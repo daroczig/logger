@@ -20,5 +20,18 @@ layout_generator(msg_format = "{level} [{time}] {msg}",
 function taking \code{level} and \code{msg} arguments
 }
 \description{
-Generating logging function
+Available variables to be used in the \code{msg_format}:
+\itemize{
+  \item level: log level, eg INFO
+  \item time: current time formatted as \code{time_format}
+  \item pid: the process identification number of the R session
+  \item user: name of the real user id as reported by \code{Sys.info}
+  \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+}
+}
+\examples{
+\dontrun{
+logger <- layout_generator(msg_format = '{node}/{pid} {time} {level}: {msg}')
+logger(FATAL, 'asdsa {runif(1)}')
+}
 }
