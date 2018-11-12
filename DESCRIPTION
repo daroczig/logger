@@ -1,0 +1,17 @@
+Type: Package
+Package: logger
+Authors@R: c(
+    person("Gergely", "Daroczi", , "daroczig@rapporter.net", role = c("aut", "cre")),
+    person("System1", role = c("fnd"))
+    )
+Title: log4j-friendly logger
+Description: Rendering and writing log messages based on log4j
+Version: 0.1
+Date: 2018-07-04
+URL: https://github.com/daroczig/logger
+RoxygenNote: 6.1.0
+License: AGPL-3
+Imports:
+  glue
+Suggests:
+  testthat
