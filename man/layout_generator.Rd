@@ -24,8 +24,9 @@ Available variables to be used in the \code{msg_format}:
 \itemize{
   \item level: log level, eg INFO
   \item time: current time formatted as \code{time_format}
-  \item pid: the process identification number of the R session
+  \item namespace: R package calling the logging function
   \item user: name of the real user id as reported by \code{Sys.info}
+  \item pid: the process identification number of the R session
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
 }
 }

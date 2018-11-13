@@ -9,6 +9,7 @@ Description: Rendering and writing log messages based on log4j
 Version: 0.1
 Date: 2018-07-04
 URL: https://github.com/daroczig/logger
+Encoding: UTF-8
 RoxygenNote: 6.1.0
 License: AGPL-3
 Imports:

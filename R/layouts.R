@@ -1,11 +1,29 @@
+#' Find the namespace from which the logging function was called
+#' @return string
+#' @keywords internal
+find_namespace <- function() {
+
+    namespaces <- lapply(sys.frames(), topenv)
+    namespaces <- sapply(namespaces, environmentName)
+    namespaces <- namespaces[namespaces != 'logger']
+    namespace <- tail(namespaces, 1)
+    if (length(namespace) == 0) {
+        namespace <- 'global'
+    }
+    namespace
+
+}
+
+
 #' Generating logging function
 #'
 #' Available variables to be used in the \code{msg_format}:
 #' \itemize{
 #'   \item level: log level, eg INFO
 #'   \item time: current time formatted as \code{time_format}
-#'   \item pid: the process identification number of the R session
+#'   \item namespace: R package calling the logging function
 #'   \item user: name of the real user id as reported by \code{Sys.info}
+#'   \item pid: the process identification number of the R session
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
 #' }
 #' @param level log level, eg \code{INFO}
@@ -30,6 +48,8 @@ layout_generator <- function(msg_format = '{level} [{time}] {msg}',
         if (!inherits(level, 'loglevel')) {
             stop('Invalid log level, see ?log_levels')
         }
+
+        namespace <- find_namespace()
 
         time  <- as.character(Sys.time(), time_format)
         level <- attr(level, 'level')
