@@ -62,7 +62,7 @@ log_layout <- function(layout, namespace = 'global') {
     if (missing(layout)) {
         layout <- config$layout
         if (!is.null(attr(layout, 'generator'))) {
-            layout <- as.call(parse(text = attr(layout, 'call')))
+            layout <- as.call(parse(text = attr(layout, 'generator')))
         }
         return(layout)
     }
@@ -91,8 +91,8 @@ log_appender <- function(appender, namespace = 'global') {
 
     if (missing(appender)) {
         appender <- config$appender
-        if (!is.null(attr(appender, 'call'))) {
-            appender <- as.call(parse(text = attr(appender, 'call')))
+        if (!is.null(attr(appender, 'generator'))) {
+            appender <- as.call(parse(text = attr(appender, 'generator')))
         }
         return(appender)
     }

@@ -11,9 +11,10 @@ appender_console <- function(lines) {
 #' @export
 #' @return function taking \code{lines} argument
 appender_file <- function(file) {
-    function(lines) {
-        cat(lines, sep = '\n', file = file, append = TRUE)
-    }
+    structure(
+        function(lines) {
+            cat(lines, sep = '\n', file = file, append = TRUE)
+        }, generator = deparse(match.call()))
 }
 
 
@@ -22,10 +23,11 @@ appender_file <- function(file) {
 #' @export
 #' @return function taking \code{lines} argument
 appender_tee <- function(file) {
-    function(lines) {
-        appender_console(lines)
-        appender_file(file)(lines)
-    }
+    structure(
+        function(lines) {
+            appender_console(lines)
+            appender_file(file)(lines)
+        }, generator = deparse(match.call()))
 }
 
 
