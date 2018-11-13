@@ -1,3 +1,15 @@
+#' Checks if provided namespace exists and falls back to global if not
+#' @param namespace string
+#' @return string
+#' @keywords internal
+fallback_namespace <- function(namespace) {
+    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
+        namespace <- 'global'
+    }
+    namespace
+}
+
+
 #' Find the namespace from which the logging function was called
 #' @return string
 #' @keywords internal

@@ -59,10 +59,11 @@ layout_glue <- layout_generator(
     time_format = '%Y-%d-%m %H:%M:%S')
 
 
-#' Format a log message with \code{glue}
+#' Format a log message as JSON
 #' @inheritParams layout_generator
 #' @return character vector
 #' @export
+#' @note TODO refactor get vars into helper function and transform this function to a generator with all the available variables?
 #' @examples \dontrun{
 #' log_layout(layout_json)
 #' log_info(42:44)
