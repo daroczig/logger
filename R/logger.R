@@ -60,7 +60,11 @@ log_layout <- function(layout, namespace = 'global') {
     config <- get(namespace, envir = namespaces)
 
     if (missing(layout)) {
-        return(config$layout)
+        layout <- config$layout
+        if (!is.null(attr(layout, 'generator'))) {
+            layout <- as.call(parse(text = attr(layout, 'call')))
+        }
+        return(layout)
     }
 
     config$layout <- layout
@@ -86,7 +90,11 @@ log_appender <- function(appender, namespace = 'global') {
     config <- get(namespace, envir = namespaces)
 
     if (missing(appender)) {
-        return(config$appender)
+        appender <- config$appender
+        if (!is.null(attr(appender, 'call'))) {
+            appender <- as.call(parse(text = attr(appender, 'call')))
+        }
+        return(appender)
     }
 
     config$appender <- appender

@@ -4,8 +4,9 @@
 #' \itemize{
 #'   \item level: log level, eg INFO
 #'   \item time: current time formatted as \code{time_format}
-#'   \item namespace: R package calling the logging function
-#'   \item TODO function and call
+#'   \item namespace: R package (if any) calling the logging function
+#'   \item call: parent call (if any) calling the logging function
+#'   \item fn: function's (if any) name calling the logging function
 #'   \item user: name of the real user id as reported by \code{Sys.info}
 #'   \item pid: the process identification number of the R session
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
@@ -14,7 +15,7 @@
 #' @param msg character vector
 #' @param msg_format \code{glue}-flavored layout of the message
 #' @param time_format see \code{strptime} for details
-#' @return function taking \code{level} and \code{msg} arguments
+#' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
@@ -29,8 +30,9 @@ layout_generator <- function(msg_format = '{level} [{time}] {msg}',
 
     force(msg_format)
     force(time_format)
+    call <- deparse(match.call())
 
-    function(level, msg) {
+    structure(function(level, msg) {
 
         if (!inherits(level, 'loglevel')) {
             stop('Invalid log level, see ?log_levels')
@@ -49,7 +51,7 @@ layout_generator <- function(msg_format = '{level} [{time}] {msg}',
 
         glue(msg_format)
 
-    }
+    }, generator = call)
 
 }
 

@@ -17,15 +17,16 @@ layout_generator(msg_format = "{level} [{time}] {msg}",
 \item{msg}{character vector}
 }
 \value{
-function taking \code{level} and \code{msg} arguments
+function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 }
 \description{
 Available variables to be used in the \code{msg_format}:
 \itemize{
   \item level: log level, eg INFO
   \item time: current time formatted as \code{time_format}
-  \item namespace: R package calling the logging function
-  \item TODO function and call
+  \item namespace: R package (if any) calling the logging function
+  \item call: parent call (if any) calling the logging function
+  \item fn: function's (if any) name calling the logging function
   \item user: name of the real user id as reported by \code{Sys.info}
   \item pid: the process identification number of the R session
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
@@ -33,7 +34,10 @@ Available variables to be used in the \code{msg_format}:
 }
 \examples{
 \dontrun{
-logger <- layout_generator(msg_format = '{node}/{pid} {time} {level}: {msg}')
-logger(FATAL, 'asdsa {runif(1)}')
+logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+logger(FATAL, 'try {runif(1)}')
+
+log_layout(logger)
+log_info('try {runif(1)}')
 }
 }
