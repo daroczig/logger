@@ -10,12 +10,10 @@ fallback_namespace <- function(namespace) {
 }
 
 
-#' Find the namespace from which the logging function was called
-#' @return string
+#' Find the namespace, function name and call from which the logging function was called
+#' @return list
 #' @keywords internal
-find_namespace <- function() {
-
-
+find_parents <- function() {
 
     namespaces <- lapply(sys.frames(), topenv)
     namespaces <- sapply(namespaces, environmentName)
@@ -42,11 +40,30 @@ find_namespace <- function() {
         call <- deparse(call[[1]])
     }
 
-    ## ## TODO
-    ## cat('namespace: ', namespace, '\n')
-    ## cat('fn: ', fn, '\n')
-    ## cat('call: ', call, '\n')
+    list(namespace = namespace, call = call, fn = fn)
 
-    namespace
+}
 
+
+#' Find the namespace from which the logging function was called
+#' @return string
+#' @keywords internal
+find_namespace <- function() {
+    find_parents()$namespace
+}
+
+
+#' Find the call from which the logging function was called
+#' @return string
+#' @keywords internal
+find_call <- function() {
+    find_parents()$call
+}
+
+
+#' Find the function from which the logging function was called
+#' @return string
+#' @keywords internal
+find_fn <- function() {
+    find_parents()$fn
 }

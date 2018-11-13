@@ -18,7 +18,7 @@
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
-#' logger <- layout_generator(msg_format = '{node}/{pid} {time} {level}: {msg}')
+#' logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' logger(FATAL, 'asdsa {runif(1)}')
 #' }
 layout_generator <- function(msg_format = '{level} [{time}] {msg}',
@@ -34,6 +34,8 @@ layout_generator <- function(msg_format = '{level} [{time}] {msg}',
         }
 
         namespace <- find_namespace()
+        fn    <- find_fn()
+        call  <- find_call()
 
         time  <- as.character(Sys.time(), time_format)
         level <- attr(level, 'level')
