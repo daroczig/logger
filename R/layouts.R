@@ -30,9 +30,10 @@ find_namespace <- function() {
         call <- deparse(call[[1]])
     }
 
-    cat('namespace: ', namespace, '\n')
-    cat('fn: ', fn, '\n')
-    cat('call: ', call, '\n')
+    ## ## TODO
+    ## cat('namespace: ', namespace, '\n')
+    ## cat('fn: ', fn, '\n')
+    ## cat('call: ', call, '\n')
 
     namespace
 
