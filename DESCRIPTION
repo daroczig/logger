@@ -15,4 +15,5 @@ License: AGPL-3
 Imports:
   glue
 Suggests:
-  testthat
+  testthat,
+  jsonlite

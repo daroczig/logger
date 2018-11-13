@@ -57,3 +57,27 @@ layout_generator <- function(msg_format = '{level} [{time}] {msg}',
 layout_glue <- layout_generator(
     msg_format = '{level} [{time}] {msg}',
     time_format = '%Y-%d-%m %H:%M:%S')
+
+
+#' Format a log message with \code{glue}
+#' @inheritParams layout_generator
+#' @return character vector
+#' @export
+#' @examples \dontrun{
+#' log_layout(layout_json)
+#' log_info(42:44)
+#' }
+layout_json <- function(level, msg) {
+
+    if (!requireNamespace('jsonlite', quietly = TRUE)) {
+        stop('Please install the jsonlite package for logging messages in JSON format')
+    }
+
+    sapply(msg, function(msg)
+        jsonlite::toJSON(list(
+            level = level,
+            timestamp = Sys.time(),
+            message = as.character(msg)
+        ), auto_unbox = TRUE))
+
+}
