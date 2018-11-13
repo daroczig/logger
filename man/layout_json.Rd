@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_json}
 \alias{layout_json}
-\title{Format a log message with \code{glue}}
+\title{Format a log message as JSON}
 \usage{
 layout_json(level, msg)
 }
@@ -15,7 +15,10 @@ layout_json(level, msg)
 character vector
 }
 \description{
-Format a log message with \code{glue}
+Format a log message as JSON
+}
+\note{
+TODO refactor get vars into helper function and transform this function to a generator with all the available variables?
 }
 \examples{
 \dontrun{

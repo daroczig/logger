@@ -14,3 +14,9 @@ log_layout(layout, namespace = "global")
 \description{
 Get or set logger layout
 }
+\examples{
+\dontrun{
+log_layout(layout_json)
+log_info(42:44)
+}
+}

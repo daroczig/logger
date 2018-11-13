@@ -69,7 +69,28 @@ log_layout <- function(layout, namespace = 'global') {
 }
 
 
+#' Get or set logger appender function
+#' @param layout function
+#' @param namespace logger namespace
+#' @export
+#' @examples \dontrun{
+#' t <- tempfile()
+#' log_appender(appender_tee(t))
+#' log_info(42)
+#' log_info(42:44)
+#' readLines(t)
+#' }
 log_appender <- function(appender, namespace = 'global') {
+
+    namespace <- fallback_namespace(namespace)
+    config <- get(namespace, envir = namespaces)
+
+    if (missing(appender)) {
+        return(config$appender)
+    }
+
+    config$appender <- appender
+    assign(namespace, config, envir = namespaces)
 
 }
 
