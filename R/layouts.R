@@ -10,7 +10,6 @@ find_namespace <- function() {
 
     ## look up the first calling function outside of the logger package
     outer <- which(namespaces != 'logger')
-    cat(outer, '\n')
 
     namespaces <- namespaces[outer]
     namespace  <- tail(namespaces, 1)
@@ -22,10 +21,18 @@ find_namespace <- function() {
     calls <- sys.calls()
     calls <- calls[outer]
     call  <- tail(calls, 1)
-    cat('namespace: ', namespace, '\n')
 
-    try(cat('fn: ', deparse(call[[1]][[1]]), '\n'), silent = TRUE)
-    try(cat('call: ', deparse(call[[1]]), '\n'), silent = TRUE)
+    if (length(call) == 0) {
+        fn   <- NA
+        call <- NA
+    } else {
+        fn   <- deparse(call[[1]][[1]])
+        call <- deparse(call[[1]])
+    }
+
+    cat('namespace: ', namespace, '\n')
+    cat('fn: ', fn, '\n')
+    cat('call: ', call, '\n')
 
     namespace
 
