@@ -19,7 +19,10 @@
 #' @export
 #' @examples \dontrun{
 #' logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-#' logger(FATAL, 'asdsa {runif(1)}')
+#' logger(FATAL, 'try {runif(1)}')
+#'
+#' log_layout(logger)
+#' log_info('try {runif(1)}')
 #' }
 layout_generator <- function(msg_format = '{level} [{time}] {msg}',
                              time_format = '%Y-%d-%m %H:%M:%S') {
