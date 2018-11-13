@@ -18,7 +18,7 @@ character vector
 Format a log message as JSON
 }
 \note{
-TODO refactor get vars into helper function and transform this function to a generator with all the available variables?
+TODO refactor get vars into helper function and transform to generator with all the available variables? also, use glue here as well?
 }
 \examples{
 \dontrun{

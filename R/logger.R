@@ -119,6 +119,13 @@ get_logger <- function() {
 #' ## lower threshold and retry
 #' log_threshold(TRACE)
 #' log_debug('hi there')
+#'
+#' ## multiple lines
+#' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
+#' log_layout(layout_json)
+#'
+#' ## note for the JSON output, glue is not automatically applied
+#' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
 log <- function(level, msg) {
     get_logger()(level, msg)

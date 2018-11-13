@@ -40,7 +40,7 @@ layout_generator <- function(msg_format = '{level} [{time}] {msg}',
         pid   <- Sys.getpid()
         user  <- Sys.info()[["user"]]
         node  <- Sys.info()[["nodename"]]
-        msg   <- glue(msg)
+        msg   <- sapply(msg, glue)
 
         glue(msg_format)
 
@@ -63,7 +63,7 @@ layout_glue <- layout_generator(
 #' @inheritParams layout_generator
 #' @return character vector
 #' @export
-#' @note TODO refactor get vars into helper function and transform this function to a generator with all the available variables?
+#' @note TODO refactor get vars into helper function and transform to generator with all the available variables? also, use glue here as well?
 #' @examples \dontrun{
 #' log_layout(layout_json)
 #' log_info(42:44)
