@@ -1,4 +1,4 @@
-#' Logging utility
+#' Generate logging utility
 #' @param threshold omit log messages below this \code{log_levels}
 #' @param layout function rendering the log message
 #' @param appender function writing the log message
@@ -26,12 +26,45 @@ logger <- function(threshold, layout, appender) {
 }
 
 
+#' Get or set log level threshold
+#' @param level see \code{log_levels}
+#' @param namespace logger namespace
+#' @return currently set log level threshold
+#' @export
+log_threshold <- function(level, namespace = 'global') {
+
+    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
+        namespace <- 'global'
+    }
+
+    config <- get(namespace, envir = namespaces)
+
+    if (missing(level)) {
+        return(config$threshold)
+    }
+
+    config$threshold <- level
+    assign(namespace, config, envir = namespaces)
+
+    ## DRY with below 3?
+
+}
+
+log_layout <- function(layout, namespace = 'global') {
+
+}
+
+log_appender <- function(appender, namespace = 'global') {
+
+}
+
+
 #' Find the logger used in the current namespace
 #' @return function
 #' @keywords internal
 get_logger <- function() {
     ## TODO actually find instead of static
-    namespaces$global
+    do.call(logger, namespaces$global)
 }
 
 
@@ -47,7 +80,9 @@ get_logger <- function() {
 #' ## output omitted
 #' log_debug('hi there')
 #'
-#' ## TODO set threshold
+#' ## lower threshold and retry
+#' log_threshold(TRACE)
+#' log_debug('hi there')
 #' }
 log <- function(level, msg) {
     get_logger()(level, msg)

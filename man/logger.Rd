@@ -2,7 +2,7 @@
 % Please edit documentation in R/logger.R
 \name{logger}
 \alias{logger}
-\title{Logging utility}
+\title{Generate logging utility}
 \usage{
 logger(threshold, layout, appender)
 }
@@ -17,5 +17,5 @@ logger(threshold, layout, appender)
 function taking \code{level} and \code{msg} arguments
 }
 \description{
-Logging utility
+Generate logging utility
 }

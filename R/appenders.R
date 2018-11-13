@@ -4,3 +4,7 @@
 appender_console <- function(lines) {
     cat(lines, sep = '\n')
 }
+
+## TODO file
+
+## TODO graylog, cloudwatch, datadog, kinesis etc

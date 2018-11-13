@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_glue}
 \alias{layout_glue}
-\title{Formats a log message with \code{glue}}
+\title{Format a log message with \code{glue}}
 \usage{
 layout_glue(level, msg)
 }
@@ -15,5 +15,5 @@ layout_glue(level, msg)
 character vector
 }
 \description{
-Formats a log message with \code{glue}
+Format a log message with \code{glue}
 }

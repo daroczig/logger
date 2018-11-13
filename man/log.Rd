@@ -28,6 +28,8 @@ log_info('hi there')
 ## output omitted
 log_debug('hi there')
 
-## TODO set threshold
+## lower threshold and retry
+log_threshold(TRACE)
+log_debug('hi there')
 }
 }

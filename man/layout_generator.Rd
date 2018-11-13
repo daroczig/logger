@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_generator}
 \alias{layout_generator}
-\title{Generating logging function}
+\title{Generate logging function}
 \usage{
 layout_generator(msg_format = "{level} [{time}] {msg}",
   time_format = "\%Y-\%d-\%m \%H:\%M:\%S")
@@ -25,6 +25,7 @@ Available variables to be used in the \code{msg_format}:
   \item level: log level, eg INFO
   \item time: current time formatted as \code{time_format}
   \item namespace: R package calling the logging function
+  \item TODO function and call
   \item user: name of the real user id as reported by \code{Sys.info}
   \item pid: the process identification number of the R session
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
