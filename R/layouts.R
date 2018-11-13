@@ -3,13 +3,30 @@
 #' @keywords internal
 find_namespace <- function() {
 
+
+
     namespaces <- lapply(sys.frames(), topenv)
     namespaces <- sapply(namespaces, environmentName)
-    namespaces <- namespaces[namespaces != 'logger']
-    namespace <- tail(namespaces, 1)
+
+    ## look up the first calling function outside of the logger package
+    outer <- which(namespaces != 'logger')
+    cat(outer, '\n')
+
+    namespaces <- namespaces[outer]
+    namespace  <- tail(namespaces, 1)
+
     if (length(namespace) == 0) {
         namespace <- 'global'
     }
+
+    calls <- sys.calls()
+    calls <- calls[outer]
+    call  <- tail(calls, 1)
+    cat('namespace: ', namespace, '\n')
+
+    try(cat('fn: ', deparse(call[[1]][[1]]), '\n'), silent = TRUE)
+    try(cat('call: ', deparse(call[[1]]), '\n'), silent = TRUE)
+
     namespace
 
 }
