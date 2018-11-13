@@ -2,6 +2,12 @@
 % Please edit documentation in R/logger.R
 \name{log}
 \alias{log}
+\alias{log_fatal}
+\alias{log_error}
+\alias{log_warn}
+\alias{log_info}
+\alias{log_debug}
+\alias{log_trace}
 \title{Log a message with given log level}
 \usage{
 log(level, msg)
@@ -13,4 +19,15 @@ log(level, msg)
 }
 \description{
 Log a message with given log level
+}
+\examples{
+\dontrun{
+log(INFO, 'hi there')
+log_info('hi there')
+
+## output omitted
+log_debug('hi there')
+
+## TODO set threshold
+}
 }

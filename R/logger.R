@@ -39,6 +39,28 @@ get_logger <- function() {
 #' @param level log level from \code{log_levels}
 #' @param msg character vector
 #' @export
+#' @aliases log log_fatal log_error log_warn log_info log_debug log_trace
+#' @examples \dontrun{
+#' log(INFO, 'hi there')
+#' log_info('hi there')
+#'
+#' ## output omitted
+#' log_debug('hi there')
+#'
+#' ## TODO set threshold
+#' }
 log <- function(level, msg) {
     get_logger()(level, msg)
 }
+
+
+#' @export
+log_fatal <- function(msg) log(FATAL, msg)
+#' @export
+log_error <- function(msg) log(ERROR, msg)
+#' @export
+log_info <- function(msg) log(INFO, msg)
+#' @export
+log_debug <- function(msg) log(DEBUG, msg)
+#' @export
+log_trace <- function(msg) log(TRACE, msg)
