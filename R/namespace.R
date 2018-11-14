@@ -31,7 +31,7 @@ find_parents <- function() {
     namespace  <- tail(namespaces, 1)
 
     if (length(namespace) == 0) {
-        namespace <- 'global'
+        namespace <- 'R_GlobalEnv'
     }
 
     calls <- sys.calls()

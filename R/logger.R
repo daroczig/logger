@@ -103,12 +103,16 @@ log_appender <- function(appender, namespace = 'global') {
 }
 
 
-#' Find the logger used in the current namespace
+#' Find the logger used in the current namespace with a fallback to the global namespace
 #' @return function
 #' @keywords internal
 get_logger <- function() {
-    ## TODO actually find instead of static
-    do.call(logger, getFromNamespace('namespaces', 'logger')$global)
+    namespace <- find_namespace()
+    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
+        namespace <- 'global'
+    }
+    params <- get(namespace, envir = getFromNamespace('namespaces', 'logger'))
+    do.call(logger, params)
 }
 
 

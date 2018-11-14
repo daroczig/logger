@@ -2,7 +2,7 @@
 % Please edit documentation in R/logger.R
 \name{get_logger}
 \alias{get_logger}
-\title{Find the logger used in the current namespace}
+\title{Find the logger used in the current namespace with a fallback to the global namespace}
 \usage{
 get_logger()
 }
@@ -10,6 +10,6 @@ get_logger()
 function
 }
 \description{
-Find the logger used in the current namespace
+Find the logger used in the current namespace with a fallback to the global namespace
 }
 \keyword{internal}
