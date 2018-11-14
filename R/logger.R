@@ -33,8 +33,7 @@ logger <- function(threshold, layout, appender) {
 #' @export
 log_threshold <- function(level, namespace = 'global') {
 
-    namespace <- fallback_namespace(namespace)
-    config <- get(namespace, envir = namespaces)
+    config <- get(fallback_namespace(namespace), envir = namespaces)
 
     if (missing(level)) {
         return(config$threshold)
@@ -56,8 +55,7 @@ log_threshold <- function(level, namespace = 'global') {
 #' }
 log_layout <- function(layout, namespace = 'global') {
 
-    namespace <- fallback_namespace(namespace)
-    config <- get(namespace, envir = namespaces)
+    config <- get(fallback_namespace(namespace), envir = namespaces)
 
     if (missing(layout)) {
         layout <- config$layout
@@ -86,8 +84,7 @@ log_layout <- function(layout, namespace = 'global') {
 #' }
 log_appender <- function(appender, namespace = 'global') {
 
-    namespace <- fallback_namespace(namespace)
-    config <- get(namespace, envir = namespaces)
+    config <- get(fallback_namespace(namespace), envir = namespaces)
 
     if (missing(appender)) {
         appender <- config$appender
