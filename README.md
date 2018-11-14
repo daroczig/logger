@@ -39,3 +39,95 @@ So based on all the above subjective opinions, decided to write the `n+1`th exte
 - optionally colorize log message based on the log level
 - make logging fun
 
+## Log levels
+
+```
+?log_levels
+```
+
+`logger` uses the default `log4j` log levels and supports suppressing log messages with lower level compared to the currently set threshold in the namespace:
+
+```r
+log_info('Hi, there!')
+#> INFO [2018-14-11 02:04:31] Hi, there!
+log_debug('How are you doing today?')
+log_threshold()
+#> Log level: INFO
+log_threshold(TRACE)
+log_debug('How are you doing today?')
+#> DEBUG [2018-14-11 02:05:15] How are you doing today?
+```
+
+If you want to define the log level in a programmatic way, check out the `log` function.
+
+## Log message formats
+
+By default, the `log` function will simply record the log-level, current timestamp and the message after being processed by `glue`:
+
+```r
+log_info(42)
+#> INFO [2018-14-11 02:11:10] 42
+```
+
+There's also a layout writing the log message to a JSON object:
+
+
+```r
+log_layout(layout_json)
+log_info(42)
+#> {"level":4,"timestamp":"2018-11-14 02:11:47","message":"42"}
+```
+
+To customize the format how the log messages are being rendered, see `?layout_generator` that provides very easy access to a bunch environmental variables -- quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function's name, hostname, user running the R process etc:
+
+* define custom logger:
+
+    ```r
+    logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+    log_layout(logger)
+    ```
+
+* check what's being logged when called from the global environment:
+
+    ```r
+    log_info('foo')
+    #> nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:31:51 INFO: foo
+    ```
+
+* check what's being logged when called from a custom function:
+
+    ```r
+    f <- function() log_info('foo')
+    f()
+    #> nevermind/21133/R_GlobalEnv/f 2018-14-11 01:32:46 INFO: foo
+    ```
+
+* check what's being logged when called from a package:
+
+    ```r
+    devtools::load_all(system.file('tests/logger-tester-package', package = 'logger'))
+    #> Loading logger.tester
+    logger.tester.function(INFO, 'hi from tester package')
+    #> nevermind/21133/logger.tester/logger.tester.function 2018-14-11 01:32:56 INFO: hi from tester package
+    ```
+
+* suppress messages in a namespace:
+
+    ```r
+    log_threshold(namespace = 'logger.tester')
+    #> Log level: INFO 
+    log_threshold(WARN, namespace = 'logger.tester')
+    logger.tester.function(INFO, 'hi from tester package')
+    logger.tester.function(WARN, 'hi from tester package')
+    #> nevermind/21133/logger.tester/logger.tester.function 2018-14-11 01:33:16 WARN: hi from tester package
+    log_info('I am still working in the global namespace')
+    #> nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:33:21 INFO: I am still working in the global namespace
+    ```
+
+
+TODO:
+
+- more variables inside of logger, eg call and function name
+- `crayon`
+- smarter JSON logger
+- graylog, kinesis, datadog, cloudwatch etc appenders
