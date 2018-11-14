@@ -1,0 +1,15 @@
+Type: Package
+Package: logger.tester
+Authors@R: c(
+    person("Gergely", "Daroczi", , "daroczig@rapporter.net", role = c("aut", "cre")),
+    person("System1", role = c("fnd"))
+    )
+Title: Dummy package providing testing functions for logger
+Description: Dummy package providing testing functions for logger
+Version: 0.1
+Date: 2018-07-04
+URL: https://github.com/daroczig/logger
+RoxygenNote: 6.1.0
+License: AGPL-3
+Imports:
+  logger
