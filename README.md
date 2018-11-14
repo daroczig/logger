@@ -138,7 +138,7 @@ To customize the format how the log messages are being rendered, see `?layout_ge
 
 ## TODO
 
-[ ] more variables inside of logger, eg call and function name
-[ ] `crayon`
-[ ] smarter JSON logger
-[ ] graylog, kinesis, datadog, cloudwatch etc appenders
+- [ ] more variables inside of logger, eg call and function name
+- [ ] `crayon`
+- [ ] smarter JSON logger
+- [ ] graylog, kinesis, datadog, cloudwatch etc appenders
