@@ -70,7 +70,6 @@ layout_glue <- layout_generator(
 #' @inheritParams layout_generator
 #' @return character vector
 #' @export
-#' @note TODO refactor get vars into helper function and transform to generator with all the available variables? also, use glue here as well?
 #' @examples \dontrun{
 #' log_layout(layout_json)
 #' log_info(42:44)

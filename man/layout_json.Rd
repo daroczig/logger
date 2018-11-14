@@ -17,9 +17,6 @@ character vector
 \description{
 Format a log message as JSON
 }
-\note{
-TODO refactor get vars into helper function and transform to generator with all the available variables? also, use glue here as well?
-}
 \examples{
 \dontrun{
 log_layout(layout_json)
