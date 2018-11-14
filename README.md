@@ -33,17 +33,16 @@ So based on all the above subjective opinions, decided to write the `n+1`th exte
 - keep it close to `log4j`
 - respect the most recent function / variable naming conventions and general R coding style
 - rely on `glue` when it comes to formatting / rendering log messages
+- support vectorization (eg passing a vector to be logged on multiple lines)
 - make it easy to extend with new features (eg layouts, message formats and output)
 - prepare for writing to various services
 - provide support for namespaces, preferably automatically finding and creating a custom namespace for all R packages writing log messages -- each with optionally configurable log level threshold, message and output formats
 - optionally colorize log message based on the log level
 - make logging fun
 
-## Log levels
+Welcome to the Bazaar!
 
-```
-?log_levels
-```
+## Log levels
 
 `logger` uses the default `log4j` log levels and supports suppressing log messages with lower level compared to the currently set threshold in the namespace:
 
@@ -58,7 +57,7 @@ log_debug('How are you doing today?')
 #> DEBUG [2018-14-11 02:05:15] How are you doing today?
 ```
 
-If you want to define the log level in a programmatic way, check out the `log` function.
+If you want to define the log level in a programmatic way, check out the `log` function, and see `?log_levels` for all the supported log levels.
 
 ## Log message formats
 
@@ -67,15 +66,27 @@ By default, the `log` function will simply record the log-level, current timesta
 ```r
 log_info(42)
 #> INFO [2018-14-11 02:11:10] 42
+log_info('The answer is {42}')
+#> INFO [2018-14-11 02:11:11] The answer is 42
+log_info('The answers are {1:5}')
+#> INFO [2018-14-11 02:17:09] The answers are 1
+#> INFO [2018-14-11 02:17:09] The answers are 2
+#> INFO [2018-14-11 02:17:09] The answers are 3
+#> INFO [2018-14-11 02:17:09] The answers are 4
+#> INFO [2018-14-11 02:17:09] The answers are 5
 ```
 
-There's also a layout writing the log message to a JSON object:
+There's also a simple layout writing log message to JSON:
 
 
 ```r
 log_layout(layout_json)
 log_info(42)
 #> {"level":4,"timestamp":"2018-11-14 02:11:47","message":"42"}
+log_info(1:3)
+#> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"1"}
+#> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"2"}
+#> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"3"}
 ```
 
 To customize the format how the log messages are being rendered, see `?layout_generator` that provides very easy access to a bunch environmental variables -- quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function's name, hostname, user running the R process etc:
@@ -125,9 +136,9 @@ To customize the format how the log messages are being rendered, see `?layout_ge
     ```
 
 
-TODO:
+## TODO
 
-- more variables inside of logger, eg call and function name
-- `crayon`
-- smarter JSON logger
-- graylog, kinesis, datadog, cloudwatch etc appenders
+[ ] more variables inside of logger, eg call and function name
+[ ] `crayon`
+[ ] smarter JSON logger
+[ ] graylog, kinesis, datadog, cloudwatch etc appenders
