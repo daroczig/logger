@@ -108,7 +108,7 @@ log_appender <- function(appender, namespace = 'global') {
 #' @keywords internal
 get_logger <- function() {
     ## TODO actually find instead of static
-    do.call(logger, namespaces$global)
+    do.call(logger, getFromNamespace('namespaces', 'logger')$global)
 }
 
 

@@ -17,19 +17,15 @@ find_parents <- function() {
 
     namespaces <- lapply(sys.frames(), topenv)
     namespaces <- sapply(namespaces, environmentName)
-
-    ## called from the .GlobalEnv
-    if (head(namespaces, 1) == 'logger') {
-        return(list(namespace = 'global', call = NA_character_, fn = NA_character_))
-    }
-
-    cat('namespaces:\n')
-    pander::pandoc.list(namespaces)
+    ## cat('namespaces:\n')
+    ## pander::pandoc.list(namespaces)
 
     ## look up the first calling function outside of the logger package
-    outer <- which(namespaces != 'logger')
-
-    cat('outer: ', paste(outer, collapse = ', '), '\n')
+    outer <- min(which(namespaces == 'logger')) - 1
+    if (outer > 0) {
+        outer <- 1:(outer)
+    }
+    ## cat('outer: ', paste(outer, collapse = ', '), '\n')
 
     namespaces <- namespaces[outer]
     namespace  <- tail(namespaces, 1)
@@ -39,12 +35,8 @@ find_parents <- function() {
     }
 
     calls <- sys.calls()
-
-
-    cat('calls:\n')
-    pander::pandoc.list(calls)
-
-
+    ## cat('calls:\n')
+    ## pander::pandoc.list(calls)
     calls <- calls[outer]
     call  <- tail(calls, 1)
 
