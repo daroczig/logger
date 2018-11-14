@@ -135,6 +135,35 @@ To customize the format how the log messages are being rendered, see `?layout_ge
     #> nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:33:21 INFO: I am still working in the global namespace
     ```
 
+Note that the `layout_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own layout generator functions, please keep `match.call()` recorded in the `generator` attribute, or stick with standard functions. See some examples in the `layouts.R` file.
+
+## Log devices
+
+By default, `logger` will write to the console or `stdout` via the `appender_console` function:
+
+```r
+log_appender()
+#> function(lines) {
+#>     cat(lines, sep = '\n')
+#> }
+#> <environment: namespace:logger>
+```
+
+To write to a logfile instead, use the `appender_file` generator function, that returns a function that can be used in any namespace:
+
+```r
+t <- tempfile()
+log_appender(appender_file(t))
+log_info('where is this message going?')
+log_appender()
+#> appender_file(file = t)()
+readLines(t)
+#> [1] "INFO [2018-14-11 02:24:38] where is this message going?"
+```
+
+You may find `appender_tee` also useful, that write the log messages to both `stdout` and a file.
+
+Note that the `appender_file` and `appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.
 
 ## TODO
 
