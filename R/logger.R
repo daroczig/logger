@@ -1,10 +1,11 @@
 #' Generate logging utility
 #' @param threshold omit log messages below this \code{log_levels}
-#' @param layout function rendering the log message
-#' @param appender function writing the log message
+#' @param formatter function pre-processing the message of the log record
+#' @param layout function rendering the layout of the actual log record
+#' @param appender function writing the log record
 #' @return function taking \code{level} and \code{msg} arguments
 #' @export
-logger <- function(threshold, layout, appender) {
+logger <- function(threshold, formatter, layout, appender) {
 
     force(threshold)
     force(layout)
@@ -20,6 +21,7 @@ logger <- function(threshold, layout, appender) {
             return(invisible(NULL))
         }
 
+        msg <- formatter(msg)
         appender(layout(level, msg))
 
     }

@@ -4,14 +4,16 @@
 \alias{logger}
 \title{Generate logging utility}
 \usage{
-logger(threshold, layout, appender)
+logger(threshold, formatter, layout, appender)
 }
 \arguments{
 \item{threshold}{omit log messages below this \code{log_levels}}
 
-\item{layout}{function rendering the log message}
+\item{formatter}{function pre-processing the message of the log record}
 
-\item{appender}{function writing the log message}
+\item{layout}{function rendering the layout of the actual log record}
+
+\item{appender}{function writing the log record}
 }
 \value{
 function taking \code{level} and \code{msg} arguments

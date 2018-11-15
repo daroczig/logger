@@ -19,6 +19,6 @@ list
 Collect useful information about the logging environment to be used in log messages
 }
 \seealso{
-layout_generator
+layout_glue_generator
 }
 \keyword{internal}

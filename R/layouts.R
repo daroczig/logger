@@ -3,17 +3,22 @@
 #' @param time_format see \code{strptime} for details
 #' @return list
 #' @keywords internal
-#' @seealso layout_generator
+#' @seealso layout_glue_generator
 get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%S') {
     list(
         namespace = find_namespace(),
         fn        = find_fn(),
         call      = find_call(),
-        time      = as.character(Sys.time(), time_format),
+        ## time      = as.character(Sys.time(), time_format),
+        time      = Sys.time(),
         level     = attr(log_level, 'level'),
         pid       = Sys.getpid(),
         user      = Sys.info()[["user"]],
         node      = Sys.info()[["nodename"]])
+    ## TODO OS version
+    ## TODO jenkins env vars if available
+    ## TODO any env var
+    ## TODO seed
 }
 
 
@@ -21,6 +26,7 @@ get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%
 #'
 #' Available variables to be used in the \code{msg_format} provided by \code{logger:::get_logger_meta_variables}:
 #' \itemize{
+#'   \item msg: the actual log message
 #'   \item level: log level, eg INFO
 #'   \item time: current time formatted as \code{time_format}
 #'   \item namespace: R package (if any) calling the logging function
@@ -30,54 +36,44 @@ get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%
 #'   \item pid: the process identification number of the R session
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
 #' }
-#' @param level log level, eg \code{INFO}
-#' @param msg character vector
-#' @param msg_format \code{glue}-flavored layout of the message
-#' @param time_format see \code{strptime} for details
+#' @param format \code{glue}-flavored layout of the message using the above variables
 #' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
-#' logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' logger(FATAL, 'try {runif(1)}')
 #'
 #' log_layout(logger)
 #' log_info('try {runif(1)}')
 #' }
-layout_generator <- function(msg_format = '{level} [{time}] {msg}',
-                             time_format = '%Y-%d-%m %H:%M:%S') {
+layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:%M:%S")}] {msg}') {
 
-    force(msg_format)
-    force(time_format)
-
-    call <- deparse(match.call())
+    force(format)
 
     structure(function(level, msg) {
-        ## TODO msg -> ... + paste0 first
 
         if (!inherits(level, 'loglevel')) {
             stop('Invalid log level, see ?log_levels')
         }
 
-        msg <- sapply(msg, glue)
+        with(get_logger_meta_variables(level, time_format), glue(format))
 
-        with(get_logger_meta_variables(level, time_format), glue(msg_format))
-
-    }, generator = call)
+    }, generator = deparse(match.call()))
 
 }
 
 
 #' Format a log message with \code{glue}
-#' @inheritParams layout_generator
+#' @inheritParams layout_glue_generator
 #' @return character vector
 #' @importFrom glue glue
 #' @export
-layout_glue <- layout_generator()
+layout_glue <- layout_glue_generator()
 
 
 #' Format a log message as JSON
-#' @inheritParams layout_generator
+#' @inheritParams layout_glue_generator
 #' @return character vector
 #' @export
 #' @examples \dontrun{

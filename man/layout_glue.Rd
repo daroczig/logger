@@ -6,11 +6,6 @@
 \usage{
 layout_glue(level, msg)
 }
-\arguments{
-\item{level}{log level, eg \code{INFO}}
-
-\item{msg}{character vector}
-}
 \value{
 character vector
 }

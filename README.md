@@ -172,3 +172,4 @@ Note that the `appender_file` and `appender_tee` generator functions also adds a
 - [ ] `crayon`
 - [ ] smarter JSON logger
 - [ ] graylog, kinesis, datadog, cloudwatch, slack etc appenders
+
