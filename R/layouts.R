@@ -10,7 +10,7 @@ get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%
         fn        = find_fn(),
         call      = find_call(),
         time      = as.character(Sys.time(), time_format),
-        loglevel  = attr(log_level, 'level'),
+        level     = attr(log_level, 'level'),
         pid       = Sys.getpid(),
         user      = Sys.info()[["user"]],
         node      = Sys.info()[["nodename"]])
@@ -38,17 +38,13 @@ get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
-#' logger <- layout_generator(formatter_args = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' logger(FATAL, 'try {runif(1)}')
 #'
 #' log_layout(logger)
 #' log_info('try {runif(1)}')
-#'
-#' logger <- layout_generator(
-#'   formatter_fn = sprintf,
-#'   formatter_args = list('%s [%s] %s', level, time, msg))
 #' }
-layout_generator <- function(msg_format = '{loglevel} [{time}] {msg}',
+layout_generator <- function(msg_format = '{level} [{time}] {msg}',
                              time_format = '%Y-%d-%m %H:%M:%S') {
 
     force(msg_format)
@@ -77,9 +73,7 @@ layout_generator <- function(msg_format = '{loglevel} [{time}] {msg}',
 #' @return character vector
 #' @importFrom glue glue
 #' @export
-layout_glue <- layout_generator(
-    msg_format  = '{loglevel} [{time}] {msg}',
-    time_format = '%Y-%d-%m %H:%M:%S')
+layout_glue <- layout_generator()
 
 
 #' Format a log message as JSON

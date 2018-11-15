@@ -4,7 +4,7 @@
 \alias{layout_generator}
 \title{Generate logging function}
 \usage{
-layout_generator(msg_format = "{loglevel} [{time}] {msg}",
+layout_generator(msg_format = "{level} [{time}] {msg}",
   time_format = "\%Y-\%d-\%m \%H:\%M:\%S")
 }
 \arguments{
@@ -34,14 +34,10 @@ Available variables to be used in the \code{msg_format} provided by \code{logger
 }
 \examples{
 \dontrun{
-logger <- layout_generator(formatter_args = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 logger(FATAL, 'try {runif(1)}')
 
 log_layout(logger)
 log_info('try {runif(1)}')
-
-logger <- layout_generator(
-  formatter_fn = sprintf,
-  formatter_args = list('\%s [\%s] \%s', level, time, msg))
 }
 }
