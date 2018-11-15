@@ -4,7 +4,7 @@
 \alias{layout_generator}
 \title{Generate logging function}
 \usage{
-layout_generator(msg_format = "{level} [{time}] {msg}",
+layout_generator(msg_format = "{loglevel} [{time}] {msg}",
   time_format = "\%Y-\%d-\%m \%H:\%M:\%S")
 }
 \arguments{
@@ -20,7 +20,7 @@ layout_generator(msg_format = "{level} [{time}] {msg}",
 function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 }
 \description{
-Available variables to be used in the \code{msg_format}:
+Available variables to be used in the \code{msg_format} provided by \code{logger:::get_logger_meta_variables}:
 \itemize{
   \item level: log level, eg INFO
   \item time: current time formatted as \code{time_format}
@@ -34,10 +34,14 @@ Available variables to be used in the \code{msg_format}:
 }
 \examples{
 \dontrun{
-logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+logger <- layout_generator(formatter_args = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 logger(FATAL, 'try {runif(1)}')
 
 log_layout(logger)
 log_info('try {runif(1)}')
+
+logger <- layout_generator(
+  formatter_fn = sprintf,
+  formatter_args = list('\%s [\%s] \%s', level, time, msg))
 }
 }

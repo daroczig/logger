@@ -171,4 +171,4 @@ Note that the `appender_file` and `appender_tee` generator functions also adds a
 - [ ] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON`
 - [ ] `crayon`
 - [ ] smarter JSON logger
-- [ ] graylog, kinesis, datadog, cloudwatch etc appenders
+- [ ] graylog, kinesis, datadog, cloudwatch, slack etc appenders
