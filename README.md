@@ -42,6 +42,36 @@ So based on all the above subjective opinions, decided to write the `n+1`th exte
 
 Welcome to the Bazaar!
 
+## The structure of a log record
+
+Minimum requirements of a logger object and its required parameters to log something:
+
+* logger definition:
+
+    * log level `threshold`, eg `ERROR`, which defines the minimum log level required for actual logging
+    * `layout` function, which defines the format of a log record, eg 
+
+        * structured text including log level, timestamp and message
+        
+            ```
+            INFO [1970-01-01 00:00:00] I'm alive!
+            ```
+        
+        * a JSON object of log level, timestamp, hostname, calling function and message
+        
+            ```
+            {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'I\'m alive!'}
+            ```
+
+    * `formatter` function, which converts the R objects passed to the logger into an actual character vector
+    * `appender` function, which writes the actual log record somewhere, eg `stdout`, a file or a streaming service
+
+* parameters: 
+
+    * actual log level, eg `INFO`, which describes the severity of a message
+    * some other parameters describing the environment of the log record are automatically captured, eg timestamp, hostname, username, calling function etc.
+    * R objects to be logged
+
 ## Log levels
 
 `logger` uses the default `log4j` log levels and supports suppressing log messages with lower level compared to the currently set threshold in the namespace:
