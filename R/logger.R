@@ -33,33 +33,51 @@ logger <- function(threshold, formatter, layout, appender) {
 #' Get or set log level threshold
 #' @param level see \code{log_levels}
 #' @param namespace logger namespace
+#' @param index index of the logger within the namespace
 #' @return currently set log level threshold
 #' @export
-log_threshold <- function(level, namespace = 'global') {
+#' @examples \dontrun{
+#' ## check the currently set log level threshold
+#' log_threshold()
+#'
+#' ## change the log level threshold to WARN
+#' log_threshold(WARN)
+#' log_info(1)
+#' log_warn(2)
+#'
+#' ## add another logger with a lower log level threshold and check the number of logged messages
+#' log_threshold(INFO, index = 2)
+#' log_info(1)
+#' log_warn(2)
+#' }
+log_threshold <- function(level, namespace = 'global', index = 1) {
 
-    config <- get(fallback_namespace(namespace), envir = namespaces)
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    config  <- configs[[min(index, length(configs))]]
 
     if (missing(level)) {
         return(config$threshold)
     }
 
     config$threshold <- level
-    assign(namespace, config, envir = namespaces)
+    configs[[min(index, length(config) + 1)]] <- config
+    assign(namespace, configs, envir = namespaces)
 
 }
 
 
 #' Get or set logger layout
 #' @param layout function
-#' @param namespace logger namespace
+#' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
 #' log_layout(layout_json)
 #' log_info(42:44)
 #' }
-log_layout <- function(layout, namespace = 'global') {
+log_layout <- function(layout, namespace = 'global', index = 1) {
 
-    config <- get(fallback_namespace(namespace), envir = namespaces)
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    config  <- configs[[min(index, length(configs))]]
 
     if (missing(layout)) {
         layout <- config$layout
@@ -70,25 +88,35 @@ log_layout <- function(layout, namespace = 'global') {
     }
 
     config$layout <- layout
-    assign(namespace, config, envir = namespaces)
+    configs[[min(index, length(config) + 1)]] <- config
+    assign(namespace, configs, envir = namespaces)
 
 }
 
 
 #' Get or set logger appender function
 #' @param layout function
-#' @param namespace logger namespace
+#' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
+#' ## change appender to "tee" that writes to the console and a file as well
 #' t <- tempfile()
 #' log_appender(appender_tee(t))
 #' log_info(42)
 #' log_info(42:44)
 #' readLines(t)
+#'
+#' ## poor man's tee by stacking loggers in the namespace
+#' t <- tempfile()
+#' log_appender(appender_console)
+#' log_appender(appender_file(t), index = 2)
+#' log_info(42)
+#' readLines(t)
 #' }
-log_appender <- function(appender, namespace = 'global') {
+log_appender <- function(appender, namespace = 'global', index = 1) {
 
-    config <- get(fallback_namespace(namespace), envir = namespaces)
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    config  <- configs[[min(index, length(configs))]]
 
     if (missing(appender)) {
         appender <- config$appender
@@ -99,21 +127,21 @@ log_appender <- function(appender, namespace = 'global') {
     }
 
     config$appender <- appender
-    assign(namespace, config, envir = namespaces)
+    configs[[min(index, length(config) + 1)]] <- config
+    assign(namespace, configs, envir = namespaces)
 
 }
 
 
-#' Find the logger used in the current namespace with a fallback to the global namespace
-#' @return function
+#' Find the logger definition(s) specified for the current namespace with a fallback to the global namespace
+#' @return list of function(s)
 #' @keywords internal
-get_logger <- function() {
+get_logger_definitions <- function() {
     namespace <- find_namespace()
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
-    params <- get(namespace, envir = getFromNamespace('namespaces', 'logger'))
-    do.call(logger, params)
+    get(namespace, envir = getFromNamespace('namespaces', 'logger'))
 }
 
 
@@ -141,7 +169,10 @@ get_logger <- function() {
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
 log <- function(level, msg) {
-    get_logger()(level, msg)
+    defintions <- get_logger_definitions()
+    for (defintion in defintions) {
+        do.call(logger, defintion)(level, msg)
+    }
 }
 
 
@@ -149,6 +180,8 @@ log <- function(level, msg) {
 log_fatal <- function(msg) log(FATAL, msg)
 #' @export
 log_error <- function(msg) log(ERROR, msg)
+#' @export
+log_warn <- function(msg) log(WARN, msg)
 #' @export
 log_info <- function(msg) log(INFO, msg)
 #' @export

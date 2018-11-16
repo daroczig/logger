@@ -4,10 +4,12 @@
 \alias{log_appender}
 \title{Get or set logger appender function}
 \usage{
-log_appender(appender, namespace = "global")
+log_appender(appender, namespace = "global", index = 1)
 }
 \arguments{
 \item{namespace}{logger namespace}
+
+\item{index}{index of the logger within the namespace}
 
 \item{layout}{function}
 }
@@ -16,10 +18,18 @@ Get or set logger appender function
 }
 \examples{
 \dontrun{
+## change appender to "tee" that writes to the console and a file as well
 t <- tempfile()
 log_appender(appender_tee(t))
 log_info(42)
 log_info(42:44)
+readLines(t)
+
+## poor man's tee by stacking loggers in the namespace
+t <- tempfile()
+log_appender(appender_console)
+log_appender(appender_file(t), index = 2)
+log_info(42)
 readLines(t)
 }
 }

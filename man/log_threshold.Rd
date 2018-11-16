@@ -4,16 +4,34 @@
 \alias{log_threshold}
 \title{Get or set log level threshold}
 \usage{
-log_threshold(level, namespace = "global")
+log_threshold(level, namespace = "global", index = 1)
 }
 \arguments{
 \item{level}{see \code{log_levels}}
 
 \item{namespace}{logger namespace}
+
+\item{index}{index of the logger within the namespace}
 }
 \value{
 currently set log level threshold
 }
 \description{
 Get or set log level threshold
+}
+\examples{
+\dontrun{
+## check the currently set log level threshold
+log_threshold()
+
+## change the log level threshold to WARN
+log_threshold(WARN)
+log_info(1)
+log_warn(2)
+
+## add another logger with a lower log level threshold and check the number of logged messages
+log_threshold(INFO, index = 2)
+log_info(1)
+log_warn(2)
+}
 }

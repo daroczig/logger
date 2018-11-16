@@ -4,12 +4,14 @@
 \alias{log_layout}
 \title{Get or set logger layout}
 \usage{
-log_layout(layout, namespace = "global")
+log_layout(layout, namespace = "global", index = 1)
 }
 \arguments{
 \item{layout}{function}
 
 \item{namespace}{logger namespace}
+
+\item{index}{index of the logger within the namespace}
 }
 \description{
 Get or set logger layout

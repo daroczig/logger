@@ -1,6 +1,6 @@
 # logger
 
-A logging utility heavily inspired by `futile.logger`, loosely based on `log4j`.
+A modern and flexibly logging utility for R -- heavily inspired by the `futile.logger` R package and `logging` Python module.
 
 ## Installation
 
@@ -12,7 +12,7 @@ devtools::install_github('daroczig/logger')
 
 ## Why another logging R package?
 
-Although there are multiple very good options already hosted on CRAN when it comes to logging in R:
+Although there are multiple pretty good options already hosted on CRAN when it comes to logging in R, such as
 
 - `futile.logger`: probably the most popular `log4j` variant (and I'm a big fan)
 - `logging`: just like Python's `logging` package
@@ -32,17 +32,18 @@ So based on all the above subjective opinions, I decided to write the `n+1`th ex
 
 - keep it close to `log4j`
 - respect the most recent function / variable naming conventions and general R coding style
-- by default, rely on `glue` when it comes to formatting / rendering log messages, but keep it flexible if others prefer `sprintf` (eg for performance reasons) or functions
+- by default, rely on `glue` when it comes to formatting / rendering log messages, but keep it flexible if others prefer `sprintf` (eg for performance reasons) or other functions
 - support vectorization (eg passing a vector to be logged on multiple lines)
-- make it easy to extend with new features (eg layouts, message formats and output)
+- make it easy to extend with new features (eg custom layouts, message formats and output)
 - prepare for writing to various services, streams etc
-- provide support for namespaces, preferably automatically finding and creating a custom namespace for all R packages writing log messages -- each with optionally configurable log level threshold, message and output formats
+- provide support for namespaces, preferably automatically finding and creating a custom namespace for all R packages writing log messages, each with optionally configurable log level threshold, message and output formats
+- allow stacking loggers to implement logger hierarchy -- even within a namespace, so that the very same `log` call can write all the `TRACE` log messages to the console, while only pushing `ERROR`s to DataDog and eg `INFO` messages to CloudWatch
 - optionally colorize log message based on the log level
 - make logging fun
 
 Welcome to the Bazaar!
 
-## The structure of a log record
+## The structure of a logger and a log record
 
 Minimum requirements of a `logger` and its required parameters to log something:
 
@@ -94,6 +95,8 @@ Putting all these together:
 TODO create logger
 TODO use that logger
 ```
+
+TODO describe stacking loggers
 
 ## Log levels
 
@@ -220,8 +223,10 @@ Note that the `appender_file` and `appender_tee` generator functions also adds a
 
 ## TODO
 
+- [ ] doc improvements, cross-links, pkgdown, vignettes for intro and devs
 - [ ] support multiple appenders VS let users define a custom function wrapping multiple appenders
 - [ ] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console
+- [ ] allow, although do not recommend custom namespace (R pkg namespaces are just great)
 - [ ] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
 - [ ] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON`
 - [ ] `crayon`
