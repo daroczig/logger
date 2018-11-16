@@ -132,8 +132,9 @@ log_info('The answers are {1:5}')
 #> INFO [2018-14-11 02:17:09] The answers are 5
 ```
 
-There's also a simple layout writing log message to JSON:
+In the above example, first `42` was converted to a string by a message formatter, then the message was passed to a layout function to generate the actual log record.
 
+An example of another layout function writing the same log messages in JSON:
 
 ```r
 log_layout(layout_json)
@@ -193,7 +194,7 @@ To customize the format how the log messages are being rendered, see `?layout_ge
 
 Note that the `layout_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own layout generator functions, please keep `match.call()` recorded in the `generator` attribute, or stick with standard functions. See some examples in the `layouts.R` file.
 
-## Log devices
+## Delivering log records to their destination
 
 By default, `logger` will write to the console or `stdout` via the `appender_console` function:
 
@@ -220,6 +221,8 @@ readLines(t)
 You may find `appender_tee` also useful, that write the log messages to both `stdout` and a file.
 
 Note that the `appender_file` and `appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.
+
+TODO add example on stacking appenders
 
 ## TODO
 

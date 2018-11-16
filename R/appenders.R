@@ -1,5 +1,3 @@
-## log_handler_console
-
 #' Append log messages to stdout
 #' @param lines character vector
 #' @export
