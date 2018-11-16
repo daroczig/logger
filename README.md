@@ -51,7 +51,7 @@ Minimum requirements of a `logger` and its required parameters to log something:
     * log level `threshold`, eg `ERROR`, which defines the minimum log level required for actual logging
     * `layout` function, which defines the format of a log record, having access to some extra variables describing the calling environment of the log record (like timestamp, hostname, username, calling function etc), eg
 
-        * structured text including log level, timestamp and message
+        * a function returning structured text including log level, timestamp and message
         
             ```r
             layout <- function(level, msg) sprintf('%s [%s] %s', level, msg)
@@ -59,7 +59,7 @@ Minimum requirements of a `logger` and its required parameters to log something:
             #> INFO [1970-01-01 00:00:00] Happy Thursday!
             ```
         
-        * a JSON object of log level, timestamp, hostname, calling function and message
+        * a function returning a JSON object of log level, timestamp, hostname, calling function and message
         
             ```r
             layout <- function(level, msg) toJSON(level = level, timestamp = time, hostname = node, message = msg)
@@ -220,7 +220,9 @@ Note that the `appender_file` and `appender_tee` generator functions also adds a
 
 ## TODO
 
-- [ ] more variables inside of logger, eg call and function name
+- [ ] support multiple appenders VS let users define a custom function wrapping multiple appenders
+- [ ] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console
+- [ ] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
 - [ ] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON`
 - [ ] `crayon`
 - [ ] smarter JSON logger

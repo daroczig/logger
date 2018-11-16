@@ -13,6 +13,7 @@ get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%
         time      = Sys.time(),
         level     = attr(log_level, 'level'),
         pid       = Sys.getpid(),
+        ## TODO run Sys.info only once
         user      = Sys.info()[["user"]],
         node      = Sys.info()[["nodename"]])
     ## TODO OS version
@@ -59,7 +60,9 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 
         with(get_logger_meta_variables(level, time_format), glue(format))
 
-    }, generator = deparse(match.call()))
+    }, generator = deparse(match.call())
+    ## TODO add get_logger_meta_variables as attributes if the appender might want to use it, eg syslog?
+    )
 
 }
 
