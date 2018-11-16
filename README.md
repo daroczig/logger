@@ -44,7 +44,7 @@ Welcome to the Bazaar!
 
 ## The structure of a log record
 
-Minimum requirements of a logger object and its required parameters to log something:
+Minimum requirements of a `logger` and its required parameters to log something:
 
 * logger definition:
 
@@ -53,7 +53,7 @@ Minimum requirements of a logger object and its required parameters to log somet
 
         * structured text including log level, timestamp and message
         
-            ```
+            ```r
             layout <- function(level, msg) sprintf('%s [%s] %s', level, msg)
             layout(INFO, 'Happy Thursday!')
             #> INFO [1970-01-01 00:00:00] Happy Thursday!
@@ -61,14 +61,27 @@ Minimum requirements of a logger object and its required parameters to log somet
         
         * a JSON object of log level, timestamp, hostname, calling function and message
         
-            ```
+            ```r
             layout <- function(level, msg) toJSON(level = level, timestamp = time, hostname = node, message = msg)
             layout(INFO, 'Happy Thursday!')
-            {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}
+            #> {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}
             ```
 
-    * `formatter` function, which converts the R objects passed to the logger into an actual character vector
-    * `appender` function, which writes the actual log record somewhere, eg `stdout`, a file or a streaming service
+    * `formatter` function, which converts the R objects passed to the logger into an actual character vector, eg
+    
+        ```r
+        formatter <- function(...) paste(..., collapse = ' ', sep = ' ')
+        formatter(letters[1:3], 'foo', pi)
+        #> [1] "a foo 3.14159265358979 b foo 3.14159265358979 c foo 3.14159265358979"
+        ```
+    
+    * `appender` function, which writes the actual log record somewhere, eg `stdout`, a file or a streaming service, eg
+    
+        ```r
+        appender <- function(line) cat(line, '\n')
+        appender('INFO [now] I am a log message')
+        #> INFO [now] I am a log message 
+        ```
 
 * user-provided parameters: 
 
