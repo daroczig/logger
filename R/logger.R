@@ -146,7 +146,7 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
     if (missing(appender)) {
         appender <- config$appender
         if (!is.null(attr(appender, 'generator'))) {
-            appender <- parse(text = attr(layout, 'generator'))[[1]]
+            appender <- parse(text = attr(appender, 'generator'))[[1]]
         }
         return(appender)
     }
@@ -161,6 +161,7 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
 #' Find the logger definition(s) specified for the current namespace with a fallback to the global namespace
 #' @return list of function(s)
 #' @keywords internal
+#' @importFrom utils getFromNamespace
 get_logger_definitions <- function() {
     namespace <- find_namespace()
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {

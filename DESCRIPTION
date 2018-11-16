@@ -13,6 +13,7 @@ Encoding: UTF-8
 RoxygenNote: 6.1.0
 License: AGPL-3
 Imports:
+  utils,
   glue
 Suggests:
   testthat,

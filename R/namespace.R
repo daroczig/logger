@@ -13,6 +13,7 @@ fallback_namespace <- function(namespace) {
 #' Find the namespace, function name and call from which the logging function was called
 #' @return list
 #' @keywords internal
+#' @importFrom utils tail
 find_parents <- function() {
 
     namespaces <- lapply(sys.frames(), topenv)

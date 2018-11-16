@@ -10,6 +10,10 @@ A modern and flexibly logging utility for R -- heavily inspired by the `futile.l
 devtools::install_github('daroczig/logger')
 ```
 
+## Quick examples
+
+TODO
+
 ## Why another logging R package?
 
 Although there are multiple pretty good options already hosted on CRAN when it comes to logging in R, such as
@@ -222,7 +226,7 @@ You may find `appender_tee` also useful, that write the log messages to both `st
 
 Note that the `appender_file` and `appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.
 
-TODO add example on stacking appenders
+TODO note that `tee` can be implemented by stacking loggers as well, like described above
 
 ## TODO
 
