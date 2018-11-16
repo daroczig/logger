@@ -28,14 +28,14 @@ But some/most of these packages are
 - using strange syntax elements, eg dots in function names or object-oriented approaches not being very familiar to most R users
 - requires a lot of typing and code repetitions
 
-So based on all the above subjective opinions, decided to write the `n+1`th extensible `log4j` logger that fits my liking -- and hopefully yours as well -- with the focus being on:
+So based on all the above subjective opinions, I decided to write the `n+1`th extensible `log4j` logger that fits my liking -- and hopefully yours as well -- with the focus being on:
 
 - keep it close to `log4j`
 - respect the most recent function / variable naming conventions and general R coding style
-- rely on `glue` when it comes to formatting / rendering log messages
+- by default, rely on `glue` when it comes to formatting / rendering log messages, but keep it flexible if others prefer `sprintf` (eg for performance reasons) or functions
 - support vectorization (eg passing a vector to be logged on multiple lines)
 - make it easy to extend with new features (eg layouts, message formats and output)
-- prepare for writing to various services
+- prepare for writing to various services, streams etc
 - provide support for namespaces, preferably automatically finding and creating a custom namespace for all R packages writing log messages -- each with optionally configurable log level threshold, message and output formats
 - optionally colorize log message based on the log level
 - make logging fun
@@ -87,6 +87,13 @@ Minimum requirements of a `logger` and its required parameters to log something:
 
     * actual log level, eg `INFO`, which describes the severity of a message
     * R objects to be logged
+
+Putting all these together:
+
+```r
+TODO create logger
+TODO use that logger
+```
 
 ## Log levels
 
