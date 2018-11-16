@@ -1,0 +1,10 @@
+language: R
+sudo: false
+cache:
+- packages
+
+before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown")'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
