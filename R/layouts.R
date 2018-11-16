@@ -1,25 +1,31 @@
 #' Collect useful information about the logging environment to be used in log messages
 #' @param log_level log level as per \code{\link{log_levels}}
-#' @param time_format see \code{strptime} for details
 #' @return list
 #' @keywords internal
 #' @seealso layout_glue_generator
-get_logger_meta_variables <- function(log_level, time_format = '%Y-%d-%m %H:%M:%S') {
+get_logger_meta_variables <- function(log_level) {
+
     list(
+
         namespace = find_namespace(),
         fn        = find_fn(),
         call      = find_call(),
-        ## time      = as.character(Sys.time(), time_format),
+
         time      = Sys.time(),
         level     = attr(log_level, 'level'),
+
         pid       = Sys.getpid(),
         ## TODO run Sys.info only once
         user      = Sys.info()[["user"]],
-        node      = Sys.info()[["nodename"]])
-    ## TODO OS version
-    ## TODO jenkins env vars if available
-    ## TODO any env var
-    ## TODO seed
+        node      = Sys.info()[["nodename"]]
+
+        ## TODO OS version
+        ## TODO jenkins env vars if available
+        ## TODO any env var
+        ## TODO seed
+
+    )
+
 }
 
 
@@ -58,7 +64,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
             stop('Invalid log level, see ?log_levels')
         }
 
-        with(get_logger_meta_variables(level, time_format), glue(format))
+        with(get_logger_meta_variables(level), glue(format))
 
     }, generator = deparse(match.call())
     ## TODO add get_logger_meta_variables as attributes if the appender might want to use it, eg syslog?

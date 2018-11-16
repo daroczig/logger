@@ -4,13 +4,10 @@
 \alias{get_logger_meta_variables}
 \title{Collect useful information about the logging environment to be used in log messages}
 \usage{
-get_logger_meta_variables(log_level,
-  time_format = "\%Y-\%d-\%m \%H:\%M:\%S")
+get_logger_meta_variables(log_level)
 }
 \arguments{
 \item{log_level}{log level as per \code{\link{log_levels}}}
-
-\item{time_format}{see \code{strptime} for details}
 }
 \value{
 list
