@@ -29,6 +29,7 @@ logger <- function(threshold, formatter, layout, appender) {
     }
 }
 
+## TODO DRY the below 4 functions
 
 #' Get or set log level threshold
 #' @param level see \code{log_levels}
@@ -67,7 +68,7 @@ log_threshold <- function(level, namespace = 'global', index = 1) {
 
 
 #' Get or set logger layout
-#' @param layout function
+#' @param layout function defining the structure of a log message / object
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -88,6 +89,30 @@ log_layout <- function(layout, namespace = 'global', index = 1) {
     }
 
     config$layout <- layout
+    configs[[min(index, length(config) + 1)]] <- config
+    assign(namespace, configs, envir = namespaces)
+
+}
+
+
+#' Get or set logger layout
+#' @param formatter function defining how R objects are converted into a single string
+#' @inheritParams log_threshold
+#' @export
+log_formatter <- function(formatter, namespace = 'global', index = 1) {
+
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    config  <- configs[[min(index, length(configs))]]
+
+    if (missing(formatter)) {
+        formatter <- config$formatter
+        if (!is.null(attr(formatter, 'generator'))) {
+            formatter <- parse(text = attr(formatter, 'generator'))[[1]]
+        }
+        return(formatter)
+    }
+
+    config$formatter <- formatter
     configs[[min(index, length(config) + 1)]] <- config
     assign(namespace, configs, envir = namespaces)
 
