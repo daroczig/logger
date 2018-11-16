@@ -67,8 +67,18 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 }
 
 
+#' Format a log record by concatenating the log level, timestamp and message
+#' @param level log level, see \code{\link{log_levels}} for more details
+#' @param msg string message
+#' @return character vector
+#' @export
+layout_raw <- function(level, msg) {
+    paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%d-%m %H:%M:%S"), '] ', msg)
+}
+
+
 #' Format a log message with \code{glue}
-#' @inheritParams layout_glue_generator
+#' @inheritParams layout_raw
 #' @return character vector
 #' @importFrom glue glue
 #' @export
