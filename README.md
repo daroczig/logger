@@ -49,27 +49,30 @@ Minimum requirements of a logger object and its required parameters to log somet
 * logger definition:
 
     * log level `threshold`, eg `ERROR`, which defines the minimum log level required for actual logging
-    * `layout` function, which defines the format of a log record, eg 
+    * `layout` function, which defines the format of a log record, having access to some extra variables describing the calling environment of the log record (like timestamp, hostname, username, calling function etc), eg
 
         * structured text including log level, timestamp and message
         
             ```
-            INFO [1970-01-01 00:00:00] I'm alive!
+            layout <- function(level, msg) sprintf('%s [%s] %s', level, msg)
+            layout(INFO, 'Happy Thursday!')
+            #> INFO [1970-01-01 00:00:00] Happy Thursday!
             ```
         
         * a JSON object of log level, timestamp, hostname, calling function and message
         
             ```
-            {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'I\'m alive!'}
+            layout <- function(level, msg) toJSON(level = level, timestamp = time, hostname = node, message = msg)
+            layout(INFO, 'Happy Thursday!')
+            {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}
             ```
 
     * `formatter` function, which converts the R objects passed to the logger into an actual character vector
     * `appender` function, which writes the actual log record somewhere, eg `stdout`, a file or a streaming service
 
-* parameters: 
+* user-provided parameters: 
 
     * actual log level, eg `INFO`, which describes the severity of a message
-    * some other parameters describing the environment of the log record are automatically captured, eg timestamp, hostname, username, calling function etc.
     * R objects to be logged
 
 ## Log levels
