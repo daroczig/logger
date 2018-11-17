@@ -162,8 +162,9 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
 #' @return list of function(s)
 #' @keywords internal
 #' @importFrom utils getFromNamespace
-get_logger_definitions <- function() {
-    namespace <- find_namespace()
+#' @param custom_namespace override the default / auto-picked namespace with a custom string
+get_logger_definitions <- function(custom_namespace = NA_character_) {
+    namespace <- ifelse(is.na(custom_namespace), find_namespace(), custom_namespace)
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
@@ -173,7 +174,9 @@ get_logger_definitions <- function() {
 
 #' Log a message with given log level
 #' @param level log level from \code{log_levels}
-#' @param msg character vector
+#' @param msg R objects that can be converted to a character vector via the active message formatter function
+#' @param custom_namespace string referring to the \code{logger} environment / config to be used to log the \code{msg} instead of the default namespace, which is defined by the R package name from which the logger was called.
+#' @seealso \code{\link{log_formatter}}
 #' @export
 #' @aliases log log_fatal log_error log_warn log_info log_debug log_trace
 #' @examples \dontrun{
@@ -194,10 +197,10 @@ get_logger_definitions <- function() {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log <- function(level, msg) {
-    defintions <- get_logger_definitions()
-    for (defintion in defintions) {
-        do.call(logger, defintion)(level, msg)
+log <- function(level, msg, custom_namespace = NA_character_) {
+    definitions <- get_logger_definitions(custom_namespace)
+    for (definition in definitions) {
+        do.call(logger, definition)(level, msg)
     }
 }
 
