@@ -92,7 +92,7 @@ layout_glue <- layout_glue_generator()
 
 
 #' Format a log message as JSON
-#' @inheritParams layout_glue_generator
+#' @inheritParams layout_raw
 #' @return character vector
 #' @export
 #' @examples \dontrun{

@@ -120,7 +120,7 @@ log_formatter <- function(formatter, namespace = 'global', index = 1) {
 
 
 #' Get or set logger appender function
-#' @param layout function
+#' @param appender function
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{

@@ -6,6 +6,11 @@
 \usage{
 layout_json(level, msg)
 }
+\arguments{
+\item{level}{log level, see \code{\link{log_levels}} for more details}
+
+\item{msg}{string message}
+}
 \value{
 character vector
 }

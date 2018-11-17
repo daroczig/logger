@@ -7,11 +7,11 @@
 log_appender(appender, namespace = "global", index = 1)
 }
 \arguments{
+\item{appender}{function}
+
 \item{namespace}{logger namespace}
 
 \item{index}{index of the logger within the namespace}
-
-\item{layout}{function}
 }
 \description{
 Get or set logger appender function
