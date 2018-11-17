@@ -3,5 +3,5 @@ _pkgdown.yml
 .editorconfig
 .gitignore
 .lintr
-.*.sh
+.*.sh$
 .backup
