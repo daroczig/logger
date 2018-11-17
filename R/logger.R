@@ -206,14 +206,14 @@ log <- function(level, msg, custom_namespace = NA_character_) {
 
 
 #' @export
-log_fatal <- function(msg) log(FATAL, msg)
+log_fatal <- function(msg) log(FATAL, msg, custom_namespace = NA_character_)
 #' @export
-log_error <- function(msg) log(ERROR, msg)
+log_error <- function(msg) log(ERROR, msg, custom_namespace = NA_character_)
 #' @export
-log_warn <- function(msg) log(WARN, msg)
+log_warn <- function(msg) log(WARN, msg, custom_namespace = NA_character_)
 #' @export
-log_info <- function(msg) log(INFO, msg)
+log_info <- function(msg) log(INFO, msg, custom_namespace = NA_character_)
 #' @export
-log_debug <- function(msg) log(DEBUG, msg)
+log_debug <- function(msg) log(DEBUG, msg, custom_namespace = NA_character_)
 #' @export
-log_trace <- function(msg) log(TRACE, msg)
+log_trace <- function(msg) log(TRACE, msg, custom_namespace = NA_character_)
