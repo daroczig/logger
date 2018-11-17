@@ -231,11 +231,15 @@ TODO note that `tee` can be implemented by stacking loggers as well, like descri
 ## TODO
 
 - [ ] doc improvements, cross-links, pkgdown, vignettes for intro and devs
-- [ ] support multiple appenders VS let users define a custom function wrapping multiple appenders
-- [ ] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console
-- [ ] allow, although do not recommend custom namespace (R pkg namespaces are just great)
+
+- [x] support multiple appenders VS let users define a custom function wrapping multiple appenders
+- [x] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console
+- [x] allow, although do not recommend custom namespace (R pkg namespaces are just great)
+- [x] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON` (wontdo)
+
+- [x] more variables inside of logger, eg call and function name
 - [ ] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
-- [ ] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON`
+
 - [ ] `crayon`
 - [ ] smarter JSON logger
 - [ ] graylog, kinesis, datadog, cloudwatch, slack etc appenders
