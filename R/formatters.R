@@ -22,7 +22,7 @@ formatter_sprintf <- function(fmt, ...) {
 #' @return character vector
 #' @export
 formatter_glue <- function(...) {
-    as.character(glue(...))
+    as.character(glue(..., .envir = parent.frame()))
 }
 
 
