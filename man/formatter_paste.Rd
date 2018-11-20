@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_paste}
 \alias{formatter_paste}
-\title{Concatenate strings}
+\title{Concatenate strings via \code{paste}}
 \usage{
 formatter_paste(...)
 }
@@ -13,5 +13,5 @@ formatter_paste(...)
 string
 }
 \description{
-Concatenate strings
+Concatenate strings via \code{paste}
 }
