@@ -33,6 +33,17 @@ formatter_glue <- function(...) {
 #' @param ... passed to \code{glue} for the text interpolation
 #' @return character vector
 #' @export
+#' @examples \dontrun{
+#' formatter_glue_or_sprinf("{a} + {b} = %s", a = 2, b = 3, 5)
+#' formatter_glue_or_sprinf("{pi} * {2} = %s", pi*2)
+#' formatter_glue_or_sprinf("{pi} * {2} = {pi*2}")
+#'
+#' formatter_glue_or_sprinf("Hi ", "{c('foo', 'bar')}, did you know that 2*4={2*4}")
+#' formatter_glue_or_sprinf("Hi {c('foo', 'bar')}, did you know that 2*4={2*4}")
+#' formatter_glue_or_sprinf("Hi {c('foo', 'bar')}, did you know that 2*4=%s", 2*4)
+#' formatter_glue_or_sprinf("Hi %s, did you know that 2*4={2*4}", c('foo', 'bar'))
+#' formatter_glue_or_sprinf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
+#' }
 formatter_glue_or_sprinf <- function(msg, ...) {
 
     params <- list(...)
