@@ -2,6 +2,8 @@
 
 A modern and flexibly logging utility for R -- heavily inspired by the `futile.logger` R package and `logging` Python module.
 
+![CRAN](https://www.r-pkg.org/badges/version/logger) [![Build Status](https://travis-ci.org/daroczig/logger.svg?branch=master)](https://travis-ci.org/daroczig/logger) [![Code Coverage](https://codecov.io/gh/daroczig/logger/branch/master/graph/badge.svg)](https://codecov.io/gh/daroczig/logger)
+
 ## Installation
 
 `logger` is not on CRAN yet, please install from GitHub:
@@ -232,7 +234,7 @@ TODO note that `tee` can be implemented by stacking loggers as well, like descri
 
 - [ ] doc improvements, cross-links, pkgdown, vignettes for intro and devs
 - [ ] unit tests
-- [ ] code coverage report
+- [x] code coverage report
 - [ ] lint
 
 - [x] support multiple appenders VS let users define a custom function wrapping multiple appenders
