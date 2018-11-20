@@ -27,5 +27,5 @@ DEBUG <- structure(5L, level = 'DEBUG', class = c('loglevel', 'integer'))
 TRACE <- structure(6L, level = 'TRACE', class = c('loglevel', 'integer'))
 
 print.loglevel <- function(x) {
-    cat('Log level:', attr(x, 'level'), '\n')
+    cat('Log level: ', attr(x, 'level'), '\n', sep = '')
 }

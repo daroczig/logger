@@ -49,6 +49,9 @@ test_that('built in variables', {
     ## expect_equal(capture.output(g()), 'R_GlobalEnv / g / g()')
 })
 
+test_that('print.level', {
+    expect_equal(capture.output(INFO), 'Log level: INFO')
+})
 
 ## reset settings
 log_threshold(threshold)
