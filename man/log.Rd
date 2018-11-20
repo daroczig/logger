@@ -10,14 +10,14 @@
 \alias{log_trace}
 \title{Log a message with given log level}
 \usage{
-log(level, msg, custom_namespace = NA_character_)
+log(level, ..., custom_namespace = NA_character_)
 }
 \arguments{
 \item{level}{log level from \code{log_levels}}
 
-\item{msg}{R objects that can be converted to a character vector via the active message formatter function}
+\item{...}{R objects that can be converted to a character vector via the active message formatter function}
 
-\item{custom_namespace}{string referring to the \code{logger} environment / config to be used to log the \code{msg} instead of the default namespace, which is defined by the R package name from which the logger was called.}
+\item{custom_namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.}
 }
 \description{
 Log a message with given log level

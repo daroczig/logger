@@ -11,7 +11,7 @@ logger <- function(threshold, formatter, layout, appender) {
     force(layout)
     force(appender)
 
-    function(level, msg) {
+    function(level, ...) {
 
         if (!inherits(threshold, 'loglevel')) {
             stop('Invalid log level provided as threshold, see ?log_levels')
@@ -21,7 +21,7 @@ logger <- function(threshold, formatter, layout, appender) {
             return(invisible(NULL))
         }
 
-        msg <- formatter(msg)
+        msg <- formatter(...)
         ## TODO support multiple appenders/handlers (list of functions), like tee?
         ## TODO or support multiple loggers on the same namespace, eg log text to console and JSON to another stream?
         appender(layout(level, msg))
@@ -174,8 +174,8 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 
 #' Log a message with given log level
 #' @param level log level from \code{log_levels}
-#' @param msg R objects that can be converted to a character vector via the active message formatter function
-#' @param custom_namespace string referring to the \code{logger} environment / config to be used to log the \code{msg} instead of the default namespace, which is defined by the R package name from which the logger was called.
+#' @param ... R objects that can be converted to a character vector via the active message formatter function
+#' @param custom_namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
 #' @seealso \code{\link{log_formatter}}
 #' @export
 #' @aliases log log_fatal log_error log_warn log_info log_debug log_trace
@@ -197,23 +197,23 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log <- function(level, msg, custom_namespace = NA_character_) {
+log <- function(level, ..., custom_namespace = NA_character_) {
     definitions <- get_logger_definitions(custom_namespace)
     for (definition in definitions) {
-        do.call(logger, definition)(level, msg)
+        do.call(logger, definition)(level, ...)
     }
 }
 
 
 #' @export
-log_fatal <- function(msg) log(FATAL, msg, custom_namespace = NA_character_)
+log_fatal <- function(...) log(FATAL, ..., custom_namespace = NA_character_)
 #' @export
-log_error <- function(msg) log(ERROR, msg, custom_namespace = NA_character_)
+log_error <- function(...) log(ERROR, ..., custom_namespace = NA_character_)
 #' @export
-log_warn <- function(msg) log(WARN, msg, custom_namespace = NA_character_)
+log_warn <- function(...) log(WARN, ..., custom_namespace = NA_character_)
 #' @export
-log_info <- function(msg) log(INFO, msg, custom_namespace = NA_character_)
+log_info <- function(...) log(INFO, ..., custom_namespace = NA_character_)
 #' @export
-log_debug <- function(msg) log(DEBUG, msg, custom_namespace = NA_character_)
+log_debug <- function(...) log(DEBUG, ..., custom_namespace = NA_character_)
 #' @export
-log_trace <- function(msg) log(TRACE, msg, custom_namespace = NA_character_)
+log_trace <- function(...) log(TRACE, ..., custom_namespace = NA_character_)

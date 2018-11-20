@@ -2,16 +2,16 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_glue}
 \alias{formatter_glue}
-\title{Concatenate strings and apply glue formatter}
+\title{Apply \code{glue}}
 \usage{
 formatter_glue(...)
 }
 \arguments{
-\item{...}{first passed to \code{paste} to generate a character vector of all passed objects, then passed to \code{glue}}
+\item{...}{passed to \code{glue} for the text interpolation}
 }
 \value{
 character vector
 }
 \description{
-Concatenate strings and apply glue formatter
+Apply \code{glue}
 }
