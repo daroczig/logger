@@ -269,6 +269,7 @@ TODO note that `tee` can be implemented by stacking loggers as well, like descri
 
 - [x] more variables inside of logger, eg call and function name
 - [x] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
+- [x] add `get_logger_meta_variables` as attributes to strings returned by layouts, eg if the appender might want to use it, like syslog? (wontdo, `syslog` appender can use a `syslog` layout as well)
 
 - [ ] `crayon`
 - [ ] smarter JSON logger

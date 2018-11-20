@@ -81,9 +81,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 
         with(get_logger_meta_variables(level), glue(format))
 
-    }, generator = deparse(match.call())
-    ## TODO add get_logger_meta_variables as attributes if the appender might want to use it, eg syslog?
-    )
+    }, generator = deparse(match.call()))
 
 }
 
