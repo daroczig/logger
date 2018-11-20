@@ -55,3 +55,12 @@ test_that('glue+sprintf works', {
 })
 
 rm(everything)
+
+
+formatter <- log_formatter()
+log_formatter(formatter_paste)
+test_that('paste formatter in actual logs', {
+    expect_true(grepl('hi5$', capture.output(log_info('hi', 5))))
+})
+
+log_formatter(formatter)
