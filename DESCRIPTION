@@ -1,7 +1,7 @@
 Type: Package
 Package: logger
 Authors@R: c(
-    person("Gergely", "Daroczi", , "daroczig@rapporter.net", role = c("aut", "cre")),
+    person("Gergely", "Daróczi", , "daroczig@rapporter.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3149-8537")),
     person("System1", role = c("fnd"))
     )
 Title: A Modern and Flexible Logging Utility
