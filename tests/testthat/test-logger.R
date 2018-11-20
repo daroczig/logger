@@ -50,7 +50,7 @@ test_that('built in variables', {
 })
 
 test_that('print.level', {
-    expect_equal(capture.output(INFO), 'Log level: INFO')
+    expect_equal(capture.output(print(INFO)), 'Log level: INFO')
 })
 
 ## reset settings
