@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_glue_generator}
 \alias{layout_glue_generator}
-\title{Generate logging function}
+\title{Generate logging function using common variables available via glue syntax}
 \usage{
 
   layout_glue_generator(format = "{level} [{format(time, \\"\%Y-\%d-\%m \%H:\%M:\%S\\")}] {msg}")
@@ -14,17 +14,10 @@
 function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 }
 \description{
-Available variables to be used in the \code{msg_format} provided by \code{logger:::get_logger_meta_variables}:
+\code{format} is passed to \code{glue} with access to the below variables:
 \itemize{
-  \item msg: the actual log message
-  \item level: log level, eg INFO
-  \item time: current time formatted as \code{time_format}
-  \item namespace: R package (if any) calling the logging function
-  \item call: parent call (if any) calling the logging function
-  \item fn: function's (if any) name calling the logging function
-  \item user: name of the real user id as reported by \code{Sys.info}
-  \item pid: the process identification number of the R session
-  \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+ \item msg: the actual log message
+ \item further variables set by \code{\link{get_logger_meta_variables}}
 }
 }
 \examples{

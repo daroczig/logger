@@ -243,7 +243,7 @@ TODO note that `tee` can be implemented by stacking loggers as well, like descri
 - [x] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON` (wontdo)
 
 - [x] more variables inside of logger, eg call and function name
-- [ ] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
+- [x] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
 
 - [ ] `crayon`
 - [ ] smarter JSON logger

@@ -1,9 +1,28 @@
 #' Collect useful information about the logging environment to be used in log messages
+#'
+#' Available variables to be used in the \code{format} provided by \code{logger:::get_logger_meta_variables}:
+#' \itemize{
+#'   \item level: log level, eg INFO
+#'   \item time: current time formatted as \code{time_format}
+#'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+#'   \item arch: machine type, typically the CPU architecture
+#'   \item os_name: Operating System's name
+#'   \item os_release: Operating System's release
+#'   \item os_version: Operating System's version
+#'   \item user: name of the real user id as reported by \code{Sys.info}
+#'   \item pid: the process identification number of the R session
+#'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+#'   \item namespace: R package (if any) calling the logging function
+#'   \item call: parent call (if any) calling the logging function
+#'   \item fn: function's (if any) name calling the logging function
+#' }
 #' @param log_level log level as per \code{\link{log_levels}}
 #' @return list
-#' @keywords internal
+#' @export
 #' @seealso layout_glue_generator
-get_logger_meta_variables <- function(log_level) {
+get_logger_meta_variables <- function(log_level = NULL) {
+
+    sysinfo <- Sys.info()
 
     list(
 
@@ -15,13 +34,16 @@ get_logger_meta_variables <- function(log_level) {
         level     = attr(log_level, 'level'),
 
         pid       = Sys.getpid(),
-        ## TODO run Sys.info only once
-        user      = Sys.info()[["user"]],
-        node      = Sys.info()[["nodename"]]
 
-        ## TODO OS version
-        ## TODO jenkins env vars if available
-        ## TODO any env var
+        ## stuff from Sys.info
+        node       = sysinfo[['nodename']],
+        arch       = sysinfo[['machine']],
+        os_name    = sysinfo[['sysname']],
+        os_release = sysinfo[['release']],
+        os_version = sysinfo[['version']],
+        user       = sysinfo[['user']]
+
+        ## TODO jenkins (or any) env vars => no need to get here, users can write custom layouts
         ## TODO seed
 
     )
@@ -29,19 +51,12 @@ get_logger_meta_variables <- function(log_level) {
 }
 
 
-#' Generate logging function
+#' Generate logging function using common variables available via glue syntax
 #'
-#' Available variables to be used in the \code{msg_format} provided by \code{logger:::get_logger_meta_variables}:
+#' \code{format} is passed to \code{glue} with access to the below variables:
 #' \itemize{
-#'   \item msg: the actual log message
-#'   \item level: log level, eg INFO
-#'   \item time: current time formatted as \code{time_format}
-#'   \item namespace: R package (if any) calling the logging function
-#'   \item call: parent call (if any) calling the logging function
-#'   \item fn: function's (if any) name calling the logging function
-#'   \item user: name of the real user id as reported by \code{Sys.info}
-#'   \item pid: the process identification number of the R session
-#'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+#'  \item msg: the actual log message
+#'  \item further variables set by \code{\link{get_logger_meta_variables}}
 #' }
 #' @param format \code{glue}-flavored layout of the message using the above variables
 #' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout

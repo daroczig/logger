@@ -4,7 +4,7 @@
 \alias{get_logger_meta_variables}
 \title{Collect useful information about the logging environment to be used in log messages}
 \usage{
-get_logger_meta_variables(log_level)
+get_logger_meta_variables(log_level = NULL)
 }
 \arguments{
 \item{log_level}{log level as per \code{\link{log_levels}}}
@@ -13,9 +13,23 @@ get_logger_meta_variables(log_level)
 list
 }
 \description{
-Collect useful information about the logging environment to be used in log messages
+Available variables to be used in the \code{format} provided by \code{logger:::get_logger_meta_variables}:
+\itemize{
+  \item level: log level, eg INFO
+  \item time: current time formatted as \code{time_format}
+  \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+  \item arch: machine type, typically the CPU architecture
+  \item os_name: Operating System's name
+  \item os_release: Operating System's release
+  \item os_version: Operating System's version
+  \item user: name of the real user id as reported by \code{Sys.info}
+  \item pid: the process identification number of the R session
+  \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+  \item namespace: R package (if any) calling the logging function
+  \item call: parent call (if any) calling the logging function
+  \item fn: function's (if any) name calling the logging function
+}
 }
 \seealso{
 layout_glue_generator
 }
-\keyword{internal}
