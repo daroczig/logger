@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate logging function — layout_glue_generator • logger</title>
+<title>Generate logging function using common variables available via glue syntax — layout_glue_generator • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,18 +30,11 @@
 
 
 
-<meta property="og:title" content="Generate logging function — layout_glue_generator" />
+<meta property="og:title" content="Generate logging function using common variables available via glue syntax — layout_glue_generator" />
 
-<meta property="og:description" content="Available variables to be used in the msg_format provided by logger:::get_logger_meta_variables:
+<meta property="og:description" content="format is passed to glue with access to the below variables:
 msg: the actual log message
-level: log level, eg INFO
-time: current time formatted as time_format
-namespace: R package (if any) calling the logging function
-call: parent call (if any) calling the logging function
-fn: function's (if any) name calling the logging function
-user: name of the real user id as reported by Sys.info
-pid: the process identification number of the R session
-node: name by which the machine is known on the network as reported by Sys.info
+further variables set by get_logger_meta_variables
 " />
 <meta name="twitter:card" content="summary" />
 
@@ -109,23 +102,16 @@ node: name by which the machine is known on the network as reported by Sys.info
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate logging function</h1>
+    <h1>Generate logging function using common variables available via glue syntax</h1>
     <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/layouts.R'><code>R/layouts.R</code></a></small>
     <div class="hidden name"><code>layout_glue_generator.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Available variables to be used in the <code>msg_format</code> provided by <code>logger:::get_logger_meta_variables</code>:</p><ul>
+    <p><code>format</code> is passed to <code>glue</code> with access to the below variables:</p><ul>
 <li><p>msg: the actual log message</p></li>
-<li><p>level: log level, eg INFO</p></li>
-<li><p>time: current time formatted as <code>time_format</code></p></li>
-<li><p>namespace: R package (if any) calling the logging function</p></li>
-<li><p>call: parent call (if any) calling the logging function</p></li>
-<li><p>fn: function's (if any) name calling the logging function</p></li>
-<li><p>user: name of the real user id as reported by <code>Sys.info</code></p></li>
-<li><p>pid: the process identification number of the R session</p></li>
-<li><p>node: name by which the machine is known on the network as reported by <code>Sys.info</code></p></li>
+<li><p>further variables set by <code><a href='get_logger_meta_variables.html'>get_logger_meta_variables</a></code></p></li>
 </ul>
     
     </div>
@@ -174,7 +160,7 @@ node: name by which the machine is known on the network as reported by Sys.info
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.1.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
 </div>
       </footer>
    </div>

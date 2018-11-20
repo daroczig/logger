@@ -32,7 +32,21 @@
 
 <meta property="og:title" content="Collect useful information about the logging environment to be used in log messages — get_logger_meta_variables" />
 
-<meta property="og:description" content="Collect useful information about the logging environment to be used in log messages" />
+<meta property="og:description" content="Available variables to be used in the format provided by logger:::get_logger_meta_variables:
+level: log level, eg INFO
+time: current time formatted as time_format
+node: name by which the machine is known on the network as reported by Sys.info
+arch: machine type, typically the CPU architecture
+os_name: Operating System's name
+os_release: Operating System's release
+os_version: Operating System's version
+user: name of the real user id as reported by Sys.info
+pid: the process identification number of the R session
+node: name by which the machine is known on the network as reported by Sys.info
+namespace: R package (if any) calling the logging function
+call: parent call (if any) calling the logging function
+fn: function's (if any) name calling the logging function
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,11 +120,25 @@
 
     <div class="ref-description">
     
-    <p>Collect useful information about the logging environment to be used in log messages</p>
+    <p>Available variables to be used in the <code>format</code> provided by <code>logger:::get_logger_meta_variables</code>:</p><ul>
+<li><p>level: log level, eg INFO</p></li>
+<li><p>time: current time formatted as <code>time_format</code></p></li>
+<li><p>node: name by which the machine is known on the network as reported by <code>Sys.info</code></p></li>
+<li><p>arch: machine type, typically the CPU architecture</p></li>
+<li><p>os_name: Operating System's name</p></li>
+<li><p>os_release: Operating System's release</p></li>
+<li><p>os_version: Operating System's version</p></li>
+<li><p>user: name of the real user id as reported by <code>Sys.info</code></p></li>
+<li><p>pid: the process identification number of the R session</p></li>
+<li><p>node: name by which the machine is known on the network as reported by <code>Sys.info</code></p></li>
+<li><p>namespace: R package (if any) calling the logging function</p></li>
+<li><p>call: parent call (if any) calling the logging function</p></li>
+<li><p>fn: function's (if any) name calling the logging function</p></li>
+</ul>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_logger_meta_variables</span>(<span class='no'>log_level</span>)</pre>
+    <pre class="usage"><span class='fu'>get_logger_meta_variables</span>(<span class='kw'>log_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,7 +178,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.1.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
 </div>
       </footer>
    </div>
