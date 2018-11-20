@@ -26,6 +26,10 @@ formatter_glue <- function(...) {
 
 
 #' Apply \code{glue} and \code{sprintf}
+#'
+#' The best of both words: using both formatter functions in your log messages, which can be useful eg if you are migrating from \code{sprintf} formatted log messages to \code{glue} or similar.
+#'
+#' Note that this function tries to be smart when passing arguments to \code{glue} and \code{sprintf}, but might fail with some edge cases, and returns an unformatted string.
 #' @param ... passed to \code{glue} for the text interpolation
 #' @return character vector
 #' @export
