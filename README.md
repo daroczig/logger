@@ -231,6 +231,9 @@ TODO note that `tee` can be implemented by stacking loggers as well, like descri
 ## TODO
 
 - [ ] doc improvements, cross-links, pkgdown, vignettes for intro and devs
+- [ ] unit tests
+- [ ] code coverage report
+- [ ] lint
 
 - [x] support multiple appenders VS let users define a custom function wrapping multiple appenders
 - [x] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console

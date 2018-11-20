@@ -21,10 +21,7 @@ logger <- function(threshold, formatter, layout, appender) {
             return(invisible(NULL))
         }
 
-        msg <- formatter(...)
-        ## TODO support multiple appenders/handlers (list of functions), like tee?
-        ## TODO or support multiple loggers on the same namespace, eg log text to console and JSON to another stream?
-        appender(layout(level, msg))
+        appender(layout(level, formatter(...)))
 
     }
 }

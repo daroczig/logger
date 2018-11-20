@@ -17,4 +17,5 @@ Imports:
   glue
 Suggests:
   testthat,
+  covr,
   jsonlite
