@@ -3,6 +3,9 @@ sudo: false
 cache:
 - packages
 
+after_success:
+  - Rscript -e 'library(testthat);library(logger);test_package("logger")'
+  - Rscript -e 'covr::codecov()'
 before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown")'
 deploy:
   provider: script
