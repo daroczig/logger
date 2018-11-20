@@ -7,10 +7,10 @@
 formatter_paste(...)
 }
 \arguments{
-\item{...}{R objects that can be converted to string}
+\item{...}{passed to \code{paste}}
 }
 \value{
-string
+character vector
 }
 \description{
 Concatenate strings via \code{paste}

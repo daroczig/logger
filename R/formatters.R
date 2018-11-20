@@ -1,6 +1,6 @@
 #' Concatenate strings via \code{paste}
-#' @param ... R objects that can be converted to string
-#' @return string
+#' @param ... passed to \code{paste}
+#' @return character vector
 #' @export
 formatter_paste <- function(...) {
     paste(...)
@@ -8,6 +8,7 @@ formatter_paste <- function(...) {
 
 
 #' Apply \code{sprintf}
+#' @param fmt passed to \code{sprintf}
 #' @param ... passed to \code{sprintf}
 #' @return character vector
 #' @export
@@ -30,6 +31,7 @@ formatter_glue <- function(...) {
 #' The best of both words: using both formatter functions in your log messages, which can be useful eg if you are migrating from \code{sprintf} formatted log messages to \code{glue} or similar.
 #'
 #' Note that this function tries to be smart when passing arguments to \code{glue} and \code{sprintf}, but might fail with some edge cases, and returns an unformatted string.
+#' @param msg passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}
 #' @param ... passed to \code{glue} for the text interpolation
 #' @return character vector
 #' @export

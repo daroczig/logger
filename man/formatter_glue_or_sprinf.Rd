@@ -7,6 +7,8 @@
 formatter_glue_or_sprinf(msg, ...)
 }
 \arguments{
+\item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}}
+
 \item{...}{passed to \code{glue} for the text interpolation}
 }
 \value{

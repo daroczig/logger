@@ -7,6 +7,8 @@
 formatter_sprintf(fmt, ...)
 }
 \arguments{
+\item{fmt}{passed to \code{sprintf}}
+
 \item{...}{passed to \code{sprintf}}
 }
 \value{
