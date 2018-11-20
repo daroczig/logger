@@ -12,9 +12,34 @@ A modern and flexibly logging utility for R -- heavily inspired by the `futile.l
 devtools::install_github('daroczig/logger')
 ```
 
-## Quick examples
+## Quick example
 
-TODO
+```r
+library(logger)
+log_threshold(DEBUG)
+log_info('Script starting up...')
+#> INFO [2018-20-11 22:49:36] Script starting up...
+
+pkgs <- available.packages()
+log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
+#> INFO [2018-20-11 22:49:37] There are 13433 R packages hosted on CRAN!
+
+for (letter in letters) {
+    lpkgs <- sum(grepl(letter, pkgs[, 'Package'], ignore.case = TRUE))
+    log(if (lpkgs < 5000) TRACE else DEBUG,
+        '{lpkgs} R packages including the {shQuote(letter)} letter')
+}
+#> DEBUG [2018-20-11 22:49:38] 6300 R packages including the 'a' letter
+#> DEBUG [2018-20-11 22:49:38] 6772 R packages including the 'e' letter
+#> DEBUG [2018-20-11 22:49:38] 5412 R packages including the 'i' letter
+#> DEBUG [2018-20-11 22:49:38] 7014 R packages including the 'r' letter
+#> DEBUG [2018-20-11 22:49:38] 6402 R packages including the 's' letter
+#> DEBUG [2018-20-11 22:49:38] 5864 R packages including the 't' letter
+
+log_warn('There might be many, like {1:2} or more warnings!!!')
+#> WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!
+#> WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!
+```
 
 ## Why another logging R package?
 
