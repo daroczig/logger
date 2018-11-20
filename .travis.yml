@@ -4,6 +4,7 @@ cache:
 - packages
 
 after_success:
+- Rscript -e 'library(devtools);install();test()'
 - Rscript -e 'covr::codecov()'
 
 before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown")'
