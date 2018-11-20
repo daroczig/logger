@@ -107,7 +107,7 @@ layout_json <- function(level, msg) {
 
     sapply(msg, function(msg)
         jsonlite::toJSON(list(
-            level = level,
+            level = attr(level, 'level'),
             timestamp = Sys.time(),
             message = as.character(msg)
         ), auto_unbox = TRUE))
