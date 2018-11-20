@@ -37,17 +37,17 @@ test_that('simple glue layout with threshold directly calling log', {
     expect_equal(capture.output(log(TRACE, 'foobar')), character())
 })
 
-## test_that('built in variables', {
-##     log_layout(layout_glue_generator('{pid}'))
-##     expect_equal(capture.output(log_info('foobar')), as.character(Sys.getpid()))
-##     log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
-##     f <- function() log_info('foobar')
-##     expect_equal(capture.output(f()), 'R_GlobalEnv / f / f()')
-##     g <- function() f()
-##     expect_equal(capture.output(g()), 'R_GlobalEnv / f / f()')
-##     g <- f
-##     expect_equal(capture.output(g()), 'R_GlobalEnv / g / g()')
-## })
+test_that('built in variables', {
+    log_layout(layout_glue_generator('{pid}'))
+    expect_equal(capture.output(log_info('foobar')), as.character(Sys.getpid()))
+    ## log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
+    ## f <- function() log_info('foobar')
+    ## expect_equal(capture.output(f()), 'R_GlobalEnv / f / f()')
+    ## g <- function() f()
+    ## expect_equal(capture.output(g()), 'R_GlobalEnv / f / f()')
+    ## g <- f
+    ## expect_equal(capture.output(g()), 'R_GlobalEnv / g / g()')
+})
 
 
 ## reset settings
