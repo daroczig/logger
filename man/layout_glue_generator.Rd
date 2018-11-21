@@ -22,18 +22,8 @@ function taking \code{level} and \code{msg} arguments - keeping the original cal
 }
 \examples{
 \dontrun{
-## enable colors
-log_layout(layout_glue_colors)
-log_threshold(TRACE)
-log_fatal('asdsa')
-log_error('asdsa')
-log_warn('asdsa')
-log_info('asdsa')
-log_debug('asdsa')
-log_trace('asdsa')
-
 logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-logger(FATAL, 'try {runif(1)}')
+logger(INFO, 'try {runif(1)}')
 
 log_layout(logger)
 log_info('try {runif(1)}')

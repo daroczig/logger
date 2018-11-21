@@ -65,20 +65,8 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
-#' ## enable colors
-#' log_layout(layout_glue_colors)
-#' log_threshold(TRACE)
-#' log_info('Starting the script...')
-#' log_debug('This is the second line')
-#' log_trace('That is being placed right after the first one.')
-#' log_warn('Some errors might come!')
-#' log_error('This is a problem')
-#' log_debug('Getting an error is usually bad')
-#' log_error('This is another problem')
-#' log_fatal('The last problem.')
-#'
 #' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-#' logger(FATAL, 'try {runif(1)}')
+#' logger(INFO, 'try {runif(1)}')
 #'
 #' log_layout(logger)
 #' log_info('try {runif(1)}')
@@ -123,6 +111,18 @@ layout_glue <- layout_glue_generator()
 #' @return character vector
 #' @importFrom glue glue
 #' @export
+#' @examples \dontrun{
+#' log_layout(layout_glue_colors)
+#' log_threshold(TRACE)
+#' log_info('Starting the script...')
+#' log_debug('This is the second line')
+#' log_trace('That is being placed right after the first one.')
+#' log_warn('Some errors might come!')
+#' log_error('This is a problem')
+#' log_debug('Getting an error is usually bad')
+#' log_error('This is another problem')
+#' log_fatal('The last problem.')
+#' }
 layout_glue_colors <- layout_glue_generator(
     format = paste(
         '{crayon::bold(colorize_by_log_level(level, levelr))}',

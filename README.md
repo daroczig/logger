@@ -15,6 +15,8 @@ devtools::install_github('daroczig/logger')
 
 ## Quick example
 
+Setting the log level threshold and logging various messages in ad-hoc and programmatic ways:
+
 ```r
 library(logger)
 log_threshold(DEBUG)
@@ -41,6 +43,23 @@ log_warn('There might be many, like {1:2} or more warnings!!!')
 #> WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!
 #> WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!
 ```
+
+Setting custom layout to render the log records with colors:
+
+```r
+log_layout(layout_glue_colors)
+log_threshold(TRACE)
+log_info('Starting the script...')
+log_debug('This is the second line')
+log_trace('That is being placed right after the first one.')
+log_warn('Some errors might come!')
+log_error('This is a problem')
+log_debug('Getting an error is usually bad')
+log_error('This is another problem')
+log_fatal('The last problem.')
+```
+
+<img src="inst/logger-color.png" alt="colored log output">
 
 ## Why another logging R package?
 
@@ -272,7 +291,7 @@ TODO note that `tee` can be implemented by stacking loggers as well, like descri
 - [x] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
 - [x] add `get_logger_meta_variables` as attributes to strings returned by layouts, eg if the appender might want to use it, like syslog? (wontdo, `syslog` appender can use a `syslog` layout as well)
 
-- [ ] `crayon`
+- [x] `crayon`
 - [ ] smarter JSON logger
 - [ ] graylog, kinesis, datadog, cloudwatch, slack etc appenders
 

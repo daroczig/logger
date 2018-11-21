@@ -17,3 +17,17 @@ character vector
 \description{
 Format a log message with \code{glue} and ANSI escape codes to add colors
 }
+\examples{
+\dontrun{
+log_layout(layout_glue_colors)
+log_threshold(TRACE)
+log_info('Starting the script...')
+log_debug('This is the second line')
+log_trace('That is being placed right after the first one.')
+log_warn('Some errors might come!')
+log_error('This is a problem')
+log_debug('Getting an error is usually bad')
+log_error('This is another problem')
+log_fatal('The last problem.')
+}
+}
