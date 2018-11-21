@@ -59,10 +59,21 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #'  \item further variables set by \code{\link{get_logger_meta_variables}}
 #' }
 #' @param format \code{glue}-flavored layout of the message using the above variables
+#' @param colors booleans flagging if log records should be colored by log level
 #' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
+#' ## enable colors
+#' log_layout(layout_glue)
+#' log_threshold(TRACE)
+#' log_fatal('asdsa')
+#' log_error('asdsa')
+#' log_warn('asdsa')
+#' log_info('asdsa')
+#' log_debug('asdsa')
+#' log_trace('asdsa')
+#'
 #' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' logger(FATAL, 'try {runif(1)}')
 #'
@@ -79,7 +90,30 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
             stop('Invalid log level, see ?log_levels')
         }
 
-        with(get_logger_meta_variables(level), glue(format))
+        layout <- with(get_logger_meta_variables(level), glue(format))
+
+        if (colors == TRUE) {
+
+            if (!requireNamespace('crayon', quietly = TRUE)) {
+                stop('Colored logging requires the "crayon" package to be installed.')
+            }
+
+            color <- switch(
+                attr(level, 'level'),
+                'FATAL' = crayon:::bgRed,
+                'ERROR' = crayon::combine_styles(crayon::bold, crayon:::make_style('red')),
+                'WARN'  = crayon:::make_style('orangered1'),
+                'INFO'  = crayon:::make_style('grey100'),
+                'DEBUG' = crayon:::make_style('green4'),
+                'TRACE' = crayon:::make_style('greenyellow'),
+                stop('Unknown log level')
+            )
+
+            layout <- paste0(color(layout), crayon::reset(''))
+
+        }
+
+        layout
 
     }, generator = deparse(match.call()))
 
@@ -103,6 +137,9 @@ layout_raw <- function(level, msg) {
 #' @export
 layout_glue <- layout_glue_generator()
 
+
+layout_glue_colors <- layout_glue_generator('')
+colorize_by_log_level
 
 #' Format a log message as JSON
 #' @inheritParams layout_raw

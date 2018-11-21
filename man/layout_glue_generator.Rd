@@ -5,10 +5,13 @@
 \title{Generate logging function using common variables available via glue syntax}
 \usage{
 
-  layout_glue_generator(format = "{level} [{format(time, \\"\%Y-\%d-\%m \%H:\%M:\%S\\")}] {msg}")
+  layout_glue_generator(format = "{crayon::bold(level)} [{format(time, \\"\%Y-\%d-\%m \%H:\%M:\%S\\")}] {msg}",
+  colors = requireNamespace("crayon", quitely = TRUE))
 }
 \arguments{
 \item{format}{\code{glue}-flavored layout of the message using the above variables}
+
+\item{colors}{booleans flagging if log records should be colored by log level}
 }
 \value{
 function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
@@ -22,6 +25,16 @@ function taking \code{level} and \code{msg} arguments - keeping the original cal
 }
 \examples{
 \dontrun{
+## enable colors
+log_layout(layout_glue)
+log_threshold(TRACE)
+log_fatal('asdsa')
+log_error('asdsa')
+log_warn('asdsa')
+log_info('asdsa')
+log_debug('asdsa')
+log_trace('asdsa')
+
 logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 logger(FATAL, 'try {runif(1)}')
 
