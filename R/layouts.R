@@ -2,7 +2,8 @@
 #'
 #' Available variables to be used in the \code{format} provided by \code{logger:::get_logger_meta_variables}:
 #' \itemize{
-#'   \item level: log level, eg INFO
+#'   \item levelr: log level as an R object, eg \code{INFO}
+#'   \item level: log level as a string, eg INFO
 #'   \item time: current time formatted as \code{time_format}
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
 #'   \item arch: machine type, typically the CPU architecture
@@ -31,6 +32,7 @@ get_logger_meta_variables <- function(log_level = NULL) {
         call      = find_call(),
 
         time      = Sys.time(),
+        levelr    = log_level,
         level     = attr(log_level, 'level'),
 
         pid       = Sys.getpid(),
@@ -59,20 +61,21 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #'  \item further variables set by \code{\link{get_logger_meta_variables}}
 #' }
 #' @param format \code{glue}-flavored layout of the message using the above variables
-#' @param colors booleans flagging if log records should be colored by log level
 #' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
 #' ## enable colors
-#' log_layout(layout_glue)
+#' log_layout(layout_glue_colors)
 #' log_threshold(TRACE)
-#' log_fatal('asdsa')
-#' log_error('asdsa')
-#' log_warn('asdsa')
-#' log_info('asdsa')
-#' log_debug('asdsa')
-#' log_trace('asdsa')
+#' log_info('Starting the script...')
+#' log_debug('This is the second line')
+#' log_trace('That is being placed right after the first one.')
+#' log_warn('Some errors might come!')
+#' log_error('This is a problem')
+#' log_debug('Getting an error is usually bad')
+#' log_error('This is another problem')
+#' log_fatal('The last problem.')
 #'
 #' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' logger(FATAL, 'try {runif(1)}')
@@ -90,30 +93,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
             stop('Invalid log level, see ?log_levels')
         }
 
-        layout <- with(get_logger_meta_variables(level), glue(format))
-
-        if (colors == TRUE) {
-
-            if (!requireNamespace('crayon', quietly = TRUE)) {
-                stop('Colored logging requires the "crayon" package to be installed.')
-            }
-
-            color <- switch(
-                attr(level, 'level'),
-                'FATAL' = crayon:::bgRed,
-                'ERROR' = crayon::combine_styles(crayon::bold, crayon:::make_style('red')),
-                'WARN'  = crayon:::make_style('orangered1'),
-                'INFO'  = crayon:::make_style('grey100'),
-                'DEBUG' = crayon:::make_style('green4'),
-                'TRACE' = crayon:::make_style('greenyellow'),
-                stop('Unknown log level')
-            )
-
-            layout <- paste0(color(layout), crayon::reset(''))
-
-        }
-
-        layout
+        with(get_logger_meta_variables(level), glue(format))
 
     }, generator = deparse(match.call()))
 
@@ -138,8 +118,17 @@ layout_raw <- function(level, msg) {
 layout_glue <- layout_glue_generator()
 
 
-layout_glue_colors <- layout_glue_generator('')
-colorize_by_log_level
+#' Format a log message with \code{glue} and ANSI escape codes to add colors
+#' @inheritParams layout_raw
+#' @return character vector
+#' @importFrom glue glue
+#' @export
+layout_glue_colors <- layout_glue_generator(
+    format = paste(
+        '{crayon::bold(colorize_by_log_level(level, levelr))}',
+        '[{format(time, "%Y-%d-%m %H:%M:%S")}]',
+        '{colorize_by_log_level(msg, levelr)}'))
+
 
 #' Format a log message as JSON
 #' @inheritParams layout_raw

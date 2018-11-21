@@ -2,10 +2,28 @@
 % Please edit documentation in R/color.R
 \name{colorize_by_log_level}
 \alias{colorize_by_log_level}
-\title{Colorize character vector}
+\title{Colorize string by related log level}
 \usage{
-colorize_by_log_level(level, msg)
+colorize_by_log_level(msg, level)
+}
+\arguments{
+\item{msg}{string}
+
+\item{level}{see \code{\link{log_levels}}}
+}
+\value{
+string with ANSI escape code
 }
 \description{
-Colorize character vector
+Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
+}
+\examples{
+\dontrun{
+cat(colorize_by_log_level(FATAL, 'foobar'), '\\n')
+cat(colorize_by_log_level(ERROR, 'foobar'), '\\n')
+cat(colorize_by_log_level(WARN, 'foobar'), '\\n')
+cat(colorize_by_log_level(INFO, 'foobar'), '\\n')
+cat(colorize_by_log_level(DEBUG, 'foobar'), '\\n')
+cat(colorize_by_log_level(TRACE, 'foobar'), '\\n')
+}
 }

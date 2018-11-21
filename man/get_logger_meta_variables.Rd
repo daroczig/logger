@@ -15,7 +15,8 @@ list
 \description{
 Available variables to be used in the \code{format} provided by \code{logger:::get_logger_meta_variables}:
 \itemize{
-  \item level: log level, eg INFO
+  \item levelr: log level as an R object, eg \code{INFO}
+  \item level: log level as a string, eg INFO
   \item time: current time formatted as \code{time_format}
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
   \item arch: machine type, typically the CPU architecture
