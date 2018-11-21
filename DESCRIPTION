@@ -18,4 +18,5 @@ Imports:
 Suggests:
   testthat,
   covr,
-  jsonlite
+  jsonlite,
+  crayon
