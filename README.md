@@ -111,6 +111,14 @@ Minimum requirements of a `logger` and its required parameters to log something:
 * logger definition:
 
     * log level `threshold`, eg `ERROR`, which defines the minimum log level required for actual logging
+    * `formatter` function, which converts the R objects passed to the logger into an actual log message (to be then passed to the `layout` function), eg
+    
+        ```r
+        formatter <- function(...) paste(..., collapse = ' ', sep = ' ')
+        formatter(letters[1:3], 'foo', pi)
+        #> [1] "a foo 3.14159265358979 b foo 3.14159265358979 c foo 3.14159265358979"
+        ```
+
     * `layout` function, which defines the format of a log record, having access to some extra variables describing the calling environment of the log record (like timestamp, hostname, username, calling function etc), eg
 
         * a function returning structured text including log level, timestamp and message
@@ -129,14 +137,6 @@ Minimum requirements of a `logger` and its required parameters to log something:
             #> {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}
             ```
 
-    * `formatter` function, which converts the R objects passed to the logger into an actual character vector, eg
-    
-        ```r
-        formatter <- function(...) paste(..., collapse = ' ', sep = ' ')
-        formatter(letters[1:3], 'foo', pi)
-        #> [1] "a foo 3.14159265358979 b foo 3.14159265358979 c foo 3.14159265358979"
-        ```
-    
     * `appender` function, which writes the actual log record somewhere, eg `stdout`, a file or a streaming service, eg
     
         ```r
@@ -147,17 +147,20 @@ Minimum requirements of a `logger` and its required parameters to log something:
 
 * user-provided parameters: 
 
-    * actual log level, eg `INFO`, which describes the severity of a message
+    * log level of the log record, eg `INFO`, which describes the severity of a message
     * R objects to be logged
 
-Putting all these together:
+Putting all these together (by explicitly setting the default config):
 
 ```r
-TODO create logger
-TODO use that logger
+log_threshold(INFO)
+log_formatter(formatter_glue)
+log_layout(layout_simple)
+log_appender(appender_console)
+log_debug('I am a low level log message')
+log_warn('I am a higher level log message')
+#> WARN [2018-22-11 11:35:48] I am a higher level log message
 ```
-
-TODO describe stacking loggers
 
 ## Log levels
 
@@ -174,11 +177,15 @@ log_debug('How are you doing today?')
 #> DEBUG [2018-14-11 02:05:15] How are you doing today?
 ```
 
-If you want to define the log level in a programmatic way, check out the `log` function, and see `?log_levels` for all the supported log levels.
+If you want to define the log level in a programmatic way, check out the `log_level` function, and see `?log_levels` for all the supported log levels.
+
+## Log namespaces
+
+By default, all log messages will be processed by the global logging function, but you may also use custom namespaces (eg to deliver specific log records to a special destination or to apply custom log level threshold) and even multiple loggers as well within the very same namespace (eg to deliver all `INFO` and above log levels in the console and everything below that to a trace log file). For examples on these, please see below.
 
 ## Log message formats
 
-By default, the `log` function will simply record the log-level, current timestamp and the message after being processed by `glue`:
+By default, the `log_level` and its derivative functions will simply record the log-level, current timestamp and the message after being processed by `glue`:
 
 ```r
 log_info(42)
@@ -193,7 +200,9 @@ log_info('The answers are {1:5}')
 #> INFO [2018-14-11 02:17:09] The answers are 5
 ```
 
-In the above example, first `42` was converted to a string by a message formatter, then the message was passed to a layout function to generate the actual log record.
+In the above example, first, `42` was converted to a string by a message formatter, then the message was passed to a layout function to generate the actual log record.
+
+## Log layouts
 
 An example of another layout function writing the same log messages in JSON:
 
@@ -281,9 +290,38 @@ readLines(t)
 
 You may find `appender_tee` also useful, that write the log messages to both `stdout` and a file.
 
-Note that the `appender_file` and `appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.
+*Note that the `appender_file` and `appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.*
 
-TODO note that `tee` can be implemented by stacking loggers as well, like described above
+## Stacking loggers
+
+Note that the `appender_tee` functionality can be implemented by stacking loggers as well, eg setting two loggers for the global namespace: `appender_console` and `appender_file`. The advantage of this approach is that you can set different log level thresholds for each logger, for example:
+
+```r
+log_threshold()
+#> Log level: INFO
+
+## create a new logger with index 2
+log_threshold(TRACE, index = 2)
+
+## note that the original logger still have the same log level threshold
+log_threshold()
+#> Log level: INFO
+log_threshold(index = 2)
+#> Log level: TRACE
+
+## update the appender of the new logger
+t <-tempfile()
+log_appender(appender_file(t), index = 2)
+
+## test both loggers
+log_info('info msg')
+#> INFO [2018-22-11 11:52:08] info msg
+log_debug('info msg')
+
+readLines(t)
+#> [1] "INFO [2018-22-11 11:52:08] info msg" 
+#> [2] "DEBUG [2018-22-11 11:52:13] info msg"
+```
 
 ## TODO
 

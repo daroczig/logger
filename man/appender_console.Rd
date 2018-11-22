@@ -2,7 +2,7 @@
 % Please edit documentation in R/appenders.R
 \name{appender_console}
 \alias{appender_console}
-\title{Append log messages to stdout}
+\title{Append log record to stdout}
 \usage{
 appender_console(lines)
 }
@@ -10,5 +10,5 @@ appender_console(lines)
 \item{lines}{character vector}
 }
 \description{
-Append log messages to stdout
+Append log record to stdout
 }

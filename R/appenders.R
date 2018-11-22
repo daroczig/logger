@@ -1,4 +1,4 @@
-#' Append log messages to stdout
+#' Append log record to stdout
 #' @param lines character vector
 #' @export
 appender_console <- function(lines) {

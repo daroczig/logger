@@ -93,13 +93,13 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @param msg string message
 #' @return character vector
 #' @export
-layout_raw <- function(level, msg) {
+layout_simple <- function(level, msg) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%d-%m %H:%M:%S"), '] ', msg)
 }
 
 
 #' Format a log message with \code{glue}
-#' @inheritParams layout_raw
+#' @inheritParams layout_simple
 #' @return character vector
 #' @importFrom glue glue
 #' @export
@@ -107,7 +107,7 @@ layout_glue <- layout_glue_generator()
 
 
 #' Format a log message with \code{glue} and ANSI escape codes to add colors
-#' @inheritParams layout_raw
+#' @inheritParams layout_simple
 #' @return character vector
 #' @importFrom glue glue
 #' @export
@@ -131,7 +131,7 @@ layout_glue_colors <- layout_glue_generator(
 
 
 #' Format a log message as JSON
-#' @inheritParams layout_raw
+#' @inheritParams layout_simple
 #' @return character vector
 #' @export
 #' @examples \dontrun{
