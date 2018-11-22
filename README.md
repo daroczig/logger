@@ -207,12 +207,12 @@ log_info(1:3)
 #> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"3"}
 ```
 
-To customize the format how the log messages are being rendered, see `?layout_generator` that provides very easy access to a bunch environmental variables -- quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function's name, hostname, user running the R process etc:
+To customize the format how the log messages are being rendered, see `?layout_glue_generator` that provides very easy access to a bunch variables -- quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function's name, hostname, user running the R process etc:
 
 * define custom logger:
 
     ```r
-    logger <- layout_generator(msg_format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+    logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
     log_layout(logger)
     ```
 
@@ -236,8 +236,8 @@ To customize the format how the log messages are being rendered, see `?layout_ge
     ```r
     devtools::load_all(system.file('tests/logger-tester-package', package = 'logger'))
     #> Loading logger.tester
-    logger.tester.function(INFO, 'hi from tester package')
-    #> nevermind/21133/logger.tester/logger.tester.function 2018-14-11 01:32:56 INFO: hi from tester package
+    logger_tester_function(INFO, 'hi from tester package')
+    #> nevermind/21133/logger.tester/logger_tester_function 2018-14-11 01:32:56 INFO: hi from tester package
     ```
 
 * suppress messages in a namespace:
@@ -246,14 +246,14 @@ To customize the format how the log messages are being rendered, see `?layout_ge
     log_threshold(namespace = 'logger.tester')
     #> Log level: INFO 
     log_threshold(WARN, namespace = 'logger.tester')
-    logger.tester.function(INFO, 'hi from tester package')
-    logger.tester.function(WARN, 'hi from tester package')
-    #> nevermind/21133/logger.tester/logger.tester.function 2018-14-11 01:33:16 WARN: hi from tester package
+    logger_tester_function(INFO, 'hi from tester package')
+    logger_tester_function(WARN, 'hi from tester package')
+    #> nevermind/21133/logger.tester/logger_tester_function 2018-14-11 01:33:16 WARN: hi from tester package
     log_info('I am still working in the global namespace')
     #> nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:33:21 INFO: I am still working in the global namespace
     ```
 
-Note that the `layout_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own layout generator functions, please keep `match.call()` recorded in the `generator` attribute, or stick with standard functions. See some examples in the `layouts.R` file.
+Note that the `layout_glue_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own layout generator functions, please keep `match.call()` recorded in the `generator` attribute, or stick with standard functions. See some examples in the `layouts.R` file.
 
 ## Delivering log records to their destination
 
