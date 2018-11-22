@@ -20,7 +20,7 @@
 #' @param log_level log level as per \code{\link{log_levels}}
 #' @return list
 #' @export
-#' @seealso layout_glue_generator
+#' @seealso \code{\link{layout_glue_generator}}
 get_logger_meta_variables <- function(log_level = NULL) {
 
     sysinfo <- Sys.info()

@@ -1,6 +1,6 @@
 #' Log levels
 #'
-#' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}:
+#' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.
 #'
 #' \enumerate{
 #'   \item \code{FATAL} severe error that will prevent the application from continuing

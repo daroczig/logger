@@ -32,5 +32,5 @@ Available variables to be used in the log formatter functions, eg in \code{\link
 }
 }
 \seealso{
-layout_glue_generator
+\code{\link{layout_glue_generator}}
 }
