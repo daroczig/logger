@@ -159,3 +159,4 @@ layout_json <- function(level, msg) {
         ), auto_unbox = TRUE))
 
 }
+## TODO need for smarter JSON logger

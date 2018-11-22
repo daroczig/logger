@@ -32,3 +32,5 @@ appender_tee <- function(file) {
             appender_file(file)(lines)
         }, generator = deparse(match.call()))
 }
+
+## TODO other appenders: graylog, kinesis, datadog, cloudwatch, slack etc

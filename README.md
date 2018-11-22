@@ -323,23 +323,40 @@ readLines(t)
 #> [2] "DEBUG [2018-22-11 11:52:13] info msg"
 ```
 
-## TODO
+## Performance
 
-- [ ] doc improvements, cross-links, pkgdown, vignettes for intro and devs
-- [ ] unit tests
-- [x] code coverage report
-- [ ] lint
+Although this has not been an important feature in the early development and overall design of this logger implementation, but with the default `layout_simple` and `formatter_glue`, it seems to perform pretty well:
 
-- [x] support multiple appenders VS let users define a custom function wrapping multiple appenders
-- [x] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console
-- [x] allow, although do not recommend custom namespace (R pkg namespaces are just great)
-- [x] refactor layout functions to use the same backend and render message either via `glue`, `sprintf` or eg `toJSON` (wontdo)
+```r
+library(microbenchmark)
+library(futile.logger)
+t1 <- tempfile()
+flog.appender(appender.file(t1))
+#> NULL
+library(logger)
+#> The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN
+t2 <- tempfile()
+log_appender(appender_file(t2))
+string1 <- function() flog.info('hi')
+string2 <- function() log_info('hi')
+dynamic1 <- function() flog.info('hi %s', 42)
+dynamic2 <- function() log_info('hi {42}')
+vector1 <- function() flog.info(paste('hi', 1:5))
+vector2 <- function() log_info('hi {1:5}')
+microbenchmark(string1(), string2(), vector1(), vector2(), dynamic1(), dynamic2(), times = 1e3)
+#> Unit: microseconds
+#>        expr      min        lq      mean    median       uq       max neval cld
+#>   string1() 1510.372 1596.9630 1901.6076 1644.6540 1851.185  8995.092  1000   b
+#>   string2()  331.924  363.5350  466.1253  391.1195  441.039 27085.823  1000  a 
+#>   vector1() 1532.526 1609.0395 1889.2811 1669.5170 1865.571  6503.950  1000   b
+#>   vector2()  399.974  432.0735  519.9258  463.9960  521.519  2574.311  1000  a 
+#>  dynamic1() 1529.500 1615.7520 1949.9390 1668.8430 1888.323 29860.102  1000   b
+#>  dynamic2()  379.412  413.6555  505.2265  439.7285  495.892  2699.117  1000  a 
 
-- [x] more variables inside of logger, eg call and function name
-- [x] more variables inside of logger, eg OS name/version, Jenkins or other environment variables
-- [x] add `get_logger_meta_variables` as attributes to strings returned by layouts, eg if the appender might want to use it, like syslog? (wontdo, `syslog` appender can use a `syslog` layout as well)
+paste(t1, length(readLines(t1)))
+#> [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"
+paste(t2, length(readLines(t2)))
+#> [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"
+```
 
-- [x] `crayon`
-- [ ] smarter JSON logger
-- [ ] graylog, kinesis, datadog, cloudwatch, slack etc appenders
-
+On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, if needed.
