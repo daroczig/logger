@@ -47,19 +47,21 @@ log_warn('There might be many, like {1:2} or more warnings!!!')
 Setting custom layout to render the log records with colors:
 
 ```r
+library(logger)
 log_layout(layout_glue_colors)
 log_threshold(TRACE)
 log_info('Starting the script...')
-log_debug('This is the second line')
-log_trace('That is being placed right after the first one.')
-log_warn('Some errors might come!')
+log_debug('This is the second log line')
+log_trace('Note that the 2nd line is being placed right after the 1st one.')
+log_success('Doing pretty well so far!')
+log_warn('But beware, as some errors might come :/')
 log_error('This is a problem')
-log_debug('Getting an error is usually bad')
+log_debug('Note that getting an error is usually bad')
 log_error('This is another problem')
-log_fatal('The last problem.')
+log_fatal('The last problem')
 ```
 
-<img src="man/figures/logger-color.png" alt="colored log output">
+<img src="man/figures/logger-colors.png" alt="colored log output">
 
 But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale etc.
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/color.R
 \name{colorize_by_log_level}
 \alias{colorize_by_log_level}
-\title{Colorize string by related log level}
+\title{Colorize string by the related log level}
 \usage{
 colorize_by_log_level(msg, level)
 }
@@ -22,6 +22,7 @@ Adding color to a string to be used in terminal output. Supports ANSI standard c
 cat(colorize_by_log_level(FATAL, 'foobar'), '\\n')
 cat(colorize_by_log_level(ERROR, 'foobar'), '\\n')
 cat(colorize_by_log_level(WARN, 'foobar'), '\\n')
+cat(colorize_by_log_level(SUCCESS, 'foobar'), '\\n')
 cat(colorize_by_log_level(INFO, 'foobar'), '\\n')
 cat(colorize_by_log_level(DEBUG, 'foobar'), '\\n')
 cat(colorize_by_log_level(TRACE, 'foobar'), '\\n')

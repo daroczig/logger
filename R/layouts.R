@@ -126,8 +126,8 @@ layout_glue <- layout_glue_generator()
 layout_glue_colors <- layout_glue_generator(
     format = paste(
         '{crayon::bold(colorize_by_log_level(level, levelr))}',
-        '[{format(time, "%Y-%d-%m %H:%M:%S")}]',
-        '{colorize_by_log_level(msg, levelr)}'))
+        '[{crayon::italic(format(time, "%Y-%d-%m %H:%M:%S"))}]',
+        '{grayscale_by_log_level(msg, levelr)}'))
 
 
 #' Format a log message as JSON
