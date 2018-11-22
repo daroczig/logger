@@ -61,9 +61,15 @@ log_error('This is another problem')
 log_fatal('The last problem')
 ```
 
+Or simply run the related demo:
+
+```r
+demo(colors, package = 'logger', echo = FALSE)
+```
+
 <img src="man/figures/logger-colors.png" alt="colored log output">
 
-But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale etc.
+But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc.
 
 ## Why another logging R package?
 
