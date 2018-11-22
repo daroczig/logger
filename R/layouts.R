@@ -97,7 +97,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_simple <- function(level, msg) {
-    paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%d-%m %H:%M:%S"), '] ', msg)
+    paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }
 
 
