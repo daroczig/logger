@@ -135,15 +135,15 @@
 <span class='co'>## change appender to "tee" that writes to the console and a file as well</span>
 <span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span>()
 <span class='fu'>log_appender</span>(<span class='fu'><a href='appender_tee.html'>appender_tee</a></span>(<span class='no'>t</span>))
-<span class='fu'><a href='log.html'>log_info</a></span>(<span class='fl'>42</span>)
-<span class='fu'><a href='log.html'>log_info</a></span>(<span class='fl'>42</span>:<span class='fl'>44</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>:<span class='fl'>44</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/readLines'>readLines</a></span>(<span class='no'>t</span>)
 
 <span class='co'>## poor man's tee by stacking loggers in the namespace</span>
 <span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span>()
 <span class='fu'>log_appender</span>(<span class='no'>appender_console</span>)
 <span class='fu'>log_appender</span>(<span class='fu'><a href='appender_file.html'>appender_file</a></span>(<span class='no'>t</span>), <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'><a href='log.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/readLines'>readLines</a></span>(<span class='no'>t</span>)
 <span class='co'># }</span></pre>
   </div>
