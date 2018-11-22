@@ -3,13 +3,13 @@
 #' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}:
 #'
 #' \enumerate{
-#'   \item FATAL severe error that will prevent the application from continuing
-#'   \item ERROR An error in the application, possibly recoverable
-#'   \item WARN An event that might possible lead to an error
-#'   \item SUCCESS An explicit success event above the INFO level that you want to log
-#'   \item INFO An event for informational purposes
-#'   \item DEBUG A general debugging event
-#'   \item TRACE A fine-grained debug message, typically capturing the flow through the application.
+#'   \item \code{FATAL} severe error that will prevent the application from continuing
+#'   \item \code{ERROR} An error in the application, possibly recoverable
+#'   \item \code{WARN} An event that might possible lead to an error
+#'   \item \code{SUCCESS} An explicit success event above the INFO level that you want to log
+#'   \item \code{INFO} An event for informational purposes
+#'   \item \code{DEBUG} A general debugging event
+#'   \item \code{TRACE} A fine-grained debug message, typically capturing the flow through the application.
 #' }
 #' @references \url{https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
 #' @aliases log_levels FATAL ERROR WARN SUCCESS INFO DEBUG TRACE

@@ -1,10 +1,10 @@
 #' Collect useful information about the logging environment to be used in log messages
 #'
-#' Available variables to be used in the \code{format} provided by \code{logger:::get_logger_meta_variables}:
+#' Available variables to be used in the log formatter functions, eg in \code{\link{layout_glue_generator}}:
 #' \itemize{
-#'   \item levelr: log level as an R object, eg \code{INFO}
-#'   \item level: log level as a string, eg INFO
-#'   \item time: current time formatted as \code{time_format}
+#'   \item levelr: log level as an R object, eg \code{\link{INFO}}
+#'   \item level: log level as a string, eg \code{\link{INFO}}
+#'   \item time: current time as \code{POSIXct}
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
 #'   \item arch: machine type, typically the CPU architecture
 #'   \item os_name: Operating System's name
@@ -61,7 +61,7 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #'  \item further variables set by \code{\link{get_logger_meta_variables}}
 #' }
 #' @param format \code{glue}-flavored layout of the message using the above variables
-#' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
+#' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{\link{log_layout}} for the currently used layout
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{

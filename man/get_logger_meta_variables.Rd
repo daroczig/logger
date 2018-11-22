@@ -13,11 +13,11 @@ get_logger_meta_variables(log_level = NULL)
 list
 }
 \description{
-Available variables to be used in the \code{format} provided by \code{logger:::get_logger_meta_variables}:
+Available variables to be used in the log formatter functions, eg in \code{\link{layout_glue_generator}}:
 \itemize{
-  \item levelr: log level as an R object, eg \code{INFO}
-  \item level: log level as a string, eg INFO
-  \item time: current time formatted as \code{time_format}
+  \item levelr: log level as an R object, eg \code{\link{INFO}}
+  \item level: log level as a string, eg \code{\link{INFO}}
+  \item time: current time as \code{POSIXct}
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
   \item arch: machine type, typically the CPU architecture
   \item os_name: Operating System's name

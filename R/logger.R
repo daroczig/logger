@@ -1,5 +1,5 @@
 #' Generate logging utility
-#' @param threshold omit log messages below this \code{log_levels}
+#' @param threshold omit log messages below this \code{\link{log_levels}}
 #' @param formatter function pre-processing the message of the log record
 #' @param layout function rendering the layout of the actual log record
 #' @param appender function writing the log record
@@ -29,7 +29,7 @@ logger <- function(threshold, formatter, layout, appender) {
 ## TODO DRY the below 4 functions
 
 #' Get or set log level threshold
-#' @param level see \code{log_levels}
+#' @param level see \code{\link{log_levels}}
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set log level threshold
@@ -170,7 +170,7 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 
 
 #' Log a message with given log level
-#' @param level log level from \code{log_levels}
+#' @param level log level from \code{\link{log_levels}}
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
 #' @param custom_namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
 #' @seealso \code{\link{log_formatter}}

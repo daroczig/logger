@@ -14,7 +14,7 @@
 log_level(level, ..., custom_namespace = NA_character_)
 }
 \arguments{
-\item{level}{log level from \code{log_levels}}
+\item{level}{log level from \code{\link{log_levels}}}
 
 \item{...}{R objects that can be converted to a character vector via the active message formatter function}
 

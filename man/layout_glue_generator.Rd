@@ -11,7 +11,7 @@
 \item{format}{\code{glue}-flavored layout of the message using the above variables}
 }
 \value{
-function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{log_layout()} for the currently used layout
+function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{\link{log_layout}} for the currently used layout
 }
 \description{
 \code{format} is passed to \code{glue} with access to the below variables:

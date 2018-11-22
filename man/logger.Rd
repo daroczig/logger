@@ -7,7 +7,7 @@
 logger(threshold, formatter, layout, appender)
 }
 \arguments{
-\item{threshold}{omit log messages below this \code{log_levels}}
+\item{threshold}{omit log messages below this \code{\link{log_levels}}}
 
 \item{formatter}{function pre-processing the message of the log record}
 
