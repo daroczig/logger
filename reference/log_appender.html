@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get or set logger appender function — log_appender • logger</title>
+<title>Get or set log record appender function — log_appender • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Get or set logger appender function — log_appender" />
+<meta property="og:title" content="Get or set log record appender function — log_appender" />
 
-<meta property="og:description" content="Get or set logger appender function" />
+<meta property="og:description" content="Get or set log record appender function" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,14 +99,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get or set logger appender function</h1>
+    <h1>Get or set log record appender function</h1>
     <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/logger.R'><code>R/logger.R</code></a></small>
     <div class="hidden name"><code>log_appender.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get or set logger appender function</p>
+    <p>Get or set log record appender function</p>
     
     </div>
 
@@ -117,7 +117,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>appender</th>
-      <td><p>function</p></td>
+      <td><p>function delivering a log record to the destination, eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code> or <code><a href='appender_tee.html'>appender_tee</a></code></p></td>
     </tr>
     <tr>
       <th>namespace</th>
@@ -128,6 +128,10 @@
       <td><p>index of the logger within the namespace</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='logger.html'>logger</a></code>, <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_layout.html'>log_layout</a></code> and <code><a href='log_formatter.html'>log_formatter</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -151,7 +155,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

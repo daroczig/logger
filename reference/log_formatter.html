@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get or set logger layout — log_formatter • logger</title>
+<title>Get or set log message formatter — log_formatter • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Get or set logger layout — log_formatter" />
+<meta property="og:title" content="Get or set log message formatter — log_formatter" />
 
-<meta property="og:description" content="Get or set logger layout" />
+<meta property="og:description" content="Get or set log message formatter" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,14 +99,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get or set logger layout</h1>
+    <h1>Get or set log message formatter</h1>
     <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/logger.R'><code>R/logger.R</code></a></small>
     <div class="hidden name"><code>log_formatter.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get or set logger layout</p>
+    <p>Get or set log message formatter</p>
     
     </div>
 
@@ -117,7 +117,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>formatter</th>
-      <td><p>function defining how R objects are converted into a single string</p></td>
+      <td><p>function defining how R objects are converted into a single string, eg <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code></p></td>
     </tr>
     <tr>
       <th>namespace</th>
@@ -129,13 +129,19 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='logger.html'>logger</a></code>, <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_appender.html'>log_appender</a></code> and <code><a href='log_layout.html'>log_layout</a></code></p></div>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

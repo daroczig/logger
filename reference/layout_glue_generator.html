@@ -131,13 +131,18 @@ further variables set by get_logger_meta_variables
 
     <p>function taking <code>level</code> and <code>msg</code> arguments - keeping the original call creating the generator in the <code>generator</code> attribute that is returned when calling <code><a href='log_layout.html'>log_layout</a></code> for the currently used layout</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>See example calls from <code><a href='layout_glue.html'>layout_glue</a></code> and <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>.</p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>logger</span> <span class='kw'>&lt;-</span> <span class='fu'>layout_glue_generator</span>(<span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span>)
-<span class='fu'><a href='logger.html'>logger</a></span>(<span class='no'>INFO</span>, <span class='st'>'try {runif(1)}'</span>)
+<span class='no'>example_layout</span> <span class='kw'>&lt;-</span> <span class='fu'>layout_glue_generator</span>(
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span>)
+<span class='fu'>example_layout</span>(<span class='no'>INFO</span>, <span class='st'>'try {runif(1)}'</span>)
 
-<span class='fu'><a href='log_layout.html'>log_layout</a></span>(<span class='no'>logger</span>)
+<span class='fu'><a href='log_layout.html'>log_layout</a></span>(<span class='no'>example_layout</span>)
 <span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'try {runif(1)}'</span>)
 <span class='co'># }</span></pre>
   </div>
@@ -147,6 +152,8 @@ further variables set by get_logger_meta_variables
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

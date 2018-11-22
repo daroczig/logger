@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Generate logging utility — logger" />
 
-<meta property="og:description" content="Generate logging utility" />
+<meta property="og:description" content="A logger consists of a log level threshold, a log message formatter function, a log record layout formatting function and the appender function deciding on the destination of the log record. For more details, see the package README.md." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,7 +106,7 @@
 
     <div class="ref-description">
     
-    <p>Generate logging utility</p>
+    <p>A logger consists of a log level <code>threshold</code>, a log message <code>formatter</code> function, a log record <code>layout</code> formatting function and the <code>appender</code> function deciding on the destination of the log record. For more details, see the package <code>README.md</code>.</p>
     
     </div>
 
@@ -137,6 +137,10 @@
 
     <p>function taking <code>level</code> and <code>msg</code> arguments</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_formatter.html'>log_formatter</a></code>, <code><a href='log_layout.html'>log_layout</a></code> and <code><a href='log_appender.html'>log_appender</a></code> and then call <code><a href='log_levels.html'>log_levels</a></code> and its derivatives, such as <code><a href='log_level.html'>log_info</a></code> directly.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -145,6 +149,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#note">Note</a></li>
           </ul>
 
   </div>

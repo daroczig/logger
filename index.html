@@ -352,31 +352,45 @@
 <a class="sourceLine" id="cb20-23" data-line-number="23"><span class="co">#&gt; [1] "INFO [2018-22-11 11:52:08] info msg" </span></a>
 <a class="sourceLine" id="cb20-24" data-line-number="24"><span class="co">#&gt; [2] "DEBUG [2018-22-11 11:52:13] info msg"</span></a></code></pre></div>
 </div>
-<div id="todo" class="section level2">
+<div id="performance" class="section level2">
 <h2 class="hasAnchor">
-<a href="#todo" class="anchor"></a>TODO</h2>
-<ul>
-<li>[ ] doc improvements, cross-links, pkgdown, vignettes for intro and devs</li>
-<li>[ ] unit tests</li>
-<li>[x] code coverage report</li>
-<li><p>[ ] lint</p></li>
-<li>[x] support multiple appenders VS let users define a custom function wrapping multiple appenders</li>
-<li>[x] support multiple loggers, eg log ERROR+ to a Errbit/CloudWatch/DataDog/Splunk etc and TRACE+ to the console</li>
-<li>[x] allow, although do not recommend custom namespace (R pkg namespaces are just great)</li>
-<li><p>[x] refactor layout functions to use the same backend and render message either via <code>glue</code>, <code>sprintf</code> or eg <code>toJSON</code> (wontdo)</p></li>
-<li>[x] more variables inside of logger, eg call and function name</li>
-<li>[x] more variables inside of logger, eg OS name/version, Jenkins or other environment variables</li>
-<li><p>[x] add <code>get_logger_meta_variables</code> as attributes to strings returned by layouts, eg if the appender might want to use it, like syslog? (wontdo, <code>syslog</code> appender can use a <code>syslog</code> layout as well)</p></li>
-<li>[x] <code>crayon</code>
-</li>
-<li>[ ] smarter JSON logger</li>
-<li><p>[ ] graylog, kinesis, datadog, cloudwatch, slack etc appenders</p></li>
-</ul>
+<a href="#performance" class="anchor"></a>Performance</h2>
+<p>Although this has not been an important feature in the early development and overall design of this logger implementation, but with the default <code>layout_simple</code> and <code>formatter_glue</code>, it seems to perform pretty well:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(microbenchmark)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(futile.logger)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">t1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="kw">flog.appender</span>(<span class="kw">appender.file</span>(t1))</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt; NULL</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt; The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">t2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="reference/appender_file.html">appender_file</a></span>(t2))</a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">string1 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">flog.info</span>(<span class="st">'hi'</span>)</a>
+<a class="sourceLine" id="cb21-11" data-line-number="11">string2 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)</a>
+<a class="sourceLine" id="cb21-12" data-line-number="12">dynamic1 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">flog.info</span>(<span class="st">'hi %s'</span>, <span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">dynamic2 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'hi {42}'</span>)</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14">vector1 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">flog.info</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb21-15" data-line-number="15">vector2 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'hi {1:5}'</span>)</a>
+<a class="sourceLine" id="cb21-16" data-line-number="16"><span class="kw">microbenchmark</span>(<span class="kw">string1</span>(), <span class="kw">string2</span>(), <span class="kw">vector1</span>(), <span class="kw">vector2</span>(), <span class="kw">dynamic1</span>(), <span class="kw">dynamic2</span>(), <span class="dt">times =</span> <span class="fl">1e3</span>)</a>
+<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="co">#&gt; Unit: microseconds</span></a>
+<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="co">#&gt;        expr      min        lq      mean    median       uq       max neval cld</span></a>
+<a class="sourceLine" id="cb21-19" data-line-number="19"><span class="co">#&gt;   string1() 1510.372 1596.9630 1901.6076 1644.6540 1851.185  8995.092  1000   b</span></a>
+<a class="sourceLine" id="cb21-20" data-line-number="20"><span class="co">#&gt;   string2()  331.924  363.5350  466.1253  391.1195  441.039 27085.823  1000  a </span></a>
+<a class="sourceLine" id="cb21-21" data-line-number="21"><span class="co">#&gt;   vector1() 1532.526 1609.0395 1889.2811 1669.5170 1865.571  6503.950  1000   b</span></a>
+<a class="sourceLine" id="cb21-22" data-line-number="22"><span class="co">#&gt;   vector2()  399.974  432.0735  519.9258  463.9960  521.519  2574.311  1000  a </span></a>
+<a class="sourceLine" id="cb21-23" data-line-number="23"><span class="co">#&gt;  dynamic1() 1529.500 1615.7520 1949.9390 1668.8430 1888.323 29860.102  1000   b</span></a>
+<a class="sourceLine" id="cb21-24" data-line-number="24"><span class="co">#&gt;  dynamic2()  379.412  413.6555  505.2265  439.7285  495.892  2699.117  1000  a </span></a>
+<a class="sourceLine" id="cb21-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb21-26" data-line-number="26"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t1, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t1)))</a>
+<a class="sourceLine" id="cb21-27" data-line-number="27"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"</span></a>
+<a class="sourceLine" id="cb21-28" data-line-number="28"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t2, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t2)))</a>
+<a class="sourceLine" id="cb21-29" data-line-number="29"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"</span></a></code></pre></div>
+<p>On the other hand, there are some low-hanging fruits to improve performance, eg caching the <code>logger</code> function in the namespace, if needed.</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
