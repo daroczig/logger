@@ -116,8 +116,10 @@
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'Note that getting an error is usually bad'</span>)</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is another problem'</span>)</a>
 <a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem'</span>)</a></code></pre></div>
-<p><img src="reference/figures/logger-colors.png" alt="colored log output"></p>
-<p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale etc.</p>
+<p>Or simply run the related demo:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/demo">demo</a></span>(colors, <span class="dt">package =</span> <span class="st">'logger'</span>, <span class="dt">echo =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="reference/figures/colors.png" alt="colored log output"></p>
+<p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc.</p>
 </div>
 <div id="why-another-logging-r-package" class="section level2">
 <h2 class="hasAnchor">
@@ -169,145 +171,186 @@
 <ul>
 <li>log level <code>threshold</code>, eg <code>ERROR</code>, which defines the minimum log level required for actual logging</li>
 <li>
+<p><code>formatter</code> function, which converts the R objects passed to the logger into an actual log message (to be then passed to the <code>layout</code> function), eg</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">formatter &lt;-<span class="st"> </span><span class="cf">function</span>(...) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(..., <span class="dt">collapse =</span> <span class="st">' '</span>, <span class="dt">sep =</span> <span class="st">' '</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">formatter</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="st">'foo'</span>, pi)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [1] "a foo 3.14159265358979 b foo 3.14159265358979 c foo 3.14159265358979"</span></a></code></pre></div>
+</li>
+<li>
 <p><code>layout</code> function, which defines the format of a log record, having access to some extra variables describing the calling environment of the log record (like timestamp, hostname, username, calling function etc), eg</p>
 <ul>
 <li>
 <p>a function returning structured text including log level, timestamp and message</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">layout &lt;-<span class="st"> </span><span class="cf">function</span>(level, msg) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sprintf">sprintf</a></span>(<span class="st">'%s [%s] %s'</span>, level, msg)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/layout">layout</a></span>(INFO, <span class="st">'Happy Thursday!'</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; INFO [1970-01-01 00:00:00] Happy Thursday!</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">layout &lt;-<span class="st"> </span><span class="cf">function</span>(level, msg) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sprintf">sprintf</a></span>(<span class="st">'%s [%s] %s'</span>, level, msg)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/layout">layout</a></span>(INFO, <span class="st">'Happy Thursday!'</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; INFO [1970-01-01 00:00:00] Happy Thursday!</span></a></code></pre></div>
 </li>
 <li>
 <p>a function returning a JSON object of log level, timestamp, hostname, calling function and message</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">layout &lt;-<span class="st"> </span><span class="cf">function</span>(level, msg) <span class="kw">toJSON</span>(<span class="dt">level =</span> level, <span class="dt">timestamp =</span> time, <span class="dt">hostname =</span> node, <span class="dt">message =</span> msg)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/layout">layout</a></span>(INFO, <span class="st">'Happy Thursday!'</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">layout &lt;-<span class="st"> </span><span class="cf">function</span>(level, msg) <span class="kw">toJSON</span>(<span class="dt">level =</span> level, <span class="dt">timestamp =</span> time, <span class="dt">hostname =</span> node, <span class="dt">message =</span> msg)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/layout">layout</a></span>(INFO, <span class="st">'Happy Thursday!'</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></a></code></pre></div>
 </li>
 </ul>
 </li>
 <li>
-<p><code>formatter</code> function, which converts the R objects passed to the logger into an actual character vector, eg</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">formatter &lt;-<span class="st"> </span><span class="cf">function</span>(...) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(..., <span class="dt">collapse =</span> <span class="st">' '</span>, <span class="dt">sep =</span> <span class="st">' '</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">formatter</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="st">'foo'</span>, pi)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; [1] "a foo 3.14159265358979 b foo 3.14159265358979 c foo 3.14159265358979"</span></a></code></pre></div>
-</li>
-<li>
 <p><code>appender</code> function, which writes the actual log record somewhere, eg <code>stdout</code>, a file or a streaming service, eg</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">appender &lt;-<span class="st"> </span><span class="cf">function</span>(line) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(line, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">appender</span>(<span class="st">'INFO [now] I am a log message'</span>)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; INFO [now] I am a log message </span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">appender &lt;-<span class="st"> </span><span class="cf">function</span>(line) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(line, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">appender</span>(<span class="st">'INFO [now] I am a log message'</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; INFO [now] I am a log message </span></a></code></pre></div>
 </li>
 </ul>
 </li>
 <li>
 <p>user-provided parameters:</p>
 <ul>
-<li>actual log level, eg <code>INFO</code>, which describes the severity of a message</li>
+<li>log level of the log record, eg <code>INFO</code>, which describes the severity of a message</li>
 <li>R objects to be logged</li>
 </ul>
 </li>
 </ul>
-<p>Putting all these together:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">TODO create logger</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">TODO use that logger</a></code></pre></div>
-<p>TODO describe stacking loggers</p>
+<p>Putting all these together (by explicitly setting the default config):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(INFO)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/log_formatter.html">log_formatter</a></span>(formatter_glue)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_simple)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>(appender_console)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'I am a low level log message'</span>)</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'I am a higher level log message'</span>)</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; WARN [2018-22-11 11:35:48] I am a higher level log message</span></a></code></pre></div>
 </div>
 <div id="log-levels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#log-levels" class="anchor"></a>Log levels</h2>
 <p><code>logger</code> uses the default <code>log4j</code> log levels and supports suppressing log messages with lower level compared to the currently set threshold in the namespace:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Hi, there!'</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; INFO [2018-14-11 02:04:31] Hi, there!</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'How are you doing today?'</span>)</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>()</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; Log level: INFO</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'How are you doing today?'</span>)</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; DEBUG [2018-14-11 02:05:15] How are you doing today?</span></a></code></pre></div>
-<p>If you want to define the log level in a programmatic way, check out the <code>log</code> function, and see <code><a href="reference/log_levels.html">?log_levels</a></code> for all the supported log levels.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Hi, there!'</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; INFO [2018-14-11 02:04:31] Hi, there!</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'How are you doing today?'</span>)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>()</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Log level: INFO</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'How are you doing today?'</span>)</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; DEBUG [2018-14-11 02:05:15] How are you doing today?</span></a></code></pre></div>
+<p>If you want to define the log level in a programmatic way, check out the <code>log_level</code> function, and see <code><a href="reference/log_levels.html">?log_levels</a></code> for all the supported log levels.</p>
+</div>
+<div id="log-namespaces" class="section level2">
+<h2 class="hasAnchor">
+<a href="#log-namespaces" class="anchor"></a>Log namespaces</h2>
+<p>By default, all log messages will be processed by the global logging function, but you may also use custom namespaces (eg to deliver specific log records to a special destination or to apply custom log level threshold) and even multiple loggers as well within the very same namespace (eg to deliver all <code>INFO</code> and above log levels in the console and everything below that to a trace log file). For examples on these, please see below.</p>
 </div>
 <div id="log-message-formats" class="section level2">
 <h2 class="hasAnchor">
 <a href="#log-message-formats" class="anchor"></a>Log message formats</h2>
-<p>By default, the <code>log</code> function will simply record the log-level, current timestamp and the message after being processed by <code>glue</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; INFO [2018-14-11 02:11:10] 42</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'The answer is {42}'</span>)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; INFO [2018-14-11 02:11:11] The answer is 42</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'The answers are {1:5}'</span>)</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 1</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 2</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 3</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 4</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 5</span></a></code></pre></div>
-<p>In the above example, first <code>42</code> was converted to a string by a message formatter, then the message was passed to a layout function to generate the actual log record.</p>
+<p>By default, the <code>log_level</code> and its derivative functions will simply record the log-level, current timestamp and the message after being processed by <code>glue</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; INFO [2018-14-11 02:11:10] 42</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'The answer is {42}'</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; INFO [2018-14-11 02:11:11] The answer is 42</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'The answers are {1:5}'</span>)</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 1</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 2</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 3</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 4</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; INFO [2018-14-11 02:17:09] The answers are 5</span></a></code></pre></div>
+<p>In the above example, first, <code>42</code> was converted to a string by a message formatter, then the message was passed to a layout function to generate the actual log record.</p>
+</div>
+<div id="log-layouts" class="section level2">
+<h2 class="hasAnchor">
+<a href="#log-layouts" class="anchor"></a>Log layouts</h2>
 <p>An example of another layout function writing the same log messages in JSON:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_json)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:11:47","message":"42"}</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:17:36","message":"1"}</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:17:36","message":"2"}</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:17:36","message":"3"}</span></a></code></pre></div>
-<p>To customize the format how the log messages are being rendered, see <code>?layout_generator</code> that provides very easy access to a bunch environmental variables – quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function’s name, hostname, user running the R process etc:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_json)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:11:47","message":"42"}</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:17:36","message":"1"}</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:17:36","message":"2"}</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; {"level":4,"timestamp":"2018-11-14 02:17:36","message":"3"}</span></a></code></pre></div>
+<p>To customize the format how the log messages are being rendered, see <code><a href="reference/layout_glue_generator.html">?layout_glue_generator</a></code> that provides very easy access to a bunch variables – quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function’s name, hostname, user running the R process etc:</p>
 <ul>
 <li>
 <p>define custom logger:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">logger &lt;-<span class="st"> </span><span class="kw">layout_generator</span>(<span class="dt">msg_format =</span> <span class="st">'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(logger)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">logger &lt;-<span class="st"> </span><span class="kw"><a href="reference/layout_glue_generator.html">layout_glue_generator</a></span>(<span class="dt">format =</span> <span class="st">'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span>)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(logger)</a></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from the global environment:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'foo'</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:31:51 INFO: foo</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'foo'</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:31:51 INFO: foo</span></a></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from a custom function:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'foo'</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">f</span>()</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; nevermind/21133/R_GlobalEnv/f 2018-14-11 01:32:46 INFO: foo</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'foo'</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">f</span>()</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; nevermind/21133/R_GlobalEnv/f 2018-14-11 01:32:46 INFO: foo</span></a></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from a package:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/load_all">load_all</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">'tests/logger-tester-package'</span>, <span class="dt">package =</span> <span class="st">'logger'</span>))</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; Loading logger.tester</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">logger.tester.function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; nevermind/21133/logger.tester/logger.tester.function 2018-14-11 01:32:56 INFO: hi from tester package</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/load_all">load_all</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">'tests/logger-tester-package'</span>, <span class="dt">package =</span> <span class="st">'logger'</span>))</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; Loading logger.tester</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw">logger_tester_function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; nevermind/21133/logger.tester/logger_tester_function 2018-14-11 01:32:56 INFO: hi from tester package</span></a></code></pre></div>
 </li>
 <li>
 <p>suppress messages in a namespace:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="dt">namespace =</span> <span class="st">'logger.tester'</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; Log level: INFO </span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(WARN, <span class="dt">namespace =</span> <span class="st">'logger.tester'</span>)</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">logger.tester.function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw">logger.tester.function</span>(WARN, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; nevermind/21133/logger.tester/logger.tester.function 2018-14-11 01:33:16 WARN: hi from tester package</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'I am still working in the global namespace'</span>)</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:33:21 INFO: I am still working in the global namespace</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="dt">namespace =</span> <span class="st">'logger.tester'</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; Log level: INFO </span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(WARN, <span class="dt">namespace =</span> <span class="st">'logger.tester'</span>)</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">logger_tester_function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw">logger_tester_function</span>(WARN, <span class="st">'hi from tester package'</span>)</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; nevermind/21133/logger.tester/logger_tester_function 2018-14-11 01:33:16 WARN: hi from tester package</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'I am still working in the global namespace'</span>)</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:33:21 INFO: I am still working in the global namespace</span></a></code></pre></div>
 </li>
 </ul>
-<p>Note that the <code>layout_generator</code> functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what’s being used instead of just showing the actual functions’s body. So thus if you want to write your own layout generator functions, please keep <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> recorded in the <code>generator</code> attribute, or stick with standard functions. See some examples in the <code>layouts.R</code> file.</p>
+<p>Note that the <code>layout_glue_generator</code> functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what’s being used instead of just showing the actual functions’s body. So thus if you want to write your own layout generator functions, please keep <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> recorded in the <code>generator</code> attribute, or stick with standard functions. See some examples in the <code>layouts.R</code> file.</p>
 </div>
 <div id="delivering-log-records-to-their-destination" class="section level2">
 <h2 class="hasAnchor">
 <a href="#delivering-log-records-to-their-destination" class="anchor"></a>Delivering log records to their destination</h2>
 <p>By default, <code>logger</code> will write to the console or <code>stdout</code> via the <code>appender_console</code> function:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>()</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; function(lines) {</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt;     cat(lines, sep = '\n')</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; &lt;environment: namespace:logger&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>()</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; function(lines) {</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt;     cat(lines, sep = '\n')</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; &lt;environment: namespace:logger&gt;</span></a></code></pre></div>
 <p>To write to a logfile instead, use the <code>appender_file</code> generator function, that returns a function that can be used in any namespace:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">t &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="reference/appender_file.html">appender_file</a></span>(t))</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'where is this message going?'</span>)</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>()</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; appender_file(file = t)()</span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t)</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; [1] "INFO [2018-14-11 02:24:38] where is this message going?"</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">t &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="reference/appender_file.html">appender_file</a></span>(t))</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'where is this message going?'</span>)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>()</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; appender_file(file = t)()</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t)</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt; [1] "INFO [2018-14-11 02:24:38] where is this message going?"</span></a></code></pre></div>
 <p>You may find <code>appender_tee</code> also useful, that write the log messages to both <code>stdout</code> and a file.</p>
-<p>Note that the <code>appender_file</code> and <code>appender_tee</code> generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what’s being used instead of just showing the actual functions’s body. So thus if you want to write your own appender functions, please keep <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> recorded in the <code>generator</code> attribute – see examples in the <code>appenders.R</code> file.</p>
-<p>TODO note that <code>tee</code> can be implemented by stacking loggers as well, like described above</p>
+<p><em>Note that the <code>appender_file</code> and <code>appender_tee</code> generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what’s being used instead of just showing the actual functions’s body. So thus if you want to write your own appender functions, please keep <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> recorded in the <code>generator</code> attribute – see examples in the <code>appenders.R</code> file.</em></p>
+</div>
+<div id="stacking-loggers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#stacking-loggers" class="anchor"></a>Stacking loggers</h2>
+<p>Note that the <code>appender_tee</code> functionality can be implemented by stacking loggers as well, eg setting two loggers for the global namespace: <code>appender_console</code> and <code>appender_file</code>. The advantage of this approach is that you can set different log level thresholds for each logger, for example:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>()</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; Log level: INFO</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">## create a new logger with index 2</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE, <span class="dt">index =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">## note that the original logger still have the same log level threshold</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>()</a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt; Log level: INFO</span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="dt">index =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt; Log level: TRACE</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13">## update the appender of the new logger</a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">t &lt;-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="kw"><a href="reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="reference/appender_file.html">appender_file</a></span>(t), <span class="dt">index =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb20-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17">## test both loggers</a>
+<a class="sourceLine" id="cb20-18" data-line-number="18"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'info msg'</span>)</a>
+<a class="sourceLine" id="cb20-19" data-line-number="19"><span class="co">#&gt; INFO [2018-22-11 11:52:08] info msg</span></a>
+<a class="sourceLine" id="cb20-20" data-line-number="20"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'info msg'</span>)</a>
+<a class="sourceLine" id="cb20-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb20-22" data-line-number="22"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t)</a>
+<a class="sourceLine" id="cb20-23" data-line-number="23"><span class="co">#&gt; [1] "INFO [2018-22-11 11:52:08] info msg" </span></a>
+<a class="sourceLine" id="cb20-24" data-line-number="24"><span class="co">#&gt; [2] "DEBUG [2018-22-11 11:52:13] info msg"</span></a></code></pre></div>
 </div>
 <div id="todo" class="section level2">
 <h2 class="hasAnchor">

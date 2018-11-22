@@ -32,10 +32,10 @@
 
 <meta property="og:title" content="Collect useful information about the logging environment to be used in log messages — get_logger_meta_variables" />
 
-<meta property="og:description" content="Available variables to be used in the format provided by logger:::get_logger_meta_variables:
+<meta property="og:description" content="Available variables to be used in the log formatter functions, eg in layout_glue_generator:
 levelr: log level as an R object, eg INFO
 level: log level as a string, eg INFO
-time: current time formatted as time_format
+time: current time as POSIXct
 node: name by which the machine is known on the network as reported by Sys.info
 arch: machine type, typically the CPU architecture
 os_name: Operating System's name
@@ -121,10 +121,10 @@ fn: function's (if any) name calling the logging function
 
     <div class="ref-description">
     
-    <p>Available variables to be used in the <code>format</code> provided by <code>logger:::get_logger_meta_variables</code>:</p><ul>
-<li><p>levelr: log level as an R object, eg <code>INFO</code></p></li>
-<li><p>level: log level as a string, eg INFO</p></li>
-<li><p>time: current time formatted as <code>time_format</code></p></li>
+    <p>Available variables to be used in the log formatter functions, eg in <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code>:</p><ul>
+<li><p>levelr: log level as an R object, eg <code><a href='log_levels.html'>INFO</a></code></p></li>
+<li><p>level: log level as a string, eg <code><a href='log_levels.html'>INFO</a></code></p></li>
+<li><p>time: current time as <code>POSIXct</code></p></li>
 <li><p>node: name by which the machine is known on the network as reported by <code>Sys.info</code></p></li>
 <li><p>arch: machine type, typically the CPU architecture</p></li>
 <li><p>os_name: Operating System's name</p></li>
