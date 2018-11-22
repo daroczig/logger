@@ -65,7 +65,8 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
-#' example_layout <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' example_layout <- layout_glue_generator(
+#'   format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' example_layout(INFO, 'try {runif(1)}')
 #'
 #' log_layout(example_layout)
