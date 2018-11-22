@@ -65,12 +65,13 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
-#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-#' logger(INFO, 'try {runif(1)}')
+#' example_layout <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' example_layout(INFO, 'try {runif(1)}')
 #'
-#' log_layout(logger)
+#' log_layout(example_layout)
 #' log_info('try {runif(1)}')
 #' }
+#' @seealso See example calls from \code{\link{layout_glue}} and \code{\link{layout_glue_colors}}.
 layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:%M:%S")}] {msg}') {
 
     force(format)
@@ -93,16 +94,20 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @param msg string message
 #' @return character vector
 #' @export
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_simple <- function(level, msg) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%d-%m %H:%M:%S"), '] ', msg)
 }
 
 
 #' Format a log message with \code{glue}
+#'
+#' By default, this layout includes the log level of the log record as per \code{\link{log_levels}}, the current timestamp and the actual log message -- that you can override via calling \code{\link{layout_glue_generator}} directly. For colorized output, see \code{\link{layout_glue_colors}}.
 #' @inheritParams layout_simple
 #' @return character vector
 #' @importFrom glue glue
 #' @export
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_glue <- layout_glue_generator()
 
 
@@ -123,6 +128,7 @@ layout_glue <- layout_glue_generator()
 #' log_error('This is another problem')
 #' log_fatal('The last problem.')
 #' }
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_glue_colors <- layout_glue_generator(
     format = paste(
         '{crayon::bold(colorize_by_log_level(level, levelr))}',
@@ -138,6 +144,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_layout(layout_json)
 #' log_info(42:44)
 #' }
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
 layout_json <- function(level, msg) {
 
     if (!requireNamespace('jsonlite', quietly = TRUE)) {

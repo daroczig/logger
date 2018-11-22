@@ -22,10 +22,13 @@ function taking \code{level} and \code{msg} arguments - keeping the original cal
 }
 \examples{
 \dontrun{
-logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-logger(INFO, 'try {runif(1)}')
+example_layout <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+example_layout(INFO, 'try {runif(1)}')
 
-log_layout(logger)
+log_layout(example_layout)
 log_info('try {runif(1)}')
 }
+}
+\seealso{
+See example calls from \code{\link{layout_glue}} and \code{\link{layout_glue_colors}}.
 }

@@ -2,17 +2,20 @@
 % Please edit documentation in R/logger.R
 \name{log_formatter}
 \alias{log_formatter}
-\title{Get or set logger layout}
+\title{Get or set log message formatter}
 \usage{
 log_formatter(formatter, namespace = "global", index = 1)
 }
 \arguments{
-\item{formatter}{function defining how R objects are converted into a single string}
+\item{formatter}{function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}}
 
 \item{namespace}{logger namespace}
 
 \item{index}{index of the logger within the namespace}
 }
 \description{
-Get or set logger layout
+Get or set log message formatter
+}
+\seealso{
+\code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
 }

@@ -35,3 +35,6 @@ log_info(1)
 log_warn(2)
 }
 }
+\seealso{
+\code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
+}

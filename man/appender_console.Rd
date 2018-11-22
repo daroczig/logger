@@ -12,3 +12,6 @@ appender_console(lines)
 \description{
 Append log record to stdout
 }
+\seealso{
+This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}} or \code{\link{appender_tee}}
+}

@@ -2,23 +2,26 @@
 % Please edit documentation in R/logger.R
 \name{log_layout}
 \alias{log_layout}
-\title{Get or set logger layout}
+\title{Get or set log record layout}
 \usage{
 log_layout(layout, namespace = "global", index = 1)
 }
 \arguments{
-\item{layout}{function defining the structure of a log message / object}
+\item{layout}{function defining the structure of a log record, eg \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}}
 
 \item{namespace}{logger namespace}
 
 \item{index}{index of the logger within the namespace}
 }
 \description{
-Get or set logger layout
+Get or set log record layout
 }
 \examples{
 \dontrun{
 log_layout(layout_json)
 log_info(42:44)
 }
+}
+\seealso{
+\code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 }

@@ -19,5 +19,8 @@ logger(threshold, formatter, layout, appender)
 function taking \code{level} and \code{msg} arguments
 }
 \description{
-Generate logging utility
+A logger consists of a log level \code{threshold}, a log message \code{formatter} function, a log record \code{layout} formatting function and the \code{appender} function deciding on the destination of the log record. For more details, see the package \code{README.md}.
+}
+\note{
+It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
 }

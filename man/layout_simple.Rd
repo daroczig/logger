@@ -17,3 +17,6 @@ character vector
 \description{
 Format a log record by concatenating the log level, timestamp and message
 }
+\seealso{
+This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+}

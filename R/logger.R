@@ -1,10 +1,13 @@
 #' Generate logging utility
+#'
+#' A logger consists of a log level \code{threshold}, a log message \code{formatter} function, a log record \code{layout} formatting function and the \code{appender} function deciding on the destination of the log record. For more details, see the package \code{README.md}.
 #' @param threshold omit log messages below this \code{\link{log_levels}}
 #' @param formatter function pre-processing the message of the log record
 #' @param layout function rendering the layout of the actual log record
 #' @param appender function writing the log record
 #' @return function taking \code{level} and \code{msg} arguments
 #' @export
+#' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
 logger <- function(threshold, formatter, layout, appender) {
 
     force(threshold)
@@ -48,6 +51,7 @@ logger <- function(threshold, formatter, layout, appender) {
 #' log_info(1)
 #' log_warn(2)
 #' }
+#' @seealso \code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
 log_threshold <- function(level, namespace = 'global', index = 1) {
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
@@ -64,14 +68,15 @@ log_threshold <- function(level, namespace = 'global', index = 1) {
 }
 
 
-#' Get or set logger layout
-#' @param layout function defining the structure of a log message / object
+#' Get or set log record layout
+#' @param layout function defining the structure of a log record, eg \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
 #' log_layout(layout_json)
 #' log_info(42:44)
 #' }
+#' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 log_layout <- function(layout, namespace = 'global', index = 1) {
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
@@ -92,10 +97,11 @@ log_layout <- function(layout, namespace = 'global', index = 1) {
 }
 
 
-#' Get or set logger layout
-#' @param formatter function defining how R objects are converted into a single string
+#' Get or set log message formatter
+#' @param formatter function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
 #' @inheritParams log_threshold
 #' @export
+#' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
 log_formatter <- function(formatter, namespace = 'global', index = 1) {
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
@@ -116,8 +122,8 @@ log_formatter <- function(formatter, namespace = 'global', index = 1) {
 }
 
 
-#' Get or set logger appender function
-#' @param appender function
+#' Get or set log record appender function
+#' @param appender function delivering a log record to the destination, eg \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -135,6 +141,7 @@ log_formatter <- function(formatter, namespace = 'global', index = 1) {
 #' log_info(42)
 #' readLines(t)
 #' }
+#' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
 log_appender <- function(appender, namespace = 'global', index = 1) {
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
@@ -173,7 +180,7 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' @param level log level from \code{\link{log_levels}}
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
 #' @param custom_namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
-#' @seealso \code{\link{log_formatter}}
+#' @seealso \code{\link{logger}}
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
 #' @examples \dontrun{

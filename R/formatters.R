@@ -2,6 +2,7 @@
 #' @param ... passed to \code{paste}
 #' @return character vector
 #' @export
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
 formatter_paste <- function(...) {
     paste(...)
 }
@@ -12,6 +13,7 @@ formatter_paste <- function(...) {
 #' @param ... passed to \code{sprintf}
 #' @return character vector
 #' @export
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
 formatter_sprintf <- function(fmt, ...) {
     sprintf(fmt, ...)
 }
@@ -21,6 +23,7 @@ formatter_sprintf <- function(fmt, ...) {
 #' @param ... passed to \code{glue} for the text interpolation
 #' @return character vector
 #' @export
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
 formatter_glue <- function(...) {
     as.character(glue(..., .envir = parent.frame()))
 }
@@ -46,6 +49,7 @@ formatter_glue <- function(...) {
 #' formatter_glue_or_sprinf("Hi %s, did you know that 2*4={2*4}", c('foo', 'bar'))
 #' formatter_glue_or_sprinf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_glue}}
 formatter_glue_or_sprinf <- function(msg, ...) {
 
     params <- list(...)

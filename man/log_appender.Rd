@@ -2,19 +2,19 @@
 % Please edit documentation in R/logger.R
 \name{log_appender}
 \alias{log_appender}
-\title{Get or set logger appender function}
+\title{Get or set log record appender function}
 \usage{
 log_appender(appender, namespace = "global", index = 1)
 }
 \arguments{
-\item{appender}{function}
+\item{appender}{function delivering a log record to the destination, eg \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}}
 
 \item{namespace}{logger namespace}
 
 \item{index}{index of the logger within the namespace}
 }
 \description{
-Get or set logger appender function
+Get or set log record appender function
 }
 \examples{
 \dontrun{
@@ -32,4 +32,7 @@ log_appender(appender_file(t), index = 2)
 log_info(42)
 readLines(t)
 }
+}
+\seealso{
+\code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
 }

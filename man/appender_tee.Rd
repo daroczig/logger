@@ -15,3 +15,6 @@ function taking \code{lines} argument
 \description{
 Append log messages to a file and stdout as well
 }
+\seealso{
+This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}} or \code{\link{appender_file}}
+}

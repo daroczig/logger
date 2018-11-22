@@ -31,3 +31,6 @@ log_error('This is another problem')
 log_fatal('The last problem.')
 }
 }
+\seealso{
+This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+}

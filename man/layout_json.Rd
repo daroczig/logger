@@ -23,3 +23,6 @@ log_layout(layout_json)
 log_info(42:44)
 }
 }
+\seealso{
+This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
+}

@@ -15,3 +15,6 @@ character vector
 \description{
 Apply \code{glue}
 }
+\seealso{
+This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
+}
