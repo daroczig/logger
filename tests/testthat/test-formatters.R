@@ -42,15 +42,15 @@ result <- c(
 
 test_that('glue+sprintf works', {
 
-    expect_equal(formatter_glue_or_sprinf("Hi ", "{c('foo', 'bar')}, did you know that 2*4={2*4}?"), result)
-    expect_equal(formatter_glue_or_sprinf("Hi {c('foo', 'bar')}, did you know that 2*4={2*4}?"), result)
-    expect_equal(formatter_glue_or_sprinf("Hi {c('foo', 'bar')}, did you know that 2*4=%s?", 2*4), result)
-    expect_equal(formatter_glue_or_sprinf("Hi %s, did you know that 2*4={2*4}?", c('foo', 'bar')), result)
-    expect_equal(formatter_glue_or_sprinf("Hi %s, did you know that 2*4=%s?", c('foo', 'bar'), 2*4), result)
+    expect_equal(formatter_glue_or_sprintf("Hi ", "{c('foo', 'bar')}, did you know that 2*4={2*4}?"), result)
+    expect_equal(formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4={2*4}?"), result)
+    expect_equal(formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4=%s?", 2*4), result)
+    expect_equal(formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}?", c('foo', 'bar')), result)
+    expect_equal(formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s?", c('foo', 'bar'), 2*4), result)
 
-    expect_equal(formatter_glue_or_sprinf('%s and %i'), '%s and %i')
-    expect_equal(formatter_glue_or_sprinf('%s and %i', 1), '%s and %i')
-    expect_equal(formatter_glue_or_sprinf('fun{fun}'), 'fun{fun}')
+    expect_equal(formatter_glue_or_sprintf('%s and %i'), '%s and %i')
+    expect_equal(formatter_glue_or_sprintf('%s and %i', 1), '%s and %i')
+    expect_equal(formatter_glue_or_sprintf('fun{fun}'), 'fun{fun}')
 
 })
 
