@@ -4,5 +4,5 @@
 #' @export
 #' @importFrom logger log
 logger.tester.function <- function(level, msg) {
-    log(level, msg)
+    log_level(level, msg)
 }

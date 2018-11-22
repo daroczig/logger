@@ -29,12 +29,12 @@ test_that('simple glue layout with threshold', {
 })
 
 test_that('simple glue layout with threshold directly calling log', {
-    expect_equal(capture.output(log(FATAL, 'foobar')), 'FATAL foobar')
-    expect_equal(capture.output(log(ERROR, 'foobar')), 'ERROR foobar')
-    expect_equal(capture.output(log(WARN, 'foobar')), 'WARN foobar')
-    expect_equal(capture.output(log(INFO, 'foobar')), 'INFO foobar')
-    expect_equal(capture.output(log(DEBUG, 'foobar')), character())
-    expect_equal(capture.output(log(TRACE, 'foobar')), character())
+    expect_equal(capture.output(log_level(FATAL, 'foobar')), 'FATAL foobar')
+    expect_equal(capture.output(log_level(ERROR, 'foobar')), 'ERROR foobar')
+    expect_equal(capture.output(log_level(WARN, 'foobar')), 'WARN foobar')
+    expect_equal(capture.output(log_level(INFO, 'foobar')), 'INFO foobar')
+    expect_equal(capture.output(log_level(DEBUG, 'foobar')), character())
+    expect_equal(capture.output(log_level(TRACE, 'foobar')), character())
 })
 
 test_that('built in variables', {

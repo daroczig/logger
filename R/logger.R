@@ -177,7 +177,7 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' @export
 #' @aliases log log_fatal log_error log_warn log_info log_debug log_trace
 #' @examples \dontrun{
-#' log(INFO, 'hi there')
+#' log_level(INFO, 'hi there')
 #' log_info('hi there')
 #'
 #' ## output omitted
@@ -194,7 +194,7 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log <- function(level, ..., custom_namespace = NA_character_) {
+log_level <- function(level, ..., custom_namespace = NA_character_) {
     definitions <- get_logger_definitions(custom_namespace)
     for (definition in definitions) {
         do.call(logger, definition)(level, ...)
@@ -203,14 +203,14 @@ log <- function(level, ..., custom_namespace = NA_character_) {
 
 
 #' @export
-log_fatal <- function(...) log(FATAL, ..., custom_namespace = NA_character_)
+log_fatal <- function(...) log_level(FATAL, ..., custom_namespace = NA_character_)
 #' @export
-log_error <- function(...) log(ERROR, ..., custom_namespace = NA_character_)
+log_error <- function(...) log_level(ERROR, ..., custom_namespace = NA_character_)
 #' @export
-log_warn <- function(...) log(WARN, ..., custom_namespace = NA_character_)
+log_warn <- function(...) log_level(WARN, ..., custom_namespace = NA_character_)
 #' @export
-log_info <- function(...) log(INFO, ..., custom_namespace = NA_character_)
+log_info <- function(...) log_level(INFO, ..., custom_namespace = NA_character_)
 #' @export
-log_debug <- function(...) log(DEBUG, ..., custom_namespace = NA_character_)
+log_debug <- function(...) log_level(DEBUG, ..., custom_namespace = NA_character_)
 #' @export
-log_trace <- function(...) log(TRACE, ..., custom_namespace = NA_character_)
+log_trace <- function(...) log_level(TRACE, ..., custom_namespace = NA_character_)

@@ -29,8 +29,8 @@ log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
 
 for (letter in letters) {
     lpkgs <- sum(grepl(letter, pkgs[, 'Package'], ignore.case = TRUE))
-    log(if (lpkgs < 5000) TRACE else DEBUG,
-        '{lpkgs} R packages including the {shQuote(letter)} letter')
+    log_level(if (lpkgs < 5000) TRACE else DEBUG,
+              '{lpkgs} R packages including the {shQuote(letter)} letter')
 }
 #> DEBUG [2018-20-11 22:49:38] 6300 R packages including the 'a' letter
 #> DEBUG [2018-20-11 22:49:38] 6772 R packages including the 'e' letter
