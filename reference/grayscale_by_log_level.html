@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log levels — FATAL • logger</title>
+<title>Render a string with light/dark gray based on the related log level — grayscale_by_log_level • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Log levels — FATAL" />
+<meta property="og:title" content="Render a string with light/dark gray based on the related log level — grayscale_by_log_level" />
 
-<meta property="og:description" content="The standard Apache logj4 log levels plus a custom level for SUCCESS:" />
+<meta property="og:description" content="Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,51 +99,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log levels</h1>
-    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/levels.R'><code>R/levels.R</code></a></small>
-    <div class="hidden name"><code>log_levels.Rd</code></div>
+    <h1>Render a string with light/dark gray based on the related log level</h1>
+    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/color.R'><code>R/color.R</code></a></small>
+    <div class="hidden name"><code>grayscale_by_log_level.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The standard Apache logj4 log levels plus a custom level for <code>SUCCESS</code>:</p>
+    <p>Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>FATAL</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>loglevel</code> (inherits from <code>integer</code>) of length 1.</p>
+    <pre class="usage"><span class='fu'>grayscale_by_log_level</span>(<span class='no'>msg</span>, <span class='no'>level</span>)</pre>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <ol>
-<li><p>FATAL severe error that will prevent the application from continuing</p></li>
-<li><p>ERROR An error in the application, possibly recoverable</p></li>
-<li><p>WARN An event that might possible lead to an error</p></li>
-<li><p>SUCCESS An explicit success event above the INFO level that you want to log</p></li>
-<li><p>INFO An event for informational purposes</p></li>
-<li><p>DEBUG A general debugging event</p></li>
-<li><p>TRACE A fine-grained debug message, typically capturing the flow through the application.</p></li>
-</ol>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>msg</th>
+      <td><p>string</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>see <code><a href='log_levels.html'>log_levels</a></code></p></td>
+    </tr>
+    </table>
     
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><a href='https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html'>https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html</a>, <a href='https://logging.apache.org/log4j/2.x/manual/customloglevels.html'>https://logging.apache.org/log4j/2.x/manual/customloglevels.html</a></p>
+    <p>string with ANSI escape code</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>FATAL</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>ERROR</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>WARN</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>SUCCESS</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>INFO</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>DEBUG</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>grayscale_by_log_level</span>(<span class='no'>TRACE</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

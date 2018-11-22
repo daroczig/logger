@@ -104,17 +104,19 @@
 <a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!</span></a>
 <a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!</span></a></code></pre></div>
 <p>Setting custom layout to render the log records with colors:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_glue_colors)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Starting the script...'</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'This is the second line'</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_trace</a></span>(<span class="st">'That is being placed right after the first one.'</span>)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'Some errors might come!'</span>)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is a problem'</span>)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'Getting an error is usually bad'</span>)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is another problem'</span>)</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem.'</span>)</a></code></pre></div>
-<p><img src="reference/figures/logger-color.png" alt="colored log output"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_glue_colors)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Starting the script...'</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'This is the second log line'</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="reference/log_level.html">log_trace</a></span>(<span class="st">'Note that the 2nd line is being placed right after the 1st one.'</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_success</a></span>(<span class="st">'Doing pretty well so far!'</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'But beware, as some errors might come :/'</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is a problem'</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'Note that getting an error is usually bad'</span>)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is another problem'</span>)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem'</span>)</a></code></pre></div>
+<p><img src="reference/figures/logger-colors.png" alt="colored log output"></p>
 <p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale etc.</p>
 </div>
 <div id="why-another-logging-r-package" class="section level2">
