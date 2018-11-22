@@ -6,6 +6,7 @@
 \alias{log_levels}
 \alias{ERROR}
 \alias{WARN}
+\alias{SUCCESS}
 \alias{INFO}
 \alias{DEBUG}
 \alias{TRACE}
@@ -15,19 +16,20 @@
 FATAL
 }
 \description{
-Apache logj4 log levels:
+The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}:
 }
 \details{
 \enumerate{
-  \item FATAL
-  \item ERROR
-  \item WARN
-  \item INFO
-  \item DEBUG
-  \item TRACE
+  \item FATAL severe error that will prevent the application from continuing
+  \item ERROR An error in the application, possibly recoverable
+  \item WARN An event that might possible lead to an error
+  \item SUCCESS An explicit success event above the INFO level that you want to log
+  \item INFO An event for informational purposes
+  \item DEBUG A general debugging event
+  \item TRACE A fine-grained debug message, typically capturing the flow through the application.
 }
 }
 \references{
-\url{https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html}
+\url{https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
 }
 \keyword{datasets}

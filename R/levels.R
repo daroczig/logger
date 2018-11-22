@@ -1,30 +1,33 @@
 #' Log levels
 #'
-#' Apache logj4 log levels:
+#' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}:
 #'
 #' \enumerate{
-#'   \item FATAL
-#'   \item ERROR
-#'   \item WARN
-#'   \item INFO
-#'   \item DEBUG
-#'   \item TRACE
+#'   \item FATAL severe error that will prevent the application from continuing
+#'   \item ERROR An error in the application, possibly recoverable
+#'   \item WARN An event that might possible lead to an error
+#'   \item SUCCESS An explicit success event above the INFO level that you want to log
+#'   \item INFO An event for informational purposes
+#'   \item DEBUG A general debugging event
+#'   \item TRACE A fine-grained debug message, typically capturing the flow through the application.
 #' }
-#' @references \url{https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html}
-#' @aliases log_levels FATAL ERROR WARN INFO DEBUG TRACE
+#' @references \url{https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
+#' @aliases log_levels FATAL ERROR WARN SUCCESS INFO DEBUG TRACE
 #' @rdname log_levels
 #' @export
-FATAL <- structure(1L, level = 'FATAL', class = c('loglevel', 'integer'))
+FATAL <- structure(100L, level = 'FATAL', class = c('loglevel', 'integer'))
 #' @export
-ERROR <- structure(2L, level = 'ERROR', class = c('loglevel', 'integer'))
+ERROR <- structure(200L, level = 'ERROR', class = c('loglevel', 'integer'))
 #' @export
-WARN  <- structure(3L, level = 'WARN', class = c('loglevel', 'integer'))
+WARN  <- structure(300L, level = 'WARN', class = c('loglevel', 'integer'))
 #' @export
-INFO  <- structure(4L, level = 'INFO', class = c('loglevel', 'integer'))
+SUCCESS  <- structure(250L, level = 'SUCCESS', class = c('loglevel', 'integer'))
 #' @export
-DEBUG <- structure(5L, level = 'DEBUG', class = c('loglevel', 'integer'))
+INFO  <- structure(400L, level = 'INFO', class = c('loglevel', 'integer'))
 #' @export
-TRACE <- structure(6L, level = 'TRACE', class = c('loglevel', 'integer'))
+DEBUG <- structure(500L, level = 'DEBUG', class = c('loglevel', 'integer'))
+#' @export
+TRACE <- structure(600L, level = 'TRACE', class = c('loglevel', 'integer'))
 
 print.loglevel <- function(x) {
     cat('Log level: ', attr(x, 'level'), '\n', sep = '')

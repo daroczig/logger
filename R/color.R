@@ -22,12 +22,13 @@ colorize_by_log_level <- function(msg, level) {
 
     color <- switch(
         attr(level, 'level'),
-        'FATAL' = crayon::bgRed,
-        'ERROR' = crayon::combine_styles(crayon::bold, crayon::make_style('red')),
-        'WARN'  = crayon::make_style('orangered1'),
-        'INFO'  = crayon::make_style('grey100'),
-        'DEBUG' = crayon::make_style('green4'),
-        'TRACE' = crayon::make_style('greenyellow'),
+        'FATAL'   = crayon::combine_styles(crayon::bold, crayon::make_style('red1')),
+        'ERROR'   = crayon::make_style('red4'),
+        'WARN'    = crayon::make_style('darkorange'),
+        'SUCCESS' = crayon::combine_styles(crayon::bold, crayon::make_style('green4')),
+        'INFO'    = crayon::reset,
+        'DEBUG'   = crayon::make_style('deepskyblue4'),
+        'TRACE'   = crayon::make_style('greenyellow'),
         stop('Unknown log level')
     )
 

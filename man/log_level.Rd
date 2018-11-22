@@ -5,6 +5,7 @@
 \alias{log_fatal}
 \alias{log_error}
 \alias{log_warn}
+\alias{log_success}
 \alias{log_info}
 \alias{log_debug}
 \alias{log_trace}

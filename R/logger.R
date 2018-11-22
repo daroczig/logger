@@ -175,7 +175,7 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' @param custom_namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
 #' @seealso \code{\link{log_formatter}}
 #' @export
-#' @aliases log_level log_fatal log_error log_warn log_info log_debug log_trace
+#' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
 #' @examples \dontrun{
 #' log_level(INFO, 'hi there')
 #' log_info('hi there')
@@ -208,6 +208,8 @@ log_fatal <- function(...) log_level(FATAL, ..., custom_namespace = NA_character
 log_error <- function(...) log_level(ERROR, ..., custom_namespace = NA_character_)
 #' @export
 log_warn <- function(...) log_level(WARN, ..., custom_namespace = NA_character_)
+#' @export
+log_success <- function(...) log_level(SUCCESS, ..., custom_namespace = NA_character_)
 #' @export
 log_info <- function(...) log_level(INFO, ..., custom_namespace = NA_character_)
 #' @export
