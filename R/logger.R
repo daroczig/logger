@@ -166,9 +166,9 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
 #' @return list of function(s)
 #' @keywords internal
 #' @importFrom utils getFromNamespace
-#' @param custom_namespace override the default / auto-picked namespace with a custom string
-get_logger_definitions <- function(custom_namespace = NA_character_) {
-    namespace <- ifelse(is.na(custom_namespace), find_namespace(), custom_namespace)
+#' @param namespace override the default / auto-picked namespace with a custom string
+get_logger_definitions <- function(namespace = NA_character_) {
+    namespace <- ifelse(is.na(namespace), find_namespace(), namespace)
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
@@ -179,7 +179,7 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' Log a message with given log level
 #' @param level log level from \code{\link{log_levels}}
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
-#' @param custom_namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
+#' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
 #' @seealso \code{\link{logger}}
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
@@ -201,8 +201,8 @@ get_logger_definitions <- function(custom_namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log_level <- function(level, ..., custom_namespace = NA_character_) {
-    definitions <- get_logger_definitions(custom_namespace)
+log_level <- function(level, ..., namespace = NA_character_) {
+    definitions <- get_logger_definitions(namespace)
     for (definition in definitions) {
         do.call(logger, definition)(level, ...)
     }
@@ -210,16 +210,16 @@ log_level <- function(level, ..., custom_namespace = NA_character_) {
 
 
 #' @export
-log_fatal <- function(...) log_level(FATAL, ..., custom_namespace = NA_character_)
+log_fatal <- function(...) log_level(FATAL, ..., namespace = NA_character_)
 #' @export
-log_error <- function(...) log_level(ERROR, ..., custom_namespace = NA_character_)
+log_error <- function(...) log_level(ERROR, ..., namespace = NA_character_)
 #' @export
-log_warn <- function(...) log_level(WARN, ..., custom_namespace = NA_character_)
+log_warn <- function(...) log_level(WARN, ..., namespace = NA_character_)
 #' @export
-log_success <- function(...) log_level(SUCCESS, ..., custom_namespace = NA_character_)
+log_success <- function(...) log_level(SUCCESS, ..., namespace = NA_character_)
 #' @export
-log_info <- function(...) log_level(INFO, ..., custom_namespace = NA_character_)
+log_info <- function(...) log_level(INFO, ..., namespace = NA_character_)
 #' @export
-log_debug <- function(...) log_level(DEBUG, ..., custom_namespace = NA_character_)
+log_debug <- function(...) log_level(DEBUG, ..., namespace = NA_character_)
 #' @export
-log_trace <- function(...) log_level(TRACE, ..., custom_namespace = NA_character_)
+log_trace <- function(...) log_level(TRACE, ..., namespace = NA_character_)

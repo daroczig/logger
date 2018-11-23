@@ -4,10 +4,10 @@
 \alias{get_logger_definitions}
 \title{Find the logger definition(s) specified for the current namespace with a fallback to the global namespace}
 \usage{
-get_logger_definitions(custom_namespace = NA_character_)
+get_logger_definitions(namespace = NA_character_)
 }
 \arguments{
-\item{custom_namespace}{override the default / auto-picked namespace with a custom string}
+\item{namespace}{override the default / auto-picked namespace with a custom string}
 }
 \value{
 list of function(s)
