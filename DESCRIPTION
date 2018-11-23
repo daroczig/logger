@@ -21,5 +21,7 @@ Suggests:
   jsonlite,
   crayon,
   knitr,
-  rmarkdown
+  rmarkdown,
+  devtools,
+  roxygen2
 VignetteBuilder: knitr

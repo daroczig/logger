@@ -5,3 +5,4 @@ _pkgdown.yml
 .lintr
 .*.sh$
 .backup
+.*.graphml$
