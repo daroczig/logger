@@ -359,4 +359,4 @@ paste(t2, length(readLines(t2)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"
 ```
 
-On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, if needed.
+On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed.

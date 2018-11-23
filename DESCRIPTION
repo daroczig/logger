@@ -19,4 +19,7 @@ Suggests:
   testthat,
   covr,
   jsonlite,
-  crayon
+  crayon,
+  knitr,
+  rmarkdown
+VignetteBuilder: knitr
