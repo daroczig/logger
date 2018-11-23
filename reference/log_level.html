@@ -86,7 +86,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/customize_logger.html">Customizing the format and destination of log records</a>
+    </li>
+    <li>
       <a href="../articles/logger_structure.html">The anatomy of a log request</a>
+    </li>
+    <li>
+      <a href="../articles/performance.html">Logger performance</a>
     </li>
   </ul>
 </li>
@@ -122,7 +128,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>log_level</span>(<span class='no'>level</span>, <span class='no'>...</span>, <span class='kw'>custom_namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>)</pre>
+    <pre class="usage"><span class='fu'>log_level</span>(<span class='no'>level</span>, <span class='no'>...</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,7 +142,7 @@
       <td><p>R objects that can be converted to a character vector via the active message formatter function</p></td>
     </tr>
     <tr>
-      <th>custom_namespace</th>
+      <th>namespace</th>
       <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.</p></td>
     </tr>
     </table>
