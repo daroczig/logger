@@ -210,16 +210,16 @@ log_level <- function(level, ..., namespace = NA_character_) {
 
 
 #' @export
-log_fatal <- function(...) log_level(FATAL, ..., namespace = NA_character_)
+log_fatal <- function(...) log_level(FATAL, ...)
 #' @export
-log_error <- function(...) log_level(ERROR, ..., namespace = NA_character_)
+log_error <- function(...) log_level(ERROR, ...)
 #' @export
-log_warn <- function(...) log_level(WARN, ..., namespace = NA_character_)
+log_warn <- function(...) log_level(WARN, ...)
 #' @export
-log_success <- function(...) log_level(SUCCESS, ..., namespace = NA_character_)
+log_success <- function(...) log_level(SUCCESS, ...)
 #' @export
-log_info <- function(...) log_level(INFO, ..., namespace = NA_character_)
+log_info <- function(...) log_level(INFO, ...)
 #' @export
-log_debug <- function(...) log_level(DEBUG, ..., namespace = NA_character_)
+log_debug <- function(...) log_level(DEBUG, ...)
 #' @export
-log_trace <- function(...) log_level(TRACE, ..., namespace = NA_character_)
+log_trace <- function(...) log_level(TRACE, ...)
