@@ -104,224 +104,23 @@ So based on all the above subjective opinions, I decided to write the `n+1`th ex
 
 Welcome to the Bazaar!
 
-## The structure of a logger and a log record
+## The first steps with `logger`
 
-Minimum requirements of a `logger` and its required parameters to log something:
+TODO or in vignette?
 
-* logger definition:
+## Interested in more details?
 
-    * log level `threshold`, eg `ERROR`, which defines the minimum log level required for actual logging
-    * `formatter` function, which converts the R objects passed to the logger into an actual log message (to be then passed to the `layout` function), eg
-    
-        ```r
-        formatter <- function(...) paste(..., collapse = ' ', sep = ' ')
-        formatter(letters[1:3], 'foo', pi)
-        #> [1] "a foo 3.14159265358979 b foo 3.14159265358979 c foo 3.14159265358979"
-        ```
+Check out the main documentation site at https://daroczig.github.io/logger or the vignettes on the below topics:
 
-    * `layout` function, which defines the format of a log record, having access to some extra variables describing the calling environment of the log record (like timestamp, hostname, username, calling function etc), eg
+* [101](TODO)
+* [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/logger_structure.html)
+* [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html)
+* [Writing custom extensions](TODO)
+* [Logging from R packages][TODO]
 
-        * a function returning structured text including log level, timestamp and message
-        
-            ```r
-            layout <- function(level, msg) sprintf('%s [%s] %s', level, msg)
-            layout(INFO, 'Happy Thursday!')
-            #> INFO [1970-01-01 00:00:00] Happy Thursday!
-            ```
-        
-        * a function returning a JSON object of log level, timestamp, hostname, calling function and message
-        
-            ```r
-            layout <- function(level, msg) toJSON(level = level, timestamp = time, hostname = node, message = msg)
-            layout(INFO, 'Happy Thursday!')
-            #> {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}
-            ```
 
-    * `appender` function, which writes the actual log record somewhere, eg `stdout`, a file or a streaming service, eg
-    
-        ```r
-        appender <- function(line) cat(line, '\n')
-        appender('INFO [now] I am a log message')
-        #> INFO [now] I am a log message 
-        ```
 
-* user-provided parameters: 
 
-    * log level of the log record, eg `INFO`, which describes the severity of a message
-    * R objects to be logged
-
-Putting all these together (by explicitly setting the default config):
-
-```r
-log_threshold(INFO)
-log_formatter(formatter_glue)
-log_layout(layout_simple)
-log_appender(appender_console)
-log_debug('I am a low level log message')
-log_warn('I am a higher level log message')
-#> WARN [2018-22-11 11:35:48] I am a higher level log message
-```
-
-## Log levels
-
-`logger` uses the default `log4j` log levels and supports suppressing log messages with lower level compared to the currently set threshold in the namespace:
-
-```r
-log_info('Hi, there!')
-#> INFO [2018-14-11 02:04:31] Hi, there!
-log_debug('How are you doing today?')
-log_threshold()
-#> Log level: INFO
-log_threshold(TRACE)
-log_debug('How are you doing today?')
-#> DEBUG [2018-14-11 02:05:15] How are you doing today?
-```
-
-If you want to define the log level in a programmatic way, check out the `log_level` function, and see `?log_levels` for all the supported log levels.
-
-## Log namespaces
-
-By default, all log messages will be processed by the global logging function, but you may also use custom namespaces (eg to deliver specific log records to a special destination or to apply custom log level threshold) and even multiple loggers as well within the very same namespace (eg to deliver all `INFO` and above log levels in the console and everything below that to a trace log file). For examples on these, please see below.
-
-## Log message formats
-
-By default, the `log_level` and its derivative functions will simply record the log-level, current timestamp and the message after being processed by `glue`:
-
-```r
-log_info(42)
-#> INFO [2018-14-11 02:11:10] 42
-log_info('The answer is {42}')
-#> INFO [2018-14-11 02:11:11] The answer is 42
-log_info('The answers are {1:5}')
-#> INFO [2018-14-11 02:17:09] The answers are 1
-#> INFO [2018-14-11 02:17:09] The answers are 2
-#> INFO [2018-14-11 02:17:09] The answers are 3
-#> INFO [2018-14-11 02:17:09] The answers are 4
-#> INFO [2018-14-11 02:17:09] The answers are 5
-```
-
-In the above example, first, `42` was converted to a string by a message formatter, then the message was passed to a layout function to generate the actual log record.
-
-## Log layouts
-
-An example of another layout function writing the same log messages in JSON:
-
-```r
-log_layout(layout_json)
-log_info(42)
-#> {"level":4,"timestamp":"2018-11-14 02:11:47","message":"42"}
-log_info(1:3)
-#> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"1"}
-#> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"2"}
-#> {"level":4,"timestamp":"2018-11-14 02:17:36","message":"3"}
-```
-
-To customize the format how the log messages are being rendered, see `?layout_glue_generator` that provides very easy access to a bunch variables -- quick examples on automatically logging the call from which the log message originated along with the (package) namespace, calling function's name, hostname, user running the R process etc:
-
-* define custom logger:
-
-    ```r
-    logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-    log_layout(logger)
-    ```
-
-* check what's being logged when called from the global environment:
-
-    ```r
-    log_info('foo')
-    #> nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:31:51 INFO: foo
-    ```
-
-* check what's being logged when called from a custom function:
-
-    ```r
-    f <- function() log_info('foo')
-    f()
-    #> nevermind/21133/R_GlobalEnv/f 2018-14-11 01:32:46 INFO: foo
-    ```
-
-* check what's being logged when called from a package:
-
-    ```r
-    devtools::load_all(system.file('tests/logger-tester-package', package = 'logger'))
-    #> Loading logger.tester
-    logger_tester_function(INFO, 'hi from tester package')
-    #> nevermind/21133/logger.tester/logger_tester_function 2018-14-11 01:32:56 INFO: hi from tester package
-    ```
-
-* suppress messages in a namespace:
-
-    ```r
-    log_threshold(namespace = 'logger.tester')
-    #> Log level: INFO 
-    log_threshold(WARN, namespace = 'logger.tester')
-    logger_tester_function(INFO, 'hi from tester package')
-    logger_tester_function(WARN, 'hi from tester package')
-    #> nevermind/21133/logger.tester/logger_tester_function 2018-14-11 01:33:16 WARN: hi from tester package
-    log_info('I am still working in the global namespace')
-    #> nevermind/21133/R_GlobalEnv/NA 2018-14-11 01:33:21 INFO: I am still working in the global namespace
-    ```
-
-Note that the `layout_glue_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own layout generator functions, please keep `match.call()` recorded in the `generator` attribute, or stick with standard functions. See some examples in the `layouts.R` file.
-
-## Delivering log records to their destination
-
-By default, `logger` will write to the console or `stdout` via the `appender_console` function:
-
-```r
-log_appender()
-#> function(lines) {
-#>     cat(lines, sep = '\n')
-#> }
-#> <environment: namespace:logger>
-```
-
-To write to a logfile instead, use the `appender_file` generator function, that returns a function that can be used in any namespace:
-
-```r
-t <- tempfile()
-log_appender(appender_file(t))
-log_info('where is this message going?')
-log_appender()
-#> appender_file(file = t)()
-readLines(t)
-#> [1] "INFO [2018-14-11 02:24:38] where is this message going?"
-```
-
-You may find `appender_tee` also useful, that write the log messages to both `stdout` and a file.
-
-*Note that the `appender_file` and `appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.*
-
-## Stacking loggers
-
-Note that the `appender_tee` functionality can be implemented by stacking loggers as well, eg setting two loggers for the global namespace: `appender_console` and `appender_file`. The advantage of this approach is that you can set different log level thresholds for each logger, for example:
-
-```r
-log_threshold()
-#> Log level: INFO
-
-## create a new logger with index 2
-log_threshold(TRACE, index = 2)
-
-## note that the original logger still have the same log level threshold
-log_threshold()
-#> Log level: INFO
-log_threshold(index = 2)
-#> Log level: TRACE
-
-## update the appender of the new logger
-t <-tempfile()
-log_appender(appender_file(t), index = 2)
-
-## test both loggers
-log_info('info msg')
-#> INFO [2018-22-11 11:52:08] info msg
-log_debug('info msg')
-
-readLines(t)
-#> [1] "INFO [2018-22-11 11:52:08] info msg" 
-#> [2] "DEBUG [2018-22-11 11:52:13] info msg"
-```
 
 ## Performance
 

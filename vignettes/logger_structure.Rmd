@@ -1,7 +1,5 @@
 ---
 title: "The anatomy of a log request"
-author: "Gergely Daróczi"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{The anatomy of a log request}
@@ -56,7 +54,7 @@ To make a successful log record, `logger` requires the below components:
         formatter(1:3, c('foo', 'bar'))
         ```
     
-    - `layout` function, which takes log message(s) and further information on the log request (such as like timestamp, hostname, username, calling function etc) to render the actual log records eg human-readable text, JSON etc
+    - `layout` function, which takes log message(s) and further information on the log request (such as timestamp, hostname, username, calling function etc) to render the actual log records eg human-readable text, JSON etc
     
        
         ```r
@@ -84,3 +82,4 @@ log_debug('I am a low level log message that will not be printed with a high log
 log_warn('I am a higher level log message that is very likely to be printed')
 ```
 
+Note, that all `logger` definitions and requests are tied to a logging namespace, and one log request might trigger multiple `logger` definitions as well (stacking). Find more information on these in the [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html) vignette.
