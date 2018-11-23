@@ -45,6 +45,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/logger_structure.html">The anatomy of a log request</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -385,7 +397,7 @@
 <a class="sourceLine" id="cb21-27" data-line-number="27"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"</span></a>
 <a class="sourceLine" id="cb21-28" data-line-number="28"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t2, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t2)))</a>
 <a class="sourceLine" id="cb21-29" data-line-number="29"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"</span></a></code></pre></div>
-<p>On the other hand, there are some low-hanging fruits to improve performance, eg caching the <code>logger</code> function in the namespace, if needed.</p>
+<p>On the other hand, there are some low-hanging fruits to improve performance, eg caching the <code>logger</code> function in the namespace, or using much faster message formatters (eg <code>paste0</code> or <code>sprintf</code> instead of <code>glue</code>) if needed.</p>
 </div>
 </div>
   </div>
