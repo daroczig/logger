@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Writing custom logger extensions • logger</title>
+<title>Writing Custom Logger Extensions • logger</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Writing custom logger extensions">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Writing Custom Logger Extensions">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -53,16 +53,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/customize_logger.html">Customizing the format and destination of log records</a>
+      <a href="../articles/Intro.html">Introduction to logger</a>
     </li>
     <li>
-      <a href="../articles/logger_structure.html">The anatomy of a log request</a>
+      <a href="../articles/anatomy.html">The Anatomy of a Log Request</a>
     </li>
     <li>
-      <a href="../articles/performance.html">Logger performance</a>
+      <a href="../articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a>
     </li>
     <li>
-      <a href="../articles/write_custom_extensions.html">Writing custom logger extensions</a>
+      <a href="../articles/performance.html">Simple Benchmarks on logger Performance</a>
+    </li>
+    <li>
+      <a href="../articles/r_packages.html">Logging from R Packages</a>
+    </li>
+    <li>
+      <a href="../articles/write_custom_extensions.html">Writing Custom Logger Extensions</a>
     </li>
   </ul>
 </li>
@@ -86,7 +92,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Writing custom logger extensions</h1>
+      <h1>Writing Custom Logger Extensions</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/master/vignettes/write_custom_extensions.Rmd"><code>vignettes/write_custom_extensions.Rmd</code></a></small>
@@ -102,7 +108,7 @@
 <a href="#custom-log-message-formatter-functions" class="anchor"></a>Custom log message formatter functions</h2>
 <p>The log message formatter function should be able to take any number of R objects and convert those into a character vector that is safe to pass to the layout function.</p>
 <p>This transformer function can be as simple as calling <code>paste</code>, <code>glue</code> or <code>sprintf</code> or something complex as well, eg looking up user attributes of a user id mentioned in a log record etc.</p>
-<p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code>log_formatter</code> can pretty-print that instead of the unnamed function body. See the <code>formatters.R</code> file for more examples.</p>
+<p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_formatter.html">?log_formatter</a></code> can pretty-print that instead of the unnamed function body. See the <code>formatters.R</code> file for more examples.</p>
 </div>
 <div id="custom-log-layout-rendering-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -118,13 +124,13 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3">}</a></code></pre></div>
 <p>Or much more complex, eg looking up the hostname of the machine, public IP address etc and logging all these automatically with the message of the log request.</p>
 <p>Your easiest option to set up a custom layout is calling <code><a href="../reference/layout_glue_generator.html">?layout_glue_generator</a></code> that comes with a nice API being able to access a bunch of meta-information on the log request via <code><a href="../reference/get_logger_meta_variables.html">?get_logger_meta_variables</a></code>. For such example, see the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a> vignette.</p>
-<p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code>log_layout</code> can pretty-print that instead of the unnamed function body. See the <code>layout.R</code> file for more examples.</p>
+<p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_layout.html">?log_layout</a></code> can pretty-print that instead of the unnamed function body. See the <code>layout.R</code> file for more examples.</p>
 </div>
 <div id="custom-log-record-appenders" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-log-record-appenders" class="anchor"></a>Custom log record appenders</h2>
 <p>The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console or to a local file, or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message.</p>
-<p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code>log_appender</code> can pretty-print that instead of the unnamed function body. See the <code>appenders.R</code> file for more examples.</p>
+<p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_appender.html">?log_appender</a></code> can pretty-print that instead of the unnamed function body. See the <code>appenders.R</code> file for more examples.</p>
 </div>
   </div>
 

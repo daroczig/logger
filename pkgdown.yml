@@ -2,8 +2,10 @@ pandoc: '2.2'
 pkgdown: 1.2.0.9000
 pkgdown_sha: c980e84a573614087c6e151d5e6e19a22748b761
 articles:
+  Intro: Intro.html
+  anatomy: anatomy.html
   customize_logger: customize_logger.html
-  logger_structure: logger_structure.html
   performance: performance.html
+  r_packages: r_packages.html
   write_custom_extensions: write_custom_extensions.html
 
