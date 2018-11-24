@@ -108,7 +108,7 @@ Welcome to the Bazaar!
 
 Check out the main documentation site at https://daroczig.github.io/logger or the vignettes on the below topics:
 
-* [Introduction to logger](https://daroczig.github.io/logger/articles/101.html)
+* [Introduction to logger](https://daroczig.github.io/logger/articles/Intro.html)
 * [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html)
 * [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html)
 * [Writing Custom Logger Extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
