@@ -22,7 +22,7 @@ oldconf <- list(
     appender = log_appender())
 ```
 
-In this vignette I suppose that you are already familiar with [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/logger_structure.html) vignette.
+In this vignette I suppose that you are already familiar with [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) vignette.
 
 ## What gets logged?
 
