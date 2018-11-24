@@ -1,0 +1,17 @@
+---
+title: "Logging from R packages"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Logging from R packages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+TODO recap on namespaces + optional custom ns
