@@ -5,4 +5,5 @@ articles:
   customize_logger: customize_logger.html
   logger_structure: logger_structure.html
   performance: performance.html
+  write_custom_extensions: write_custom_extensions.html
 

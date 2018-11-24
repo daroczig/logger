@@ -61,6 +61,9 @@
     <li>
       <a href="articles/performance.html">Logger performance</a>
     </li>
+    <li>
+      <a href="articles/write_custom_extensions.html">Writing custom logger extensions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -96,7 +99,7 @@
 <div id="quick-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-example" class="anchor"></a>Quick example</h2>
-<p>Setting the log level threshold and logging various messages in ad-hoc and programmatic ways:</p>
+<p>Setting the log level threshold to something low and logging various messages in ad-hoc and programmatic ways:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(DEBUG)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Script starting up...'</span>)</a>
@@ -121,7 +124,7 @@
 <a class="sourceLine" id="cb2-22" data-line-number="22"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'There might be many, like {1:2} or more warnings!!!'</span>)</a>
 <a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!</span></a>
 <a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!</span></a></code></pre></div>
-<p>Setting custom layout to render the log records with colors:</p>
+<p>Setting a custom log layout to render the log records with colors:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_glue_colors)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
@@ -137,7 +140,7 @@
 <p>Or simply run the related demo:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/demo">demo</a></span>(colors, <span class="dt">package =</span> <span class="st">'logger'</span>, <span class="dt">echo =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="reference/figures/colors.png" alt="colored log output"></p>
-<p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc.</p>
+<p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see the related vignettes.</p>
 </div>
 <div id="why-another-logging-r-package" class="section level2">
 <h2 class="hasAnchor">
@@ -187,8 +190,8 @@
 <li><a href="TODO">101</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/logger_structure.html">The Anatomy of a Log Request</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a></li>
-<li><a href="TODO">Writing custom extensions</a></li>
-<li>[Logging from R packages][TODO]</li>
+<li><a href="https://daroczig.github.io/logger/articles/write_custom_extensions.html">Writing custom logger extensions</a></li>
+<li><a href="TODO">Logging from R packages</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/performance.html">Logger performance</a></li>
 </ul>
 </div>
