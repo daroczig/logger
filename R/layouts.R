@@ -96,9 +96,9 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
-layout_simple <- function(level, msg) {
+layout_simple <- structure(function(level, msg) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
-}
+}, generator = quote(layout_simple()))
 
 
 #' Format a log message with \code{glue}
@@ -146,7 +146,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_info(42:44)
 #' }
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
-layout_json <- function(level, msg) {
+layout_json <- structure(function(level, msg) {
 
     if (!requireNamespace('jsonlite', quietly = TRUE)) {
         stop('Please install the jsonlite package for logging messages in JSON format')
@@ -159,5 +159,5 @@ layout_json <- function(level, msg) {
             message = as.character(msg)
         ), auto_unbox = TRUE))
 
-}
+}, generator = quote(layout_json()))
 ## TODO need for smarter JSON logger

@@ -3,9 +3,9 @@
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_paste <- function(...) {
+formatter_paste <- structure(function(...) {
     paste(...)
-}
+}, generator = quote(formatter_paste()))
 
 
 #' Apply \code{sprintf}
@@ -14,9 +14,9 @@ formatter_paste <- function(...) {
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_sprintf <- function(fmt, ...) {
+formatter_sprintf <- structure(function(fmt, ...) {
     sprintf(fmt, ...)
-}
+}, generator = quote(formatter_sprintf()))
 
 
 #' Apply \code{glue}
@@ -24,9 +24,9 @@ formatter_sprintf <- function(fmt, ...) {
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue <- function(...) {
+formatter_glue <- structure(function(...) {
     as.character(glue(..., .envir = parent.frame()))
-}
+}, generator = quote(formatter_glue()))
 
 
 #' Apply \code{glue} and \code{sprintf}
@@ -50,7 +50,7 @@ formatter_glue <- function(...) {
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue_or_sprintf <- function(msg, ...) {
+formatter_glue_or_sprintf <- structure(function(msg, ...) {
 
     params <- list(...)
 
@@ -87,4 +87,4 @@ formatter_glue_or_sprintf <- function(msg, ...) {
     ## return
     msg
 
-}
+}, generator = quote(formatter_glue_or_sprintf()))

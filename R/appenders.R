@@ -2,9 +2,9 @@
 #' @param lines character vector
 #' @export
 #' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}} or \code{\link{appender_tee}}
-appender_console <- function(lines) {
+appender_console <- structure(function(lines) {
     cat(lines, sep = '\n')
-}
+}, generator = quote(appander_console()))
 
 
 #' Append log messages to a file

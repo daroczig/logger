@@ -15,7 +15,7 @@ devtools::install_github('daroczig/logger')
 
 ## Quick example
 
-Setting the log level threshold and logging various messages in ad-hoc and programmatic ways:
+Setting the log level threshold to something low and logging various messages in ad-hoc and programmatic ways:
 
 ```r
 library(logger)
@@ -44,7 +44,7 @@ log_warn('There might be many, like {1:2} or more warnings!!!')
 #> WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!
 ```
 
-Setting custom layout to render the log records with colors:
+Setting a custom log layout to render the log records with colors:
 
 ```r
 library(logger)
@@ -69,7 +69,7 @@ demo(colors, package = 'logger', echo = FALSE)
 
 <img src="man/figures/colors.png" alt="colored log output">
 
-But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc.
+But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see the related vignettes.
 
 ## Why another logging R package?
 
@@ -111,6 +111,6 @@ Check out the main documentation site at https://daroczig.github.io/logger or th
 * [101](TODO)
 * [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/logger_structure.html)
 * [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html)
-* [Writing custom extensions](TODO)
-* [Logging from R packages][TODO]
+* [Writing custom logger extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
+* [Logging from R packages](TODO)
 * [Logger performance](https://daroczig.github.io/logger/articles/performance.html)

@@ -22,7 +22,7 @@ oldconf <- list(
     appender = log_appender())
 ```
 
-In this vignette I suppose that you are already familiar with [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/logger_structure.html).
+In this vignette I suppose that you are already familiar with [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/logger_structure.html) vignette.
 
 ## What gets logged?
 
@@ -142,7 +142,7 @@ A quick example:
 log_layout()
 ````
 
-*So thus if you want to write your own layout generator functions, please keep `match.call()` recorded in the `generator` attribute, or stick with standard functions. See some examples in the `layouts.R` file.*
+For more details on this, see the [Writing custom logger extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html) vignette.
 
 ```{r}
 ## reset layout
@@ -169,8 +169,6 @@ unlink(t)
 ```
 
 You may find `?appender_tee` also useful, that write the log messages to both `stdout` and a file.
-
-*Note that the `?appender_file` and `?appender_tee` generator functions also adds a special attribute to the resulting function so that when printing the appender function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body. So thus if you want to write your own appender functions, please keep `match.call()` recorded in the `generator` attribute -- see examples in the `appenders.R` file.*
 
 ```{r}
 ## reset appender
