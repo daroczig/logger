@@ -1,8 +1,8 @@
 ---
-title: "Customizing the format and destination of log records"
+title: "Customizing the Format and the Destination of a Log Record"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Customizing the format and destination of log records}
+  %\VignetteIndexEntry{Customizing the Format and the Destination of a Log Record}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

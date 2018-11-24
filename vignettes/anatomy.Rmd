@@ -1,8 +1,8 @@
 ---
-title: "The anatomy of a log request"
+title: "The Anatomy of a Log Request"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The anatomy of a log request}
+  %\VignetteIndexEntry{The Anatomy of a Log Request}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

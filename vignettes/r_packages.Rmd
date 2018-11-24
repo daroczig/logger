@@ -1,8 +1,8 @@
 ---
-title: "Logging from R packages"
+title: "Logging from R Packages"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Logging from R packages}
+  %\VignetteIndexEntry{Logging from R Packages}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

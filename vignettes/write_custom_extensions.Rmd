@@ -1,7 +1,7 @@
 ---
-title: "Writing custom logger extensions"
+title: "Writing Custom Logger Extensions"
 vignette: >
-  %\VignetteIndexEntry{Writing custom logger extensions}
+  %\VignetteIndexEntry{Writing Custom Logger Extensions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

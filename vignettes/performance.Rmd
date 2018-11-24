@@ -1,8 +1,8 @@
 ---
-title: "Logger performance"
+title: "Simple Benchmarks on logger Performance"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Simple Benchmarks on logger Performance}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

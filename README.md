@@ -110,7 +110,7 @@ Check out the main documentation site at https://daroczig.github.io/logger or th
 
 * [Introduction to logger](https://daroczig.github.io/logger/articles/101.html)
 * [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html)
-* [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html)
-* [Writing custom logger extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
-* [Logging from R packages](https://daroczig.github.io/logger/articles/r_packages.html)
-* [Logger performance](https://daroczig.github.io/logger/articles/performance.html)
+* [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html)
+* [Writing Custom Logger Extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
+* [Logging from R Packages](https://daroczig.github.io/logger/articles/r_packages.html)
+* [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html)
