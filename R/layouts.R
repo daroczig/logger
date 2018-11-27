@@ -148,9 +148,7 @@ layout_glue_colors <- layout_glue_generator(
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
 layout_json <- structure(function(level, msg) {
 
-    if (!requireNamespace('jsonlite', quietly = TRUE)) {
-        stop('Please install the jsonlite package for logging messages in JSON format')
-    }
+    fail_on_missing_package('jsonlite')
 
     sapply(msg, function(msg)
         jsonlite::toJSON(list(

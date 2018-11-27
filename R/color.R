@@ -16,10 +16,7 @@
 #' }
 colorize_by_log_level <- function(msg, level) {
 
-    if (!requireNamespace('crayon', quietly = TRUE)) {
-        warning('Colored logging requires the "crayon" package to be installed.')
-        return(msg)
-    }
+    fail_on_missing_package('crayon')
 
     color <- switch(
         attr(level, 'level'),
@@ -56,10 +53,7 @@ colorize_by_log_level <- function(msg, level) {
 #' }
 grayscale_by_log_level <- function(msg, level) {
 
-    if (!requireNamespace('crayon', quietly = TRUE)) {
-        warning('Colored logging requires the "crayon" package to be installed.')
-        return(msg)
-    }
+    fail_on_missing_package('crayon')
 
     color <- switch(
         attr(level, 'level'),

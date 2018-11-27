@@ -43,7 +43,6 @@ log_threshold(TRACE)
 
 The rerunning the above code chunk:
 
-
 ```{r}
 log_info('Loading data')
 data(mtcars)
