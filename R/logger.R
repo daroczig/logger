@@ -223,3 +223,31 @@ log_info <- function(...) log_level(INFO, ...)
 log_debug <- function(...) log_level(DEBUG, ...)
 #' @export
 log_trace <- function(...) log_level(TRACE, ...)
+
+
+#' Evaluate R expression with a temporarily updated log level threshold
+#' @param expression R command
+#' @param threshold \code{\link{log_levels}}
+#' @inheritParams log_threshold
+#' @export
+#' @examples \dontrun{
+#' log_threshold(TRACE)
+#' log_trace('Logging everything!')
+#' x <- with_log_threshold({
+#'   log_info('Now we are temporarily suppressing eg INFO messages')
+#'   log_warn('WARN')
+#'   log_debug('Debug messages are suppressed as well')
+#'   log_error('ERROR')
+#'   invisible(42)
+#' }, threshold = WARN)
+#' x
+#' log_trace('DONE')
+#' }
+with_log_threshold <- function(expression, threshold = ERROR, namespace = 'global', index = 1) {
+    old <- log_threshold(namespace = namespace, index = index)
+    on.exit({
+        log_threshold(old, namespace = namespace, index = index)
+    })
+    log_threshold(threshold, namespace = namespace, index = index)
+    eval(quote(expression))
+}
