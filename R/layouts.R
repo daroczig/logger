@@ -130,6 +130,7 @@ layout_glue <- layout_glue_generator()
 #' log_fatal('The last problem.')
 #' }
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @note This functionality depends on the \pkg{crayon} package.
 layout_glue_colors <- layout_glue_generator(
     format = paste(
         '{crayon::bold(colorize_by_log_level(level, levelr))}',
@@ -145,6 +146,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_layout(layout_json)
 #' log_info(42:44)
 #' }
+#' @note This functionality depends on the \pkg{jsonlite} package.
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
 layout_json <- structure(function(level, msg) {
 

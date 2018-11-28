@@ -17,6 +17,9 @@ character vector
 \description{
 Format a log message as JSON
 }
+\note{
+This functionality depends on the \pkg{jsonlite} package.
+}
 \examples{
 \dontrun{
 log_layout(layout_json)

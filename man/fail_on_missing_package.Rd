@@ -12,4 +12,12 @@ fail_on_missing_package(pkg)
 \description{
 Check if R package can be loaded and fails loudly otherwise
 }
+\examples{
+\dontrun{
+f <- function() fail_on_missing_package('foobar')
+f()
+g <- function() fail_on_missing_package('stats')
+g()
+}
+}
 \keyword{internal}

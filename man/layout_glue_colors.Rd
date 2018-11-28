@@ -17,6 +17,9 @@ character vector
 \description{
 Format a log message with \code{glue} and ANSI escape codes to add colors
 }
+\note{
+This functionality depends on the \pkg{crayon} package.
+}
 \examples{
 \dontrun{
 log_layout(layout_glue_colors)

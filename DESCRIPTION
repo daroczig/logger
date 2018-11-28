@@ -23,5 +23,6 @@ Suggests:
   knitr,
   rmarkdown,
   devtools,
-  roxygen2
+  roxygen2,
+  slackr
 VignetteBuilder: knitr

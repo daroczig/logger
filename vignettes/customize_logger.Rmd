@@ -168,6 +168,22 @@ readLines(t)
 unlink(t)
 ```
 
+There's a similar generator function that returns an appender function delivering log messages to Slack channels:
+
+```r
+## load Slack configuration, API token etc from a (hopefully encrypted) yaml file or similar
+slack_config <- config::config(...)
+## redirect log messages to Slack
+log_appender(appender_slack(
+    channel   = '#gergely-test',
+    username  = 'logger',
+    api_token = slack_config$token
+), namespace = 'slack')
+log_info('Excited about sending logs to Slack!')
+#> INFO [2018-11-28 00:21:13] Excited about sending logs to Slack!
+log_info('Hi there from logger@R!', namespace = 'slack')
+```
+
 You may find `?appender_tee` also useful, that write the log messages to both `stdout` and a file.
 
 ```{r}
