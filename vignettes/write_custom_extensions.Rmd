@@ -46,6 +46,24 @@ If you are writing such a function or a generator function returning a log messa
 
 ## Custom log record appenders
 
-The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console or to a local file, or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message.
+The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console (`?appender_console`) or to a local file (`?appender_file`), or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message (`?appender_slack`).
 
 If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_appender` can pretty-print that instead of the unnamed function body. See the `appenders.R` file for more examples.
+
+An example for a custom appender delivering log messages to a database table:
+
+```r
+## the dbr package provides and easy and secure way of connecting to databased from R
+## although if you want to minimize the dependencies, feel free to stick with DBI etc.
+library(dbr)
+## init a persistent connection to the database using a yaml config in the background thanks to dbr
+## NOTE that this is optional and a temporarily connection could be also used
+##      for higher reliability but lower throughput
+con <- db_connect('mydb')
+## define custom function writing the log message to a table
+log_appender(function(lines) {
+    db_append(
+        df = data.frame(timestamp = Sys.time(), message = lines),
+        table = 'logs', db = con)
+})
+```
