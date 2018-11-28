@@ -13,6 +13,7 @@ fail_on_missing_package <- function(pkg) {
         stop(sprintf(
             'Please install the %s package to use %s',
             shQuote(pkg),
-            deparse(pc[[1]])))
+            deparse(pc[[1]])),
+            call. = FALSE)
     }
 }
