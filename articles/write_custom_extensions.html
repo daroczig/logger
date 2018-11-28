@@ -129,8 +129,22 @@
 <div id="custom-log-record-appenders" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-log-record-appenders" class="anchor"></a>Custom log record appenders</h2>
-<p>The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console or to a local file, or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message.</p>
+<p>The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console (<code><a href="../reference/appender_console.html">?appender_console</a></code>) or to a local file (<code><a href="../reference/appender_file.html">?appender_file</a></code>), or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message (<code><a href="../reference/appender_slack.html">?appender_slack</a></code>).</p>
 <p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_appender.html">?log_appender</a></code> can pretty-print that instead of the unnamed function body. See the <code>appenders.R</code> file for more examples.</p>
+<p>An example for a custom appender delivering log messages to a database table:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">## the dbr package provides and easy and secure way of connecting to databased from R</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">## although if you want to minimize the dependencies, feel free to stick with DBI etc.</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dbr)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">## init a persistent connection to the database using a yaml config in the background thanks to dbr</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">## <span class="al">NOTE</span> that this is optional and a temporarily connection could be also used</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">##      for higher reliability but lower throughput</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">con &lt;-<span class="st"> </span><span class="kw">db_connect</span>(<span class="st">'mydb'</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">## define custom function writing the log message to a table</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="cf">function</span>(lines) {</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="kw">db_append</span>(</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">        <span class="dt">df =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">timestamp =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.time">Sys.time</a></span>(), <span class="dt">message =</span> lines),</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">        <span class="dt">table =</span> <span class="st">'logs'</span>, <span class="dt">db =</span> con)</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">})</a></code></pre></div>
 </div>
   </div>
 
