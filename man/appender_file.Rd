@@ -16,5 +16,5 @@ function taking \code{lines} argument
 Append log messages to a file
 }
 \seealso{
-This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}} or \code{\link{appender_tee}}
+This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
 }

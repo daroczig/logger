@@ -1,7 +1,7 @@
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
-#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}} or \code{\link{appender_tee}}
+#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
 appender_console <- structure(function(lines) {
     cat(lines, sep = '\n')
 }, generator = quote(appender_console()))
@@ -11,7 +11,7 @@ appender_console <- structure(function(lines) {
 #' @param file path
 #' @export
 #' @return function taking \code{lines} argument
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}} or \code{\link{appender_tee}}
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
 appender_file <- function(file) {
     structure(
         function(lines) {
@@ -24,7 +24,7 @@ appender_file <- function(file) {
 #' @param file path
 #' @export
 #' @return function taking \code{lines} argument
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}} or \code{\link{appender_file}}
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
 appender_tee <- function(file) {
     structure(
         function(lines) {
@@ -43,6 +43,7 @@ appender_tee <- function(file) {
 #' @return function taking \code{lines} argument
 #' @export
 #' @note This functionality depends on the \pkg{slackr} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
 appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
                            username     = Sys.getenv('SLACK_USERNAME'),
                            icon_emoji   = Sys.getenv('SLACK_ICON_EMOJI'),
@@ -64,4 +65,22 @@ appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
 
 }
 
-## TODO other appenders: graylog, kinesis, datadog, cloudwatch etc
+
+#' Send log messages to Pushbullet
+#' @param ... parameters passed to \code{pbPost}, such as \code{recipients} or \code{apikey}, although it's probably much better to set all these in the \code{~/.rpushbullet.json} as per package docs at \url{http://dirk.eddelbuettel.com/code/rpushbullet.html}
+#' @export
+#' @note This functionality depends on the \pkg{RPushbullet} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}
+#' @export
+appender_pushbullet <- function(...) {
+
+    fail_on_missing_package('RPushbullet')
+
+    structure(
+        function(lines) {
+            RPushbullet::pbPost(type = 'note', body = paste(lines, sep = '\n'), ...)
+        }, generator = deparse(match.call()))
+
+}
+
+## TODO other appenders: graylog, kinesis, datadog, cloudwatch, email via sendmailR, ES etc

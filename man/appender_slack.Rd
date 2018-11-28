@@ -29,3 +29,6 @@ Send log messages to a Slack channel
 \note{
 This functionality depends on the \pkg{slackr} package.
 }
+\seealso{
+This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
+}

@@ -24,5 +24,6 @@ Suggests:
   rmarkdown,
   devtools,
   roxygen2,
-  slackr
+  slackr,
+  RPushbullet
 VignetteBuilder: knitr

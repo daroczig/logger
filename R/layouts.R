@@ -44,6 +44,7 @@ get_logger_meta_variables <- function(log_level = NULL) {
         os_release = sysinfo[['release']],
         os_version = sysinfo[['version']],
         user       = sysinfo[['user']]
+        ## NOTE might be better to rely on the whoami pkg?
 
         ## TODO jenkins (or any) env vars => no need to get here, users can write custom layouts
         ## TODO seed
