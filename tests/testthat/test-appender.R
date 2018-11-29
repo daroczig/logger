@@ -32,7 +32,6 @@ test_that('append to file + print to console', {
     rm(t)
 })
 
-
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)

@@ -9,7 +9,7 @@ logger(threshold, formatter, layout, appender)
 \arguments{
 \item{threshold}{omit log messages below this \code{\link{log_levels}}}
 
-\item{formatter}{function pre-processing the message of the log record}
+\item{formatter}{function pre-processing the message of the log record when it's not a single string with the \code{skip_formatter} attribute set to \code{TRUE}}
 
 \item{layout}{function rendering the layout of the actual log record}
 
