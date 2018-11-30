@@ -6,6 +6,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{css, echo=FALSE}
+div.left, div.right {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+div.left p package, div.right p package {
+    font-family: monospace;
+    color: brown;
+}
+```
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -23,17 +35,37 @@ The `logging` package behaves very similarly to the Python logging module and so
 
 In `logging`, you have to initialize a logger first via `addHandler` or simply by calling `basicConfig`, which is not required in `logger` as it already comes with a default logger.
 
-+-----------------------+---------------------+
-| logging               | logger              |
-+=======================+=====================+
-|     rlibrary(logging) |     library(logger) |
-|     basicConfig()     |                     |
-+-----------------------+---------------------+
+<div class="left">
+<package>logging</package>
+```{r}
+library(logging)
+basicConfig()
+```
+</div>
+<div class="right">
+<package>logger</package>
+```{r}
+library(logger)
+```
+</div>
 
 Logging works similarly in the two packages -- with a bit different function names:
 
 * although `logging` uses mostly camelCase function names (eg `basicConfig`), but the logging functions are all lowercase without any separator, such as `loginfo` or `logwarn`
 * `logger` uses snake_case for the function names, such as `log_info` and `log_warn`
+
+<div class="left">
+<package>logging</package>
+```{r}
+1+2
+```
+</div>
+<div class="right">
+<package>logger</package>
+```{r}
+1+2
+```
+</div>
 
 +--------------------------+---------------------------+
 | logging                  | logger                    |
