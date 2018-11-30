@@ -7,42 +7,75 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Although this has not been an important feature in the early development and overall design of this logger implementation, but with the default `?layout_simple` and `?formatter_glue`, it seems to perform pretty well:
+Although this has not been an important feature in the early development and overall design of this `logger` implementation, but with the default `?layout_simple` and `?formatter_glue`, it seems to perform pretty well when comparing with `futile.logger` and `logging` packages:
 
 ```r
 library(microbenchmark)
 
+## 1
 library(futile.logger)
 t1 <- tempfile()
 flog.appender(appender.file(t1))
 #> NULL
 
+## 2
 library(logger)
 #> The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN
 t2 <- tempfile()
 log_appender(appender_file(t2))
 
+## 3
+library(logging)
+t3 <- tempfile()
+addHandler(writeToFile, file = t3)
+
 string1 <- function() flog.info('hi')
 string2 <- function() log_info('hi')
+string3 <- function() loginfo('hi')
 dynamic1 <- function() flog.info('hi %s', 42)
 dynamic2 <- function() log_info('hi {42}')
+dynamic3 <- function() loginfo('hi %s', 42)
 vector1 <- function() flog.info(paste('hi', 1:5))
 vector2 <- function() log_info('hi {1:5}')
+vector3 <- function() loginfo(paste('hi', 1:5))
 
-microbenchmark(string1(), string2(), vector1(), vector2(), dynamic1(), dynamic2(), times = 1e3)
+microbenchmark(
+    string1(), string2(), string3(),
+    vector1(), vector2(), vector3(),
+    dynamic1(), dynamic2(), dynamic3(),
+    times = 1e3)
 #> Unit: microseconds
-#>        expr      min        lq      mean    median       uq       max neval cld
-#>   string1() 1510.372 1596.9630 1901.6076 1644.6540 1851.185  8995.092  1000   b
-#>   string2()  331.924  363.5350  466.1253  391.1195  441.039 27085.823  1000  a 
-#>   vector1() 1532.526 1609.0395 1889.2811 1669.5170 1865.571  6503.950  1000   b
-#>   vector2()  399.974  432.0735  519.9258  463.9960  521.519  2574.311  1000  a 
-#>  dynamic1() 1529.500 1615.7520 1949.9390 1668.8430 1888.323 29860.102  1000   b
-#>  dynamic2()  379.412  413.6555  505.2265  439.7285  495.892  2699.117  1000  a 
+#>        expr      min        lq      mean    median        uq       max neval
+#>   string1() 1518.464 1599.2235 1883.7689 1663.0845 1881.1760  5240.846  1000
+#>   string2()  385.047  421.2870  552.8052  448.7820  512.3650 28183.701  1000
+#>   string3()  172.651  203.3220  245.0161  223.9185  252.6610  2715.789  1000
+#>   vector1() 1538.627 1619.2575 1974.3082 1685.0440 1927.3660 22666.598  1000
+#>   vector2()  452.602  493.4485  600.5212  525.8900  598.6625  5221.666  1000
+#>   vector3()  197.139  230.6060  336.2018  250.1175  280.7730 34252.702  1000
+#>  dynamic1() 1540.621 1616.4125 1925.4346 1680.3110 1903.5200 10541.621  1000
+#>  dynamic2()  429.357  472.3230  580.2668  506.8400  570.3485  5535.131  1000
+#>  dynamic3()  191.259  224.0820  266.1682  244.9190  277.0915  1796.317  1000
 
 paste(t1, length(readLines(t1)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"
 paste(t2, length(readLines(t2)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"
+paste(t3, length(readLines(t3)))
+
 ```
 
-On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed.
+On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed -- like what `futile.logger` and `logging` are using instead of `glue`, so a quick `logger` comparison:
+
+```r
+log_formatter(formatter_sprintf)
+string <- function() log_info('hi')
+dynamic <- function() log_info('hi %s', 42)
+vector <- function() log_info(paste('hi', 1:5))
+
+microbenchmark(string(), vector(), dynamic(), times = 1e3)
+#> Unit: microseconds
+#>       expr     min      lq     mean   median       uq      max neval cld
+#>   string() 253.594 263.200 310.4871 271.4010 306.3625 5601.426  1000   a
+#>   vector() 274.007 283.144 330.9722 292.4010 320.3390 5339.479  1000   a
+#>  dynamic() 259.390 270.818 326.5437 281.2985 325.0975 5398.330  1000   a
+```
