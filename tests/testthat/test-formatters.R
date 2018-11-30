@@ -1,9 +1,19 @@
 library(logger)
 library(testthat)
 
+## save current settings so that we can reset later
+formatter  <- log_formatter()
+
 context('formatters')
 everything <- 42
+g <- function() {
+    log_info("Hi {everything}")
+}
+f <- function() {
+    log_info("Hi %s", everything)
+}
 
+log_formatter(formatter_glue)
 test_that('glue works', {
 
     expect_equal(formatter_glue("Hi"), "Hi")
@@ -15,9 +25,12 @@ test_that('glue works', {
     expect_equal(formatter_glue("Hi {a}", a = 42), "Hi 42")
     expect_equal(formatter_glue("Hi {everything}"), "Hi 42")
     expect_equal(formatter_glue("Hi {1:2}"), paste("Hi", 1:2))
+    expect_output(log_info("Hi {everything}"), '42')
+    expect_output(g(), '42')
 
 })
 
+log_formatter(formatter_sprintf)
 test_that('sprintf works', {
 
     expect_equal(formatter_sprintf("Hi"), "Hi")
@@ -32,6 +45,9 @@ test_that('sprintf works', {
 
     expect_error(formatter_sprintf('%s and %i', 1))
     expect_equal(formatter_sprintf('%s and %i', 1, 2), '1 and 2')
+
+    expect_output(log_info("Hi %s", everything), '42')
+    expect_output(f(), '42')
 
 })
 
@@ -54,13 +70,13 @@ test_that('glue+sprintf works', {
 
 })
 
+## cleanup
 rm(everything)
+rm(f)
 
-
-formatter <- log_formatter()
 log_formatter(formatter_paste)
 test_that('paste formatter in actual logs', {
-    expect_true(grepl('hi 5$', capture.output(log_info('hi', 5))))
+    expect_output(log_info('hi', 5), 'hi 5')
 })
 
 log_formatter(formatter)

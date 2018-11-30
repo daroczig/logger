@@ -5,17 +5,21 @@
 #' @examples \dontrun{
 #' log_eval(pi * 2, level = INFO)
 #'
+#' ## lowering the log level threshold so that we don't have to set a higher level in log_eval
+#' log_threshold(TRACE)
+#' log_eval(x <- 4)
+#' log_eval(sqrt(x))
+#'
+#' ## log_eval can be called in-line as well as returning the return value of the expression
+#' x <- log_eval(mean(runif(1e3)))
+#' x
+#'
 #' ## https://twitter.com/krlmlr/status/1067864829547999232
 #' f <- sqrt
 #' g <- mean
 #' x <- 1:31
 #' log_eval(f(g(x)), level = INFO)
 #' log_eval(y <- f(g(x)), level = INFO)
-#'
-#' ## lowering the log level threshold so that we don't have to set a higher level in log_eval
-#' log_threshold(TRACE)
-#' log_eval(x <- 4)
-#' log_eval(sqrt(x))
 #'
 #' ## returning a function
 #' log_eval(f <- sqrt)
