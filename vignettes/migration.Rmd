@@ -7,12 +7,12 @@ vignette: >
 ---
 
 ```{css, echo=FALSE}
-div.left, div.right {
+div.comparison {
     width: 49%;
     display: inline-block;
     vertical-align: top;
 }
-div.left p package, div.right p package {
+div.comparison p package {
     font-family: monospace;
     color: brown;
 }
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In this vignette I suppose that you are already familiar with at least one of the [similar logging R packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package) and you are looking for suggestions on how to switch to `logger`.
+In this vignette I suppose that you are already familiar with at least one of the [similar logging R packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package) and you are looking for suggestions on how to switch to `logger`. Before moving forward, please make sure that you have read the [Introduction to logger](https://daroczig.github.io/logger/articles/Intro.html), [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes for a decent background on `logger`, and use this vignette as a quick-reference sheet to help you migrate from another package.
 
 ## futile.logger
 
@@ -33,55 +33,125 @@ In this vignette I suppose that you are already familiar with at least one of th
 
 The `logging` package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while `logger` tries to accommodate native R users' expectations -- so there are some minor nuances between the usage of the two packages.
 
-In `logging`, you have to initialize a logger first via `addHandler` or simply by calling `basicConfig`, which is not required in `logger` as it already comes with a default logger.
+In `logging`, you have to initialize a logger first via `addHandler` or simply by calling `basicConfig`, which is not required in `logger` as it already comes with a default log config:
 
-<div class="left">
-<package>logging</package>
+<div class="comparison"><package>logging</package>
 ```{r}
 library(logging)
 basicConfig()
 ```
 </div>
-<div class="right">
-<package>logger</package>
+<div class="comparison"><package>logger</package>
 ```{r}
 library(logger)
+ 
 ```
 </div>
 
-Logging works similarly in the two packages -- with a bit different function names:
+After initializing the logging engine, actual logging works similarly in the two packages -- with a bit different function names:
 
 * although `logging` uses mostly camelCase function names (eg `basicConfig`), but the logging functions are all lowercase without any separator, such as `loginfo` or `logwarn`
 * `logger` uses snake_case for the function names, such as `log_info` and `log_warn`
 
-<div class="left">
-<package>logging</package>
+<div class="comparison"><package>logging</package>
 ```{r}
-1+2
+loginfo('hi there')
+logwarn('watch out')
 ```
 </div>
-<div class="right">
-<package>logger</package>
+<div class="comparison"><package>logger</package>
 ```{r}
-1+2
+log_info('hi there')
+log_warn('watch out')
 ```
 </div>
 
-+--------------------------+---------------------------+
-| logging                  | logger                    |
-+==========================+===========================+
-|     loginfo('hi there')  |     log_info('hi there')  |
-|     logwarn('watch out') |     log_warn('watch out') |
-+--------------------------+---------------------------+
+As you can see above, the default layout of the log messages is somewhat different:
 
-The default output is also a bit different:
+* `logging` starts with the timestamp that is followed by the log level and the message separated by two colons
+* `logger` starts with the log level, followed by the timestamp between brackets and then the message
 
-+--------------------------+---------------------------+
-| logging                  | logger                    |
-+==========================+===========================+
-|     loginfo('hi there')  |     log_info('hi there')  |
-|     logwarn('watch out') |     log_warn('watch out') |
-+--------------------------+---------------------------+
+The available log levels:
 
+<div class="comparison"><package>logging</package>
+```{r}
+?loglevels
+```
+```{r}
+str(as.list(loglevels))
+```
+</div>
+<div class="comparison"><package>logger</package>
+```{r}
+?log_levels
+```
+```{r}
+TRACE
+DEBUG
+INFO
+SUCCESS
+WARN
+ERROR
+FATAL
+```
+</div>
 
+Performance-wise, there's no big difference between the two packages, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
 
+Getting and setting the layout of the log record should happen up-front in both packages:
+
+<div class="comparison"><package>logging</package>
+```{r}
+getLogger()[['handlers']]$basic.stdout$formatter
+```
+</div>
+<div class="comparison"><package>logger</package>
+```{r}
+log_layout()
+```
+</div>
+
+`logger` provides multiple configurable layouts to fit the user's need, eg easily show the calling function of the lof request, the `pid` of the R process, name of the machine etc. or colorized outputs. See [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignette for more details.
+
+If you want to pass dynamic log messages to the log engines, you can do that via the hard-coded `sprintf` in the `logging` package, while you can set that on a namespaces basis in `logger`, which is by default using `glue`:
+
+<div class="comparison"><package>logging</package>
+```{r}
+loginfo('hi')
+loginfo('hi %s', 84/2)
+loginfo(paste('hi', 84/2))
+loginfo(glue::glue('hi {84/2}'))
+```
+</div>
+<div class="comparison"><package>logger</package>
+```{r}
+log_info('hi')
+log_info('hi {84/2}')
+log_formatter(formatter_sprintf)
+log_info('hi %s', 84/2)
+log_formatter(formatter_paste)
+log_info('hi', 84/2)
+```
+</div>
+
+Setting the destination of the log records works similarly in both packages, although he `logger` packages bundles a lot more options:
+
+<div class="comparison"><package>logging</package>
+```{r}
+?addHandler
+?writeToConsole
+?writeToFile
+```
+</div>
+<div class="comparison"><package>logger</package>
+```{r}
+?log_appender
+?appender_console
+?appender_file
+?appender_tee
+?appender_slack
+?appender_pushbullet
+```
+</div>
+
+Both packages support using different logging namespaces and stacking loggers within the same namespace.
