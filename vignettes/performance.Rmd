@@ -12,57 +12,59 @@ Although this has not been an important feature in the early development and ove
 ```r
 library(microbenchmark)
 
-## 1
+## fl
 library(futile.logger)
 t1 <- tempfile()
 flog.appender(appender.file(t1))
 #> NULL
 
-## 2
+## lg
+library(logging)
+t2 <- tempfile()
+addHandler(writeToFile, file = t2)
+
+## lr
 library(logger)
 #> The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN
-t2 <- tempfile()
-log_appender(appender_file(t2))
-
-## 3
-library(logging)
 t3 <- tempfile()
-addHandler(writeToFile, file = t3)
+log_appender(appender_file(t3))
 
-string1 <- function() flog.info('hi')
-string2 <- function() log_info('hi')
-string3 <- function() loginfo('hi')
-dynamic1 <- function() flog.info('hi %s', 42)
-dynamic2 <- function() log_info('hi {42}')
-dynamic3 <- function() loginfo('hi %s', 42)
-vector1 <- function() flog.info(paste('hi', 1:5))
-vector2 <- function() log_info('hi {1:5}')
-vector3 <- function() loginfo(paste('hi', 1:5))
+string_fl <- function() flog.info('hi')
+string_lg <- function() loginfo('hi')
+string_lr <- function() log_info('hi')
+dynamic_fl <- function() flog.info('hi %s', 42)
+dynamic_lg <- function() loginfo('hi %s', 42)
+dynamic_lr <- function() log_info('hi {42}')
+vector_fl <- function() flog.info(paste('hi', 1:5))
+vector_lg <- function() loginfo(paste('hi', 1:5))
+vector_lr <- function() log_info('hi {1:5}')
 
 microbenchmark(
-    string1(), string2(), string3(),
-    vector1(), vector2(), vector3(),
-    dynamic1(), dynamic2(), dynamic3(),
+    string_fl(), string_lg(), string_lr(),
+    vector_fl(), vector_lg(), vector_lr(),
+    dynamic_fl(), dynamic_lg(), dynamic_lr(),
     times = 1e3)
 #> Unit: microseconds
-#>        expr      min        lq      mean    median        uq       max neval
-#>   string1() 1518.464 1599.2235 1883.7689 1663.0845 1881.1760  5240.846  1000
-#>   string2()  385.047  421.2870  552.8052  448.7820  512.3650 28183.701  1000
-#>   string3()  172.651  203.3220  245.0161  223.9185  252.6610  2715.789  1000
-#>   vector1() 1538.627 1619.2575 1974.3082 1685.0440 1927.3660 22666.598  1000
-#>   vector2()  452.602  493.4485  600.5212  525.8900  598.6625  5221.666  1000
-#>   vector3()  197.139  230.6060  336.2018  250.1175  280.7730 34252.702  1000
-#>  dynamic1() 1540.621 1616.4125 1925.4346 1680.3110 1903.5200 10541.621  1000
-#>  dynamic2()  429.357  472.3230  580.2668  506.8400  570.3485  5535.131  1000
-#>  dynamic3()  191.259  224.0820  266.1682  244.9190  277.0915  1796.317  1000
+#>          expr      min        lq      mean    median        uq       max neval
+#>   string_fl() 1512.977 1617.6525 1979.0123 1689.1815 1985.6720 10120.066  1000
+#>   string_lg()  175.621  205.9510  261.2027  226.8425  253.3665  5341.951  1000
+#>   string_lr()  380.559  423.2585  518.4699  458.0620  515.9010  4164.467  1000
+#>   vector_fl() 1525.434 1637.7230 2003.3080 1703.6170 1949.7630 29310.051  1000
+#>   vector_lg()  199.937  233.3350  282.8340  259.4480  291.0290  1941.681  1000
+#>   vector_lr()  447.289  492.9680  592.7103  528.8395  587.4295  3412.259  1000
+#>  dynamic_fl() 1535.833 1639.3170 1975.3253 1701.6000 1923.4710 17921.065  1000
+#>  dynamic_lg()  193.110  227.9535  294.2567  252.2250  280.7870 17460.301  1000
+#>  dynamic_lr()  426.520  480.0890  590.9619  519.0605  582.7750  2807.365  1000
 
 paste(t1, length(readLines(t1)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"
 paste(t2, length(readLines(t2)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"
 paste(t3, length(readLines(t3)))
-
+#> [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"
 ```
+
+So based on the above, non-comprehensive benchmark, it seems that when it comes to using the very base functionality of a logging engine, `logging` comes first, then `logger` performs similarl
 
 On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed -- like what `futile.logger` and `logging` are using instead of `glue`, so a quick `logger` comparison:
 
