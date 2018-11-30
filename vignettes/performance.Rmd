@@ -64,7 +64,7 @@ paste(t3, length(readLines(t3)))
 #> [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"
 ```
 
-So based on the above, non-comprehensive benchmark, it seems that when it comes to using the very base functionality of a logging engine, `logging` comes first, then `logger` performs similarl
+So based on the above, non-comprehensive benchmark, it seems that when it comes to using the very base functionality of a logging engine, `logging` comes first, then `logger` performs with a bit of overhead due to using `glue` by default, then comes a bit slower `futile.logger`.
 
 On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed -- like what `futile.logger` and `logging` are using instead of `glue`, so a quick `logger` comparison:
 
