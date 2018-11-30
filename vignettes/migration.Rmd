@@ -1,0 +1,55 @@
+---
+title: "Migration Guide"
+vignette: >
+  %\VignetteIndexEntry{Migration Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this vignette I suppose that you are already familiar with at least one of the [similar logging R packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package) and you are looking for suggestions on how to switch to `logger`.
+
+## futile.logger
+
+## logging
+
+The `logging` package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while `logger` tries to accommodate native R users' expectations -- so there are some minor nuances between the usage of the two packages.
+
+In `logging`, you have to initialize a logger first via `addHandler` or simply by calling `basicConfig`, which is not required in `logger` as it already comes with a default logger.
+
++-----------------------+---------------------+
+| logging               | logger              |
++=======================+=====================+
+|     rlibrary(logging) |     library(logger) |
+|     basicConfig()     |                     |
++-----------------------+---------------------+
+
+Logging works similarly in the two packages -- with a bit different function names:
+
+* although `logging` uses mostly camelCase function names (eg `basicConfig`), but the logging functions are all lowercase without any separator, such as `loginfo` or `logwarn`
+* `logger` uses snake_case for the function names, such as `log_info` and `log_warn`
+
++--------------------------+---------------------------+
+| logging                  | logger                    |
++==========================+===========================+
+|     loginfo('hi there')  |     log_info('hi there')  |
+|     logwarn('watch out') |     log_warn('watch out') |
++--------------------------+---------------------------+
+
+The default output is also a bit different:
+
++--------------------------+---------------------------+
+| logging                  | logger                    |
++==========================+===========================+
+|     loginfo('hi there')  |     log_info('hi there')  |
+|     logwarn('watch out') |     log_warn('watch out') |
++--------------------------+---------------------------+
+
+
+
