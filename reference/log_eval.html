@@ -161,17 +161,21 @@
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='fu'>log_eval</span>(<span class='no'>pi</span> * <span class='fl'>2</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>)
 
+<span class='co'>## lowering the log level threshold so that we don't have to set a higher level in log_eval</span>
+<span class='fu'><a href='log_threshold.html'>log_threshold</a></span>(<span class='no'>TRACE</span>)
+<span class='fu'>log_eval</span>(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>4</span>)
+<span class='fu'>log_eval</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>x</span>))
+
+<span class='co'>## log_eval can be called in-line as well as returning the return value of the expression</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>log_eval</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fl'>1e3</span>)))
+<span class='no'>x</span>
+
 <span class='co'>## https://twitter.com/krlmlr/status/1067864829547999232</span>
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='no'>sqrt</span>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='no'>mean</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>31</span>
 <span class='fu'>log_eval</span>(<span class='fu'>f</span>(<span class='fu'>g</span>(<span class='no'>x</span>)), <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>)
 <span class='fu'>log_eval</span>(<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>f</span>(<span class='fu'>g</span>(<span class='no'>x</span>)), <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>)
-
-<span class='co'>## lowering the log level threshold so that we don't have to set a higher level in log_eval</span>
-<span class='fu'><a href='log_threshold.html'>log_threshold</a></span>(<span class='no'>TRACE</span>)
-<span class='fu'>log_eval</span>(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>4</span>)
-<span class='fu'>log_eval</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>x</span>))
 
 <span class='co'>## returning a function</span>
 <span class='fu'>log_eval</span>(<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='no'>sqrt</span>)
