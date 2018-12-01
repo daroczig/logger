@@ -83,10 +83,10 @@ Although there are multiple pretty good options already hosted on CRAN when it c
 
 Also many more work-in-progress R packages hosted on eg GitHub, such as 
 
-- ``:
-- ``:
-- ``:
-- ``:
+- https://github.com/smbache/loggr
+- https://github.com/nfultz/tron
+- https://github.com/metrumresearchgroup/logrrr
+- https://github.com/lorenzwalthert/drogger
 
 But some/most of these packages are
 
