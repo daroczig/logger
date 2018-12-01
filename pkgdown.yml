@@ -5,6 +5,7 @@ articles:
   Intro: Intro.html
   anatomy: anatomy.html
   customize_logger: customize_logger.html
+  migration: migration.html
   performance: performance.html
   r_packages: r_packages.html
   write_custom_extensions: write_custom_extensions.html

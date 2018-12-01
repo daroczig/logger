@@ -62,6 +62,9 @@
       <a href="../articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a>
     </li>
     <li>
+      <a href="../articles/migration.html">Migration Guide</a>
+    </li>
+    <li>
       <a href="../articles/performance.html">Simple Benchmarks on logger Performance</a>
     </li>
     <li>
@@ -108,7 +111,7 @@
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/load_all">load_all</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">'demo-packages/logger-tester-package'</span>, <span class="dt">package =</span> <span class="st">'logger'</span>))</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Loading logger.tester</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">logger_tester_function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; INFO [2018-11-30 11:56:55] hi from tester package</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; INFO [2018-12-01 01:04:14] hi from tester package</span></a></code></pre></div>
 <p>But if auto-guessing is not your style, then feel free to set your custom namespace (eg the name of your package) in all <code><a href="../reference/log_level.html">?log_info</a></code> etc function calls and let your users know about how to suppress / reformat / redirect your log messages via <code><a href="../reference/log_threshold.html">?log_threshold</a></code>, <code><a href="../reference/log_layout.html">?log_layout</a></code>, <code><a href="../reference/log_appender.html">?log_appender</a></code>.</p>
 <p>Please note that setting the formatter function via <code><a href="../reference/log_formatter.html">?log_formatter</a></code> should not be left to the R package end-users, as the log message formatter is specific to your logging calls, so that should be decided by the R package author. Feel free to pick any formatter function (eg <code>glue</code>, <code>sprintf</code>, <code>paste</code> or something else), and set that via <code><a href="../reference/log_formatter.html">?log_formatter</a></code> when your R package is loaded. All other parameters of your <code>logger</code> will inherit from the <code>global</code> namespace – set by your R package’s end user.</p>
   </div>

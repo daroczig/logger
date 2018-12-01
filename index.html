@@ -62,6 +62,9 @@
       <a href="articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a>
     </li>
     <li>
+      <a href="articles/migration.html">Migration Guide</a>
+    </li>
+    <li>
       <a href="articles/performance.html">Simple Benchmarks on logger Performance</a>
     </li>
     <li>
@@ -148,21 +151,28 @@
 <p><img src="reference/figures/colors.png" alt="colored log output"></p>
 <p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see the related vignettes.</p>
 </div>
-<div id="why-another-logging-r-package" class="section level2">
+<div id="why-yet-another-logging-r-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#why-another-logging-r-package" class="anchor"></a>Why another logging R package?</h2>
+<a href="#why-yet-another-logging-r-package" class="anchor"></a>Why yet another logging R package?</h2>
 <p>Although there are multiple pretty good options already hosted on CRAN when it comes to logging in R, such as</p>
 <ul>
 <li>
-<code>futile.logger</code>: probably the most popular <code>log4j</code> variant (and I’m a big fan)</li>
+<a href="https://cran.r-project.org/package=futile.logger"><code>futile.logger</code></a>: probably the most popular <code>log4j</code> variant (and I’m a big fan)</li>
 <li>
-<code>logging</code>: just like Python’s <code>logging</code> package</li>
+<a href="https://cran.r-project.org/package=logging"><code>logging</code></a>: just like Python’s <code>logging</code> package</li>
 <li>
-<code>loggit</code>: capture <code>message</code>, <code>warning</code> and <code>stop</code> function messages in a JSON file</li>
+<a href="https://cran.r-project.org/package=loggit"><code>loggit</code></a>: capture <code>message</code>, <code>warning</code> and <code>stop</code> function messages in a JSON file</li>
 <li>
-<code>log4r</code>: <code>log4j</code>-based, object-oriented logger</li>
+<a href="https://cran.r-project.org/package=log4r"><code>log4r</code></a>: <code>log4j</code>-based, object-oriented logger</li>
 <li>
-<code>rsyslog</code>: logging to <code>syslog</code> on ‘POSIX’-compatible operating systems</li>
+<a href="https://cran.r-project.org/package=rsyslog"><code>rsyslog</code></a>: logging to <code>syslog</code> on ‘POSIX’-compatible operating systems</li>
+</ul>
+<p>Also many more work-in-progress R packages hosted on eg GitHub, such as</p>
+<ul>
+<li><a href="https://github.com/smbache/loggr" class="uri">https://github.com/smbache/loggr</a></li>
+<li><a href="https://github.com/nfultz/tron" class="uri">https://github.com/nfultz/tron</a></li>
+<li><a href="https://github.com/metrumresearchgroup/logrrr" class="uri">https://github.com/metrumresearchgroup/logrrr</a></li>
+<li><a href="https://github.com/lorenzwalthert/drogger" class="uri">https://github.com/lorenzwalthert/drogger</a></li>
 </ul>
 <p>But some/most of these packages are</p>
 <ul>
@@ -186,7 +196,7 @@
 <li>optionally colorize log message based on the log level</li>
 <li>make logging fun</li>
 </ul>
-<p>Welcome to the Bazaar!</p>
+<p>Welcome to the <a href="https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar">Bazaar</a>, and if you have happened to already use any of the above mentioned R packages for logging, you might find useful the <a href="https://daroczig.github.io/logger/articles/migration.html">Migration Guide</a>.</p>
 </div>
 <div id="interested-in-more-details" class="section level2">
 <h2 class="hasAnchor">
@@ -197,6 +207,7 @@
 <li><a href="https://daroczig.github.io/logger/articles/anatomy.html">The Anatomy of a Log Request</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/write_custom_extensions.html">Writing Custom Logger Extensions</a></li>
+<li><a href="https://daroczig.github.io/logger/articles/migration.html">Migration Guide</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/r_packages.html">Logging from R Packages</a></li>
 <li><a href="https://daroczig.github.io/logger/articles/performance.html">Simple Benchmarks on Performance</a></li>
 </ul>

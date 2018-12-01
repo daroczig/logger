@@ -62,6 +62,9 @@
       <a href="../articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a>
     </li>
     <li>
+      <a href="../articles/migration.html">Migration Guide</a>
+    </li>
+    <li>
       <a href="../articles/performance.html">Simple Benchmarks on logger Performance</a>
     </li>
     <li>
@@ -102,41 +105,72 @@
 
     
     
-<p>Although this has not been an important feature in the early development and overall design of this logger implementation, but with the default <code><a href="../reference/layout_simple.html">?layout_simple</a></code> and <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code>, it seems to perform pretty well:</p>
+<p>Although this has not been an important feature in the early development and overall design of this <code>logger</code> implementation, but with the default <code><a href="../reference/layout_simple.html">?layout_simple</a></code> and <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code>, it seems to perform pretty well when comparing with <code>futile.logger</code> and <code>logging</code> packages:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(microbenchmark)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(futile.logger)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">t1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">flog.appender</span>(<span class="kw">appender.file</span>(t1))</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; NULL</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">t2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_file.html">appender_file</a></span>(t2))</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">string1 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">flog.info</span>(<span class="st">'hi'</span>)</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">string2 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">dynamic1 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">flog.info</span>(<span class="st">'hi %s'</span>, <span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">dynamic2 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {42}'</span>)</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">vector1 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">flog.info</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">vector2 &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {1:5}'</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">## fl</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(futile.logger)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">t1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.appender">flog.appender</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.appender">appender.file</a></span>(t1))</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; NULL</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">## lg</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logging)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">t2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/addHandler">addHandler</a></span>(writeToFile, <span class="dt">file =</span> t2)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">## lr</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">t3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_file.html">appender_file</a></span>(t3))</a>
 <a class="sourceLine" id="cb1-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="kw">microbenchmark</span>(<span class="kw">string1</span>(), <span class="kw">string2</span>(), <span class="kw">vector1</span>(), <span class="kw">vector2</span>(), <span class="kw">dynamic1</span>(), <span class="kw">dynamic2</span>(), <span class="dt">times =</span> <span class="fl">1e3</span>)</a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; Unit: microseconds</span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt;        expr      min        lq      mean    median       uq       max neval cld</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt;   string1() 1510.372 1596.9630 1901.6076 1644.6540 1851.185  8995.092  1000   b</span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt;   string2()  331.924  363.5350  466.1253  391.1195  441.039 27085.823  1000  a </span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt;   vector1() 1532.526 1609.0395 1889.2811 1669.5170 1865.571  6503.950  1000   b</span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt;   vector2()  399.974  432.0735  519.9258  463.9960  521.519  2574.311  1000  a </span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt;  dynamic1() 1529.500 1615.7520 1949.9390 1668.8430 1888.323 29860.102  1000   b</span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt;  dynamic2()  379.412  413.6555  505.2265  439.7285  495.892  2699.117  1000  a </span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">string_fl &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="st">'hi'</span>)</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">string_lg &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="st">'hi'</span>)</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">string_lr &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">dynamic_fl &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">dynamic_lg &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">dynamic_lr &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {42}'</span>)</a>
+<a class="sourceLine" id="cb1-26" data-line-number="26">vector_fl &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">vector_lg &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">vector_lr &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {1:5}'</span>)</a>
 <a class="sourceLine" id="cb1-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t1, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t1)))</a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"</span></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t2, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t2)))</a>
-<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"</span></a></code></pre></div>
-<p>On the other hand, there are some low-hanging fruits to improve performance, eg caching the <code>logger</code> function in the namespace, or using much faster message formatters (eg <code>paste0</code> or <code>sprintf</code> instead of <code>glue</code>) if needed.</p>
+<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">    <span class="kw">string_fl</span>(), <span class="kw">string_lg</span>(), <span class="kw">string_lr</span>(),</a>
+<a class="sourceLine" id="cb1-32" data-line-number="32">    <span class="kw">vector_fl</span>(), <span class="kw">vector_lg</span>(), <span class="kw">vector_lr</span>(),</a>
+<a class="sourceLine" id="cb1-33" data-line-number="33">    <span class="kw">dynamic_fl</span>(), <span class="kw">dynamic_lg</span>(), <span class="kw">dynamic_lr</span>(),</a>
+<a class="sourceLine" id="cb1-34" data-line-number="34">    <span class="dt">times =</span> <span class="fl">1e3</span>)</a>
+<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="co">#&gt; Unit: microseconds</span></a>
+<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="co">#&gt;          expr      min        lq      mean    median        uq       max neval</span></a>
+<a class="sourceLine" id="cb1-37" data-line-number="37"><span class="co">#&gt;   string_fl() 1512.977 1617.6525 1979.0123 1689.1815 1985.6720 10120.066  1000</span></a>
+<a class="sourceLine" id="cb1-38" data-line-number="38"><span class="co">#&gt;   string_lg()  175.621  205.9510  261.2027  226.8425  253.3665  5341.951  1000</span></a>
+<a class="sourceLine" id="cb1-39" data-line-number="39"><span class="co">#&gt;   string_lr()  380.559  423.2585  518.4699  458.0620  515.9010  4164.467  1000</span></a>
+<a class="sourceLine" id="cb1-40" data-line-number="40"><span class="co">#&gt;   vector_fl() 1525.434 1637.7230 2003.3080 1703.6170 1949.7630 29310.051  1000</span></a>
+<a class="sourceLine" id="cb1-41" data-line-number="41"><span class="co">#&gt;   vector_lg()  199.937  233.3350  282.8340  259.4480  291.0290  1941.681  1000</span></a>
+<a class="sourceLine" id="cb1-42" data-line-number="42"><span class="co">#&gt;   vector_lr()  447.289  492.9680  592.7103  528.8395  587.4295  3412.259  1000</span></a>
+<a class="sourceLine" id="cb1-43" data-line-number="43"><span class="co">#&gt;  dynamic_fl() 1535.833 1639.3170 1975.3253 1701.6000 1923.4710 17921.065  1000</span></a>
+<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co">#&gt;  dynamic_lg()  193.110  227.9535  294.2567  252.2250  280.7870 17460.301  1000</span></a>
+<a class="sourceLine" id="cb1-45" data-line-number="45"><span class="co">#&gt;  dynamic_lr()  426.520  480.0890  590.9619  519.0605  582.7750  2807.365  1000</span></a>
+<a class="sourceLine" id="cb1-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb1-47" data-line-number="47"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t1, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t1)))</a>
+<a class="sourceLine" id="cb1-48" data-line-number="48"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"</span></a>
+<a class="sourceLine" id="cb1-49" data-line-number="49"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t2, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t2)))</a>
+<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"</span></a>
+<a class="sourceLine" id="cb1-51" data-line-number="51"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(t3, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t3)))</a>
+<a class="sourceLine" id="cb1-52" data-line-number="52"><span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"</span></a></code></pre></div>
+<p>So based on the above, non-comprehensive benchmark, it seems that when it comes to using the very base functionality of a logging engine, <code>logging</code> comes first, then <code>logger</code> performs with a bit of overhead due to using <code>glue</code> by default, then comes a bit slower <code>futile.logger</code>.</p>
+<p>On the other hand, there are some low-hanging fruits to improve performance, eg caching the <code>logger</code> function in the namespace, or using much faster message formatters (eg <code>paste0</code> or <code>sprintf</code> instead of <code>glue</code>) if needed – like what <code>futile.logger</code> and <code>logging</code> are using instead of <code>glue</code>, so a quick <code>logger</code> comparison:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_sprintf)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">string &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">dynamic &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">vector &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">microbenchmark</span>(<span class="kw">string</span>(), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/vector">vector</a></span>(), <span class="kw">dynamic</span>(), <span class="dt">times =</span> <span class="fl">1e3</span>)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; Unit: microseconds</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;       expr     min      lq     mean   median       uq      max neval cld</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;   string() 253.594 263.200 310.4871 271.4010 306.3625 5601.426  1000   a</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;   vector() 274.007 283.144 330.9722 292.4010 320.3390 5339.479  1000   a</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  dynamic() 259.390 270.818 326.5437 281.2985 325.0975 5398.330  1000   a</span></a></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
