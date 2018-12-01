@@ -155,3 +155,7 @@ Setting the destination of the log records works similarly in both packages, alt
 </div>
 
 Both packages support using different logging namespaces and stacking loggers within the same namespace.
+
+## [`loggit`](https://cran.r-project.org/package=loggit)
+
+Sorry, no direct support for capturing `message`, `warning` and `stop` function messages and feed to `logger`, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to achieve this.
