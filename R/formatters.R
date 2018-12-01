@@ -26,7 +26,8 @@ formatter_sprintf <- structure(function(fmt, ...) {
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
 formatter_glue <- structure(function(...) {
     ## jump 1 level up from the logger pkg
-    parent <- min(which(rev(sapply(lapply(sys.frames(), topenv), environmentName) != 'logger'))) - 1
+    envirs <- sapply(lapply(sys.frames(), topenv), environmentName)
+    parent <- min(which(rev(envirs != 'logger')) - 1, length(envirs))
     as.character(glue(..., .envir = parent.frame(parent)))
 }, generator = quote(formatter_glue()))
 
@@ -80,7 +81,8 @@ formatter_glue_or_sprintf <- structure(function(msg, ...) {
     }
 
     ## jump 1 level up from the logger pkg
-    parent <- min(which(rev(sapply(lapply(sys.frames(), topenv), environmentName) != 'logger'))) - 1
+    envirs <- sapply(lapply(sys.frames(), topenv), environmentName)
+    parent <- min(which(rev(envirs != 'logger')) - 1, length(envirs))
 
     ## then try to glue
     msg <- tryCatch(

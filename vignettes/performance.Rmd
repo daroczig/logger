@@ -7,42 +7,77 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Although this has not been an important feature in the early development and overall design of this logger implementation, but with the default `?layout_simple` and `?formatter_glue`, it seems to perform pretty well:
+Although this has not been an important feature in the early development and overall design of this `logger` implementation, but with the default `?layout_simple` and `?formatter_glue`, it seems to perform pretty well when comparing with `futile.logger` and `logging` packages:
 
 ```r
 library(microbenchmark)
 
+## fl
 library(futile.logger)
 t1 <- tempfile()
 flog.appender(appender.file(t1))
 #> NULL
 
+## lg
+library(logging)
+t2 <- tempfile()
+addHandler(writeToFile, file = t2)
+
+## lr
 library(logger)
 #> The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN
-t2 <- tempfile()
-log_appender(appender_file(t2))
+t3 <- tempfile()
+log_appender(appender_file(t3))
 
-string1 <- function() flog.info('hi')
-string2 <- function() log_info('hi')
-dynamic1 <- function() flog.info('hi %s', 42)
-dynamic2 <- function() log_info('hi {42}')
-vector1 <- function() flog.info(paste('hi', 1:5))
-vector2 <- function() log_info('hi {1:5}')
+string_fl <- function() flog.info('hi')
+string_lg <- function() loginfo('hi')
+string_lr <- function() log_info('hi')
+dynamic_fl <- function() flog.info('hi %s', 42)
+dynamic_lg <- function() loginfo('hi %s', 42)
+dynamic_lr <- function() log_info('hi {42}')
+vector_fl <- function() flog.info(paste('hi', 1:5))
+vector_lg <- function() loginfo(paste('hi', 1:5))
+vector_lr <- function() log_info('hi {1:5}')
 
-microbenchmark(string1(), string2(), vector1(), vector2(), dynamic1(), dynamic2(), times = 1e3)
+microbenchmark(
+    string_fl(), string_lg(), string_lr(),
+    vector_fl(), vector_lg(), vector_lr(),
+    dynamic_fl(), dynamic_lg(), dynamic_lr(),
+    times = 1e3)
 #> Unit: microseconds
-#>        expr      min        lq      mean    median       uq       max neval cld
-#>   string1() 1510.372 1596.9630 1901.6076 1644.6540 1851.185  8995.092  1000   b
-#>   string2()  331.924  363.5350  466.1253  391.1195  441.039 27085.823  1000  a 
-#>   vector1() 1532.526 1609.0395 1889.2811 1669.5170 1865.571  6503.950  1000   b
-#>   vector2()  399.974  432.0735  519.9258  463.9960  521.519  2574.311  1000  a 
-#>  dynamic1() 1529.500 1615.7520 1949.9390 1668.8430 1888.323 29860.102  1000   b
-#>  dynamic2()  379.412  413.6555  505.2265  439.7285  495.892  2699.117  1000  a 
+#>          expr      min        lq      mean    median        uq       max neval
+#>   string_fl() 1512.977 1617.6525 1979.0123 1689.1815 1985.6720 10120.066  1000
+#>   string_lg()  175.621  205.9510  261.2027  226.8425  253.3665  5341.951  1000
+#>   string_lr()  380.559  423.2585  518.4699  458.0620  515.9010  4164.467  1000
+#>   vector_fl() 1525.434 1637.7230 2003.3080 1703.6170 1949.7630 29310.051  1000
+#>   vector_lg()  199.937  233.3350  282.8340  259.4480  291.0290  1941.681  1000
+#>   vector_lr()  447.289  492.9680  592.7103  528.8395  587.4295  3412.259  1000
+#>  dynamic_fl() 1535.833 1639.3170 1975.3253 1701.6000 1923.4710 17921.065  1000
+#>  dynamic_lg()  193.110  227.9535  294.2567  252.2250  280.7870 17460.301  1000
+#>  dynamic_lr()  426.520  480.0890  590.9619  519.0605  582.7750  2807.365  1000
 
 paste(t1, length(readLines(t1)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"
 paste(t2, length(readLines(t2)))
 #> [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"
+paste(t3, length(readLines(t3)))
+#> [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"
 ```
 
-On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed.
+So based on the above, non-comprehensive benchmark, it seems that when it comes to using the very base functionality of a logging engine, `logging` comes first, then `logger` performs with a bit of overhead due to using `glue` by default, then comes a bit slower `futile.logger`.
+
+On the other hand, there are some low-hanging fruits to improve performance, eg caching the `logger` function in the namespace, or using much faster message formatters (eg `paste0` or `sprintf` instead of `glue`) if needed -- like what `futile.logger` and `logging` are using instead of `glue`, so a quick `logger` comparison:
+
+```r
+log_formatter(formatter_sprintf)
+string <- function() log_info('hi')
+dynamic <- function() log_info('hi %s', 42)
+vector <- function() log_info(paste('hi', 1:5))
+
+microbenchmark(string(), vector(), dynamic(), times = 1e3)
+#> Unit: microseconds
+#>       expr     min      lq     mean   median       uq      max neval cld
+#>   string() 253.594 263.200 310.4871 271.4010 306.3625 5601.426  1000   a
+#>   vector() 274.007 283.144 330.9722 292.4010 320.3390 5339.479  1000   a
+#>  dynamic() 259.390 270.818 326.5437 281.2985 325.0975 5398.330  1000   a
+```

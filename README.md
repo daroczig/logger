@@ -71,15 +71,22 @@ demo(colors, package = 'logger', echo = FALSE)
 
 But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see the related vignettes.
 
-## Why another logging R package?
+## Why yet another logging R package?
 
 Although there are multiple pretty good options already hosted on CRAN when it comes to logging in R, such as
 
-- `futile.logger`: probably the most popular `log4j` variant (and I'm a big fan)
-- `logging`: just like Python's `logging` package
-- `loggit`: capture `message`, `warning` and `stop` function messages in a JSON file
-- `log4r`: `log4j`-based, object-oriented logger
-- `rsyslog`: logging to `syslog` on 'POSIX'-compatible operating systems
+- [`futile.logger`](https://cran.r-project.org/package=futile.logger): probably the most popular `log4j` variant (and I'm a big fan)
+- [`logging`](https://cran.r-project.org/package=logging): just like Python's `logging` package
+- [`loggit`](https://cran.r-project.org/package=loggit): capture `message`, `warning` and `stop` function messages in a JSON file
+- [`log4r`](https://cran.r-project.org/package=log4r): `log4j`-based, object-oriented logger
+- [`rsyslog`](https://cran.r-project.org/package=rsyslog): logging to `syslog` on 'POSIX'-compatible operating systems
+
+Also many more work-in-progress R packages hosted on eg GitHub, such as 
+
+- https://github.com/smbache/loggr
+- https://github.com/nfultz/tron
+- https://github.com/metrumresearchgroup/logrrr
+- https://github.com/lorenzwalthert/drogger
 
 But some/most of these packages are
 
@@ -102,7 +109,7 @@ So based on all the above subjective opinions, I decided to write the `n+1`th ex
 - optionally colorize log message based on the log level
 - make logging fun
 
-Welcome to the Bazaar!
+Welcome to the [Bazaar](https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar), and if you have happened to already use any of the above mentioned R packages for logging, you might find useful the [Migration Guide](https://daroczig.github.io/logger/articles/migration.html).
 
 ## Interested in more details?
 
@@ -112,5 +119,6 @@ Check out the main documentation site at https://daroczig.github.io/logger or th
 * [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html)
 * [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html)
 * [Writing Custom Logger Extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
+* [Migration Guide](https://daroczig.github.io/logger/articles/migration.html)
 * [Logging from R Packages](https://daroczig.github.io/logger/articles/r_packages.html)
 * [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html)

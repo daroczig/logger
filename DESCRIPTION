@@ -25,5 +25,7 @@ Suggests:
   devtools,
   roxygen2,
   slackr,
-  RPushbullet
+  RPushbullet,
+  logging,
+  futile.logger
 VignetteBuilder: knitr
