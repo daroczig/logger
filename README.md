@@ -75,11 +75,11 @@ But you could set up any custom colors and layout, eg using custom colors only f
 
 Although there are multiple pretty good options already hosted on CRAN when it comes to logging in R, such as
 
-- `futile.logger`: probably the most popular `log4j` variant (and I'm a big fan)
-- `logging`: just like Python's `logging` package
-- `loggit`: capture `message`, `warning` and `stop` function messages in a JSON file
-- `log4r`: `log4j`-based, object-oriented logger
-- `rsyslog`: logging to `syslog` on 'POSIX'-compatible operating systems
+- [`futile.logger`](https://cran.r-project.org/package=futile.logger): probably the most popular `log4j` variant (and I'm a big fan)
+- [`logging`](https://cran.r-project.org/package=logging): just like Python's `logging` package
+- [`loggit`](https://cran.r-project.org/package=loggit): capture `message`, `warning` and `stop` function messages in a JSON file
+- [`log4r`](https://cran.r-project.org/package=log4r): `log4j`-based, object-oriented logger
+- [`rsyslog`](https://cran.r-project.org/package=rsyslog): logging to `syslog` on 'POSIX'-compatible operating systems
 
 Also many more work-in-progress R packages hosted on eg GitHub, such as 
 
