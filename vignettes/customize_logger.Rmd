@@ -89,7 +89,7 @@ log_info('The answer is {42}')
 log_info('The answers are {1:5}')
 ```
 
-For other formatter and layout functions, see the manual of the above mentioned functions that have references to all the other functions and generator functions bundled with the package.
+If you need colorized logs highlighting the important log messages, check out `?layout_glue_colors`, and for other formatter and layout functions, see the manual of the above mentioned functions that have references to all the other functions and generator functions bundled with the package.
 
 ## Custom log record layout
 
@@ -135,6 +135,18 @@ A quick example:
     logger_tester_function(WARN, 'hi from tester package')
     log_info('I am still working in the global namespace')
     ```
+
+Another example of making use of the generator function is to update the layout to include the Process ID that might be very useful eg when forking, see for example the below code chunk using the above defined log layout:
+
+```{r}
+library(parallel)
+f <- function(x) {
+    log_info('foo')
+    log_warn('bar')
+    mean(x)
+}
+invisible(mclapply(split(runif(100), 1:10), f, mc.cores = 5))
+```
 
 *Note that the `layout_glue_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body:*
 
@@ -216,17 +228,6 @@ log_debug('info msg')
 readLines(t)
 unlink(t)
 ```
-
-
-
-
-
-
-
-
-
-
-
 
 ```{r cleanup, include = FALSE}
 ## restore settings
