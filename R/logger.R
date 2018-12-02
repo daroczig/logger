@@ -14,11 +14,11 @@ logger <- function(threshold, formatter, layout, appender) {
     force(layout)
     force(appender)
 
-    function(level, ...) {
+    if (!inherits(threshold, 'loglevel')) {
+        stop('Invalid log level provided as threshold, see ?log_levels')
+    }
 
-        if (!inherits(threshold, 'loglevel')) {
-            stop('Invalid log level provided as threshold, see ?log_levels')
-        }
+    function(level, ...) {
 
         if (level > threshold) {
             return(invisible(NULL))
