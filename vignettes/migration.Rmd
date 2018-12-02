@@ -29,9 +29,9 @@ library(logger)
 
 In this vignette I suppose that you are already familiar with at least one of the [similar logging R packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package) and you are looking for suggestions on how to switch to `logger`. Before moving forward, please make sure that you have read the [Introduction to logger](https://daroczig.github.io/logger/articles/Intro.html), [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes for a decent background on `logger`, and use this vignette as a quick-reference sheet to help you migrate from another package.
 
-## [`futile.logger`](https://cran.r-project.org/package=futile.logger)
+## futile.logger
 
-The `logger` package has been very heavily inspired by `futile.logger` and have been using it for many years, also opened multiple pull requests to extend `futile.logger` before I decided to revamp my ideas into a new R package -- but there are still many common things between `futile.logger` and `logger`.
+The `logger` package has been very heavily inspired by [`futile.logger`](https://cran.r-project.org/package=futile.logger) and have been using it for many years, also opened multiple pull requests to extend `futile.logger` before I decided to revamp my ideas into a new R package -- but there are still many common things between `futile.logger` and `logger`.
 
 Both packages comes with a default log engine / config, so it's enough to load the packages and those are ready to be used right away:
 
@@ -141,9 +141,9 @@ log_appender(appender_console)
 
 Both packages support using different logging namespaces and stacking loggers within the same namespace. Performance-wise, there's `logger` seems to be faster than `futile.logger`, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
 
-## [`logging`](https://cran.r-project.org/package=logging)
+## logging
 
-The `logging` package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while `logger` tries to accommodate native R users' expectations -- so there are some minor nuances between the usage of the two packages.
+The [`logging`](https://cran.r-project.org/package=logging) package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while `logger` tries to accommodate native R users' expectations -- so there are some minor nuances between the usage of the two packages.
 
 In `logging`, you have to initialize a logger first via `addHandler` or simply by calling `basicConfig`, which is not required in `logger` as it already comes with a default log config:
 
@@ -269,9 +269,9 @@ Setting the destination of the log records works similarly in both packages, alt
 
 Both packages support using different logging namespaces and stacking loggers within the same namespace.
 
-## [`loggit`](https://cran.r-project.org/package=loggit)
+## loggit
 
-Sorry, no direct support for capturing `message`, `warning` and `stop` function messages and feed to `logger`, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to achieve this.
+Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=loggit) -- capturing `message`, `warning` and `stop` function messages, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to be used as message hooks feed `logger`.
 
 ```{r echo=FALSE, results='hide'}
 detach('package:logger', unload = TRUE)
