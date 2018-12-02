@@ -155,6 +155,23 @@ log_appender(appender_console)
 
 Both packages support using different logging namespaces and stacking loggers within the same namespace. Performance-wise, there's `logger` seems to be faster than `futile.logger`, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
 
+### Using `logger` as a drop-in-replacement of `futile.logger`
+
+`logger` has no hard requirements, so it's a very lightweight alternative of `futile.logger`. Although the function names are a bit different, and the message formatter also differs, but with some simple tweaks, `logger` can become an almost perfect drop-in-replacement of `futile.logger`:
+
+```{r}
+library(logger)
+log_formatter(formatter_sprintf)
+flog.trace <- log_trace
+flog.debug <- log_debug
+flog.info <- log_info
+flog.warn <- log_warn
+flog.error <- log_error
+
+flog.info('Hello from logger in a futile.logger theme ...')
+flog.warn('... where the default log message formatter is %s', 'sprintf')
+```
+
 ## logging
 
 The [`logging`](https://cran.r-project.org/package=logging) package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while `logger` tries to accommodate native R users' expectations -- so there are some minor nuances between the usage of the two packages.
@@ -299,6 +316,22 @@ Setting the destination of the log records works similarly in both packages, alt
 
 Both packages support using different logging namespaces and stacking loggers within the same namespace.
 
+### Using `logger` as a drop-in-replacement of `logging`
+
+`logger` has no hard requirements, so it's an adequate alternative of `logging`. Although the function names are a bit different, and the message formatter also differs, but with some simple tweaks, `logger` can become an almost perfect drop-in-replacement of `logging` -- although not all log levels (eg \code{FINE} and \code{CRITICAL}) are supported:
+
+```{r}
+library(logger)
+log_formatter(formatter_sprintf)
+log_layout(layout_logging)
+logdebug <- log_debug
+loginfo <- log_info
+logwarn <- log_warn
+logerror <- log_error
+
+loginfo('Hello from logger in a logging theme ...')
+logwarn('... where the default log message formatter is %s', 'sprintf')
+```
 ## loggit
 
 Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=loggit) -- capturing `message`, `warning` and `stop` function messages, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to be used as message hooks feed `logger`.

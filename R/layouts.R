@@ -102,6 +102,17 @@ layout_simple <- structure(function(level, msg) {
 }, generator = quote(layout_simple()))
 
 
+#' Format a log record as the logging package does by default
+#' @param level log level, see \code{\link{log_levels}} for more details
+#' @param msg string message
+#' @return character vector
+#' @export
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+layout_logging <- structure(function(level, msg) {
+    paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ', attr(level, 'level'), '::', msg)
+}, generator = quote(layout_simple()))
+
+
 #' Format a log message with \code{glue}
 #'
 #' By default, this layout includes the log level of the log record as per \code{\link{log_levels}}, the current timestamp and the actual log message -- that you can override via calling \code{\link{layout_glue_generator}} directly. For colorized output, see \code{\link{layout_glue_colors}}.
