@@ -25,10 +25,11 @@ logger <- function(threshold, formatter, layout, appender) {
         }
 
         ## workaround to be able to avoid any formatter function, eg when passing in a string
-        if (length(list(...)) == 1 && isTRUE(attr(list(...)[[1]], 'skip_formatter', exact = TRUE))) {
-            messages <- list(...)[[1]]
+        messages <- list(...)
+        if (length(messages) == 1 && isTRUE(attr(messages[[1]], 'skip_formatter', exact = TRUE))) {
+            messages <- messages[[1]]
         } else {
-            messages <- formatter(...)
+            messages <- do.call(formatter, messages, quote = TRUE, envir = parent.frame())
         }
 
         appender(layout(level, messages))
@@ -209,27 +210,38 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
 log_level <- function(level, ..., namespace = NA_character_) {
+
     definitions <- get_logger_definitions(namespace)
+
     for (definition in definitions) {
-        do.call(logger, definition)(level, ...)
+
+        log_fun <- do.call(logger, definition)
+        log_arg <- list(...)
+
+        if (is.null(log_arg$level)) {
+            log_arg$level <- level
+        }
+
+        do.call(log_fun, log_arg, envir = parent.frame())
+
     }
 }
 
 
 #' @export
-log_fatal <- function(...) log_level(FATAL, ...)
+log_fatal <- function(...) invisible(eval.parent(substitute(log_level(FATAL, ...))))
 #' @export
-log_error <- function(...) log_level(ERROR, ...)
+log_error <- function(...) invisible(eval.parent(substitute(log_level(ERROR, ...))))
 #' @export
-log_warn <- function(...) log_level(WARN, ...)
+log_warn <- function(...) invisible(eval.parent(substitute(log_level(WARN, ...))))
 #' @export
-log_success <- function(...) log_level(SUCCESS, ...)
+log_success <- function(...) invisible(eval.parent(substitute(log_level(SUCCESS, ...))))
 #' @export
-log_info <- function(...) log_level(INFO, ...)
+log_info <- function(...) invisible(eval.parent(substitute(log_level(INFO, ...))))
 #' @export
-log_debug <- function(...) log_level(DEBUG, ...)
+log_debug <- function(...) invisible(eval.parent(substitute(log_level(DEBUG, ...))))
 #' @export
-log_trace <- function(...) log_level(TRACE, ...)
+log_trace <- function(...) invisible(eval.parent(substitute(log_level(TRACE, ...))))
 
 
 #' Evaluate R expression with a temporarily updated log level threshold
