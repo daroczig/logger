@@ -53,4 +53,14 @@ if (max(mtcars$hp) < 1000) {
 }
 ```
 
+You may also find the `?log_eval` function useful to log both an R expression and its result in the same log record:
+
+```{r}
+f <- sqrt
+g <- mean
+x <- 1:31
+log_eval(y <- f(g(x)), level = INFO)
+str(y)
+```
+
 For more details, check the [function reference in the manual](https://daroczig.github.io/logger/reference/index.html), or start with the [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes.
