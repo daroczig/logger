@@ -84,7 +84,21 @@ log_info('Hi, there!', namespace = 'kitchensink')
 log_trace('Hi, there!')
 ```
 
-## Log message formats and layouts
+## Log message formatter functions
+
+In the above example, we logged strings without any dynamic parameter, so the task of the logger was quite easy. But in most cases you want to log a parameterized string and the formatter function's task to transform that to a regular character vector.
+
+By default, `logger` uses `glue` in the background:
+
+```{r}
+log_formatter(formatter_glue)
+log_info('There are {nrow(mtcars)} cars in the mtcars dataset')
+log_info('2 + 2 = {2+2}')
+```
+
+If you don't like this syntax, or want to save a dependency, you can use other formatter functions as well, such as `?formatter_sprintf` (being the default in eg the [`logging` and `futile.logger` packages](https://daroczig.github.io/logger/articles/migration.html)) or `?formatter_paste`, or [write your own formatter function](https://daroczig.github.io/logger/articles/write_custom_extensions.html) converting R objects into string.
+
+## Log message layouts
 
 By default, `?log_level` and its derivative functions (eg `?log_info`) will simply record the log-level, the current timestamp and the message after being processed by `glue`:
 
