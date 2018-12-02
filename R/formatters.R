@@ -88,3 +88,19 @@ formatter_glue_or_sprintf <- structure(function(msg, ...) {
     msg
 
 }, generator = quote(formatter_glue_or_sprintf()))
+
+
+#' Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged
+#' @param message character vector directly passed to the appender function in \code{\link{logger}}
+#' @param ... should be never set
+#' @return character vector  with \code{skip_formatter} attribute set to \code{TRUE}
+#' @export
+skip_formatter <- function(message, ...) {
+    if (!inherits(message, 'character')) {
+        stop('Cannot skip the formatter function if the log message is not already formatter to a character vector')
+    }
+    if (length(list(...)) > 0) {
+        stop('Cannot skip the formatter function if further arguments are passed besides the actual log message(s)')
+    }
+    structure(message, skip_formatter = TRUE)
+}

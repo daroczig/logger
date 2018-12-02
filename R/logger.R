@@ -2,7 +2,7 @@
 #'
 #' A logger consists of a log level \code{threshold}, a log message \code{formatter} function, a log record \code{layout} formatting function and the \code{appender} function deciding on the destination of the log record. For more details, see the package \code{README.md}.
 #' @param threshold omit log messages below this \code{\link{log_levels}}
-#' @param formatter function pre-processing the message of the log record when it's not a single string with the \code{skip_formatter} attribute set to \code{TRUE}
+#' @param formatter function pre-processing the message of the log record when it's not wrapped in a \code{skip_formatter} call
 #' @param layout function rendering the layout of the actual log record
 #' @param appender function writing the log record
 #' @return function taking \code{level} and \code{msg} arguments

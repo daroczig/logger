@@ -47,19 +47,18 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
     ## log expression and results
     if (multiline == FALSE) {
 
-        log_level(level, structure(
+        log_level(level, skip_formatter(
             paste(
                 shQuote(paste(exprs, collapse = ' ')),
                 '=>',
-                shQuote(paste(gsub('\n', ' ', deparse(res$value)), collapse = ' '))),
-            skip_formatter = TRUE))
+                shQuote(paste(gsub('\n', ' ', deparse(res$value)), collapse = ' ')))))
 
     } else {
 
         log_level(level, 'Running expression: ====================')
-        log_level(level, structure(exprs, skip_formatter = TRUE))
+        log_level(level, skip_formatter(exprs))
         log_level(level, 'Results: ===============================')
-        log_level(level, structure(capture.output(res$value), skip_formatter = TRUE))
+        log_level(level, skip_formatter(capture.output(res$value)))
         log_level(level, paste(
             'Elapsed time:',
             round(difftime(Sys.time(), timer, units = 'secs'), 2),
