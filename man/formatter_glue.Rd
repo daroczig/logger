@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_glue}
 \alias{formatter_glue}
-\title{Apply \code{glue}}
+\title{Apply \code{glue} to convert R objects into a character vector}
 \usage{
 formatter_glue(...)
 }
@@ -13,7 +13,10 @@ formatter_glue(...)
 character vector
 }
 \description{
-Apply \code{glue}
+Apply \code{glue} to convert R objects into a character vector
+}
+\note{
+Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 }
 \seealso{
 This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}

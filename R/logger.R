@@ -1,12 +1,22 @@
 #' Generate logging utility
 #'
 #' A logger consists of a log level \code{threshold}, a log message \code{formatter} function, a log record \code{layout} formatting function and the \code{appender} function deciding on the destination of the log record. For more details, see the package \code{README.md}.
+#'
+#' By default, a general logger definition is created when loading the \code{logger} package, that uses
+#'
+#' \enumerate{
+#'   \item \code{\link{INFO}} as the log level threshold
+#'   \item \code{\link{layout_simple}} as the layout function showing the log level, timestamp and log message
+#'   \item \code{\link{formatter_glue}} (or \code{\link{formatter_sprintf}} if \pkg{glue} is not installed) as the default formatter function transforming the R objects to be logged to a character vector
+#'   \item \code{\link{appender_console}} as the default log record destination
+#' }
 #' @param threshold omit log messages below this \code{\link{log_levels}}
 #' @param formatter function pre-processing the message of the log record when it's not wrapped in a \code{\link{skip_formatter}} call
 #' @param layout function rendering the layout of the actual log record
 #' @param appender function writing the log record
 #' @return function taking \code{level} and \code{msg} arguments
 #' @export
+#' @references For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
 #' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
 logger <- function(threshold, formatter, layout, appender) {
 

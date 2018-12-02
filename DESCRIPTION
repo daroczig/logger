@@ -13,19 +13,19 @@ Encoding: UTF-8
 RoxygenNote: 6.1.0
 License: AGPL-3
 Imports:
-  utils,
-  glue
+  utils
 Suggests:
-  testthat,
-  covr,
+  glue,
   jsonlite,
   crayon,
+  slackr,
+  RPushbullet,
+  testthat,
+  covr,
   knitr,
   rmarkdown,
   devtools,
   roxygen2,
-  slackr,
-  RPushbullet,
   microbenchmark,
   logging,
   futile.logger,

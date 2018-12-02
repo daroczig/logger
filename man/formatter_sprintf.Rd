@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_sprintf}
 \alias{formatter_sprintf}
-\title{Apply \code{sprintf}}
+\title{Apply \code{sprintf} to convert R objects into a character vector}
 \usage{
 formatter_sprintf(fmt, ...)
 }
@@ -15,7 +15,7 @@ formatter_sprintf(fmt, ...)
 character vector
 }
 \description{
-Apply \code{sprintf}
+Apply \code{sprintf} to convert R objects into a character vector
 }
 \seealso{
 This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}

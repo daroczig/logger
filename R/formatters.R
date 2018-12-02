@@ -1,4 +1,4 @@
-#' Concatenate strings via \code{paste}
+#' Concatenate R objects into a character vector via \code{paste}
 #' @param ... passed to \code{paste}
 #' @return character vector
 #' @export
@@ -8,7 +8,7 @@ formatter_paste <- structure(function(...) {
 }, generator = quote(formatter_paste()))
 
 
-#' Apply \code{sprintf}
+#' Apply \code{sprintf} to convert R objects into a character vector
 #' @param fmt passed to \code{sprintf}
 #' @param ... passed to \code{sprintf}
 #' @return character vector
@@ -19,13 +19,15 @@ formatter_sprintf <- structure(function(fmt, ...) {
 }, generator = quote(formatter_sprintf()))
 
 
-#' Apply \code{glue}
+#' Apply \code{glue} to convert R objects into a character vector
 #' @param ... passed to \code{glue} for the text interpolation
 #' @return character vector
 #' @export
+#' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
 formatter_glue <- structure(function(...) {
-    as.character(glue(..., .envir = parent.frame()))
+    fail_on_missing_package('glue')
+    as.character(glue::glue(..., .envir = parent.frame()))
 }, generator = quote(formatter_glue()))
 
 
@@ -78,9 +80,10 @@ formatter_glue_or_sprintf <- structure(function(msg, ...) {
     }
 
     ## then try to glue
+    fail_on_missing_package('glue')
     msg <- tryCatch(
         as.character(sapply(msg, function(msg) {
-            do.call(glue, c(msg, glueparams), envir = parent.frame())
+            do.call(glue::glue, c(msg, glueparams), envir = parent.frame())
         }, USE.NAMES = FALSE)),
         error = function(e) msg)
 
