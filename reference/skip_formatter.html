@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate logging utility — logger • logger</title>
+<title>Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged — skip_formatter • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Generate logging utility — logger" />
+<meta property="og:title" content="Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged — skip_formatter" />
 
-<meta property="og:description" content="A logger consists of a log level threshold, a log message formatter function, a log record layout formatting function and the appender function deciding on the destination of the log record. For more details, see the package README.md." />
+<meta property="og:description" content="Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,47 +129,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate logging utility</h1>
-    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/logger.R'><code>R/logger.R</code></a></small>
-    <div class="hidden name"><code>logger.Rd</code></div>
+    <h1>Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged</h1>
+    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/formatters.R'><code>R/formatters.R</code></a></small>
+    <div class="hidden name"><code>skip_formatter.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A logger consists of a log level <code>threshold</code>, a log message <code>formatter</code> function, a log record <code>layout</code> formatting function and the <code>appender</code> function deciding on the destination of the log record. For more details, see the package <code>README.md</code>.</p>
+    <p>Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>logger</span>(<span class='no'>threshold</span>, <span class='no'>formatter</span>, <span class='no'>layout</span>, <span class='no'>appender</span>)</pre>
+    <pre class="usage"><span class='fu'>skip_formatter</span>(<span class='no'>message</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>threshold</th>
-      <td><p>omit log messages below this <code><a href='log_levels.html'>log_levels</a></code></p></td>
+      <th>message</th>
+      <td><p>character vector directly passed to the appender function in <code><a href='logger.html'>logger</a></code></p></td>
     </tr>
     <tr>
-      <th>formatter</th>
-      <td><p>function pre-processing the message of the log record when it's not wrapped in a <code><a href='skip_formatter.html'>skip_formatter</a></code> call</p></td>
-    </tr>
-    <tr>
-      <th>layout</th>
-      <td><p>function rendering the layout of the actual log record</p></td>
-    </tr>
-    <tr>
-      <th>appender</th>
-      <td><p>function writing the log record</p></td>
+      <th>...</th>
+      <td><p>should be never set</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>function taking <code>level</code> and <code>msg</code> arguments</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_formatter.html'>log_formatter</a></code>, <code><a href='log_layout.html'>log_layout</a></code> and <code><a href='log_appender.html'>log_appender</a></code> and then call <code><a href='log_levels.html'>log_levels</a></code> and its derivatives, such as <code><a href='log_level.html'>log_info</a></code> directly.</p>
+    <p>character vector  with <code>skip_formatter</code> attribute set to <code>TRUE</code></p>
     
 
   </div>
@@ -179,8 +167,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#note">Note</a></li>
           </ul>
 
   </div>

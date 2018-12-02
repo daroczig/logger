@@ -119,9 +119,11 @@ div.comparison p package {
 <p>In this vignette I suppose that you are already familiar with at least one of the <a href="https://daroczig.github.io/logger/index.html#why-another-logging-r-package">similar logging R packages</a> and you are looking for suggestions on how to switch to <code>logger</code>. Before moving forward, please make sure that you have read the <a href="https://daroczig.github.io/logger/articles/Intro.html">Introduction to logger</a>, <a href="https://daroczig.github.io/logger/articles/anatomy.html">The Anatomy of a Log Request</a> and <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a> vignettes for a decent background on <code>logger</code>, and use this vignette as a quick-reference sheet to help you migrate from another package.</p>
 <div id="futile-logger" class="section level2">
 <h2 class="hasAnchor">
-<a href="#futile-logger" class="anchor"></a><a href="https://cran.r-project.org/package=futile.logger"><code>futile.logger</code></a>
-</h2>
-<p>The <code>logger</code> package has been very heavily inspired by <code>futile.logger</code> and have been using it for many years, also opened multiple pull requests to extend <code>futile.logger</code> before I decided to revamp my ideas into a new R package – but there are still many common things between <code>futile.logger</code> and <code>logger</code>.</p>
+<a href="#futile-logger" class="anchor"></a>futile.logger</h2>
+<p>The <code>logger</code> package has been very heavily inspired by <a href="https://cran.r-project.org/package=futile.logger"><code>futile.logger</code></a> and have been using it for many years, also opened multiple pull requests to extend <code>futile.logger</code> before I decided to revamp my ideas into a new R package – but there are still many common things between <code>futile.logger</code> and <code>logger</code>.</p>
+<div id="initialize" class="section level3">
+<h3 class="hasAnchor">
+<a href="#initialize" class="anchor"></a>Initialize</h3>
 <p>Both packages comes with a default log engine / config, so it’s enough to load the packages and those are ready to be used right away:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
@@ -136,65 +138,85 @@ div.comparison p package {
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a></code></pre></div>
 </div>
+</div>
+<div id="logging-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#logging-functions" class="anchor"></a>Logging functions</h3>
 <p>The most important change is that function names are by snake_case in <code>logger</code>, while <code>futile.logger</code> uses dot.separated expressions, and <code>futile.logger</code> prefixes function names by <code>flog</code> while <code>logger</code> uses <code>log</code> for that:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="st">'hi there'</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi there</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-02 21:49:27] hi there</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.warn</a></span>(<span class="st">'watch out'</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; WARN [2018-12-01 01:04:10] watch out</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; WARN [2018-12-02 21:49:27] watch out</span></a></code></pre></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi there</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt;  [2018-12-02 21:49:27] hi there</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; WARN [2018-12-01 01:04:10] watch out</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;  [2018-12-02 21:49:27] watch out</span></a></code></pre></div>
 </div>
 <p>As you can see above, the default layout of the messages is exactly the same.</p>
+</div>
+<div id="log-levels" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-levels" class="anchor"></a>Log levels</h3>
 <p>Regarding log levels, <code>futile.logger</code> bundles the default <code>log4j</code> levels (<code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code> and <code>FATAL</code>) that is extended by <code>SUCCESS</code> in <code>logger</code> as sometimes it’s worth logging with a higher than <code>INFO</code> level that something succeeded.</p>
+</div>
+<div id="log-record-layout" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-record-layout" class="anchor"></a>Log record layout</h3>
 <p>Changing layouts is easy in both package, as you simply pass a layout function:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.layout">flog.layout</a></span>(layout.json)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; NULL</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="st">'hi again'</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; {"level":"INFO","timestamp":"2018-12-01 01:04:10 +0000","message":"hi again","func":"tryCatch"}</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; {"level":"INFO","timestamp":"2018-12-02 21:49:27 +0000","message":"hi again","func":"tryCatch"}</span></a></code></pre></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/log_layout.html">log_layout</a></span>(layout_json)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"> </a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi again'</span>)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; {"level":"INFO","timestamp":"2018-12-01 01:04:10","message":"hi again"}</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; {"level":{},"timestamp":"2018-12-02 21:49:27","message":"hi again"}</span></a></code></pre></div>
 </div>
 <p>As you can see, <code>futile.logger</code> provided a bit more information about the log request in a structured way, while <code>logger</code> simply used the default parameters, but it’s easy to extend the latter with the calling function name, <code>pid</code> of the R session, name of the machine etc – see <code><a href="../reference/get_logger_meta_variables.html">?get_logger_meta_variables</a></code> for a more complete list. <code>logger</code> also ships a but more layouts, eg <code><a href="../reference/layout_glue_colors.html">?layout_glue_colors</a></code> or roll out your own via the <code><a href="../reference/layout_glue_generator.html">?layout_glue_generator</a></code> factory function.</p>
+</div>
+<div id="log-message-formatting" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-message-formatting" class="anchor"></a>Log message formatting</h3>
 <p>By default, <code>futile.logger</code> uses an <code>sprintf</code> formatter, while <code>logger</code> passes the objects to be logged to <code>glue</code>:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="st">'hi'</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-02 21:49:27] hi</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; INFO [2018-12-02 21:49:27] hi 42</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; INFO [2018-12-02 21:49:28] hi 42</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/futile.logger/topics/flog.logger">flog.info</a></span>(glue<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">'hi {84/2}'</span>))</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; INFO [2018-12-02 21:49:28] hi 42</span></a></code></pre></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt;  [2018-12-02 21:49:28] hi</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {84/2}'</span>)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  [2018-12-02 21:49:28] hi 42</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_sprintf)</a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  [2018-12-02 21:49:28] hi 42</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_paste)</a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  [2018-12-02 21:49:28] hi 42</span></a></code></pre></div>
 </div>
 <p>It’s easy to change this default formatter in both packages: use <code>flog.layout</code> handles this as well in <code>futile.logger</code>, while the formatter is separated from the layout function in <code>logger</code>, so check <code><a href="../reference/log_formatter.html">?log_formatter</a></code> instead. <code>logger</code> ships with a bit more formatter functions, eg the default <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code> and <code><a href="../reference/formatter_glue_or_sprintf.html">?formatter_glue_or_sprintf</a></code> that tries to combine the best from both words.</p>
+</div>
+<div id="log-record-destination" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-record-destination" class="anchor"></a>Log record destination</h3>
 <p>Setting the destination of the log records works similarly in both packages, although he <code>logger</code> packages bundles a lot more options:</p>
 <div class="comparison">
 <p><package>logging</package></p>
@@ -210,13 +232,20 @@ div.comparison p package {
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_file.html">appender_file</a></span>(t))</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_tee.html">appender_tee</a></span>(t))</a></code></pre></div>
 </div>
+</div>
+<div id="hierarchical-logging-and-performance" class="section level3">
+<h3 class="hasAnchor">
+<a href="#hierarchical-logging-and-performance" class="anchor"></a>Hierarchical logging and performance</h3>
 <p>Both packages support using different logging namespaces and stacking loggers within the same namespace. Performance-wise, there’s <code>logger</code> seems to be faster than <code>futile.logger</code>, but for more details, check the <a href="https://daroczig.github.io/logger/articles/performance.html">Simple Benchmarks on Performance</a> vignette.</p>
+</div>
 </div>
 <div id="logging" class="section level2">
 <h2 class="hasAnchor">
-<a href="#logging" class="anchor"></a><a href="https://cran.r-project.org/package=logging"><code>logging</code></a>
-</h2>
-<p>The <code>logging</code> package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while <code>logger</code> tries to accommodate native R users’ expectations – so there are some minor nuances between the usage of the two packages.</p>
+<a href="#logging" class="anchor"></a>logging</h2>
+<p>The <a href="https://cran.r-project.org/package=logging"><code>logging</code></a> package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while <code>logger</code> tries to accommodate native R users’ expectations – so there are some minor nuances between the usage of the two packages.</p>
+<div id="initialize-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#initialize-1" class="anchor"></a>Initialize</h3>
 <p>In <code>logging</code>, you have to initialize a logger first via <code>addHandler</code> or simply by calling <code>basicConfig</code>, which is not required in <code>logger</code> as it already comes with a default log config:</p>
 <div class="comparison">
 <p><package>logging</package></p>
@@ -228,6 +257,10 @@ div.comparison p package {
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"> </a></code></pre></div>
 </div>
+</div>
+<div id="logging-functions-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#logging-functions-1" class="anchor"></a>Logging functions</h3>
 <p>After initializing the logging engine, actual logging works similarly in the two packages – with a bit different function names:</p>
 <ul>
 <li>although <code>logging</code> uses mostly camelCase function names (eg <code>basicConfig</code>), but the logging functions are all lowercase without any separator, such as <code>loginfo</code> or <code>logwarn</code>
@@ -239,16 +272,16 @@ div.comparison p package {
 <div class="comparison">
 <p><package>logging</package></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="st">'hi there'</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; 2018-12-01 01:04:10 INFO::hi there</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; 2018-12-02 21:49:28 INFO::hi there</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">logwarn</a></span>(<span class="st">'watch out'</span>)</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; 2018-12-01 01:04:10 </span><span class="al">WARNING</span><span class="co">::watch out</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; 2018-12-02 21:49:28 </span><span class="al">WARNING</span><span class="co">::watch out</span></a></code></pre></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi there</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt;  [2018-12-02 21:49:28] hi there</span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; WARN [2018-12-01 01:04:10] watch out</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt;  [2018-12-02 21:49:28] watch out</span></a></code></pre></div>
 </div>
 <p>As you can see above, the default layout of the log messages is somewhat different:</p>
 <ul>
@@ -257,6 +290,10 @@ div.comparison p package {
 <li>
 <code>logger</code> starts with the log level, followed by the timestamp between brackets and then the message</li>
 </ul>
+</div>
+<div id="log-levels-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-levels-1" class="anchor"></a>Log levels</h3>
 <p>The available log levels:</p>
 <div class="comparison">
 <p><package>logging</package></p>
@@ -285,7 +322,15 @@ div.comparison p package {
 <a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt;  Named int [1:7] 9 8 6 250 4 2 1</span></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt;  - attr(*, "names")= chr [1:7] "TRACE" "DEBUG" "INFO" "" ...</span></a></code></pre></div>
 </div>
+</div>
+<div id="performance" class="section level3">
+<h3 class="hasAnchor">
+<a href="#performance" class="anchor"></a>Performance</h3>
 <p>Performance-wise, there’s no big difference between the two packages, but for more details, check the <a href="https://daroczig.github.io/logger/articles/performance.html">Simple Benchmarks on Performance</a> vignette.</p>
+</div>
+<div id="log-record-layout-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-record-layout-1" class="anchor"></a>Log record layout</h3>
 <p>Getting and setting the layout of the log record should happen up-front in both packages:</p>
 <div class="comparison">
 <p><package>logging</package></p>
@@ -297,7 +342,7 @@ div.comparison p package {
 <a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt;     text &lt;- paste(record$timestamp, paste(record$levelname, record$logger, </span></a>
 <a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt;         msg, sep = ":"))</span></a>
 <a class="sourceLine" id="cb19-8" data-line-number="8"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="co">#&gt; &lt;bytecode: 0x7d21098&gt;</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="co">#&gt; &lt;bytecode: 0x7648958&gt;</span></a>
 <a class="sourceLine" id="cb19-10" data-line-number="10"><span class="co">#&gt; &lt;environment: namespace:logging&gt;</span></a></code></pre></div>
 </div>
 <div class="comparison">
@@ -306,31 +351,39 @@ div.comparison p package {
 <a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; layout_simple</span></a></code></pre></div>
 </div>
 <p><code>logger</code> provides multiple configurable layouts to fit the user’s need, eg easily show the calling function of the lof request, the <code>pid</code> of the R process, name of the machine etc. or colorized outputs. See <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a> vignette for more details.</p>
+</div>
+<div id="log-message-formatting-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-message-formatting-1" class="anchor"></a>Log message formatting</h3>
 <p>If you want to pass dynamic log messages to the log engines, you can do that via the hard-coded <code>sprintf</code> in the <code>logging</code> package, while you can set that on a namespaces basis in <code>logger</code>, which is by default using <code>glue</code>:</p>
 <div class="comparison">
 <p><package>logging</package></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="st">'hi'</span>)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; 2018-12-01 01:04:10 INFO::hi</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; 2018-12-02 21:49:28 INFO::hi</span></a>
 <a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">#&gt; 2018-12-01 01:04:10 INFO::hi 42</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">#&gt; 2018-12-02 21:49:28 INFO::hi 42</span></a>
 <a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">'hi'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt; 2018-12-01 01:04:10 INFO::hi 42</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt; 2018-12-02 21:49:28 INFO::hi 42</span></a>
 <a class="sourceLine" id="cb21-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/logging/topics/log">loginfo</a></span>(glue<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">'hi {84/2}'</span>))</a>
-<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt; 2018-12-01 01:04:10 INFO::hi 42</span></a></code></pre></div>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt; 2018-12-02 21:49:28 INFO::hi 42</span></a></code></pre></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt;  [2018-12-02 21:49:28] hi</span></a>
 <a class="sourceLine" id="cb22-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {84/2}'</span>)</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">#&gt;  [2018-12-02 21:49:28] hi 42</span></a>
 <a class="sourceLine" id="cb22-5" data-line-number="5"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_sprintf)</a>
 <a class="sourceLine" id="cb22-6" data-line-number="6"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt;  [2018-12-02 21:49:28] hi 42</span></a>
 <a class="sourceLine" id="cb22-8" data-line-number="8"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_paste)</a>
 <a class="sourceLine" id="cb22-9" data-line-number="9"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="dv">84</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt; INFO [2018-12-01 01:04:10] hi 42</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt;  [2018-12-02 21:49:28] hi 42</span></a></code></pre></div>
 </div>
+</div>
+<div id="log-record-destination-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-record-destination-1" class="anchor"></a>Log record destination</h3>
 <p>Setting the destination of the log records works similarly in both packages, although he <code>logger</code> packages bundles a lot more options:</p>
 <div class="comparison">
 <p><package>logging</package></p>
@@ -347,13 +400,17 @@ div.comparison p package {
 <a class="sourceLine" id="cb24-5" data-line-number="5">?appender_slack</a>
 <a class="sourceLine" id="cb24-6" data-line-number="6">?appender_pushbullet</a></code></pre></div>
 </div>
+</div>
+<div id="hierarchical-logging" class="section level3">
+<h3 class="hasAnchor">
+<a href="#hierarchical-logging" class="anchor"></a>Hierarchical logging</h3>
 <p>Both packages support using different logging namespaces and stacking loggers within the same namespace.</p>
+</div>
 </div>
 <div id="loggit" class="section level2">
 <h2 class="hasAnchor">
-<a href="#loggit" class="anchor"></a><a href="https://cran.r-project.org/package=loggit"><code>loggit</code></a>
-</h2>
-<p>Sorry, no direct support for capturing <code>message</code>, <code>warning</code> and <code>stop</code> function messages and feed to <code>logger</code>, but it’s on the <a href="https://github.com/daroczig/logger/issues/6">roadmap</a> to provide helper functions to achieve this.</p>
+<a href="#loggit" class="anchor"></a>loggit</h2>
+<p>Sorry, no direct replacement for <a href="https://cran.r-project.org/package=loggit"><code>loggit</code></a> – capturing <code>message</code>, <code>warning</code> and <code>stop</code> function messages, but it’s on the <a href="https://github.com/daroczig/logger/issues/6">roadmap</a> to provide helper functions to be used as message hooks feed <code>logger</code>.</p>
 </div>
   </div>
 
@@ -362,15 +419,9 @@ div.comparison p package {
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#futile-logger"></a><a href="https://cran-r-project-org/package=futile-logger"><code>futile.logger</code></a>
-</li>
-      <li>
-<a href="#logging"></a><a href="https://cran-r-project-org/package=logging"><code>logging</code></a>
-</li>
-      <li>
-<a href="#loggit"></a><a href="https://cran-r-project-org/package=loggit"><code>loggit</code></a>
-</li>
+<li><a href="#futile-logger">futile.logger</a></li>
+      <li><a href="#logging">logging</a></li>
+      <li><a href="#loggit">loggit</a></li>
       </ul>
 </div>
       </div>
