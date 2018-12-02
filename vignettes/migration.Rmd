@@ -220,25 +220,20 @@ As you can see above, the default layout of the log messages is somewhat differe
 
 ### Log levels
 
-The available log levels:
+For the available log levels in `logging`, check `?loglevels`, and `?log_levels` for the same in `logger`:
 
 <div class="comparison"><package>logging</package>
-```r
-?loglevels
-```
 ```{r}
 str(as.list(loglevels))
 ```
 </div>
 <div class="comparison"><package>logger</package>
-```r
-?log_levels
-```
 ```{r}
-str(c(
-    TRACE, DEBUG, INFO,
-    SUCCESS,
-    WARN, ERROR, FATAL))
+levels <- mget(ls(
+    envir = environment(logger), pattern = '^[A-Z]'),
+    envir = environment(logger))
+str(levels[order(-as.numeric(levels))], give.attr = FALSE)
+ 
 ```
 </div>
 
