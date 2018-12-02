@@ -136,16 +136,37 @@ A quick example:
     log_info('I am still working in the global namespace')
     ```
 
-Another example of making use of the generator function is to update the layout to include the Process ID that might be very useful eg when forking, see for example the below code chunk using the above defined log layout:
+Another example of making use of the generator function is to update the layout to include the Process ID that might be very useful eg when forking, see for example the below code chunk still using the above defined log layout:
 
-```{r}
-library(parallel)
+```r
 f <- function(x) {
-    log_info('foo')
-    log_warn('bar')
+    log_info('received {length(x)} values')
+    log_success('with the mean of {mean(x)}')
     mean(x)
 }
-invisible(mclapply(split(runif(100), 1:10), f, mc.cores = 5))
+
+library(parallel)
+mclapply(split(runif(100), 1:10), f, mc.cores = 5)
+#> nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.403173440974206
+#> nevermind/26449/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26449/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.538581100990996
+#> nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.485734378430061
+#> nevermind/26450/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26449/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26450/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.580483326432295
+#> nevermind/26452/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26449/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.461282140854746
+#> nevermind/26450/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26451/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26450/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.465152264293283
+#> nevermind/26452/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.618332817289047
+#> nevermind/26451/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.493527933699079
+#> nevermind/26452/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26452/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.606248055002652
+#> nevermind/26451/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values
+#> nevermind/26451/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.537314630229957
 ```
 
 *Note that the `layout_glue_generator` functions also adds a special attribute to the resulting formatting function so that when printing the layout function to the console, the user can easily interpret what's being used instead of just showing the actual functions's body:*

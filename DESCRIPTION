@@ -26,6 +26,8 @@ Suggests:
   roxygen2,
   slackr,
   RPushbullet,
+  microbenchmark,
   logging,
-  futile.logger
+  futile.logger,
+  parallel
 VignetteBuilder: knitr
