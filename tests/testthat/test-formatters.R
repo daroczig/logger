@@ -87,6 +87,8 @@ test_that('paste formatter in actual logs', {
 log_formatter(formatter_glue)
 test_that('skip formatter', {
     expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
+    expect_error(log_info(skip_formatter(mtcars)))
+    expect_error(log_info(skip_formatter('hi {x}', x = 4)))
 })
 
 log_formatter(formatter)
