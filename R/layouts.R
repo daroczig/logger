@@ -63,7 +63,6 @@ get_logger_meta_variables <- function(log_level = NULL) {
 #' }
 #' @param format \code{glue}-flavored layout of the message using the above variables
 #' @return function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{\link{log_layout}} for the currently used layout
-#' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
 #' example_layout <- layout_glue_generator(
@@ -80,11 +79,12 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 
     structure(function(level, msg) {
 
+        fail_on_missing_package('glue')
         if (!inherits(level, 'loglevel')) {
             stop('Invalid log level, see ?log_levels')
         }
 
-        with(get_logger_meta_variables(level), glue(format))
+        with(get_logger_meta_variables(level), glue::glue(format))
 
     }, generator = deparse(match.call()))
 
@@ -118,7 +118,6 @@ layout_logging <- structure(function(level, msg) {
 #' By default, this layout includes the log level of the log record as per \code{\link{log_levels}}, the current timestamp and the actual log message -- that you can override via calling \code{\link{layout_glue_generator}} directly. For colorized output, see \code{\link{layout_glue_colors}}.
 #' @inheritParams layout_simple
 #' @return character vector
-#' @importFrom glue glue
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_glue <- layout_glue_generator()
@@ -127,7 +126,6 @@ layout_glue <- layout_glue_generator()
 #' Format a log message with \code{glue} and ANSI escape codes to add colors
 #' @inheritParams layout_simple
 #' @return character vector
-#' @importFrom glue glue
 #' @export
 #' @examples \dontrun{
 #' log_layout(layout_glue_colors)
