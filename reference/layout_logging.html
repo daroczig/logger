@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Concatenate R objects into a character vector via <code>paste</code> — formatter_paste • logger</title>
+<title>Format a log record as the logging package does by default — layout_logging • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Concatenate R objects into a character vector via <code>paste</code> — formatter_paste" />
+<meta property="og:title" content="Format a log record as the logging package does by default — layout_logging" />
 
-<meta property="og:description" content="Concatenate R objects into a character vector via paste" />
+<meta property="og:description" content="Format a log record as the logging package does by default" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,25 +129,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Concatenate R objects into a character vector via <code>paste</code></h1>
-    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/formatters.R'><code>R/formatters.R</code></a></small>
-    <div class="hidden name"><code>formatter_paste.Rd</code></div>
+    <h1>Format a log record as the logging package does by default</h1>
+    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/layouts.R'><code>R/layouts.R</code></a></small>
+    <div class="hidden name"><code>layout_logging.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Concatenate R objects into a character vector via <code>paste</code></p>
+    <p>Format a log record as the logging package does by default</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>formatter_paste</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>layout_logging</span>(<span class='no'>level</span>, <span class='no'>msg</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>passed to <code>paste</code></p></td>
+      <th>level</th>
+      <td><p>log level, see <code><a href='log_levels.html'>log_levels</a></code> for more details</p></td>
+    </tr>
+    <tr>
+      <th>msg</th>
+      <td><p>string message</p></td>
     </tr>
     </table>
     
@@ -157,7 +161,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code></p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_layout.html'>log_layout</a></code>, for alternatives, see <code><a href='layout_glue.html'>layout_glue</a></code>, <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='layout_json.html'>layout_json</a></code>, or generator functions such as <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></div>
     
 
   </div>
