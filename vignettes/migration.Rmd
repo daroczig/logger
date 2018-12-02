@@ -33,6 +33,8 @@ In this vignette I suppose that you are already familiar with at least one of th
 
 The `logger` package has been very heavily inspired by [`futile.logger`](https://cran.r-project.org/package=futile.logger) and have been using it for many years, also opened multiple pull requests to extend `futile.logger` before I decided to revamp my ideas into a new R package -- but there are still many common things between `futile.logger` and `logger`.
 
+### Initialize
+
 Both packages comes with a default log engine / config, so it's enough to load the packages and those are ready to be used right away:
 
 <div class="comparison"><package>futile.logger</package>
@@ -45,6 +47,8 @@ library(futile.logger)
 library(logger)
 ```
 </div>
+
+### Logging functions
 
 The most important change is that function names are by snake_case in `logger`, while `futile.logger` uses dot.separated expressions, and `futile.logger` prefixes function names by `flog` while `logger` uses `log` for that:
 
@@ -63,7 +67,11 @@ log_warn('watch out')
 
 As you can see above, the default layout of the messages is exactly the same.
 
+### Log levels
+
 Regarding log levels, `futile.logger` bundles the default `log4j` levels (`TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` and `FATAL`) that is extended by `SUCCESS` in `logger` as sometimes it's worth logging with a higher than `INFO` level that something succeeded.
+
+### Log record layout
 
 Changing layouts is easy in both package, as you simply pass a layout function:
 
@@ -87,6 +95,8 @@ As you can see, `futile.logger` provided a bit more information about the log re
 flog.layout(layout.simple)
 log_layout(layout_simple)
 ```
+
+### Log message formatting
 
 By default, `futile.logger` uses an `sprintf` formatter, while `logger` passes the objects to be logged to `glue`:
 
@@ -116,6 +126,8 @@ log_formatter(formatter_glue)
 
 It's easy to change this default formatter in both packages: use `flog.layout` handles this as well in `futile.logger`, while the formatter is separated from the layout function in `logger`, so check `?log_formatter` instead. `logger` ships with a bit more formatter functions, eg the default `?formatter_glue` and `?formatter_glue_or_sprintf` that tries to combine the best from both words.
 
+### Log record destination
+
 Setting the destination of the log records works similarly in both packages, although he `logger` packages bundles a lot more options:
 
 <div class="comparison"><package>logging</package>
@@ -139,11 +151,15 @@ flog.appender(appender.console)
 log_appender(appender_console)
 ```
 
+### Hierarchical logging and performance
+
 Both packages support using different logging namespaces and stacking loggers within the same namespace. Performance-wise, there's `logger` seems to be faster than `futile.logger`, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
 
 ## logging
 
 The [`logging`](https://cran.r-project.org/package=logging) package behaves very similarly to the Python logging module and so thus being pretty Pythonic, while `logger` tries to accommodate native R users' expectations -- so there are some minor nuances between the usage of the two packages.
+
+### Initialize
 
 In `logging`, you have to initialize a logger first via `addHandler` or simply by calling `basicConfig`, which is not required in `logger` as it already comes with a default log config:
 
@@ -159,6 +175,8 @@ library(logger)
  
 ```
 </div>
+
+### Logging functions
 
 After initializing the logging engine, actual logging works similarly in the two packages -- with a bit different function names:
 
@@ -183,6 +201,8 @@ As you can see above, the default layout of the log messages is somewhat differe
 * `logging` starts with the timestamp that is followed by the log level and the message separated by two colons
 * `logger` starts with the log level, followed by the timestamp between brackets and then the message
 
+### Log levels
+
 The available log levels:
 
 <div class="comparison"><package>logging</package>
@@ -205,7 +225,11 @@ str(c(
 ```
 </div>
 
+### Performance
+
 Performance-wise, there's no big difference between the two packages, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
+
+### Log record layout
 
 Getting and setting the layout of the log record should happen up-front in both packages:
 
@@ -221,6 +245,8 @@ log_layout()
 </div>
 
 `logger` provides multiple configurable layouts to fit the user's need, eg easily show the calling function of the lof request, the `pid` of the R process, name of the machine etc. or colorized outputs. See [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignette for more details.
+
+### Log message formatting
 
 If you want to pass dynamic log messages to the log engines, you can do that via the hard-coded `sprintf` in the `logging` package, while you can set that on a namespaces basis in `logger`, which is by default using `glue`:
 
@@ -247,6 +273,8 @@ log_info('hi', 84/2)
 log_formatter(formatter_glue)
 ```
 
+### Log record destination
+
 Setting the destination of the log records works similarly in both packages, although he `logger` packages bundles a lot more options:
 
 <div class="comparison"><package>logging</package>
@@ -266,6 +294,8 @@ Setting the destination of the log records works similarly in both packages, alt
 ?appender_pushbullet
 ```
 </div>
+
+### Hierarchical logging
 
 Both packages support using different logging namespaces and stacking loggers within the same namespace.
 
