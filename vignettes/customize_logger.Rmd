@@ -46,6 +46,22 @@ If you want to define the log level in a programmatic way, check out `?log_level
 log_level(INFO, 'Hi, there!')
 ```
 
+To temporarily update the log level threshold, you may also find the `?with_log_threshold` function useful:
+
+```{r}
+log_threshold(INFO)
+log_debug('pst, can you hear me?')
+log_info('no')
+
+with_log_threshold(log_debug('pst, can you hear me?'), threshold = TRACE)
+log_info('yes')
+
+with_log_threshold({
+    log_debug('pst, can you hear me?')
+    log_info('yes')
+}, threshold = TRACE)
+```
+
 ## Log namespaces
 
 By default, all log messages will be processed by the global `logger` definition, but you may also use custom namespaces (eg to deliver specific log records to a special destination or to apply a custom log level threshold) and even multiple loggers as well within the very same namespace (eg to deliver all `INFO` and above log levels in the console and everything below that to a trace log file).
