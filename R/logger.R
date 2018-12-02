@@ -239,19 +239,19 @@ log_level <- function(level, ..., namespace = NA_character_) {
 
 
 #' @export
-log_fatal <- function(...) invisible(eval.parent(substitute(log_level(FATAL, ...))))
+log_fatal <- function(...) invisible(eval.parent(substitute(log_level(logger::FATAL, ...))))
 #' @export
-log_error <- function(...) invisible(eval.parent(substitute(log_level(ERROR, ...))))
+log_error <- function(...) invisible(eval.parent(substitute(log_level(logger::ERROR, ...))))
 #' @export
-log_warn <- function(...) invisible(eval.parent(substitute(log_level(WARN, ...))))
+log_warn <- function(...) invisible(eval.parent(substitute(log_level(logger::WARN, ...))))
 #' @export
-log_success <- function(...) invisible(eval.parent(substitute(log_level(SUCCESS, ...))))
+log_success <- function(...) invisible(eval.parent(substitute(log_level(logger::SUCCESS, ...))))
 #' @export
-log_info <- function(...) invisible(eval.parent(substitute(log_level(INFO, ...))))
+log_info <- function(...) invisible(eval.parent(substitute(log_level(logger::INFO, ...))))
 #' @export
-log_debug <- function(...) invisible(eval.parent(substitute(log_level(DEBUG, ...))))
+log_debug <- function(...) invisible(eval.parent(substitute(log_level(logger::DEBUG, ...))))
 #' @export
-log_trace <- function(...) invisible(eval.parent(substitute(log_level(TRACE, ...))))
+log_trace <- function(...) invisible(eval.parent(substitute(log_level(logger::TRACE, ...))))
 
 
 #' Evaluate R expression with a temporarily updated log level threshold
