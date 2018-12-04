@@ -92,7 +92,13 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+      </header>
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+<div class="row">
   <div class="contents col-md-9">
 <div id="logger" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
@@ -241,6 +247,9 @@
   </div>
 </div>
 
+$for(include-after)$
+$include-after$
+$endfor$
 
       <footer><div class="copyright">
   <p>Developed by Gergely Daróczi, <a href="https://system1.com"><img src="http://system1.com/static/svg/logo.svg" height="24"></a>.</p>
