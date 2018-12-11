@@ -2,3 +2,4 @@
 
 export(logger_tester_function)
 importFrom(logger,log_level)
+importFrom(logger,log_info)
