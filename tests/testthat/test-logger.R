@@ -52,8 +52,8 @@ test_that('built in variables', {
 test_that('called from package', {
     devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
     log_layout(layout_simple)
-    expect_output(logger_tester_function(INFO, 'hi from tester package'), 'INFO')
-    expect_output(logger_info_tester_function('hi from tester package'), 'INFO')
+    expect_output(logger_tester_function(INFO, 'x = '), 'INFO')
+    expect_output(logger_info_tester_function('everything = '), 'INFO')
 })
 
 test_that('print.level', {
