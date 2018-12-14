@@ -16,6 +16,7 @@ fallback_namespace <- function(namespace) {
 #' @importFrom utils tail
 find_parents <- function() {
 
+    ## TODO clean this up as now we have direct access to the calling evironment?
     namespaces <- lapply(sys.frames(), topenv)
     namespaces <- sapply(namespaces, environmentName)
     ## cat('namespaces:\n')
@@ -37,7 +38,7 @@ find_parents <- function() {
 
     calls <- sys.calls()
     ## cat('calls:\n')
-    ## pander::pandoc.list(calls)
+    ## pander::pandoc.list(lapply(sys.calls(), deparse))
     calls <- calls[outer]
     call  <- tail(calls, 1)
 

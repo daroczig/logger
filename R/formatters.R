@@ -25,9 +25,9 @@ formatter_sprintf <- structure(function(fmt, ...) {
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue <- structure(function(...) {
+formatter_glue <- structure(function(..., .frame = sys.frame()) {
     fail_on_missing_package('glue')
-    as.character(glue::glue(..., .envir = parent.frame()))
+    as.character(glue::glue(..., .envir = .frame))
 }, generator = quote(formatter_glue()))
 
 

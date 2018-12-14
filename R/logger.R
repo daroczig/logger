@@ -28,7 +28,7 @@ logger <- function(threshold, formatter, layout, appender) {
         stop('Invalid log level provided as threshold, see ?log_levels')
     }
 
-    function(level, ...) {
+    function(level, ..., .call = sys.call(), .frame = sys.frame()) {
 
         if (level > threshold) {
             return(invisible(NULL))
@@ -39,7 +39,9 @@ logger <- function(threshold, formatter, layout, appender) {
         if (length(messages) == 1 && isTRUE(attr(messages[[1]], 'skip_formatter', exact = TRUE))) {
             messages <- messages[[1]]
         } else {
-            messages <- do.call(formatter, messages, quote = TRUE, envir = parent.frame())
+            messages <- do.call(formatter, c(messages, list(.call = substitute(.call), .frame = .frame)))
+
+            ## messages <- do.call(formatter, messages)
         }
 
         appender(layout(level, messages))
@@ -219,7 +221,7 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log_level <- function(level, ..., namespace = NA_character_) {
+log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(), .frame = sys.frame()) {
 
     definitions <- get_logger_definitions(namespace)
 
@@ -232,7 +234,10 @@ log_level <- function(level, ..., namespace = NA_character_) {
             log_arg$level <- level
         }
 
-        do.call(log_fun, log_arg, envir = parent.frame())
+        log_arg$.call <- substitute(.call)
+        log_arg$.frame <- .frame
+
+        do.call(log_fun, log_arg)
 
     }
 }
@@ -247,7 +252,7 @@ log_warn <- function(...) invisible(eval.parent(substitute(logger::log_level(log
 #' @export
 log_success <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::SUCCESS, ...))))
 #' @export
-log_info <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::INFO, ...))))
+log_info <- function(...) log_level(INFO, ..., .call = sys.call(1), .frame = sys.frame())
 #' @export
 log_debug <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::DEBUG, ...))))
 #' @export
