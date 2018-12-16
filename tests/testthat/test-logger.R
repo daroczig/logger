@@ -42,16 +42,18 @@ test_that('built in variables', {
     expect_equal(capture.output(log_info('foobar')), as.character(Sys.getpid()))
 })
 
-## test_that('namespace, fn and call', {
-##     log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
-##     expect_output(log_info('foobar'), 'R_GlobalEnv / f / f()')
-##     f <- function() log_info('foobar')
-##     expect_output(f(), 'R_GlobalEnv / f / f()')
-##     g <- function() f()
-##     expect_output(g(), 'R_GlobalEnv / f / f()')
-##     g <- f
-##     expect_output(g(), 'R_GlobalEnv / g / g()')
-## })
+## cannot test namespace checking as these are being called from logger/testthat, not .GlobalEnv
+## maybe with callr?
+test_that('fn and call', {
+    log_layout(layout_glue_generator('{fn} / {call}'))
+    expect_output(log_info('foobar'), 'f / f()')
+    f <- function() log_info('foobar')
+    expect_output(f(), 'f / f()')
+    g <- function() f()
+    expect_output(g(), 'f / f()')
+    g <- f
+    expect_output(g(), 'g / g()')
+})
 
 test_that('called from package', {
     devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
