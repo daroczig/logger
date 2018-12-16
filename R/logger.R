@@ -250,9 +250,9 @@ log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 
-        log_arg$level <- level
-        log_arg$.call  = .call
-        log_arg$.envir = .envir
+        log_arg$level  <- level
+        log_arg$.call  <- .call
+        log_arg$.envir <- .envir
 
         do.call(log_fun, log_arg)
 
