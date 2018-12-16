@@ -1,9 +1,10 @@
 #' Concatenate R objects into a character vector via \code{paste}
 #' @param ... passed to \code{paste}
+#' @inheritParams log_level
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_paste <- structure(function(..., .envir = parent.frame(1)) {
+formatter_paste <- structure(function(..., .envir = parent.frame()) {
     eval(paste(...), envir = .envir)
 }, generator = quote(formatter_paste()))
 
@@ -11,21 +12,23 @@ formatter_paste <- structure(function(..., .envir = parent.frame(1)) {
 #' Apply \code{sprintf} to convert R objects into a character vector
 #' @param fmt passed to \code{sprintf}
 #' @param ... passed to \code{sprintf}
+#' @inheritParams log_level
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_sprintf <- structure(function(fmt, ..., .envir = parent.frame(1)) {
+formatter_sprintf <- structure(function(fmt, ..., .envir = parent.frame()) {
     eval(sprintf(fmt, ...), envir = .envir)
 }, generator = quote(formatter_sprintf()))
 
 
 #' Apply \code{glue} to convert R objects into a character vector
 #' @param ... passed to \code{glue} for the text interpolation
+#' @inheritParams log_level
 #' @return character vector
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue <- structure(function(..., .envir = parent.frame(1)) {
+formatter_glue <- structure(function(..., .envir = parent.frame()) {
     fail_on_missing_package('glue')
     as.character(glue::glue(..., .envir = .envir))
 }, generator = quote(formatter_glue()))
@@ -38,6 +41,7 @@ formatter_glue <- structure(function(..., .envir = parent.frame(1)) {
 #' Note that this function tries to be smart when passing arguments to \code{glue} and \code{sprintf}, but might fail with some edge cases, and returns an unformatted string.
 #' @param msg passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}
 #' @param ... passed to \code{glue} for the text interpolation
+#' @inheritParams log_level
 #' @return character vector
 #' @export
 #' @examples \dontrun{
@@ -52,7 +56,7 @@ formatter_glue <- structure(function(..., .envir = parent.frame(1)) {
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue_or_sprintf <- structure(function(msg, ..., .envir = parent.frame(1)) {
+formatter_glue_or_sprintf <- structure(function(msg, ..., .envir = parent.frame()) {
 
     params <- list(...)
 

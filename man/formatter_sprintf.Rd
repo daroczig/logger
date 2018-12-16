@@ -4,12 +4,14 @@
 \alias{formatter_sprintf}
 \title{Apply \code{sprintf} to convert R objects into a character vector}
 \usage{
-formatter_sprintf(fmt, ..., .envir = parent.frame(1))
+formatter_sprintf(fmt, ..., .envir = parent.frame())
 }
 \arguments{
 \item{fmt}{passed to \code{sprintf}}
 
 \item{...}{passed to \code{sprintf}}
+
+\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
 }
 \value{
 character vector

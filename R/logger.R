@@ -214,11 +214,11 @@ get_logger_definitions <- function(namespace = NA_character_, .envir = parent.fr
 
 
 #' Log a message with given log level
-#' @param level log level from \code{\link{log_levels}}
+#' @param level log level, see \code{\link{log_levels}} for more details
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
 #' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
-#' @param .call R expression from which the calling function was called (optionally used by the logging layout)
-#' @param .envir original frame of the calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}
+#' @param .call R expression from which the logging function was called (optionally used by the logging layout)
+#' @param .envir original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}
 #' @seealso \code{\link{logger}}
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
