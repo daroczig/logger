@@ -17,3 +17,16 @@ fail_on_missing_package <- function(pkg) {
             call. = FALSE)
     }
 }
+
+
+#' Simple helper to record both the parent call and its environment
+#' @return list of parent call and frame
+#' @keywords internal
+get_parent <- function() {
+    list(
+        ## ## commented out not to waste time on this currently not used anyway
+        ## log_call = sys.call(-1),
+        parent_call = sys.call(-2),
+        parent_frame = parent.frame(2)
+    )
+}

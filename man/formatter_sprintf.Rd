@@ -4,7 +4,7 @@
 \alias{formatter_sprintf}
 \title{Apply \code{sprintf} to convert R objects into a character vector}
 \usage{
-formatter_sprintf(fmt, ...)
+formatter_sprintf(fmt, ..., .parent = get_parent())
 }
 \arguments{
 \item{fmt}{passed to \code{sprintf}}

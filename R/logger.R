@@ -18,6 +18,12 @@
 #' @export
 #' @references For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
 #' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
+#' @examples \dontrun{
+#' do.call(logger, logger:::namespaces$global[[1]])(INFO, 42)
+#' do.call(logger, logger:::namespaces$global[[1]])(INFO, '{pi}')
+#' x <- 42
+#' do.call(logger, logger:::namespaces$global[[1]])(INFO, '{x}^2 = {x^2}')
+#' }
 logger <- function(threshold, formatter, layout, appender) {
 
     force(threshold)
@@ -28,7 +34,7 @@ logger <- function(threshold, formatter, layout, appender) {
         stop('Invalid log level provided as threshold, see ?log_levels')
     }
 
-    function(level, ..., .call = sys.call(), .frame = sys.frame()) {
+    function(level, ..., .parent = get_parent()) {
 
         if (level > threshold) {
             return(invisible(NULL))
@@ -39,7 +45,7 @@ logger <- function(threshold, formatter, layout, appender) {
         if (length(messages) == 1 && isTRUE(attr(messages[[1]], 'skip_formatter', exact = TRUE))) {
             messages <- messages[[1]]
         } else {
-            messages <- do.call(formatter, c(messages, list(.call = substitute(.call), .frame = .frame)))
+            messages <- do.call(formatter, c(messages, list(.parent = .parent)))
 
             ## messages <- do.call(formatter, messages)
         }
@@ -221,7 +227,7 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(), .frame = sys.frame()) {
+log_level <- function(level, ..., namespace = NA_character_, .parent = get_parent()) {
 
     definitions <- get_logger_definitions(namespace)
 
@@ -230,12 +236,11 @@ log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(),
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 
-        if (is.null(log_arg$level)) {
+        ## if (is.null(log_arg$level)) {
             log_arg$level <- level
-        }
+        ## }
 
-        log_arg$.call <- substitute(.call)
-        log_arg$.frame <- .frame
+        log_arg$.parent <- .parent
 
         do.call(log_fun, log_arg)
 
@@ -244,19 +249,19 @@ log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(),
 
 
 #' @export
-log_fatal <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::FATAL, ...))))
+log_fatal <- function(...) log_level(FATAL, ..., .parent = get_parent())
 #' @export
-log_error <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::ERROR, ...))))
+log_error <- function(...) log_level(ERROR, ..., .parent = get_parent())
 #' @export
-log_warn <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::WARN, ...))))
+log_warn <- function(...) log_level(WARN, ..., .parent = get_parent())
 #' @export
-log_success <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::SUCCESS, ...))))
+log_success <- function(...) log_level(SUCCESS, ..., .parent = get_parent())
 #' @export
-log_info <- function(...) log_level(INFO, ..., .call = sys.call(1), .frame = sys.frame())
+log_info <- function(...) log_level(INFO, ..., .parent = get_parent())
 #' @export
-log_debug <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::DEBUG, ...))))
+log_debug <- function(...) log_level(DEBUG, ..., .parent = get_parent())
 #' @export
-log_trace <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::TRACE, ...))))
+log_trace <- function(...) log_level(TRACE, ..., .parent = get_parent())
 
 
 #' Evaluate R expression with a temporarily updated log level threshold

@@ -14,8 +14,8 @@ formatter_paste <- structure(function(...) {
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_sprintf <- structure(function(fmt, ...) {
-    sprintf(fmt, ...)
+formatter_sprintf <- structure(function(fmt, ..., .parent = get_parent()) {
+    eval(sprintf(fmt, ...), envir = .parent$parent_frame)
 }, generator = quote(formatter_sprintf()))
 
 
@@ -25,9 +25,9 @@ formatter_sprintf <- structure(function(fmt, ...) {
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue <- structure(function(..., .frame = sys.frame()) {
+formatter_glue <- structure(function(..., .parent = get_parent()) {
     fail_on_missing_package('glue')
-    as.character(glue::glue(..., .envir = .frame))
+    as.character(glue::glue(..., .envir = .parent$parent_frame))
 }, generator = quote(formatter_glue()))
 
 

@@ -34,6 +34,14 @@ By default, a general logger definition is created when loading the \code{logger
 \note{
 It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
 }
+\examples{
+\dontrun{
+do.call(logger, logger:::namespaces$global[[1]])(INFO, 42)
+do.call(logger, logger:::namespaces$global[[1]])(INFO, '{pi}')
+x <- 42
+do.call(logger, logger:::namespaces$global[[1]])(INFO, '{x}^2 = {x^2}')
+}
+}
 \references{
 For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
 }

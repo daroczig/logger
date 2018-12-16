@@ -11,8 +11,8 @@
 \alias{log_trace}
 \title{Log a message with given log level}
 \usage{
-log_level(level, ..., namespace = NA_character_, .call = sys.call(),
-  .frame = sys.frame())
+log_level(level, ..., namespace = NA_character_,
+  .parent = get_parent())
 }
 \arguments{
 \item{level}{log level from \code{\link{log_levels}}}

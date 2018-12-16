@@ -4,7 +4,7 @@
 \alias{formatter_glue}
 \title{Apply \code{glue} to convert R objects into a character vector}
 \usage{
-formatter_glue(..., .frame = sys.frame())
+formatter_glue(..., .parent = get_parent())
 }
 \arguments{
 \item{...}{passed to \code{glue} for the text interpolation}
