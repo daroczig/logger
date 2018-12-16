@@ -55,6 +55,17 @@ test_that('fn and call', {
 
 library(callr)
 test_that('namespace in a remote R session to avoid calling from testthat', {
+
+    t <- tempfile()
+    cat('
+      library(logger)
+      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
+      log_info("foobar")', file = t)
+    expect_equal(
+        system(paste('Rscript', t), intern = TRUE),
+        'R_GlobalEnv / NA / NA')
+    unlink(t)
+
     expect_output(
         r(function() {
             library(logger)
