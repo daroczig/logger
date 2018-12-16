@@ -48,7 +48,6 @@ logger <- function(threshold, formatter, layout, appender) {
             messages <- do.call(formatter, c(messages, list(.envir = .envir)))
         }
 
-        ## TODO pass .call to layout
         appender(layout(level, messages, .call = substitute(.call), .envir = .envir))
 
     }
