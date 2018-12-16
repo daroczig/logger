@@ -4,7 +4,7 @@
 \alias{formatter_glue_or_sprintf}
 \title{Apply \code{glue} and \code{sprintf}}
 \usage{
-formatter_glue_or_sprintf(msg, ...)
+formatter_glue_or_sprintf(msg, ..., .envir = parent.frame(1))
 }
 \arguments{
 \item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}}

@@ -18,18 +18,20 @@
 #'   \item fn: function's (if any) name calling the logging function
 #' }
 #' @param log_level log level as per \code{\link{log_levels}}
+#' @param .call
+#' @param .envir
 #' @return list
 #' @export
 #' @seealso \code{\link{layout_glue_generator}}
-get_logger_meta_variables <- function(log_level = NULL) {
+get_logger_meta_variables <- function(log_level = NULL, .call = sys.call(-1), .envir = parent.frame(1)) {
 
     sysinfo <- Sys.info()
 
     list(
 
-        namespace = find_namespace(),
-        fn        = find_fn(),
-        call      = find_call(),
+        namespace = top_env_name(.envir),
+        fn        = deparse(.call[[1]]),
+        call      = deparse(.call),
 
         time      = Sys.time(),
         levelr    = log_level,
@@ -77,14 +79,14 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 
     force(format)
 
-    structure(function(level, msg) {
+    structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame(1)) {
 
         fail_on_missing_package('glue')
         if (!inherits(level, 'loglevel')) {
             stop('Invalid log level, see ?log_levels')
         }
 
-        with(get_logger_meta_variables(level), glue::glue(format))
+        with(get_logger_meta_variables(level, .call = .call, .envir = .envir), glue::glue(format))
 
     }, generator = deparse(match.call()))
 
@@ -97,7 +99,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
-layout_simple <- structure(function(level, msg) {
+layout_simple <- structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame(1)) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }, generator = quote(layout_simple()))
 
@@ -108,7 +110,7 @@ layout_simple <- structure(function(level, msg) {
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
-layout_logging <- structure(function(level, msg) {
+layout_logging <- structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame(1)) {
     paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ', attr(level, 'level'), '::', msg)
 }, generator = quote(layout_simple()))
 
@@ -158,7 +160,7 @@ layout_glue_colors <- layout_glue_generator(
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
-layout_json <- structure(function(level, msg) {
+layout_json <- structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame(1)) {
 
     fail_on_missing_package('jsonlite')
 

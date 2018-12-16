@@ -34,7 +34,7 @@ logger <- function(threshold, formatter, layout, appender) {
         stop('Invalid log level provided as threshold, see ?log_levels')
     }
 
-    function(level, ..., .call = sys.call(-1), .envir = parent.frame(1)) {
+    function(level, ..., .call = sys.call(-1), .envir = parent.frame()) {
 
         if (level > threshold) {
             return(invisible(NULL))
@@ -49,10 +49,23 @@ logger <- function(threshold, formatter, layout, appender) {
         }
 
         ## TODO pass .call to layout
-        appender(layout(level, messages))
+        appender(layout(level, messages, .call = substitute(.call), .envir = .envir))
 
     }
 }
+
+
+#' Checks if provided namespace exists and falls back to global if not
+#' @param namespace string
+#' @return string
+#' @keywords internal
+fallback_namespace <- function(namespace) {
+    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
+        namespace <- 'global'
+    }
+    namespace
+}
+
 
 ## TODO DRY the below 4 functions
 
@@ -192,8 +205,8 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
 #' @keywords internal
 #' @importFrom utils getFromNamespace
 #' @param namespace override the default / auto-picked namespace with a custom string
-get_logger_definitions <- function(namespace = NA_character_) {
-    namespace <- ifelse(is.na(namespace), find_namespace(), namespace)
+get_logger_definitions <- function(namespace = NA_character_, .envir = parent.frame()) {
+    namespace <- ifelse(is.na(namespace), top_env_name(.envir), namespace)
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
@@ -228,9 +241,9 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame(1)) {
+log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
-    definitions <- get_logger_definitions(namespace)
+    definitions <- get_logger_definitions(namespace, .envir = .envir)
 
     for (definition in definitions) {
 
@@ -248,19 +261,19 @@ log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1
 
 
 #' @export
-log_fatal <- function(...) log_level(FATAL, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_fatal <- function(...) log_level(FATAL, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_error <- function(...) log_level(ERROR, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_error <- function(...) log_level(ERROR, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_warn <- function(...) log_level(WARN, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_warn <- function(...) log_level(WARN, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_success <- function(...) log_level(SUCCESS, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_success <- function(...) log_level(SUCCESS, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_info <- function(...) log_level(INFO, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_info <- function(...) log_level(INFO, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_debug <- function(...) log_level(DEBUG, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_debug <- function(...) log_level(DEBUG, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_trace <- function(...) log_level(TRACE, ..., .call = sys.call(-1), .envir = parent.frame(1))
+log_trace <- function(...) log_level(TRACE, ..., .call = sys.call(-1), .envir = parent.frame())
 
 
 #' Evaluate R expression with a temporarily updated log level threshold

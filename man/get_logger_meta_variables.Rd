@@ -4,7 +4,8 @@
 \alias{get_logger_meta_variables}
 \title{Collect useful information about the logging environment to be used in log messages}
 \usage{
-get_logger_meta_variables(log_level = NULL)
+get_logger_meta_variables(log_level = NULL, .call = sys.call(-1),
+  .envir = parent.frame(1))
 }
 \arguments{
 \item{log_level}{log level as per \code{\link{log_levels}}}

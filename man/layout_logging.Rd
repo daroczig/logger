@@ -4,7 +4,8 @@
 \alias{layout_logging}
 \title{Format a log record as the logging package does by default}
 \usage{
-layout_logging(level, msg)
+layout_logging(level, msg, .call = sys.call(-1),
+  .envir = parent.frame(1))
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}

@@ -4,7 +4,8 @@
 \alias{layout_glue_colors}
 \title{Format a log message with \code{glue} and ANSI escape codes to add colors}
 \usage{
-layout_glue_colors(level, msg)
+layout_glue_colors(level, msg, .call = sys.call(-1),
+  .envir = parent.frame(1))
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}

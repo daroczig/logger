@@ -12,7 +12,7 @@
 \title{Log a message with given log level}
 \usage{
 log_level(level, ..., namespace = NA_character_, .call = sys.call(-1),
-  .envir = parent.frame(1))
+  .envir = parent.frame())
 }
 \arguments{
 \item{level}{log level from \code{\link{log_levels}}}

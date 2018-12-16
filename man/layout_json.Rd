@@ -4,7 +4,7 @@
 \alias{layout_json}
 \title{Format a log message as JSON}
 \usage{
-layout_json(level, msg)
+layout_json(level, msg, .call = sys.call(-1), .envir = parent.frame(1))
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}
