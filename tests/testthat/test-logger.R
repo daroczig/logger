@@ -42,8 +42,6 @@ test_that('built in variables', {
     expect_equal(capture.output(log_info('foobar')), as.character(Sys.getpid()))
 })
 
-## cannot test namespace checking as these are being called from logger/testthat, not .GlobalEnv
-## maybe with callr?
 test_that('fn and call', {
     log_layout(layout_glue_generator('{fn} / {call}'))
     expect_output(log_info('foobar'), 'f / f()')
@@ -53,6 +51,36 @@ test_that('fn and call', {
     expect_output(g(), 'f / f()')
     g <- f
     expect_output(g(), 'g / g()')
+})
+
+library(callr)
+test_that('namespace in a remote R session to avoid calling from testthat', {
+    expect_output(
+        r(function() {
+            library(logger)
+            log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
+            f <- function() log_info('foobar')
+            f()
+        }, show = TRUE),
+        'R_GlobalEnv / f / f()')
+    expect_output(
+        r(function() {
+            library(logger)
+            log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
+            f <- function() log_info('foobar')
+            g <- function() f()
+            g()
+        }, show = TRUE),
+        'R_GlobalEnv / f / f()')
+    expect_output(
+        r(function() {
+            library(logger)
+            log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
+            f <- function() log_info('foobar')
+            g <- f
+            g()
+        }, show = TRUE),
+        'R_GlobalEnv / g / g()')
 })
 
 test_that('called from package', {
