@@ -54,6 +54,9 @@ test_that('fn and call', {
 
 test_that('namespace in a remote R session to avoid calling from testthat', {
 
+    ## R CMD check doesn't like the below "system" calls :/
+    skip_on_cran()
+
     t <- tempfile()
     cat('
       library(logger)
