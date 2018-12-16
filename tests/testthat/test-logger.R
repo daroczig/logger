@@ -44,7 +44,6 @@ test_that('built in variables', {
 
 test_that('fn and call', {
     log_layout(layout_glue_generator('{fn} / {call}'))
-    expect_output(log_info('foobar'), 'f / f()')
     f <- function() log_info('foobar')
     expect_output(f(), 'f / f()')
     g <- function() f()
@@ -53,7 +52,6 @@ test_that('fn and call', {
     expect_output(g(), 'g / g()')
 })
 
-library(callr)
 test_that('namespace in a remote R session to avoid calling from testthat', {
 
     t <- tempfile()
@@ -66,32 +64,41 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
         'R_GlobalEnv / NA / NA')
     unlink(t)
 
-    expect_output(
-        r(function() {
-            library(logger)
-            log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
-            f <- function() log_info('foobar')
-            f()
-        }, show = TRUE),
+    t <- tempfile()
+    cat('
+      library(logger)
+      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
+      f <- function() log_info("foobar")
+      f()', file = t)
+    expect_equal(
+        system(paste('Rscript', t), intern = TRUE),
         'R_GlobalEnv / f / f()')
-    expect_output(
-        r(function() {
-            library(logger)
-            log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
-            f <- function() log_info('foobar')
-            g <- function() f()
-            g()
-        }, show = TRUE),
+    unlink(t)
+
+    t <- tempfile()
+    cat('
+      library(logger)
+      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
+      f <- function() log_info("foobar")
+      g <- function() f()
+      g()', file = t)
+    expect_equal(
+        system(paste('Rscript', t), intern = TRUE),
         'R_GlobalEnv / f / f()')
-    expect_output(
-        r(function() {
-            library(logger)
-            log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
-            f <- function() log_info('foobar')
-            g <- f
-            g()
-        }, show = TRUE),
+    unlink(t)
+
+    t <- tempfile()
+    cat('
+      library(logger)
+      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
+      f <- function() log_info("foobar")
+      g <- f
+      g()', file = t)
+    expect_equal(
+        system(paste('Rscript', t), intern = TRUE),
         'R_GlobalEnv / g / g()')
+    unlink(t)
+
 })
 
 test_that('called from package', {
