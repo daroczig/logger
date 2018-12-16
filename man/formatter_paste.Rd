@@ -4,7 +4,7 @@
 \alias{formatter_paste}
 \title{Concatenate R objects into a character vector via \code{paste}}
 \usage{
-formatter_paste(...)
+formatter_paste(..., .envir = parent.frame(1))
 }
 \arguments{
 \item{...}{passed to \code{paste}}

@@ -3,8 +3,8 @@
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_paste <- structure(function(...) {
-    paste(...)
+formatter_paste <- structure(function(..., .envir = parent.frame(1)) {
+    eval(paste(...), envir = .envir)
 }, generator = quote(formatter_paste()))
 
 
@@ -14,8 +14,8 @@ formatter_paste <- structure(function(...) {
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_sprintf <- structure(function(fmt, ..., .parent = get_parent()) {
-    eval(sprintf(fmt, ...), envir = .parent$parent_frame)
+formatter_sprintf <- structure(function(fmt, ..., .envir = parent.frame(1)) {
+    eval(sprintf(fmt, ...), envir = .envir)
 }, generator = quote(formatter_sprintf()))
 
 
@@ -25,9 +25,9 @@ formatter_sprintf <- structure(function(fmt, ..., .parent = get_parent()) {
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue <- structure(function(..., .parent = get_parent()) {
+formatter_glue <- structure(function(..., .envir = parent.frame(1)) {
     fail_on_missing_package('glue')
-    as.character(glue::glue(..., .envir = .parent$parent_frame))
+    as.character(glue::glue(..., .envir = .envir))
 }, generator = quote(formatter_glue()))
 
 
@@ -52,7 +52,7 @@ formatter_glue <- structure(function(..., .parent = get_parent()) {
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue_or_sprintf <- structure(function(msg, ...) {
+formatter_glue_or_sprintf <- structure(function(msg, ..., .envir = parent.frame(1)) {
 
     params <- list(...)
 
@@ -75,7 +75,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ...) {
     if (length(sprintfparams) > 0) {
         sprintfparams[vapply(sprintfparams, is.null, logical(1))] <- 'NULL'
         msg <- tryCatch(
-            do.call(sprintf, c(msg, sprintfparams)),
+            do.call(sprintf, c(msg, sprintfparams), envir = .envir),
             error = function(e) msg)
     }
 
@@ -83,7 +83,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ...) {
     fail_on_missing_package('glue')
     msg <- tryCatch(
         as.character(sapply(msg, function(msg) {
-            do.call(glue::glue, c(msg, glueparams), envir = parent.frame())
+            do.call(glue::glue, c(msg, glueparams), envir = .envir)
         }, USE.NAMES = FALSE)),
         error = function(e) msg)
 

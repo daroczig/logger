@@ -34,7 +34,7 @@ logger <- function(threshold, formatter, layout, appender) {
         stop('Invalid log level provided as threshold, see ?log_levels')
     }
 
-    function(level, ..., .parent = get_parent()) {
+    function(level, ..., .call = sys.call(-1), .envir = parent.frame(1)) {
 
         if (level > threshold) {
             return(invisible(NULL))
@@ -45,11 +45,10 @@ logger <- function(threshold, formatter, layout, appender) {
         if (length(messages) == 1 && isTRUE(attr(messages[[1]], 'skip_formatter', exact = TRUE))) {
             messages <- messages[[1]]
         } else {
-            messages <- do.call(formatter, c(messages, list(.parent = .parent)))
-
-            ## messages <- do.call(formatter, messages)
+            messages <- do.call(formatter, c(messages, list(.envir = .envir)))
         }
 
+        ## TODO pass .call to layout
         appender(layout(level, messages))
 
     }
@@ -206,6 +205,8 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' @param level log level from \code{\link{log_levels}}
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
 #' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
+#' @param .call R expression from which the calling function was called (optionally used by the logging layout)
+#' @param .envir original frame of the calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}
 #' @seealso \code{\link{logger}}
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
@@ -227,7 +228,7 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log_level <- function(level, ..., namespace = NA_character_, .parent = get_parent()) {
+log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame(1)) {
 
     definitions <- get_logger_definitions(namespace)
 
@@ -236,11 +237,9 @@ log_level <- function(level, ..., namespace = NA_character_, .parent = get_paren
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 
-        ## if (is.null(log_arg$level)) {
-            log_arg$level <- level
-        ## }
-
-        log_arg$.parent <- .parent
+        log_arg$level <- level
+        log_arg$.call  = .call
+        log_arg$.envir = .envir
 
         do.call(log_fun, log_arg)
 
@@ -249,19 +248,19 @@ log_level <- function(level, ..., namespace = NA_character_, .parent = get_paren
 
 
 #' @export
-log_fatal <- function(...) log_level(FATAL, ..., .parent = get_parent())
+log_fatal <- function(...) log_level(FATAL, ..., .call = sys.call(-1), .envir = parent.frame(1))
 #' @export
-log_error <- function(...) log_level(ERROR, ..., .parent = get_parent())
+log_error <- function(...) log_level(ERROR, ..., .call = sys.call(-1), .envir = parent.frame(1))
 #' @export
-log_warn <- function(...) log_level(WARN, ..., .parent = get_parent())
+log_warn <- function(...) log_level(WARN, ..., .call = sys.call(-1), .envir = parent.frame(1))
 #' @export
-log_success <- function(...) log_level(SUCCESS, ..., .parent = get_parent())
+log_success <- function(...) log_level(SUCCESS, ..., .call = sys.call(-1), .envir = parent.frame(1))
 #' @export
-log_info <- function(...) log_level(INFO, ..., .parent = get_parent())
+log_info <- function(...) log_level(INFO, ..., .call = sys.call(-1), .envir = parent.frame(1))
 #' @export
-log_debug <- function(...) log_level(DEBUG, ..., .parent = get_parent())
+log_debug <- function(...) log_level(DEBUG, ..., .call = sys.call(-1), .envir = parent.frame(1))
 #' @export
-log_trace <- function(...) log_level(TRACE, ..., .parent = get_parent())
+log_trace <- function(...) log_level(TRACE, ..., .call = sys.call(-1), .envir = parent.frame(1))
 
 
 #' Evaluate R expression with a temporarily updated log level threshold

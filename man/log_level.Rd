@@ -11,8 +11,8 @@
 \alias{log_trace}
 \title{Log a message with given log level}
 \usage{
-log_level(level, ..., namespace = NA_character_,
-  .parent = get_parent())
+log_level(level, ..., namespace = NA_character_, .call = sys.call(-1),
+  .envir = parent.frame(1))
 }
 \arguments{
 \item{level}{log level from \code{\link{log_levels}}}
@@ -20,6 +20,10 @@ log_level(level, ..., namespace = NA_character_,
 \item{...}{R objects that can be converted to a character vector via the active message formatter function}
 
 \item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.}
+
+\item{.call}{R expression from which the calling function was called (optionally used by the logging layout)}
+
+\item{.envir}{original frame of the calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
 }
 \description{
 Log a message with given log level
