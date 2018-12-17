@@ -34,7 +34,7 @@ logger <- function(threshold, formatter, layout, appender) {
         stop('Invalid log level provided as threshold, see ?log_levels')
     }
 
-    function(level, ..., .call = sys.call(-1), .envir = parent.frame()) {
+    function(level, ..., namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
         if (level > threshold) {
             return(invisible(NULL))
@@ -48,7 +48,7 @@ logger <- function(threshold, formatter, layout, appender) {
             messages <- do.call(formatter, c(messages, list(.envir = .envir)))
         }
 
-        appender(layout(level, messages, .call = substitute(.call), .envir = .envir))
+        appender(layout(level, messages, namespace = namespace, .call = substitute(.call), .envir = .envir))
 
     }
 }
@@ -216,7 +216,7 @@ get_logger_definitions <- function(namespace = NA_character_, .envir = parent.fr
 #' Log a message with given log level
 #' @param level log level, see \code{\link{log_levels}} for more details
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
-#' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
+#' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.
 #' @param .call R expression from which the logging function was called (optionally used by the logging layout)
 #' @param .envir original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}
 #' @seealso \code{\link{logger}}
@@ -257,7 +257,9 @@ log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1
             NA
         }
         log_arg$.envir <- .envir
+        log_arg$namespace <- namespace
 
+        ## TODO try with match.call and replace [[1]]?
         do.call(log_fun, log_arg)
 
     }
