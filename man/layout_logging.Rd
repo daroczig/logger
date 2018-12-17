@@ -24,6 +24,16 @@ character vector
 \description{
 Format a log record as the logging package does by default
 }
+\examples{
+\dontrun{
+log_layout(layout_logging)
+log_info(42)
+log_info(42, namespace = 'everything')
+
+devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
+logger_tester_function(INFO, 42) ## TODO this is off?
+}
+}
 \seealso{
 This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 }

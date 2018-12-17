@@ -115,8 +115,19 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_, .call
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @examples \dontrun{
+#' log_layout(layout_logging)
+#' log_info(42)
+#' log_info(42, namespace = 'everything')
+#'
+#' devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
+#' logger_tester_function(INFO, 42) ## TODO this is off?
+#' }
 layout_logging <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
-    paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ', attr(level, 'level'), '::', msg)
+    paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ',
+           attr(level, 'level'), ':',
+           ifelse(is.na(namespace) | namespace == 'global', '', namespace), ':',
+           msg)
 }, generator = quote(layout_simple()))
 
 
