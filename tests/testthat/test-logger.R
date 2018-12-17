@@ -52,6 +52,9 @@ test_that('fn and call', {
     expect_output(g(), 'g / g()')
 })
 
+## setting R_TESTS to empty string because of https://github.com/hadley/testthat/issues/144
+Sys.unsetenv('R_TESTS')
+
 test_that('namespace in a remote R session to avoid calling from testthat', {
 
     ## R CMD check doesn't like the below "system" calls :/
