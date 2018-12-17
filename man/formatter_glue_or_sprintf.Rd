@@ -4,12 +4,14 @@
 \alias{formatter_glue_or_sprintf}
 \title{Apply \code{glue} and \code{sprintf}}
 \usage{
-formatter_glue_or_sprintf(msg, ...)
+formatter_glue_or_sprintf(msg, ..., .envir = parent.frame())
 }
 \arguments{
 \item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}}
 
 \item{...}{passed to \code{glue} for the text interpolation}
+
+\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
 }
 \value{
 character vector

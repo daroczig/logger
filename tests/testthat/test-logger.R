@@ -40,13 +40,23 @@ test_that('simple glue layout with threshold directly calling log', {
 test_that('built in variables', {
     log_layout(layout_glue_generator('{pid}'))
     expect_equal(capture.output(log_info('foobar')), as.character(Sys.getpid()))
-    ## log_layout(layout_glue_generator('{namespace} / {fn} / {call}'))
-    ## f <- function() log_info('foobar')
-    ## expect_equal(capture.output(f()), 'R_GlobalEnv / f / f()')
-    ## g <- function() f()
-    ## expect_equal(capture.output(g()), 'R_GlobalEnv / f / f()')
-    ## g <- f
-    ## expect_equal(capture.output(g()), 'R_GlobalEnv / g / g()')
+})
+
+test_that('fn and call', {
+    log_layout(layout_glue_generator('{fn} / {call}'))
+    f <- function() log_info('foobar')
+    expect_output(f(), 'f / f()')
+    g <- function() f()
+    expect_output(g(), 'f / f()')
+    g <- f
+    expect_output(g(), 'g / g()')
+})
+
+test_that('called from package', {
+    devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
+    log_layout(layout_simple)
+    expect_output(logger_tester_function(INFO, 'x = '), 'INFO')
+    expect_output(logger_info_tester_function('everything = '), 'INFO')
 })
 
 test_that('print.level', {

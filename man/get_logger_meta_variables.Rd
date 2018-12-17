@@ -4,10 +4,15 @@
 \alias{get_logger_meta_variables}
 \title{Collect useful information about the logging environment to be used in log messages}
 \usage{
-get_logger_meta_variables(log_level = NULL)
+get_logger_meta_variables(log_level = NULL, .call = sys.call(-1),
+  .envir = parent.frame())
 }
 \arguments{
 \item{log_level}{log level as per \code{\link{log_levels}}}
+
+\item{.call}{R expression from which the logging function was called (optionally used by the logging layout)}
+
+\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
 }
 \value{
 list

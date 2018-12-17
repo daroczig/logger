@@ -6,3 +6,4 @@ _pkgdown.yml
 .*.sh$
 .backup
 .*.graphml$
+logo.R

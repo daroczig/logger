@@ -4,12 +4,17 @@
 \alias{layout_simple}
 \title{Format a log record by concatenating the log level, timestamp and message}
 \usage{
-layout_simple(level, msg)
+layout_simple(level, msg, .call = sys.call(-1),
+  .envir = parent.frame())
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}
 
 \item{msg}{string message}
+
+\item{.call}{R expression from which the logging function was called (optionally used by the logging layout)}
+
+\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
 }
 \value{
 character vector

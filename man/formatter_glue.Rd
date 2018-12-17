@@ -4,10 +4,12 @@
 \alias{formatter_glue}
 \title{Apply \code{glue} to convert R objects into a character vector}
 \usage{
-formatter_glue(...)
+formatter_glue(..., .envir = parent.frame())
 }
 \arguments{
 \item{...}{passed to \code{glue} for the text interpolation}
+
+\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
 }
 \value{
 character vector

@@ -18,6 +18,12 @@
 #' @export
 #' @references For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
 #' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
+#' @examples \dontrun{
+#' do.call(logger, logger:::namespaces$global[[1]])(INFO, 42)
+#' do.call(logger, logger:::namespaces$global[[1]])(INFO, '{pi}')
+#' x <- 42
+#' do.call(logger, logger:::namespaces$global[[1]])(INFO, '{x}^2 = {x^2}')
+#' }
 logger <- function(threshold, formatter, layout, appender) {
 
     force(threshold)
@@ -28,7 +34,7 @@ logger <- function(threshold, formatter, layout, appender) {
         stop('Invalid log level provided as threshold, see ?log_levels')
     }
 
-    function(level, ...) {
+    function(level, ..., .call = sys.call(-1), .envir = parent.frame()) {
 
         if (level > threshold) {
             return(invisible(NULL))
@@ -39,13 +45,26 @@ logger <- function(threshold, formatter, layout, appender) {
         if (length(messages) == 1 && isTRUE(attr(messages[[1]], 'skip_formatter', exact = TRUE))) {
             messages <- messages[[1]]
         } else {
-            messages <- do.call(formatter, messages, quote = TRUE, envir = parent.frame())
+            messages <- do.call(formatter, c(messages, list(.envir = .envir)))
         }
 
-        appender(layout(level, messages))
+        appender(layout(level, messages, .call = substitute(.call), .envir = .envir))
 
     }
 }
+
+
+#' Checks if provided namespace exists and falls back to global if not
+#' @param namespace string
+#' @return string
+#' @keywords internal
+fallback_namespace <- function(namespace) {
+    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
+        namespace <- 'global'
+    }
+    namespace
+}
+
 
 ## TODO DRY the below 4 functions
 
@@ -185,8 +204,8 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
 #' @keywords internal
 #' @importFrom utils getFromNamespace
 #' @param namespace override the default / auto-picked namespace with a custom string
-get_logger_definitions <- function(namespace = NA_character_) {
-    namespace <- ifelse(is.na(namespace), find_namespace(), namespace)
+get_logger_definitions <- function(namespace = NA_character_, .envir = parent.frame()) {
+    namespace <- ifelse(is.na(namespace), top_env_name(.envir), namespace)
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
@@ -195,9 +214,11 @@ get_logger_definitions <- function(namespace = NA_character_) {
 
 
 #' Log a message with given log level
-#' @param level log level from \code{\link{log_levels}}
+#' @param level log level, see \code{\link{log_levels}} for more details
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
 #' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.
+#' @param .call R expression from which the logging function was called (optionally used by the logging layout)
+#' @param .envir original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}
 #' @seealso \code{\link{logger}}
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
@@ -219,39 +240,44 @@ get_logger_definitions <- function(namespace = NA_character_) {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-log_level <- function(level, ..., namespace = NA_character_) {
+log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
-    definitions <- get_logger_definitions(namespace)
+    definitions <- get_logger_definitions(namespace, .envir = .envir)
 
     for (definition in definitions) {
 
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 
-        if (is.null(log_arg$level)) {
-            log_arg$level <- level
+        log_arg$level  <- level
+        log_arg$.call  <- if(!is.null(.call)) {
+            .call
+        } else {
+            ## cannot pass NULL
+            NA
         }
+        log_arg$.envir <- .envir
 
-        do.call(log_fun, log_arg, envir = parent.frame())
+        do.call(log_fun, log_arg)
 
     }
 }
 
 
 #' @export
-log_fatal <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::FATAL, ...))))
+log_fatal <- function(...) log_level(FATAL, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_error <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::ERROR, ...))))
+log_error <- function(...) log_level(ERROR, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_warn <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::WARN, ...))))
+log_warn <- function(...) log_level(WARN, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_success <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::SUCCESS, ...))))
+log_success <- function(...) log_level(SUCCESS, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_info <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::INFO, ...))))
+log_info <- function(...) log_level(INFO, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_debug <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::DEBUG, ...))))
+log_debug <- function(...) log_level(DEBUG, ..., .call = sys.call(-1), .envir = parent.frame())
 #' @export
-log_trace <- function(...) invisible(eval.parent(substitute(logger::log_level(logger::TRACE, ...))))
+log_trace <- function(...) log_level(TRACE, ..., .call = sys.call(-1), .envir = parent.frame())
 
 
 #' Evaluate R expression with a temporarily updated log level threshold
