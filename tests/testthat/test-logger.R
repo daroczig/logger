@@ -52,61 +52,6 @@ test_that('fn and call', {
     expect_output(g(), 'g / g()')
 })
 
-## setting R_TESTS to empty string because of https://github.com/hadley/testthat/issues/144
-Sys.unsetenv('R_TESTS')
-
-test_that('namespace in a remote R session to avoid calling from testthat', {
-
-    ## R CMD check doesn't like the below "system" calls :/
-    skip_on_cran()
-
-    t <- tempfile()
-    cat('
-      library(logger)
-      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
-      log_info("foobar")', file = t)
-    expect_equal(
-        system(paste('Rscript', t), intern = TRUE),
-        'R_GlobalEnv / NA / NA')
-    unlink(t)
-
-    t <- tempfile()
-    cat('
-      library(logger)
-      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
-      f <- function() log_info("foobar")
-      f()', file = t)
-    expect_equal(
-        system(paste('Rscript', t), intern = TRUE),
-        'R_GlobalEnv / f / f()')
-    unlink(t)
-
-    t <- tempfile()
-    cat('
-      library(logger)
-      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
-      f <- function() log_info("foobar")
-      g <- function() f()
-      g()', file = t)
-    expect_equal(
-        system(paste('Rscript', t), intern = TRUE),
-        'R_GlobalEnv / f / f()')
-    unlink(t)
-
-    t <- tempfile()
-    cat('
-      library(logger)
-      log_layout(layout_glue_generator("{namespace} / {fn} / {call}"))
-      f <- function() log_info("foobar")
-      g <- f
-      g()', file = t)
-    expect_equal(
-        system(paste('Rscript', t), intern = TRUE),
-        'R_GlobalEnv / g / g()')
-    unlink(t)
-
-})
-
 test_that('called from package', {
     devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
     log_layout(layout_simple)
