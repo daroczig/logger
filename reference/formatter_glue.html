@@ -140,7 +140,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>formatter_glue</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>formatter_glue</span>(<span class='no'>...</span>, <span class='kw'>.envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,6 +148,10 @@
     <tr>
       <th>...</th>
       <td><p>passed to <code>glue</code> for the text interpolation</p></td>
+    </tr>
+    <tr>
+      <th>.envir</th>
+      <td><p>original frame of the <code>.call</code> calling function where the formatter function is to be evaluated and that is used to look up the <code>namespace</code> as well via <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-topenv'>topenv</a></code></p></td>
     </tr>
     </table>
     
@@ -186,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
       </footer>
    </div>

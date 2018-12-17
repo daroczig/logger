@@ -186,6 +186,13 @@
     <p>For more details, see the Anatomy of a Log Request vignette at <a href='https://daroczig.github.io/logger/articles/anatomy.html'>https://daroczig.github.io/logger/articles/anatomy.html</a>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/do.call'>do.call</a></span>(<span class='no'>logger</span>, <span class='kw pkg'>logger</span><span class='kw ns'>:::</span><span class='no'>namespaces</span>$<span class='no'>global</span><span class='kw'>[[</span><span class='fl'>1</span>]])(<span class='no'>INFO</span>, <span class='fl'>42</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/do.call'>do.call</a></span>(<span class='no'>logger</span>, <span class='kw pkg'>logger</span><span class='kw ns'>:::</span><span class='no'>namespaces</span>$<span class='no'>global</span><span class='kw'>[[</span><span class='fl'>1</span>]])(<span class='no'>INFO</span>, <span class='st'>'{pi}'</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>42</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/do.call'>do.call</a></span>(<span class='no'>logger</span>, <span class='kw pkg'>logger</span><span class='kw ns'>:::</span><span class='no'>namespaces</span>$<span class='no'>global</span><span class='kw'>[[</span><span class='fl'>1</span>]])(<span class='no'>INFO</span>, <span class='st'>'{x}^2 = {x^2}'</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -199,7 +206,9 @@
       <li><a href="#note">Note</a></li>
 
       <li><a href="#references">References</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -210,7 +219,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
       </footer>
    </div>
