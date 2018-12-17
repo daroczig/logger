@@ -25,15 +25,16 @@ If you are writing such a function or a generator function returning a log messa
 
 ## Custom log layout rendering functions
 
-The layout functions return the log record and take two arguments:
+The layout functions return the log record and take at least two arguments:
 
 - the log level and
 - a message already formatted as a string by a log message formatter function
+- the namespace, calling function and environment of the log request automatically collected by `?log_level`
 
 Such layout rendering function can be as simple as the default `?layout_simple`:
 
 ```r
-layout_simple <- function(level, msg) {
+layout_simple <- function(level, msg, ...) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }
 ```
