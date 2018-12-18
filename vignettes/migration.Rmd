@@ -281,6 +281,17 @@ log_info('hi', 84/2)
 ```
 </div>
 
+For even better compatibility, there's also `?formatter_logging` that not only relies on `sprintf` when the first argument is a string, but will log the call and the result as well when the log object is an R expression:
+
+```{r}
+log_formatter(formatter_logging)
+log_info('42')
+log_info(42)
+log_info(4+2)
+log_info('foo %s', 'bar')
+log_info(12, 1+1, 2 * 2)
+```
+
 ```{r echo=FALSE, results='hide'}
 log_formatter(formatter_glue)
 ```
@@ -317,7 +328,7 @@ Both packages support using different logging namespaces and stacking loggers wi
 
 ```{r}
 library(logger)
-log_formatter(formatter_sprintf)
+log_formatter(formatter_logging)
 log_layout(layout_logging)
 logdebug <- log_debug
 loginfo <- log_info
@@ -327,6 +338,66 @@ logerror <- log_error
 loginfo('Hello from logger in a logging theme ...')
 logwarn('... where the default log message formatter is %s', 'sprintf', namespace = 'foobar')
 ```
+
+## log4r
+
+The [`log4r`](https://cran.r-project.org/package=log4r) package provides an object-oriented approach for logging in R, so the logger object is to be passed to the log calls -- unlike in the `logger` package.
+
+### Initialize
+
+So thus it's important to create a logging object in `log4r` before being able to log messages, while that's automatically done in `logger:
+
+<div class="comparison"><package>log4r</package>
+```{r}
+library(log4r)
+logger <- create.logger(logfile = stdout(), level = "INFO")
+```
+</div>
+<div class="comparison"><package>logger</package>
+```{r}
+library(logger)
+```
+</div>
+
+Please note that in the background, `logger` does have a concept of logger objects, but that's behind the scene and the user does not have to specify / reference it. On the other hand, if you wish, you can do that via the `namespace` concept of `logger` -- more on that later.
+
+### Logging functions
+
+While `logger` has a `log_` prefix for all logging functions, `log4r` has lowercase functions names referring to the log level, which takes a logging object and the log message:
+
+<div class="comparison"><package>log4r</package>
+```{r}
+info(logger, 'hi there')
+warn(logger, 'watch out')
+```
+</div>
+<div class="comparison"><package>logger</package>
+```{r}
+log_info('hi there')
+log_warn('watch out')
+```
+</div>
+
+As you can see the default layout of the messages is a bit different in the two packages.
+
+### Log levels
+
+Both packages are based on `log4j`, and `log4r` provides `DEBUG`, `INFO`, `WARN`, `ERROR` and `FATAL`, while `logger` also adds `TRACE` and `SUCCESS` on the top of these.
+
+To change the log level threshold, use the `level` function on the logging object in `log4r`, while it's `log_level` in `logger`.
+
+### Log record layout and formatter functions
+
+The `log4r` provides a `logformat` argument in `create.logger` that can be used to override the default formatting, while `logger` provides formatter and layout functions for a flexible log record design.
+
+### Log record destination
+
+By default, `log4r` logs to a file that can be set to `stoud` to write to the console, while `logger` writes to the console by default, but logging to files via the `appender_file` functions is also possible -- besides a number of other log record destinations as well.
+
+### Hierarchical logging and performance
+
+Creating objects is the `log4r` way of handling multiple log environments, while `logger` handles that via `namespace`s.
+
 ## loggit
 
 Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=loggit) -- capturing `message`, `warning` and `stop` function messages, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to be used as message hooks feed `logger`.

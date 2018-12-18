@@ -22,7 +22,7 @@ fail_on_missing_package <- function(pkg) {
 #' Returns the name of the top level environment from which the logger was called
 #' @return string
 #' @keywords internal
-#' @param .envir call environment
-top_env_name <- function(.envir = parent.frame()) {
-    environmentName(topenv(.envir))
+#' @param .topenv call environment
+top_env_name <- function(.topenv = parent.frame()) {
+    environmentName(topenv(.topenv))
 }

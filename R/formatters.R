@@ -3,9 +3,9 @@
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_paste <- structure(function(..., .envir = parent.frame()) {
-    eval(paste(...), envir = .envir)
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    eval(paste(...), envir = .topenv)
 }, generator = quote(formatter_paste()))
 
 
@@ -15,9 +15,9 @@ formatter_paste <- structure(function(..., .envir = parent.frame()) {
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_sprintf <- structure(function(fmt, ..., .envir = parent.frame()) {
-    eval(sprintf(fmt, ...), envir = .envir)
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    eval(sprintf(fmt, ...), envir = .topenv)
 }, generator = quote(formatter_sprintf()))
 
 
@@ -27,10 +27,10 @@ formatter_sprintf <- structure(function(fmt, ..., .envir = parent.frame()) {
 #' @return character vector
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue <- structure(function(..., .envir = parent.frame()) {
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
-    as.character(glue::glue(..., .envir = .envir))
+    as.character(glue::glue(..., .envir = .topenv))
 }, generator = quote(formatter_glue()))
 
 
@@ -55,8 +55,8 @@ formatter_glue <- structure(function(..., .envir = parent.frame()) {
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}", c('foo', 'bar'))
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}
-formatter_glue_or_sprintf <- structure(function(msg, ..., .envir = parent.frame()) {
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
 
@@ -79,7 +79,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .envir = parent.frame(
     if (length(sprintfparams) > 0) {
         sprintfparams[vapply(sprintfparams, is.null, logical(1))] <- 'NULL'
         msg <- tryCatch(
-            do.call(sprintf, c(msg, sprintfparams), envir = .envir),
+            do.call(sprintf, c(msg, sprintfparams), envir = .topenv),
             error = function(e) msg)
     }
 
@@ -87,7 +87,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .envir = parent.frame(
     fail_on_missing_package('glue')
     msg <- tryCatch(
         as.character(sapply(msg, function(msg) {
-            do.call(glue::glue, c(msg, glueparams), envir = .envir)
+            do.call(glue::glue, c(msg, glueparams), envir = .topenv)
         }, USE.NAMES = FALSE)),
         error = function(e) msg)
 
@@ -111,3 +111,36 @@ skip_formatter <- function(message, ...) {
     }
     structure(message, skip_formatter = TRUE)
 }
+
+
+#' Mimic the default formatter used in the \pkg{logging} package
+#'
+#' The \pkg{logging} package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then \code{\link{sprintf}} is being called -- otherwise it does something like \code{\link{log_eval}} and logs the R expression(s) and the result(s) as well.
+#' @examples \dontrun{
+#' log_formatter(formatter_logging)
+#' log_info('42')
+#' log_info(42)
+#' log_info(4+2)
+#' log_info('foo %s', 'bar')
+#' log_info('vector %s', 1:3)
+#' log_info(12, 1+1, 2 * 2)
+#' }
+#' @param ... string and further params passed to \code{sprintf} or R expressions to be evaluated
+#' @inheritParams log_level
+#' @return character vector
+#' @export
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
+formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+
+    params <- list(...)
+    .logcall <- substitute(.logcall)
+
+    if (is.character(params[[1]])) {
+        return(do.call(sprintf, params, envir = .topenv))
+    }
+
+    sapply(1:length(params), function(i) {
+        paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ': ')
+    })
+
+}, generator = quote(formatter_logging()))

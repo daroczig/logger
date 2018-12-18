@@ -4,12 +4,17 @@
 \alias{formatter_paste}
 \title{Concatenate R objects into a character vector via \code{paste}}
 \usage{
-formatter_paste(..., .envir = parent.frame())
+formatter_paste(..., .logcall = sys.call(), .topcall = sys.call(-1),
+  .topenv = parent.frame())
 }
 \arguments{
 \item{...}{passed to \code{paste}}
 
-\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
+\item{.logcall}{the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)}
+
+\item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
+
+\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
 character vector
@@ -18,5 +23,5 @@ character vector
 Concatenate R objects into a character vector via \code{paste}
 }
 \seealso{
-This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
+This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
 }

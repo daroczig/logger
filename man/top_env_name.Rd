@@ -4,10 +4,10 @@
 \alias{top_env_name}
 \title{Returns the name of the top level environment from which the logger was called}
 \usage{
-top_env_name(.envir = parent.frame())
+top_env_name(.topenv = parent.frame())
 }
 \arguments{
-\item{.envir}{call environment}
+\item{.topenv}{call environment}
 }
 \value{
 string

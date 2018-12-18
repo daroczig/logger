@@ -75,6 +75,22 @@ test_that('glue+sprintf works', {
 
 })
 
+test_that('formatter_logging works', {
+
+    log_formatter(formatter_logging)
+    expect_output(log_info('42'), '42')
+    expect_output(log_info(42), '42')
+    expect_output(log_info(4+2), '4 \\+ 2')
+    expect_output(log_info(4+2), '6')
+    expect_output(log_info('foo %s', 'bar'), 'foo bar')
+    expect_output(log_info(12, 100+100, 2*2), '12')
+    expect_output(log_info(12, 100+100, 2*2), '100 \\+ 100')
+    expect_output(log_info(12, 100+100, 2*2), '200')
+    expect_output(log_info(12, 100+100, 2*2), '2 \\* 2')
+    expect_output(log_info(12, 100+100, 2*2), '4')
+
+})
+
 ## cleanup
 rm(everything)
 rm(f)

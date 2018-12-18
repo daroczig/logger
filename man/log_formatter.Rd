@@ -7,7 +7,7 @@
 log_formatter(formatter, namespace = "global", index = 1)
 }
 \arguments{
-\item{formatter}{function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}}
+\item{formatter}{function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}}
 
 \item{namespace}{logger namespace}
 

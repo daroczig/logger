@@ -21,7 +21,7 @@ The log message formatter function should be able to take any number of R object
 
 This transformer function can be as simple as calling `paste`, `glue` or `sprintf` or something complex as well, eg looking up user attributes of a user id mentioned in a log record etc.
 
-When writing a custom formatter function, it should also accept the original log request's environment as `.envir`, which can be used to find the relevant variables in your formatter.
+When writing a custom formatter function, it should also accept the original logging function call as `.logcall`, the parent call as `.topcall` and the log request's environment as `.topenv`, which can be used to find the relevant variables in your formatter.
 
 If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_formatter` can pretty-print that instead of the unnamed function body. See the [`formatters.R`](https://github.com/daroczig/logger/blob/master/R/formatters.R) file for more examples.
 
@@ -31,7 +31,7 @@ The layout functions return the log record and take at least two arguments:
 
 - the log level and
 - a message already formatted as a string by a log message formatter function
-- the namespace (as `namespace`), calling function (as `.call`) and environment (as `.envir`) of the log request automatically collected by `?log_level`
+- the namespace (as `namespace`), calling function (as `.topcall`) and its environment (as `.topenv`) of the log request, and the actual log call (as `.logcall`) automatically collected by `?log_level`
 
 Such layout rendering function can be as simple as the default `?layout_simple`:
 
