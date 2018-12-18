@@ -12,6 +12,10 @@ namespaces <- new.env()
             formatter = formatter_sprintf,
             appender  = appender_console))
 
+    if (requireNamespace('glue', quietly = TRUE)) {
+        log_formatter(formatter_glue, namespace = 'global', index = 1)
+    }
+
 }
 
 .onAttach <- function(libname, pkgname) {
@@ -19,8 +23,6 @@ namespaces <- new.env()
     ## warn user about using sprintf instead of glue due to missing dependency
     if (!requireNamespace('glue', quietly = TRUE)) {
         packageStartupMessage('logger: As the "glue" R package is not installed, using "sprintf" as the default log message formatter instead of "glue".')
-    } else {
-        log_formatter(formatter_glue, namespace = 'global', index = 1)
     }
 
 }
