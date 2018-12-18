@@ -111,7 +111,7 @@
 <a href="#custom-log-message-formatter-functions" class="anchor"></a>Custom log message formatter functions</h2>
 <p>The log message formatter function should be able to take any number of R objects and convert those into a character vector that is safe to pass to the layout function.</p>
 <p>This transformer function can be as simple as calling <code>paste</code>, <code>glue</code> or <code>sprintf</code> or something complex as well, eg looking up user attributes of a user id mentioned in a log record etc.</p>
-<p>When writing a custom formatter function, it should also accept the original log request’s environment as <code>.envir</code>, which can be used to find the relevant variables in your formatter.</p>
+<p>When writing a custom formatter function, it should also accept the original logging function call as <code>.logcall</code>, the parent call as <code>.topcall</code> and the log request’s environment as <code>.topenv</code>, which can be used to find the relevant variables in your formatter.</p>
 <p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://www.rdocumentation.org/packages/base/topics/match.call">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_formatter.html">?log_formatter</a></code> can pretty-print that instead of the unnamed function body. See the <a href="https://github.com/daroczig/logger/blob/master/R/formatters.R"><code>formatters.R</code></a> file for more examples.</p>
 </div>
 <div id="custom-log-layout-rendering-functions" class="section level2">
@@ -121,7 +121,7 @@
 <ul>
 <li>the log level and</li>
 <li>a message already formatted as a string by a log message formatter function</li>
-<li>the namespace (as <code>namespace</code>), calling function (as <code>.call</code>) and environment (as <code>.envir</code>) of the log request automatically collected by <code><a href="../reference/log_level.html">?log_level</a></code>
+<li>the namespace (as <code>namespace</code>), calling function (as <code>.topcall</code>) and its environment (as <code>.topenv</code>) of the log request, and the actual log call (as <code>.logcall</code>) automatically collected by <code><a href="../reference/log_level.html">?log_level</a></code>
 </li>
 </ul>
 <p>Such layout rendering function can be as simple as the default <code><a href="../reference/layout_simple.html">?layout_simple</a></code>:</p>

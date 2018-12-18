@@ -141,7 +141,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>layout_glue_colors</span>(<span class='no'>level</span>, <span class='no'>msg</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>.call</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>), <span class='kw'>.envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
+  <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(), <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>),
+  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,12 +160,16 @@
       <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></td>
     </tr>
     <tr>
-      <th>.call</th>
-      <td><p>R expression from which the logging function was called (optionally used by the logging layout)</p></td>
+      <th>.logcall</th>
+      <td><p>the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)</p></td>
     </tr>
     <tr>
-      <th>.envir</th>
-      <td><p>original frame of the <code>.call</code> calling function where the formatter function is to be evaluated and that is used to look up the <code>namespace</code> as well via <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-topenv'>topenv</a></code></p></td>
+      <th>.topcall</th>
+      <td><p>R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)</p></td>
+    </tr>
+    <tr>
+      <th>.topenv</th>
+      <td><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></td>
     </tr>
     </table>
     

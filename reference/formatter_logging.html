@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Apply <code>sprintf</code> to convert R objects into a character vector — formatter_sprintf • logger</title>
+<title>Mimic the default formatter used in the <span class="pkg">logging</span> package — formatter_logging • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Apply <code>sprintf</code> to convert R objects into a character vector — formatter_sprintf" />
+<meta property="og:title" content="Mimic the default formatter used in the <span class="pkg">logging</span> package — formatter_logging" />
 
-<meta property="og:description" content="Apply sprintf to convert R objects into a character vector" />
+<meta property="og:description" content="The logging package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then sprintf is being called -- otherwise it does something like log_eval and logs the R expression(s) and the result(s) as well." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,30 +129,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Apply <code>sprintf</code> to convert R objects into a character vector</h1>
+    <h1>Mimic the default formatter used in the <span class="pkg">logging</span> package</h1>
     <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/formatters.R'><code>R/formatters.R</code></a></small>
-    <div class="hidden name"><code>formatter_sprintf.Rd</code></div>
+    <div class="hidden name"><code>formatter_logging.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Apply <code>sprintf</code> to convert R objects into a character vector</p>
+    <p>The <span class="pkg">logging</span> package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then <code><a href='https://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code> is being called -- otherwise it does something like <code><a href='log_eval.html'>log_eval</a></code> and logs the R expression(s) and the result(s) as well.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>formatter_sprintf</span>(<span class='no'>fmt</span>, <span class='no'>...</span>, <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(),
-  <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>), <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>formatter_logging</span>(<span class='no'>...</span>, <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(), <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>),
+  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fmt</th>
-      <td><p>passed to <code>sprintf</code></p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>passed to <code>sprintf</code></p></td>
+      <td><p>string and further params passed to <code>sprintf</code> or R expressions to be evaluated</p></td>
     </tr>
     <tr>
       <th>.logcall</th>
@@ -174,9 +170,19 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='formatter_logging.html'>formatter_logging</a></code></p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='log_formatter.html'>log_formatter</a></span>(<span class='no'>formatter_logging</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'42'</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>4</span>+<span class='fl'>2</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'foo %s'</span>, <span class='st'>'bar'</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'vector %s'</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>12</span>, <span class='fl'>1</span>+<span class='fl'>1</span>, <span class='fl'>2</span> * <span class='fl'>2</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -186,7 +192,9 @@
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
