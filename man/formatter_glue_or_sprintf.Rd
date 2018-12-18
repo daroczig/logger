@@ -4,14 +4,19 @@
 \alias{formatter_glue_or_sprintf}
 \title{Apply \code{glue} and \code{sprintf}}
 \usage{
-formatter_glue_or_sprintf(msg, ..., .envir = parent.frame())
+formatter_glue_or_sprintf(msg, ..., .logcall = sys.call(),
+  .topcall = sys.call(-1), .topenv = parent.frame())
 }
 \arguments{
 \item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}}
 
 \item{...}{passed to \code{glue} for the text interpolation}
 
-\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
+\item{.logcall}{the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)}
+
+\item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
+
+\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{\link{logger::top_env_name}}}
 }
 \value{
 character vector

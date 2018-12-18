@@ -75,6 +75,8 @@ test_that('glue+sprintf works', {
 
 })
 
+## log_formatter(formatter_logging); log_info('122'); log_info('foo %s', 'bar')
+
 ## cleanup
 rm(everything)
 rm(f)

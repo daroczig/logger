@@ -24,7 +24,8 @@
 #' @return list
 #' @export
 #' @seealso \code{\link{layout_glue_generator}}
-get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_,
+                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     sysinfo <- Sys.info()
 
@@ -32,9 +33,9 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 
         ns        = namespace,
         ans       = fallback_namespace(namespace),
-        topenv    = top_env_name(.envir),
-        fn        = deparse(.call[[1]]),
-        call      = deparse(.call),
+        topenv    = top_env_name(.topenv),
+        fn        = deparse(.topcall[[1]]),
+        call      = deparse(.topcall),
 
         time      = Sys.time(),
         levelr    = log_level,
@@ -82,7 +83,8 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 
     force(format)
 
-    structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+    structure(function(level, msg, namespace = NA_character_,
+                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
         fail_on_missing_package('glue')
         if (!inherits(level, 'loglevel')) {
@@ -90,7 +92,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
         }
 
         with(get_logger_meta_variables(log_level = level, namespace = namespace,
-                                       .call = .call, .envir = .envir),
+                                       .logcall = .logcall, .topcall = .topcall, .topenv = .topenv),
              glue::glue(format))
 
     }, generator = deparse(match.call()))
@@ -104,7 +106,8 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
-layout_simple <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+layout_simple <- structure(function(level, msg, namespace = NA_character_,
+                                    .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }, generator = quote(layout_simple()))
 
@@ -123,8 +126,11 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_, .call
 #' devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
 #' logger_tester_function(INFO, 42)
 #' }
-layout_logging <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
-    meta <- get_logger_meta_variables(log_level = level, namespace = namespace, .call = .call, .envir = .envir)
+layout_logging <- structure(function(level, msg, namespace = NA_character_,
+                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    meta <- get_logger_meta_variables(
+        log_level = level, namespace = namespace,
+        .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
     paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ',
            attr(level, 'level'), ':',
            ifelse(meta$ns == 'global', '', meta$ns), ':',
@@ -182,11 +188,14 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 
     force(fields)
 
-    structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+    structure(function(level, msg, namespace = NA_character_,
+                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
         fail_on_missing_package('jsonlite')
 
-        json <- get_logger_meta_variables(log_level = level, namespace = namespace, .call = .call, .envir = .envir)
+        json <- get_logger_meta_variables(
+            log_level = level, namespace = namespace,
+            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 
         sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
 
