@@ -113,7 +113,7 @@ In the above example, first, `42` was converted to a string by the `?formatter_g
 An example of another layout function writing the same log messages in JSON:
 
 ```{r}
-log_layout(layout_json)
+log_layout(layout_json())
 log_info(42)
 log_info('The answer is {42}')
 log_info('The answers are {1:5}')

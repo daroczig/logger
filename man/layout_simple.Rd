@@ -4,13 +4,15 @@
 \alias{layout_simple}
 \title{Format a log record by concatenating the log level, timestamp and message}
 \usage{
-layout_simple(level, msg, .call = sys.call(-1),
-  .envir = parent.frame())
+layout_simple(level, msg, namespace = NA_character_,
+  .call = sys.call(-1), .envir = parent.frame())
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}
 
 \item{msg}{string message}
+
+\item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
 
 \item{.call}{R expression from which the logging function was called (optionally used by the logging layout)}
 

@@ -4,11 +4,13 @@
 \alias{get_logger_meta_variables}
 \title{Collect useful information about the logging environment to be used in log messages}
 \usage{
-get_logger_meta_variables(log_level = NULL, .call = sys.call(-1),
-  .envir = parent.frame())
+get_logger_meta_variables(log_level = NULL, namespace = NA_character_,
+  .call = sys.call(-1), .envir = parent.frame())
 }
 \arguments{
 \item{log_level}{log level as per \code{\link{log_levels}}}
+
+\item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
 
 \item{.call}{R expression from which the logging function was called (optionally used by the logging layout)}
 
@@ -31,7 +33,9 @@ Available variables to be used in the log formatter functions, eg in \code{\link
   \item user: name of the real user id as reported by \code{Sys.info}
   \item pid: the process identification number of the R session
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
-  \item namespace: R package (if any) calling the logging function
+  \item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
+  \item ans: same as \code{ns} if there's a defined \code{\link{logger}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
+  \item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
   \item call: parent call (if any) calling the logging function
   \item fn: function's (if any) name calling the logging function
 }

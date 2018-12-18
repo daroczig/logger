@@ -21,19 +21,22 @@ The log message formatter function should be able to take any number of R object
 
 This transformer function can be as simple as calling `paste`, `glue` or `sprintf` or something complex as well, eg looking up user attributes of a user id mentioned in a log record etc.
 
-If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_formatter` can pretty-print that instead of the unnamed function body. See the `formatters.R` file for more examples.
+When writing a custom formatter function, it should also accept the original log request's environment as `.envir`, which can be used to find the relevant variables in your formatter.
+
+If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_formatter` can pretty-print that instead of the unnamed function body. See the [`formatters.R`](https://github.com/daroczig/logger/blob/master/R/formatters.R) file for more examples.
 
 ## Custom log layout rendering functions
 
-The layout functions return the log record and take two arguments:
+The layout functions return the log record and take at least two arguments:
 
 - the log level and
 - a message already formatted as a string by a log message formatter function
+- the namespace (as `namespace`), calling function (as `.call`) and environment (as `.envir`) of the log request automatically collected by `?log_level`
 
 Such layout rendering function can be as simple as the default `?layout_simple`:
 
 ```r
-layout_simple <- function(level, msg) {
+layout_simple <- function(level, msg, ...) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }
 ```
@@ -42,13 +45,13 @@ Or much more complex, eg looking up the hostname of the machine, public IP addre
 
 Your easiest option to set up a custom layout is calling `?layout_glue_generator` that comes with a nice API being able to access a bunch of meta-information on the log request via `?get_logger_meta_variables`. For such example, see the [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html) vignette.
 
-If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_layout` can pretty-print that instead of the unnamed function body. See the `layout.R` file for more examples.
+If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_layout` can pretty-print that instead of the unnamed function body. See the [`layouts.R`](https://github.com/daroczig/logger/blob/master/R/layouts.R) file for more examples.
 
 ## Custom log record appenders
 
 The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console (`?appender_console`) or to a local file (`?appender_file`), or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message (`?appender_slack`).
 
-If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_appender` can pretty-print that instead of the unnamed function body. See the `appenders.R` file for more examples.
+If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_appender` can pretty-print that instead of the unnamed function body. See the [`appenders.R`](https://github.com/daroczig/logger/blob/master/R/appenders.R) file for more examples.
 
 An example for a custom appender delivering log messages to a database table:
 

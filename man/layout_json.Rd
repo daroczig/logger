@@ -2,32 +2,29 @@
 % Please edit documentation in R/layouts.R
 \name{layout_json}
 \alias{layout_json}
-\title{Format a log message as JSON}
+\title{Generate log layout function rendering JSON}
 \usage{
-layout_json(level, msg, .call = sys.call(-1), .envir = parent.frame())
+layout_json(fields = c("time", "level", "ns", "ans", "topenv", "fn",
+  "node", "arch", "os_name", "os_release", "os_version", "pid", "user",
+  "msg"))
 }
 \arguments{
-\item{level}{log level, see \code{\link{log_levels}} for more details}
-
-\item{msg}{string message}
-
-\item{.call}{R expression from which the logging function was called (optionally used by the logging layout)}
-
-\item{.envir}{original frame of the \code{.call} calling function where the formatter function is to be evaluated and that is used to look up the \code{namespace} as well via \code{\link{topenv}}}
+\item{fields}{character vector of field names to be included in the JSON}
 }
 \value{
 character vector
 }
 \description{
-Format a log message as JSON
+Generate log layout function rendering JSON
 }
 \note{
 This functionality depends on the \pkg{jsonlite} package.
 }
 \examples{
 \dontrun{
-log_layout(layout_json)
-log_info(42:44)
+log_layout(layout_json())
+log_info(42)
+log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 }
 }
 \seealso{

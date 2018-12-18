@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_glue_generator}
 \alias{layout_glue_generator}
-\title{Generate logging function using common variables available via glue syntax}
+\title{Generate log layout function using common variables available via glue syntax}
 \usage{
 
   layout_glue_generator(format = "{level} [{format(time, \\"\%Y-\%d-\%m \%H:\%M:\%S\\")}] {msg}")
@@ -23,7 +23,7 @@ function taking \code{level} and \code{msg} arguments - keeping the original cal
 \examples{
 \dontrun{
 example_layout <- layout_glue_generator(
-  format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+  format = '{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}')
 example_layout(INFO, 'try {runif(1)}')
 
 log_layout(example_layout)

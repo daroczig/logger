@@ -18,8 +18,8 @@ Get or set log record layout
 }
 \examples{
 \dontrun{
-log_layout(layout_json)
-log_info(42:44)
+log_layout(layout_json())
+log_info(42)
 }
 }
 \seealso{

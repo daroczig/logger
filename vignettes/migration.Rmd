@@ -83,13 +83,13 @@ flog.info('hi again')
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_layout(layout_json)
+log_layout(layout_json())
  
 log_info('hi again')
 ```
 </div>
 
-As you can see, `futile.logger` provided a bit more information about the log request in a structured way, while `logger` simply used the default parameters, but it's easy to extend the latter with the calling function name, `pid` of the R session, name of the machine etc -- see `?get_logger_meta_variables` for a more complete list. `logger` also ships a but more layouts, eg `?layout_glue_colors` or roll out your own via the `?layout_glue_generator` factory function.
+As you can see, `logger` provided a bit more information about the log request compared to `futile.logger`, but it's easy to change the list of fields to be used in the JSON -- see `?get_logger_meta_variables` for a complete list of variable names to be passed to `?layout_json`. `logger` also ships a lot more layouts, eg `?layout_glue_colors` or roll out your own via the `?layout_glue_generator` factory function.
 
 ```{r echo=FALSE, results='hide'}
 flog.layout(layout.simple)
@@ -215,7 +215,7 @@ log_warn('watch out')
 
 As you can see above, the default layout of the log messages is somewhat different:
 
-* `logging` starts with the timestamp that is followed by the log level and the message separated by two colons
+* `logging` starts with the timestamp that is followed by the log level, optional namespace and the message separated by colons
 * `logger` starts with the log level, followed by the timestamp between brackets and then the message
 
 ### Log levels

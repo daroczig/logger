@@ -14,14 +14,14 @@ test_that('colorized layout', {
 })
 
 context('JSON layout')
-log_layout(layout_json)
+log_layout(layout_json())
 test_that('JSON layout', {
     expect_equal(fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
-    expect_equal(fromJSON(capture.output(log_info('foobar')))$message, 'foobar')
+    expect_equal(fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
 })
 
 context('safe-checks')
-test_that('mist throw errors', {
+test_that('must throw errors', {
 
     expect_error(layout_simple(FOOBAR))
     expect_error(layout_simple(42))

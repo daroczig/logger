@@ -19,7 +19,7 @@ log_level(level, ..., namespace = NA_character_, .call = sys.call(-1),
 
 \item{...}{R objects that can be converted to a character vector via the active message formatter function}
 
-\item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called.}
+\item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
 
 \item{.call}{R expression from which the logging function was called (optionally used by the logging layout)}
 
@@ -42,7 +42,9 @@ log_debug('hi there')
 
 ## multiple lines
 log_info('ok {1:3} + {1:3} = {2*(1:3)}')
-log_layout(layout_json)
+
+log_layout(layout_json())
+log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 
 ## note for the JSON output, glue is not automatically applied
 log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))

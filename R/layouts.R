@@ -13,7 +13,9 @@
 #'   \item user: name of the real user id as reported by \code{Sys.info}
 #'   \item pid: the process identification number of the R session
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
-#'   \item namespace: R package (if any) calling the logging function
+#'   \item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
+#'   \item ans: same as \code{ns} if there's a defined \code{\link{logger}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
+#'   \item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
 #'   \item call: parent call (if any) calling the logging function
 #'   \item fn: function's (if any) name calling the logging function
 #' }
@@ -22,13 +24,15 @@
 #' @return list
 #' @export
 #' @seealso \code{\link{layout_glue_generator}}
-get_logger_meta_variables <- function(log_level = NULL, .call = sys.call(-1), .envir = parent.frame()) {
+get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
     sysinfo <- Sys.info()
 
     list(
 
-        namespace = top_env_name(.envir),
+        ns        = namespace,
+        ans       = fallback_namespace(namespace),
+        topenv    = top_env_name(.envir),
         fn        = deparse(.call[[1]]),
         call      = deparse(.call),
 
@@ -55,7 +59,7 @@ get_logger_meta_variables <- function(log_level = NULL, .call = sys.call(-1), .e
 }
 
 
-#' Generate logging function using common variables available via glue syntax
+#' Generate log layout function using common variables available via glue syntax
 #'
 #' \code{format} is passed to \code{glue} with access to the below variables:
 #' \itemize{
@@ -67,7 +71,7 @@ get_logger_meta_variables <- function(log_level = NULL, .call = sys.call(-1), .e
 #' @export
 #' @examples \dontrun{
 #' example_layout <- layout_glue_generator(
-#'   format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#'   format = '{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}')
 #' example_layout(INFO, 'try {runif(1)}')
 #'
 #' log_layout(example_layout)
@@ -78,14 +82,16 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 
     force(format)
 
-    structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame()) {
+    structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
         fail_on_missing_package('glue')
         if (!inherits(level, 'loglevel')) {
             stop('Invalid log level, see ?log_levels')
         }
 
-        with(get_logger_meta_variables(level, .call = .call, .envir = .envir), glue::glue(format))
+        with(get_logger_meta_variables(log_level = level, namespace = namespace,
+                                       .call = .call, .envir = .envir),
+             glue::glue(format))
 
     }, generator = deparse(match.call()))
 
@@ -98,7 +104,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
-layout_simple <- structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame()) {
+layout_simple <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }, generator = quote(layout_simple()))
 
@@ -109,8 +115,20 @@ layout_simple <- structure(function(level, msg, .call = sys.call(-1), .envir = p
 #' @return character vector
 #' @export
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
-layout_logging <- structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame()) {
-    paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ', attr(level, 'level'), '::', msg)
+#' @examples \dontrun{
+#' log_layout(layout_logging)
+#' log_info(42)
+#' log_info(42, namespace = 'everything')
+#'
+#' devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
+#' logger_tester_function(INFO, 42)
+#' }
+layout_logging <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+    meta <- get_logger_meta_variables(log_level = level, namespace = namespace, .call = .call, .envir = .envir)
+    paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ',
+           attr(level, 'level'), ':',
+           ifelse(meta$ns == 'global', '', meta$ns), ':',
+           msg)
 }, generator = quote(layout_simple()))
 
 
@@ -149,26 +167,29 @@ layout_glue_colors <- layout_glue_generator(
         '{grayscale_by_log_level(msg, levelr)}'))
 
 
-#' Format a log message as JSON
-#' @inheritParams layout_simple
+#' Generate log layout function rendering JSON
+#' @param fields character vector of field names to be included in the JSON
 #' @return character vector
 #' @export
 #' @examples \dontrun{
-#' log_layout(layout_json)
-#' log_info(42:44)
+#' log_layout(layout_json())
+#' log_info(42)
+#' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
-layout_json <- structure(function(level, msg, .call = sys.call(-1), .envir = parent.frame()) {
+layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user', 'msg')) {
 
-    fail_on_missing_package('jsonlite')
+    force(fields)
 
-    sapply(msg, function(msg)
-        jsonlite::toJSON(list(
-            level = attr(level, 'level'),
-            timestamp = Sys.time(),
-            message = as.character(msg)
-        ), auto_unbox = TRUE))
+    structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
-}, generator = quote(layout_json()))
-## TODO need for smarter JSON logger
+        fail_on_missing_package('jsonlite')
+
+        json <- get_logger_meta_variables(log_level = level, namespace = namespace, .call = .call, .envir = .envir)
+
+        sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
+
+    }, generator = deparse(match.call()))
+
+}
