@@ -29,5 +29,6 @@ Suggests:
   microbenchmark,
   logging,
   futile.logger,
+  log4r,
   parallel
 VignetteBuilder: knitr
