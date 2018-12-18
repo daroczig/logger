@@ -5,6 +5,8 @@ library(jsonlite)
 ## save current settings so that we can reset later
 layout <- log_layout()
 
+context('custom layouts')
+
 log_layout(layout_glue_colors)
 test_that('colorized layout', {
     expect_output(log_info('foobar'), 'INFO')
@@ -13,14 +15,12 @@ test_that('colorized layout', {
     expect_output(log_error('foobar'), 'foobar')
 })
 
-context('JSON layout')
 log_layout(layout_json())
 test_that('JSON layout', {
     expect_equal(fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
     expect_equal(fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
 })
 
-context('safe-checks')
 test_that('must throw errors', {
 
     expect_error(layout_simple(FOOBAR))
@@ -34,6 +34,13 @@ test_that('must throw errors', {
 
 })
 
+log_layout(layout_logging)
+test_that('logging layout', {
+    expect_output(log_info('foobar'), 'INFO')
+    expect_output(log_info('foo', namespace = 'bar'), 'foo')
+    expect_output(log_info('foo', namespace = 'bar'), 'bar')
+    expect_output(log_info('foo', namespace = 'bar'), 'INFO:bar:foo')
+})
 
 ## reset settings
 log_layout(layout)
