@@ -5,7 +5,7 @@ library(jsonlite)
 ## save current settings so that we can reset later
 layout <- log_layout()
 
-context('custom layouts')
+context('layouts')
 
 log_layout(layout_glue_colors)
 test_that('colorized layout', {
