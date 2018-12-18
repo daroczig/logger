@@ -29,6 +29,15 @@ test_that('log thresholds', {
     expect_output(log_trace('foo'), 'TRACE.*foo')
 })
 
+log_threshold(WARN)
+test_that('with log thresholds', {
+    expect_output(with_log_threshold(log_fatal('foo'), threshold = TRACE), 'FATAL.*foo')
+    expect_output(with_log_threshold(log_error('foo'), threshold = TRACE), 'ERROR.*foo')
+    expect_output(with_log_threshold(log_error('foo'), threshold = FATAL), NA)
+    expect_output(with_log_threshold(log_error('foo'), threshold = INFO), 'ERROR.*foo')
+    expect_output(with_log_threshold(log_debug('foo'), threshold = INFO), NA)
+})
+
 log_layout(layout_glue_generator('{level} {msg}'))
 log_threshold(TRACE)
 test_that('simple glue layout with no threshold', {
