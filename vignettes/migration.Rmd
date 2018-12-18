@@ -281,6 +281,18 @@ log_info('hi', 84/2)
 ```
 </div>
 
+For even better compatibility, there's also `?formatter_logging` that not only relies on `sprintf` when the first argument is a string, but will log the call and the result as well when the log object is an R expression:
+
+```{r}
+log_formatter(formatter_logging)
+log_info('42')
+log_info(42)
+log_info(4+2)
+log_info('foo %s', 'bar')
+log_info('a vector: %s', c(4, 2))
+log_info(12, 1+1, 2 * 2)
+```
+
 ```{r echo=FALSE, results='hide'}
 log_formatter(formatter_glue)
 ```
@@ -317,7 +329,7 @@ Both packages support using different logging namespaces and stacking loggers wi
 
 ```{r}
 library(logger)
-log_formatter(formatter_sprintf)
+log_formatter(formatter_logging)
 log_layout(layout_logging)
 logdebug <- log_debug
 loginfo <- log_info
