@@ -120,48 +120,54 @@
 <p>the <strong>environment</strong> and meta-information of the log request, eg actual timestamp, hostname of the computer, the name of the user running the R script, the pid of the R process, calling function and the actual call etc.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span>(<span class="dt">log_level =</span> INFO)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">f</span>()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; $namespace</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; [1] "R_GlobalEnv"</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; $ns</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; [1] NA</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; $fn</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; [1] "f"</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; $ans</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; [1] "global"</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; $call</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; [1] "f()"</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; $topenv</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; [1] "R_GlobalEnv"</span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; $time</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; [1] "2018-12-17 01:19:43 UTC"</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; $fn</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; [1] "f"</span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; $levelr</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [1] 400</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; attr(,"level")</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; [1] "INFO"</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; attr(,"class")</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; [1] "loglevel" "integer" </span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; $level</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; [1] "INFO"</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; $pid</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; [1] 25608</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; $call</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [1] "f()"</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; $time</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; [1] "2018-12-18 00:50:09 UTC"</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; $levelr</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; [1] 400</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; attr(,"level")</span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; [1] "INFO"</span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; attr(,"class")</span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; [1] "loglevel" "integer" </span></a>
 <a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; $node</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; [1] "travis-job-3d7a5c4d-924f-4462-acfc-9db3fcc7a67a"</span></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; $level</span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; [1] "INFO"</span></a>
 <a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt; $arch</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt; [1] "x86_64"</span></a>
+<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt; $pid</span></a>
+<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt; [1] 15402</span></a>
 <a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="co">#&gt; $os_name</span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">#&gt; [1] "Linux"</span></a>
+<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="co">#&gt; $node</span></a>
+<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">#&gt; [1] "travis-job-62f43a61-15c0-444f-ad2c-0cb474627479"</span></a>
 <a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">#&gt; $os_release</span></a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co">#&gt; [1] "4.4.0-101-generic"</span></a>
+<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">#&gt; $arch</span></a>
+<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co">#&gt; [1] "x86_64"</span></a>
 <a class="sourceLine" id="cb2-39" data-line-number="39"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="co">#&gt; $os_version</span></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co">#&gt; [1] "#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017"</span></a>
+<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="co">#&gt; $os_name</span></a>
+<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co">#&gt; [1] "Linux"</span></a>
 <a class="sourceLine" id="cb2-42" data-line-number="42"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="co">#&gt; $user</span></a>
-<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="co">#&gt; [1] "travis"</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="co">#&gt; $os_release</span></a>
+<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="co">#&gt; [1] "4.4.0-101-generic"</span></a>
+<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-46" data-line-number="46"><span class="co">#&gt; $os_version</span></a>
+<a class="sourceLine" id="cb2-47" data-line-number="47"><span class="co">#&gt; [1] "#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017"</span></a>
+<a class="sourceLine" id="cb2-48" data-line-number="48"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-49" data-line-number="49"><span class="co">#&gt; $user</span></a>
+<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="co">#&gt; [1] "travis"</span></a></code></pre></div>
 </li>
 <li>
 <p>a <strong>logger definition</strong> to process the log request, including</p>
@@ -177,7 +183,7 @@
 <a class="sourceLine" id="cb3-7" data-line-number="7">ERROR <span class="op">&lt;=</span><span class="st"> </span>INFO</a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; [1] TRUE</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; ERROR [2018-12-17 01:19:43] Oops</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; ERROR [2018-12-18 00:50:09] Oops</span></a></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and converts those into actual log message(s) to be then passed to the <code>layout</code> function for the log record rendering – such as <code>paste</code>, <code>sprintf</code>, <code>glue</code> or eg the below custom example:</p>
@@ -208,7 +214,7 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(appender_console)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span>)</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'I am a higher level log message that is very likely to be printed'</span>)</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; WARN [2018-12-17 01:19:43] I am a higher level log message that is very likely to be printed</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; WARN [2018-12-18 00:50:09] I am a higher level log message that is very likely to be printed</span></a></code></pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied to a logging namespace, and one log request might trigger multiple <code>logger</code> definitions as well (stacking). Find more information on these in the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a> vignette.</p>
   </div>
 

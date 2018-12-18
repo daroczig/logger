@@ -140,8 +140,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>layout_glue_colors</span>(<span class='no'>level</span>, <span class='no'>msg</span>, <span class='kw'>.call</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>),
-  <span class='kw'>.envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>layout_glue_colors</span>(<span class='no'>level</span>, <span class='no'>msg</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>.call</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>), <span class='kw'>.envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,6 +153,10 @@
     <tr>
       <th>msg</th>
       <td><p>string message</p></td>
+    </tr>
+    <tr>
+      <th>namespace</th>
+      <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></td>
     </tr>
     <tr>
       <th>.call</th>

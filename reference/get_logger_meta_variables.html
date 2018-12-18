@@ -44,7 +44,9 @@ os_version: Operating System's version
 user: name of the real user id as reported by Sys.info
 pid: the process identification number of the R session
 node: name by which the machine is known on the network as reported by Sys.info
-namespace: R package (if any) calling the logging function
+ns: namespace usually defaults to global or the name of the holding R package of the calling the logging function
+ans: same as ns if there's a defined logger for the namespace, otherwise a fallback namespace (eg usually global)
+topenv: the name of the top environment from which the parent call was called (eg R package name or GlobalEnv)
 call: parent call (if any) calling the logging function
 fn: function's (if any) name calling the logging function
 " />
@@ -163,15 +165,17 @@ fn: function's (if any) name calling the logging function
 <li><p>user: name of the real user id as reported by <code>Sys.info</code></p></li>
 <li><p>pid: the process identification number of the R session</p></li>
 <li><p>node: name by which the machine is known on the network as reported by <code>Sys.info</code></p></li>
-<li><p>namespace: R package (if any) calling the logging function</p></li>
+<li><p>ns: namespace usually defaults to <code>global</code> or the name of the holding R package of the calling the logging function</p></li>
+<li><p>ans: same as <code>ns</code> if there's a defined <code><a href='logger.html'>logger</a></code> for the namespace, otherwise a fallback namespace (eg usually <code>global</code>)</p></li>
+<li><p>topenv: the name of the top environment from which the parent call was called (eg R package name or <code>GlobalEnv</code>)</p></li>
 <li><p>call: parent call (if any) calling the logging function</p></li>
 <li><p>fn: function's (if any) name calling the logging function</p></li>
 </ul>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_logger_meta_variables</span>(<span class='kw'>log_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.call</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>),
-  <span class='kw'>.envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>get_logger_meta_variables</span>(<span class='kw'>log_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>.call</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span>(-<span class='fl'>1</span>), <span class='kw'>.envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,6 +183,10 @@ fn: function's (if any) name calling the logging function
     <tr>
       <th>log_level</th>
       <td><p>log level as per <code><a href='log_levels.html'>log_levels</a></code></p></td>
+    </tr>
+    <tr>
+      <th>namespace</th>
+      <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></td>
     </tr>
     <tr>
       <th>.call</th>
