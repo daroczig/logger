@@ -31,7 +31,7 @@ log_info(42)
 log_info(42, namespace = 'everything')
 
 devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
-logger_tester_function(INFO, 42) ## TODO this is off?
+logger_tester_function(INFO, 42)
 }
 }
 \seealso{

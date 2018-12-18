@@ -13,9 +13,9 @@
 #'   \item user: name of the real user id as reported by \code{Sys.info}
 #'   \item pid: the process identification number of the R session
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
-#'   \item ns: namespace as \code{global} or the name of the holding R package of the calling the logging function
+#'   \item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
 #'   \item ans: same as \code{ns} if there's a defined \code{\link{logger}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
-#'   \item env: the name of the environment from which the parent call was called (eg R package name or \code{GlobalEnv})
+#'   \item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
 #'   \item call: parent call (if any) calling the logging function
 #'   \item fn: function's (if any) name calling the logging function
 #' }
@@ -27,12 +27,14 @@
 get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
     sysinfo <- Sys.info()
+    topenv  <- top_env_name(.envir)
+    ns      <- ifelse(!is.na(namespace), namespace, ifelse(topenv == 'R_GlobalEnv', 'global', topenv))
 
     list(
 
-        ns        = ifelse(!is.na(namespace), namespace, 'global'),
-        ans       = fallback_namespace(namespace),
-        env       = top_env_name(.envir),
+        ns        = ns,
+        ans       = fallback_namespace(ns),
+        topenv    = topenv,
         fn        = deparse(.call[[1]]),
         call      = deparse(.call),
 
@@ -71,7 +73,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 #' @export
 #' @examples \dontrun{
 #' example_layout <- layout_glue_generator(
-#'   format = '{node}/{pid}/{ns}/{ans}/{fn} {time} {level}: {msg}')
+#'   format = '{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}')
 #' example_layout(INFO, 'try {runif(1)}')
 #'
 #' log_layout(example_layout)
@@ -121,12 +123,13 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_, .call
 #' log_info(42, namespace = 'everything')
 #'
 #' devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
-#' logger_tester_function(INFO, 42) ## TODO this is off?
+#' logger_tester_function(INFO, 42)
 #' }
 layout_logging <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+    meta <- get_logger_meta_variables(log_level = level, namespace = namespace, .call = .call, .envir = .envir)
     paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ',
            attr(level, 'level'), ':',
-           ifelse(is.na(namespace) | namespace == 'global', '', namespace), ':',
+           ifelse(meta$ns == 'global', '', meta$ns), ':',
            msg)
 }, generator = quote(layout_simple()))
 

@@ -33,9 +33,9 @@ Available variables to be used in the log formatter functions, eg in \code{\link
   \item user: name of the real user id as reported by \code{Sys.info}
   \item pid: the process identification number of the R session
   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
-  \item ns: namespace as \code{global} or the name of the holding R package of the calling the logging function
+  \item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
   \item ans: same as \code{ns} if there's a defined \code{\link{logger}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
-  \item env: the name of the environment from which the parent call was called (eg R package name or \code{GlobalEnv})
+  \item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
   \item call: parent call (if any) calling the logging function
   \item fn: function's (if any) name calling the logging function
 }

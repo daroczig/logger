@@ -8,7 +8,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     t <- tempfile()
     cat('
       library(logger)
-      log_layout(layout_glue_generator("{ns} / {env} / {fn} / {call}"))
+      log_layout(layout_glue_generator("{ns} / {topenv} / {fn} / {call}"))
       log_info("foobar")', file = t)
     expect_equal(
         system(paste('Rscript', t), intern = TRUE),
@@ -18,7 +18,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     t <- tempfile()
     cat('
       library(logger)
-      log_layout(layout_glue_generator("{ns} / {env} / {fn} / {call}"))
+      log_layout(layout_glue_generator("{ns} / {topenv} / {fn} / {call}"))
       f <- function() log_info("foobar")
       f()', file = t)
     expect_equal(
@@ -29,7 +29,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     t <- tempfile()
     cat('
       library(logger)
-      log_layout(layout_glue_generator("{ns} / {env} / {fn} / {call}"))
+      log_layout(layout_glue_generator("{ns} / {topenv} / {fn} / {call}"))
       f <- function() log_info("foobar")
       g <- function() f()
       g()', file = t)
@@ -41,7 +41,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     t <- tempfile()
     cat('
       library(logger)
-      log_layout(layout_glue_generator("{ns} / {env} / {fn} / {call}"))
+      log_layout(layout_glue_generator("{ns} / {topenv} / {fn} / {call}"))
       f <- function() log_info("foobar")
       g <- f
       g()', file = t)
