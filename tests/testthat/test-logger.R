@@ -7,6 +7,28 @@ layout <- log_layout()
 
 context('loggers')
 
+log_threshold(WARN)
+test_that('log levels', {
+    expect_output(log_fatal('foo'), 'FATAL.*foo')
+    expect_output(log_error('foo'), 'ERROR.*foo')
+    expect_output(log_warn('foo'), 'WARN.*foo')
+    expect_output(log_success('foo'), NA)
+    expect_output(log_info('foo'), NA)
+    expect_output(log_debug('foo'), NA)
+    expect_output(log_trace('foo'), NA)
+})
+
+log_threshold(TRACE)
+test_that('log thresholds', {
+    expect_output(log_fatal('foo'), 'FATAL.*foo')
+    expect_output(log_error('foo'), 'ERROR.*foo')
+    expect_output(log_warn('foo'), 'WARN.*foo')
+    expect_output(log_success('foo'), 'SUCCESS.*foo')
+    expect_output(log_info('foo'), 'INFO.*foo')
+    expect_output(log_debug('foo'), 'DEBUG.*foo')
+    expect_output(log_trace('foo'), 'TRACE.*foo')
+})
+
 log_layout(layout_glue_generator('{level} {msg}'))
 log_threshold(TRACE)
 test_that('simple glue layout with no threshold', {

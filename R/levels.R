@@ -21,7 +21,7 @@ ERROR <- structure(200L, level = 'ERROR', class = c('loglevel', 'integer'))
 #' @export
 WARN  <- structure(300L, level = 'WARN', class = c('loglevel', 'integer'))
 #' @export
-SUCCESS  <- structure(250L, level = 'SUCCESS', class = c('loglevel', 'integer'))
+SUCCESS <- structure(350L, level = 'SUCCESS', class = c('loglevel', 'integer'))
 #' @export
 INFO  <- structure(400L, level = 'INFO', class = c('loglevel', 'integer'))
 #' @export
