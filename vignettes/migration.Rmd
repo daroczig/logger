@@ -289,7 +289,6 @@ log_info('42')
 log_info(42)
 log_info(4+2)
 log_info('foo %s', 'bar')
-log_info('a vector: %s', c(4, 2))
 log_info(12, 1+1, 2 * 2)
 ```
 
