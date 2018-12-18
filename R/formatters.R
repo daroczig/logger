@@ -132,4 +132,4 @@ formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = s
         paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ': ')
     })
 
-}, generator = quote(formatter_sprintf()))
+}, generator = quote(formatter_logging()))

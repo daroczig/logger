@@ -16,7 +16,7 @@ formatter_sprintf(fmt, ..., .logcall = sys.call(),
 
 \item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
 
-\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{\link{logger::top_env_name}}}
+\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
 character vector
