@@ -242,6 +242,12 @@ get_logger_definitions <- function(namespace = NA_character_, .envir = parent.fr
 #' }
 log_level <- function(level, ..., namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
+    ## guess namespace
+    if (is.na(namespace)) {
+        topenv    <- top_env_name(.envir)
+        namespace <-  ifelse(topenv == 'R_GlobalEnv', 'global', topenv)
+    }
+
     definitions <- get_logger_definitions(namespace, .envir = .envir)
 
     for (definition in definitions) {

@@ -27,14 +27,12 @@
 get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
     sysinfo <- Sys.info()
-    topenv  <- top_env_name(.envir)
-    ns      <- ifelse(!is.na(namespace), namespace, ifelse(topenv == 'R_GlobalEnv', 'global', topenv))
 
     list(
 
-        ns        = ns,
-        ans       = fallback_namespace(ns),
-        topenv    = topenv,
+        ns        = namespace,
+        ans       = fallback_namespace(namespace),
+        topenv    = top_env_name(.envir),
         fn        = deparse(.call[[1]]),
         call      = deparse(.call),
 
