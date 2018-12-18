@@ -80,6 +80,7 @@ Although there are multiple pretty good options already hosted on CRAN when it c
 - [`loggit`](https://cran.r-project.org/package=loggit): capture `message`, `warning` and `stop` function messages in a JSON file
 - [`log4r`](https://cran.r-project.org/package=log4r): `log4j`-based, object-oriented logger
 - [`rsyslog`](https://cran.r-project.org/package=rsyslog): logging to `syslog` on 'POSIX'-compatible operating systems
+- [`lumberjack`](https://cran.r-project.org/package=lumberjack): provides a special operator to log changes in data
 
 Also many more work-in-progress R packages hosted on eg GitHub, such as 
 
@@ -87,6 +88,7 @@ Also many more work-in-progress R packages hosted on eg GitHub, such as
 - https://github.com/nfultz/tron
 - https://github.com/metrumresearchgroup/logrrr
 - https://github.com/lorenzwalthert/drogger
+- https://github.com/s-fleck/yog
 
 But some/most of these packages are
 
