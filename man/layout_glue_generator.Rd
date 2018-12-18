@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_glue_generator}
 \alias{layout_glue_generator}
-\title{Generate logging function using common variables available via glue syntax}
+\title{Generate log layout function using common variables available via glue syntax}
 \usage{
 
   layout_glue_generator(format = "{level} [{format(time, \\"\%Y-\%d-\%m \%H:\%M:\%S\\")}] {msg}")

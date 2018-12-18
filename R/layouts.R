@@ -59,7 +59,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 }
 
 
-#' Generate logging function using common variables available via glue syntax
+#' Generate log layout function using common variables available via glue syntax
 #'
 #' \code{format} is passed to \code{glue} with access to the below variables:
 #' \itemize{
@@ -167,26 +167,29 @@ layout_glue_colors <- layout_glue_generator(
         '{grayscale_by_log_level(msg, levelr)}'))
 
 
-#' Format a log message as JSON
-#' @inheritParams layout_simple
+#' Generate log layout function rendering JSON
+#' @param fields character vector of field names to be included in the JSON
 #' @return character vector
 #' @export
 #' @examples \dontrun{
-#' log_layout(layout_json)
-#' log_info(42:44)
+#' log_layout(layout_json())
+#' log_info(42)
+#' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
-layout_json <- structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
+layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user', 'msg')) {
 
-    fail_on_missing_package('jsonlite')
+    force(fields)
 
-    sapply(msg, function(msg)
-        jsonlite::toJSON(list(
-            level = attr(level, 'level'),
-            timestamp = Sys.time(),
-            message = as.character(msg)
-        ), auto_unbox = TRUE))
+    structure(function(level, msg, namespace = NA_character_, .call = sys.call(-1), .envir = parent.frame()) {
 
-}, generator = quote(layout_json()))
-## TODO need for smarter JSON logger
+        fail_on_missing_package('jsonlite')
+
+        json <- get_logger_meta_variables(log_level = level, namespace = namespace, .call = .call, .envir = .envir)
+
+        sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
+
+    }, generator = deparse(match.call()))
+
+}

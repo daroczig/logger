@@ -110,8 +110,8 @@ log_threshold <- function(level, namespace = 'global', index = 1) {
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
-#' log_layout(layout_json)
-#' log_info(42:44)
+#' log_layout(layout_json())
+#' log_info(42)
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 log_layout <- function(layout, namespace = 'global', index = 1) {
@@ -235,7 +235,9 @@ get_logger_definitions <- function(namespace = NA_character_, .envir = parent.fr
 #'
 #' ## multiple lines
 #' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
-#' log_layout(layout_json)
+#'
+#' log_layout(layout_json())
+#' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 #'
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))

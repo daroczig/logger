@@ -14,7 +14,7 @@ test_that('colorized layout', {
 })
 
 context('JSON layout')
-log_layout(layout_json)
+log_layout(layout_json())
 test_that('JSON layout', {
     expect_equal(fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
     expect_equal(fromJSON(capture.output(log_info('foobar')))$message, 'foobar')
