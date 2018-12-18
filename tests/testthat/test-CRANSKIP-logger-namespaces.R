@@ -54,7 +54,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     cat('
       library(logger)
       log_layout(layout_glue_generator("{ns} / {ans} / {topenv} / {fn} / {call}"))
-      devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
+      devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"), quiet = TRUE)
       logger_info_tester_function("foobar")',
       file = t)
     expect_equal(
@@ -66,7 +66,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     cat('
       library(logger)
       log_layout(layout_glue_generator("{ns} / {ans} / {topenv} / {fn} / {call}"))
-      devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
+      devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"), quiet = TRUE)
       log_threshold(INFO, namespace = "logger.tester")
       logger_info_tester_function("foobar")',
       file = t)
