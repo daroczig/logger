@@ -3,7 +3,7 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
  ![CRAN](https://www.r-pkg.org/badges/version/logger) [![Build Status](https://travis-ci.org/daroczig/logger.svg?branch=master)](https://travis-ci.org/daroczig/logger) [![Code Coverage](https://codecov.io/gh/daroczig/logger/branch/master/graph/badge.svg)](https://codecov.io/gh/daroczig/logger)
 
-A modern and flexibly logging utility for R -- heavily inspired by the `futile.logger` R package and `logging` Python module.
+A lightweight, modern and flexibly logging utility for R -- heavily inspired by the `futile.logger` R package and `logging` Python module.
 
 ## Installation
 
@@ -121,6 +121,6 @@ Check out the main documentation site at https://daroczig.github.io/logger or th
 * [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html)
 * [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html)
 * [Writing Custom Logger Extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
-* [Migration Guide](https://daroczig.github.io/logger/articles/migration.html)
+* [Migration Guide from other logging packages](https://daroczig.github.io/logger/articles/migration.html)
 * [Logging from R Packages](https://daroczig.github.io/logger/articles/r_packages.html)
 * [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html)
