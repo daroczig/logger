@@ -20,7 +20,18 @@ formatter_logging(..., .logcall = sys.call(), .topcall = sys.call(-1),
 character vector
 }
 \description{
-Mimic the default formatter used in the \pkg{logging} package
+The \pkg{logging} package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then \code{\link{sprintf}} is being called -- otherwise it does something like \code{\link{log_eval}} and logs the R expression(s) and the result(s) as well.
+}
+\examples{
+\dontrun{
+log_formatter(formatter_logging)
+log_info('42')
+log_info(42)
+log_info(4+2)
+log_info('foo \%s', 'bar')
+log_info('vector \%s', 1:3)
+log_info(12, 1+1, 2 * 2)
+}
 }
 \seealso{
 This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
