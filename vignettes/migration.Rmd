@@ -325,7 +325,7 @@ logwarn <- log_warn
 logerror <- log_error
 
 loginfo('Hello from logger in a logging theme ...')
-logwarn('... where the default log message formatter is %s', 'sprintf')
+logwarn('... where the default log message formatter is %s', 'sprintf', namespace = 'foobar')
 ```
 ## loggit
 
