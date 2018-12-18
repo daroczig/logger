@@ -265,6 +265,7 @@ log_level <- function(level, ..., namespace = NA_character_,
         log_arg <- list(...)
 
         log_arg$level  <- level
+        log_arg$.logcall <- .logcall
         log_arg$.topcall  <- if(!is.null(.topcall)) {
             .topcall
         } else {

@@ -111,3 +111,25 @@ skip_formatter <- function(message, ...) {
     }
     structure(message, skip_formatter = TRUE)
 }
+
+
+#' Mimic the default formatter used in the \pkg{logging} package
+#' @param ... string and further params passed to \code{sprintf} or R expressions to be evaluated
+#' @inheritParams log_level
+#' @return character vector
+#' @export
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
+formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+
+    params <- list(...)
+    .logcall <- substitute(.logcall)
+
+    if (is.character(params[[1]])) {
+        return(do.call(sprintf, params, envir = .topenv))
+    }
+
+    sapply(1:length(params), function(i) {
+        paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ': ')
+    })
+
+}, generator = quote(formatter_sprintf()))
