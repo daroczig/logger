@@ -11,7 +11,8 @@
 \alias{log_trace}
 \title{Log a message with given log level}
 \usage{
-log_level(level, ...)
+log_level(level, ..., namespace = NA_character_,
+  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 
 log_trace(...)
 

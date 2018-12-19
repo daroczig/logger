@@ -229,7 +229,8 @@ get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.f
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
 #' @usage
-#' log_level(level, ...)
+#' log_level(level, ..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
 #' log_trace(...)
 #'
