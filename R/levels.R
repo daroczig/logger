@@ -16,7 +16,7 @@
 #' @aliases log_levels FATAL ERROR WARN SUCCESS INFO DEBUG TRACE
 #' @rdname log_levels
 #' @usage
-#' ?log_levels
+#' log_levels
 #'
 #' TRACE
 #'

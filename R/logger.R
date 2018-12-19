@@ -281,6 +281,7 @@ log_level <- function(level, ..., namespace = NA_character_,
     }
 }
 
+## @@ TODO list these functions in the index
 
 #' @export
 log_fatal <- function(...) {
