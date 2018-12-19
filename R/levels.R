@@ -2,6 +2,7 @@
 #'
 #' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.
 #'
+#' List of supported log levels:
 #' \enumerate{
 #'   \item \code{FATAL} severe error that will prevent the application from continuing
 #'   \item \code{ERROR} An error in the application, possibly recoverable
@@ -14,6 +15,22 @@
 #' @references \url{https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
 #' @aliases log_levels FATAL ERROR WARN SUCCESS INFO DEBUG TRACE
 #' @rdname log_levels
+#' @usage
+#' ?log_levels
+#'
+#' TRACE
+#'
+#' DEBUG
+#'
+#' INFO
+#'
+#' SUCCESS
+#'
+#' WARN
+#'
+#' ERROR
+#'
+#' FATAL
 #' @export
 FATAL <- structure(100L, level = 'FATAL', class = c('loglevel', 'integer'))
 #' @export

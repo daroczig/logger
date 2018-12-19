@@ -13,12 +13,27 @@
 \title{Log levels}
 \format{An object of class \code{loglevel} (inherits from \code{integer}) of length 1.}
 \usage{
+?log_levels
+
+TRACE
+
+DEBUG
+
+INFO
+
+SUCCESS
+
+WARN
+
+ERROR
+
 FATAL
 }
 \description{
 The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.
 }
 \details{
+List of supported log levels:
 \enumerate{
   \item \code{FATAL} severe error that will prevent the application from continuing
   \item \code{ERROR} An error in the application, possibly recoverable
