@@ -16,6 +16,9 @@ div.comparison p package {
     font-family: monospace;
     color: brown;
 }
+div#tocnav ul.nav li ul {
+    padding-left: 10px;
+}
 ```
 
 ```{r setup, include = FALSE}
