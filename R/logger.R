@@ -228,6 +228,22 @@ get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.f
 #' @seealso \code{\link{logger}}
 #' @export
 #' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
+#' @usage
+#' log_level(level, ...)
+#'
+#' log_trace(...)
+#'
+#' log_debug(...)
+#'
+#' log_info(...)
+#'
+#' log_success(...)
+#'
+#' log_warn(...)
+#'
+#' log_error(...)
+#'
+#' log_fatal(...)
 #' @examples \dontrun{
 #' log_level(INFO, 'hi there')
 #' log_info('hi there')
@@ -280,8 +296,6 @@ log_level <- function(level, ..., namespace = NA_character_,
 
     }
 }
-
-## @@ TODO list these functions in the index
 
 #' @export
 log_fatal <- function(...) {

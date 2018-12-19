@@ -13,8 +13,6 @@
 \title{Log levels}
 \format{An object of class \code{loglevel} (inherits from \code{integer}) of length 1.}
 \usage{
-log_levels
-
 TRACE
 
 DEBUG
