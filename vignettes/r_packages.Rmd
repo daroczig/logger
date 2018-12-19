@@ -7,6 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r pkgchecks, echo = FALSE}
+## check if other logger packages are available and exit if not
+for (pkg in c('devtools')) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+        warning(paste(pkg, 'package not available, so cannot build this vignette'))
+        knitr::knit_exit()
+    }
+}
+```
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

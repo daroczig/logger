@@ -26,9 +26,9 @@ Suggests:
   rmarkdown,
   devtools,
   roxygen2,
-  microbenchmark,
+  parallel
+Enhances:
   logging,
   futile.logger,
-  log4r,
-  parallel
+  log4r
 VignetteBuilder: knitr

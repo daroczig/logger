@@ -3,6 +3,12 @@ sudo: false
 cache:
 - packages
 
+r_packages:
+- logging
+- futile.logger
+- log4r
+- microbenchmark
+
 after_success:
 - Rscript -e 'library(devtools);install();test()'
 - Rscript -e 'covr::codecov()'

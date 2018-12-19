@@ -90,13 +90,6 @@ test_that('built in variables: namespace', {
     expect_output(log_info('bar', namespace = 'foo'), 'global')
 })
 
-test_that('called from package', {
-    devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
-    log_layout(layout_simple)
-    expect_output(logger_tester_function(INFO, 'x = '), 'INFO')
-    expect_output(logger_info_tester_function('everything = '), 'INFO')
-})
-
 test_that('print.level', {
     expect_equal(capture.output(print(INFO)), 'Log level: INFO')
 })

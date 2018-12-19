@@ -10,7 +10,7 @@ A lightweight, modern and flexibly logging utility for R -- heavily inspired by 
 `logger` is not on CRAN yet, please install from GitHub:
 
 ```r
-devtools::install_github('daroczig/logger')
+remotes::install_github('daroczig/logger')
 ```
 
 ## Quick example
