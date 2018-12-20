@@ -8,7 +8,7 @@ log_layout(layout_glue_generator('{level} {msg}'))
 
 context('log_eval')
 test_that('single line', {
-    expect_output(log_eval(4, INFO), "INFO '4' => '4'")
+    expect_output(log_eval(4, INFO), sprintf("INFO %s => %s", shQuote(4), shQuote(4)))
 })
 
 test_that('multi line', {
@@ -18,12 +18,14 @@ test_that('multi line', {
 })
 
 test_that('invisible return', {
-    expect_output(log_eval(require(logger), INFO), "INFO 'require\\(logger\\)' => 'TRUE'")
+    expect_output(log_eval(require(logger), INFO), sprintf("INFO %s => %s",
+                                                           shQuote('require\\(logger\\)'),
+                                                           shQuote(TRUE)))
 })
 
 log_threshold(TRACE)
 test_that('lower log level', {
-    expect_output(log_eval(4), "TRACE '4' => '4'")
+    expect_output(log_eval(4), sprintf("TRACE %s => %s", shQuote(4), shQuote(4)))
 })
 
 ## reset settings
