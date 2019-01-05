@@ -8,7 +8,8 @@ Title: A Lightweight, Modern and Flexible Logging Utility
 Description: Inspired by the the 'futile.logger' R package and 'logging' Python module, this utility provides a flexible and extensible way of formatting and delivering log messages with low overhead.
 Version: 0.1
 Date: 2018-12-20
-URL: https://github.com/daroczig/logger
+URL: https://daroczig.github.io/logger
+BugReports: https://github.com/daroczig/logger/issues
 Encoding: UTF-8
 RoxygenNote: 6.1.0
 License: AGPL-3
