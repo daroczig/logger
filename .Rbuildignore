@@ -7,3 +7,4 @@ _pkgdown.yml
 .backup
 .*.graphml$
 logo.R
+cran-comments.md
