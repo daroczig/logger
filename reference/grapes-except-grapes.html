@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log levels — FATAL • logger</title>
+<title>Try to evaluate an expressions and evaluate another expression on exception — %except% • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Log levels — FATAL" />
+<meta property="og:title" content="Try to evaluate an expressions and evaluate another expression on exception — %except%" />
 
-<meta property="og:description" content="The standard Apache logj4 log levels plus a custom level for SUCCESS. For the full list of these log levels and suggested usage, check the below Details." />
+<meta property="og:description" content="Try to evaluate an expressions and evaluate another expression on exception" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,63 +124,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log levels</h1>
+    <h1>Try to evaluate an expressions and evaluate another expression on exception</h1>
     
-    <div class="hidden name"><code>log_levels.Rd</code></div>
+    <div class="hidden name"><code>grapes-except-grapes.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The standard Apache logj4 log levels plus a custom level for <code>SUCCESS</code>. For the full list of these log levels and suggested usage, check the below Details.</p>
+    <p>Try to evaluate an expressions and evaluate another expression on exception</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>TRACE</span>
-
-<span class='no'>DEBUG</span>
-
-<span class='no'>INFO</span>
-
-<span class='no'>SUCCESS</span>
-
-<span class='no'>WARN</span>
-
-<span class='no'>ERROR</span>
-
-<span class='no'>FATAL</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>loglevel</code> (inherits from <code>integer</code>) of length 1.</p>
+    <pre class="usage"><span class='no'>try</span> <span class='kw'>%except%</span> <span class='no'>except</span></pre>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>List of supported log levels:</p><ol>
-<li><p><code>FATAL</code> severe error that will prevent the application from continuing</p></li>
-<li><p><code>ERROR</code> An error in the application, possibly recoverable</p></li>
-<li><p><code>WARN</code> An event that might possible lead to an error</p></li>
-<li><p><code>SUCCESS</code> An explicit success event above the INFO level that you want to log</p></li>
-<li><p><code>INFO</code> An event for informational purposes</p></li>
-<li><p><code>DEBUG</code> A general debugging event</p></li>
-<li><p><code>TRACE</code> A fine-grained debug message, typically capturing the flow through the application.</p></li>
-</ol>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>try</th>
+      <td><p>R expression</p></td>
+    </tr>
+    <tr>
+      <th>except</th>
+      <td><p>fallback R expression to be evaluated if <code>try</code> fails</p></td>
+    </tr>
+    </table>
     
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p><a href='https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html'>https://logging.apache.org/log4j/2.0/log4j-api/apidocs/org/apache/logging/log4j/Level.html</a>, <a href='https://logging.apache.org/log4j/2.x/manual/customloglevels.html'>https://logging.apache.org/log4j/2.x/manual/customloglevels.html</a></p>
+    <p>Suppress log messages in the <code>except</code> namespace if you don't want to throw a <code>WARN</code> log message on the exception branch.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>everything</span> <span class='kw'>%except%</span> <span class='fl'>42</span></div><div class='output co'>#&gt; WARN [2019-01-05 20:33:15] Running '42' as 'everything' failed: "object 'everything' not found"</div><div class='output co'>#&gt; [1] 42</div><div class='input'><span class='no'>everything</span> <span class='kw'>&lt;-</span> <span class='st'>'640kb'</span>
+<span class='no'>everything</span> <span class='kw'>%except%</span> <span class='fl'>42</span></div><div class='output co'>#&gt; [1] "640kb"</div><div class='input'>
+<span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; WARN [2019-01-05 20:33:15] Running 'sum(1:10)' as 'Mean(1:10)' failed: 'could not find function "Mean"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>))</div><div class='output co'>#&gt; WARN [2019-01-05 20:33:15] Running '(sum(1:10)/length(1:10))' as 'Mean(1:10)' failed: 'could not find function "Mean"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'>MEAN</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; WARN [2019-01-05 20:33:15] Running 'MEAN(1:10)' as 'Mean(1:10)' failed: 'could not find function "Mean"'
+#&gt; WARN [2019-01-05 20:33:15] Running 'mean(1:10)' as 'Mean(1:10) %except% MEAN(1:10)' failed: 'could not find function "MEAN"'</div><div class='output co'>#&gt; [1] 5.5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
-          </ul>
+      <li><a href="#note">Note</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
