@@ -4,10 +4,10 @@
 #' @export
 #' @note Suppress log messages in the \code{except} namespace if you don't want to throw a \code{WARN} log message on the exception branch.
 #' @examples
-#' xxx %except% 42
-#' xxx <- 13
-#' xxx %except% 42
-#' rm(xxx)
+#' everything %except% 42
+#' everything <- '640kb'
+#' everything %except% 42
+#'
 #' Mean(1:10) %except% sum(1:10) / length(1:10)
 #' Mean(1:10) %except% (sum(1:10) / length(1:10))
 #' Mean(1:10) %except% MEAN(1:10) %except% mean(1:10)
