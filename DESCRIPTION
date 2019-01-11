@@ -21,6 +21,7 @@ Suggests:
   crayon,
   slackr,
   RPushbullet,
+  telegram,
   testthat,
   covr,
   knitr,
