@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Try to evaluate an expressions and evaluate another expression on exception — %except% • logger</title>
+<title>Send log messages to a Telegram chat — appender_telegram • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Try to evaluate an expressions and evaluate another expression on exception — %except%" />
+<meta property="og:title" content="Send log messages to a Telegram chat — appender_telegram" />
 
-<meta property="og:description" content="Try to evaluate an expressions and evaluate another expression on exception" />
+<meta property="og:description" content="Send log messages to a Telegram chat" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,52 +124,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Try to evaluate an expressions and evaluate another expression on exception</h1>
+    <h1>Send log messages to a Telegram chat</h1>
     
-    <div class="hidden name"><code>grapes-except-grapes.Rd</code></div>
+    <div class="hidden name"><code>appender_telegram.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Try to evaluate an expressions and evaluate another expression on exception</p>
+    <p>Send log messages to a Telegram chat</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>try</span> <span class='kw'>%except%</span> <span class='no'>except</span></pre>
+    <pre class="usage"><span class='fu'>appender_telegram</span>(<span class='kw'>chat_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"TELEGRAM_CHAT_ID"</span>),
+  <span class='kw'>bot_token</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"TELEGRAM_BOT_TOKEN"</span>), <span class='kw'>parse_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>try</th>
-      <td><p>R expression</p></td>
+      <th>chat_id</th>
+      <td><p>Unique identifier for the target chat or username of the target channel (in the format @channelusername)</p></td>
     </tr>
     <tr>
-      <th>except</th>
-      <td><p>fallback R expression to be evaluated if <code>try</code> fails</p></td>
+      <th>bot_token</th>
+      <td><p>Telegram Authorization token</p></td>
+    </tr>
+    <tr>
+      <th>parse_mode</th>
+      <td><p>Message parse mode. Allowed values: Markdown or HTML</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>function taking <code>lines</code> argument</p>
+    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Suppress log messages in the <code>except</code> namespace if you don't want to throw a <code>WARN</code> log message on the exception branch.</p>
+    <p>This functionality depends on the <span class="pkg">telegram</span> package.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>This is generator function for <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_pushbullet.html'>appender_pushbullet</a></code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>everything</span> <span class='kw'>%except%</span> <span class='fl'>42</span></div><div class='output co'>#&gt; WARN [2019-01-12 08:23:43] Running '42' as 'everything' failed: "object 'everything' not found"</div><div class='output co'>#&gt; [1] 42</div><div class='input'><span class='no'>everything</span> <span class='kw'>&lt;-</span> <span class='st'>'640kb'</span>
-<span class='no'>everything</span> <span class='kw'>%except%</span> <span class='fl'>42</span></div><div class='output co'>#&gt; [1] "640kb"</div><div class='input'>
-<span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; WARN [2019-01-12 08:23:43] Running 'sum(1:10)' as 'Mean(1:10)' failed: 'could not find function "Mean"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>))</div><div class='output co'>#&gt; WARN [2019-01-12 08:23:43] Running '(sum(1:10)/length(1:10))' as 'Mean(1:10)' failed: 'could not find function "Mean"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'>MEAN</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; WARN [2019-01-12 08:23:43] Running 'MEAN(1:10)' as 'Mean(1:10)' failed: 'could not find function "Mean"'
-#&gt; WARN [2019-01-12 08:23:43] Running 'mean(1:10)' as 'Mean(1:10) %except% MEAN(1:10)' failed: 'could not find function "MEAN"'</div><div class='output co'>#&gt; [1] 5.5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#note">Note</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
