@@ -83,4 +83,31 @@ appender_pushbullet <- function(...) {
 
 }
 
+
+#' Send log messages to a Telegram chat
+#' @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+#' @param bot_token Telegram Authorization token
+#' @param parse_mode Message parse mode. Allowed values: Markdown or HTML
+#' @return function taking \code{lines} argument
+#' @export
+#' @note This functionality depends on the \pkg{telegram} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
+appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
+                              bot_token    = Sys.getenv('TELEGRAM_BOT_TOKEN'),
+                              parse_mode   = NULL) {
+
+    fail_on_missing_package('telegram')
+    force(chat_id)
+    force(bot_token)
+    force(parse_mode)
+
+    tb <- telegram::TGBot$new(token = bot_token)
+    structure(
+        function(lines) {
+            tb$sendMessage(text = lines, parse_mode = parse_mode, chat_id = chat_id)
+        }, generator = deparse(match.call()))
+
+}
+
+
 ## TODO other appenders: graylog, kinesis, datadog, cloudwatch, email via sendmailR, ES etc
