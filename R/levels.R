@@ -1,3 +1,5 @@
+log_levels_supported <- c('FATAL', 'ERROR', 'WARN', 'SUCCESS', 'INFO', 'DEBUG', 'TRACE')
+
 #' Log levels
 #'
 #' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.

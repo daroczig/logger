@@ -27,12 +27,9 @@
 logger <- function(threshold, formatter, layout, appender) {
 
     force(threshold)
+    threshold <- validate_log_level(threshold)
     force(layout)
     force(appender)
-
-    if (!inherits(threshold, 'loglevel')) {
-        stop('Invalid log level provided as threshold, see ?log_levels')
-    }
 
     function(level, ..., namespace = NA_character_, .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
@@ -103,7 +100,7 @@ log_threshold <- function(level, namespace = 'global', index = 1) {
         return(config$threshold)
     }
 
-    config$threshold <- level
+    config$threshold <- validate_log_level(level)
     configs[[min(index, length(config) + 1)]] <- config
     assign(namespace, configs, envir = namespaces)
 
@@ -281,7 +278,7 @@ log_level <- function(level, ..., namespace = NA_character_,
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 
-        log_arg$level  <- level
+        log_arg$level <- validate_log_level(level)
         log_arg$.logcall <- .logcall
         log_arg$.topcall  <- if(!is.null(.topcall)) {
             .topcall
@@ -297,6 +294,22 @@ log_level <- function(level, ..., namespace = NA_character_,
 
     }
 }
+
+
+#' Assure valid log level
+#' @param level \code{\link{log_levels}} object or string representation
+#' @return \code{\link{log_levels}} object
+#' @keywords internal
+validate_log_level <- function(level) {
+    if (inherits(level, 'loglevel')) {
+        return(level)
+    }
+    if (is.character(level) & level %in% log_levels_supported) {
+        return(get(level, envir = as.environment('package:logger')))
+    }
+    stop('Invalid log level', )
+}
+
 
 #' @export
 log_fatal <- function(...) {

@@ -11,6 +11,7 @@
 #' Mean(1:10) %except% sum(1:10) / length(1:10)
 #' Mean(1:10) %except% (sum(1:10) / length(1:10))
 #' Mean(1:10) %except% MEAN(1:10) %except% mean(1:10)
+#' Mean(1:10) %except% (MEAN(1:10) %except% mean(1:10))
 `%except%` <- function(try, except) {
 
     call <- sys.call(-1)
