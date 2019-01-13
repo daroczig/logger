@@ -1,6 +1,6 @@
 #' Check if R package can be loaded and fails loudly otherwise
 #' @param pkg string
-#' @keywords internal
+#' @export
 #' @examples \dontrun{
 #' f <- function() fail_on_missing_package('foobar')
 #' f()

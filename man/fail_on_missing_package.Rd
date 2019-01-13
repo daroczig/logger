@@ -20,4 +20,3 @@ g <- function() fail_on_missing_package('stats')
 g()
 }
 }
-\keyword{internal}
