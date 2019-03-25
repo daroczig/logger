@@ -74,3 +74,18 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
     }
 
 }
+
+
+#' Logs a long line to stand out from the console
+#' @param level log level
+#' @param separator character
+#' @export
+#' @examples
+#' log_separator()
+#' log_separator(ERROR, '!')
+log_separator <- function(level = INFO, separator = '=') {
+    log_level(
+        paste(rep(separator, 80 - 23 - nchar(attr(level, 'level'))), collapse = ''),
+        level = level)
+}
+
