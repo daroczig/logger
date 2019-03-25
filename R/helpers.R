@@ -89,3 +89,39 @@ log_separator <- function(level = INFO, separator = '=') {
         level = level)
 }
 
+
+#' Tic-toc logging
+#' @param ... passed to \code{log_level}
+#' @param level x
+#' @param namespace x
+#' @export
+#' @examples \dontrun{
+#' log_tictoc('warming up')
+#' Sys.sleep(0.1)
+#' log_tictoc('running')
+#' Sys.sleep(0.1)
+#' log_tictoc('running')
+#' Sys.sleep(runif(1))
+#' log_tictoc('and running')
+#' }
+#' @author Thanks to Neal Fultz for the idea and original implementation!
+log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
+
+    ns <- fallback_namespace(namespace)
+
+    on.exit({
+        assign(ns, toc, envir = tictocs)
+    })
+
+    nsenv <- get(fallback_namespace(namespace), envir = namespaces)
+    tic <- get0(ns, envir = tictocs, ifnotfound = Sys.time())
+    toc <- Sys.time()
+    tictoc <- difftime(toc, tic)
+
+    log_level(paste(ns, 'timer',
+                    ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
+                    round(tictoc, 2), attr(tictoc, 'units') , '-- '),
+              ..., level = level, namespace = namespace)
+
+}
+tictocs <- new.env()
