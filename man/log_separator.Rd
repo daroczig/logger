@@ -16,5 +16,5 @@ Logs a long line to stand out from the console
 }
 \examples{
 log_separator()
-log_separator(WARN, '!')
+log_separator(ERROR, '!')
 }
