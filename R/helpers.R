@@ -110,9 +110,9 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
     message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
     message <- sapply(message, function(m) {
         paste0(
-            '= ', m,
+            separator, ' ', m,
             paste(rep(' ', width - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
-            ' =')
+            ' ', separator)
     })
     log_level(skip_formatter(message), level = level)
 
