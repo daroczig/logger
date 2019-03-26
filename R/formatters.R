@@ -30,18 +30,7 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
-    as.character(
-        tryCatch(
-            glue::glue(..., .envir = .topenv),
-            error = function(e) {
-                stop(paste(
-                    '`glue` failed in `formatter_glue` on:\n\n',
-                    capture.output(str(...)),
-                    '\n\nRaw error message:\n\n',
-                    e$message,
-                    '\n\nPlease consider using another `log_formatter` or',
-                    '`skip_formatter` on strings with curly braces.'))
-            }))
+    as.character(glue::glue(..., .envir = .topenv))
 }, generator = quote(formatter_glue()))
 
 
