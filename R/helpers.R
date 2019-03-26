@@ -97,9 +97,15 @@ log_separator <- function(level = INFO, separator = '=', width = 80) {
 #' @export
 #' @examples
 #' log_with_separator('An important message')
+#' log_with_separator('Some critical KPI down!!!', separator = '$')
 #' log_with_separator('This message is worth a {1e3} words')
-#' log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:')
-#' log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:', width = 60)
+#' log_with_separator(paste(
+#'   'A very important message with a bunch of extra words that will',
+#'   'eventually wrap into a multi-line message for our quite nice demo :wow:'))
+#' log_with_separator(paste(
+#'   'A very important message with a bunch of extra words that will',
+#'   'eventually wrap into a multi-line message for our quite nice demo :wow:'),
+#'   width = 60)
 #' log_with_separator('Boo!', level = FATAL)
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
