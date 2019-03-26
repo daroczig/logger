@@ -9,7 +9,6 @@ test_that('tictoc', {
 })
 
 test_that('log with separator', {
-    expect_error(log_with_separator(42), NA)
     expect_output(
         cat(system("Rscript -e 'logger::log_with_separator(42)'", intern = TRUE)),
         '===')

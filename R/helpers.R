@@ -111,8 +111,7 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 
     log_separator(level = level, separator = separator, width = width)
 
-    formatter <- get_logger_definitions(namespace = namespace)[[1]][['formatter']]
-    message <- formatter(...)
+    message <- do.call(eval(log_formatter()), list(...))
     message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
     message <- sapply(message, function(m) {
         paste0(
