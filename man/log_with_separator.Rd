@@ -23,6 +23,7 @@ Logs a message in a very visible way
 }
 \examples{
 log_with_separator('An important message')
+log_with_separator('Some critical KPI down!!!', separator = '$')
 log_with_separator('This message is worth a {1e3} words')
 log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:')
 log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:', width = 60)
