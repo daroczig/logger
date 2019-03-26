@@ -105,10 +105,7 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 
     log_separator(level = level, separator = separator, width = width)
 
-    ns <- fallback_namespace(namespace)
-    nsenv <- get(fallback_namespace(namespace), envir = namespaces)
-    formatter <- nsenv[[1]][['formatter']]
-
+    formatter <- get_logger_definitions(namespace = namespace)[[1]][['formatter']]
     message <- formatter(...)
     message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
     message <- sapply(message, function(m) {
