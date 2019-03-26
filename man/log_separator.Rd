@@ -4,12 +4,14 @@
 \alias{log_separator}
 \title{Logs a long line to stand out from the console}
 \usage{
-log_separator(level = INFO, separator = "=")
+log_separator(level = INFO, separator = "=", width = 80)
 }
 \arguments{
-\item{level}{log level}
+\item{level}{log level, see \code{\link{log_levels}} for more details}
 
-\item{separator}{character}
+\item{separator}{character to be used as a separator}
+
+\item{width}{max width of message -- longer text will be wrapped into multiple lines}
 }
 \description{
 Logs a long line to stand out from the console

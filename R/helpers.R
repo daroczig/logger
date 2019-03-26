@@ -77,46 +77,49 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 
 
 #' Logs a long line to stand out from the console
-#' @param level log level
-#' @param separator character
+#' @inheritParams log_level
+#' @param separator character to be used as a separator
+#' @param width max width of message -- longer text will be wrapped into multiple lines
 #' @export
 #' @examples
 #' log_separator()
-#' log_separator(ERROR, '!')
-log_separator <- function(level = INFO, separator = '=') {
+#' log_separator(ERROR, '!', width = 60)
+log_separator <- function(level = INFO, separator = '=', width = 80) {
     log_level(
-        paste(rep(separator, 80 - 23 - nchar(attr(level, 'level'))), collapse = ''),
+        paste(rep(separator, width - 23 - nchar(attr(level, 'level'))), collapse = ''),
         level = level)
 }
 
 
 #' Logs a message in a very visible way
-#' @param message string
+#' @inheritParams log_level
+#' @inheritParams log_separator
 #' @export
 #' @examples
 #' log_with_separator('An important message')
 #' log_with_separator('This message is worth a {1e3} words')
 #' log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:')
+#' log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:', width = 60)
 #' log_with_separator('Boo!', level = FATAL)
-log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=') {
+log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
-    log_separator(level = level, separator = separator)
+    log_separator(level = level, separator = separator, width = width)
 
     ns <- fallback_namespace(namespace)
     nsenv <- get(fallback_namespace(namespace), envir = namespaces)
     formatter <- nsenv[[1]][['formatter']]
 
     message <- formatter(...)
-    message <- strwrap(message, 80 - 23 - nchar(attr(level, 'level')) - 4)
+    message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
     message <- sapply(message, function(m) {
         paste0(
             '= ', m,
-            paste(rep(' ', 80 - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
+            paste(rep(' ', width - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
             ' =')
     })
     log_level(skip_formatter(message), level = level)
 
-    log_separator(level = level, separator = separator)
+    log_separator(level = level, separator = separator, width = width)
 
 }
 
