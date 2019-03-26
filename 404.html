@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send log messages to a Telegram chat — appender_telegram • logger</title>
+<title>Page not found (404) • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -26,15 +26,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Send log messages to a Telegram chat — appender_telegram" />
-
-<meta property="og:description" content="Send log messages to a Telegram chat" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Page not found (404)" />
 
 
 
@@ -51,7 +48,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -63,7 +60,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">logger</a>
+        <a class="navbar-link" href="index.html">logger</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
       </span>
     </div>
@@ -71,13 +68,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -87,25 +84,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Intro.html">Introduction to logger</a>
+      <a href="articles/Intro.html">Introduction to logger</a>
     </li>
     <li>
-      <a href="../articles/anatomy.html">The Anatomy of a Log Request</a>
+      <a href="articles/anatomy.html">The Anatomy of a Log Request</a>
     </li>
     <li>
-      <a href="../articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a>
+      <a href="articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a>
     </li>
     <li>
-      <a href="../articles/migration.html">Migration Guide</a>
+      <a href="articles/migration.html">Migration Guide</a>
     </li>
     <li>
-      <a href="../articles/performance.html">Simple Benchmarks on logger Performance</a>
+      <a href="articles/performance.html">Simple Benchmarks on logger Performance</a>
     </li>
     <li>
-      <a href="../articles/r_packages.html">Logging from R Packages</a>
+      <a href="articles/r_packages.html">Logging from R Packages</a>
     </li>
     <li>
-      <a href="../articles/write_custom_extensions.html">Writing Custom Logger Extensions</a>
+      <a href="articles/write_custom_extensions.html">Writing Custom Logger Extensions</a>
     </li>
   </ul>
 </li>
@@ -123,67 +120,17 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Send log messages to a Telegram chat</h1>
-    
-    <div class="hidden name"><code>appender_telegram.Rd</code></div>
+      <h1>Page not found (404)</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Send log messages to a Telegram chat</p>
-    
-    </div>
-
-    <pre class="usage"><span class='fu'>appender_telegram</span>(<span class='kw'>chat_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"TELEGRAM_CHAT_ID"</span>),
-  <span class='kw'>bot_token</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"TELEGRAM_BOT_TOKEN"</span>), <span class='kw'>parse_mode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>chat_id</th>
-      <td><p>Unique identifier for the target chat or username of the target channel (in the format @channelusername)</p></td>
-    </tr>
-    <tr>
-      <th>bot_token</th>
-      <td><p>Telegram Authorization token</p></td>
-    </tr>
-    <tr>
-      <th>parse_mode</th>
-      <td><p>Message parse mode. Allowed values: Markdown or HTML</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>function taking <code>lines</code> argument</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>This functionality depends on the <span class="pkg">telegram</span> package.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>This is generator function for <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_pushbullet.html'>appender_pushbullet</a></code></p></div>
-    
+Content not found. Please use links in the navbar.
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
 
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-  </div>
 </div>
+
 
       <footer>
       <div class="copyright">
