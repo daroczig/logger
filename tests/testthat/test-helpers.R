@@ -9,3 +9,7 @@ test_that('separator', {
     expect_output(log_separator(), 'INFO')
     expect_output(log_separator(WARN), 'WARN')
 })
+
+test_that('tictoc', {
+    expect_output(log_tictoc(), 'timer tic 0 secs')
+})
