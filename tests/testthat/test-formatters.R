@@ -95,6 +95,8 @@ test_that('formatter_logging works', {
 test_that('special chars in the text work', {
   expect_equal(formatter_glue('JSON: {toJSON(1:4)}'), 'JSON: [1,2,3,4]')
   expect_equal(formatter_glue('JSON: {toJSON(iris[1:2, ], auto_unbox = TRUE)}'), 'JSON: [{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
+  expect_output(log_info('JSON: {toJSON(1:4)}'), '1,2,3,4')
+  expect_output(log_info('JSON: {toJSON(iris[1:2, ], auto_unbox = TRUE)}'), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
 })
 
 ## cleanup
