@@ -90,6 +90,33 @@ log_separator <- function(level = INFO, separator = '=') {
 }
 
 
+#' Logs a message in a very visible way
+#' @param message string
+#' @export
+#' @examples
+#' log_with_separator('An important message')
+#' log_with_separator('This message is worth a {1e3} words')
+#' log_with_separator('A very important message with a bunch of extra words that will eventually wrap into a multi-line message for our quite nice demo :wow:')
+log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=') {
+
+    ns <- fallback_namespace(namespace)
+    nsenv <- get(fallback_namespace(namespace), envir = namespaces)
+    formatter <- nsenv[[1]][['formatter']]
+
+    log_separator(level = level, separator = separator)
+
+    message <- formatter(...)
+    message <- strwrap(message, 80 - 26 - 4)
+    message <- sapply(message, function(m) {
+        paste0('= ', m, paste(rep(' ', 80 - 26 - 4 - nchar(m)), collapse = ''), ' =')
+    })
+    log_level(skip_formatter(message), level = level)
+
+    log_separator(level = level, separator = separator)
+
+}
+
+
 #' Tic-toc logging
 #' @param ... passed to \code{log_level}
 #' @param level x

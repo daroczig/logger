@@ -13,3 +13,8 @@ test_that('separator', {
 test_that('tictoc', {
     expect_output(log_tictoc(), 'timer tic 0 secs')
 })
+
+test_that('log with separator', {
+    expect_output(log_with_separator('foobar'), '===')
+    expect_output(log_with_separator('foobar'), 'foobar')
+})
