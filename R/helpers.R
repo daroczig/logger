@@ -74,3 +74,90 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
     }
 
 }
+
+
+#' Logs a long line to stand out from the console
+#' @inheritParams log_level
+#' @param separator character to be used as a separator
+#' @param width max width of message -- longer text will be wrapped into multiple lines
+#' @export
+#' @examples
+#' log_separator()
+#' log_separator(ERROR, '!', width = 60)
+log_separator <- function(level = INFO, separator = '=', width = 80) {
+    log_level(
+        paste(rep(separator, width - 23 - nchar(attr(level, 'level'))), collapse = ''),
+        level = level)
+}
+
+
+#' Logs a message in a very visible way
+#' @inheritParams log_level
+#' @inheritParams log_separator
+#' @export
+#' @examples
+#' log_with_separator('An important message')
+#' log_with_separator('Some critical KPI down!!!', separator = '$')
+#' log_with_separator('This message is worth a {1e3} words')
+#' log_with_separator(paste(
+#'   'A very important message with a bunch of extra words that will',
+#'   'eventually wrap into a multi-line message for our quite nice demo :wow:'))
+#' log_with_separator(paste(
+#'   'A very important message with a bunch of extra words that will',
+#'   'eventually wrap into a multi-line message for our quite nice demo :wow:'),
+#'   width = 60)
+#' log_with_separator('Boo!', level = FATAL)
+log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
+
+    log_separator(level = level, separator = separator, width = width)
+
+    message <- do.call(eval(log_formatter()), list(...))
+    message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
+    message <- sapply(message, function(m) {
+        paste0(
+            separator, ' ', m,
+            paste(rep(' ', width - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
+            ' ', separator)
+    })
+    log_level(skip_formatter(message), level = level)
+
+    log_separator(level = level, separator = separator, width = width)
+
+}
+
+
+#' Tic-toc logging
+#' @param ... passed to \code{log_level}
+#' @param level x
+#' @param namespace x
+#' @export
+#' @examples \dontrun{
+#' log_tictoc('warming up')
+#' Sys.sleep(0.1)
+#' log_tictoc('running')
+#' Sys.sleep(0.1)
+#' log_tictoc('running')
+#' Sys.sleep(runif(1))
+#' log_tictoc('and running')
+#' }
+#' @author Thanks to Neal Fultz for the idea and original implementation!
+log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
+
+    ns <- fallback_namespace(namespace)
+
+    on.exit({
+        assign(ns, toc, envir = tictocs)
+    })
+
+    nsenv <- get(fallback_namespace(namespace), envir = namespaces)
+    tic <- get0(ns, envir = tictocs, ifnotfound = Sys.time())
+    toc <- Sys.time()
+    tictoc <- difftime(toc, tic)
+
+    log_level(paste(ns, 'timer',
+                    ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
+                    round(tictoc, 2), attr(tictoc, 'units') , '-- '),
+              ..., level = level, namespace = namespace)
+
+}
+tictocs <- new.env()

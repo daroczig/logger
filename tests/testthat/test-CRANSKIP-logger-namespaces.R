@@ -1,7 +1,7 @@
 library(logger)
 library(testthat)
 
-context('loggers not to be run while R CMD check')
+context('CRAN skip: logging from packages')
 
 test_that('called from package', {
     devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
