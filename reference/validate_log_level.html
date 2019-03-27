@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Try to evaluate an expressions and evaluate another expression on exception — %except% • logger</title>
+<title>Assure valid log level — validate_log_level • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,9 +31,9 @@
 
 
 
-<meta property="og:title" content="Try to evaluate an expressions and evaluate another expression on exception — %except%" />
+<meta property="og:title" content="Assure valid log level — validate_log_level" />
 
-<meta property="og:description" content="Try to evaluate an expressions and evaluate another expression on exception" />
+<meta property="og:description" content="Assure valid log level" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,53 +125,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Try to evaluate an expressions and evaluate another expression on exception</h1>
+    <h1>Assure valid log level</h1>
     
-    <div class="hidden name"><code>grapes-except-grapes.Rd</code></div>
+    <div class="hidden name"><code>validate_log_level.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Try to evaluate an expressions and evaluate another expression on exception</p>
+    <p>Assure valid log level</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>try</span> <span class='kw'>%except%</span> <span class='no'>except</span></pre>
+    <pre class="usage"><span class='fu'>validate_log_level</span>(<span class='no'>level</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>try</th>
-      <td><p>R expression</p></td>
-    </tr>
-    <tr>
-      <th>except</th>
-      <td><p>fallback R expression to be evaluated if <code>try</code> fails</p></td>
+      <th>level</th>
+      <td><p><code><a href='log_levels.html'>log_levels</a></code> object or string representation</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Suppress log messages in the <code>except</code> namespace if you don't want to throw a <code>WARN</code> log message on the exception branch.</p>
+    <p><code><a href='log_levels.html'>log_levels</a></code> object</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>everything</span> <span class='kw'>%except%</span> <span class='fl'>42</span></div><div class='output co'>#&gt; WARN [2019-03-27 10:56:17] Running '42' as 'everything' failed: "object 'everything' not found"</div><div class='output co'>#&gt; [1] 42</div><div class='input'><span class='no'>everything</span> <span class='kw'>&lt;-</span> <span class='st'>'640kb'</span>
-<span class='no'>everything</span> <span class='kw'>%except%</span> <span class='fl'>42</span></div><div class='output co'>#&gt; [1] "640kb"</div><div class='input'>
-<span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; WARN [2019-03-27 10:56:17] Running 'sum(1:10)' as 'Mean(1:10)' failed: 'could not find function "Mean"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>))</div><div class='output co'>#&gt; WARN [2019-03-27 10:56:17] Running '(sum(1:10)/length(1:10))' as 'Mean(1:10)' failed: 'could not find function "Mean"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'>MEAN</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt; WARN [2019-03-27 10:56:17] Running 'MEAN(1:10)' as 'Mean(1:10)' failed: 'could not find function "Mean"'
-#&gt; WARN [2019-03-27 10:56:17] Running 'mean(1:10)' as 'Mean(1:10) %except% MEAN(1:10)' failed: 'could not find function "MEAN"'</div><div class='output co'>#&gt; [1] 5.5</div><div class='input'><span class='fu'>Mean</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> (<span class='fu'>MEAN</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%except%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>))</div><div class='output co'>#&gt; WARN [2019-03-27 10:56:17] Running '(MEAN(1:10) %except% mean(1:10))' as 'Mean(1:10)' failed: 'could not find function "Mean"'
-#&gt; WARN [2019-03-27 10:56:17] Running 'mean(1:10)' as 'MEAN(1:10)' failed: 'could not find function "MEAN"'</div><div class='output co'>#&gt; [1] 5.5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#note">Note</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
