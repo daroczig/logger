@@ -161,3 +161,17 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
 
 }
 tictocs <- new.env()
+
+
+#' Logs the error message to console before failing
+#' @param expression call
+#' @export
+#' @examples \dontrun{
+#' log_failure('foobar')
+#' log_failure(foobar)
+#' }
+log_failure <- function(expression) {
+  tryCatch(expression, error = function(e) {
+    log_error(e$message)
+  })
+}
