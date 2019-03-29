@@ -173,5 +173,6 @@ tictocs <- new.env()
 log_failure <- function(expression) {
   tryCatch(expression, error = function(e) {
     log_error(e$message)
+  stop(e)
   })
 }
