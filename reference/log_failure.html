@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Logs a message in a very visible way — log_with_separator • logger</title>
+<title>Logs the error message to console before failing — log_failure • logger</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,9 +31,9 @@
 
 
 
-<meta property="og:title" content="Logs a message in a very visible way — log_with_separator" />
+<meta property="og:title" content="Logs the error message to console before failing — log_failure" />
 
-<meta property="og:description" content="Logs a message in a very visible way" />
+<meta property="og:description" content="Logs the error message to console before failing" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,72 +125,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Logs a message in a very visible way</h1>
+    <h1>Logs the error message to console before failing</h1>
     
-    <div class="hidden name"><code>log_with_separator.Rd</code></div>
+    <div class="hidden name"><code>log_failure.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Logs a message in a very visible way</p>
+    <p>Logs the error message to console before failing</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>log_with_separator</span>(<span class='no'>...</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>"="</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>80</span>)</pre>
+    <pre class="usage"><span class='fu'>log_failure</span>(<span class='no'>expression</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>R objects that can be converted to a character vector via the active message formatter function</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>log level, see <code><a href='log_levels.html'>log_levels</a></code> for more details</p></td>
-    </tr>
-    <tr>
-      <th>namespace</th>
-      <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></td>
-    </tr>
-    <tr>
-      <th>separator</th>
-      <td><p>character to be used as a separator</p></td>
-    </tr>
-    <tr>
-      <th>width</th>
-      <td><p>max width of message -- longer text will be wrapped into multiple lines</p></td>
+      <th>expression</th>
+      <td><p>call</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'An important message'</span>)</div><div class='output co'>#&gt; INFO [2019-03-29 19:00:15] =====================================================
-#&gt; INFO [2019-03-29 19:00:15] = An important message                              =
-#&gt; INFO [2019-03-29 19:00:15] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'Some critical KPI down!!!'</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>'$'</span>)</div><div class='output co'>#&gt; INFO [2019-03-29 19:00:15] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-#&gt; INFO [2019-03-29 19:00:15] $ Some critical KPI down!!!                         $
-#&gt; INFO [2019-03-29 19:00:15] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'This message is worth a {1e3} words'</span>)</div><div class='output co'>#&gt; INFO [2019-03-29 19:00:15] =====================================================
-#&gt; INFO [2019-03-29 19:00:15] = This message is worth a 1000 words                =
-#&gt; INFO [2019-03-29 19:00:15] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(
-  <span class='st'>'A very important message with a bunch of extra words that will'</span>,
-  <span class='st'>'eventually wrap into a multi-line message for our quite nice demo :wow:'</span>))</div><div class='output co'>#&gt; INFO [2019-03-29 19:00:15] =====================================================
-#&gt; INFO [2019-03-29 19:00:15] = A very important message with a bunch of extra    =
-#&gt; INFO [2019-03-29 19:00:15] = words that will eventually wrap into a            =
-#&gt; INFO [2019-03-29 19:00:15] = multi-line message for our quite nice demo :wow:  =
-#&gt; INFO [2019-03-29 19:00:15] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(
-  <span class='st'>'A very important message with a bunch of extra words that will'</span>,
-  <span class='st'>'eventually wrap into a multi-line message for our quite nice demo :wow:'</span>),
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div><div class='output co'>#&gt; INFO [2019-03-29 19:00:15] =================================
-#&gt; INFO [2019-03-29 19:00:15] = A very important message      =
-#&gt; INFO [2019-03-29 19:00:15] = with a bunch of extra words   =
-#&gt; INFO [2019-03-29 19:00:15] = that will eventually wrap     =
-#&gt; INFO [2019-03-29 19:00:15] = into a multi-line message     =
-#&gt; INFO [2019-03-29 19:00:15] = for our quite nice demo       =
-#&gt; INFO [2019-03-29 19:00:15] = :wow:                         =
-#&gt; INFO [2019-03-29 19:00:15] =================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'Boo!'</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>FATAL</span>)</div><div class='output co'>#&gt; FATAL [2019-03-29 19:00:15] ====================================================
-#&gt; FATAL [2019-03-29 19:00:15] = Boo!                                             =
-#&gt; FATAL [2019-03-29 19:00:15] ====================================================</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>log_failure</span>(<span class='st'>'foobar'</span>)
+<span class='fu'>log_failure</span>(<span class='no'>foobar</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
