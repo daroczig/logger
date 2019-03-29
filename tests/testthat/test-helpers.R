@@ -21,4 +21,6 @@ test_that('log with separator', {
 test_that('log failure', {
   expect_output(log_failure("foobar"), NA)
   expect_output(log_failure(foobar), 'ERROR.*foobar')
+  expect_error(log_failure('foobar'), NA)
+  expect_error(log_failure(foobar))
 })
