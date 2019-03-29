@@ -17,3 +17,8 @@ test_that('tictoc', {
 test_that('log with separator', {
     expect_output(log_with_separator(42), '===')
 })
+
+test_that('log failure', {
+  expect_output(log_failure("foobar"), NA)
+  expect_output(log_failure(foobar), 'ERROR.*foobar')
+})
