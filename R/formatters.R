@@ -28,9 +28,21 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
-    as.character(glue::glue(..., .envir = .topenv))
+    as.character(
+        tryCatch(
+            glue::glue(..., .envir = .topenv),
+            error = function(e) {
+                stop(paste(
+                    '`glue` failed in `formatter_glue` on:\n\n',
+                    capture.output(str(...)),
+                    '\n\nRaw error message:\n\n',
+                    e$message,
+                    '\n\nPlease consider using another `log_formatter` or',
+                    '`skip_formatter` on strings with curly braces.'))
+            }))
 }, generator = quote(formatter_glue()))
 
 
