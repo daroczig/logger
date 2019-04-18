@@ -103,15 +103,15 @@
 <p>For most cases, it’s enough to load the package and use the functions with the <code>log</code> prefix to log important and not so important messages, for example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Loading data'</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; INFO [2019-04-15 12:05:04] Loading data</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; INFO [2019-04-18 13:33:39] Loading data</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(mtcars)</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The dataset includes {nrow(mtcars)} rows'</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; INFO [2019-04-15 12:05:04] The dataset includes 32 rows</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; INFO [2019-04-18 13:33:39] The dataset includes 32 rows</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(mtcars<span class="op">$</span>hp) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>) {</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="kw"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span>)</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span>)</a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; WARN [2019-04-15 12:05:04] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; WARN [2019-04-18 13:33:39] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></a></code></pre></div>
 <p>Interestingly, the most powerful car was not being logged – because by default the <code>logger</code> prints messages with at least the <code>INFO</code> log level:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>()</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; [1] 400</span></a>
@@ -123,22 +123,22 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(TRACE)</a></code></pre></div>
 <p>The rerunning the above code chunk:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Loading data'</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; INFO [2019-04-15 12:05:04] Loading data</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; INFO [2019-04-18 13:33:39] Loading data</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(mtcars)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The dataset includes {nrow(mtcars)} rows'</span>)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; INFO [2019-04-15 12:05:04] The dataset includes 32 rows</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; INFO [2019-04-18 13:33:39] The dataset includes 32 rows</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(mtcars<span class="op">$</span>hp) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>) {</a>
 <a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="kw"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span>)</a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span>)</a>
 <a class="sourceLine" id="cb4-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; WARN [2019-04-15 12:05:04] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; DEBUG [2019-04-15 12:05:04] The most powerful car is Maserati Bora with 335 hp</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; WARN [2019-04-18 13:33:39] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; DEBUG [2019-04-18 13:33:39] The most powerful car is Maserati Bora with 335 hp</span></a></code></pre></div>
 <p>You may also find the <code><a href="../reference/log_eval.html">?log_eval</a></code> function useful to log both an R expression and its result in the same log record:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">f &lt;-<span class="st"> </span>sqrt</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">g &lt;-<span class="st"> </span>mean</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">31</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="../reference/log_eval.html">log_eval</a></span>(y &lt;-<span class="st"> </span><span class="kw">f</span>(<span class="kw">g</span>(x)), <span class="dt">level =</span> INFO)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; INFO [2019-04-15 12:05:04] 'y &lt;- f(g(x))' =&gt; '4'</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; INFO [2019-04-18 13:33:39] 'y &lt;- f(g(x))' =&gt; '4'</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(y)</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  num 4</span></a></code></pre></div>
 <p>For more details, check the <a href="https://daroczig.github.io/logger/reference/index.html">function reference in the manual</a>, or start with the <a href="https://daroczig.github.io/logger/articles/anatomy.html">The Anatomy of a Log Request</a> and <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a> vignettes.</p>
