@@ -84,10 +84,11 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @examples
 #' log_separator()
 #' log_separator(ERROR, '!', width = 60)
-log_separator <- function(level = INFO, separator = '=', width = 80) {
+log_separator <- function(level = INFO, namespace = NA_character_, separator = '=', width = 80) {
     log_level(
         paste(rep(separator, width - 23 - nchar(attr(level, 'level'))), collapse = ''),
-        level = level)
+        level = level,
+        namespace = namespace)
 }
 
 
