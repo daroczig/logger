@@ -10,7 +10,7 @@
 log_messages <- function() {
     invisible(suppressMessages(trace(
         what = 'message',
-        trace = substitute(logger::log_info(logger::skip_formatter(paste(list(...), collapse = '')))),
+        exit = substitute(logger::log_info(logger::skip_formatter(cond$message))),
         print = FALSE,
         where = baseenv())))
 }
