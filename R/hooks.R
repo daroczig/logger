@@ -1,7 +1,6 @@
 #' Injects a logger call to standard messages
 #'
 #' This function uses \code{trace} to add a \code{log_info} function call when \code{message} is called to log the informative messages with the \code{logger} layout and appender.
-#' @return
 #' @export
 #' @examples \dontrun{
 #' log_messages()
@@ -19,7 +18,6 @@ log_messages <- function() {
 #' Injects a logger call to standard warnings
 #'
 #' This function uses \code{trace} to add a \code{log_warn} function call when \code{warning} is called to log the warning messages with the \code{logger} layout and appender.
-#' @return
 #' @export
 #' @examples \dontrun{
 #' log_warnings()
@@ -37,7 +35,6 @@ log_warnings <- function() {
 #' Injects a logger call to standard errors
 #'
 #' This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.
-#' @return
 #' @export
 #' @examples \dontrun{
 #' log_errors()
