@@ -110,7 +110,7 @@ log_separator <- function(level = INFO, namespace = NA_character_, separator = '
 #' log_with_separator('Boo!', level = FATAL)
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
-    log_separator(level = level, separator = separator, width = width)
+    log_separator(level = level, separator = separator, width = width, namespace = namespace)
 
     message <- do.call(eval(log_formatter()), list(...))
     message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
@@ -120,9 +120,9 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
             paste(rep(' ', width - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
             ' ', separator)
     })
-    log_level(skip_formatter(message), level = level)
+    log_level(skip_formatter(message), level = level, namespace = namespace)
 
-    log_separator(level = level, separator = separator, width = width)
+    log_separator(level = level, separator = separator, width = width, namespace = namespace)
 
 }
 
