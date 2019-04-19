@@ -26,7 +26,7 @@ log_messages <- function() {
 log_warnings <- function() {
     invisible(suppressMessages(trace(
         what = 'warning',
-        trace = substitute(logger::log_warn(logger::skip_formatter(paste(list(...), collapse = '')))),
+        tracer = substitute(logger::log_warn(logger::skip_formatter(paste(list(...), collapse = '')))),
         print = FALSE,
         where = baseenv())))
 }
@@ -43,7 +43,7 @@ log_warnings <- function() {
 log_errors <- function() {
     invisible(suppressMessages(trace(
         what = 'stop',
-        trace = substitute(logger::log_error(logger::skip_formatter(paste(list(...), collapse = '')))),
+        tracer = substitute(logger::log_error(logger::skip_formatter(paste(list(...), collapse = '')))),
         print = FALSE,
         where = baseenv())))
 }
