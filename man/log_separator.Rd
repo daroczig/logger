@@ -23,4 +23,6 @@ Logs a long line to stand out from the console
 log_separator()
 log_separator(ERROR, separator = '!', width = 60)
 }
+\seealso{
+\code{\link{log_with_separator}}
 }
