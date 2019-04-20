@@ -4,10 +4,13 @@
 \alias{log_separator}
 \title{Logs a long line to stand out from the console}
 \usage{
-log_separator(level = INFO, separator = "=", width = 80)
+log_separator(level = INFO, namespace = NA_character_,
+  separator = "=", width = 80)
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}
+
+\item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
 
 \item{separator}{character to be used as a separator}
 
@@ -18,5 +21,6 @@ Logs a long line to stand out from the console
 }
 \examples{
 log_separator()
-log_separator(ERROR, '!', width = 60)
+log_separator(ERROR, separator = '!', width = 60)
+}
 }
