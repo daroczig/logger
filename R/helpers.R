@@ -83,11 +83,13 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @export
 #' @examples
 #' log_separator()
-#' log_separator(ERROR, '!', width = 60)
-log_separator <- function(level = INFO, separator = '=', width = 80) {
+#' log_separator(ERROR, separator = '!', width = 60)
+#' @seealso \code{\link{log_with_separator}}
+log_separator <- function(level = INFO, namespace = NA_character_, separator = '=', width = 80) {
     log_level(
         paste(rep(separator, width - 23 - nchar(attr(level, 'level'))), collapse = ''),
-        level = level)
+        level = level,
+        namespace = namespace)
 }
 
 
@@ -107,9 +109,10 @@ log_separator <- function(level = INFO, separator = '=', width = 80) {
 #'   'eventually wrap into a multi-line message for our quite nice demo :wow:'),
 #'   width = 60)
 #' log_with_separator('Boo!', level = FATAL)
+#' @seealso \code{\link{log_separator}}
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
-    log_separator(level = level, separator = separator, width = width)
+    log_separator(level = level, separator = separator, width = width, namespace = namespace)
 
     message <- do.call(eval(log_formatter()), list(...))
     message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
@@ -119,9 +122,9 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
             paste(rep(' ', width - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
             ' ', separator)
     })
-    log_level(skip_formatter(message), level = level)
+    log_level(skip_formatter(message), level = level, namespace = namespace)
 
-    log_separator(level = level, separator = separator, width = width)
+    log_separator(level = level, separator = separator, width = width, namespace = namespace)
 
 }
 
