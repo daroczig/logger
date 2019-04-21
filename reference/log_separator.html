@@ -136,7 +136,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>log_separator</span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>"="</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>80</span>)</pre>
+    <pre class="usage"><span class='fu'>log_separator</span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>"="</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>80</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,6 +145,10 @@
     <tr>
       <th>level</th>
       <td><p>log level, see <code><a href='log_levels.html'>log_levels</a></code> for more details</p></td>
+    </tr>
+    <tr>
+      <th>namespace</th>
+      <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></td>
     </tr>
     <tr>
       <th>separator</th>
@@ -155,15 +160,21 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='log_with_separator.html'>log_with_separator</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>log_separator</span>()</div><div class='output co'>#&gt; INFO [2019-04-19 07:37:27] =====================================================</div><div class='input'><span class='fu'>log_separator</span>(<span class='no'>ERROR</span>, <span class='st'>'!'</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div><div class='output co'>#&gt; ERROR [2019-04-19 07:37:27] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>log_separator</span>()</div><div class='output co'>#&gt; INFO [2019-04-21 09:36:27] =====================================================</div><div class='input'><span class='fu'>log_separator</span>(<span class='no'>ERROR</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>'!'</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div><div class='output co'>#&gt; ERROR [2019-04-21 09:36:27] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
