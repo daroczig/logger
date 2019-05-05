@@ -3,7 +3,7 @@
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}}
 formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     eval(paste(...), envir = .topenv)
 }, generator = quote(formatter_paste()))
@@ -15,7 +15,7 @@ formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}}
 formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     eval(sprintf(fmt, ...), envir = .topenv)
 }, generator = quote(formatter_sprintf()))
@@ -27,7 +27,7 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @return character vector
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}}
 #' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
@@ -67,7 +67,7 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}", c('foo', 'bar'))
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}}
 formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
@@ -141,7 +141,7 @@ skip_formatter <- function(message, ...) {
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_pander}}
 formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
@@ -156,3 +156,27 @@ formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = s
     })
 
 }, generator = quote(formatter_logging()))
+
+
+#' Formats R objects with pander
+#' @param x object to be logged
+#' @param ... optional parameters passed to \code{pander}
+#' @inheritParams log_level
+#' @return character vector
+#' @examples \dontrun{
+#' log_formatter(formatter_pander)
+#' log_info('42')
+#' log_info(42)
+#' log_info(4+2)
+#' log_info(head(iris))
+#' log_info(head(iris), style = 'simple')
+#' log_info(lm(hp ~ wt, mtcars))
+#' }
+#' @export
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+formatter_pander <- structure(function(x, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+
+    fail_on_missing_package('pander')
+    eval(pander::pander_return(x, ...), envir = .topenv)
+
+}, generator = quote(formatter_pander()))

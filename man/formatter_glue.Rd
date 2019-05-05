@@ -26,5 +26,5 @@ Apply \code{glue} to convert R objects into a character vector
 Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
 }
 \seealso{
-This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}}
 }

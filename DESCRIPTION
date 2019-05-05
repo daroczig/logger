@@ -16,6 +16,7 @@ License: AGPL-3
 Imports:
   utils
 Suggests:
+  pander,
   glue,
   jsonlite,
   crayon,
