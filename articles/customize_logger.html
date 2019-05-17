@@ -9,7 +9,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Customizing the Format and the Destination of a Log Record">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -105,7 +105,7 @@
 <a href="#what-gets-logged" class="anchor"></a>What gets logged?</h2>
 <p><code>logger</code> mostly relies on and uses the default <code>log4j</code> log levels and supports suppressing log messages with a lower log level compared to the currently set threshold in the logging namespace:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Hi, there!'</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; INFO [2019-04-21 09:36:34] Hi, there!</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; INFO [2019-05-17 06:28:03] Hi, there!</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'How are you doing today?'</span>)</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>()</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; [1] 400</span></a>
@@ -115,29 +115,29 @@
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; [1] "loglevel" "integer"</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
 <a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'How are you doing today?'</span>)</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; DEBUG [2019-04-21 09:36:34] How are you doing today?</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; DEBUG [2019-05-17 06:28:03] How are you doing today?</span></a></code></pre></div>
 <p>So the <code><a href="../reference/log_threshold.html">?log_threshold</a></code> function can both get and set the log level threshold for all future log requests.</p>
 <p>For the full list of all supported log levels and so thus the possible log level thresholds, see <code><a href="../reference/log_levels.html">?log_levels</a></code>.</p>
 <p>If you want to define the log level in a programmatic way, check out <code><a href="../reference/log_level.html">?log_level</a></code>, eg</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_level</a></span>(INFO, <span class="st">'Hi, there!'</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; INFO [2019-04-21 09:36:34] Hi, there!</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; INFO [2019-05-17 06:28:03] Hi, there!</span></a></code></pre></div>
 <p>To temporarily update the log level threshold, you may also find the <code><a href="../reference/with_log_threshold.html">?with_log_threshold</a></code> function useful:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(INFO)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'pst, can you hear me?'</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'no'</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; INFO [2019-04-21 09:36:34] no</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; INFO [2019-05-17 06:28:03] no</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="../reference/with_log_threshold.html">with_log_threshold</a></span>(<span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'pst, can you hear me?'</span>), <span class="dt">threshold =</span> TRACE)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; DEBUG [2019-04-21 09:36:34] pst, can you hear me?</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; DEBUG [2019-05-17 06:28:03] pst, can you hear me?</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'yes'</span>)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; INFO [2019-04-21 09:36:34] yes</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; INFO [2019-05-17 06:28:03] yes</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="../reference/with_log_threshold.html">with_log_threshold</a></span>({</a>
 <a class="sourceLine" id="cb3-12" data-line-number="12">    <span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'pst, can you hear me?'</span>)</a>
 <a class="sourceLine" id="cb3-13" data-line-number="13">    <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'yes'</span>)</a>
 <a class="sourceLine" id="cb3-14" data-line-number="14">}, <span class="dt">threshold =</span> TRACE)</a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; DEBUG [2019-04-21 09:36:34] pst, can you hear me?</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; INFO [2019-04-21 09:36:34] yes</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; DEBUG [2019-05-17 06:28:03] pst, can you hear me?</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; INFO [2019-05-17 06:28:03] yes</span></a></code></pre></div>
 </div>
 <div id="log-namespaces" class="section level2">
 <h2 class="hasAnchor">
@@ -147,13 +147,13 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(INFO)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="../reference/log_level.html">log_trace</a></span>(<span class="st">'Hi, there!'</span>, <span class="dt">namespace =</span> <span class="st">'kitchensink'</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Hi, there!'</span>, <span class="dt">namespace =</span> <span class="st">'kitchensink'</span>)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; INFO [2019-04-21 09:36:34] Hi, there!</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; INFO [2019-05-17 06:28:03] Hi, there!</span></a></code></pre></div>
 <p>But once you start customizing that namespace, it gets forked from the global settings and live on its own without modifying the original namespace:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(TRACE, <span class="dt">namespace =</span> <span class="st">'kitchensink'</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/log_level.html">log_trace</a></span>(<span class="st">'Hi, there!'</span>, <span class="dt">namespace =</span> <span class="st">'kitchensink'</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; TRACE [2019-04-21 09:36:34] Hi, there!</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; TRACE [2019-05-17 06:28:03] Hi, there!</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Hi, there!'</span>, <span class="dt">namespace =</span> <span class="st">'kitchensink'</span>)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; INFO [2019-04-21 09:36:34] Hi, there!</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; INFO [2019-05-17 06:28:03] Hi, there!</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw"><a href="../reference/log_level.html">log_trace</a></span>(<span class="st">'Hi, there!'</span>)</a></code></pre></div>
 </div>
 <div id="log-message-formatter-functions" class="section level2">
@@ -163,9 +163,9 @@
 <p>By default, <code>logger</code> uses <code>glue</code> in the background:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_glue)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'There are {nrow(mtcars)} cars in the mtcars dataset'</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; INFO [2019-04-21 09:36:34] There are 32 cars in the mtcars dataset</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; INFO [2019-05-17 06:28:03] There are 32 cars in the mtcars dataset</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'2 + 2 = {2+2}'</span>)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; INFO [2019-04-21 09:36:34] 2 + 2 = 4</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; INFO [2019-05-17 06:28:03] 2 + 2 = 4</span></a></code></pre></div>
 <p>If you don’t like this syntax, or want to save a dependency, you can use other formatter functions as well, such as <code><a href="../reference/formatter_sprintf.html">?formatter_sprintf</a></code> (being the default in eg the <a href="https://daroczig.github.io/logger/articles/migration.html"><code>logging</code> and <code>futile.logger</code> packages</a>) or <code><a href="../reference/formatter_paste.html">?formatter_paste</a></code>, or <a href="https://daroczig.github.io/logger/articles/write_custom_extensions.html">write your own formatter function</a> converting R objects into string.</p>
 </div>
 <div id="log-message-layouts" class="section level2">
@@ -173,28 +173,28 @@
 <a href="#log-message-layouts" class="anchor"></a>Log message layouts</h2>
 <p>By default, <code><a href="../reference/log_level.html">?log_level</a></code> and its derivative functions (eg <code><a href="../reference/log_level.html">?log_info</a></code>) will simply record the log-level, the current timestamp and the message after being processed by <code>glue</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; INFO [2019-04-21 09:36:34] 42</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; INFO [2019-05-17 06:28:03] 42</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The answer is {42}'</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; INFO [2019-04-21 09:36:34] The answer is 42</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; INFO [2019-05-17 06:28:03] The answer is 42</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The answers are {1:5}'</span>)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; INFO [2019-04-21 09:36:34] The answers are 1</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; INFO [2019-04-21 09:36:34] The answers are 2</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; INFO [2019-04-21 09:36:34] The answers are 3</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; INFO [2019-04-21 09:36:34] The answers are 4</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; INFO [2019-04-21 09:36:34] The answers are 5</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; INFO [2019-05-17 06:28:03] The answers are 1</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; INFO [2019-05-17 06:28:03] The answers are 2</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; INFO [2019-05-17 06:28:03] The answers are 3</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; INFO [2019-05-17 06:28:03] The answers are 4</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; INFO [2019-05-17 06:28:03] The answers are 5</span></a></code></pre></div>
 <p>In the above example, first, <code>42</code> was converted to a string by the <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code> message formatter, then the message was passed to the <code><a href="../reference/layout_simple.html">?layout_simple</a></code> layout function to generate the actual log record.</p>
 <p>An example of another layout function writing the same log messages in JSON:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="kw"><a href="../reference/layout_json.html">layout_json</a></span>())</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"42"}</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"42"}</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The answer is {42}'</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"The answer is 42"}</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"The answer is 42"}</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The answers are {1:5}'</span>)</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"The answers are 1"}</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"The answers are 2"}</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"The answers are 3"}</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"The answers are 4"}</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; {"time":"2019-04-21 09:36:34","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":17797,"user":"travis","msg":"The answers are 5"}</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"The answers are 1"}</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"The answers are 2"}</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"The answers are 3"}</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"The answers are 4"}</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; {"time":"2019-05-17 06:28:03","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-385989a3-0672-48f7-abee-3847785af4ae","arch":"x86_64","os_name":"Linux","os_release":"4.4.0-101-generic","os_version":"#124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017","pid":30097,"user":"travis","msg":"The answers are 5"}</span></a></code></pre></div>
 <p>If you need colorized logs highlighting the important log messages, check out <code><a href="../reference/layout_glue_colors.html">?layout_glue_colors</a></code>, and for other formatter and layout functions, see the manual of the above mentioned functions that have references to all the other functions and generator functions bundled with the package.</p>
 </div>
 <div id="custom-log-record-layout" class="section level2">
@@ -212,20 +212,20 @@
 <li>
 <p>check what’s being logged when called from the global environment:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'foo'</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d/17797/global/eval 2019-04-21 09:36:34 INFO: foo</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; travis-job-385989a3-0672-48f7-abee-3847785af4ae/30097/global/eval 2019-05-17 06:28:03 INFO: foo</span></a></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from a custom function:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'foo'</span>)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">f</span>()</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d/17797/global/f 2019-04-21 09:36:34 INFO: foo</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; travis-job-385989a3-0672-48f7-abee-3847785af4ae/30097/global/f 2019-05-17 06:28:03 INFO: foo</span></a></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from a package:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/load_all">load_all</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">'demo-packages/logger-tester-package'</span>, <span class="dt">package =</span> <span class="st">'logger'</span>))</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/load_all.html">load_all</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">'demo-packages/logger-tester-package'</span>, <span class="dt">package =</span> <span class="st">'logger'</span>))</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; Loading logger.tester</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">logger_tester_function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d/17797/logger.tester/logger_tester_function 2019-04-21 09:36:34 INFO: hi from tester package 0.567662951536477</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; travis-job-385989a3-0672-48f7-abee-3847785af4ae/30097/logger.tester/logger_tester_function 2019-05-17 06:28:03 INFO: hi from tester package 0.022009865147993</span></a></code></pre></div>
 </li>
 <li>
 <p>suppress messages in a namespace:</p>
@@ -238,20 +238,20 @@
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(WARN, <span class="dt">namespace =</span> <span class="st">'logger.tester'</span>)</a>
 <a class="sourceLine" id="cb13-8" data-line-number="8"><span class="kw">logger_tester_function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
 <a class="sourceLine" id="cb13-9" data-line-number="9"><span class="kw">logger_tester_function</span>(WARN, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d/17797/logger.tester/logger_tester_function 2019-04-21 09:36:34 WARN: hi from tester package 0.263691623695195</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; travis-job-385989a3-0672-48f7-abee-3847785af4ae/30097/logger.tester/logger_tester_function 2019-05-17 06:28:03 WARN: hi from tester package 0.993722724262625</span></a>
 <a class="sourceLine" id="cb13-11" data-line-number="11"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'I am still working in the global namespace'</span>)</a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt; travis-job-61f3f50d-22cb-4c6f-bcc2-ce8801dd196d/17797/global/eval 2019-04-21 09:36:34 INFO: I am still working in the global namespace</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt; travis-job-385989a3-0672-48f7-abee-3847785af4ae/30097/global/eval 2019-05-17 06:28:03 INFO: I am still working in the global namespace</span></a></code></pre></div>
 </li>
 </ul>
 <p>Another example of making use of the generator function is to update the layout to include the Process ID that might be very useful eg when forking, see for example the below code chunk still using the above defined log layout:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'received {length(x)} values'</span>)</a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="kw"><a href="../reference/log_level.html">log_success</a></span>(<span class="st">'with the mean of {mean(x)}'</span>)</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(x)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">    <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x)</a>
 <a class="sourceLine" id="cb14-5" data-line-number="5">}</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(parallel)</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/split">split</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="dv">100</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), f, <span class="dt">mc.cores =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(parallel)</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/split.html">split</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">100</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), f, <span class="dt">mc.cores =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt; nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values</span></a>
 <a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 SUCCESS: with the mean of 0.403173440974206</span></a>
 <a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt; nevermind/26449/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values</span></a>
@@ -286,14 +286,14 @@
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>()</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; appender_console</span></a></code></pre></div>
 <p>To write to a logfile instead, use the <code><a href="../reference/appender_file.html">?appender_file</a></code> generator function, that returns a function that can be used in any namespace:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">t &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">t &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_file.html">appender_file</a></span>(t))</a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'where is this message going?'</span>)</a>
 <a class="sourceLine" id="cb18-4" data-line-number="4"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>()</a>
 <a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; appender_file(file = t)</span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t)</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; [1] "INFO [2019-04-21 09:36:34] where is this message going?"</span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unlink">unlink</a></span>(t)</a></code></pre></div>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(t)</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; [1] "INFO [2019-05-17 06:28:03] where is this message going?"</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(t)</a></code></pre></div>
 <p>There’s a similar generator function that returns an appender function delivering log messages to Slack channels:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">## load Slack configuration, API token etc from a (hopefully encrypted) yaml file or similar</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">slack_config &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">config</span>(...)</a>
@@ -339,18 +339,18 @@
 <a class="sourceLine" id="cb21-23" data-line-number="23"><span class="co">#&gt; [1] "loglevel" "integer"</span></a>
 <a class="sourceLine" id="cb21-24" data-line-number="24"></a>
 <a class="sourceLine" id="cb21-25" data-line-number="25">## update the appender of the new logger</a>
-<a class="sourceLine" id="cb21-26" data-line-number="26">t &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb21-26" data-line-number="26">t &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()</a>
 <a class="sourceLine" id="cb21-27" data-line-number="27"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_file.html">appender_file</a></span>(t), <span class="dt">index =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb21-28" data-line-number="28"></a>
 <a class="sourceLine" id="cb21-29" data-line-number="29">## test both loggers</a>
 <a class="sourceLine" id="cb21-30" data-line-number="30"><span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'info msg'</span>)</a>
-<a class="sourceLine" id="cb21-31" data-line-number="31"><span class="co">#&gt; INFO [2019-04-21 09:36:34] info msg</span></a>
+<a class="sourceLine" id="cb21-31" data-line-number="31"><span class="co">#&gt; INFO [2019-05-17 06:28:03] info msg</span></a>
 <a class="sourceLine" id="cb21-32" data-line-number="32"><span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'info msg'</span>)</a>
 <a class="sourceLine" id="cb21-33" data-line-number="33"></a>
-<a class="sourceLine" id="cb21-34" data-line-number="34"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(t)</a>
-<a class="sourceLine" id="cb21-35" data-line-number="35"><span class="co">#&gt; [1] "INFO [2019-04-21 09:36:34] info msg" </span></a>
-<a class="sourceLine" id="cb21-36" data-line-number="36"><span class="co">#&gt; [2] "DEBUG [2019-04-21 09:36:34] info msg"</span></a>
-<a class="sourceLine" id="cb21-37" data-line-number="37"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unlink">unlink</a></span>(t)</a></code></pre></div>
+<a class="sourceLine" id="cb21-34" data-line-number="34"><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(t)</a>
+<a class="sourceLine" id="cb21-35" data-line-number="35"><span class="co">#&gt; [1] "INFO [2019-05-17 06:28:03] info msg" </span></a>
+<a class="sourceLine" id="cb21-36" data-line-number="36"><span class="co">#&gt; [2] "DEBUG [2019-05-17 06:28:03] info msg"</span></a>
+<a class="sourceLine" id="cb21-37" data-line-number="37"><span class="kw"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(t)</a></code></pre></div>
 </div>
   </div>
 

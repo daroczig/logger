@@ -9,7 +9,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Lightweight, Modern and Flexible Logging Utility">
 <meta property="og:description" content="Inspired by the the 'futile.logger' R package and 'logging' Python module, this utility provides a flexible and extensible way of formatting and delivering log messages with low overhead.">
 <meta name="twitter:card" content="summary">
@@ -96,52 +96,58 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><code>logger</code> is not on CRAN yet, please install from GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'daroczig/logger'</span>)</a></code></pre></div>
+</div>
+<div id="installation-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation-1" class="anchor"></a>Installation</h2>
+<p><img src="http://www.r-pkg.org/badges/version-ago/logger" alt="CRAN version"></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"logger"</span>)</a></code></pre></div>
+<p><code>logger</code> can also be installed from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'daroczig/logger'</span>)</a></code></pre></div>
 </div>
 <div id="quick-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-example" class="anchor"></a>Quick example</h2>
 <p>Setting the log level threshold to something low and logging various messages in ad-hoc and programmatic ways:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(DEBUG)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Script starting up...'</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; INFO [2018-20-11 22:49:36] Script starting up...</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">pkgs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/available.packages">available.packages</a></span>()</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'There are {nrow(pkgs)} R packages hosted on CRAN!'</span>)</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; INFO [2018-20-11 22:49:37] There are 13433 R packages hosted on CRAN!</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="cf">for</span> (letter <span class="cf">in</span> letters) {</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">    lpkgs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">grepl</a></span>(letter, pkgs[, <span class="st">'Package'</span>], <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">    <span class="kw"><a href="reference/log_level.html">log_level</a></span>(<span class="cf">if</span> (lpkgs <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span>) TRACE <span class="cf">else</span> DEBUG,</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">              <span class="st">'{lpkgs} R packages including the {shQuote(letter)} letter'</span>)</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">}</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6300 R packages including the 'a' letter</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6772 R packages including the 'e' letter</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 5412 R packages including the 'i' letter</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 7014 R packages including the 'r' letter</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6402 R packages including the 's' letter</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 5864 R packages including the 't' letter</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'There might be many, like {1:2} or more warnings!!!'</span>)</a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(logger)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(DEBUG)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Script starting up...'</span>)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; INFO [2018-20-11 22:49:36] Script starting up...</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">pkgs &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/available.packages.html">available.packages</a></span>()</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'There are {nrow(pkgs)} R packages hosted on CRAN!'</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; INFO [2018-20-11 22:49:37] There are 13433 R packages hosted on CRAN!</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="cf">for</span> (letter <span class="cf">in</span> letters) {</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    lpkgs &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(letter, pkgs[, <span class="st">'Package'</span>], <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    <span class="kw"><a href="reference/log_level.html">log_level</a></span>(<span class="cf">if</span> (lpkgs <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span>) TRACE <span class="cf">else</span> DEBUG,</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">              <span class="st">'{lpkgs} R packages including the {shQuote(letter)} letter'</span>)</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6300 R packages including the 'a' letter</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6772 R packages including the 'e' letter</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 5412 R packages including the 'i' letter</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 7014 R packages including the 'r' letter</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6402 R packages including the 's' letter</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 5864 R packages including the 't' letter</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'There might be many, like {1:2} or more warnings!!!'</span>)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!</span></a></code></pre></div>
 <p>Setting a custom log layout to render the log records with colors:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(logger)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_glue_colors)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Starting the script...'</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'This is the second log line'</span>)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="reference/log_level.html">log_trace</a></span>(<span class="st">'Note that the 2nd line is being placed right after the 1st one.'</span>)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_success</a></span>(<span class="st">'Doing pretty well so far!'</span>)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'But beware, as some errors might come :/'</span>)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is a problem'</span>)</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'Note that getting an error is usually bad'</span>)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is another problem'</span>)</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(logger)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/log_layout.html">log_layout</a></span>(layout_glue_colors)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="reference/log_threshold.html">log_threshold</a></span>(TRACE)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Starting the script...'</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'This is the second log line'</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw"><a href="reference/log_level.html">log_trace</a></span>(<span class="st">'Note that the 2nd line is being placed right after the 1st one.'</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw"><a href="reference/log_level.html">log_success</a></span>(<span class="st">'Doing pretty well so far!'</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'But beware, as some errors might come :/'</span>)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is a problem'</span>)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'Note that getting an error is usually bad'</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is another problem'</span>)</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="kw"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem'</span>)</a></code></pre></div>
 <p>Or simply run the related demo:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/demo">demo</a></span>(colors, <span class="dt">package =</span> <span class="st">'logger'</span>, <span class="dt">echo =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(colors, <span class="dt">package =</span> <span class="st">'logger'</span>, <span class="dt">echo =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="reference/figures/colors.png" alt="colored log output"></p>
 <p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see the related vignettes.</p>
 </div>

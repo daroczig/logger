@@ -1,6 +1,6 @@
 pandoc: '2.2'
 pkgdown: 1.3.0.9000
-pkgdown_sha: a267beee11ac619011b359471c66178dc13685ab
+pkgdown_sha: 96e12f83bb3f92e4a30309181cc14134bd92b644
 articles:
   Intro: Intro.html
   anatomy: anatomy.html
