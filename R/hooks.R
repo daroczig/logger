@@ -85,15 +85,15 @@ log_shiny_input_changes <- function(input) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
 
-    input_values <- isolate(reactiveValuesToList(input))
+    input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
     log_info(skip_formatter(paste(
         'Default Shiny inputs initialized:',
         as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))))
 
-    observe({
+    shiny::observe({
         old_input_values <- shiny_input_values
-        new_input_values <- reactiveValuesToList(input)
+        new_input_values <- shiny::reactiveValuesToList(input)
         mapply(function(name, old, new) {
             if (!identical(old, new)) {
                 log_info('Shiny input change detected on {name}: {old} -> {new}')
