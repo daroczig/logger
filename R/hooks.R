@@ -47,3 +47,30 @@ log_errors <- function() {
         print = FALSE,
         where = baseenv())))
 }
+
+
+#' Auto logging input changes in Shiny app
+#'
+#' This is to be called in the \code{server} section of the Shiny app.
+#' @export
+#' @importFrom utils assignInMyNamespace
+log_shiny_input_changes <- function(input) {
+
+    ## TODO fail outside of Shiny
+
+    input_values <- isolate(reactiveValuesToList(input))
+    assignInMyNamespace('shiny_input_values', input_values)
+
+    observe({
+        old_input_alues <- shiny_input_values
+        new_input_alues <- reactiveValuesToList(input)
+        str(new_input_alues)
+        log_info('check')
+        str(mapply(identical, old_input_alues, new_input_alues))
+        log_info('run')
+        assignInNamespace('shiny_input_values', new_input_alues, ns = 'logger')
+    })
+
+
+}
+shiny_input_values <- NULL
