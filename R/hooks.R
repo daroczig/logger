@@ -54,6 +54,28 @@ log_errors <- function() {
 #' This is to be called in the \code{server} section of the Shiny app.
 #' @export
 #' @importFrom utils assignInMyNamespace
+#' @examples \dontrun{
+#' library(shiny)
+#'
+#' ui <- bootstrapPage(
+#'     numericInput('mean', 'mean', 0),
+#'     numericInput('sd', 'sd', 1),
+#'     textInput('title', 'title', 'title'),
+#'     plotOutput('plot')
+#' )
+#'
+#' server <- function(input, output) {
+#'
+#'     logger::log_shiny_input_changes(input)
+#'
+#'     output$plot <- renderPlot({
+#'         hist(rnorm(1e3, input$mean, input$sd), main = input$title)
+#'     })
+#'
+#' }
+#'
+#' shinyApp(ui = ui, server = server)
+#' }
 log_shiny_input_changes <- function(input) {
 
     fail_on_missing_package('shiny')
