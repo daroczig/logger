@@ -17,6 +17,7 @@ ui <- bootstrapPage(
     numericInput('mean', 'mean', 0),
     numericInput('sd', 'sd', 1),
     textInput('title', 'title', 'title'),
+    textInput('foo', 'This is not used at all, still gets logged', 'foo'),
     plotOutput('plot')
 )
 
