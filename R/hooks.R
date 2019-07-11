@@ -56,23 +56,21 @@ log_errors <- function() {
 #' @importFrom utils assignInMyNamespace
 log_shiny_input_changes <- function(input) {
 
-    if (!requireNamespace('shiny')) {
-        stop('Shiny not even installed, it makes no sense to try to log Shiny app changes')
-    }
+    fail_on_missing_package('shiny')
     if (!shiny::isRunning()) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
 
     input_values <- isolate(reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
+    log_info(skip_formatter(paste(
+        'Default Shiny inputs initialized:',
+        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))))
 
     observe({
         old_input_alues <- shiny_input_values
         new_input_alues <- reactiveValuesToList(input)
-        str(new_input_alues)
-        log_info('check')
         str(mapply(identical, old_input_alues, new_input_alues))
-        log_info('run')
         assignInNamespace('shiny_input_values', new_input_alues, ns = 'logger')
     })
 
