@@ -6,6 +6,9 @@
 \usage{
 log_shiny_input_changes(input)
 }
+\arguments{
+\item{input}{passed from Shiny's \code{server}}
+}
 \description{
 This is to be called in the \code{server} section of the Shiny app.
 }

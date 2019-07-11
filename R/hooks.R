@@ -53,6 +53,7 @@ log_errors <- function() {
 #'
 #' This is to be called in the \code{server} section of the Shiny app.
 #' @export
+#' @param input passed from Shiny's \code{server}
 #' @importFrom utils assignInMyNamespace
 #' @examples \dontrun{
 #' library(shiny)
