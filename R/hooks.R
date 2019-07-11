@@ -57,6 +57,7 @@ log_errors <- function() {
 log_shiny_input_changes <- function(input) {
 
     fail_on_missing_package('shiny')
+    fail_on_missing_package('jsonlite')
     if (!shiny::isRunning()) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
@@ -70,7 +71,11 @@ log_shiny_input_changes <- function(input) {
     observe({
         old_input_alues <- shiny_input_values
         new_input_alues <- reactiveValuesToList(input)
-        str(mapply(identical, old_input_alues, new_input_alues))
+        mapply(function(name, old, new) {
+            if (!identical(old, new)) {
+                log_info('Shiny input change detected on {name}: {old} -> {new}')
+            }
+        }, names(old_input_alues), old_input_alues, new_input_alues)
         assignInNamespace('shiny_input_values', new_input_alues, ns = 'logger')
     })
 
