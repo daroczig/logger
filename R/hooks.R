@@ -91,14 +91,14 @@ log_shiny_input_changes <- function(input) {
         as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))))
 
     observe({
-        old_input_alues <- shiny_input_values
-        new_input_alues <- reactiveValuesToList(input)
+        old_input_values <- shiny_input_values
+        new_input_values <- reactiveValuesToList(input)
         mapply(function(name, old, new) {
             if (!identical(old, new)) {
                 log_info('Shiny input change detected on {name}: {old} -> {new}')
             }
-        }, names(old_input_alues), old_input_alues, new_input_alues)
-        assignInNamespace('shiny_input_values', new_input_alues, ns = 'logger')
+        }, names(old_input_values), old_input_values, new_input_values)
+        assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')
     })
 
 
