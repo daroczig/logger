@@ -28,7 +28,8 @@ Suggests:
   rmarkdown,
   devtools,
   roxygen2,
-  parallel
+  parallel,
+  shiny
 Enhances:
   logging,
   futile.logger,

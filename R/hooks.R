@@ -56,7 +56,12 @@ log_errors <- function() {
 #' @importFrom utils assignInMyNamespace
 log_shiny_input_changes <- function(input) {
 
-    ## TODO fail outside of Shiny
+    if (!requireNamespace('shiny')) {
+        stop('Shiny not even installed, it makes no sense to try to log Shiny app changes')
+    }
+    if (!shiny::isRunning()) {
+        stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
+    }
 
     input_values <- isolate(reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
