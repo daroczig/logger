@@ -9,7 +9,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Logging from R Packages">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -86,6 +86,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -105,7 +106,7 @@
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/load_all.html">load_all</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">'demo-packages/logger-tester-package'</span>, <span class="dt">package =</span> <span class="st">'logger'</span>))</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Loading logger.tester</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">logger_tester_function</span>(INFO, <span class="st">'hi from tester package'</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; INFO [2019-05-17 06:28:10] hi from tester package 0.364140667952597</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; INFO [2019-07-19 21:11:56] hi from tester package 0.436368189519271</span></a></code></pre></div>
 <p>But if auto-guessing is not your style, then feel free to set your custom namespace (eg the name of your package) in all <code><a href="../reference/log_level.html">?log_info</a></code> etc function calls and let your users know about how to suppress / reformat / redirect your log messages via <code><a href="../reference/log_threshold.html">?log_threshold</a></code>, <code><a href="../reference/log_layout.html">?log_layout</a></code>, <code><a href="../reference/log_appender.html">?log_appender</a></code>.</p>
 <p>Please note that setting the formatter function via <code><a href="../reference/log_formatter.html">?log_formatter</a></code> should not be left to the R package end-users, as the log message formatter is specific to your logging calls, so that should be decided by the R package author. Feel free to pick any formatter function (eg <code>glue</code>, <code>sprintf</code>, <code>paste</code> or something else), and set that via <code><a href="../reference/log_formatter.html">?log_formatter</a></code> when your R package is loaded. All other parameters of your <code>logger</code> will inherit from the <code>global</code> namespace – set by your R package’s end user.</p>
   </div>
@@ -116,17 +117,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Gergely Daróczi, <a href="https://system1.com"><img src="http://system1.com/static/svg/logo.svg" height="24"></a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
