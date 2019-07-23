@@ -272,13 +272,18 @@ log_level <- function(level, ..., namespace = NA_character_,
     }
 
     definitions <- get_logger_definitions(namespace, .topenv = .topenv)
+    level <- validate_log_level(level)
 
     for (definition in definitions) {
 
+        if (level > definition$threshold) {
+            next
+        }
+        
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 
-        log_arg$level <- validate_log_level(level)
+        log_arg$level <- level
         log_arg$.logcall <- .logcall
         log_arg$.topcall  <- if(!is.null(.topcall)) {
             .topcall
