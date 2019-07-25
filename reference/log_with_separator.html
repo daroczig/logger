@@ -173,31 +173,31 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'An important message'</span>)</div><div class='output co'>#&gt; INFO [2019-07-19 21:11:41] =====================================================
-#&gt; INFO [2019-07-19 21:11:41] = An important message                              =
-#&gt; INFO [2019-07-19 21:11:41] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'Some critical KPI down!!!'</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>'$'</span>)</div><div class='output co'>#&gt; INFO [2019-07-19 21:11:41] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-#&gt; INFO [2019-07-19 21:11:41] $ Some critical KPI down!!!                         $
-#&gt; INFO [2019-07-19 21:11:41] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'This message is worth a {1e3} words'</span>)</div><div class='output co'>#&gt; INFO [2019-07-19 21:11:41] =====================================================
-#&gt; INFO [2019-07-19 21:11:41] = This message is worth a 1000 words                =
-#&gt; INFO [2019-07-19 21:11:41] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(
+    <pre class="examples"><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'An important message'</span>)</div><div class='output co'>#&gt; INFO [2019-07-25 06:58:11] =====================================================
+#&gt; INFO [2019-07-25 06:58:11] = An important message                              =
+#&gt; INFO [2019-07-25 06:58:11] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'Some critical KPI down!!!'</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>'$'</span>)</div><div class='output co'>#&gt; INFO [2019-07-25 06:58:11] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#&gt; INFO [2019-07-25 06:58:11] $ Some critical KPI down!!!                         $
+#&gt; INFO [2019-07-25 06:58:11] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'This message is worth a {1e3} words'</span>)</div><div class='output co'>#&gt; INFO [2019-07-25 06:58:11] =====================================================
+#&gt; INFO [2019-07-25 06:58:11] = This message is worth a 1000 words                =
+#&gt; INFO [2019-07-25 06:58:11] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(
   <span class='st'>'A very important message with a bunch of extra words that will'</span>,
-  <span class='st'>'eventually wrap into a multi-line message for our quite nice demo :wow:'</span>))</div><div class='output co'>#&gt; INFO [2019-07-19 21:11:41] =====================================================
-#&gt; INFO [2019-07-19 21:11:41] = A very important message with a bunch of extra    =
-#&gt; INFO [2019-07-19 21:11:41] = words that will eventually wrap into a            =
-#&gt; INFO [2019-07-19 21:11:41] = multi-line message for our quite nice demo :wow:  =
-#&gt; INFO [2019-07-19 21:11:41] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(
+  <span class='st'>'eventually wrap into a multi-line message for our quite nice demo :wow:'</span>))</div><div class='output co'>#&gt; INFO [2019-07-25 06:58:11] =====================================================
+#&gt; INFO [2019-07-25 06:58:11] = A very important message with a bunch of extra    =
+#&gt; INFO [2019-07-25 06:58:11] = words that will eventually wrap into a            =
+#&gt; INFO [2019-07-25 06:58:11] = multi-line message for our quite nice demo :wow:  =
+#&gt; INFO [2019-07-25 06:58:11] =====================================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(
   <span class='st'>'A very important message with a bunch of extra words that will'</span>,
   <span class='st'>'eventually wrap into a multi-line message for our quite nice demo :wow:'</span>),
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div><div class='output co'>#&gt; INFO [2019-07-19 21:11:41] =================================
-#&gt; INFO [2019-07-19 21:11:41] = A very important message      =
-#&gt; INFO [2019-07-19 21:11:41] = with a bunch of extra words   =
-#&gt; INFO [2019-07-19 21:11:41] = that will eventually wrap     =
-#&gt; INFO [2019-07-19 21:11:41] = into a multi-line message     =
-#&gt; INFO [2019-07-19 21:11:41] = for our quite nice demo       =
-#&gt; INFO [2019-07-19 21:11:41] = :wow:                         =
-#&gt; INFO [2019-07-19 21:11:41] =================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'Boo!'</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>FATAL</span>)</div><div class='output co'>#&gt; FATAL [2019-07-19 21:11:41] ====================================================
-#&gt; FATAL [2019-07-19 21:11:41] = Boo!                                             =
-#&gt; FATAL [2019-07-19 21:11:41] ====================================================</div></pre>
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div><div class='output co'>#&gt; INFO [2019-07-25 06:58:11] =================================
+#&gt; INFO [2019-07-25 06:58:11] = A very important message      =
+#&gt; INFO [2019-07-25 06:58:11] = with a bunch of extra words   =
+#&gt; INFO [2019-07-25 06:58:11] = that will eventually wrap     =
+#&gt; INFO [2019-07-25 06:58:11] = into a multi-line message     =
+#&gt; INFO [2019-07-25 06:58:11] = for our quite nice demo       =
+#&gt; INFO [2019-07-25 06:58:11] = :wow:                         =
+#&gt; INFO [2019-07-25 06:58:11] =================================</div><div class='input'><span class='fu'>log_with_separator</span>(<span class='st'>'Boo!'</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>FATAL</span>)</div><div class='output co'>#&gt; FATAL [2019-07-25 06:58:11] ====================================================
+#&gt; FATAL [2019-07-25 06:58:11] = Boo!                                             =
+#&gt; FATAL [2019-07-25 06:58:11] ====================================================</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
