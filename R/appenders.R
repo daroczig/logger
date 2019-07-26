@@ -9,23 +9,26 @@ appender_console <- structure(function(lines) {
 
 #' Append log messages to a file
 #' @param file path
+#' @param append boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending
 #' @export
 #' @return function taking \code{lines} argument
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
-appender_file <- function(file) {
+appender_file <- function(file, append = TRUE) {
+    force(append)
     structure(
         function(lines) {
-            cat(lines, sep = '\n', file = file, append = TRUE)
+            cat(lines, sep = '\n', file = file, append = append)
         }, generator = deparse(match.call()))
 }
 
 
 #' Append log messages to a file and stdout as well
-#' @param file path
+#' @inheritParams appender_file
 #' @export
 #' @return function taking \code{lines} argument
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
-appender_tee <- function(file) {
+appender_tee <- function(file, append = TRUE) {
+    force(append)
     structure(
         function(lines) {
             appender_console(lines)
