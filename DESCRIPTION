@@ -28,7 +28,8 @@ Suggests:
   rmarkdown,
   devtools,
   roxygen2,
-  parallel
+  parallel,
+  rsyslog
 Enhances:
   logging,
   futile.logger,
