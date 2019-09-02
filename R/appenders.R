@@ -127,5 +127,28 @@ appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
 
 }
 
+#' Send log messages to the POSIX system log
+#' @param identifier A string identifying the process.
+#' @param ... Further arguments passed on to \code{\link[rsyslog]{open_syslog}}.
+#' @return function taking \code{lines} argument
+#' @export
+#' @note This functionality depends on the \pkg{rsyslog} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
+#' @examples
+#' if (requireNamespace("rsyslog", quietly = TRUE)) {
+#'   log_appender(appender_syslog("test"))
+#'   log_info("Test message.")
+#' }
+appender_syslog <- function(identifier, ...) {
+    fail_on_missing_package('rsyslog')
+    rsyslog::open_syslog(identifier = identifier, ...)
+    structure(
+        function(lines) {
+            for (line in lines)
+                rsyslog::syslog(line)
+        },
+        generator = deparse(match.call())
+    )
+}
 
 ## TODO other appenders: graylog, kinesis, datadog, cloudwatch, email via sendmailR, ES etc
