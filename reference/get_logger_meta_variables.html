@@ -8,11 +8,13 @@
 
 <title>Collect useful information about the logging environment to be used in log messages — get_logger_meta_variables • logger</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Collect useful information about the logging environment to be used in log messages — get_logger_meta_variables" />
 
+<meta property="og:title" content="Collect useful information about the logging environment to be used in log messages — get_logger_meta_variables" />
 <meta property="og:description" content="Available variables to be used in the log formatter functions, eg in layout_glue_generator:
 levelr: log level as an R object, eg INFO
 level: log level as a string, eg INFO
@@ -54,6 +56,7 @@ fn: function's (if any) name calling the logging function
 
 " />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -130,7 +133,6 @@ fn: function's (if any) name calling the logging function
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -152,7 +154,6 @@ fn: function's (if any) name calling the logging function
     </div>
 
     <div class="ref-description">
-    
     <p>Available variables to be used in the log formatter functions, eg in <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code>:</p><ul>
 <li><p>levelr: log level as an R object, eg <code><a href='log_levels.html'>INFO</a></code></p></li>
 <li><p>level: log level as a string, eg <code><a href='log_levels.html'>INFO</a></code></p></li>
@@ -172,13 +173,12 @@ fn: function's (if any) name calling the logging function
 <li><p>fn: function's (if any) name calling the logging function</p></li>
 </ul>
 
-    
     </div>
 
     <pre class="usage"><span class='fu'>get_logger_meta_variables</span>(<span class='kw'>log_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
   <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(), <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
   <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -203,26 +203,22 @@ fn: function's (if any) name calling the logging function
       <td><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>list</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -234,7 +230,7 @@ fn: function's (if any) name calling the logging function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.9900.</p>
 </div>
 
       </footer>
