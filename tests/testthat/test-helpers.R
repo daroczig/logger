@@ -1,6 +1,11 @@
 library(logger)
 library(testthat)
 
+## save current settings so that we can reset later
+appender <- log_appender()
+
+log_appender(appender_stdout)
+
 context('helpers')
 
 test_that('separator', {
@@ -24,3 +29,6 @@ test_that('log failure', {
   expect_error(log_failure('foobar'), NA)
   expect_error(log_failure(foobar))
 })
+
+## reset settings
+log_appender(appender)

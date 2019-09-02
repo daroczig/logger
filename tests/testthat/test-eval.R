@@ -2,9 +2,12 @@ library(logger)
 library(testthat)
 
 ## save current settings so that we can reset later
-layout <- log_layout()
+layout    <- log_layout()
 threshold <- log_threshold()
+appender  <- log_appender()
+
 log_layout(layout_glue_generator('{level} {msg}'))
+log_appender(appender_stdout)
 
 context('log_eval')
 test_that('single line', {
@@ -31,3 +34,4 @@ test_that('lower log level', {
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)
+log_appender(appender)

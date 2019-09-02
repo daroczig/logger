@@ -3,9 +3,12 @@ library(testthat)
 
 ## save current settings so that we can reset later
 threshold <- log_threshold()
-layout <- log_layout()
+appender  <- log_appender()
+layout    <- log_layout()
 
 context('loggers')
+
+log_appender(appender_stdout)
 
 log_threshold(WARN)
 test_that('log levels', {
@@ -97,3 +100,4 @@ test_that('print.level', {
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)
+log_appender(appender)

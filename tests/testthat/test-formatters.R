@@ -3,7 +3,8 @@ library(testthat)
 library(jsonlite)
 
 ## save current settings so that we can reset later
-formatter  <- log_formatter()
+formatter <- log_formatter()
+appender  <- log_appender()
 
 context('formatters')
 everything <- 42
@@ -15,6 +16,7 @@ f <- function() {
 }
 
 log_formatter(formatter_glue)
+log_appender(appender_stdout)
 test_that('glue works', {
 
     expect_equal(formatter_glue("Hi"), "Hi")
@@ -116,3 +118,4 @@ test_that('skip formatter', {
 })
 
 log_formatter(formatter)
+log_appender(appender)
