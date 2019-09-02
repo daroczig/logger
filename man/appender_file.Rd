@@ -4,10 +4,12 @@
 \alias{appender_file}
 \title{Append log messages to a file}
 \usage{
-appender_file(file)
+appender_file(file, append = TRUE)
 }
 \arguments{
 \item{file}{path}
+
+\item{append}{boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending}
 }
 \value{
 function taking \code{lines} argument
