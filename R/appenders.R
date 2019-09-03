@@ -145,9 +145,10 @@ appender_syslog <- function(identifier, ...) {
 #' @param namespace \code{logger} namespace to use for logging messages on starting up the background process
 #' @return function taking \code{lines} argument
 #' @export
-#' @note This functionality depends on the \pkg{txtq} and \pkg{callr} packages.
+#' @note This functionality depends on the \pkg{txtq} and \pkg{callr} packages. The R session's temp folder is used for staging files (message queue and other forms of communication between the parent and child processes).
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
+#'   force(file)
 #'   function(lines) {
 #'     Sys.sleep(1)
 #'     cat(lines, sep = '\n', file = file, append = TRUE)
@@ -166,11 +167,21 @@ appender_syslog <- function(identifier, ...) {
 #' ## use async appander
 #' log_appender(my_appender)
 #' log_info('Was this slow?')
-#' for (i in 1:25) log_info(i)
+#' system.time(for (i in 1:25) log_info(i))
+#' readLines(t)
+#' Sys.sleep(10)
+#' readLines(t)
 #'
-#' ## check on the async appender
+#' ## check on the async appender (debugging, you will probably never need this)
 #' attr(my_appender, 'async_writer_queue')$count()
+#'
 #' attr(my_appender, 'async_writer_process')$get_pid()
+#' attr(my_appender, 'async_writer_process')$get_state()
+#' attr(my_appender, 'async_writer_process')$poll_process(1)
+#' attr(my_appender, 'async_writer_process')$read()
+#'
+#' attr(my_appender, 'async_writer_process')$call('sadsadsad')
+#' attr(my_appender, 'async_writer_process')$is_alive()
 #' }
 appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
 
@@ -200,12 +211,17 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
     async_writer_process$run(assign, args = list(x = 'async_writer_storage', value = async_writer_storage))
     async_writer_process$run(function() async_writer_queue <<- txtq::txtq(async_writer_storage))
 
-    ## pass arguments and appender
+    ## pass arguments
     async_writer_process$run(assign, args = list(x = 'batch', value = batch))
-    async_writer_process$run(assign, args = list(x = 'appender', value = appender))
+
+    ## pass appender
+    async_writer_tempfile <- tempfile()
+    saveRDS(appender, async_writer_tempfile)
+    log_trace(paste('Async appender cached at:', async_writer_tempfile), namespace = 'async_logger')
+    async_writer_process$run(assign, args = list(x = 'async_writer_tempfile', value = async_writer_tempfile))
+    async_writer_process$run(assign, args = list(x = 'appender', value = readRDS(async_writer_tempfile)))
 
     ## start infinite loop processing log records
-    log_info('start')
     async_writer_process$call(function() {
         while (TRUE) {
             items <- async_writer_queue$pop(batch)
@@ -222,7 +238,6 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
             }
         }
     })
-    log_info('end')
 
     structure(
         function(lines) {
@@ -239,5 +254,7 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
         async_writer_storage = async_writer_storage,
         async_writer_queue = async_writer_queue,
         async_writer_process = async_writer_process)
+
+    ## NOTE no need to clean up, all will go away with the current R session's temp folder
 
 }

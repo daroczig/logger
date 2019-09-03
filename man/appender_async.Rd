@@ -20,7 +20,7 @@ function taking \code{lines} argument
 Delays executing the actual appender function to the future in a background process to avoid blocking the main R session
 }
 \note{
-This functionality depends on the \pkg{txtq} and \pkg{callr} packages.
+This functionality depends on the \pkg{txtq} and \pkg{callr} packages. The R session's temp folder is used for staging files (message queue and other forms of communication between the parent and child processes).
 }
 \examples{
 \dontrun{
@@ -47,6 +47,10 @@ for (i in 1:25) log_info(i)
 
 ## check on the async appender
 attr(my_appender, 'async_writer_queue')$count()
+
 attr(my_appender, 'async_writer_process')$get_pid()
+attr(my_appender, 'async_writer_process')$get_state()
+attr(my_appender, 'async_writer_process')$poll_process(1)
+attr(my_appender, 'async_writer_process')$read()
 }
 }
