@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Format a log record by concatenating the log level, timestamp and message — layout_simple • logger</title>
+<title>Append log record to stdout — appender_stdout • logger</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Format a log record by concatenating the log level, timestamp and message — layout_simple" />
-<meta property="og:description" content="Format a log record by concatenating the log level, timestamp and message" />
+<meta property="og:title" content="Append log record to stdout — appender_stdout" />
+<meta property="og:description" content="Append log record to stdout" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,61 +130,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Format a log record by concatenating the log level, timestamp and message</h1>
+    <h1>Append log record to stdout</h1>
     
-    <div class="hidden name"><code>layout_simple.Rd</code></div>
+    <div class="hidden name"><code>appender_stdout.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Format a log record by concatenating the log level, timestamp and message</p>
+    <p>Append log record to stdout</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layout_simple</span>(<span class='no'>level</span>, <span class='no'>msg</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(), <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
-  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>appender_stdout</span>(<span class='no'>lines</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>level</th>
-      <td><p>log level, see <code><a href='log_levels.html'>log_levels</a></code> for more details</p></td>
-    </tr>
-    <tr>
-      <th>msg</th>
-      <td><p>string message</p></td>
-    </tr>
-    <tr>
-      <th>namespace</th>
-      <td><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></td>
-    </tr>
-    <tr>
-      <th>.logcall</th>
-      <td><p>the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)</p></td>
-    </tr>
-    <tr>
-      <th>.topcall</th>
-      <td><p>R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)</p></td>
-    </tr>
-    <tr>
-      <th>.topenv</th>
-      <td><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></td>
+      <th>lines</th>
+      <td><p>character vector</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>character vector</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='log_layout.html'>log_layout</a></code>, for alternatives, see <code><a href='layout_glue.html'>layout_glue</a></code>, <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='layout_json.html'>layout_json</a></code>, or generator functions such as <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_slack.html'>appender_slack</a></code>, <code><a href='appender_pushbullet.html'>appender_pushbullet</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>
 

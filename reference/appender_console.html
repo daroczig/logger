@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Append log record to stdout — appender_console • logger</title>
+<title>Append log record to stderr — appender_console • logger</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Append log record to stdout — appender_console" />
-<meta property="og:description" content="Append log record to stdout" />
+<meta property="og:title" content="Append log record to stderr — appender_console" />
+<meta property="og:description" content="Append log record to stderr" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,16 +130,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Append log record to stdout</h1>
+    <h1>Append log record to stderr</h1>
     
     <div class="hidden name"><code>appender_console.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Append log record to stdout</p>
+    <p>Append log record to stderr</p>
     </div>
 
-    <pre class="usage"><span class='fu'>appender_console</span>(<span class='no'>lines</span>)</pre>
+    <pre class="usage"><span class='fu'>appender_console</span>(<span class='no'>lines</span>)
+
+<span class='fu'>appender_stderr</span>(<span class='no'>lines</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,7 +154,7 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_slack.html'>appender_slack</a></code>, <code><a href='appender_pushbullet.html'>appender_pushbullet</a></code></p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_stdout.html'>appender_stdout</a></code>, <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_slack.html'>appender_slack</a></code>, <code><a href='appender_pushbullet.html'>appender_pushbullet</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -168,7 +170,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gergely Daróczi, <a href='https://system1.com'><img src="http://system1.com/static/svg/logo.svg" height="24" /></a>.</p>
+  <p>Developed by Gergely Daróczi, <a href='https://system1.com'><img src="https://system1.com/static/img/logo.svg" height="24" style="background-color:grey;"/></a>.</p>
 </div>
 
 <div class="pkgdown">
