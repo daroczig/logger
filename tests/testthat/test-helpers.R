@@ -1,6 +1,11 @@
 library(logger)
 library(testthat)
 
+## save current settings so that we can reset later
+appender <- log_appender()
+
+log_appender(appender_stdout)
+
 context('helpers')
 
 test_that('separator', {
@@ -22,5 +27,8 @@ test_that('log failure', {
   expect_output(log_failure("foobar"), NA)
   expect_output(try(log_failure(foobar), silent = TRUE), 'ERROR.*foobar')
   expect_error(log_failure('foobar'), NA)
-  expect_error(log_failure(foobar))
+  expect_match(capture.output(expect_error(log_failure(foobar))), 'not found')
 })
+
+## reset settings
+log_appender(appender)

@@ -1,6 +1,6 @@
 authors:
   System1:
     href: https://system1.com
-    html: <img src="http://system1.com/static/svg/logo.svg" height="24" />
+    html: <img src="https://system1.com/static/img/logo.svg" height="24" style="background-color:grey;"/>
 toc:
   depth: 3
