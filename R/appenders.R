@@ -236,7 +236,7 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
                     appender(items$message[i])
                 }
                 ## remove processed log records
-                async_writer_queue$clean()
+                ## async_writer_queue$clean()
             }
         }
     })
