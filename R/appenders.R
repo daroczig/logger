@@ -142,128 +142,102 @@ appender_syslog <- function(identifier, ...) {
 #' Delays executing the actual appender function to the future in a background process to avoid blocking the main R session
 #' @param appender a  \code{\link{log_appender}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)
 #' @param batch number of records to process from the queue at once
+#' @param namespace \code{logger} namespace to use for logging messages on starting up the background process
 #' @return function taking \code{lines} argument
 #' @export
 #' @note This functionality depends on the \pkg{txtq} and \pkg{callr} packages.
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
 #'   function(lines) {
-#'     Sys.sleep(5)
+#'     Sys.sleep(1)
 #'     cat(lines, sep = '\n', file = file, append = TRUE)
 #'   }
 #' }
 #'
+#' ## log what's happening in the background
+#' log_threshold(TRACE, namespace = 'async_logger')
+#' log_appender(appender_console, namespace = 'async_logger')
+#'
+#' ## start async appender
 #' t <- tempfile()
-#' log_appender(appender_async(appender_file_slow(file = t)))
+#' log_info('Logging in the background to {t}')
+#' my_appender <- appender_async(appender_file_slow(file = t))
+#'
+#' ## use async appander
+#' log_appender(my_appender)
 #' log_info('Was this slow?')
+#' for (i in 1:25) log_info(i)
+#'
+#' ## check on the async appender
+#' attr(my_appender, 'async_writer_queue')$count()
+#' attr(my_appender, 'async_writer_process')$get_pid()
 #' }
-appender_async <- function(appender, batch = 1) {
+appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
 
     fail_on_missing_package('txtq')
     fail_on_missing_package('callr')
 
     force(appender)
     force(batch)
-    appender_reference <- attr(appender, 'generator')
 
-    ## if (is.null(appender_reference)) {
-    ##     stop('No generator found for the appender function')
-    ## }
-
-    ## make sure we have a storage for the message queue
-    if (is.null(async_writer_storage)) {
-        assignInMyNamespace('async_writer_storage', tempfile())
-    }
+    ## create a storage for the message queue
+    async_writer_storage <- tempfile()
+    log_trace(paste('Async writer storage:', async_writer_storage), namespace = 'async_logger')
 
     ## initialize the message queue
-    if (is.null(async_writer_queue)) {
-        assignInMyNamespace('async_writer_queue', txtq::txtq(async_writer_storage))
-    }
+    async_writer_queue <- txtq::txtq(async_writer_storage)
 
-    ## prepare background process for async execution of the message queue
-    if (is.null(async_writer_process)) {
+    ## start a background process for the async execution of the message queue
+    ## TODO make it easy to create multiple/parallel background processes?
+    async_writer_process <- callr::r_session$new()
+    log_trace(paste('Async writer PID:', async_writer_process$get_pid()), namespace = 'async_logger')
 
-        ## TODO make it easy to create multiple/parallel background processes?
-        ## create a background process for doing the actual appender calls
-        assignInMyNamespace('async_writer_process', callr::r_session$new())
+    ## load minimum required packages
+    async_writer_process$run(function() require('logger'))
+    async_writer_process$run(function() require('txtq'))
 
-        ## loading minimum required packages
-        async_writer_process$run(function() require('logger'))
-        async_writer_process$run(function() require('txtq'))
+    ## connect to the message queue
+    async_writer_process$run(assign, args = list(x = 'async_writer_storage', value = async_writer_storage))
+    async_writer_process$run(function() async_writer_queue <<- txtq::txtq(async_writer_storage))
 
-        ## connect to the message queue
-        async_writer_process$run(assign, args = list(x = 'async_writer_storage', value = async_writer_storage))
-        async_writer_process$run(function() queue <<- txtq::txtq(async_writer_storage))
+    ## pass arguments and appender
+    async_writer_process$run(assign, args = list(x = 'batch', value = batch))
+    async_writer_process$run(assign, args = list(x = 'appender', value = appender))
 
-        ## pass arguments and appender
-        async_writer_process$run(assign, args = list(x = 'batch', value = batch))
-        async_writer_process$run(assign, args = list(x = 'appender', value = appender))
-        ## TODO
-
-        async_writer_process$run(function() appender)
-        ## async_writer_process$run(function() queue$count())
-
-        ## start infinite loop
-        log_info('start')
-        async_writer_process$call(function() {
-            ## TODO Inf
-            while (TRUE) {
-                items <- queue$pop(batch)
-                if (nrow(items) == 0) {
-                    Sys.sleep(.1)
-                } else {
-                    ## execute the actual appender for each log item
-                    for (i in seq_len(nrow(items))) {
-                        appender(items$message[i])
-                    }
-                    ## TODO eval
-                    ## items$title
-                    ## items$message
-                    ## cat(items$message, sep = '\n', file = '/tmp/asynced', append = TRUE)
-
-                    ## remove processed log records
-                    queue$clean()
+    ## start infinite loop processing log records
+    log_info('start')
+    async_writer_process$call(function() {
+        while (TRUE) {
+            items <- async_writer_queue$pop(batch)
+            if (nrow(items) == 0) {
+                ## avoid burning CPU
+                Sys.sleep(.1)
+            } else {
+                ## execute the actual appender for each log item
+                for (i in seq_len(nrow(items))) {
+                    appender(items$message[i])
                 }
+                ## remove processed log records
+                async_writer_queue$clean()
             }
-        })
-        log_info('end')
-
-
-
-        async_writer_process$poll_process(10)
-        async_writer_process$get_state()
-        async_writer_process$read()
-
-        async_writer_process$close()
-
-        ## TODO move this below
-        if (async_writer_process$get_state() != 'busy') {
-            stop('Ouch, the background log appender process has stopped working?')
         }
-
-        ## TODO
-
-        async_writer_process$run(function() async_writer_storage)
-
-        async_writer_process$run(sessionInfo)
-
-    } else {
-
-        ## TODO check if background process works
-
-    }
-
-
+    })
+    log_info('end')
 
     structure(
         function(lines) {
             ## TODO check if background process still works?
+            ## if (async_writer_process$get_state() != 'busy') {
+            ##     stop('Ouch, the background log appender process has stopped working?')
+            ## }
             ## write to message queue
             for (line in lines) {
-                queue$push(title = as.character(as.numeric(Sys.time())), message = line)
+                async_writer_queue$push(title = as.character(as.numeric(Sys.time())), message = line)
             }
-        }, generator = deparse(match.call()))
+        },
+        generator = deparse(match.call()),
+        async_writer_storage = async_writer_storage,
+        async_writer_queue = async_writer_queue,
+        async_writer_process = async_writer_process)
+
 }
-async_writer_storage <- NULL
-async_writer_queue   <- NULL
-async_writer_process <- NULL

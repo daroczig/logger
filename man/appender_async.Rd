@@ -4,12 +4,14 @@
 \alias{appender_async}
 \title{Delays executing the actual appender function to the future in a background process to avoid blocking the main R session}
 \usage{
-appender_async(appender, batch = 1)
+appender_async(appender, batch = 1, namespace = "async_logger")
 }
 \arguments{
 \item{appender}{a  \code{\link{log_appender}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)}
 
 \item{batch}{number of records to process from the queue at once}
+
+\item{namespace}{\code{logger} namespace to use for logging messages on starting up the background process}
 }
 \value{
 function taking \code{lines} argument
@@ -24,13 +26,27 @@ This functionality depends on the \pkg{txtq} and \pkg{callr} packages.
 \dontrun{
 appender_file_slow <- function(file) {
   function(lines) {
-    Sys.sleep(5)
+    Sys.sleep(1)
     cat(lines, sep = '\\n', file = file, append = TRUE)
   }
 }
 
+## log what's happening in the background
+log_threshold(TRACE, namespace = 'async_logger')
+log_appender(appender_console, namespace = 'async_logger')
+
+## start async appender
 t <- tempfile()
-log_appender(appender_async(appender_file_slow(file = t)))
+log_info('Logging in the background to {t}')
+my_appender <- appender_async(appender_file_slow(file = t))
+
+## use async appander
+log_appender(my_appender)
 log_info('Was this slow?')
+for (i in 1:25) log_info(i)
+
+## check on the async appender
+attr(my_appender, 'async_writer_queue')$count()
+attr(my_appender, 'async_writer_process')$get_pid()
 }
 }
