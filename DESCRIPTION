@@ -29,7 +29,9 @@ Suggests:
   devtools,
   roxygen2,
   parallel,
-  rsyslog
+  rsyslog,
+  callr,
+  txtq
 Enhances:
   logging,
   futile.logger,
