@@ -226,17 +226,25 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
     ## start infinite loop processing log records
     async_writer_process$call(function() {
         while (TRUE) {
+
             items <- async_writer_queue$pop(batch)
+
             if (nrow(items) == 0) {
+
                 ## avoid burning CPU
                 Sys.sleep(.1)
+
             } else {
+
                 ## execute the actual appender for each log item
                 for (i in seq_len(nrow(items))) {
                     appender(items$message[i])
                 }
+
                 ## remove processed log records
+                ## TODO re-enable after wlandau/txtq/issues/15
                 ## async_writer_queue$clean()
+
             }
         }
     })
