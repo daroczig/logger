@@ -81,3 +81,29 @@ microbenchmark(string(), vector(), dynamic(), times = 1e3)
 #>   vector() 129.111 136.8245 168.9274 155.5840 172.6795 3230.528  1000   b
 #>  dynamic() 116.347 124.7620 159.1570 143.2140 160.5040 4397.640  1000  ab
 ```
+
+Which suggests that `logger` is a pretty well-performing log framework.
+
+If you need even more performance with slower appenders, then asynchronous logging is your friend: passing the log messages to a reliable message queue, and a background process delivering those to the actual log destination in the background -- without blocking the main R process. This can be easily achieved in `logger` by wrapping any appender function in the `appender_async` function, such as:
+
+```r
+## demo log appender that's pretty slow
+appender_file_slow <- function(file) {
+  force(file)
+  function(lines) {
+    Sys.sleep(1)
+    cat(lines, sep = '\n', file = file, append = TRUE)
+  }
+}
+
+## create an async appender and start using it right away
+log_appender(appender_async(appender_file_slow(file = tempfile())))
+
+async <- function() log_info('Was this slow?')
+microbenchmark(async(), times = 1e3)
+#> Unit: microseconds
+#>     expr     min      lq     mean   median     uq      max neval
+#>  async() 511.329 528.247 614.8694 558.2535 616.14 5018.731  1000
+```
+
+Please note that although this ~0.6 ms is significantly higher than the ~0.15 ms we achieved above with the `sprintf` formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad. If you need even higher throughput, then a custom `appender_async` without checking on the background process and potentially a faster message queue can bring this even below to 200 µs.
