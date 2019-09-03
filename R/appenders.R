@@ -1,7 +1,7 @@
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
-#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 appender_console <- structure(function(lines) {
     cat(lines, sep = '\n')
 }, generator = quote(appender_console()))
@@ -12,7 +12,7 @@ appender_console <- structure(function(lines) {
 #' @param append boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending
 #' @export
 #' @return function taking \code{lines} argument
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 appender_file <- function(file, append = TRUE) {
     force(append)
     structure(
@@ -26,7 +26,7 @@ appender_file <- function(file, append = TRUE) {
 #' @inheritParams appender_file
 #' @export
 #' @return function taking \code{lines} argument
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 appender_tee <- function(file, append = TRUE) {
     force(append)
     structure(
@@ -46,7 +46,7 @@ appender_tee <- function(file, append = TRUE) {
 #' @return function taking \code{lines} argument
 #' @export
 #' @note This functionality depends on the \pkg{slackr} package.
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
                            username     = Sys.getenv('SLACK_USERNAME'),
                            icon_emoji   = Sys.getenv('SLACK_ICON_EMOJI'),
@@ -73,7 +73,7 @@ appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
 #' @param ... parameters passed to \code{pbPost}, such as \code{recipients} or \code{apikey}, although it's probably much better to set all these in the \code{~/.rpushbullet.json} as per package docs at \url{http://dirk.eddelbuettel.com/code/rpushbullet.html}
 #' @export
 #' @note This functionality depends on the \pkg{RPushbullet} package.
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 #' @export
 appender_pushbullet <- function(...) {
 
@@ -119,7 +119,7 @@ appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
 #' @return function taking \code{lines} argument
 #' @export
 #' @note This functionality depends on the \pkg{rsyslog} package.
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 #' @examples \dontrun{
 #' if (requireNamespace("rsyslog", quietly = TRUE)) {
 #'   log_appender(appender_syslog("test"))
@@ -145,7 +145,7 @@ appender_syslog <- function(identifier, ...) {
 #' @return function taking \code{lines} and optional \code{partition_key} argument
 #' @export
 #' @note This functionality depends on the \pkg{botor} package.
-#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_syslog}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 appender_kinesis <- function(stream) {
     fail_on_missing_package('botor')
     force(stream)
@@ -167,7 +167,7 @@ appender_kinesis <- function(stream) {
 #' @return function taking \code{lines} argument
 #' @export
 #' @note This functionality depends on the \pkg{txtq} and \pkg{callr} packages. The R session's temp folder is used for staging files (message queue and other forms of communication between the parent and child processes).
-#' @seealso This function is to be used with an actual \code{\link{log_appender}}, for example \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_syslog}} or \code{\link{appender_kinesis}}.
+#' @seealso This function is to be used with an actual \code{\link{log_appender}}, for example \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}} or \code{\link{appender_kinesis}}.
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
 #'   force(file)
