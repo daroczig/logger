@@ -31,7 +31,8 @@ Suggests:
   parallel,
   rsyslog,
   callr,
-  txtq
+  txtq,
+  botor
 Enhances:
   logging,
   futile.logger,

@@ -21,9 +21,11 @@ Send log messages to the POSIX system log
 This functionality depends on the \pkg{rsyslog} package.
 }
 \examples{
+\dontrun{
 if (requireNamespace("rsyslog", quietly = TRUE)) {
   log_appender(appender_syslog("test"))
   log_info("Test message.")
+}
 }
 }
 \seealso{

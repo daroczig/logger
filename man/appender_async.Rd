@@ -45,6 +45,7 @@ my_appender <- appender_async(appender_file_slow(file = t))
 log_appender(my_appender)
 log_info('Was this slow?')
 system.time(for (i in 1:25) log_info(i))
+
 readLines(t)
 Sys.sleep(10)
 readLines(t)

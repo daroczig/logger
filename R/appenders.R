@@ -119,24 +119,44 @@ appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
 #' @export
 #' @note This functionality depends on the \pkg{rsyslog} package.
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
-#' @examples
+#' @examples \dontrun{
 #' if (requireNamespace("rsyslog", quietly = TRUE)) {
 #'   log_appender(appender_syslog("test"))
 #'   log_info("Test message.")
+#' }
 #' }
 appender_syslog <- function(identifier, ...) {
     fail_on_missing_package('rsyslog')
     rsyslog::open_syslog(identifier = identifier, ...)
     structure(
         function(lines) {
-            for (line in lines)
+            for (line in lines) {
                 rsyslog::syslog(line)
+            }
         },
         generator = deparse(match.call())
     )
 }
 
-## TODO other appenders: graylog, kinesis, datadog, cloudwatch, email via sendmailR, ES etc
+
+#' Send log messages to a Amazon Kinesis stream
+#' @param stream name of the Kinesis stream
+#' @return function taking \code{lines} and optional \code{partition_key} argument
+#' @export
+#' @note This functionality depends on the \pkg{botor} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
+appender_kinesis <- function(stream) {
+    fail_on_missing_package('botor')
+    force(stream)
+    structure(
+        function(lines, partition_key = NA_character_) {
+            for (line in lines) {
+                botor::kinesis()$put_record(StreamName = stream, Data = line, PartitionKey = partition_key)
+            }
+        },
+        generator = deparse(match.call())
+    )
+}
 
 
 #' Delays executing the actual appender function to the future in a background process to avoid blocking the main R session
@@ -278,3 +298,5 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
     ## NOTE no need to clean up, all will go away with the current R session's temp folder
 
 }
+
+## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc
