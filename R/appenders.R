@@ -180,8 +180,8 @@ appender_syslog <- function(identifier, ...) {
 #' attr(my_appender, 'async_writer_process')$poll_process(1)
 #' attr(my_appender, 'async_writer_process')$read()
 #'
-#' attr(my_appender, 'async_writer_process')$call('sadsadsad')
 #' attr(my_appender, 'async_writer_process')$is_alive()
+#' attr(my_appender, 'async_writer_process')$read_error()
 #' }
 appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
 
@@ -240,17 +240,27 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
     })
 
     structure(
+
         function(lines) {
-            ## TODO check if background process still works?
-            ## if (async_writer_process$get_state() != 'busy') {
-            ##     stop('Ouch, the background log appender process has stopped working?')
-            ## }
+
+            ## check if background process still works
+            if (!isTRUE(async_writer_process$is_alive())) {
+                stop('FATAL: Async writer process not found')
+            }
+            remote_error <- async_writer_process$read_error()
+            if (remote_error != '') {
+                stop(paste('FATAL: Async writer failed with', shQuote(remote_error)))
+            }
+
             ## write to message queue
             for (line in lines) {
                 async_writer_queue$push(title = as.character(as.numeric(Sys.time())), message = line)
             }
+
         },
+
         generator = deparse(match.call()),
+        ## share remote process and queue with parent for debugging purposes
         async_writer_storage = async_writer_storage,
         async_writer_queue = async_writer_queue,
         async_writer_process = async_writer_process)
