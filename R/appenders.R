@@ -168,12 +168,14 @@ appender_syslog <- function(identifier, ...) {
 #' log_appender(my_appender)
 #' log_info('Was this slow?')
 #' system.time(for (i in 1:25) log_info(i))
+#'
 #' readLines(t)
 #' Sys.sleep(10)
 #' readLines(t)
 #'
 #' ## check on the async appender (debugging, you will probably never need this)
 #' attr(my_appender, 'async_writer_queue')$count()
+#' attr(my_appender, 'async_writer_queue')$log()
 #'
 #' attr(my_appender, 'async_writer_process')$get_pid()
 #' attr(my_appender, 'async_writer_process')$get_state()

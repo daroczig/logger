@@ -25,6 +25,7 @@ This functionality depends on the \pkg{txtq} and \pkg{callr} packages. The R ses
 \examples{
 \dontrun{
 appender_file_slow <- function(file) {
+  force(file)
   function(lines) {
     Sys.sleep(1)
     cat(lines, sep = '\\n', file = file, append = TRUE)
@@ -43,14 +44,21 @@ my_appender <- appender_async(appender_file_slow(file = t))
 ## use async appander
 log_appender(my_appender)
 log_info('Was this slow?')
-for (i in 1:25) log_info(i)
+system.time(for (i in 1:25) log_info(i))
+readLines(t)
+Sys.sleep(10)
+readLines(t)
 
-## check on the async appender
+## check on the async appender (debugging, you will probably never need this)
 attr(my_appender, 'async_writer_queue')$count()
+attr(my_appender, 'async_writer_queue')$log()
 
 attr(my_appender, 'async_writer_process')$get_pid()
 attr(my_appender, 'async_writer_process')$get_state()
 attr(my_appender, 'async_writer_process')$poll_process(1)
 attr(my_appender, 'async_writer_process')$read()
+
+attr(my_appender, 'async_writer_process')$is_alive()
+attr(my_appender, 'async_writer_process')$read_error()
 }
 }
