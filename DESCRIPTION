@@ -29,7 +29,8 @@ Suggests:
   devtools,
   roxygen2,
   parallel,
-  shiny
+  shiny,
+  rsyslog
 Enhances:
   logging,
   futile.logger,

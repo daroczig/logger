@@ -34,3 +34,6 @@ log_with_separator(paste(
   width = 60)
 log_with_separator('Boo!', level = FATAL)
 }
+\seealso{
+\code{\link{log_separator}}
+}

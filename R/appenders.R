@@ -1,31 +1,52 @@
+#' Append log record to stderr
+#' @param lines character vector
+#' @export
+#' @aliases appender_stderr
+#' @usage
+#' appender_console(lines)
+#'
+#' appender_stderr(lines)
+#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_stdout}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
+appender_console <- structure(function(lines) {
+    cat(lines, file = stderr(), sep = '\n')
+}, generator = quote(appender_console()))
+
+
+#' @export
+appender_stderr <- appender_console
+
+
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
-#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
-appender_console <- structure(function(lines) {
+#' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
+appender_stdout <- structure(function(lines) {
     cat(lines, sep = '\n')
-}, generator = quote(appender_console()))
+}, generator = quote(appender_stdout()))
 
 
 #' Append log messages to a file
 #' @param file path
+#' @param append boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending
 #' @export
 #' @return function taking \code{lines} argument
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
-appender_file <- function(file) {
+appender_file <- function(file, append = TRUE) {
+    force(append)
     structure(
         function(lines) {
-            cat(lines, sep = '\n', file = file, append = TRUE)
+            cat(lines, sep = '\n', file = file, append = append)
         }, generator = deparse(match.call()))
 }
 
 
 #' Append log messages to a file and stdout as well
-#' @param file path
+#' @inheritParams appender_file
 #' @export
 #' @return function taking \code{lines} argument
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
-appender_tee <- function(file) {
+appender_tee <- function(file, append = TRUE) {
+    force(append)
     structure(
         function(lines) {
             appender_console(lines)
@@ -109,5 +130,28 @@ appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
 
 }
 
+#' Send log messages to the POSIX system log
+#' @param identifier A string identifying the process.
+#' @param ... Further arguments passed on to \code{\link[rsyslog]{open_syslog}}.
+#' @return function taking \code{lines} argument
+#' @export
+#' @note This functionality depends on the \pkg{rsyslog} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
+#' @examples
+#' if (requireNamespace("rsyslog", quietly = TRUE)) {
+#'   log_appender(appender_syslog("test"))
+#'   log_info("Test message.")
+#' }
+appender_syslog <- function(identifier, ...) {
+    fail_on_missing_package('rsyslog')
+    rsyslog::open_syslog(identifier = identifier, ...)
+    structure(
+        function(lines) {
+            for (line in lines)
+                rsyslog::syslog(line)
+        },
+        generator = deparse(match.call())
+    )
+}
 
 ## TODO other appenders: graylog, kinesis, datadog, cloudwatch, email via sendmailR, ES etc

@@ -4,10 +4,12 @@
 \alias{appender_tee}
 \title{Append log messages to a file and stdout as well}
 \usage{
-appender_tee(file)
+appender_tee(file, append = TRUE)
 }
 \arguments{
 \item{file}{path}
+
+\item{append}{boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending}
 }
 \value{
 function taking \code{lines} argument

@@ -6,7 +6,13 @@ A lightweight, modern and flexibly logging utility for R -- heavily inspired by 
 
 ## Installation
 
-`logger` is not on CRAN yet, please install from GitHub:
+![CRAN version](http://www.r-pkg.org/badges/version-ago/logger)
+
+```r
+install.packages('logger')
+```
+
+The most recent, development version of `logger` can also be installed from GitHub:
 
 ```r
 remotes::install_github('daroczig/logger')
