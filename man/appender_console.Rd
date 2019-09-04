@@ -2,16 +2,19 @@
 % Please edit documentation in R/appenders.R
 \name{appender_console}
 \alias{appender_console}
-\title{Append log record to stdout}
+\alias{appender_stderr}
+\title{Append log record to stderr}
 \usage{
 appender_console(lines)
+
+appender_stderr(lines)
 }
 \arguments{
 \item{lines}{character vector}
 }
 \description{
-Append log record to stdout
+Append log record to stderr
 }
 \seealso{
-This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_stdout}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 }

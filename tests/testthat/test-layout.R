@@ -4,10 +4,13 @@ library(jsonlite)
 
 ## save current settings so that we can reset later
 layout <- log_layout()
+appender <- log_appender()
 
 context('layouts')
 
 log_layout(layout_glue_colors)
+log_appender(appender_stdout)
+
 test_that('colorized layout', {
     expect_output(log_info('foobar'), 'INFO')
     expect_output(log_info('foobar'), 'foobar')
@@ -44,3 +47,4 @@ test_that('logging layout', {
 
 ## reset settings
 log_layout(layout)
+log_appender(appender)

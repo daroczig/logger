@@ -41,8 +41,8 @@ test_that('overwrite file', {
 test_that('append to file + print to console', {
     t <- tempfile()
     log_appender(appender_tee(t))
-    expect_equal(capture.output(log_info('foobar')), 'INFO foobar')
-    devnull <- capture.output(log_info('{1:2}'))
+    expect_equal(capture.output(log_info('foobar'), type = 'message'), 'INFO foobar')
+    devnull <- capture.output(log_info('{1:2}'), type = 'message')
     expect_equal(length(readLines(t)), 3)
     expect_equal(readLines(t)[1], 'INFO foobar')
     unlink(t)

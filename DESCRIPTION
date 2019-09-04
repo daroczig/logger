@@ -30,6 +30,7 @@ Suggests:
   roxygen2,
   parallel,
   rsyslog,
+  shiny,
   callr,
   txtq,
   botor
