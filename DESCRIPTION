@@ -29,6 +29,7 @@ Suggests:
   devtools,
   roxygen2,
   parallel,
+  shiny,
   rsyslog
 Enhances:
   logging,

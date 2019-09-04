@@ -47,3 +47,62 @@ log_errors <- function() {
         print = FALSE,
         where = baseenv())))
 }
+
+
+#' Auto logging input changes in Shiny app
+#'
+#' This is to be called in the \code{server} section of the Shiny app.
+#' @export
+#' @param input passed from Shiny's \code{server}
+#' @importFrom utils assignInMyNamespace assignInNamespace
+#' @examples \dontrun{
+#' library(shiny)
+#'
+#' ui <- bootstrapPage(
+#'     numericInput('mean', 'mean', 0),
+#'     numericInput('sd', 'sd', 1),
+#'     textInput('title', 'title', 'title'),
+#'     textInput('foo', 'This is not used at all, still gets logged', 'foo'),
+#'     plotOutput('plot')
+#' )
+#'
+#' server <- function(input, output) {
+#'
+#'     logger::log_shiny_input_changes(input)
+#'
+#'     output$plot <- renderPlot({
+#'         hist(rnorm(1e3, input$mean, input$sd), main = input$title)
+#'     })
+#'
+#' }
+#'
+#' shinyApp(ui = ui, server = server)
+#' }
+log_shiny_input_changes <- function(input) {
+
+    fail_on_missing_package('shiny')
+    fail_on_missing_package('jsonlite')
+    if (!shiny::isRunning()) {
+        stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
+    }
+
+    input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
+    assignInMyNamespace('shiny_input_values', input_values)
+    log_info(skip_formatter(paste(
+        'Default Shiny inputs initialized:',
+        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))))
+
+    shiny::observe({
+        old_input_values <- shiny_input_values
+        new_input_values <- shiny::reactiveValuesToList(input)
+        mapply(function(name, old, new) {
+            if (!identical(old, new)) {
+                log_info('Shiny input change detected on {name}: {old} -> {new}')
+            }
+        }, names(old_input_values), old_input_values, new_input_values)
+        assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')
+    })
+
+
+}
+shiny_input_values <- NULL
