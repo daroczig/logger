@@ -100,12 +100,24 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:
 }
 
 
+#' Format a log record by including the raw message without anything added or modified
+#' @inheritParams log_level
+#' @param msg string message
+#' @return character vector
+#' @export
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+layout_blank <- structure(function(level, msg, namespace = NA_character_,
+                                   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    msg
+}, generator = quote(layout_blank()))
+
+
 #' Format a log record by concatenating the log level, timestamp and message
 #' @inheritParams log_level
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_simple <- structure(function(level, msg, namespace = NA_character_,
                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
@@ -117,7 +129,7 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 #' @examples \dontrun{
 #' log_layout(layout_logging)
 #' log_info(42)
@@ -144,7 +156,7 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_glue <- layout_glue_generator()
 
 
@@ -164,7 +176,7 @@ layout_glue <- layout_glue_generator()
 #' log_error('This is another problem')
 #' log_fatal('The last problem.')
 #' }
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
 #' @note This functionality depends on the \pkg{crayon} package.
 layout_glue_colors <- layout_glue_generator(
     format = paste(
@@ -183,7 +195,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
 layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user', 'msg')) {
 
     force(fields)

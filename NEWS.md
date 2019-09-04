@@ -15,9 +15,13 @@
 * new helper functions injecting `logger` calls to `message`, `warnings` and `stop` to optionally auto-log messages, warnings and errors
 * improved performance by not evaluating arguments when the log record does not meet the log level threshold (#27, @jozefhajnala)
 * new argument to `appender_file` to optionally truncate before appending (#24, @eddelbuettel)
+* new helper function to auto-log input changes in Shiny apps (#25)
 * new appender function to deliver log records to syslog (#30, @atheriel)
 * new appender function to deliver log records to Amazon Kinesis (#35)
 * new wrapper function for appender functions to deliver log records in a background process asynchronously without blocking the master process (#35)
+* new layout function returning blank log messages without any modification
+
+TODO reorder into categories (eg helpers, appenders etc)
 
 # logger 0.1 (2018-12-20)
 
