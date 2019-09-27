@@ -285,8 +285,7 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
                 }
 
                 ## remove processed log records
-                ## TODO re-enable after wlandau/txtq/issues/15
-                ## async_writer_queue$clean()
+                async_writer_queue$clean()
 
             }
         }
