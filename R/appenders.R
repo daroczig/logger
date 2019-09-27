@@ -182,6 +182,7 @@ appender_kinesis <- function(stream) {
 #' @param appender a  \code{\link{log_appender}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)
 #' @param batch number of records to process from the queue at once
 #' @param namespace \code{logger} namespace to use for logging messages on starting up the background process
+#' @param init optional function to run in the background process that is useful to set up the environment required for logging, eg if the \code{appender} function requires some extra packages to be loaded or some environment variables to be set etc
 #' @return function taking \code{lines} argument
 #' @export
 #' @note This functionality depends on the \pkg{txtq} and \pkg{callr} packages. The R session's temp folder is used for staging files (message queue and other forms of communication between the parent and child processes).
@@ -225,7 +226,8 @@ appender_kinesis <- function(stream) {
 #' attr(my_appender, 'async_writer_process')$is_alive()
 #' attr(my_appender, 'async_writer_process')$read_error()
 #' }
-appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
+appender_async <- function(appender, batch = 1, namespace = 'async_logger',
+                           init = function() log_info('Background process started')) {
 
     fail_on_missing_package('txtq')
     fail_on_missing_package('callr')
@@ -248,6 +250,7 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger') {
     ## load minimum required packages
     async_writer_process$run(function() require('logger'))
     async_writer_process$run(function() require('txtq'))
+    async_writer_process$run(init)
 
     ## connect to the message queue
     async_writer_process$run(assign, args = list(x = 'async_writer_storage', value = async_writer_storage))

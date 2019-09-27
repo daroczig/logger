@@ -4,7 +4,8 @@
 \alias{appender_async}
 \title{Delays executing the actual appender function to the future in a background process to avoid blocking the main R session}
 \usage{
-appender_async(appender, batch = 1, namespace = "async_logger")
+appender_async(appender, batch = 1, namespace = "async_logger",
+  init = function() log_info("Background process started"))
 }
 \arguments{
 \item{appender}{a  \code{\link{log_appender}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)}
@@ -12,6 +13,8 @@ appender_async(appender, batch = 1, namespace = "async_logger")
 \item{batch}{number of records to process from the queue at once}
 
 \item{namespace}{\code{logger} namespace to use for logging messages on starting up the background process}
+
+\item{init}{optional function to run in the background process that is useful to set up the environment required for logging, eg if the \code{appender} function requires some extra packages to be loaded or some environment variables to be set etc}
 }
 \value{
 function taking \code{lines} argument
