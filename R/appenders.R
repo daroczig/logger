@@ -309,7 +309,7 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
                     'FATAL: Async writer error of',
                     shQuote(remote_event$error$message),
                     'in',
-                    shQuote(deparse(remote_event$error$call))))
+                    shQuote(paste(deparse(remote_event$error$call), collapse = ' '))))
             }
 
             ## write to message queue
