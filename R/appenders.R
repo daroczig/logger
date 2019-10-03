@@ -303,6 +303,14 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
             if (remote_error != '') {
                 stop(paste('FATAL: Async writer failed with', shQuote(remote_error)))
             }
+            remote_event <- async_writer_process$read()
+            if (!is.null(remote_event) && !is.null(remote_event$error)) {
+                stop(paste(
+                    'FATAL: Async writer error of',
+                    shQuote(remote_event$error$message),
+                    'in',
+                    shQuote(deparse(remote_event$error$call))))
+            }
 
             ## write to message queue
             for (line in lines) {
