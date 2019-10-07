@@ -208,7 +208,6 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 #' @param fields character vector of field names to be included in the JSON
 #' @inheritParams layout_json
 #' @export
-#' @importFrom jsonlite fromJSON
 #' @examples \dontrun{
 #' log_formatter(formatter_json)
 #' log_info(everything = 42)

@@ -114,7 +114,6 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @importFrom jsonlite toJSON
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @examples \dontrun{
 #' log_formatter(formatter_json())
