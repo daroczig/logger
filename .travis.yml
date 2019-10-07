@@ -13,7 +13,7 @@ after_success:
 - Rscript -e 'library(devtools);install();test()'
 - Rscript -e 'covr::codecov()'
 
-before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown@3dbc8880ac17dc185e412552a1d8045d68f903e1")'
+before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown")'
 deploy:
   provider: script
   script: Rscript -e 'library(pkgdown);sessionInfo();deploy_site_github(new_process = FALSE)'
