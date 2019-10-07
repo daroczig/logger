@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Assure valid log level — validate_log_level • logger</title>
+<title>Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message — layout_json_parser • logger</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Assure valid log level — validate_log_level" />
-<meta property="og:description" content="Assure valid log level" />
+<meta property="og:title" content="Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message — layout_json_parser" />
+<meta property="og:description" content="Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,36 +130,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Assure valid log level</h1>
+    <h1>Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message</h1>
     
-    <div class="hidden name"><code>validate_log_level.Rd</code></div>
+    <div class="hidden name"><code>layout_json_parser.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Assure valid log level</p>
+    <p>Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message</p>
     </div>
 
-    <pre class="usage"><span class='fu'>validate_log_level</span>(<span class='no'>level</span>)</pre>
+    <pre class="usage"><span class='fu'>layout_json_parser</span>(<span class='kw'>fields</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"time"</span>, <span class='st'>"level"</span>, <span class='st'>"ns"</span>, <span class='st'>"ans"</span>, <span class='st'>"topenv"</span>,
+  <span class='st'>"fn"</span>, <span class='st'>"node"</span>, <span class='st'>"arch"</span>, <span class='st'>"os_name"</span>, <span class='st'>"os_release"</span>, <span class='st'>"os_version"</span>, <span class='st'>"pid"</span>,
+  <span class='st'>"user"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>level</th>
-      <td><p><code><a href='log_levels.html'>log_levels</a></code> object or string representation</p></td>
+      <th>fields</th>
+      <td><p>character vector of field names to be included in the JSON</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p><code><a href='log_levels.html'>log_levels</a></code> object</p>
+    <p>This functionality depends on the <span class="pkg">jsonlite</span> package.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>This is a <code><a href='log_layout.html'>log_layout</a></code> potentially to be used with <code><a href='formatter_json.html'>formatter_json</a></code>, for alternatives, see <code><a href='layout_simple.html'>layout_simple</a></code>, <code><a href='layout_glue.html'>layout_glue</a></code>, <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='layout_json.html'>layout_json</a></code> or generator functions such as <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='log_formatter.html'>log_formatter</a></span>(<span class='no'>formatter_json</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='kw'>everything</span> <span class='kw'>=</span> <span class='fl'>42</span>)
+<span class='fu'><a href='log_layout.html'>log_layout</a></span>(<span class='fu'>layout_json_parser</span>())
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='kw'>everything</span> <span class='kw'>=</span> <span class='fl'>42</span>)
+<span class='fu'><a href='log_layout.html'>log_layout</a></span>(<span class='fu'>layout_json_parser</span>(<span class='kw'>fields</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'time'</span>, <span class='st'>'node'</span>)))
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='kw'>cars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span>(<span class='no'>mtcars</span>), <span class='kw'>species</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
