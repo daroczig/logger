@@ -115,9 +115,17 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
 #' @return character vector
 #' @export
 #' @importFrom jsonlite toJSON
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @note This functionality depends on the \pkg{jsonlite} package.
+#' @examples \dontrun{
+#' log_formatter(formatter_json())
+#' log_layout(layout_json_parser())
+#' log_info(everything = 42)
+#' log_info(mtcars = mtcars, species = iris$Species)
+#' }
+#' @seealso This is a \code{\link{log_formatter}} potentially to be used with \code{\link{layout_json_parser}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_json <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    eval(as.character(toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
+    fail_on_missing_package('jsonlite')
+    eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
 }, generator = quote(formatter_json()))
 
 

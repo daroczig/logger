@@ -28,5 +28,5 @@ character vector
 By default, this layout includes the log level of the log record as per \code{\link{log_levels}}, the current timestamp and the actual log message -- that you can override via calling \code{\link{layout_glue_generator}} directly. For colorized output, see \code{\link{layout_glue_colors}}.
 }
 \seealso{
-This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
 }
