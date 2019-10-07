@@ -117,5 +117,11 @@ test_that('skip formatter', {
     expect_error(log_info(skip_formatter('hi {x}', x = 4)))
 })
 
+log_formatter(formatter_json)
+test_that('skip formatter', {
+    expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
+    expect_output(log_info(x = 1), '\\{"x":1\\}')
+})
+
 log_formatter(formatter)
 log_appender(appender)
