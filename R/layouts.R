@@ -231,7 +231,7 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
             log_level = level, namespace = namespace,
             .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)[fields]
 
-        msg <- fromJSON(msg)
+        msg <- jsonlite::fromJSON(msg)
 
         jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = 'null')
 
