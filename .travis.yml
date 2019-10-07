@@ -16,7 +16,7 @@ after_success:
 before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown@v1.3.0")'
 deploy:
   provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
+  script: Rscript -e 'pkgdown::deploy_site_github(new_process = FALSE)'
   skip_cleanup: true
   on:
     branch: master
