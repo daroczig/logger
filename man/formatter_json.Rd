@@ -34,5 +34,5 @@ log_info(mtcars = mtcars, species = iris$Species)
 }
 }
 \seealso{
-This is a \code{\link{log_formatter}} potentially to be used with \code{\link{layout_json_parser}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+This is a \code{\link{log_formatter}} potentially to be used with \code{\link{layout_json_parser}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 }
