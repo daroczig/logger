@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Concatenate R objects into a character vector via <code>paste</code> — formatter_paste • logger</title>
+<title>Formats R objects with pander — formatter_pander • logger</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Concatenate R objects into a character vector via <code>paste</code> — formatter_paste" />
-<meta property="og:description" content="Concatenate R objects into a character vector via paste" />
+<meta property="og:title" content="Formats R objects with pander — formatter_pander" />
+<meta property="og:description" content="Formats R objects with pander" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,24 +130,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Concatenate R objects into a character vector via <code>paste</code></h1>
+    <h1>Formats R objects with pander</h1>
     
-    <div class="hidden name"><code>formatter_paste.Rd</code></div>
+    <div class="hidden name"><code>formatter_pander.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Concatenate R objects into a character vector via <code>paste</code></p>
+    <p>Formats R objects with pander</p>
     </div>
 
-    <pre class="usage"><span class='fu'>formatter_paste</span>(<span class='no'>...</span>, <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(), <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
-  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>formatter_pander</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>), <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>x</th>
+      <td><p>object to be logged</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>passed to <code>paste</code></p></td>
+      <td><p>optional parameters passed to <code>pander</code></p></td>
     </tr>
     <tr>
       <th>.logcall</th>
@@ -166,17 +170,32 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>character vector</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This functionality depends on the <span class="pkg">pander</span> package.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='formatter_logging.html'>formatter_logging</a></code>, <code><a href='formatter_json.html'>formatter_json</a></code>, <code><a href='formatter_pander.html'>formatter_pander</a></code> and <code><a href='skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='formatter_logging.html'>formatter_logging</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='log_formatter.html'>log_formatter</a></span>(<span class='no'>formatter_pander</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'42'</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>4</span>+<span class='fl'>2</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>))
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>'simple'</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>hp</span> ~ <span class='no'>wt</span>, <span class='no'>mtcars</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
