@@ -17,7 +17,7 @@ namespaces <- new.env()
     }
 
     ## internal namespace for debugging logger
-    namespaces$logger <- list(
+    namespaces$.logger <- list(
         default = list(
             threshold = ERROR,
             layout    = layout_simple,

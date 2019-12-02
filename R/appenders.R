@@ -44,7 +44,7 @@ appender_stdout <- structure(function(lines) {
 #' readLines(t)
 #'
 #' ## log to file rotated after every 3rd line up to max 5 files and internal logger logging enabled
-#' log_threshold(TRACE, namespace = 'logger')
+#' log_threshold(TRACE, namespace = '.logger')
 #' t <- tempfile()
 #' dir.create(t)
 #' f <- file.path(t, 'log')
