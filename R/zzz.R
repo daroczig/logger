@@ -16,6 +16,14 @@ namespaces <- new.env()
         log_formatter(formatter_glue, namespace = 'global', index = 1)
     }
 
+    ## internal namespace for debugging logger
+    namespaces$logger <- list(
+        default = list(
+            threshold = ERROR,
+            layout    = layout_simple,
+            formatter = formatter_sprintf,
+            appender  = appender_console))
+
 }
 
 .onAttach <- function(libname, pkgname) {

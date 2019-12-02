@@ -31,7 +31,8 @@ Suggests:
   roxygen2,
   parallel,
   shiny,
-  rsyslog
+  rsyslog,
+  R.utils
 Enhances:
   logging,
   futile.logger,
