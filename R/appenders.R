@@ -43,15 +43,21 @@ appender_stdout <- structure(function(lines) {
 #' for (i in 1:25) log_info(i)
 #' readLines(t)
 #'
-#' ## log to file rotated after every 3rd line up to max 5 files and internal logger logging enabled
-#' log_threshold(TRACE, namespace = '.logger')
-#' t <- tempfile()
-#' dir.create(t)
+#' ## log to file rotated after every 3rd line up to max 5 files
+#' t <- tempfile(); dir.create(t)
 #' f <- file.path(t, 'log')
+#'
 #' log_appender(appender_file(f, max_lines = 3, max_files = 5L))
 #' for (i in 1:25) log_info(i)
-#' readLines(f)
-#' list.files(t)
+#'
+#' lapply(list.files(t, full.names = TRUE), function(t) {
+#'   cat('\n##', t, '\n')
+#'   cat(readLines(t), sep = '\n')
+#' })
+#'
+#' ## enable internal logging to see what's actually happening in the logrotate steps
+#' log_threshold(TRACE, namespace = '.logger')
+#' ## run the above commands again
 #' }
 appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
 
