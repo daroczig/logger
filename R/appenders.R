@@ -94,16 +94,16 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
                     log_trace(
                         'lines: %s, max_lines: %s, bytes: %s, max_bytes: %s',
                         n_lines, max_lines, n_bytes, max_bytes,
-                        namespace = 'logger')
+                        namespace = '.logger')
                     log_trace(
                         'lines >= max_lines || bytes >= max_bytes: %s',
                         n_lines >= max_lines || n_bytes >= max_bytes,
-                        namespace = 'logger')
+                        namespace = '.logger')
                     for (i in max_files:1) {
 
                         ## just kill the old file
                         if (i == 1) {
-                            log_trace('killing the main file: %s', file, namespace = 'logger')
+                            log_trace('killing the main file: %s', file, namespace = '.logger')
                             unlink(file)
                         } else {
 
@@ -116,13 +116,13 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
                             }
 
                             if (file.exists(old)) {
-                                log_trace('renaming %s to %s', old, new, namespace = 'logger')
+                                log_trace('renaming %s to %s', old, new, namespace = '.logger')
                                 file.rename(old, new)
                             }
 
                             ## kill the rotated, but not needed file
                             if (i > max_files) {
-                                log_trace('killing the file with too many rotations: %s', new, namespace = 'logger')
+                                log_trace('killing the file with too many rotations: %s', new, namespace = '.logger')
                                 unlink(new)
                             }
 
@@ -130,7 +130,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
                     }
                 }
             }
-            log_trace('logging %s to %s', shQuote(lines), file, namespace = 'logger')
+            log_trace('logging %s to %s', shQuote(lines), file, namespace = '.logger')
             cat(lines, sep = '\n', file = file, append = append)
         }, generator = deparse(match.call()))
 }
