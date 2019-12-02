@@ -26,19 +26,28 @@ Log messages are written to a file with basic log rotation: when max number of l
 }
 \examples{
 \dontrun{
-## log to a file
+## ##########################################################################
+## simple example logging to a file
 t <- tempfile()
 log_appender(appender_file(t))
 for (i in 1:25) log_info(i)
 readLines(t)
 
-## log to file rotated after every 3rd line up to max 5 files
+## ##########################################################################
+## more complex example of logging to file
+## rotated after every 3rd line up to max 5 files
+
+## create a folder storing the log files
 t <- tempfile(); dir.create(t)
 f <- file.path(t, 'log')
 
+## define the file logger with log rotation enabled
 log_appender(appender_file(f, max_lines = 3, max_files = 5L))
+
+## log 25 messages
 for (i in 1:25) log_info(i)
 
+## see what was logged
 lapply(list.files(t, full.names = TRUE), function(t) {
   cat('\\n##', t, '\\n')
   cat(readLines(t), sep = '\\n')
