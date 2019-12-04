@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send log messages to Pushbullet — appender_pushbullet • logger</title>
+<title>Changelog • logger</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,7 @@
 
 
 
-<meta property="og:title" content="Send log messages to Pushbullet — appender_pushbullet" />
-<meta property="og:description" content="Send log messages to Pushbullet" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -56,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -133,43 +131,83 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Send log messages to Pushbullet</h1>
-    
-    <div class="hidden name"><code>appender_pushbullet.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      
     </div>
 
-    <div class="ref-description">
-    <p>Send log messages to Pushbullet</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>appender_pushbullet</span>(<span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>parameters passed to <code>pbPost</code>, such as <code>recipients</code> or <code>apikey</code>, although it's probably much better to set all these in the <code>~/.rpushbullet.json</code> as per package docs at <a href='http://dirk.eddelbuettel.com/code/rpushbullet.html'>http://dirk.eddelbuettel.com/code/rpushbullet.html</a></p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>This functionality depends on the <span class="pkg">RPushbullet</span> package.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>This is generator function for <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_slack.html'>appender_slack</a></code>, <code><a href='appender_telegram.html'>appender_telegram</a></code>, <code><a href='appender_syslog.html'>appender_syslog</a></code>, <code><a href='appender_kinesis.html'>appender_kinesis</a></code> and <code><a href='appender_async.html'>appender_async</a></code> for evaluate any <code><a href='log_appender.html'>log_appender</a></code> function in a background process.</p></div>
-
+    <div id="logger-0-1-9000-2019-09-06" class="section level1">
+<h1 class="page-header">
+<a href="#logger-0-1-9000-2019-09-06" class="anchor"></a>logger 0.1.9000 (2019-09-06)<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>
+<code>appender_console</code> writes to <code>stderr</code> by default instead of <code>stdout</code> (#28)</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>new helper function to evaluate an expression with fallback</li>
+<li>allow defining the log level threshold as character (#13, <a href='https://github.com/artemklevtsov'>@artemklevtsov</a>)</li>
+<li>new appender function to deliver log records to Telegram (#14, <a href='https://github.com/artemklevtsov'>@artemklevtsov</a>)</li>
+<li>new helper functions for logging with separator lines (#16)</li>
+<li>new helper function for tic-toc logging (#16)</li>
+<li>new helper function to log error before failing (#19, <a href='https://github.com/amy17519'>@amy17519</a>)</li>
+<li>new helper functions injecting <code>logger</code> calls to <code>message</code>, <code>warnings</code> and <code>stop</code> to optionally auto-log messages, warnings and errors</li>
+<li>improved performance by not evaluating arguments when the log record does not meet the log level threshold (#27, <a href='https://github.com/jozefhajnala'>@jozefhajnala</a>)</li>
+<li>new argument to <code>appender_file</code> to optionally truncate before appending (#24, <a href='https://github.com/eddelbuettel'>@eddelbuettel</a>)</li>
+<li>new helper function to auto-log input changes in Shiny apps (#25)</li>
+<li>new appender function to deliver log records to syslog (#30, <a href='https://github.com/atheriel'>@atheriel</a>)</li>
+<li>new appender function to deliver log records to Amazon Kinesis (#35)</li>
+<li>new wrapper function for appender functions to deliver log records in a background process asynchronously without blocking the master process (#35)</li>
+<li>new layout function returning blank log messages without any modification</li>
+</ul>
+<p>TODO reorder into categories (eg helpers, appenders etc)</p>
+</div>
+</div>
+    <div id="logger-0-1-2018-12-20" class="section level1">
+<h1 class="page-header">
+<a href="#logger-0-1-2018-12-20" class="anchor"></a>logger 0.1 (2018-12-20)<small> 2019-01-02 </small>
+</h1>
+<p>Initial CRAN release after collecting feedback for a month on <a href="https://twitter.com/daroczig/status/1067461632677330944">Twitter</a>:</p>
+<ul>
+<li>
+<p>finalized design of a log request defined by</p>
+<ul>
+<li>a log level <code>threshold</code>,</li>
+<li>a <code>formatter</code> function preparing the log message,</li>
+<li>a <code>layout</code> function rendering the actual log records and</li>
+<li>an <code>appender</code> function delivering to the log destination</li>
+</ul>
+</li>
+<li>detailed documentation with 7 vignettes and a lot of examples, even some benchmarks</li>
+<li>~75% code coverage for unit tests</li>
+<li>5 <code>formatter</code> functions mostly using <code>paste</code>, <code>sprintf</code> and <code>glue</code>
+</li>
+<li>6 <code>layout</code> functions with convenient wrappers to let users define custom layouts via <code>glue</code> or <code>JSON</code>, including colorized output</li>
+<li>5 <code>appender</code> functions delivering log records to the console, files, Pushbullet and Slack</li>
+<li>helper function to evaluate an expressions with auto-logging both the expression and its result</li>
+<li>helper function to temporarily update the log level threshold</li>
+<li>helper function to skip running the formatter function on a log message</li>
+<li><p>mostly backward compatibly with the <code>logging</code> and <code>futile.logger</code> packages</p></li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#logger-0-1-9000-2019-09-06">0.1.9000</a></li>
+        <li><a href="#logger-0-1-2018-12-20">0.1</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
 

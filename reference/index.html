@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logger</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9000</span>
       </span>
     </div>
 
@@ -112,6 +112,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -149,6 +152,12 @@
       <tr>
         
         <td>
+          <p><code><a href="appender_async.html">appender_async()</a></code> </p>
+        </td>
+        <td><p>Delays executing the actual appender function to the future in a background process to avoid blocking the main R session</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="appender_console.html">appender_console()</a></code> <code><a href="appender_console.html">appender_stderr()</a></code> </p>
         </td>
         <td><p>Append log record to stderr</p></td>
@@ -158,6 +167,12 @@
           <p><code><a href="appender_file.html">appender_file()</a></code> </p>
         </td>
         <td><p>Append log messages to a file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="appender_kinesis.html">appender_kinesis()</a></code> </p>
+        </td>
+        <td><p>Send log messages to a Amazon Kinesis stream</p></td>
       </tr><tr>
         
         <td>
@@ -266,6 +281,12 @@
           <p><code><a href="grayscale_by_log_level.html">grayscale_by_log_level()</a></code> </p>
         </td>
         <td><p>Render a string with light/dark gray based on the related log level</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="layout_blank.html">layout_blank()</a></code> </p>
+        </td>
+        <td><p>Format a log record by including the raw message without anything added or modified</p></td>
       </tr><tr>
         
         <td>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logger</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9000</span>
       </span>
     </div>
 
@@ -75,6 +75,9 @@
       <a href="../articles/write_custom_extensions.html">Writing Custom Logger Extensions</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -166,6 +169,26 @@
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;   string() 110.192 118.4850 148.5848 137.1825 152.7275 1312.903  1000  a </span></a>
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;   vector() 129.111 136.8245 168.9274 155.5840 172.6795 3230.528  1000   b</span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  dynamic() 116.347 124.7620 159.1570 143.2140 160.5040 4397.640  1000  ab</span></a></code></pre></div>
+<p>Which suggests that <code>logger</code> is a pretty well-performing log framework.</p>
+<p>If you need even more performance with slower appenders, then asynchronous logging is your friend: passing the log messages to a reliable message queue, and a background process delivering those to the actual log destination in the background – without blocking the main R process. This can be easily achieved in <code>logger</code> by wrapping any appender function in the <code>appender_async</code> function, such as:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">## demo log appender that's pretty slow</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">appender_file_slow &lt;-<span class="st"> </span><span class="cf">function</span>(file) {</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw"><a href="https://rdrr.io/r/base/force.html">force</a></span>(file)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="cf">function</span>(lines) {</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="kw"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(lines, <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, <span class="dt">file =</span> file, <span class="dt">append =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">## create an async appender and start using it right away</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw"><a href="../reference/appender_async.html">appender_async</a></span>(<span class="kw">appender_file_slow</span>(<span class="dt">file =</span> <span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>())))</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">async &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Was this slow?'</span>)</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="kw">async</span>(), <span class="dt">times =</span> <span class="fl">1e3</span>)</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; Unit: microseconds</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;     expr     min      lq     mean   median     uq      max neval</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  async() 511.329 528.247 614.8694 558.2535 616.14 5018.731  1000</span></a></code></pre></div>
+<p>Please note that although this ~0.6 ms is significantly higher than the ~0.15 ms we achieved above with the <code>sprintf</code> formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad. If you need even higher throughput, then a custom <code>appender_async</code> without checking on the background process and potentially a faster message queue can bring this even below to 200 µs.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
