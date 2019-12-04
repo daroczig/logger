@@ -101,6 +101,14 @@ test_that('special chars in the text work', {
   expect_output(log_info('JSON: {toJSON(iris[1:2, ], auto_unbox = TRUE)}'), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
 })
 
+log_formatter(formatter_pander)
+test_that('pander formatter', {
+    expect_output(log_info(42), '_42_')
+    expect_output(log_info('42'), '42')
+    expect_output(log_info(head(iris)), 'Sepal.Length')
+    expect_output(log_info(lm(hp ~ wt, mtcars)), 'Fitting linear model')
+})
+
 ## cleanup
 rm(everything)
 rm(f)
@@ -115,6 +123,12 @@ test_that('skip formatter', {
     expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
     expect_error(log_info(skip_formatter(mtcars)))
     expect_error(log_info(skip_formatter('hi {x}', x = 4)))
+})
+
+log_formatter(formatter_json)
+test_that('skip formatter', {
+    expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
+    expect_output(log_info(x = 1), '\\{"x":1\\}')
 })
 
 log_formatter(formatter)

@@ -117,7 +117,7 @@ layout_blank <- structure(function(level, msg, namespace = NA_character_,
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_simple <- structure(function(level, msg, namespace = NA_character_,
                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
@@ -129,7 +129,7 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
 #' @examples \dontrun{
 #' log_layout(layout_logging)
 #' log_info(42)
@@ -156,7 +156,7 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
 layout_glue <- layout_glue_generator()
 
 
@@ -176,7 +176,7 @@ layout_glue <- layout_glue_generator()
 #' log_error('This is another problem')
 #' log_fatal('The last problem.')
 #' }
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
 #' @note This functionality depends on the \pkg{crayon} package.
 layout_glue_colors <- layout_glue_generator(
     format = paste(
@@ -195,7 +195,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_info('ok {1:3} + {1:3} = {2*(1:3)}')
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}} or generator functions such as \code{\link{layout_glue_generator}}
+#' @seealso This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json_parser}},  or generator functions such as \code{\link{layout_glue_generator}}
 layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user', 'msg')) {
 
     force(fields)
@@ -210,6 +210,42 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
             .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 
         sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
+
+    }, generator = deparse(match.call()))
+
+}
+
+
+#' Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message
+#' @param fields character vector of field names to be included in the JSON
+#' @inheritParams layout_json
+#' @export
+#' @examples \dontrun{
+#' log_formatter(formatter_json)
+#' log_info(everything = 42)
+#' log_layout(layout_json_parser())
+#' log_info(everything = 42)
+#' log_layout(layout_json_parser(fields = c('time', 'node')))
+#' log_info(cars = row.names(mtcars), species = unique(iris$Species))
+#' }
+#' @note This functionality depends on the \pkg{jsonlite} package.
+#' @seealso This is a \code{\link{log_layout}} potentially to be used with \code{\link{formatter_json}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}} or generator functions such as \code{\link{layout_glue_generator}}
+layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user')) {
+
+    force(fields)
+
+    structure(function(level, msg, namespace = NA_character_,
+                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+
+        fail_on_missing_package('jsonlite')
+
+        meta <- get_logger_meta_variables(
+            log_level = level, namespace = namespace,
+            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)[fields]
+
+        msg <- jsonlite::fromJSON(msg)
+
+        jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = 'null')
 
     }, generator = deparse(match.call()))
 

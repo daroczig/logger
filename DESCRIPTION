@@ -17,6 +17,7 @@ Imports:
   utils
 Suggests:
   glue,
+  pander,
   jsonlite,
   crayon,
   slackr,

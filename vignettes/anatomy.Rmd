@@ -15,7 +15,9 @@ knitr::opts_chunk$set(
 library(logger)
 ```
 
-<img src="logger_structure.svg" title="The structure of a logger and the flow of a log record request" alt="The structure of a logger and the flow of a log record request" style="width: 100%;" />
+```{r loggerStructureImage, echo=FALSE, out.extra='style="width: 100%;" title="The structure of a logger and the flow of a log record request" alt="The structure of a logger and the flow of a log record request"'}
+knitr::include_graphics("logger_structure.svg")
+```
 
 To make a successful log record, `logger` requires the below components:
 
