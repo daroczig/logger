@@ -70,6 +70,7 @@ appender_stdout <- structure(function(lines) {
 #' }
 appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
 
+    force(file)
     force(append)
     force(max_lines)
     force(max_bytes)
