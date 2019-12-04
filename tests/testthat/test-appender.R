@@ -49,6 +49,24 @@ test_that('append to file + print to console', {
     rm(t)
 })
 
+test_that('logrotate', {
+    log_layout(layout_glue_generator('{msg}'))
+    log_threshold(TRACE)
+    t <- tempfile()
+    dir.create(t)
+    f <- file.path(t, 'log')
+    log_appender(appender_file(f, max_lines = 2, max_files = 5L))
+    for (i in 1:24) log_info(i)
+    expect_equal(length(readLines(f)), 2)
+    expect_equal(length(list.files(t)), 5)
+    expect_equal(readLines(f), c('23', '24'))
+    log_info('42')
+    expect_equal(length(readLines(f)), 1)
+    expect_equal(readLines(f), '42')
+    unlink(t)
+    rm(t)
+})
+
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)

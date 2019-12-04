@@ -4,18 +4,59 @@
 \alias{appender_file}
 \title{Append log messages to a file}
 \usage{
-appender_file(file, append = TRUE)
+appender_file(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
+  max_files = 1L)
 }
 \arguments{
 \item{file}{path}
 
 \item{append}{boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending}
+
+\item{max_lines}{numeric specifying the maximum number of lines allowed in a file before rotating}
+
+\item{max_bytes}{numeric specifying the maximum number of bytes allowed in a file before rotating}
+
+\item{max_files}{integer specifying the maximum number of files to be used in rotation}
 }
 \value{
 function taking \code{lines} argument
 }
 \description{
-Append log messages to a file
+Log messages are written to a file with basic log rotation: when max number of lines or bytes is defined to be other than \code{Inf}, then the log file is renamed with a \code{.1} suffix and a new log file is created. The renaming happens recursively (eg \code{logfile.1} renamed to \code{logfile.2}) until the specified \code{max_files}, then the oldest file (\code{logfile.{max_files-1}}) is deleted.
+}
+\examples{
+\dontrun{
+## ##########################################################################
+## simple example logging to a file
+t <- tempfile()
+log_appender(appender_file(t))
+for (i in 1:25) log_info(i)
+readLines(t)
+
+## ##########################################################################
+## more complex example of logging to file
+## rotated after every 3rd line up to max 5 files
+
+## create a folder storing the log files
+t <- tempfile(); dir.create(t)
+f <- file.path(t, 'log')
+
+## define the file logger with log rotation enabled
+log_appender(appender_file(f, max_lines = 3, max_files = 5L))
+
+## log 25 messages
+for (i in 1:25) log_info(i)
+
+## see what was logged
+lapply(list.files(t, full.names = TRUE), function(t) {
+  cat('\\n##', t, '\\n')
+  cat(readLines(t), sep = '\\n')
+})
+
+## enable internal logging to see what's actually happening in the logrotate steps
+log_threshold(TRACE, namespace = '.logger')
+## run the above commands again
+}
 }
 \seealso{
 This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}
