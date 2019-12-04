@@ -257,12 +257,14 @@ log_info('Excited about sending logs to Slack!')
 log_info('Hi there from logger@R!', namespace = 'slack')
 ```
 
-You may find `?appender_tee` also useful, that write the log messages to both `stdout` and a file.
+You may find `?appender_tee` also useful, that writes the log messages to both `stdout` and a file.
 
 ```{r}
 ## reset appender
 log_appender(appender_console)
 ```
+
+And the are many other appender functions bundled with `logger` as well, eg some writing to Syslog, Telegram, Pushbullet, a database table or an Amazon Kinesis stream -- even doing that asynchronously via `appender_async` -- see [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) for more details. 
 
 ## Stacking loggers
 

@@ -23,7 +23,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
       log_layout(layout_glue_generator("{ns} / {ans} / {topenv} / {fn} / {call}"))
       log_info("foobar")', file = t)
     expect_equal(
-        system(paste('Rscript', t, '2>&1'), intern = TRUE),
+        system(paste('$R_HOME/bin/Rscript', t, '2>&1'), intern = TRUE),
         'global / global / R_GlobalEnv / NA / NA')
     unlink(t)
 
@@ -34,7 +34,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
       f <- function() log_info("foobar")
       f()', file = t)
     expect_equal(
-        system(paste('Rscript', t, '2>&1'), intern = TRUE),
+        system(paste('$R_HOME/bin/Rscript', t, '2>&1'), intern = TRUE),
         'global / global / R_GlobalEnv / f / f()')
     unlink(t)
 
@@ -46,7 +46,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
       g <- function() f()
       g()', file = t)
     expect_equal(
-        system(paste('Rscript', t, '2>&1'), intern = TRUE),
+        system(paste('$R_HOME/bin/Rscript', t, '2>&1'), intern = TRUE),
         'global / global / R_GlobalEnv / f / f()')
     unlink(t)
 
@@ -58,7 +58,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
       g <- f
       g()', file = t)
     expect_equal(
-        system(paste('Rscript', t, '2>&1'), intern = TRUE),
+        system(paste('$R_HOME/bin/Rscript', t, '2>&1'), intern = TRUE),
         'global / global / R_GlobalEnv / g / g()')
     unlink(t)
 
@@ -71,7 +71,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
       logger_info_tester_function("foobar")',
       file = t)
     expect_equal(
-        system(paste('Rscript', t), intern = TRUE),
+        system(paste('$R_HOME/bin/Rscript', t), intern = TRUE),
         'logger.tester / global / logger.tester / logger_info_tester_function / logger_info_tester_function("foobar")')
     unlink(t)
 
@@ -85,7 +85,7 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
       logger_info_tester_function("foobar")',
       file = t)
     expect_equal(
-        system(paste('Rscript', t), intern = TRUE),
+        system(paste('$R_HOME/bin/Rscript', t), intern = TRUE),
         'logger.tester / logger.tester / logger.tester / logger_info_tester_function / logger_info_tester_function("foobar")')
     unlink(t)
 

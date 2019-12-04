@@ -6,11 +6,17 @@ library(jsonlite)
 layout <- log_layout()
 appender <- log_appender()
 
-context('layouts')
-
-log_layout(layout_glue_colors)
 log_appender(appender_stdout)
 
+context('layouts')
+
+log_layout(layout_blank)
+test_that('blank layout', {
+    expect_output(log_info('foobar'), 'foobar')
+    expect_equal(capture.output(log_info('foobar')), 'foobar')
+})
+
+log_layout(layout_glue_colors)
 test_that('colorized layout', {
     expect_output(log_info('foobar'), 'INFO')
     expect_output(log_info('foobar'), 'foobar')

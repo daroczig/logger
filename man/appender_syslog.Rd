@@ -21,11 +21,13 @@ Send log messages to the POSIX system log
 This functionality depends on the \pkg{rsyslog} package.
 }
 \examples{
+\dontrun{
 if (requireNamespace("rsyslog", quietly = TRUE)) {
   log_appender(appender_syslog("test"))
   log_info("Test message.")
 }
 }
+}
 \seealso{
-This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}
+This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 }
