@@ -8,3 +8,4 @@ _pkgdown.yml
 .*.graphml$
 logo.R
 cran-comments.md
+.covrignore

@@ -26,15 +26,111 @@ appender_stdout <- structure(function(lines) {
 
 
 #' Append log messages to a file
+#'
+#' Log messages are written to a file with basic log rotation: when max number of lines or bytes is defined to be other than \code{Inf}, then the log file is renamed with a \code{.1} suffix and a new log file is created. The renaming happens recursively (eg \code{logfile.1} renamed to \code{logfile.2}) until the specified \code{max_files}, then the oldest file (\code{logfile.{max_files-1}}) is deleted.
 #' @param file path
 #' @param append boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending
+#' @param max_lines numeric specifying the maximum number of lines allowed in a file before rotating
+#' @param max_bytes numeric specifying the maximum number of bytes allowed in a file before rotating
+#' @param max_files integer specifying the maximum number of files to be used in rotation
 #' @export
 #' @return function taking \code{lines} argument
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
-appender_file <- function(file, append = TRUE) {
+#' @examples \dontrun{
+#' ## ##########################################################################
+#' ## simple example logging to a file
+#' t <- tempfile()
+#' log_appender(appender_file(t))
+#' for (i in 1:25) log_info(i)
+#' readLines(t)
+#'
+#' ## ##########################################################################
+#' ## more complex example of logging to file
+#' ## rotated after every 3rd line up to max 5 files
+#'
+#' ## create a folder storing the log files
+#' t <- tempfile(); dir.create(t)
+#' f <- file.path(t, 'log')
+#'
+#' ## define the file logger with log rotation enabled
+#' log_appender(appender_file(f, max_lines = 3, max_files = 5L))
+#'
+#' ## log 25 messages
+#' for (i in 1:25) log_info(i)
+#'
+#' ## see what was logged
+#' lapply(list.files(t, full.names = TRUE), function(t) {
+#'   cat('\n##', t, '\n')
+#'   cat(readLines(t), sep = '\n')
+#' })
+#'
+#' ## enable internal logging to see what's actually happening in the logrotate steps
+#' log_threshold(TRACE, namespace = '.logger')
+#' ## run the above commands again
+#' }
+appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
+
     force(append)
+    force(max_lines)
+    force(max_bytes)
+    force(max_files)
+
+    if (!is.integer(max_files) || max_files < 1) {
+        stop('max_files must be a positive integer')
+    }
+
     structure(
         function(lines) {
+            if (is.finite(max_lines) | is.finite(max_bytes)) {
+
+                fail_on_missing_package('R.utils')
+
+                n_lines <- tryCatch(
+                    suppressWarnings(R.utils::countLines(file)),
+                    error = function(e) 0)
+                n_bytes <- ifelse(file.exists(file), file.info(file)$size, 0)
+
+                if (n_lines >= max_lines || n_bytes >= max_bytes) {
+                    log_trace(
+                        'lines: %s, max_lines: %s, bytes: %s, max_bytes: %s',
+                        n_lines, max_lines, n_bytes, max_bytes,
+                        namespace = '.logger')
+                    log_trace(
+                        'lines >= max_lines || bytes >= max_bytes: %s',
+                        n_lines >= max_lines || n_bytes >= max_bytes,
+                        namespace = '.logger')
+                    for (i in max_files:1) {
+
+                        ## just kill the old file
+                        if (i == 1) {
+                            log_trace('killing the main file: %s', file, namespace = '.logger')
+                            unlink(file)
+                        } else {
+
+                            ## rotate the old file
+                            new <- paste(file, i - 1, sep = '.')
+                            if (i == 2) {
+                                old <- file
+                            } else {
+                                old <- paste(file, i - 2, sep = '.')
+                            }
+
+                            if (file.exists(old)) {
+                                log_trace('renaming %s to %s', old, new, namespace = '.logger')
+                                file.rename(old, new)
+                            }
+
+                            ## kill the rotated, but not needed file
+                            if (i > max_files) {
+                                log_trace('killing the file with too many rotations: %s', new, namespace = '.logger')
+                                unlink(new)
+                            }
+
+                        }
+                    }
+                }
+            }
+            log_trace('logging %s to %s', shQuote(lines), file, namespace = '.logger')
             cat(lines, sep = '\n', file = file, append = append)
         }, generator = deparse(match.call()))
 }

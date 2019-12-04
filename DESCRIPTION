@@ -34,7 +34,8 @@ Suggests:
   shiny,
   callr,
   txtq,
-  botor
+  botor,
+  R.utils
 Enhances:
   logging,
   futile.logger,
