@@ -1,4 +1,8 @@
 library(testthat)
 library(logger)
 
-test_check('logger', filter = '^[a-z]*$')
+if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+    test_check('logger')
+} else {
+    test_check('logger', filter = '^[a-z]*$')
+}
