@@ -79,7 +79,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 #' log_info('try {runif(1)}')
 #' }
 #' @seealso See example calls from \code{\link{layout_glue}} and \code{\link{layout_glue_colors}}.
-layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%d-%m %H:%M:%S")}] {msg}') {
+layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:%M:%S")}] {msg}') {
 
     force(format)
 
@@ -181,7 +181,7 @@ layout_glue <- layout_glue_generator()
 layout_glue_colors <- layout_glue_generator(
     format = paste(
         '{crayon::bold(colorize_by_log_level(level, levelr))}',
-        '[{crayon::italic(format(time, "%Y-%d-%m %H:%M:%S"))}]',
+        '[{crayon::italic(format(time, "%Y-%m-%d %H:%M:%S"))}]',
         '{grayscale_by_log_level(msg, levelr)}'))
 
 
