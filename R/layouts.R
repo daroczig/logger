@@ -250,3 +250,35 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
     }, generator = deparse(match.call()))
 
 }
+
+level_to_severity <- function(level) {
+  switch(attr(level, 'level', exact = TRUE),
+         "FATAL" = "CRITICAL",
+         "ERROR" = "ERR",
+         "WARN" = "WARNING",
+         "SUCCESS" = "NOTICE",
+         "INFO" = "INFO",
+         "DEBUG" = "DEBUG",
+         "TRACE" = "DEBUG")
+}
+
+#' Format a log record for syslognet
+#'
+#' Format a log record for syslognet.
+#' This function converts the logger log level to a
+#' log severity level according to RFC 5424 "The Syslog Protocol".
+#'
+#' @param level level of log message.
+#' @param msg string of log message.
+#' @param namespace namespace.
+#' @param .logcall logcall; see \code{\link[logger]{layout_blank}}.
+#' @param .topcall topcall; see \code{\link[logger]{layout_blank}}.
+#' @param .topenv topenv; ; see \code{\link[logger]{layout_blank}}.
+#' @return A character vector with a severity attribute.
+#' @export
+layout_syslognet <- function(level, msg, namespace = NA_character_,
+                             .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  ret <- paste(attr(level, "level"), msg)
+  attr(ret, 'severity') <- level_to_severity(level)
+  return(ret)
+}
