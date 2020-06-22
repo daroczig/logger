@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Anatomy of a Log Request • logger</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="The Anatomy of a Log Request">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="logger">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -80,7 +80,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/daroczig/logger/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -93,10 +100,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>The Anatomy of a Log Request</h1>
+      <h1 data-toc-skip>The Anatomy of a Log Request</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/master/vignettes/anatomy.Rmd"><code>vignettes/anatomy.Rmd</code></a></small>
       <div class="hidden name"><code>anatomy.Rmd</code></div>
 
     </div>
@@ -108,7 +115,9 @@
 <ul>
 <li>
 <p>a <strong>log request</strong>, eg</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)
+</pre></div>
 <ul>
 <li>including the log level (importance) of the record, which will be later used to decide if the log record is to be delivered or not: <code>ERROR</code> in this case</li>
 <li>R objects to be logged: a simple string in this case, although it could be a character vector or any R object(s) that can be converted into a character vector by the <code>formatter</code> function</li>
@@ -116,101 +125,113 @@
 </li>
 <li>
 <p>the <strong>environment</strong> and meta-information of the log request, eg actual timestamp, hostname of the computer, the name of the user running the R script, the pid of the R process, calling function and the actual call etc.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span>(<span class="dt">log_level =</span> INFO)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">f</span>()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; $ns</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; [1] NA</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; $ans</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; [1] "global"</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; $topenv</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; [1] "R_GlobalEnv"</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; $fn</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; [1] "f"</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; $call</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; [1] "f()"</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; $time</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; [1] "2019-12-05 22:12:40 UTC"</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; $levelr</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; [1] 400</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; attr(,"level")</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; [1] "INFO"</span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; attr(,"class")</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; [1] "loglevel" "integer" </span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; $level</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; [1] "INFO"</span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt; $pid</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt; [1] 15717</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="co">#&gt; $node</span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">#&gt; [1] "travis-job-cd6c2031-94e6-4986-a2a2-f837a06c38e2"</span></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">#&gt; $arch</span></a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co">#&gt; [1] "x86_64"</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="co">#&gt; $os_name</span></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co">#&gt; [1] "Linux"</span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="co">#&gt; $os_release</span></a>
-<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="co">#&gt; [1] "4.15.0-1028-gcp"</span></a>
-<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-46" data-line-number="46"><span class="co">#&gt; $os_version</span></a>
-<a class="sourceLine" id="cb2-47" data-line-number="47"><span class="co">#&gt; [1] "#29~16.04.1-Ubuntu SMP Tue Feb 12 16:31:10 UTC 2019"</span></a>
-<a class="sourceLine" id="cb2-48" data-line-number="48"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-49" data-line-number="49"><span class="co">#&gt; $user</span></a>
-<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="co">#&gt; [1] "travis"</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">f</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span>(log_level = <span class="kw">INFO</span>)
+<span class="fu">f</span>()
+<span class="co">#&gt; $ns</span>
+<span class="co">#&gt; [1] NA</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $ans</span>
+<span class="co">#&gt; [1] "global"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $topenv</span>
+<span class="co">#&gt; [1] "R_GlobalEnv"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fn</span>
+<span class="co">#&gt; [1] "f"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $call</span>
+<span class="co">#&gt; [1] "f()"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $time</span>
+<span class="co">#&gt; [1] "2020-06-22 12:48:01 UTC"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $levelr</span>
+<span class="co">#&gt; [1] 400</span>
+<span class="co">#&gt; attr(,"level")</span>
+<span class="co">#&gt; [1] "INFO"</span>
+<span class="co">#&gt; attr(,"class")</span>
+<span class="co">#&gt; [1] "loglevel" "integer" </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $level</span>
+<span class="co">#&gt; [1] "INFO"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $pid</span>
+<span class="co">#&gt; [1] 16177</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $node</span>
+<span class="co">#&gt; [1] "travis-job-d84e6b6a-a1cc-4c83-9042-909936a65934"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $arch</span>
+<span class="co">#&gt; [1] "x86_64"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $os_name</span>
+<span class="co">#&gt; [1] "Linux"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $os_release</span>
+<span class="co">#&gt; [1] "4.15.0-1028-gcp"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $os_version</span>
+<span class="co">#&gt; [1] "#29~16.04.1-Ubuntu SMP Tue Feb 12 16:31:10 UTC 2019"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $user</span>
+<span class="co">#&gt; [1] "travis"</span>
+</pre></div>
 </li>
 <li>
 <p>a <strong>logger definition</strong> to process the log request, including</p>
 <ul>
 <li>
 <p>log level <code>threshold</code>, eg <code>INFO</code>, which defines the minimum log level required for actual logging – all log requests with lower log level will be thrown away</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>()</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; [1] 400</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; attr(,"level")</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; [1] "INFO"</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; attr(,"class")</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; [1] "loglevel" "integer"</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">ERROR <span class="op">&lt;=</span><span class="st"> </span>INFO</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span>()
+<span class="co">#&gt; [1] 400</span>
+<span class="co">#&gt; attr(,"level")</span>
+<span class="co">#&gt; [1] "INFO"</span>
+<span class="co">#&gt; attr(,"class")</span>
+<span class="co">#&gt; [1] "loglevel" "integer"</span>
+<span class="kw">ERROR</span> <span class="op">&lt;=</span> <span class="kw">INFO</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="fu"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)
+</pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and converts those into actual log message(s) to be then passed to the <code>layout</code> function for the log record rendering – such as <code>paste</code>, <code>sprintf</code>, <code>glue</code> or eg the below custom example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">formatter &lt;-<span class="st"> </span><span class="cf">function</span>(...) <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(..., <span class="dt">collapse =</span> <span class="st">' '</span>, <span class="dt">sep =</span> <span class="st">' '</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">formatter</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'foo'</span>, <span class="st">'bar'</span>))</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">formatter</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">...</span>) <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw">...</span>, collapse = <span class="st">' '</span>, sep = <span class="st">' '</span>)
+<span class="fu">formatter</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'foo'</span>, <span class="st">'bar'</span>))
+<span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span>
+</pre></div>
 </li>
 <li>
 <p><code>layout</code> function, which takes log message(s) and further information on the log request (such as timestamp, hostname, username, calling function etc) to render the actual log records eg human-readable text, JSON etc</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(jsonlite)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">layout &lt;-<span class="st"> </span><span class="cf">function</span>(level, msg) <span class="kw"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">toJSON</a></span>(<span class="dt">level =</span> level, <span class="dt">timestamp =</span> time, <span class="dt">hostname =</span> node, <span class="dt">message =</span> msg)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span>(INFO, <span class="st">'Happy Thursday!'</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span>)
+<span class="kw">layout</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">level</span>, <span class="kw">msg</span>) <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/fromJSON.html">toJSON</a></span>(level = <span class="kw">level</span>, timestamp = <span class="kw">time</span>, hostname = <span class="kw">node</span>, message = <span class="kw">msg</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span>(<span class="kw">INFO</span>, <span class="st">'Happy Thursday!'</span>)
+<span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span>
+</pre></div>
 </li>
 <li>
 <p><code>appender</code> function, which takes fully-rendered log record(s) and delivers to somewhere, eg <code>stdout</code>, a file or a streaming service, eg</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">appender &lt;-<span class="st"> </span><span class="cf">function</span>(line) <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(line, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">appender</span>(<span class="st">'INFO [now] I am a log message'</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; INFO [now] I am a log message</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">appender</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">line</span>) <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="kw">line</span>, <span class="st">'\n'</span>)
+<span class="fu">appender</span>(<span class="st">'INFO [now] I am a log message'</span>)
+<span class="co">#&gt; INFO [now] I am a log message</span>
+</pre></div>
 </li>
 </ul>
 </li>
 </ul>
 <p>Putting all these together (by explicitly setting the default config in the <code>global</code> namespace):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/log_threshold.html">log_threshold</a></span>(INFO)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../reference/log_formatter.html">log_formatter</a></span>(formatter_glue)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="../reference/log_layout.html">log_layout</a></span>(layout_simple)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="../reference/log_appender.html">log_appender</a></span>(appender_console)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span>)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'I am a higher level log message that is very likely to be printed'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span>(<span class="kw">INFO</span>)
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_glue</span>)
+<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="kw">layout_simple</span>)
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw">appender_console</span>)
+<span class="fu"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span>)
+<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'I am a higher level log message that is very likely to be printed'</span>)
+</pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied to a logging namespace, and one log request might trigger multiple <code>logger</code> definitions as well (stacking). Find more information on these in the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a> vignette.</p>
   </div>
 
@@ -227,7 +248,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

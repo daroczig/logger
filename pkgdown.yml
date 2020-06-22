@@ -1,12 +1,6 @@
 pandoc: '2.2'
-pkgdown: 1.4.1.9000
-pkgdown_sha: 891cd8be82e2fdebe9ef3b2623687f7ac26297f8
-articles:
-  Intro: Intro.html
-  anatomy: anatomy.html
-  customize_logger: customize_logger.html
-  migration: migration.html
-  performance: performance.html
-  r_packages: r_packages.html
-  write_custom_extensions: write_custom_extensions.html
+pkgdown: 1.5.1.9000
+pkgdown_sha: caf7cc74e008e8d0d6e53eeda93cd3cad3545bf2
+articles: []
+last_built: 2020-06-22T12:47Z
 
