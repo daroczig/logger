@@ -73,6 +73,7 @@ test_that('namespaces', {
     expect_output(log_debug('foobar', namespace = 'custom'), NA)
     log_threshold(TRACE, namespace = log_namespaces())
     expect_output(log_debug('foobar', namespace = 'custom'), 'DEBUG foobar')
+    log_threshold(INFO)
 })
 
 test_that('simple glue layout with threshold directly calling log', {
