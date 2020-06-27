@@ -4,8 +4,12 @@
 \alias{formatter_glue}
 \title{Apply \code{glue} to convert R objects into a character vector}
 \usage{
-formatter_glue(..., .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+formatter_glue(
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{...}{passed to \code{glue} for the text interpolation}

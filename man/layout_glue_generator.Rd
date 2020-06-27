@@ -4,8 +4,9 @@
 \alias{layout_glue_generator}
 \title{Generate log layout function using common variables available via glue syntax}
 \usage{
-
-  layout_glue_generator(format = "{level} [{format(time, \\"\%Y-\%m-\%d \%H:\%M:\%S\\")}] {msg}")
+layout_glue_generator(
+  format = "{level} [{format(time, \\"\%Y-\%m-\%d \%H:\%M:\%S\\")}] {msg}"
+)
 }
 \arguments{
 \item{format}{\code{glue}-flavored layout of the message using the above variables}

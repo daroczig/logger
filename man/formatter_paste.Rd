@@ -4,8 +4,12 @@
 \alias{formatter_paste}
 \title{Concatenate R objects into a character vector via \code{paste}}
 \usage{
-formatter_paste(..., .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+formatter_paste(
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{...}{passed to \code{paste}}

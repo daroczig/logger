@@ -4,8 +4,12 @@
 \alias{appender_async}
 \title{Delays executing the actual appender function to the future in a background process to avoid blocking the main R session}
 \usage{
-appender_async(appender, batch = 1, namespace = "async_logger",
-  init = function() log_info("Background process started"))
+appender_async(
+  appender,
+  batch = 1,
+  namespace = "async_logger",
+  init = function() log_info("Background process started")
+)
 }
 \arguments{
 \item{appender}{a  \code{\link{log_appender}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)}
@@ -31,7 +35,7 @@ appender_file_slow <- function(file) {
   force(file)
   function(lines) {
     Sys.sleep(1)
-    cat(lines, sep = '\\n', file = file, append = TRUE)
+    cat(lines, sep = '\n', file = file, append = TRUE)
   }
 }
 

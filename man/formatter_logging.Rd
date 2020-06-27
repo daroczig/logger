@@ -4,8 +4,12 @@
 \alias{formatter_logging}
 \title{Mimic the default formatter used in the \pkg{logging} package}
 \usage{
-formatter_logging(..., .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+formatter_logging(
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{...}{string and further params passed to \code{sprintf} or R expressions to be evaluated}

@@ -4,8 +4,13 @@
 \alias{formatter_glue_or_sprintf}
 \title{Apply \code{glue} and \code{sprintf}}
 \usage{
-formatter_glue_or_sprintf(msg, ..., .logcall = sys.call(),
-  .topcall = sys.call(-1), .topenv = parent.frame())
+formatter_glue_or_sprintf(
+  msg,
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}}

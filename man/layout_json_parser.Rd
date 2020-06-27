@@ -4,9 +4,10 @@
 \alias{layout_json_parser}
 \title{Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message}
 \usage{
-layout_json_parser(fields = c("time", "level", "ns", "ans", "topenv",
-  "fn", "node", "arch", "os_name", "os_release", "os_version", "pid",
-  "user"))
+layout_json_parser(
+  fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name",
+    "os_release", "os_version", "pid", "user")
+)
 }
 \arguments{
 \item{fields}{character vector of field names to be included in the JSON}

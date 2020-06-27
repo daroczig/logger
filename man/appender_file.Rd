@@ -4,8 +4,13 @@
 \alias{appender_file}
 \title{Append log messages to a file}
 \usage{
-appender_file(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
-  max_files = 1L)
+appender_file(
+  file,
+  append = TRUE,
+  max_lines = Inf,
+  max_bytes = Inf,
+  max_files = 1L
+)
 }
 \arguments{
 \item{file}{path}
@@ -49,8 +54,8 @@ for (i in 1:25) log_info(i)
 
 ## see what was logged
 lapply(list.files(t, full.names = TRUE), function(t) {
-  cat('\\n##', t, '\\n')
-  cat(readLines(t), sep = '\\n')
+  cat('\n##', t, '\n')
+  cat(readLines(t), sep = '\n')
 })
 
 ## enable internal logging to see what's actually happening in the logrotate steps

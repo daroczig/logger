@@ -19,12 +19,12 @@ Adding color to a string to be used in terminal output. Supports ANSI standard c
 }
 \examples{
 \dontrun{
-cat(grayscale_by_log_level(FATAL, 'foobar'), '\\n')
-cat(grayscale_by_log_level(ERROR, 'foobar'), '\\n')
-cat(grayscale_by_log_level(WARN, 'foobar'), '\\n')
-cat(grayscale_by_log_level(SUCCESS, 'foobar'), '\\n')
-cat(grayscale_by_log_level(INFO, 'foobar'), '\\n')
-cat(grayscale_by_log_level(DEBUG, 'foobar'), '\\n')
-cat(grayscale_by_log_level(TRACE, 'foobar'), '\\n')
+cat(grayscale_by_log_level(FATAL, 'foobar'), '\n')
+cat(grayscale_by_log_level(ERROR, 'foobar'), '\n')
+cat(grayscale_by_log_level(WARN, 'foobar'), '\n')
+cat(grayscale_by_log_level(SUCCESS, 'foobar'), '\n')
+cat(grayscale_by_log_level(INFO, 'foobar'), '\n')
+cat(grayscale_by_log_level(DEBUG, 'foobar'), '\n')
+cat(grayscale_by_log_level(TRACE, 'foobar'), '\n')
 }
 }

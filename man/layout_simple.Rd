@@ -4,9 +4,14 @@
 \alias{layout_simple}
 \title{Format a log record by concatenating the log level, timestamp and message}
 \usage{
-layout_simple(level, msg, namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+layout_simple(
+  level,
+  msg,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}

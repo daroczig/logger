@@ -4,8 +4,13 @@
 \alias{log_with_separator}
 \title{Logs a message in a very visible way}
 \usage{
-log_with_separator(..., level = INFO, namespace = NA_character_,
-  separator = "=", width = 80)
+log_with_separator(
+  ...,
+  level = INFO,
+  namespace = NA_character_,
+  separator = "=",
+  width = 80
+)
 }
 \arguments{
 \item{...}{R objects that can be converted to a character vector via the active message formatter function}

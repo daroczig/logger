@@ -4,10 +4,13 @@
 \alias{appender_slack}
 \title{Send log messages to a Slack channel}
 \usage{
-appender_slack(channel = Sys.getenv("SLACK_CHANNEL"),
+appender_slack(
+  channel = Sys.getenv("SLACK_CHANNEL"),
   username = Sys.getenv("SLACK_USERNAME"),
   icon_emoji = Sys.getenv("SLACK_ICON_EMOJI"),
-  api_token = Sys.getenv("SLACK_API_TOKEN"), preformatted = TRUE)
+  api_token = Sys.getenv("SLACK_API_TOKEN"),
+  preformatted = TRUE
+)
 }
 \arguments{
 \item{channel}{Slack channel name with a hashtag prefix for public channel and no prefix for private channels}

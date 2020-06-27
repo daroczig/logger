@@ -4,8 +4,12 @@
 \alias{log_separator}
 \title{Logs a long line to stand out from the console}
 \usage{
-log_separator(level = INFO, namespace = NA_character_,
-  separator = "=", width = 80)
+log_separator(
+  level = INFO,
+  namespace = NA_character_,
+  separator = "=",
+  width = 80
+)
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}

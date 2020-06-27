@@ -4,8 +4,13 @@
 \alias{formatter_pander}
 \title{Formats R objects with pander}
 \usage{
-formatter_pander(x, ..., .logcall = sys.call(),
-  .topcall = sys.call(-1), .topenv = parent.frame())
+formatter_pander(
+  x,
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{x}{object to be logged}

@@ -4,8 +4,13 @@
 \alias{formatter_sprintf}
 \title{Apply \code{sprintf} to convert R objects into a character vector}
 \usage{
-formatter_sprintf(fmt, ..., .logcall = sys.call(),
-  .topcall = sys.call(-1), .topenv = parent.frame())
+formatter_sprintf(
+  fmt,
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{fmt}{passed to \code{sprintf}}

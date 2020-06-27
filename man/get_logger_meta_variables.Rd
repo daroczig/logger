@@ -4,9 +4,13 @@
 \alias{get_logger_meta_variables}
 \title{Collect useful information about the logging environment to be used in log messages}
 \usage{
-get_logger_meta_variables(log_level = NULL, namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+get_logger_meta_variables(
+  log_level = NULL,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{log_level}{log level as per \code{\link{log_levels}}}

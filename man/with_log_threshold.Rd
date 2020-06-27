@@ -4,8 +4,12 @@
 \alias{with_log_threshold}
 \title{Evaluate R expression with a temporarily updated log level threshold}
 \usage{
-with_log_threshold(expression, threshold = ERROR, namespace = "global",
-  index = 1)
+with_log_threshold(
+  expression,
+  threshold = ERROR,
+  namespace = "global",
+  index = 1
+)
 }
 \arguments{
 \item{expression}{R command}

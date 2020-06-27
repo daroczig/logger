@@ -4,8 +4,12 @@
 \alias{formatter_json}
 \title{Transforms all passed R objects into a JSON list}
 \usage{
-formatter_json(..., .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+formatter_json(
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{...}{passed to \code{toJSON} wrapped into a \code{list}}

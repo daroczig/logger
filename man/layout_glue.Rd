@@ -4,9 +4,14 @@
 \alias{layout_glue}
 \title{Format a log message with \code{glue}}
 \usage{
-layout_glue(level, msg, namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+layout_glue(
+  level,
+  msg,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}

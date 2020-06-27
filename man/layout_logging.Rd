@@ -4,9 +4,14 @@
 \alias{layout_logging}
 \title{Format a log record as the logging package does by default}
 \usage{
-layout_logging(level, msg, namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1),
-  .topenv = parent.frame())
+layout_logging(
+  level,
+  msg,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
 \item{level}{log level, see \code{\link{log_levels}} for more details}

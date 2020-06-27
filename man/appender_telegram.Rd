@@ -4,8 +4,11 @@
 \alias{appender_telegram}
 \title{Send log messages to a Telegram chat}
 \usage{
-appender_telegram(chat_id = Sys.getenv("TELEGRAM_CHAT_ID"),
-  bot_token = Sys.getenv("TELEGRAM_BOT_TOKEN"), parse_mode = NULL)
+appender_telegram(
+  chat_id = Sys.getenv("TELEGRAM_CHAT_ID"),
+  bot_token = Sys.getenv("TELEGRAM_BOT_TOKEN"),
+  parse_mode = NULL
+)
 }
 \arguments{
 \item{chat_id}{Unique identifier for the target chat or username of the target channel (in the format @channelusername)}
