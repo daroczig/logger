@@ -95,11 +95,14 @@ log_shiny_input_changes <- function(input) {
     shiny::observe({
         old_input_values <- shiny_input_values
         new_input_values <- shiny::reactiveValuesToList(input)
-        mapply(function(name, old, new) {
+        names <- unique(c(names(old_input_values), names(new_input_values)))
+        for (name in names) {
+            old <- old_input_values[name]
+            new <- new_input_values[name]
             if (!identical(old, new)) {
                 log_info('Shiny input change detected on {name}: {old} -> {new}')
             }
-        }, names(old_input_values), old_input_values, new_input_values)
+        }
         assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')
     })
 
