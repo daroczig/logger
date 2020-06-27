@@ -17,5 +17,11 @@ test_that('except helper', {
     expect_output(Mean(1:10) %except% sum(1:10) / length(1:10), 'WARN')
 })
 
+test_that('validate_log_level', {
+    expect_equal(logger:::validate_log_level(ERROR), ERROR)
+    expect_equal(logger:::validate_log_level('ERROR'), ERROR)
+    expect_error(logger:::validate_log_level('FOOBAR'))
+})
+
 ## reset settings
 log_appender(appender)
