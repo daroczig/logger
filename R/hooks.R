@@ -54,6 +54,7 @@ log_errors <- function() {
 #' This is to be called in the \code{server} section of the Shiny app.
 #' @export
 #' @param input passed from Shiny's \code{server}
+#' @param level log level
 #' @importFrom utils assignInMyNamespace assignInNamespace
 #' @examples \dontrun{
 #' library(shiny)
@@ -78,7 +79,7 @@ log_errors <- function() {
 #'
 #' shinyApp(ui = ui, server = server)
 #' }
-log_shiny_input_changes <- function(input) {
+log_shiny_input_changes <- function(input, level = INFO) {
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
@@ -100,7 +101,7 @@ log_shiny_input_changes <- function(input) {
             old <- old_input_values[name]
             new <- new_input_values[name]
             if (!identical(old, new)) {
-                log_info('Shiny input change detected on {name}: {old} -> {new}')
+                log_level(level, 'Shiny input change detected on {name}: {old} -> {new}')
             }
         }
         assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')

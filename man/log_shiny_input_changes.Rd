@@ -4,10 +4,12 @@
 \alias{log_shiny_input_changes}
 \title{Auto logging input changes in Shiny app}
 \usage{
-log_shiny_input_changes(input)
+log_shiny_input_changes(input, level = INFO)
 }
 \arguments{
 \item{input}{passed from Shiny's \code{server}}
+
+\item{level}{log level}
 }
 \description{
 This is to be called in the \code{server} section of the Shiny app.
