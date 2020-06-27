@@ -36,6 +36,9 @@ test_that('glue works', {
     expect_output(log_warn("Hi {everything}"), '42')
     expect_output(g(), '42')
 
+    expect_error(formatter_glue('malformed {'))
+    expect_error(formatter_glue('malformed {{'), NA)
+
 })
 
 log_formatter(formatter_sprintf)
