@@ -89,9 +89,19 @@ fallback_namespace <- function(namespace) {
 #' log_threshold(INFO, index = 2)
 #' log_info(1)
 #' log_warn(2)
+#'
+#' ## set the log level threshold in all namespaces to ERROR
+#' log_threshold(ERROR, namespace =  log_namespaces())
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
 log_threshold <- function(level, namespace = 'global', index = 1) {
+
+    if (length(namespace) > 1) {
+        for (ns in namespace) {
+            log_threshold(level, ns, index)
+        }
+        return(invisible())
+    }
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
@@ -118,6 +128,13 @@ log_threshold <- function(level, namespace = 'global', index = 1) {
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 log_layout <- function(layout, namespace = 'global', index = 1) {
 
+    if (length(namespace) > 1) {
+        for (ns in namespace) {
+            log_layout(layout, ns, index)
+        }
+        return(invisible())
+    }
+
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
 
@@ -142,6 +159,13 @@ log_layout <- function(layout, namespace = 'global', index = 1) {
 #' @export
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
 log_formatter <- function(formatter, namespace = 'global', index = 1) {
+
+    if (length(namespace) > 1) {
+        for (ns in namespace) {
+            log_formatter(formatter, ns, index)
+        }
+        return(invisible())
+    }
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
@@ -183,6 +207,13 @@ log_formatter <- function(formatter, namespace = 'global', index = 1) {
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
 log_appender <- function(appender, namespace = 'global', index = 1) {
 
+    if (length(namespace) > 1) {
+        for (ns in namespace) {
+            log_appender(appender, ns, index)
+        }
+        return(invisible())
+    }
+
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
 
@@ -212,6 +243,14 @@ get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.f
         namespace <- 'global'
     }
     get(namespace, envir = getFromNamespace('namespaces', 'logger'))
+}
+
+
+#' Looks up logger namespaces
+#' @return character vector of namespace names
+#' @export
+log_namespaces <- function() {
+    ls(envir = namespaces)
 }
 
 
@@ -279,7 +318,7 @@ log_level <- function(level, ..., namespace = NA_character_,
         if (level > definition$threshold) {
             next
         }
-        
+
         log_fun <- do.call(logger, definition)
         log_arg <- list(...)
 

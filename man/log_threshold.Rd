@@ -33,6 +33,9 @@ log_warn(2)
 log_threshold(INFO, index = 2)
 log_info(1)
 log_warn(2)
+
+## set the log level threshold in all namespaces to ERROR
+log_threshold(ERROR, namespace =  log_namespaces())
 }
 }
 \seealso{
