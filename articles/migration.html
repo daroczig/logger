@@ -159,9 +159,9 @@ div#tocnav ul.nav li ul {
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO [2020-06-27 13:38:41] hi there</span>
+<span class="co">#&gt; INFO [2020-06-27 14:03:09] hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.warn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN [2020-06-27 13:38:41] watch out</span>
+<span class="co">#&gt; WARN [2020-06-27 14:03:09] watch out</span>
 </pre></div>
 </div>
 <div class="comparison">
@@ -188,7 +188,7 @@ div#tocnav ul.nav li ul {
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.layout.html">flog.layout</a></span>(<span class="kw">layout.json</span>)
 <span class="co">#&gt; NULL</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi again'</span>)
-<span class="co">#&gt; {"level":"INFO","timestamp":"2020-06-27 13:38:41 +0000","message":"hi again","func":"tryCatch"}</span>
+<span class="co">#&gt; {"level":"INFO","timestamp":"2020-06-27 14:03:09 +0000","message":"hi again","func":"tryCatch"}</span>
 </pre></div>
 </div>
 <div class="comparison">
@@ -209,13 +209,13 @@ div#tocnav ul.nav li ul {
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; INFO [2020-06-27 13:38:41] hi</span>
+<span class="co">#&gt; INFO [2020-06-27 14:03:09] hi</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-<span class="co">#&gt; INFO [2020-06-27 13:38:41] hi 42</span>
+<span class="co">#&gt; INFO [2020-06-27 14:03:09] hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>))
-<span class="co">#&gt; INFO [2020-06-27 13:38:41] hi 42</span>
+<span class="co">#&gt; INFO [2020-06-27 14:03:10] hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="kw">glue</span>::<span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
-<span class="co">#&gt; INFO [2020-06-27 13:38:41] hi 42</span>
+<span class="co">#&gt; INFO [2020-06-27 14:03:10] hi 42</span>
 </pre></div>
 </div>
 <div class="comparison">
@@ -316,9 +316,9 @@ div#tocnav ul.nav li ul {
 <p><package>logging</package></p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; 2020-06-27 13:38:42 INFO::hi there</span>
+<span class="co">#&gt; 2020-06-27 14:03:10 INFO::hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">logwarn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; 2020-06-27 13:38:42 WARNING::watch out</span>
+<span class="co">#&gt; 2020-06-27 14:03:10 WARNING::watch out</span>
 </pre></div>
 </div>
 <div class="comparison">
@@ -396,7 +396,7 @@ div#tocnav ul.nav li ul {
 <span class="co">#&gt;         msg, sep = ":"))</span>
 <span class="co">#&gt;     return(text)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x651fed8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x6b04c20&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:logging&gt;</span>
 </pre></div>
 </div>
@@ -417,13 +417,13 @@ div#tocnav ul.nav li ul {
 <p><package>logging</package></p>
 <div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; 2020-06-27 13:38:42 INFO::hi</span>
+<span class="co">#&gt; 2020-06-27 14:03:10 INFO::hi</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-<span class="co">#&gt; 2020-06-27 13:38:42 INFO::hi 42</span>
+<span class="co">#&gt; 2020-06-27 14:03:10 INFO::hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>))
-<span class="co">#&gt; 2020-06-27 13:38:42 INFO::hi 42</span>
+<span class="co">#&gt; 2020-06-27 14:03:10 INFO::hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="kw">glue</span>::<span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
-<span class="co">#&gt; 2020-06-27 13:38:42 INFO::hi 42</span>
+<span class="co">#&gt; 2020-06-27 14:03:10 INFO::hi 42</span>
 </pre></div>
 </div>
 <div class="comparison">
@@ -537,9 +537,9 @@ div#tocnav ul.nav li ul {
 <p><package>log4r</package></p>
 <div class="sourceCode" id="cb28"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">info</a></span>(<span class="kw">logger</span>, <span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO  [2020-06-27 13:38:42] hi there</span>
+<span class="co">#&gt; INFO  [2020-06-27 14:03:10] hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">warn</a></span>(<span class="kw">logger</span>, <span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN  [2020-06-27 13:38:42] watch out</span>
+<span class="co">#&gt; WARN  [2020-06-27 14:03:10] watch out</span>
 </pre></div>
 </div>
 <div class="comparison">
@@ -591,7 +591,7 @@ div#tocnav ul.nav li ul {
 
 
       <footer><div class="copyright">
-  <p>Developed by Gergely Daróczi, <a href="https://system1.com"><img src="https://system1.com/static/img/logo.svg" height="24" style="background-color:grey;"></a>.</p>
+  <p>Developed by Gergely Daróczi, <a href="https://system1.com"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="24" style="background-color:grey;"></a>.</p>
 </div>
 
 <div class="pkgdown">
