@@ -218,7 +218,6 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 
 #' Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message
 #' @param fields character vector of field names to be included in the JSON
-#' @inheritParams layout_json
 #' @export
 #' @examples \dontrun{
 #' log_formatter(formatter_json)
