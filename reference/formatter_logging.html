@@ -150,8 +150,12 @@
     <p>The <span class="pkg">logging</span> package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then <code><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></code> is being called -- otherwise it does something like <code><a href='https://rdrr.io/pkg/logger/man/log_eval.html'>log_eval</a></code> and logs the R expression(s) and the result(s) as well.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_logging.html'>formatter_logging</a></span>(<span class='kw'>...</span>, .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(), .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
-  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_logging.html'>formatter_logging</a></span>(
+  <span class='kw'>...</span>,
+  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
+  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

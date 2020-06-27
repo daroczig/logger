@@ -150,9 +150,14 @@
     <p>Format a log record by including the raw message without anything added or modified</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/layout_blank.html'>layout_blank</a></span>(<span class='kw'>level</span>, <span class='kw'>msg</span>, namespace = <span class='fl'>NA_character_</span>,
-  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(), .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
-  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/layout_blank.html'>layout_blank</a></span>(
+  <span class='kw'>level</span>,
+  <span class='kw'>msg</span>,
+  namespace = <span class='fl'>NA_character_</span>,
+  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
+  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -150,8 +150,13 @@
     <p>Log messages are written to a file with basic log rotation: when max number of lines or bytes is defined to be other than <code>Inf</code>, then the log file is renamed with a <code>.1</code> suffix and a new log file is created. The renaming happens recursively (eg <code>logfile.1</code> renamed to <code>logfile.2</code>) until the specified <code>max_files</code>, then the oldest file (<code>logfile.{max_files-1}</code>) is deleted.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_file.html'>appender_file</a></span>(<span class='kw'>file</span>, append = <span class='fl'>TRUE</span>, max_lines = <span class='fl'>Inf</span>, max_bytes = <span class='fl'>Inf</span>,
-  max_files = <span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_file.html'>appender_file</a></span>(
+  <span class='kw'>file</span>,
+  append = <span class='fl'>TRUE</span>,
+  max_lines = <span class='fl'>Inf</span>,
+  max_bytes = <span class='fl'>Inf</span>,
+  max_files = <span class='fl'>1L</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

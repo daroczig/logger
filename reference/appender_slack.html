@@ -150,10 +150,13 @@
     <p>Send log messages to a Slack channel</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_slack.html'>appender_slack</a></span>(channel = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_CHANNEL"</span>),
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_slack.html'>appender_slack</a></span>(
+  channel = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_CHANNEL"</span>),
   username = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_USERNAME"</span>),
   icon_emoji = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_ICON_EMOJI"</span>),
-  api_token = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_API_TOKEN"</span>), preformatted = <span class='fl'>TRUE</span>)</pre>
+  api_token = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_API_TOKEN"</span>),
+  preformatted = <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

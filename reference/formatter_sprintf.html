@@ -150,8 +150,13 @@
     <p>Apply <code>sprintf</code> to convert R objects into a character vector</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_sprintf.html'>formatter_sprintf</a></span>(<span class='kw'>fmt</span>, <span class='kw'>...</span>, .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
-  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>), .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_sprintf.html'>formatter_sprintf</a></span>(
+  <span class='kw'>fmt</span>,
+  <span class='kw'>...</span>,
+  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
+  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
