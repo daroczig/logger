@@ -9,3 +9,4 @@ _pkgdown.yml
 logo.R
 cran-comments.md
 .covrignore
+dev-resources
