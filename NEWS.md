@@ -1,27 +1,48 @@
-# logger 0.1.9000 (2019-09-06)
+# logger 0.2.9000 (development)
+
+# logger 0.2.0 (2020-06-27)
 
 ## Breaking changes
 
 * `appender_console` writes to `stderr` by default instead of `stdout` (#28)
 
+## Fixes
+
+* default date format in `glue` layouts (#44, @burgikukac)
+* `fn` reference in loggers will not to a Cartesian join on the log lines and message, but merge (and clean up) the `fn` even for large anonymous functions (#20)
+
 ## New features
 
-* new helper function to evaluate an expression with fallback
-* allow defining the log level threshold as character (#13, @artemklevtsov)
-* new appender function to deliver log records to Telegram (#14, @artemklevtsov)
-* new helper functions for logging with separator lines (#16)
-* new helper function for tic-toc logging (#16)
-* new helper function to log error before failing (#19, @amy17519)
-* new helper functions injecting `logger` calls to `message`, `warnings` and `stop` to optionally auto-log messages, warnings and errors
-* improved performance by not evaluating arguments when the log record does not meet the log level threshold (#27, @jozefhajnala)
+* allow defining the log level threshold as a string (#13, @artemklevtsov)
+* allow updating the log level threshold, formatter, layout and appender in all namespaces with a single call (#50)
 * new argument to `appender_file` to optionally truncate before appending (#24, @eddelbuettel)
-* new helper function to auto-log input changes in Shiny apps (#25)
-* new appender function to deliver log records to syslog (#30, @atheriel)
-* new appender function to deliver log records to Amazon Kinesis (#35)
-* new wrapper function for appender functions to deliver log records in a background process asynchronously without blocking the master process (#35)
-* new layout function returning blank log messages without any modification
+* new arguments to `appender_file` to optionally rotate the log files after appending (#42)
+* improved performance by not evaluating arguments when the log record does not meet the log level threshold (#27, @jozefhajnala)
+* `logger` in now part of the Mikata Project: https://mikata.dev
 
-TODO reorder into categories (eg helpers, appenders etc)
+## New helper functions
+
+* `%except%`: evaluate an expression with fallback
+* `log_separator`: logging with separator lines (#16)
+* `log_tictoc`: tic-toc logging (#16, @nfultz)
+* `log_failure`: log error before failing (#19, @amy17519)
+* `log_messages`, `log_warnings`, `log_errors`: optionally auto-log messages, warnings and errors using `globalCallingHandlers` on R 4.0.0 and above, and injecting `logger` calls to `message`, `warnings` and `stop` below R 4.0.0
+* `log_shiny_input_changes`: auto-log input changes in Shiny apps (#25)
+
+## New formatter functions
+
+* `layout_pander`: transform R objects into markdown before logging (#22)
+
+## New layout functions
+
+* `layout_blank`: blank log messages without any modification
+
+## New appender functions
+
+* `appender_telegram`: deliver log records to Telegram (#14, @artemklevtsov)
+* `appender_syslog`: deliver log records to syslog (#30, @atheriel)
+* `appender_kinesis`: deliver log records to Amazon Kinesis (#35)
+* `appender_async`: wrapper function for other appender functions to deliver log records in a background process asynchronously without blocking the master process (#35)
 
 # logger 0.1 (2018-12-20)
 
