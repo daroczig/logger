@@ -34,8 +34,8 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
         ns        = namespace,
         ans       = fallback_namespace(namespace),
         topenv    = top_env_name(.topenv),
-        fn        = deparse(.topcall[[1]]),
-        call      = deparse(.topcall),
+        fn        = deparse_to_one_line(.topcall[[1]]),
+        call      = deparse_to_one_line(.topcall),
 
         time      = Sys.time(),
         levelr    = log_level,
