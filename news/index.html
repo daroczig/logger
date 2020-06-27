@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logger</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -144,9 +144,14 @@
       <small>Source: <a href='https://github.com/daroczig/logger/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="logger-0-1-9000-2019-09-06" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.9000">
-<a href="#logger-0-1-9000-2019-09-06" class="anchor"></a>logger 0.1.9000 (2019-09-06)<small> Unreleased </small>
+    <div id="logger-0-2-9000-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.9000">
+<a href="#logger-0-2-9000-development" class="anchor"></a>logger 0.2.9000 (development)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="logger-0-2-0-2020-06-27" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#logger-0-2-0-2020-06-27" class="anchor"></a>logger 0.2.0 (2020-06-27)<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -156,26 +161,76 @@
 <code>appender_console</code> writes to <code>stderr</code> by default instead of <code>stdout</code> (<a href='https://github.com/daroczig/logger/issues/28'>#28</a>)</li>
 </ul>
 </div>
+<div id="fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fixes" class="anchor"></a>Fixes</h2>
+<ul>
+<li>default date format in <code>glue</code> layouts (<a href='https://github.com/daroczig/logger/issues/44'>#44</a>, <a href='https://github.com/burgikukac'>@burgikukac</a>)</li>
+<li>
+<code>fn</code> reference in loggers will not to a Cartesian join on the log lines and message, but merge (and clean up) the <code>fn</code> even for large anonymous functions (<a href='https://github.com/daroczig/logger/issues/20'>#20</a>)</li>
+</ul>
+</div>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
-<li>new helper function to evaluate an expression with fallback</li>
-<li>allow defining the log level threshold as character (<a href='https://github.com/daroczig/logger/issues/13'>#13</a>, <a href='https://github.com/artemklevtsov'>@artemklevtsov</a>)</li>
-<li>new appender function to deliver log records to Telegram (<a href='https://github.com/daroczig/logger/issues/14'>#14</a>, <a href='https://github.com/artemklevtsov'>@artemklevtsov</a>)</li>
-<li>new helper functions for logging with separator lines (<a href='https://github.com/daroczig/logger/issues/16'>#16</a>)</li>
-<li>new helper function for tic-toc logging (<a href='https://github.com/daroczig/logger/issues/16'>#16</a>)</li>
-<li>new helper function to log error before failing (<a href='https://github.com/daroczig/logger/issues/19'>#19</a>, <a href='https://github.com/amy17519'>@amy17519</a>)</li>
-<li>new helper functions injecting <code>logger</code> calls to <code>message</code>, <code>warnings</code> and <code>stop</code> to optionally auto-log messages, warnings and errors</li>
-<li>improved performance by not evaluating arguments when the log record does not meet the log level threshold (<a href='https://github.com/daroczig/logger/issues/27'>#27</a>, <a href='https://github.com/jozefhajnala'>@jozefhajnala</a>)</li>
+<li>allow defining the log level threshold as a string (<a href='https://github.com/daroczig/logger/issues/13'>#13</a>, <a href='https://github.com/artemklevtsov'>@artemklevtsov</a>)</li>
+<li>allow updating the log level threshold, formatter, layout and appender in all namespaces with a single call (<a href='https://github.com/daroczig/logger/issues/50'>#50</a>)</li>
 <li>new argument to <code>appender_file</code> to optionally truncate before appending (<a href='https://github.com/daroczig/logger/issues/24'>#24</a>, <a href='https://github.com/eddelbuettel'>@eddelbuettel</a>)</li>
-<li>new helper function to auto-log input changes in Shiny apps (<a href='https://github.com/daroczig/logger/issues/25'>#25</a>)</li>
-<li>new appender function to deliver log records to syslog (<a href='https://github.com/daroczig/logger/issues/30'>#30</a>, <a href='https://github.com/atheriel'>@atheriel</a>)</li>
-<li>new appender function to deliver log records to Amazon Kinesis (<a href='https://github.com/daroczig/logger/issues/35'>#35</a>)</li>
-<li>new wrapper function for appender functions to deliver log records in a background process asynchronously without blocking the master process (<a href='https://github.com/daroczig/logger/issues/35'>#35</a>)</li>
-<li>new layout function returning blank log messages without any modification</li>
+<li>new arguments to <code>appender_file</code> to optionally rotate the log files after appending (<a href='https://github.com/daroczig/logger/issues/42'>#42</a>)</li>
+<li>improved performance by not evaluating arguments when the log record does not meet the log level threshold (<a href='https://github.com/daroczig/logger/issues/27'>#27</a>, <a href='https://github.com/jozefhajnala'>@jozefhajnala</a>)</li>
+<li>
+<code>logger</code> in now part of the Mikata Project: <a href="https://mikata.dev" class="uri">https://mikata.dev</a>
+</li>
 </ul>
-<p>TODO reorder into categories (eg helpers, appenders etc)</p>
+</div>
+<div id="new-helper-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-helper-functions" class="anchor"></a>New helper functions</h2>
+<ul>
+<li>
+<code><a href="https://rdrr.io/pkg/logger/man/grapes-except-grapes.html">%except%</a></code>: evaluate an expression with fallback</li>
+<li>
+<code>log_separator</code>: logging with separator lines (<a href='https://github.com/daroczig/logger/issues/16'>#16</a>)</li>
+<li>
+<code>log_tictoc</code>: tic-toc logging (<a href='https://github.com/daroczig/logger/issues/16'>#16</a>, <a href='https://github.com/nfultz'>@nfultz</a>)</li>
+<li>
+<code>log_failure</code>: log error before failing (<a href='https://github.com/daroczig/logger/issues/19'>#19</a>, <a href='https://github.com/amy17519'>@amy17519</a>)</li>
+<li>
+<code>log_messages</code>, <code>log_warnings</code>, <code>log_errors</code>: optionally auto-log messages, warnings and errors using <code>globalCallingHandlers</code> on R 4.0.0 and above, and injecting <code>logger</code> calls to <code>message</code>, <code>warnings</code> and <code>stop</code> below R 4.0.0</li>
+<li>
+<code>log_shiny_input_changes</code>: auto-log input changes in Shiny apps (<a href='https://github.com/daroczig/logger/issues/25'>#25</a>)</li>
+</ul>
+</div>
+<div id="new-formatter-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-formatter-functions" class="anchor"></a>New formatter functions</h2>
+<ul>
+<li>
+<code>layout_pander</code>: transform R objects into markdown before logging (<a href='https://github.com/daroczig/logger/issues/22'>#22</a>)</li>
+</ul>
+</div>
+<div id="new-layout-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-layout-functions" class="anchor"></a>New layout functions</h2>
+<ul>
+<li>
+<code>layout_blank</code>: blank log messages without any modification</li>
+</ul>
+</div>
+<div id="new-appender-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-appender-functions" class="anchor"></a>New appender functions</h2>
+<ul>
+<li>
+<code>appender_telegram</code>: deliver log records to Telegram (<a href='https://github.com/daroczig/logger/issues/14'>#14</a>, <a href='https://github.com/artemklevtsov'>@artemklevtsov</a>)</li>
+<li>
+<code>appender_syslog</code>: deliver log records to syslog (<a href='https://github.com/daroczig/logger/issues/30'>#30</a>, <a href='https://github.com/atheriel'>@atheriel</a>)</li>
+<li>
+<code>appender_kinesis</code>: deliver log records to Amazon Kinesis (<a href='https://github.com/daroczig/logger/issues/35'>#35</a>)</li>
+<li>
+<code>appender_async</code>: wrapper function for other appender functions to deliver log records in a background process asynchronously without blocking the master process (<a href='https://github.com/daroczig/logger/issues/35'>#35</a>)</li>
+</ul>
 </div>
 </div>
     <div id="logger-0-1-2018-12-20" class="section level1">
@@ -218,7 +273,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gergely Daróczi, <a href='https://system1.com'><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="24" style="background-color:grey;"/></a>.</p>
+  <p>Developed by Gergely Daróczi, <a href='https://system1.com'><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="24" /></a>.</p>
 </div>
 
 <div class="pkgdown">
