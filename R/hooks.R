@@ -1,3 +1,13 @@
+#' Warn to update R to 4+
+#' @keywords internal
+warn_if_globalCallingHandlers_is_not_available <- function() {
+    log_warn(
+        'Using legacy version of global message/warning/error hook, ',
+        'please update your R installation to at least 4.0.0 ',
+        'to make use of the much more elegant globalCallingHandlers approach.')
+}
+
+
 #' Injects a logger call to standard messages
 #'
 #' This function uses \code{trace} to add a \code{log_info} function call when \code{message} is called to log the informative messages with the \code{logger} layout and appender.
@@ -7,11 +17,20 @@
 #' message('hi there')
 #' }
 log_messages <- function() {
-    invisible(suppressMessages(trace(
-        what = 'message',
-        exit = substitute(logger::log_info(logger::skip_formatter(cond$message))),
-        print = FALSE,
-        where = baseenv())))
+    if (R.Version()$major >= 4) {
+        globalCallingHandlers(
+            message = function(m) {
+                logger::log_info(m$message)
+            }
+        )
+    } else {
+        warn_if_globalCallingHandlers_is_not_available()
+        invisible(suppressMessages(trace(
+            what = 'message',
+            exit = substitute(logger::log_info(logger::skip_formatter(cond$message))),
+            print = FALSE,
+            where = baseenv())))
+    }
 }
 
 
@@ -24,11 +43,20 @@ log_messages <- function() {
 #' for (i in 1:5) { Sys.sleep(runif(1)); warning(i) }
 #' }
 log_warnings <- function() {
-    invisible(suppressMessages(trace(
-        what = 'warning',
-        tracer = substitute(logger::log_warn(logger::skip_formatter(paste(list(...), collapse = '')))),
-        print = FALSE,
-        where = baseenv())))
+    if (R.Version()$major >= 4) {
+        globalCallingHandlers(
+            warning = function(m) {
+                logger::log_warn(m$message)
+            }
+        )
+    } else {
+        warn_if_globalCallingHandlers_is_not_available()
+        invisible(suppressMessages(trace(
+            what = 'warning',
+            tracer = substitute(logger::log_warn(logger::skip_formatter(paste(list(...), collapse = '')))),
+            print = FALSE,
+            where = baseenv())))
+    }
 }
 
 
@@ -41,11 +69,20 @@ log_warnings <- function() {
 #' stop('foobar')
 #' }
 log_errors <- function() {
-    invisible(suppressMessages(trace(
-        what = 'stop',
-        tracer = substitute(logger::log_error(logger::skip_formatter(paste(list(...), collapse = '')))),
-        print = FALSE,
-        where = baseenv())))
+        if (R.Version()$major >= 4) {
+        globalCallingHandlers(
+            error = function(m) {
+                logger::log_error(m$message)
+            }
+        )
+    } else {
+        warn_if_globalCallingHandlers_is_not_available()
+        invisible(suppressMessages(trace(
+            what = 'stop',
+            tracer = substitute(logger::log_error(logger::skip_formatter(paste(list(...), collapse = '')))),
+            print = FALSE,
+            where = baseenv())))
+    }
 }
 
 
