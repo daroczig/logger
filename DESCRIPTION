@@ -33,6 +33,7 @@ Suggests:
   rsyslog,
   shiny,
   callr,
+  httr,
   txtq,
   botor,
   R.utils
