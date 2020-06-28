@@ -426,4 +426,30 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
 
 }
 
+#' Send log messages to Microsoft Teams Incoming Webhook
+#'
+#' @param teams_webhook_url character, url to the incoming webhook you would like to use
+#'
+#' You must create an incoming webhook for the Microsoft Teams channel you want to send log messages
+#' to. For instructions on how to do this, visit the \href{https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel}{Microsoft Teams documentation page}.
+#'
+#' @return function taking lines as argument
+#' @export
+#' @note This functionality depends on the \pkg{httr} package.
+#' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+appender_ms_teams <- function(teams_webhook_url) {
+    fail_on_missing_package('httr')
+    force(teams_webhook_url)
+    structure(
+        function(lines)
+            httr::POST(url = teams_webhook_url,
+                       ## NOTE MS Teams will parse our input as Markdown text, so we need to use 2 spaces before the newline
+                       ## It may be a good idea to escape characters that have special meaning in Markdown
+                       body = list(text = paste0(lines, collapse = "  \n")),
+                       encode = "json"
+                       ),
+        generator = deparse(match.call())
+    )
+}
+
 ## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc
