@@ -255,6 +255,34 @@ appender_syslog <- function(identifier, ...) {
 }
 
 
+#' Send log messages to a network syslog server
+#' @param identifier program/function identification (string).
+#' @param server machine where syslog daemon runs (string).
+#' @param port port where syslog daemon listens (integer).
+#'
+#' @return A function taking a \code{lines} argument.
+#' @export
+#' @note This functionality depends on the \pkg{syslognet} package.
+#' @examples \dontrun{
+#' if (requireNamespace("syslognet", quietly = TRUE)) {
+#'   log_appender(appender_syslognet("test_app", 'remoteserver'))
+#'   log_info("Test message.")
+#' }
+#' }
+appender_syslognet <- function(identifier, server, port = 601L) {
+  fail_on_missing_package('syslognet')
+  structure(
+    function(lines) {
+      sev <- attr(lines, 'severity', exact = TRUE)
+      for (line in lines) {
+        syslognet::syslog(line, sev, app_name = identifier, server = server, port = port)
+      }
+    },
+    generator = deparse(match.call())
+  )
+}
+
+
 #' Send log messages to a Amazon Kinesis stream
 #' @param stream name of the Kinesis stream
 #' @return function taking \code{lines} and optional \code{partition_key} argument
@@ -424,33 +452,6 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
 
     ## NOTE no need to clean up, all will go away with the current R session's temp folder
 
-}
-
-#' Send log messages to a network syslog server
-#' @param identifier program/function identification (string).
-#' @param server machine where syslog daemon runs (string).
-#' @param port port where syslog daemon listens (integer).
-#'
-#' @return A function taking a \code{lines} argument.
-#' @export
-#' @note This functionality depends on the \pkg{syslognet} package.
-#' @examples \dontrun{
-#' if (requireNamespace("syslognet", quietly = TRUE)) {
-#'   log_appender(appender_syslognet("test_app", 'remoteserver'))
-#'   log_info("Test message.")
-#' }
-#' }
-appender_syslognet <- function(identifier, server, port = 601L) {
-  fail_on_missing_package('syslognet')
-  structure(
-    function(lines) {
-      sev <- attr(lines, 'severity', exact = TRUE)
-      for (line in lines) {
-        syslognet::syslog(line, sev, app_name = identifier, server = server, port = port)
-      }
-    },
-    generator = deparse(match.call())
-  )
 }
 
 ## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc
