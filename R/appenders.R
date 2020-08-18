@@ -441,7 +441,7 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
 #' }
 #' }
 appender_syslognet <- function(identifier, server, port = 601L) {
-  logger::fail_on_missing_package('syslognet')
+  fail_on_missing_package('syslognet')
   structure(
     function(lines) {
       sev <- attr(lines, 'severity', exact = TRUE)
