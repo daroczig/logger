@@ -271,6 +271,9 @@ appender_syslog <- function(identifier, ...) {
 #' }
 appender_syslognet <- function(identifier, server, port = 601L) {
   fail_on_missing_package('syslognet')
+  force(identifier)
+  force(server)
+  force(port)
   structure(
     function(lines) {
       sev <- attr(lines, 'severity', exact = TRUE)
