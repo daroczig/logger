@@ -276,9 +276,12 @@ level_to_severity <- function(level) {
 #' @param .topenv topenv; ; see \code{\link[logger]{layout_blank}}.
 #' @return A character vector with a severity attribute.
 #' @export
-layout_syslognet <- function(level, msg, namespace = NA_character_,
-                             .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-  ret <- paste(attr(level, "level"), msg)
-  attr(ret, 'severity') <- level_to_severity(level)
-  return(ret)
-}
+layout_syslognet <- structure(
+  function(level, msg, namespace = NA_character_,
+           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    ret <- paste(attr(level, "level"), msg)
+    attr(ret, 'severity') <- level_to_severity(level)
+    return(ret)
+  },
+  generator = quote(layout_simple())
+)
