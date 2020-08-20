@@ -268,12 +268,7 @@ level_to_severity <- function(level) {
 #' This function converts the logger log level to a
 #' log severity level according to RFC 5424 "The Syslog Protocol".
 #'
-#' @param level level of log message.
-#' @param msg string of log message.
-#' @param namespace namespace.
-#' @param .logcall logcall; see \code{\link[logger]{layout_blank}}.
-#' @param .topcall topcall; see \code{\link[logger]{layout_blank}}.
-#' @param .topenv topenv; ; see \code{\link[logger]{layout_blank}}.
+#' @inheritParams layout_simple
 #' @return A character vector with a severity attribute.
 #' @export
 layout_syslognet <- structure(
