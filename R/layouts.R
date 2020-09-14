@@ -278,5 +278,5 @@ layout_syslognet <- structure(
     attr(ret, 'severity') <- level_to_severity(level)
     return(ret)
   },
-  generator = quote(layout_simple())
+  generator = deparse(match.call())
 )
