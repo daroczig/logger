@@ -349,7 +349,7 @@ validate_log_level <- function(level) {
         return(level)
     }
     if (is.character(level) & level %in% log_levels_supported) {
-        return(get(level, envir = as.environment('package:logger')))
+        return(get(level))
     }
     stop('Invalid log level', )
 }

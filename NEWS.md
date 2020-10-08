@@ -36,6 +36,7 @@
 ## New layout functions
 
 * `layout_blank`: blank log messages without any modification
+* `layout_json_parser`: render the layout as a JSON blob after merging with requested meta fields
 
 ## New appender functions
 
