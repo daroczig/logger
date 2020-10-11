@@ -48,7 +48,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 
         ## R and ns package versions
         r_version   = paste0(R.Version()[c('major', 'minor')], collapse = '.'),
-        ns_pkg_version = tryCatch(as.character(packageVersion(namespace)), error = function(e) NULL),
+        ns_pkg_version = tryCatch(as.character(packageVersion(namespace)), error = function(e) NA_character_),
 
         ## stuff from Sys.info
         node       = sysinfo[['nodename']],
