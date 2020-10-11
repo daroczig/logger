@@ -13,7 +13,9 @@
 #'   \item user: name of the real user id as reported by \code{Sys.info}
 #'   \item pid: the process identification number of the R session
 #'   \item node: name by which the machine is known on the network as reported by \code{Sys.info}
+#'   \item r_version: R's major and minor version as a string
 #'   \item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
+#'   \item ns_pkg_version: the version of \code{ns} when it's a package
 #'   \item ans: same as \code{ns} if there's a defined \code{\link{logger}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
 #'   \item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
 #'   \item call: parent call (if any) calling the logging function
@@ -23,6 +25,7 @@
 #' @inheritParams log_level
 #' @return list
 #' @export
+#' @importFrom utils packageVersion
 #' @seealso \code{\link{layout_glue_generator}}
 get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_,
                                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
@@ -42,6 +45,10 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
         level     = attr(log_level, 'level'),
 
         pid       = Sys.getpid(),
+
+        ## R and ns package versions
+        r_version   = paste0(R.Version()[c('major', 'minor')], collapse = '.'),
+        ns_pkg_version = tryCatch(as.character(packageVersion(namespace)), error = function(e) NULL),
 
         ## stuff from Sys.info
         node       = sysinfo[['nodename']],
