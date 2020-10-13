@@ -52,7 +52,9 @@ os_version: Operating System's version
 user: name of the real user id as reported by Sys.info
 pid: the process identification number of the R session
 node: name by which the machine is known on the network as reported by Sys.info
+r_version: R's major and minor version as a string
 ns: namespace usually defaults to global or the name of the holding R package of the calling the logging function
+ns_pkg_version: the version of ns when it's a package
 ans: same as ns if there's a defined logger for the namespace, otherwise a fallback namespace (eg usually global)
 topenv: the name of the top environment from which the parent call was called (eg R package name or GlobalEnv)
 call: parent call (if any) calling the logging function
@@ -177,7 +179,9 @@ fn: function's (if any) name calling the logging function
 <li><p>user: name of the real user id as reported by <code>Sys.info</code></p></li>
 <li><p>pid: the process identification number of the R session</p></li>
 <li><p>node: name by which the machine is known on the network as reported by <code>Sys.info</code></p></li>
+<li><p>r_version: R's major and minor version as a string</p></li>
 <li><p>ns: namespace usually defaults to <code>global</code> or the name of the holding R package of the calling the logging function</p></li>
+<li><p>ns_pkg_version: the version of <code>ns</code> when it's a package</p></li>
 <li><p>ans: same as <code>ns</code> if there's a defined <code><a href='logger.html'>logger</a></code> for the namespace, otherwise a fallback namespace (eg usually <code>global</code>)</p></li>
 <li><p>topenv: the name of the top environment from which the parent call was called (eg R package name or <code>GlobalEnv</code>)</p></li>
 <li><p>call: parent call (if any) calling the logging function</p></li>

@@ -271,7 +271,7 @@
 <span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>()
 <span class="co">#&gt; appender_file(file = t)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="no">t</span>)
-<span class="co">#&gt; [1] "INFO [2020-10-13 21:34:58] where is this message going?"</span>
+<span class="co">#&gt; [1] "INFO [2020-10-13 21:42:20] where is this message going?"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(<span class="no">t</span>)</pre></body></html></div>
 <p>There’s a similar generator function that returns an appender function delivering log messages to Slack channels:</p>
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co">## load Slack configuration, API token etc from a (hopefully encrypted) yaml file or similar</span>
@@ -327,8 +327,8 @@
 <span class="fu"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'info msg'</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="no">t</span>)
-<span class="co">#&gt; [1] "INFO [2020-10-13 21:34:58] info msg" </span>
-<span class="co">#&gt; [2] "DEBUG [2020-10-13 21:34:58] info msg"</span>
+<span class="co">#&gt; [1] "INFO [2020-10-13 21:42:20] info msg" </span>
+<span class="co">#&gt; [2] "DEBUG [2020-10-13 21:42:20] info msg"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(<span class="no">t</span>)</pre></body></html></div>
 </div>
   </div>
