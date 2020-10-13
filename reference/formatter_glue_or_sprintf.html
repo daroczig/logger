@@ -150,12 +150,12 @@
     <p>The best of both words: using both formatter functions in your log messages, which can be useful eg if you are migrating from <code>sprintf</code> formatted log messages to <code>glue</code> or similar.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(
-  <span class='kw'>msg</span>,
-  <span class='kw'>...</span>,
-  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
-  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
-  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+    <pre class="usage"><span class='fu'>formatter_glue_or_sprintf</span>(
+  <span class='no'>msg</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
+  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -191,19 +191,19 @@
     <p>Note that this function tries to be smart when passing arguments to <code>glue</code> and <code>sprintf</code>, but might fail with some edge cases, and returns an unformatted string.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='https://rdrr.io/pkg/logger/man/formatter_paste.html'>formatter_paste</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_logging.html'>formatter_logging</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_json.html'>formatter_json</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_pander.html'>formatter_pander</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code>, <code>formatter_glue_or_sprintf</code>, <code><a href='formatter_logging.html'>formatter_logging</a></code>, <code><a href='formatter_json.html'>formatter_json</a></code>, <code><a href='formatter_pander.html'>formatter_pander</a></code> and <code><a href='skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"{a} + {b} = %s"</span>, a = <span class='fl'>2</span>, b = <span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"{pi} * {2} = %s"</span>, <span class='kw'>pi</span><span class='op'>*</span><span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"{pi} * {2} = {pi*2}"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"{a} + {b} = %s"</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='fl'>5</span>)
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"{pi} * {2} = %s"</span>, <span class='no'>pi</span>*<span class='fl'>2</span>)
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"{pi} * {2} = {pi*2}"</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"Hi "</span>, <span class='st'>"{c('foo', 'bar')}, did you know that 2*4={2*4}"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"Hi {c('foo', 'bar')}, did you know that 2*4={2*4}"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"Hi {c('foo', 'bar')}, did you know that 2*4=%s"</span>, <span class='fl'>2</span><span class='op'>*</span><span class='fl'>4</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"Hi %s, did you know that 2*4={2*4}"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'foo'</span>, <span class='st'>'bar'</span>))
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></span>(<span class='st'>"Hi %s, did you know that 2*4=%s"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'foo'</span>, <span class='st'>'bar'</span>), <span class='fl'>2</span><span class='op'>*</span><span class='fl'>4</span>)
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"Hi "</span>, <span class='st'>"{c('foo', 'bar')}, did you know that 2*4={2*4}"</span>)
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"Hi {c('foo', 'bar')}, did you know that 2*4={2*4}"</span>)
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"Hi {c('foo', 'bar')}, did you know that 2*4=%s"</span>, <span class='fl'>2</span>*<span class='fl'>4</span>)
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"Hi %s, did you know that 2*4={2*4}"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'foo'</span>, <span class='st'>'bar'</span>))
+<span class='fu'>formatter_glue_or_sprintf</span>(<span class='st'>"Hi %s, did you know that 2*4=%s"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'foo'</span>, <span class='st'>'bar'</span>), <span class='fl'>2</span>*<span class='fl'>4</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -220,7 +220,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

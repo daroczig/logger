@@ -111,41 +111,40 @@
     
     
 <p>Although this has not been an important feature in the early development and overall design of this <code>logger</code> implementation, but with the default <code><a href="../reference/layout_simple.html">?layout_simple</a></code> and <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code>, it seems to perform pretty well when comparing with <code>futile.logger</code> and <code>logging</code> packages:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/joshuaulrich/microbenchmark">microbenchmark</a></span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">microbenchmark</span>)
 
 <span class="co">## fl</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">futile.logger</span>)
-<span class="kw">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">flog.appender</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">appender.file</a></span>(<span class="kw">t1</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">futile.logger</span>)
+<span class="no">t1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">flog.appender</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">appender.file</a></span>(<span class="no">t1</span>))
 <span class="co">#&gt; NULL</span>
 
 <span class="co">## lg</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/WLOGSolutions/r-logging">logging</a></span>)
-<span class="kw">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/handlers-management.html">addHandler</a></span>(<span class="kw">writeToFile</span>, file = <span class="kw">t2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logging</span>)
+<span class="no">t2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
+<span class="fu"><a href="https://rdrr.io/pkg/logging/man/handlers-management.html">addHandler</a></span>(<span class="no">writeToFile</span>, <span class="kw">file</span> <span class="kw">=</span> <span class="no">t2</span>)
 
 <span class="co">## lr</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)
 <span class="co">#&gt; The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN</span>
-<span class="kw">t3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_file.html">appender_file</a></span>(<span class="kw">t3</span>))
+<span class="no">t3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_file.html">appender_file</a></span>(<span class="no">t3</span>))
 
-<span class="kw">string_fl</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi'</span>)
-<span class="kw">string_lg</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi'</span>)
-<span class="kw">string_lr</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
-<span class="kw">dynamic_fl</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">42</span>)
-<span class="kw">dynamic_lg</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="fl">42</span>)
-<span class="kw">dynamic_lr</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {42}'</span>)
-<span class="kw">vector_fl</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>))
-<span class="kw">vector_lg</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>))
-<span class="kw">vector_lr</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {1:5}'</span>)
+<span class="no">string_fl</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi'</span>)
+<span class="no">string_lg</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi'</span>)
+<span class="no">string_lr</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
+<span class="no">dynamic_fl</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">42</span>)
+<span class="no">dynamic_lg</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="fl">42</span>)
+<span class="no">dynamic_lr</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {42}'</span>)
+<span class="no">vector_fl</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">1</span>:<span class="fl">5</span>))
+<span class="no">vector_lg</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">1</span>:<span class="fl">5</span>))
+<span class="no">vector_lr</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {1:5}'</span>)
 
 <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(
     <span class="fu">string_fl</span>(), <span class="fu">string_lg</span>(), <span class="fu">string_lr</span>(),
     <span class="fu">vector_fl</span>(), <span class="fu">vector_lg</span>(), <span class="fu">vector_lr</span>(),
     <span class="fu">dynamic_fl</span>(), <span class="fu">dynamic_lg</span>(), <span class="fu">dynamic_lr</span>(),
-    times = <span class="fl">1e3</span>)
+    <span class="kw">times</span> <span class="kw">=</span> <span class="fl">1e3</span>)
 <span class="co">#&gt; Unit: microseconds</span>
 <span class="co">#&gt;          expr      min        lq      mean    median        uq        max neval</span>
 <span class="co">#&gt;   string_fl() 1533.379 1650.7915 2510.5517 1759.9345 2885.4465  20835.425  1000</span>
@@ -158,49 +157,44 @@
 <span class="co">#&gt;  dynamic_lg()  188.213  226.5370  387.2470  255.1745  350.2015  60737.562  1000</span>
 <span class="co">#&gt;  dynamic_lr()  271.478  317.3350  486.1123  360.5815  483.5830  12070.936  1000</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw">t1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw">t1</span>)))
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">t1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="no">t1</span>)))
 <span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw">t2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw">t2</span>)))
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">t2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="no">t2</span>)))
 <span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw">t3</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw">t3</span>)))
-<span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">t3</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="no">t3</span>)))
+<span class="co">#&gt; [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"</span></pre></body></html></div>
 <p>So based on the above, non-comprehensive benchmark, it seems that when it comes to using the very base functionality of a logging engine, <code>logging</code> comes first, then <code>logger</code> performs with a bit of overhead due to using <code>glue</code> by default, then comes a bit slower <code>futile.logger</code>.</p>
 <p>On the other hand, there are some low-hanging fruits to improve performance, eg caching the <code>logger</code> function in the namespace, or using much faster message formatters (eg <code>paste0</code> or <code>sprintf</code> instead of <code>glue</code>) if needed – like what <code>futile.logger</code> and <code>logging</code> are using instead of <code>glue</code>, so a quick <code>logger</code> comparison:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_sprintf</span>)
-<span class="kw">string</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
-<span class="kw">dynamic</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">42</span>)
-<span class="kw">vector</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>))
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_sprintf</span>)
+<span class="no">string</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
+<span class="no">dynamic</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">42</span>)
+<span class="no">vector</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">1</span>:<span class="fl">5</span>))
 
-<span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="fu">string</span>(), <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span>(), <span class="fu">dynamic</span>(), times = <span class="fl">1e3</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="fu">string</span>(), <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span>(), <span class="fu">dynamic</span>(), <span class="kw">times</span> <span class="kw">=</span> <span class="fl">1e3</span>)
 <span class="co">#&gt; Unit: microseconds</span>
 <span class="co">#&gt;       expr     min       lq     mean   median       uq      max neval cld</span>
 <span class="co">#&gt;   string() 110.192 118.4850 148.5848 137.1825 152.7275 1312.903  1000  a </span>
 <span class="co">#&gt;   vector() 129.111 136.8245 168.9274 155.5840 172.6795 3230.528  1000   b</span>
-<span class="co">#&gt;  dynamic() 116.347 124.7620 159.1570 143.2140 160.5040 4397.640  1000  ab</span>
-</pre></div>
+<span class="co">#&gt;  dynamic() 116.347 124.7620 159.1570 143.2140 160.5040 4397.640  1000  ab</span></pre></body></html></div>
 <p>Which suggests that <code>logger</code> is a pretty well-performing log framework.</p>
 <p>If you need even more performance with slower appenders, then asynchronous logging is your friend: passing the log messages to a reliable message queue, and a background process delivering those to the actual log destination in the background – without blocking the main R process. This can be easily achieved in <code>logger</code> by wrapping any appender function in the <code>appender_async</code> function, such as:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co">## demo log appender that's pretty slow</span>
-<span class="kw">appender_file_slow</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">file</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/base/force.html">force</a></span>(<span class="kw">file</span>)
-  <span class="fu">function</span>(<span class="kw">lines</span>) {
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">## demo log appender that's pretty slow</span>
+<span class="no">appender_file_slow</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">file</span>) {
+  <span class="fu"><a href="https://rdrr.io/r/base/force.html">force</a></span>(<span class="no">file</span>)
+  <span class="kw">function</span>(<span class="no">lines</span>) {
     <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span>(<span class="fl">1</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="kw">lines</span>, sep = <span class="st">'\n'</span>, file = <span class="kw">file</span>, append = <span class="fl">TRUE</span>)
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="no">lines</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">'\n'</span>, <span class="kw">file</span> <span class="kw">=</span> <span class="no">file</span>, <span class="kw">append</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
   }
 }
 
 <span class="co">## create an async appender and start using it right away</span>
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_async.html">appender_async</a></span>(<span class="fu">appender_file_slow</span>(file = <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>())))
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_async.html">appender_async</a></span>(<span class="fu">appender_file_slow</span>(<span class="kw">file</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>())))
 
-<span class="kw">async</span> <span class="op">&lt;-</span> <span class="fu">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Was this slow?'</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="fu">async</span>(), times = <span class="fl">1e3</span>)
+<span class="no">async</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Was this slow?'</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="fu">async</span>(), <span class="kw">times</span> <span class="kw">=</span> <span class="fl">1e3</span>)
 <span class="co">#&gt; Unit: microseconds</span>
 <span class="co">#&gt;     expr     min      lq     mean   median     uq      max neval</span>
-<span class="co">#&gt;  async() 511.329 528.247 614.8694 558.2535 616.14 5018.731  1000</span>
-</pre></div>
+<span class="co">#&gt;  async() 511.329 528.247 614.8694 558.2535 616.14 5018.731  1000</span></pre></body></html></div>
 <p>Please note that although this ~0.6 ms is significantly higher than the ~0.15 ms we achieved above with the <code>sprintf</code> formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad. If you need even higher throughput, then a custom <code>appender_async</code> without checking on the background process and potentially a faster message queue can bring this even below to 200 µs.</p>
   </div>
 
@@ -217,7 +211,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

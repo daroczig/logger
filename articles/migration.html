@@ -135,20 +135,16 @@ div#tocnav ul.nav li ul {
 <p>Both packages comes with a default log engine / config, so it’s enough to load the packages and those are ready to be used right away:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">futile.logger</span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">futile.logger</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'futile.logger'</span>
 <span class="co">#&gt; The following objects are masked from 'package:logger':</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     DEBUG, ERROR, FATAL, INFO, TRACE, WARN</span>
-</pre></div>
+<span class="co">#&gt;     DEBUG, ERROR, FATAL, INFO, TRACE, WARN</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="logging-functions" class="section level3">
@@ -157,19 +153,15 @@ div#tocnav ul.nav li ul {
 <p>The most important change is that function names are by snake_case in <code>logger</code>, while <code>futile.logger</code> uses dot.separated expressions, and <code>futile.logger</code> prefixes function names by <code>flog</code> while <code>logger</code> uses <code>log</code> for that:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO [2020-06-27 14:15:31] hi there</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi there'</span>)
+<span class="co">#&gt; INFO [2020-10-13 21:34:59] hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.warn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN [2020-06-27 14:15:31] watch out</span>
-</pre></div>
+<span class="co">#&gt; WARN [2020-10-13 21:34:59] watch out</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
-<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)
-</pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
+<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)</pre></body></html></div>
 </div>
 <p>As you can see above, the default layout of the messages is exactly the same.</p>
 </div>
@@ -184,20 +176,16 @@ div#tocnav ul.nav li ul {
 <p>Changing layouts is easy in both package, as you simply pass a layout function:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.layout.html">flog.layout</a></span>(<span class="kw">layout.json</span>)
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.layout.html">flog.layout</a></span>(<span class="no">layout.json</span>)
 <span class="co">#&gt; NULL</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi again'</span>)
-<span class="co">#&gt; {"level":"INFO","timestamp":"2020-06-27 14:15:31 +0000","message":"hi again","func":"tryCatch"}</span>
-</pre></div>
+<span class="co">#&gt; {"level":"INFO","timestamp":"2020-10-13 21:34:59 +0000","message":"hi again","func":"tryCatch"}</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="fu"><a href="../reference/layout_json.html">layout_json</a></span>())
- 
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi again'</span>)
-</pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="fu"><a href="../reference/layout_json.html">layout_json</a></span>())
+
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi again'</span>)</pre></body></html></div>
 </div>
 <p>As you can see, <code>logger</code> provided a bit more information about the log request compared to <code>futile.logger</code>, but it’s easy to change the list of fields to be used in the JSON – see <code><a href="../reference/get_logger_meta_variables.html">?get_logger_meta_variables</a></code> for a complete list of variable names to be passed to <code><a href="../reference/layout_json.html">?layout_json</a></code>. <code>logger</code> also ships a lot more layouts, eg <code><a href="../reference/layout_glue_colors.html">?layout_glue_colors</a></code> or roll out your own via the <code><a href="../reference/layout_glue_generator.html">?layout_glue_generator</a></code> factory function.</p>
 </div>
@@ -207,27 +195,23 @@ div#tocnav ul.nav li ul {
 <p>By default, <code>futile.logger</code> uses an <code>sprintf</code> formatter, while <code>logger</code> passes the objects to be logged to <code>glue</code>:</p>
 <div class="comparison">
 <p><package>futile.logger</package></p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; INFO [2020-06-27 14:15:31] hi</span>
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-<span class="co">#&gt; INFO [2020-06-27 14:15:31] hi 42</span>
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>))
-<span class="co">#&gt; INFO [2020-06-27 14:15:31] hi 42</span>
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="kw">glue</span>::<span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
-<span class="co">#&gt; INFO [2020-06-27 14:15:31] hi 42</span>
-</pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi'</span>)
+<span class="co">#&gt; INFO [2020-10-13 21:34:59] hi</span>
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
+<span class="co">#&gt; INFO [2020-10-13 21:34:59] hi 42</span>
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>))
+<span class="co">#&gt; INFO [2020-10-13 21:34:59] hi 42</span>
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="kw pkg">glue</span><span class="kw ns">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
+<span class="co">#&gt; INFO [2020-10-13 21:34:59] hi 42</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {84/2}'</span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_sprintf</span>)
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_paste</span>)
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-</pre></div>
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_sprintf</span>)
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_paste</span>)
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>)</pre></body></html></div>
 </div>
 <p>It’s easy to change this default formatter in both packages: use <code>flog.layout</code> handles this as well in <code>futile.logger</code>, while the formatter is separated from the layout function in <code>logger</code>, so check <code><a href="../reference/log_formatter.html">?log_formatter</a></code> instead. <code>logger</code> ships with a bit more formatter functions, eg the default <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code> and <code><a href="../reference/formatter_glue_or_sprintf.html">?formatter_glue_or_sprintf</a></code> that tries to combine the best from both words.</p>
 </div>
@@ -237,21 +221,17 @@ div#tocnav ul.nav li ul {
 <p>Setting the destination of the log records works similarly in both packages, although he <code>logger</code> packages bundles a lot more options:</p>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">flog.appender</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">appender.file</a></span>(<span class="kw">t</span>))
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">t</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">flog.appender</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">appender.file</a></span>(<span class="no">t</span>))
 <span class="co">#&gt; NULL</span>
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">flog.appender</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">appender.tee</a></span>(<span class="kw">t</span>))
-<span class="co">#&gt; NULL</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">flog.appender</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.appender.html">appender.tee</a></span>(<span class="no">t</span>))
+<span class="co">#&gt; NULL</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_file.html">appender_file</a></span>(<span class="kw">t</span>))
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_tee.html">appender_tee</a></span>(<span class="kw">t</span>))
-</pre></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">t</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>()
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_file.html">appender_file</a></span>(<span class="no">t</span>))
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu"><a href="../reference/appender_tee.html">appender_tee</a></span>(<span class="no">t</span>))</pre></body></html></div>
 </div>
 </div>
 <div id="hierarchical-logging-and-performance" class="section level3">
@@ -264,18 +244,16 @@ div#tocnav ul.nav li ul {
 <a href="#using-logger-as-a-drop-in-replacement-of-futile-logger" class="anchor"></a>Using <code>logger</code> as a drop-in-replacement of <code>futile.logger</code>
 </h3>
 <p><code>logger</code> has no hard requirements, so it’s a very lightweight alternative of <code>futile.logger</code>. Although the function names are a bit different, and the message formatter also differs, but with some simple tweaks, <code>logger</code> can become an almost perfect drop-in-replacement of <code>futile.logger</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_sprintf</span>)
-<span class="kw">flog.trace</span> <span class="op">&lt;-</span> <span class="kw">log_trace</span>
-<span class="kw">flog.debug</span> <span class="op">&lt;-</span> <span class="kw">log_debug</span>
-<span class="kw">flog.info</span> <span class="op">&lt;-</span> <span class="kw">log_info</span>
-<span class="kw">flog.warn</span> <span class="op">&lt;-</span> <span class="kw">log_warn</span>
-<span class="kw">flog.error</span> <span class="op">&lt;-</span> <span class="kw">log_error</span>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_sprintf</span>)
+<span class="no">flog.trace</span> <span class="kw">&lt;-</span> <span class="no">log_trace</span>
+<span class="no">flog.debug</span> <span class="kw">&lt;-</span> <span class="no">log_debug</span>
+<span class="no">flog.info</span> <span class="kw">&lt;-</span> <span class="no">log_info</span>
+<span class="no">flog.warn</span> <span class="kw">&lt;-</span> <span class="no">log_warn</span>
+<span class="no">flog.error</span> <span class="kw">&lt;-</span> <span class="no">log_error</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'Hello from logger in a futile.logger theme ...'</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.warn</a></span>(<span class="st">'... where the default log message formatter is %s'</span>, <span class="st">'sprintf'</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.warn</a></span>(<span class="st">'... where the default log message formatter is %s'</span>, <span class="st">'sprintf'</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="logging" class="section level2">
@@ -288,17 +266,12 @@ div#tocnav ul.nav li ul {
 <p>In <code>logging</code>, you have to initialize a logger first via <code>addHandler</code> or simply by calling <code>basicConfig</code>, which is not required in <code>logger</code> as it already comes with a default log config:</p>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/WLOGSolutions/r-logging">logging</a></span>)
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/bootstrapping.html">basicConfig</a></span>()
-</pre></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logging</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/logging/man/bootstrapping.html">basicConfig</a></span>()</pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
- 
-</pre></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="logging-functions-1" class="section level3">
@@ -314,19 +287,15 @@ div#tocnav ul.nav li ul {
 </ul>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; 2020-06-27 14:15:31 INFO::hi there</span>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi there'</span>)
+<span class="co">#&gt; 2020-10-13 21:34:59 INFO::hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">logwarn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; 2020-06-27 14:15:31 WARNING::watch out</span>
-</pre></div>
+<span class="co">#&gt; 2020-10-13 21:34:59 WARNING::watch out</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
-<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)
-</pre></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
+<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)</pre></body></html></div>
 </div>
 <p>As you can see above, the default layout of the log messages is somewhat different:</p>
 <ul>
@@ -339,11 +308,10 @@ div#tocnav ul.nav li ul {
 <div id="log-levels-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#log-levels-1" class="anchor"></a>Log levels</h3>
-<p>For the available log levels in <code>logging</code>, check <code><a href="https://rdrr.io/pkg/logging/man/loglevels.html">?loglevels</a></code>, and <code><a href="../reference/FATAL.html">?log_levels</a></code> for the same in <code>logger</code>:</p>
+<p>For the available log levels in <code>logging</code>, check <code><a href="https://rdrr.io/pkg/logging/man/loglevels.html">?loglevels</a></code>, and <code><a href="../reference/log_levels.html">?log_levels</a></code> for the same in <code>logger</code>:</p>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span>(<span class="kw">loglevels</span>))
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span>(<span class="no">loglevels</span>))
 <span class="co">#&gt; List of 11</span>
 <span class="co">#&gt;  $ NOTSET  : num 0</span>
 <span class="co">#&gt;  $ FINEST  : num 1</span>
@@ -355,16 +323,14 @@ div#tocnav ul.nav li ul {
 <span class="co">#&gt;  $ WARN    : num 30</span>
 <span class="co">#&gt;  $ ERROR   : num 40</span>
 <span class="co">#&gt;  $ CRITICAL: num 50</span>
-<span class="co">#&gt;  $ FATAL   : num 50</span>
-</pre></div>
+<span class="co">#&gt;  $ FATAL   : num 50</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">mget</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(
-    envir = <span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span>(<span class="kw">logger</span>), pattern = <span class="st">'^[A-Z]'</span>),
-    envir = <span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span>(<span class="kw">logger</span>))
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">levels</span>[<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span>(<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">levels</span>))], give.attr = <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">levels</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">mget</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(
+    <span class="kw">envir</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span>(<span class="no">logger</span>), <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">'^[A-Z]'</span>),
+    <span class="kw">envir</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span>(<span class="no">logger</span>))
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">levels</span>[<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span>(-<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">levels</span>))], <span class="kw">give.attr</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co">#&gt; List of 7</span>
 <span class="co">#&gt;  $ TRACE  : 'loglevel' int 600</span>
 <span class="co">#&gt;  $ DEBUG  : 'loglevel' int 500</span>
@@ -372,8 +338,7 @@ div#tocnav ul.nav li ul {
 <span class="co">#&gt;  $ SUCCESS: 'loglevel' int 350</span>
 <span class="co">#&gt;  $ WARN   : 'loglevel' int 300</span>
 <span class="co">#&gt;  $ ERROR  : 'loglevel' int 200</span>
-<span class="co">#&gt;  $ FATAL  : 'loglevel' int 100</span>
-</pre></div>
+<span class="co">#&gt;  $ FATAL  : 'loglevel' int 100</span></pre></body></html></div>
 </div>
 </div>
 <div id="performance" class="section level3">
@@ -387,8 +352,7 @@ div#tocnav ul.nav li ul {
 <p>Getting and setting the layout of the log record should happen up-front in both packages:</p>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/getLogger.html">getLogger</a></span>()[[<span class="st">'handlers'</span>]]<span class="op">$</span><span class="kw">basic.stdout</span><span class="op">$</span><span class="kw">formatter</span>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/logging/man/getLogger.html">getLogger</a></span>()<span class="kw">[[</span><span class="st">'handlers'</span>]]$<span class="no">basic.stdout</span>$<span class="no">formatter</span>
 <span class="co">#&gt; function (record) </span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     msg &lt;- trimws(record$msg)</span>
@@ -396,16 +360,13 @@ div#tocnav ul.nav li ul {
 <span class="co">#&gt;         msg, sep = ":"))</span>
 <span class="co">#&gt;     return(text)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x6174f48&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:logging&gt;</span>
-</pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x7108958&gt;</span>
+<span class="co">#&gt; &lt;environment: namespace:logging&gt;</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>()
-<span class="co">#&gt; layout_simple</span>
-</pre></div>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>()
+<span class="co">#&gt; layout_simple</span></pre></body></html></div>
 </div>
 <p><code>logger</code> provides multiple configurable layouts to fit the user’s need, eg easily show the calling function of the lof request, the <code>pid</code> of the R process, name of the machine etc. or colorized outputs. See <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a> vignette for more details.</p>
 </div>
@@ -415,37 +376,31 @@ div#tocnav ul.nav li ul {
 <p>If you want to pass dynamic log messages to the log engines, you can do that via the hard-coded <code>sprintf</code> in the <code>logging</code> package, while you can set that on a namespaces basis in <code>logger</code>, which is by default using <code>glue</code>:</p>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; 2020-06-27 14:15:31 INFO::hi</span>
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-<span class="co">#&gt; 2020-06-27 14:15:31 INFO::hi 42</span>
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>))
-<span class="co">#&gt; 2020-06-27 14:15:31 INFO::hi 42</span>
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="kw">glue</span>::<span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
-<span class="co">#&gt; 2020-06-27 14:15:31 INFO::hi 42</span>
-</pre></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi'</span>)
+<span class="co">#&gt; 2020-10-13 21:34:59 INFO::hi</span>
+<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
+<span class="co">#&gt; 2020-10-13 21:34:59 INFO::hi 42</span>
+<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>))
+<span class="co">#&gt; 2020-10-13 21:34:59 INFO::hi 42</span>
+<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="kw pkg">glue</span><span class="kw ns">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
+<span class="co">#&gt; 2020-10-13 21:34:59 INFO::hi 42</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {84/2}'</span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_sprintf</span>)
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_paste</span>)
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span><span class="op">/</span><span class="fl">2</span>)
-</pre></div>
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_sprintf</span>)
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_paste</span>)
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>)</pre></body></html></div>
 </div>
 <p>For even better compatibility, there’s also <code><a href="../reference/formatter_logging.html">?formatter_logging</a></code> that not only relies on <code>sprintf</code> when the first argument is a string, but will log the call and the result as well when the log object is an R expression:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_logging</span>)
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_logging</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'42'</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fl">42</span>)
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fl">4</span><span class="op">+</span><span class="fl">2</span>)
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fl">4</span>+<span class="fl">2</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'foo %s'</span>, <span class="st">'bar'</span>)
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fl">12</span>, <span class="fl">1</span><span class="op">+</span><span class="fl">1</span>, <span class="fl">2</span> <span class="op">*</span> <span class="fl">2</span>)
-</pre></div>
+<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="fl">12</span>, <span class="fl">1</span>+<span class="fl">1</span>, <span class="fl">2</span> * <span class="fl">2</span>)</pre></body></html></div>
 </div>
 <div id="log-record-destination-1" class="section level3">
 <h3 class="hasAnchor">
@@ -453,22 +408,18 @@ div#tocnav ul.nav li ul {
 <p>Setting the destination of the log records works similarly in both packages, although he <code>logger</code> packages bundles a lot more options:</p>
 <div class="comparison">
 <p><package>logging</package></p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="op">?</span><span class="kw">addHandler</span>
-<span class="op">?</span><span class="kw">writeToConsole</span>
-<span class="op">?</span><span class="kw">writeToFile</span>
-</pre></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r">?<span class="no">addHandler</span>
+?<span class="no">writeToConsole</span>
+?<span class="no">writeToFile</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb24"><pre class="downlit">
-<span class="op">?</span><span class="kw">log_appender</span>
-<span class="op">?</span><span class="kw">appender_console</span>
-<span class="op">?</span><span class="kw">appender_file</span>
-<span class="op">?</span><span class="kw">appender_tee</span>
-<span class="op">?</span><span class="kw">appender_slack</span>
-<span class="op">?</span><span class="kw">appender_pushbullet</span>
-</pre></div>
+<div class="sourceCode" id="cb24"><html><body><pre class="r">?<span class="no">log_appender</span>
+?<span class="no">appender_console</span>
+?<span class="no">appender_file</span>
+?<span class="no">appender_tee</span>
+?<span class="no">appender_slack</span>
+?<span class="no">appender_pushbullet</span></pre></body></html></div>
 </div>
 </div>
 <div id="hierarchical-logging" class="section level3">
@@ -481,18 +432,16 @@ div#tocnav ul.nav li ul {
 <a href="#using-logger-as-a-drop-in-replacement-of-logging" class="anchor"></a>Using <code>logger</code> as a drop-in-replacement of <code>logging</code>
 </h3>
 <p><code>logger</code> has no hard requirements, so it’s an adequate alternative of <code>logging</code>. Although the function names are a bit different, and the message formatter also differs, but with some simple tweaks, <code>logger</code> can become an almost perfect drop-in-replacement of <code>logging</code> – although not all log levels (eg  and ) are supported:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="kw">formatter_logging</span>)
-<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="kw">layout_logging</span>)
-<span class="kw">logdebug</span> <span class="op">&lt;-</span> <span class="kw">log_debug</span>
-<span class="kw">loginfo</span> <span class="op">&lt;-</span> <span class="kw">log_info</span>
-<span class="kw">logwarn</span> <span class="op">&lt;-</span> <span class="kw">log_warn</span>
-<span class="kw">logerror</span> <span class="op">&lt;-</span> <span class="kw">log_error</span>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_logging</span>)
+<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="no">layout_logging</span>)
+<span class="no">logdebug</span> <span class="kw">&lt;-</span> <span class="no">log_debug</span>
+<span class="no">loginfo</span> <span class="kw">&lt;-</span> <span class="no">log_info</span>
+<span class="no">logwarn</span> <span class="kw">&lt;-</span> <span class="no">log_warn</span>
+<span class="no">logerror</span> <span class="kw">&lt;-</span> <span class="no">log_error</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'Hello from logger in a logging theme ...'</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">logwarn</a></span>(<span class="st">'... where the default log message formatter is %s'</span>, <span class="st">'sprintf'</span>, namespace = <span class="st">'foobar'</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">logwarn</a></span>(<span class="st">'... where the default log message formatter is %s'</span>, <span class="st">'sprintf'</span>, <span class="kw">namespace</span> <span class="kw">=</span> <span class="st">'foobar'</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="log4r" class="section level2">
@@ -505,8 +454,7 @@ div#tocnav ul.nav li ul {
 <p>So thus it’s important to create a logging object in <code>log4r</code> before being able to log messages, while that’s automatically done in `logger:</p>
 <div class="comparison">
 <p><package>log4r</package></p>
-<div class="sourceCode" id="cb26"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/johnmyleswhite/log4r">log4r</a></span>)
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">log4r</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'log4r'</span>
 <span class="co">#&gt; The following object is masked from 'package:logging':</span>
@@ -518,14 +466,11 @@ div#tocnav ul.nav li ul {
 <span class="co">#&gt; The following object is masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     debug</span>
-<span class="kw">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/log4r/man/create.logger.html">create.logger</a></span>(logfile = <span class="fu"><a href="https://rdrr.io/r/base/showConnections.html">stdout</a></span>(), level = <span class="st">"INFO"</span>)
-</pre></div>
+<span class="no">logger</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/log4r/man/create.logger.html">create.logger</a></span>(<span class="kw">logfile</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/showConnections.html">stdout</a></span>(), <span class="kw">level</span> <span class="kw">=</span> <span class="st">"INFO"</span>)</pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb27"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)</pre></body></html></div>
 </div>
 <p>Please note that in the background, <code>logger</code> does have a concept of logger objects, but that’s behind the scene and the user does not have to specify / reference it. On the other hand, if you wish, you can do that via the <code>namespace</code> concept of <code>logger</code> – more on that later.</p>
 </div>
@@ -535,19 +480,15 @@ div#tocnav ul.nav li ul {
 <p>While <code>logger</code> has a <code>log_</code> prefix for all logging functions, <code>log4r</code> has lowercase functions names referring to the log level, which takes a logging object and the log message:</p>
 <div class="comparison">
 <p><package>log4r</package></p>
-<div class="sourceCode" id="cb28"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">info</a></span>(<span class="kw">logger</span>, <span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO  [2020-06-27 14:15:31] hi there</span>
-<span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">warn</a></span>(<span class="kw">logger</span>, <span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN  [2020-06-27 14:15:31] watch out</span>
-</pre></div>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">info</a></span>(<span class="no">logger</span>, <span class="st">'hi there'</span>)
+<span class="co">#&gt; INFO  [2020-10-13 21:34:59] hi there</span>
+<span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">warn</a></span>(<span class="no">logger</span>, <span class="st">'watch out'</span>)
+<span class="co">#&gt; WARN  [2020-10-13 21:34:59] watch out</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
-<div class="sourceCode" id="cb29"><pre class="downlit">
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
-<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)
-</pre></div>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
+<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)</pre></body></html></div>
 </div>
 <p>As you can see the default layout of the messages is a bit different in the two packages.</p>
 </div>
@@ -595,7 +536,7 @@ div#tocnav ul.nav li ul {
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

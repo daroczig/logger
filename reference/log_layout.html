@@ -150,14 +150,14 @@
     <p>Get or set log record layout</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></span>(<span class='kw'>layout</span>, namespace = <span class='st'>"global"</span>, index = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>log_layout</span>(<span class='no'>layout</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='st'>"global"</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>layout</th>
-      <td><p>function defining the structure of a log record, eg <code><a href='https://rdrr.io/pkg/logger/man/layout_simple.html'>layout_simple</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/layout_glue.html'>layout_glue</a></code> or <code><a href='https://rdrr.io/pkg/logger/man/layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/layout_json.html'>layout_json</a></code>, or generator functions such as <code><a href='https://rdrr.io/pkg/logger/man/layout_glue_generator.html'>layout_glue_generator</a></code></p></td>
+      <td><p>function defining the structure of a log record, eg <code><a href='layout_simple.html'>layout_simple</a></code>, <code><a href='layout_glue.html'>layout_glue</a></code> or <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='layout_json.html'>layout_json</a></code>, or generator functions such as <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></td>
     </tr>
     <tr>
       <th>namespace</th>
@@ -171,12 +171,12 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/logger/man/logger.html'>logger</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/log_threshold.html'>log_threshold</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></code></p></div>
+    <div class='dont-index'><p><code><a href='logger.html'>logger</a></code>, <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_appender.html'>log_appender</a></code> and <code><a href='log_formatter.html'>log_formatter</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/layout_json.html'>layout_json</a></span>())
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>log_layout</span>(<span class='fu'><a href='layout_json.html'>layout_json</a></span>())
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -193,7 +193,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

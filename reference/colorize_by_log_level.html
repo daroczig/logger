@@ -150,7 +150,7 @@
     <p>Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>msg</span>, <span class='kw'>level</span>)</pre>
+    <pre class="usage"><span class='fu'>colorize_by_log_level</span>(<span class='no'>msg</span>, <span class='no'>level</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,7 +161,7 @@
     </tr>
     <tr>
       <th>level</th>
-      <td><p>see <code><a href='https://rdrr.io/pkg/logger/man/log_levels.html'>log_levels</a></code></p></td>
+      <td><p>see <code><a href='log_levels.html'>log_levels</a></code></p></td>
     </tr>
     </table>
 
@@ -170,14 +170,14 @@
     <p>string with ANSI escape code</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>FATAL</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>ERROR</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>WARN</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>SUCCESS</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>INFO</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>DEBUG</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/colorize_by_log_level.html'>colorize_by_log_level</a></span>(<span class='kw'>TRACE</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>FATAL</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>ERROR</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>WARN</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>SUCCESS</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>INFO</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>DEBUG</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>colorize_by_log_level</span>(<span class='no'>TRACE</span>, <span class='st'>'foobar'</span>), <span class='st'>'\n'</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -194,7 +194,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

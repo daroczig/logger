@@ -150,11 +150,11 @@
     <p>Evaluate R expression with a temporarily updated log level threshold</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/with_log_threshold.html'>with_log_threshold</a></span>(
-  <span class='kw'>expression</span>,
-  threshold = <span class='kw'>ERROR</span>,
-  namespace = <span class='st'>"global"</span>,
-  index = <span class='fl'>1</span>
+    <pre class="usage"><span class='fu'>with_log_threshold</span>(
+  <span class='no'>expression</span>,
+  <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='no'>ERROR</span>,
+  <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='st'>"global"</span>,
+  <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -166,7 +166,7 @@
     </tr>
     <tr>
       <th>threshold</th>
-      <td><p><code><a href='https://rdrr.io/pkg/logger/man/log_levels.html'>log_levels</a></code></p></td>
+      <td><p><code><a href='log_levels.html'>log_levels</a></code></p></td>
     </tr>
     <tr>
       <th>namespace</th>
@@ -180,18 +180,18 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_threshold.html'>log_threshold</a></span>(<span class='kw'>TRACE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_trace</a></span>(<span class='st'>'Logging everything!'</span>)
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/logger/man/with_log_threshold.html'>with_log_threshold</a></span>({
-  <span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='st'>'Now we are temporarily suppressing eg INFO messages'</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_warn</a></span>(<span class='st'>'WARN'</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_debug</a></span>(<span class='st'>'Debug messages are suppressed as well'</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_error</a></span>(<span class='st'>'ERROR'</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='log_threshold.html'>log_threshold</a></span>(<span class='no'>TRACE</span>)
+<span class='fu'><a href='log_level.html'>log_trace</a></span>(<span class='st'>'Logging everything!'</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>with_log_threshold</span>({
+  <span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'Now we are temporarily suppressing eg INFO messages'</span>)
+  <span class='fu'><a href='log_level.html'>log_warn</a></span>(<span class='st'>'WARN'</span>)
+  <span class='fu'><a href='log_level.html'>log_debug</a></span>(<span class='st'>'Debug messages are suppressed as well'</span>)
+  <span class='fu'><a href='log_level.html'>log_error</a></span>(<span class='st'>'ERROR'</span>)
   <span class='fu'><a href='https://rdrr.io/r/base/invisible.html'>invisible</a></span>(<span class='fl'>42</span>)
-}, threshold = <span class='kw'>WARN</span>)
-<span class='kw'>x</span>
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_trace</a></span>(<span class='st'>'DONE'</span>)
+}, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='no'>WARN</span>)
+<span class='no'>x</span>
+<span class='fu'><a href='log_level.html'>log_trace</a></span>(<span class='st'>'DONE'</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -208,7 +208,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

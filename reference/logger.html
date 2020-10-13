@@ -150,18 +150,18 @@
     <p>A logger consists of a log level <code>threshold</code>, a log message <code>formatter</code> function, a log record <code>layout</code> formatting function and the <code>appender</code> function deciding on the destination of the log record. For more details, see the package <code>README.md</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/logger.html'>logger</a></span>(<span class='kw'>threshold</span>, <span class='kw'>formatter</span>, <span class='kw'>layout</span>, <span class='kw'>appender</span>)</pre>
+    <pre class="usage"><span class='fu'>logger</span>(<span class='no'>threshold</span>, <span class='no'>formatter</span>, <span class='no'>layout</span>, <span class='no'>appender</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>threshold</th>
-      <td><p>omit log messages below this <code><a href='https://rdrr.io/pkg/logger/man/log_levels.html'>log_levels</a></code></p></td>
+      <td><p>omit log messages below this <code><a href='log_levels.html'>log_levels</a></code></p></td>
     </tr>
     <tr>
       <th>formatter</th>
-      <td><p>function pre-processing the message of the log record when it's not wrapped in a <code><a href='https://rdrr.io/pkg/logger/man/skip_formatter.html'>skip_formatter</a></code> call</p></td>
+      <td><p>function pre-processing the message of the log record when it's not wrapped in a <code><a href='skip_formatter.html'>skip_formatter</a></code> call</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -180,25 +180,25 @@
 
     <p>By default, a general logger definition is created when loading the <code>logger</code> package, that uses</p>
 <ol>
-<li><p><code><a href='https://rdrr.io/pkg/logger/man/log_levels.html'>INFO</a></code> as the log level threshold</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/logger/man/layout_simple.html'>layout_simple</a></code> as the layout function showing the log level, timestamp and log message</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/logger/man/formatter_glue.html'>formatter_glue</a></code> (or <code><a href='https://rdrr.io/pkg/logger/man/formatter_sprintf.html'>formatter_sprintf</a></code> if <span class="pkg">glue</span> is not installed) as the default formatter function transforming the R objects to be logged to a character vector</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/logger/man/appender_console.html'>appender_console</a></code> as the default log record destination</p></li>
+<li><p><code><a href='log_levels.html'>INFO</a></code> as the log level threshold</p></li>
+<li><p><code><a href='layout_simple.html'>layout_simple</a></code> as the layout function showing the log level, timestamp and log message</p></li>
+<li><p><code><a href='formatter_glue.html'>formatter_glue</a></code> (or <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code> if <span class="pkg">glue</span> is not installed) as the default formatter function transforming the R objects to be logged to a character vector</p></li>
+<li><p><code><a href='appender_console.html'>appender_console</a></code> as the default log record destination</p></li>
 </ol>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at <code><a href='https://rdrr.io/pkg/logger/man/log_threshold.html'>log_threshold</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></code> and then call <code><a href='https://rdrr.io/pkg/logger/man/log_levels.html'>log_levels</a></code> and its derivatives, such as <code><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></code> directly.</p>
+    <p>It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_formatter.html'>log_formatter</a></code>, <code><a href='log_layout.html'>log_layout</a></code> and <code><a href='log_appender.html'>log_appender</a></code> and then call <code><a href='log_levels.html'>log_levels</a></code> and its derivatives, such as <code><a href='log_level.html'>log_info</a></code> directly.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>For more details, see the Anatomy of a Log Request vignette at <a href='https://daroczig.github.io/logger/articles/anatomy.html'>https://daroczig.github.io/logger/articles/anatomy.html</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='kw'>logger</span>, <span class='kw'>logger</span>:::<span class='kw'>namespaces</span><span class='op'>$</span><span class='kw'>global</span>[[<span class='fl'>1</span>]])(<span class='kw'>INFO</span>, <span class='fl'>42</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='kw'>logger</span>, <span class='kw'>logger</span>:::<span class='kw'>namespaces</span><span class='op'>$</span><span class='kw'>global</span>[[<span class='fl'>1</span>]])(<span class='kw'>INFO</span>, <span class='st'>'{pi}'</span>)
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fl'>42</span>
-<span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='kw'>logger</span>, <span class='kw'>logger</span>:::<span class='kw'>namespaces</span><span class='op'>$</span><span class='kw'>global</span>[[<span class='fl'>1</span>]])(<span class='kw'>INFO</span>, <span class='st'>'{x}^2 = {x^2}'</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>logger</span>, <span class='kw pkg'>logger</span><span class='kw ns'>:::</span><span class='no'>namespaces</span>$<span class='no'>global</span><span class='kw'>[[</span><span class='fl'>1</span>]])(<span class='no'>INFO</span>, <span class='fl'>42</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>logger</span>, <span class='kw pkg'>logger</span><span class='kw ns'>:::</span><span class='no'>namespaces</span>$<span class='no'>global</span><span class='kw'>[[</span><span class='fl'>1</span>]])(<span class='no'>INFO</span>, <span class='st'>'{pi}'</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>42</span>
+<span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='no'>logger</span>, <span class='kw pkg'>logger</span><span class='kw ns'>:::</span><span class='no'>namespaces</span>$<span class='no'>global</span><span class='kw'>[[</span><span class='fl'>1</span>]])(<span class='no'>INFO</span>, <span class='st'>'{x}^2 = {x^2}'</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -215,7 +215,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

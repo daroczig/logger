@@ -150,11 +150,11 @@
     <p>Logs a long line to stand out from the console</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_separator.html'>log_separator</a></span>(
-  level = <span class='kw'>INFO</span>,
-  namespace = <span class='fl'>NA_character_</span>,
-  separator = <span class='st'>"="</span>,
-  width = <span class='fl'>80</span>
+    <pre class="usage"><span class='fu'>log_separator</span>(
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='no'>INFO</span>,
+  <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>"="</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>80</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -162,7 +162,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>level</th>
-      <td><p>log level, see <code><a href='https://rdrr.io/pkg/logger/man/log_levels.html'>log_levels</a></code> for more details</p></td>
+      <td><p>log level, see <code><a href='log_levels.html'>log_levels</a></code> for more details</p></td>
     </tr>
     <tr>
       <th>namespace</th>
@@ -180,11 +180,11 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/logger/man/log_with_separator.html'>log_with_separator</a></code></p></div>
+    <div class='dont-index'><p><code><a href='log_with_separator.html'>log_with_separator</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_separator.html'>log_separator</a></span>()
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_separator.html'>log_separator</a></span>(<span class='kw'>ERROR</span>, separator = <span class='st'>'!'</span>, width = <span class='fl'>60</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>log_separator</span>()
+<span class='fu'>log_separator</span>(<span class='no'>ERROR</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>'!'</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -200,7 +200,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

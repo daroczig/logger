@@ -150,14 +150,14 @@
     <p>Get or set log record appender function</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></span>(<span class='kw'>appender</span>, namespace = <span class='st'>"global"</span>, index = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>log_appender</span>(<span class='no'>appender</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='st'>"global"</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>appender</th>
-      <td><p>function delivering a log record to the destination, eg <code><a href='https://rdrr.io/pkg/logger/man/appender_console.html'>appender_console</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_file.html'>appender_file</a></code> or <code><a href='https://rdrr.io/pkg/logger/man/appender_tee.html'>appender_tee</a></code></p></td>
+      <td><p>function delivering a log record to the destination, eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code> or <code><a href='appender_tee.html'>appender_tee</a></code></p></td>
     </tr>
     <tr>
       <th>namespace</th>
@@ -171,23 +171,23 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/logger/man/logger.html'>logger</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/log_threshold.html'>log_threshold</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></code></p></div>
+    <div class='dont-index'><p><code><a href='logger.html'>logger</a></code>, <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_layout.html'>log_layout</a></code> and <code><a href='log_formatter.html'>log_formatter</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## change appender to "tee" that writes to the console and a file as well</span>
-<span class='kw'>t</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_tee.html'>appender_tee</a></span>(<span class='kw'>t</span>))
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>42</span><span class='op'>:</span><span class='fl'>44</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='kw'>t</span>)
+<span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
+<span class='fu'>log_appender</span>(<span class='fu'><a href='appender_tee.html'>appender_tee</a></span>(<span class='no'>t</span>))
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>:<span class='fl'>44</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='no'>t</span>)
 
 <span class='co'>## poor man's tee by stacking loggers in the namespace</span>
-<span class='kw'>t</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></span>(<span class='kw'>appender_console</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_file.html'>appender_file</a></span>(<span class='kw'>t</span>), index = <span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='kw'>t</span>)
+<span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
+<span class='fu'>log_appender</span>(<span class='no'>appender_console</span>)
+<span class='fu'>log_appender</span>(<span class='fu'><a href='appender_file.html'>appender_file</a></span>(<span class='no'>t</span>), <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='no'>t</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -204,7 +204,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

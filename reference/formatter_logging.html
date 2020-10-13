@@ -147,14 +147,14 @@
     </div>
 
     <div class="ref-description">
-    <p>The <span class="pkg">logging</span> package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then <code><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></code> is being called -- otherwise it does something like <code><a href='https://rdrr.io/pkg/logger/man/log_eval.html'>log_eval</a></code> and logs the R expression(s) and the result(s) as well.</p>
+    <p>The <span class="pkg">logging</span> package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then <code><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></code> is being called -- otherwise it does something like <code><a href='log_eval.html'>log_eval</a></code> and logs the R expression(s) and the result(s) as well.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_logging.html'>formatter_logging</a></span>(
-  <span class='kw'>...</span>,
-  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
-  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
-  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+    <pre class="usage"><span class='fu'>formatter_logging</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
+  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -183,17 +183,17 @@
     <p>character vector</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='https://rdrr.io/pkg/logger/man/formatter_paste.html'>formatter_paste</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_glue.html'>formatter_glue</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_json.html'>formatter_json</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_pander.html'>formatter_pander</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code>, for alternatives, see <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='formatter_json.html'>formatter_json</a></code>, <code><a href='formatter_pander.html'>formatter_pander</a></code> and <code><a href='skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></span>(<span class='kw'>formatter_logging</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='st'>'42'</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>4</span><span class='op'>+</span><span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='st'>'foo %s'</span>, <span class='st'>'bar'</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='st'>'vector %s'</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='fl'>12</span>, <span class='fl'>1</span><span class='op'>+</span><span class='fl'>1</span>, <span class='fl'>2</span> <span class='op'>*</span> <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='log_formatter.html'>log_formatter</a></span>(<span class='no'>formatter_logging</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'42'</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>4</span>+<span class='fl'>2</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'foo %s'</span>, <span class='st'>'bar'</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'vector %s'</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>12</span>, <span class='fl'>1</span>+<span class='fl'>1</span>, <span class='fl'>2</span> * <span class='fl'>2</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -210,7 +210,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

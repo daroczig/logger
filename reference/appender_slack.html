@@ -150,12 +150,12 @@
     <p>Send log messages to a Slack channel</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/appender_slack.html'>appender_slack</a></span>(
-  channel = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_CHANNEL"</span>),
-  username = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_USERNAME"</span>),
-  icon_emoji = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_ICON_EMOJI"</span>),
-  api_token = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_API_TOKEN"</span>),
-  preformatted = <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'>appender_slack</span>(
+  <span class='kw'>channel</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_CHANNEL"</span>),
+  <span class='kw'>username</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_USERNAME"</span>),
+  <span class='kw'>icon_emoji</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_ICON_EMOJI"</span>),
+  <span class='kw'>api_token</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"SLACK_API_TOKEN"</span>),
+  <span class='kw'>preformatted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -191,7 +191,7 @@
     <p>This functionality depends on the <span class="pkg">slackr</span> package.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is generator function for <code><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='https://rdrr.io/pkg/logger/man/appender_console.html'>appender_console</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_file.html'>appender_file</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_tee.html'>appender_tee</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_pushbullet.html'>appender_pushbullet</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_telegram.html'>appender_telegram</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_syslog.html'>appender_syslog</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/appender_kinesis.html'>appender_kinesis</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/appender_async.html'>appender_async</a></code> for evaluate any <code><a href='https://rdrr.io/pkg/logger/man/log_appender.html'>log_appender</a></code> function in a background process.</p></div>
+    <div class='dont-index'><p>This is generator function for <code><a href='log_appender.html'>log_appender</a></code>, for alternatives, see eg <code><a href='appender_console.html'>appender_console</a></code>, <code><a href='appender_file.html'>appender_file</a></code>, <code><a href='appender_tee.html'>appender_tee</a></code>, <code><a href='appender_pushbullet.html'>appender_pushbullet</a></code>, <code><a href='appender_telegram.html'>appender_telegram</a></code>, <code><a href='appender_syslog.html'>appender_syslog</a></code>, <code><a href='appender_kinesis.html'>appender_kinesis</a></code> and <code><a href='appender_async.html'>appender_async</a></code> for evaluate any <code><a href='log_appender.html'>log_appender</a></code> function in a background process.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -208,7 +208,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

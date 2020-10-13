@@ -150,11 +150,11 @@
     <p>Transforms all passed R objects into a JSON list</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_json.html'>formatter_json</a></span>(
-  <span class='kw'>...</span>,
-  .logcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
-  .topcall = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='op'>-</span><span class='fl'>1</span>),
-  .topenv = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+    <pre class="usage"><span class='fu'>formatter_json</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
+  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -186,14 +186,14 @@
     <p>This functionality depends on the <span class="pkg">jsonlite</span> package.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>This is a <code><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></code> potentially to be used with <code><a href='https://rdrr.io/pkg/logger/man/layout_json_parser.html'>layout_json_parser</a></code>, for alternatives, see <code><a href='https://rdrr.io/pkg/logger/man/formatter_paste.html'>formatter_paste</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_glue.html'>formatter_glue</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_logging.html'>formatter_logging</a></code>, <code><a href='https://rdrr.io/pkg/logger/man/formatter_pander.html'>formatter_pander</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
+    <div class='dont-index'><p>This is a <code><a href='log_formatter.html'>log_formatter</a></code> potentially to be used with <code><a href='layout_json_parser.html'>layout_json_parser</a></code>, for alternatives, see <code><a href='formatter_paste.html'>formatter_paste</a></code>, <code><a href='formatter_sprintf.html'>formatter_sprintf</a></code>, <code><a href='formatter_glue.html'>formatter_glue</a></code>, <code><a href='formatter_glue_or_sprintf.html'>formatter_glue_or_sprintf</a></code>, <code><a href='formatter_logging.html'>formatter_logging</a></code>, <code><a href='formatter_pander.html'>formatter_pander</a></code> and <code><a href='skip_formatter.html'>skip_formatter</a></code> for marking a string not to apply the formatter on it.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_formatter.html'>log_formatter</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/formatter_json.html'>formatter_json</a></span>())
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/logger/man/layout_json_parser.html'>layout_json_parser</a></span>())
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(everything = <span class='fl'>42</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(mtcars = <span class='kw'>mtcars</span>, species = <span class='kw'>iris</span><span class='op'>$</span><span class='kw'>Species</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='log_formatter.html'>log_formatter</a></span>(<span class='fu'>formatter_json</span>())
+<span class='fu'><a href='log_layout.html'>log_layout</a></span>(<span class='fu'><a href='layout_json_parser.html'>layout_json_parser</a></span>())
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='kw'>everything</span> <span class='kw'>=</span> <span class='fl'>42</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -210,7 +210,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

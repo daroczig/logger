@@ -130,11 +130,9 @@
 </li>
 </ul>
 <p>Such layout rendering function can be as simple as the default <code><a href="../reference/layout_simple.html">?layout_simple</a></code>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">layout_simple</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">level</span>, <span class="kw">msg</span>, <span class="kw">...</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span>(<span class="kw">level</span>, <span class="st">'level'</span>), <span class="st">' ['</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>(), <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">'] '</span>, <span class="kw">msg</span>)
-}
-</pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">layout_simple</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">level</span>, <span class="no">msg</span>, <span class="no">...</span>) {
+    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span>(<span class="no">level</span>, <span class="st">'level'</span>), <span class="st">' ['</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>(), <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">'] '</span>, <span class="no">msg</span>)
+}</pre></body></html></div>
 <p>Or much more complex, eg looking up the hostname of the machine, public IP address etc and logging all these automatically with the message of the log request.</p>
 <p>Your easiest option to set up a custom layout is calling <code><a href="../reference/layout_glue_generator.html">?layout_glue_generator</a></code> that comes with a nice API being able to access a bunch of meta-information on the log request via <code><a href="../reference/get_logger_meta_variables.html">?get_logger_meta_variables</a></code>. For such example, see the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a> vignette.</p>
 <p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://rdrr.io/r/base/match.call.html">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_layout.html">?log_layout</a></code> can pretty-print that instead of the unnamed function body. See the <a href="https://github.com/daroczig/logger/blob/master/R/layouts.R"><code>layouts.R</code></a> file for more examples.</p>
@@ -145,21 +143,19 @@
 <p>The appender functions take log records and delivers those to the desired destination. This can be as simple as writing to the console (<code><a href="../reference/appender_console.html">?appender_console</a></code>) or to a local file (<code><a href="../reference/appender_file.html">?appender_file</a></code>), or delivering the log record via an API request to a remote service, streaming somewhere or sending a Slack message (<code><a href="../reference/appender_slack.html">?appender_slack</a></code>).</p>
 <p>If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg <code><a href="https://rdrr.io/r/base/match.call.html">match.call()</a></code> in the generator function or the quoted function call) recorded in the <code>generator</code> attribute of the function so that <code><a href="../reference/log_appender.html">?log_appender</a></code> can pretty-print that instead of the unnamed function body. See the <a href="https://github.com/daroczig/logger/blob/master/R/appenders.R"><code>appenders.R</code></a> file for more examples.</p>
 <p>An example for a custom appender delivering log messages to a database table:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">## the dbr package provides and easy and secure way of connecting to databased from R</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">## the dbr package provides and easy and secure way of connecting to databased from R</span>
 <span class="co">## although if you want to minimize the dependencies, feel free to stick with DBI etc.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">dbr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dbr</span>)
 <span class="co">## init a persistent connection to the database using a yaml config in the background thanks to dbr</span>
 <span class="co">## NOTE that this is optional and a temporarily connection could be also used</span>
 <span class="co">##      for higher reliability but lower throughput</span>
-<span class="kw">con</span> <span class="op">&lt;-</span> <span class="fu">db_connect</span>(<span class="st">'mydb'</span>)
+<span class="no">con</span> <span class="kw">&lt;-</span> <span class="fu">db_connect</span>(<span class="st">'mydb'</span>)
 <span class="co">## define custom function writing the log message to a table</span>
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="fu">function</span>(<span class="kw">lines</span>) {
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="kw">function</span>(<span class="no">lines</span>) {
     <span class="fu">db_append</span>(
-        df = <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(timestamp = <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>(), message = <span class="kw">lines</span>),
-        table = <span class="st">'logs'</span>, db = <span class="kw">con</span>)
-})
-</pre></div>
+        <span class="kw">df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">timestamp</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>(), <span class="kw">message</span> <span class="kw">=</span> <span class="no">lines</span>),
+        <span class="kw">table</span> <span class="kw">=</span> <span class="st">'logs'</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="no">con</span>)
+})</pre></body></html></div>
 </div>
   </div>
 
@@ -178,7 +174,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

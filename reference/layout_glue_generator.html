@@ -153,13 +153,13 @@ further variables set by get_logger_meta_variables
     <div class="ref-description">
     <p><code>format</code> is passed to <code>glue</code> with access to the below variables:</p><ul>
 <li><p>msg: the actual log message</p></li>
-<li><p>further variables set by <code><a href='https://rdrr.io/pkg/logger/man/get_logger_meta_variables.html'>get_logger_meta_variables</a></code></p></li>
+<li><p>further variables set by <code><a href='get_logger_meta_variables.html'>get_logger_meta_variables</a></code></p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/layout_glue_generator.html'>layout_glue_generator</a></span>(
-  format = <span class='st'>"{level} [{format(time, \"%Y-%m-%d %H:%M:%S\")}] {msg}"</span>
+    <pre class="usage"><span class='fu'>layout_glue_generator</span>(
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"{level} [{format(time, \"%Y-%m-%d %H:%M:%S\")}] {msg}"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -173,19 +173,19 @@ further variables set by get_logger_meta_variables
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>function taking <code>level</code> and <code>msg</code> arguments - keeping the original call creating the generator in the <code>generator</code> attribute that is returned when calling <code><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></code> for the currently used layout</p>
+    <p>function taking <code>level</code> and <code>msg</code> arguments - keeping the original call creating the generator in the <code>generator</code> attribute that is returned when calling <code><a href='log_layout.html'>log_layout</a></code> for the currently used layout</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See example calls from <code><a href='https://rdrr.io/pkg/logger/man/layout_glue.html'>layout_glue</a></code> and <code><a href='https://rdrr.io/pkg/logger/man/layout_glue_colors.html'>layout_glue_colors</a></code>.</p></div>
+    <div class='dont-index'><p>See example calls from <code><a href='layout_glue.html'>layout_glue</a></code> and <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>example_layout</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/logger/man/layout_glue_generator.html'>layout_glue_generator</a></span>(
-  format = <span class='st'>'{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}'</span>)
-<span class='fu'>example_layout</span>(<span class='kw'>INFO</span>, <span class='st'>'try {runif(1)}'</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>example_layout</span> <span class='kw'>&lt;-</span> <span class='fu'>layout_glue_generator</span>(
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>'{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}'</span>)
+<span class='fu'>example_layout</span>(<span class='no'>INFO</span>, <span class='st'>'try {runif(1)}'</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_layout.html'>log_layout</a></span>(<span class='kw'>example_layout</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/logger/man/log_level.html'>log_info</a></span>(<span class='st'>'try {runif(1)}'</span>)
+<span class='fu'><a href='log_layout.html'>log_layout</a></span>(<span class='no'>example_layout</span>)
+<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>'try {runif(1)}'</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -202,7 +202,7 @@ further variables set by get_logger_meta_variables
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

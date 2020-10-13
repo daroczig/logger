@@ -108,31 +108,26 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><a href="https://cran.r-project.org/package=logger"><img src="http://www.r-pkg.org/badges/version-ago/logger" alt="CRAN version"></a></p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'logger'</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'logger'</span>)</pre></div>
 <p>The most recent, development version of <code>logger</code> can also be installed from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">'daroczig/logger'</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">'daroczig/logger'</span>)</pre></div>
 </div>
 <div id="quick-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-example" class="anchor"></a>Quick example</h2>
 <p>Setting the log level threshold to something low and logging various messages in ad-hoc and programmatic ways:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
-<span class="fu"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="kw">DEBUG</span>)
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)
+<span class="fu"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="no">DEBUG</span>)
 <span class="fu"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Script starting up...'</span>)
 <span class="co">#&gt; INFO [2018-20-11 22:49:36] Script starting up...</span>
 
-<span class="kw">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html">available.packages</a></span>()
+<span class="no">pkgs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html">available.packages</a></span>()
 <span class="fu"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'There are {nrow(pkgs)} R packages hosted on CRAN!'</span>)
 <span class="co">#&gt; INFO [2018-20-11 22:49:37] There are 13433 R packages hosted on CRAN!</span>
 
-<span class="co">for</span> (<span class="kw">letter</span> <span class="co">in</span> <span class="kw">letters</span>) {
-    <span class="kw">lpkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="kw">letter</span>, <span class="kw">pkgs</span>[, <span class="st">'Package'</span>], ignore.case = <span class="fl">TRUE</span>))
-    <span class="fu"><a href="reference/log_level.html">log_level</a></span>(<span class="co">if</span> (<span class="kw">lpkgs</span> <span class="op">&lt;</span> <span class="fl">5000</span>) <span class="kw">TRACE</span> <span class="co">else</span> <span class="kw">DEBUG</span>,
+<span class="kw">for</span> (<span class="no">letter</span> <span class="kw">in</span> <span class="no">letters</span>) {
+    <span class="no">lpkgs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="no">letter</span>, <span class="no">pkgs</span>[, <span class="st">'Package'</span>], <span class="kw">ignore.case</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
+    <span class="fu"><a href="reference/log_level.html">log_level</a></span>(<span class="kw">if</span> (<span class="no">lpkgs</span> <span class="kw">&lt;</span> <span class="fl">5000</span>) <span class="no">TRACE</span> <span class="kw">else</span> <span class="no">DEBUG</span>,
               <span class="st">'{lpkgs} R packages including the {shQuote(letter)} letter'</span>)
 }
 <span class="co">#&gt; DEBUG [2018-20-11 22:49:38] 6300 R packages including the 'a' letter</span>
@@ -144,13 +139,11 @@
 
 <span class="fu"><a href="reference/log_level.html">log_warn</a></span>(<span class="st">'There might be many, like {1:2} or more warnings!!!'</span>)
 <span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 1 or more warnings!!!</span>
-<span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!</span>
-</pre></div>
+<span class="co">#&gt; WARN [2018-20-11 22:49:39] There might be many, like 2 or more warnings!!!</span></pre></div>
 <p>Setting a custom log layout to render the log records with colors:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://daroczig.github.io/logger">logger</a></span>)
-<span class="fu"><a href="reference/log_layout.html">log_layout</a></span>(<span class="kw">layout_glue_colors</span>)
-<span class="fu"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="kw">TRACE</span>)
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)
+<span class="fu"><a href="reference/log_layout.html">log_layout</a></span>(<span class="no">layout_glue_colors</span>)
+<span class="fu"><a href="reference/log_threshold.html">log_threshold</a></span>(<span class="no">TRACE</span>)
 <span class="fu"><a href="reference/log_level.html">log_info</a></span>(<span class="st">'Starting the script...'</span>)
 <span class="fu"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'This is the second log line'</span>)
 <span class="fu"><a href="reference/log_level.html">log_trace</a></span>(<span class="st">'Note that the 2nd line is being placed right after the 1st one.'</span>)
@@ -159,12 +152,9 @@
 <span class="fu"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is a problem'</span>)
 <span class="fu"><a href="reference/log_level.html">log_debug</a></span>(<span class="st">'Note that getting an error is usually bad'</span>)
 <span class="fu"><a href="reference/log_level.html">log_error</a></span>(<span class="st">'This is another problem'</span>)
-<span class="fu"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem'</span>)
-</pre></div>
+<span class="fu"><a href="reference/log_level.html">log_fatal</a></span>(<span class="st">'The last problem'</span>)</pre></div>
 <p>Or simply run the related demo:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="kw">colors</span>, package = <span class="st">'logger'</span>, echo = <span class="fl">FALSE</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="no">colors</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">'logger'</span>, <span class="kw">echo</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></div>
 <p><img src="reference/figures/colors.png" alt="colored log output"></p>
 <p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see the related vignettes.</p>
 </div>
@@ -281,7 +271,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

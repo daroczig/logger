@@ -150,7 +150,7 @@
     <p>Check if R package can be loaded and fails loudly otherwise</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/logger/man/fail_on_missing_package.html'>fail_on_missing_package</a></span>(<span class='kw'>pkg</span>)</pre>
+    <pre class="usage"><span class='fu'>fail_on_missing_package</span>(<span class='no'>pkg</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,10 +163,10 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>f</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>() <span class='fu'><a href='https://rdrr.io/pkg/logger/man/fail_on_missing_package.html'>fail_on_missing_package</a></span>(<span class='st'>'foobar'</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() <span class='fu'>fail_on_missing_package</span>(<span class='st'>'foobar'</span>)
 <span class='fu'>f</span>()
-<span class='kw'>g</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>() <span class='fu'><a href='https://rdrr.io/pkg/logger/man/fail_on_missing_package.html'>fail_on_missing_package</a></span>(<span class='st'>'stats'</span>)
+<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() <span class='fu'>fail_on_missing_package</span>(<span class='st'>'stats'</span>)
 <span class='fu'>g</span>()
 }</div></pre>
   </div>
@@ -184,7 +184,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
