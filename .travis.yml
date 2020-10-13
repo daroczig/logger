@@ -13,7 +13,7 @@ after_success:
 - Rscript -e 'library(devtools);install();test()'
 - Rscript -e 'Sys.setenv(NOT_CRAN = "true");covr::codecov()'
 
-before_deploy: Rscript -e 'devtools::install_github("r-lib/pkgdown")'
+before_deploy: Rscript -e 'install.packages("pkgdown", repos="http://mran.microsoft.com/snapshot/2020-09-01/")'
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github(new_process = FALSE)'
