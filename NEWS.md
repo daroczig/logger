@@ -1,6 +1,6 @@
 # logger 0.2.9000 (development)
 
-# logger 0.2.0 (2020-06-27)
+# logger 0.2.0 (2020-11-17
 
 ## Breaking changes
 
@@ -17,6 +17,7 @@
 * allow updating the log level threshold, formatter, layout and appender in all namespaces with a single call (#50)
 * new argument to `appender_file` to optionally truncate before appending (#24, @eddelbuettel)
 * new arguments to `appender_file` to optionally rotate the log files after appending (#42)
+* new meta variables for logging in custom layouts: R version and calling package's version
 * improved performance by not evaluating arguments when the log record does not meet the log level threshold (#27, @jozefhajnala)
 * `logger` in now part of the Mikata Project: https://mikata.dev
 
