@@ -3,6 +3,9 @@ sudo: false
 cache:
 - packages
 
+apt_packages:
+  - libgit2-dev
+
 r_packages:
 - logging
 - futile.logger
