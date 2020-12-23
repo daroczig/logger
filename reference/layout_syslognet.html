@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get or set log record layout — log_layout • logger</title>
+<title>Format a log record for syslognet — layout_syslognet • logger</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Get or set log record layout — log_layout" />
-<meta property="og:description" content="Get or set log record layout" />
+<meta property="og:title" content="Format a log record for syslognet — layout_syslognet" />
+<meta property="og:description" content="Format a log record for syslognet.
+This function converts the logger log level to a
+log severity level according to RFC 5424 &quot;The Syslog Protocol&quot;." />
 
 
 
@@ -141,43 +143,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get or set log record layout</h1>
-    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/logger.R'><code>R/logger.R</code></a></small>
-    <div class="hidden name"><code>log_layout.Rd</code></div>
+    <h1>Format a log record for syslognet</h1>
+    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/layouts.R'><code>R/layouts.R</code></a></small>
+    <div class="hidden name"><code>layout_syslognet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get or set log record layout</p>
+    <p>Format a log record for syslognet.
+This function converts the logger log level to a
+log severity level according to RFC 5424 "The Syslog Protocol".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>log_layout</span>(<span class='no'>layout</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='st'>"global"</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>layout_syslognet</span>(
+  <span class='no'>level</span>,
+  <span class='no'>msg</span>,
+  <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>.logcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(),
+  <span class='kw'>.topcall</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>),
+  <span class='kw'>.topenv</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>layout</th>
-      <td><p>function defining the structure of a log record, eg <code><a href='layout_simple.html'>layout_simple</a></code>, <code><a href='layout_glue.html'>layout_glue</a></code> or <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='layout_json.html'>layout_json</a></code>, or generator functions such as <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></td>
+      <th>level</th>
+      <td><p>level of log message.</p></td>
+    </tr>
+    <tr>
+      <th>msg</th>
+      <td><p>string of log message.</p></td>
     </tr>
     <tr>
       <th>namespace</th>
-      <td><p>logger namespace</p></td>
+      <td><p>namespace.</p></td>
     </tr>
     <tr>
-      <th>index</th>
-      <td><p>index of the logger within the namespace</p></td>
+      <th>.logcall</th>
+      <td><p>logcall; see <code><a href='layout_blank.html'>layout_blank</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>.topcall</th>
+      <td><p>topcall; see <code><a href='layout_blank.html'>layout_blank</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>.topenv</th>
+      <td><p>topenv; ; see <code><a href='layout_blank.html'>layout_blank</a></code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><code><a href='logger.html'>logger</a></code>, <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_appender.html'>log_appender</a></code> and <code><a href='log_formatter.html'>log_formatter</a></code></p></div>
+    <p>A character vector with a severity attribute.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>log_layout</span>(<span class='fu'><a href='layout_json.html'>layout_json</a></span>())
-<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

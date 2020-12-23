@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get or set log record layout — log_layout • logger</title>
+<title>Send log messages to a network syslog server — appender_syslognet • logger</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get or set log record layout — log_layout" />
-<meta property="og:description" content="Get or set log record layout" />
+<meta property="og:title" content="Send log messages to a network syslog server — appender_syslognet" />
+<meta property="og:description" content="Send log messages to a network syslog server" />
 
 
 
@@ -141,42 +141,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get or set log record layout</h1>
-    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/logger.R'><code>R/logger.R</code></a></small>
-    <div class="hidden name"><code>log_layout.Rd</code></div>
+    <h1>Send log messages to a network syslog server</h1>
+    <small class="dont-index">Source: <a href='https://github.com/daroczig/logger/blob/master/R/appenders.R'><code>R/appenders.R</code></a></small>
+    <div class="hidden name"><code>appender_syslognet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get or set log record layout</p>
+    <p>Send log messages to a network syslog server</p>
     </div>
 
-    <pre class="usage"><span class='fu'>log_layout</span>(<span class='no'>layout</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='st'>"global"</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>appender_syslognet</span>(<span class='no'>identifier</span>, <span class='no'>server</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>601L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>layout</th>
-      <td><p>function defining the structure of a log record, eg <code><a href='layout_simple.html'>layout_simple</a></code>, <code><a href='layout_glue.html'>layout_glue</a></code> or <code><a href='layout_glue_colors.html'>layout_glue_colors</a></code>, <code><a href='layout_json.html'>layout_json</a></code>, or generator functions such as <code><a href='layout_glue_generator.html'>layout_glue_generator</a></code></p></td>
+      <th>identifier</th>
+      <td><p>program/function identification (string).</p></td>
     </tr>
     <tr>
-      <th>namespace</th>
-      <td><p>logger namespace</p></td>
+      <th>server</th>
+      <td><p>machine where syslog daemon runs (string).</p></td>
     </tr>
     <tr>
-      <th>index</th>
-      <td><p>index of the logger within the namespace</p></td>
+      <th>port</th>
+      <td><p>port where syslog daemon listens (integer).</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><code><a href='logger.html'>logger</a></code>, <code><a href='log_threshold.html'>log_threshold</a></code>, <code><a href='log_appender.html'>log_appender</a></code> and <code><a href='log_formatter.html'>log_formatter</a></code></p></div>
+    <p>A function taking a <code>lines</code> argument.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This functionality depends on the <span class="pkg">syslognet</span> package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>log_layout</span>(<span class='fu'><a href='layout_json.html'>layout_json</a></span>())
-<span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='fl'>42</span>)
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"syslognet"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='fu'><a href='log_appender.html'>log_appender</a></span>(<span class='fu'>appender_syslognet</span>(<span class='st'>"test_app"</span>, <span class='st'>'remoteserver'</span>))
+  <span class='fu'><a href='log_level.html'>log_info</a></span>(<span class='st'>"Test message."</span>)
+}
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
