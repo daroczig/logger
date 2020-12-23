@@ -154,7 +154,7 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
            attr(level, 'level'), ':',
            ifelse(meta$ns == 'global', '', meta$ns), ':',
            msg)
-}, generator = quote(layout_simple()))
+}, generator = quote(layout_logging()))
 
 
 #' Format a log message with \code{glue}
@@ -256,3 +256,33 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
     }, generator = deparse(match.call()))
 
 }
+
+
+#nocov start
+#' Format a log record for syslognet
+#'
+#' Format a log record for syslognet.
+#' This function converts the logger log level to a
+#' log severity level according to RFC 5424 "The Syslog Protocol".
+#'
+#' @inheritParams layout_simple
+#' @return A character vector with a severity attribute.
+#' @export
+layout_syslognet <- structure(
+  function(level, msg, namespace = NA_character_,
+           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    ret <- paste(attr(level, 'level'), msg)
+    attr(ret, 'severity') <- switch(
+        attr(level, 'level', exact = TRUE),
+        'FATAL' = 'CRITICAL',
+        'ERROR' = 'ERR',
+        'WARN' = 'WARNING',
+        'SUCCESS' = 'NOTICE',
+        'INFO' = 'INFO',
+        'DEBUG' = 'DEBUG',
+        'TRACE' = 'DEBUG')
+    return(ret)
+  },
+  generator = quote(layout_syslognet())
+)
+#nocov end

@@ -35,7 +35,8 @@ Suggests:
   callr,
   txtq,
   botor,
-  R.utils
+  R.utils,
+  syslognet
 Enhances:
   logging,
   futile.logger,
