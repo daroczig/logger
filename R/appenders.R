@@ -255,6 +255,7 @@ appender_syslog <- function(identifier, ...) {
 }
 
 
+#nocov start
 #' Send log messages to a network syslog server
 #' @param identifier program/function identification (string).
 #' @param server machine where syslog daemon runs (string).
@@ -284,6 +285,7 @@ appender_syslognet <- function(identifier, server, port = 601L) {
     generator = deparse(match.call())
   )
 }
+#nocov end
 
 
 #' Send log messages to a Amazon Kinesis stream
