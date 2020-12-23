@@ -147,7 +147,7 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
            attr(level, 'level'), ':',
            ifelse(meta$ns == 'global', '', meta$ns), ':',
            msg)
-}, generator = quote(layout_simple()))
+}, generator = quote(layout_logging()))
 
 
 #' Format a log message with \code{glue}
@@ -278,5 +278,5 @@ layout_syslognet <- structure(
     attr(ret, 'severity') <- level_to_severity(level)
     return(ret)
   },
-  generator = quote(layout_simple())
+  generator = quote(layout_syslognet())
 )
