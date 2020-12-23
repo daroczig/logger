@@ -251,17 +251,8 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
 
 }
 
-level_to_severity <- function(level) {
-  switch(attr(level, 'level', exact = TRUE),
-         "FATAL" = "CRITICAL",
-         "ERROR" = "ERR",
-         "WARN" = "WARNING",
-         "SUCCESS" = "NOTICE",
-         "INFO" = "INFO",
-         "DEBUG" = "DEBUG",
-         "TRACE" = "DEBUG")
-}
 
+#nocov start
 #' Format a log record for syslognet
 #'
 #' Format a log record for syslognet.
@@ -274,9 +265,18 @@ level_to_severity <- function(level) {
 layout_syslognet <- structure(
   function(level, msg, namespace = NA_character_,
            .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    ret <- paste(attr(level, "level"), msg)
-    attr(ret, 'severity') <- level_to_severity(level)
+    ret <- paste(attr(level, 'level'), msg)
+    attr(ret, 'severity') <- switch(
+        attr(level, 'level', exact = TRUE),
+        'FATAL' = 'CRITICAL',
+        'ERROR' = 'ERR',
+        'WARN' = 'WARNING',
+        'SUCCESS' = 'NOTICE',
+        'INFO' = 'INFO',
+        'DEBUG' = 'DEBUG',
+        'TRACE' = 'DEBUG')
     return(ret)
   },
   generator = quote(layout_syslognet())
 )
+#nocov end
