@@ -114,12 +114,15 @@
 <p>For most cases, it’s enough to load the package and use the functions with the <code>log</code> prefix to log important and not so important messages, for example:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">logger</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Loading data'</span>)
+<span class="co">#&gt; INFO [2021-03-03 22:44:54] Loading data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The dataset includes {nrow(mtcars)} rows'</span>)
+<span class="co">#&gt; INFO [2021-03-03 22:44:54] The dataset includes 32 rows</span>
 <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">mtcars</span>$<span class="no">hp</span>) <span class="kw">&lt;</span> <span class="fl">1000</span>) {
     <span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span>)
     <span class="fu"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span>)
-}</pre></body></html></div>
+}
+<span class="co">#&gt; WARN [2021-03-03 22:44:54] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></pre></body></html></div>
 <p>Interestingly, the most powerful car was not being logged – because by default the <code>logger</code> prints messages with at least the <code>INFO</code> log level:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span>()
 <span class="co">#&gt; [1] 400</span>
@@ -131,17 +134,22 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span>(<span class="no">TRACE</span>)</pre></body></html></div>
 <p>The rerunning the above code chunk:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'Loading data'</span>)
+<span class="co">#&gt; INFO [2021-03-03 22:44:54] Loading data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'The dataset includes {nrow(mtcars)} rows'</span>)
+<span class="co">#&gt; INFO [2021-03-03 22:44:54] The dataset includes 32 rows</span>
 <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">mtcars</span>$<span class="no">hp</span>) <span class="kw">&lt;</span> <span class="fl">1000</span>) {
     <span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span>)
     <span class="fu"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span>)
-}</pre></body></html></div>
+}
+<span class="co">#&gt; WARN [2021-03-03 22:44:54] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span>
+<span class="co">#&gt; DEBUG [2021-03-03 22:44:54] The most powerful car is Maserati Bora with 335 hp</span></pre></body></html></div>
 <p>You may also find the <code><a href="../reference/log_eval.html">?log_eval</a></code> function useful to log both an R expression and its result in the same log record:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">f</span> <span class="kw">&lt;-</span> <span class="no">sqrt</span>
 <span class="no">g</span> <span class="kw">&lt;-</span> <span class="no">mean</span>
 <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">1</span>:<span class="fl">31</span>
 <span class="fu"><a href="../reference/log_eval.html">log_eval</a></span>(<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu">f</span>(<span class="fu">g</span>(<span class="no">x</span>)), <span class="kw">level</span> <span class="kw">=</span> <span class="no">INFO</span>)
+<span class="co">#&gt; INFO [2021-03-03 22:44:54] 'y &lt;- f(g(x))' =&gt; '4'</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">y</span>)
 <span class="co">#&gt;  num 4</span></pre></body></html></div>
 <p>For more details, check the <a href="https://daroczig.github.io/logger/reference/index.html">function reference in the manual</a>, or start with the <a href="https://daroczig.github.io/logger/articles/anatomy.html">The Anatomy of a Log Request</a> and <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a> vignettes.</p>
