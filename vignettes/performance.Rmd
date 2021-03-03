@@ -107,11 +107,3 @@ microbenchmark(async(), times = 1e3)
 ```
 
 Please note that although this ~0.6 ms is significantly higher than the ~0.15 ms we achieved above with the `sprintf` formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad. If you need even higher throughput, then a custom `appender_async` without checking on the background process and potentially a faster message queue can bring this even below to 200 µs.
-
-```{r cleanup, include = FALSE}
-## restore settings
-log_threshold(oldconf$threshold)
-log_layout(oldconf$layout)
-log_formatter(oldconf$formatter)
-log_appender(oldconf$appender)
-```

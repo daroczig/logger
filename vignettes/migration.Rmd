@@ -424,16 +424,16 @@ Creating objects is the `log4r` way of handling multiple log environments, while
 
 Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=loggit) -- capturing `message`, `warning` and `stop` function messages, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to be used as message hooks feed `logger`.
 
-```{r echo=FALSE, results='hide'}
-detach('package:logger', unload = TRUE)
-detach('package:futile.logger', unload = TRUE)
-detach('package:logging', unload = TRUE)
-```
-
 ```{r cleanup, include = FALSE}
 ## restore settings
 log_threshold(oldconf$threshold)
 log_layout(oldconf$layout)
 log_formatter(oldconf$formatter)
 log_appender(oldconf$appender)
+```
+
+```{r echo=FALSE, results='hide'}
+detach('package:logger', unload = TRUE)
+detach('package:futile.logger', unload = TRUE)
+detach('package:logging', unload = TRUE)
 ```
