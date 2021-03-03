@@ -72,6 +72,16 @@ with_log_threshold({
 }, threshold = TRACE)
 ```
 
+You can also define your own log level(s) if needed, for example introducing an extra level between `DEBUG` and `INFO`:
+
+```{r}
+FYI <- structure(450L, level = 'FYI', class = c('loglevel', 'integer'))
+log_threshold(FYI)
+log_debug('ping')
+log_level(FYI, 'ping')
+log_info('pong')
+```
+
 ## Log namespaces
 
 By default, all log messages will be processed by the global `logger` definition, but you may also use custom namespaces (eg to deliver specific log records to a special destination or to apply a custom log level threshold) and even multiple loggers as well within the very same namespace (eg to deliver all `INFO` and above log levels in the console and everything below that to a trace log file).
@@ -221,7 +231,7 @@ For more details on this, see the [Writing custom logger extensions](https://dar
 ## reset layout
 log_layout(layout_simple)
 ```
-    
+
 ## Delivering log records to their destination
 
 By default, `logger` will write to the console or `stdout` via the `?appender_console` function:
@@ -264,7 +274,7 @@ You may find `?appender_tee` also useful, that writes the log messages to both `
 log_appender(appender_console)
 ```
 
-And the are many other appender functions bundled with `logger` as well, eg some writing to Syslog, Telegram, Pushbullet, a database table or an Amazon Kinesis stream -- even doing that asynchronously via `appender_async` -- see [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) for more details. 
+And the are many other appender functions bundled with `logger` as well, eg some writing to Syslog, Telegram, Pushbullet, a database table or an Amazon Kinesis stream -- even doing that asynchronously via `appender_async` -- see [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) for more details.
 
 ## Stacking loggers
 
