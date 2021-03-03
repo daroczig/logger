@@ -345,8 +345,9 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
     log_trace(paste('Async writer PID:', async_writer_process$get_pid()), namespace = 'async_logger')
 
     ## load minimum required packages
-    async_writer_process$run(function() require('logger'))
-    async_writer_process$run(function() require('txtq'))
+    async_writer_process$run(function() source(system.file(
+        'load-packages-in-background-process.R',
+        package = 'logger')))
     async_writer_process$run(init)
 
     ## connect to the message queue
