@@ -77,7 +77,7 @@ vector <- function() log_info(paste('hi', 1:5))
 microbenchmark(string(), vector(), dynamic(), times = 1e3)
 #> Unit: microseconds
 #>       expr     min       lq     mean   median       uq      max neval cld
-#>   string() 110.192 118.4850 148.5848 137.1825 152.7275 1312.903  1000  a 
+#>   string() 110.192 118.4850 148.5848 137.1825 152.7275 1312.903  1000  a
 #>   vector() 129.111 136.8245 168.9274 155.5840 172.6795 3230.528  1000   b
 #>  dynamic() 116.347 124.7620 159.1570 143.2140 160.5040 4397.640  1000  ab
 ```
@@ -107,3 +107,11 @@ microbenchmark(async(), times = 1e3)
 ```
 
 Please note that although this ~0.6 ms is significantly higher than the ~0.15 ms we achieved above with the `sprintf` formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad. If you need even higher throughput, then a custom `appender_async` without checking on the background process and potentially a faster message queue can bring this even below to 200 µs.
+
+```{r cleanup, include = FALSE}
+## restore settings
+log_threshold(oldconf$threshold)
+log_layout(oldconf$layout)
+log_formatter(oldconf$formatter)
+log_appender(oldconf$appender)
+```

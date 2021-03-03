@@ -1,6 +1,6 @@
 # logger 0.2.9000 (development)
 
-# logger 0.2.0 (2020-11-17
+# logger 0.2.0 (2021-03-03)
 
 ## Breaking changes
 

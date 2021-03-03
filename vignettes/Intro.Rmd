@@ -12,6 +12,16 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(logger)
+## backup settings
+oldconf <- list(
+    threshold = log_threshold(),
+    layout = log_layout(),
+    formatter = log_formatter(),
+    appender = log_appender())
+## knitr not picking up stderr
+log_appender(appender_stdout)
 ```
 
 If you are not only using R in the interactive console for ad-hoc data analysis, but running eg batch jobs (for ETL, reporting, modeling, forecasting etc) as well, then logging the status(changes) of your script is a must so that later on you can review / debug what have happened.
@@ -64,3 +74,11 @@ str(y)
 ```
 
 For more details, check the [function reference in the manual](https://daroczig.github.io/logger/reference/index.html), or start with the [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes.
+
+```{r cleanup, include = FALSE}
+## restore settings
+log_threshold(oldconf$threshold)
+log_layout(oldconf$layout)
+log_formatter(oldconf$formatter)
+log_appender(oldconf$appender)
+```

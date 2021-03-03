@@ -39,6 +39,14 @@ knitr::opts_chunk$set(
 
 ## load the main package first
 library(logger)
+## backup settings
+oldconf <- list(
+    threshold = log_threshold(),
+    layout = log_layout(),
+    formatter = log_formatter(),
+    appender = log_appender())
+## knitr not picking up stderr
+log_appender(appender_stdout)
 ```
 
 In this vignette I suppose that you are already familiar with at least one of the [similar logging R packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package) and you are looking for suggestions on how to switch to `logger`. Before moving forward, please make sure that you have read the [Introduction to logger](https://daroczig.github.io/logger/articles/Intro.html), [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes for a decent background on `logger`, and use this vignette as a quick-reference sheet to help you migrate from another package.
@@ -98,7 +106,7 @@ flog.info('hi again')
 <div class="comparison"><package>logger</package>
 ```{r}
 log_layout(layout_json())
- 
+
 log_info('hi again')
 ```
 </div>
@@ -203,7 +211,7 @@ basicConfig()
 <div class="comparison"><package>logger</package>
 ```{r}
 library(logger)
- 
+
 ```
 </div>
 
@@ -247,7 +255,7 @@ levels <- mget(ls(
     envir = environment(logger), pattern = '^[A-Z]'),
     envir = environment(logger))
 str(levels[order(-as.numeric(levels))], give.attr = FALSE)
- 
+
 ```
 </div>
 
@@ -420,4 +428,12 @@ Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=l
 detach('package:logger', unload = TRUE)
 detach('package:futile.logger', unload = TRUE)
 detach('package:logging', unload = TRUE)
+```
+
+```{r cleanup, include = FALSE}
+## restore settings
+log_threshold(oldconf$threshold)
+log_layout(oldconf$layout)
+log_formatter(oldconf$formatter)
+log_appender(oldconf$appender)
 ```
