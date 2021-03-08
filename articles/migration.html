@@ -154,16 +154,16 @@ div#tocnav ul.nav li ul {
 <div class="comparison">
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi there</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.warn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN [2021-03-03 22:45:00] watch out</span></pre></body></html></div>
+<span class="co">#&gt; WARN [2021-03-08 18:52:07] watch out</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi there</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi there</span>
 <span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN [2021-03-03 22:45:00] watch out</span></pre></body></html></div>
+<span class="co">#&gt; WARN [2021-03-08 18:52:07] watch out</span></pre></body></html></div>
 </div>
 <p>As you can see above, the default layout of the messages is exactly the same.</p>
 </div>
@@ -181,14 +181,14 @@ div#tocnav ul.nav li ul {
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.layout.html">flog.layout</a></span>(<span class="no">layout.json</span>)
 <span class="co">#&gt; NULL</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi again'</span>)
-<span class="co">#&gt; {"level":"INFO","timestamp":"2021-03-03 22:45:00 +0000","message":"hi again","func":"tryCatch"}</span></pre></body></html></div>
+<span class="co">#&gt; {"level":"INFO","timestamp":"2021-03-08 18:52:07 +0000","message":"hi again","func":"tryCatch"}</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="fu"><a href="../reference/layout_json.html">layout_json</a></span>())
 
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi again'</span>)
-<span class="co">#&gt; {"time":"2021-03-03 22:45:00","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-32600d7e-aef4-4929-a1f9-704cb21e562d","arch":"x86_64","os_name":"Linux","os_release":"4.15.0-1028-gcp","os_version":"#29~16.04.1-Ubuntu SMP Tue Feb 12 16:31:10 UTC 2019","pid":19749,"user":"travis","msg":"hi again"}</span></pre></body></html></div>
+<span class="co">#&gt; {"time":"2021-03-08 18:52:07","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"travis-job-334d034d-5fdb-420d-831f-e783a505e8be","arch":"x86_64","os_name":"Linux","os_release":"4.15.0-1028-gcp","os_version":"#29~16.04.1-Ubuntu SMP Tue Feb 12 16:31:10 UTC 2019","pid":20159,"user":"travis","msg":"hi again"}</span></pre></body></html></div>
 </div>
 <p>As you can see, <code>logger</code> provided a bit more information about the log request compared to <code>futile.logger</code>, but it’s easy to change the list of fields to be used in the JSON – see <code><a href="../reference/get_logger_meta_variables.html">?get_logger_meta_variables</a></code> for a complete list of variable names to be passed to <code><a href="../reference/layout_json.html">?layout_json</a></code>. <code>logger</code> also ships a lot more layouts, eg <code><a href="../reference/layout_glue_colors.html">?layout_glue_colors</a></code> or roll out your own via the <code><a href="../reference/layout_glue_generator.html">?layout_glue_generator</a></code> factory function.</p>
 </div>
@@ -199,26 +199,26 @@ div#tocnav ul.nav li ul {
 <div class="comparison">
 <p><package>futile.logger</package></p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi 42</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>))
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi 42</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/futile.logger/man/flog.logger.html">flog.info</a></span>(<span class="kw pkg">glue</span><span class="kw ns">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi 42</span></pre></body></html></div>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi 42</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi</span>
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi {84/2}'</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi 42</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi 42</span>
 <span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_sprintf</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi 42</span>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi 42</span>
 <span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_paste</span>)
 <span class="fu"><a href="../reference/log_level.html">log_info</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
-<span class="co">#&gt; INFO [2021-03-03 22:45:00] hi 42</span></pre></body></html></div>
+<span class="co">#&gt; INFO [2021-03-08 18:52:07] hi 42</span></pre></body></html></div>
 </div>
 <p>It’s easy to change this default formatter in both packages: use <code>flog.layout</code> handles this as well in <code>futile.logger</code>, while the formatter is separated from the layout function in <code>logger</code>, so check <code><a href="../reference/log_formatter.html">?log_formatter</a></code> instead. <code>logger</code> ships with a bit more formatter functions, eg the default <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code> and <code><a href="../reference/formatter_glue_or_sprintf.html">?formatter_glue_or_sprintf</a></code> that tries to combine the best from both words.</p>
 </div>
@@ -295,9 +295,9 @@ div#tocnav ul.nav li ul {
 <div class="comparison">
 <p><package>logging</package></p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi there'</span>)
-<span class="co">#&gt; 2021-03-03 22:45:00 INFO::hi there</span>
+<span class="co">#&gt; 2021-03-08 18:52:08 INFO::hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">logwarn</a></span>(<span class="st">'watch out'</span>)
-<span class="co">#&gt; 2021-03-03 22:45:00 WARNING::watch out</span></pre></body></html></div>
+<span class="co">#&gt; 2021-03-08 18:52:08 WARNING::watch out</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
@@ -367,7 +367,7 @@ div#tocnav ul.nav li ul {
 <span class="co">#&gt;         msg, sep = ":"))</span>
 <span class="co">#&gt;     return(text)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x63bdfc8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x69a7e40&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:logging&gt;</span></pre></body></html></div>
 </div>
 <div class="comparison">
@@ -384,13 +384,13 @@ div#tocnav ul.nav li ul {
 <div class="comparison">
 <p><package>logging</package></p>
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi'</span>)
-<span class="co">#&gt; 2021-03-03 22:45:00 INFO::hi</span>
+<span class="co">#&gt; 2021-03-08 18:52:08 INFO::hi</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="st">'hi %s'</span>, <span class="fl">84</span>/<span class="fl">2</span>)
-<span class="co">#&gt; 2021-03-03 22:45:00 INFO::hi 42</span>
+<span class="co">#&gt; 2021-03-08 18:52:08 INFO::hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">'hi'</span>, <span class="fl">84</span>/<span class="fl">2</span>))
-<span class="co">#&gt; 2021-03-03 22:45:00 INFO::hi 42</span>
+<span class="co">#&gt; 2021-03-08 18:52:08 INFO::hi 42</span>
 <span class="fu"><a href="https://rdrr.io/pkg/logging/man/logging-entrypoints.html">loginfo</a></span>(<span class="kw pkg">glue</span><span class="kw ns">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">'hi {84/2}'</span>))
-<span class="co">#&gt; 2021-03-03 22:45:00 INFO::hi 42</span></pre></body></html></div>
+<span class="co">#&gt; 2021-03-08 18:52:08 INFO::hi 42</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
@@ -488,9 +488,9 @@ div#tocnav ul.nav li ul {
 <div class="comparison">
 <p><package>log4r</package></p>
 <div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">info</a></span>(<span class="no">logger</span>, <span class="st">'hi there'</span>)
-<span class="co">#&gt; INFO  [2021-03-03 22:45:00] hi there</span>
+<span class="co">#&gt; INFO  [2021-03-08 18:52:08] hi there</span>
 <span class="fu"><a href="https://rdrr.io/pkg/log4r/man/levellog.html">warn</a></span>(<span class="no">logger</span>, <span class="st">'watch out'</span>)
-<span class="co">#&gt; WARN  [2021-03-03 22:45:00] watch out</span></pre></body></html></div>
+<span class="co">#&gt; WARN  [2021-03-08 18:52:08] watch out</span></pre></body></html></div>
 </div>
 <div class="comparison">
 <p><package>logger</package></p>
