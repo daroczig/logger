@@ -17,6 +17,9 @@ formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys
 #' @export
 #' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    if (is.null(fmt) || length(fmt) == 0) {
+        fmt <- ''
+    }
     eval(sprintf(fmt, ...), envir = .topenv)
 }, generator = quote(formatter_sprintf()))
 
@@ -76,6 +79,10 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
     sprintfparams <- which(names(params) == '')
     if (length(params) > 0 & length(sprintfparams) == 0) {
         sprintfparams <- seq_along(params)
+    }
+    if (is.null(msg) || length(msg) == 0) {
+        msg <- ''
+        # no need to touch params, both glue and sprintf handle missing placeholders
     }
 
     ## but some unnamed params might belong to glue actually, so
