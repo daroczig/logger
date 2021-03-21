@@ -20,7 +20,7 @@ test_that('except helper', {
 test_that('validate_log_level', {
     expect_equal(logger:::validate_log_level(ERROR), ERROR)
     expect_equal(logger:::validate_log_level('ERROR'), ERROR)
-    expect_error(logger:::validate_log_level('FOOBAR'))
+    expect_error(logger:::validate_log_level('FOOBAR'), 'log level')
 })
 
 ## reset settings
