@@ -351,7 +351,7 @@ validate_log_level <- function(level) {
     if (is.character(level) & level %in% log_levels_supported) {
         return(get(level))
     }
-    stop('Invalid log level', )
+    stop('Invalid log level')
 }
 
 
