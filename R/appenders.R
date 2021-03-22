@@ -8,12 +8,35 @@
 #' appender_stderr(lines)
 #' @seealso This is a \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_stdout}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
 appender_console <- structure(function(lines) {
-    cat(lines, file = stderr(), sep = '\n')
+    no_colorout(cat(lines, file = stderr(), sep = '\n'))
 }, generator = quote(appender_console()))
 
 
 #' @export
 appender_stderr <- appender_console
+
+
+#' Evaluates an expression with colorout off
+#'
+#' @param ex An expression.
+#'
+#' @return The value from the evaluated expression.
+#'
+#' @noRd
+no_colorout <- function(ex){
+
+    # to satisfy R CMD check:
+    isColorOut <- noColorOut <- ColorOut <- NULL
+
+    colorout_active <- 'colorout' %in% .packages() && isColorOut()
+
+    if(colorout_active) noColorOut()
+    result <- eval(ex)
+    if(colorout_active) ColorOut()
+
+    invisible(result)
+
+}
 
 
 #' Append log record to stdout
