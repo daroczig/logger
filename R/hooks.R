@@ -92,6 +92,7 @@ log_errors <- function() {
 #' @export
 #' @param input passed from Shiny's \code{server}
 #' @param level log level
+#' @param excluded_inputs character vector of input names to exclude from logging
 #' @importFrom utils assignInMyNamespace assignInNamespace
 #' @examples \dontrun{
 #' library(shiny)
@@ -101,12 +102,13 @@ log_errors <- function() {
 #'     numericInput('sd', 'sd', 1),
 #'     textInput('title', 'title', 'title'),
 #'     textInput('foo', 'This is not used at all, still gets logged', 'foo'),
+#'     passwordInput('password', 'Password not to be logged', 'secret'),
 #'     plotOutput('plot')
 #' )
 #'
 #' server <- function(input, output) {
 #'
-#'     logger::log_shiny_input_changes(input)
+#'     logger::log_shiny_input_changes(input, excluded_inputs = 'password')
 #'
 #'     output$plot <- renderPlot({
 #'         hist(rnorm(1e3, input$mean, input$sd), main = input$title)
@@ -116,7 +118,7 @@ log_errors <- function() {
 #'
 #' shinyApp(ui = ui, server = server)
 #' }
-log_shiny_input_changes <- function(input, level = INFO) {
+log_shiny_input_changes <- function(input, level = INFO, excluded_inputs = character()) {
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
@@ -134,6 +136,7 @@ log_shiny_input_changes <- function(input, level = INFO) {
         old_input_values <- shiny_input_values
         new_input_values <- shiny::reactiveValuesToList(input)
         names <- unique(c(names(old_input_values), names(new_input_values)))
+        names <- setdiff(names, excluded_inputs)
         for (name in names) {
             old <- old_input_values[name]
             new <- new_input_values[name]

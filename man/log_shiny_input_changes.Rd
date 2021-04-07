@@ -4,12 +4,14 @@
 \alias{log_shiny_input_changes}
 \title{Auto logging input changes in Shiny app}
 \usage{
-log_shiny_input_changes(input, level = INFO)
+log_shiny_input_changes(input, level = INFO, excluded_inputs = character())
 }
 \arguments{
 \item{input}{passed from Shiny's \code{server}}
 
 \item{level}{log level}
+
+\item{excluded_inputs}{character vector of input names to exclude from logging}
 }
 \description{
 This is to be called in the \code{server} section of the Shiny app.
@@ -23,12 +25,13 @@ ui <- bootstrapPage(
     numericInput('sd', 'sd', 1),
     textInput('title', 'title', 'title'),
     textInput('foo', 'This is not used at all, still gets logged', 'foo'),
+    passwordInput('password', 'Password not to be logged', 'secret')
     plotOutput('plot')
 )
 
 server <- function(input, output) {
 
-    logger::log_shiny_input_changes(input)
+    logger::log_shiny_input_changes(input, excluded_inputs = 'password')
 
     output$plot <- renderPlot({
         hist(rnorm(1e3, input$mean, input$sd), main = input$title)
