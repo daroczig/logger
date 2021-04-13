@@ -4,18 +4,30 @@
 \alias{appender_tee}
 \title{Append log messages to a file and stdout as well}
 \usage{
-appender_tee(file, append = TRUE)
+appender_tee(
+  file,
+  append = TRUE,
+  max_lines = Inf,
+  max_bytes = Inf,
+  max_files = 1L
+)
 }
 \arguments{
 \item{file}{path}
 
 \item{append}{boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending}
+
+\item{max_lines}{numeric specifying the maximum number of lines allowed in a file before rotating}
+
+\item{max_bytes}{numeric specifying the maximum number of bytes allowed in a file before rotating}
+
+\item{max_files}{integer specifying the maximum number of files to be used in rotation}
 }
 \value{
 function taking \code{lines} argument
 }
 \description{
-Append log messages to a file and stdout as well
+This appends log messages to both console and a file. The same rotation options are available as in \code{appender_file()}.
 }
 \seealso{
 This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
