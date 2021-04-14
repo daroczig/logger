@@ -27,7 +27,7 @@ appender_tee(
 function taking \code{lines} argument
 }
 \description{
-This appends log messages to both console and a file. The same rotation options are available as in \code{appender_file()}.
+This appends log messages to both console and a file. The same rotation options are available as in \code{\link{appender_file}}.
 }
 \seealso{
 This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
