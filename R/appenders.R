@@ -138,16 +138,21 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
 
 
 #' Append log messages to a file and stdout as well
+#'
+#' This appends log messages to both console and a file. The same rotation options are available as in \code{\link{appender_file}}.
 #' @inheritParams appender_file
 #' @export
 #' @return function taking \code{lines} argument
 #' @seealso This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_slack}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
-appender_tee <- function(file, append = TRUE) {
+appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
     force(append)
+    force(max_lines)
+    force(max_bytes)
+    force(max_files)
     structure(
         function(lines) {
             appender_console(lines)
-            appender_file(file)(lines)
+            appender_file(file, append, max_lines, max_bytes, max_files)(lines)
         }, generator = deparse(match.call()))
 }
 
