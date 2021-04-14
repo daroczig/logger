@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Append log messages to a file and stdout as well — appender_tee" />
-<meta property="og:description" content="Append log messages to a file and stdout as well" />
+<meta property="og:description" content="This appends log messages to both console and a file. The same rotation options are available as in appender_file." />
 
 
 
@@ -147,10 +147,16 @@
     </div>
 
     <div class="ref-description">
-    <p>Append log messages to a file and stdout as well</p>
+    <p>This appends log messages to both console and a file. The same rotation options are available as in <code><a href='appender_file.html'>appender_file</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>appender_tee</span>(<span class='no'>file</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>appender_tee</span>(
+  <span class='no'>file</span>,
+  <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>max_lines</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>max_bytes</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>max_files</span> <span class='kw'>=</span> <span class='fl'>1L</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +168,18 @@
     <tr>
       <th>append</th>
       <td><p>boolean passed to <code>cat</code> defining if the file should be overwritten with the most recent log message instead of appending</p></td>
+    </tr>
+    <tr>
+      <th>max_lines</th>
+      <td><p>numeric specifying the maximum number of lines allowed in a file before rotating</p></td>
+    </tr>
+    <tr>
+      <th>max_bytes</th>
+      <td><p>numeric specifying the maximum number of bytes allowed in a file before rotating</p></td>
+    </tr>
+    <tr>
+      <th>max_files</th>
+      <td><p>integer specifying the maximum number of files to be used in rotation</p></td>
     </tr>
     </table>
 
