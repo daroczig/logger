@@ -1,5 +1,11 @@
 # logger 0.2.9000 (development)
 
+# logger 0.2.1 (2021-07-06)
+
+Maintenance release:
+
+* update `appender_slack` to use `slackr_msg` instead of `text_slackr`
+
 # logger 0.2.0 (2021-03-03)
 
 ## Breaking changes
