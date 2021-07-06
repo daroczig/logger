@@ -25,7 +25,7 @@ ui <- bootstrapPage(
     numericInput('sd', 'sd', 1),
     textInput('title', 'title', 'title'),
     textInput('foo', 'This is not used at all, still gets logged', 'foo'),
-    passwordInput('password', 'Password not to be logged', 'secret')
+    passwordInput('password', 'Password not to be logged', 'secret'),
     plotOutput('plot')
 )
 

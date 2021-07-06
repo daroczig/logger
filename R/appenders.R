@@ -173,7 +173,7 @@ appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
                            api_token    = Sys.getenv('SLACK_API_TOKEN'),
                            preformatted = TRUE) {
 
-    fail_on_missing_package('slackr')
+    fail_on_missing_package('slackr', '1.4.1')
     force(channel)
     force(username)
     force(icon_emoji)
@@ -182,8 +182,9 @@ appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
 
     structure(
         function(lines) {
-            slackr::text_slackr(text = lines, channel = channel, username = username,
-                        icon_emoji = icon_emoji, api_token = api_token, preformatted = preformatted)
+            slackr::slackr_msg(
+                text = lines, channel = channel, username = username,
+                icon_emoji = icon_emoji, token = api_token, preformatted = preformatted)
         }, generator = deparse(match.call()))
 
 }
@@ -340,7 +341,7 @@ appender_kinesis <- function(stream) {
 #' log_info('Logging in the background to {t}')
 #' my_appender <- appender_async(appender_file_slow(file = t))
 #'
-#' ## use async appander
+#' ## use async appender
 #' log_appender(my_appender)
 #' log_info('Was this slow?')
 #' system.time(for (i in 1:25) log_info(i))

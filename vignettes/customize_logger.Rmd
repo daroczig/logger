@@ -196,7 +196,6 @@ f <- function(x) {
     log_success('with the mean of {mean(x)}')
     mean(x)
 }
-
 library(parallel)
 mclapply(split(runif(100), 1:10), f, mc.cores = 5)
 #> nevermind/26448/R_GlobalEnv/FUN 2018-12-02 21:54:11 INFO: received 10 values

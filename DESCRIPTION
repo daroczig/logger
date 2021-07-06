@@ -20,7 +20,7 @@ Suggests:
   pander,
   jsonlite,
   crayon,
-  slackr,
+  slackr (>= 1.4.1),
   RPushbullet,
   telegram,
   testthat,

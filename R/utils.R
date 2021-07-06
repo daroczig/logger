@@ -1,13 +1,15 @@
 #' Check if R package can be loaded and fails loudly otherwise
 #' @param pkg string
+#' @param min_version optional minimum version needed
 #' @export
+#' @importFrom utils packageVersion compareVersion
 #' @examples \dontrun{
 #' f <- function() fail_on_missing_package('foobar')
 #' f()
 #' g <- function() fail_on_missing_package('stats')
 #' g()
 #' }
-fail_on_missing_package <- function(pkg) {
+fail_on_missing_package <- function(pkg, min_version) {
     pc <- sys.call(which = 1)
     if (!requireNamespace(pkg, quietly = TRUE)) {
         stop(sprintf(
@@ -15,6 +17,16 @@ fail_on_missing_package <- function(pkg) {
             shQuote(pkg),
             deparse(pc[[1]])),
             call. = FALSE)
+    }
+    if (!missing(min_version)) {
+        if (compareVersion(min_version, as.character(packageVersion(pkg))) == 1) {
+            stop(sprintf(
+                'Please install min. %s version of %s to use %s',
+                min_version,
+                pkg,
+                deparse(pc[[1]])),
+                call. = FALSE)
+        }
     }
 }
 

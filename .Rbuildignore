@@ -10,3 +10,5 @@ logo.R
 cran-comments.md
 .covrignore
 dev-resources
+^doc$
+^Meta$

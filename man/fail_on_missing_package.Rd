@@ -4,10 +4,12 @@
 \alias{fail_on_missing_package}
 \title{Check if R package can be loaded and fails loudly otherwise}
 \usage{
-fail_on_missing_package(pkg)
+fail_on_missing_package(pkg, min_version)
 }
 \arguments{
 \item{pkg}{string}
+
+\item{min_version}{optional minimum version needed}
 }
 \description{
 Check if R package can be loaded and fails loudly otherwise

@@ -48,7 +48,7 @@ t <- tempfile()
 log_info('Logging in the background to {t}')
 my_appender <- appender_async(appender_file_slow(file = t))
 
-## use async appander
+## use async appender
 log_appender(my_appender)
 log_info('Was this slow?')
 system.time(for (i in 1:25) log_info(i))
