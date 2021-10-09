@@ -224,7 +224,7 @@ mclapply(split(runif(100), 1:10), f, mc.cores = 5)
 
 ```{r}
 log_layout()
-````
+```
 
 For more details on this, see the [Writing custom logger extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html) vignette.
 

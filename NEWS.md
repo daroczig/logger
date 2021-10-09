@@ -1,5 +1,11 @@
 # logger 0.2.9000 (development)
 
+# logger 0.2.2 (2021-10-10)
+
+Maintenance release:
+
+* fix unbalanced code chunk delimiters in vignette (yihui/knitr#2057)
+
 # logger 0.2.1 (2021-07-06)
 
 Maintenance release:
