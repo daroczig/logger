@@ -14,7 +14,7 @@ test_that('async logging', {
     log_appender(my_appender)
     log_layout(layout_blank)
     for (i in 1:5) log_info(i)
-    Sys.sleep(0.1)
+    Sys.sleep(0.25)
     expect_equal(readLines(t)[1], '1')
     expect_equal(length(readLines(t)), 5)
     unlink(t)
