@@ -84,10 +84,18 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @examples
 #' log_separator()
 #' log_separator(ERROR, separator = '!', width = 60)
+#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' log_layout(logger)
+#' log_separator(ERROR, separator = '!', width = 80)
+#' log_layout(layout_blank)
+#' log_separator(ERROR, separator = '!', width = 80)
 #' @seealso \code{\link{log_with_separator}}
 log_separator <- function(level = INFO, namespace = NA_character_, separator = '=', width = 80) {
+
+    base_info_chars <- nchar(catch_base_log(level, namespace))
+
     log_level(
-        paste(rep(separator, width - 23 - nchar(attr(level, 'level'))), collapse = ''),
+        paste(rep(separator, max(0, width - base_info_chars)), collapse = ''),
         level = level,
         namespace = namespace)
 }
@@ -109,17 +117,24 @@ log_separator <- function(level = INFO, namespace = NA_character_, separator = '
 #'   'eventually wrap into a multi-line message for our quite nice demo :wow:'),
 #'   width = 60)
 #' log_with_separator('Boo!', level = FATAL)
+#' log_layout(layout_blank)
+#' log_with_separator('Boo!', level = FATAL)
+#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' log_layout(logger)
+#' log_with_separator('Boo!', level = FATAL, width = 120)
 #' @seealso \code{\link{log_separator}}
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
+
+    base_info_chars <- nchar(capture.output(log_level(level = level, namespace = namespace), type = "message"))
 
     log_separator(level = level, separator = separator, width = width, namespace = namespace)
 
     message <- do.call(eval(log_formatter()), list(...))
-    message <- strwrap(message, width - 23 - nchar(attr(level, 'level')) - 4)
+    message <- strwrap(message, max(0, width - base_info_chars - 4))
     message <- sapply(message, function(m) {
         paste0(
             separator, ' ', m,
-            paste(rep(' ', width - 23 - nchar(attr(level, 'level')) - 4 - nchar(m)), collapse = ''),
+            paste(rep(' ', max(0, width - base_info_chars - 4 - nchar(m))), collapse = ''),
             ' ', separator)
     })
     log_level(skip_formatter(message), level = level, namespace = namespace)
@@ -131,7 +146,7 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 
 #' Tic-toc logging
 #' @param ... passed to \code{log_level}
-#' @param level x
+#' @param level see \code{\link{log_levels}}
 #' @param namespace x
 #' @export
 #' @examples \dontrun{
@@ -158,7 +173,7 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
     tictoc <- difftime(toc, tic)
 
     log_level(paste(ns, 'timer',
-                    ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
+                    if (round(tictoc, 2) == 0) 'tic' else 'toc',
                     round(tictoc, 2), attr(tictoc, 'units') , '-- '),
               ..., level = level, namespace = namespace)
 

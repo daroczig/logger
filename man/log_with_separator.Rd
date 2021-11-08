@@ -38,6 +38,11 @@ log_with_separator(paste(
   'eventually wrap into a multi-line message for our quite nice demo :wow:'),
   width = 60)
 log_with_separator('Boo!', level = FATAL)
+log_layout(layout_blank)
+log_with_separator('Boo!', level = FATAL)
+logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+log_layout(logger)
+log_with_separator('Boo!', level = FATAL, width = 120)
 }
 \seealso{
 \code{\link{log_separator}}

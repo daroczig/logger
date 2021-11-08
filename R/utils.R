@@ -54,3 +54,20 @@ deparse_to_one_line <- function(x) {
          paste(deparse(x), collapse = ' '),
          perl = TRUE)
 }
+
+#' Catch the log header
+#' @return string
+#' @keywords internal
+#' @param level see \code{\link{log_levels}}
+#' @param namespace string
+catch_base_log <- function(level, namespace) {
+    res <- suppressMessages(capture.output(log_level(level = level,
+                                                     namespace = namespace),
+                                           type = "message"))
+    if (length(res) == 0) {
+        res <- capture.output(log_level(level = level,
+                                        namespace = namespace),
+                              type = "output")
+    }
+    res
+}

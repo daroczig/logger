@@ -67,11 +67,50 @@ fallback_namespace <- function(namespace) {
     namespace
 }
 
+#' Base Logging Function
+#' @param fun_name string a full name of log function
+#' @param arg see \code{\link{log_levels}}
+#' @param namespace logger namespace
+#' @param index index of the logger within the namespace
+#' @return currently set or return log function property
+#' @keywords internal
+log_base <- function(fun_name, arg, namespace, index) {
 
-## TODO DRY the below 4 functions
+    if (length(namespace) > 1) {
+        for (ns in namespace) {
+            log_base(fun_name, arg, ns, index)
+        }
+        return(invisible())
+    }
+
+    fun_name_base <- strsplit(fun_name, "_")[[1]][2]
+
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    config  <- configs[[min(index, length(configs))]]
+
+    if (fun_name_base == "threshold") {
+      if (is.null(arg)) {
+        return(config[[fun_name_base]])
+      }
+      config[[fun_name_base]] <- validate_log_level(arg)
+    } else {
+      if (is.null(arg)) {
+        res <- config[[fun_name_base]]
+        if (!is.null(attr(res, "generator"))) {
+          res <- parse(text = attr(res, "generator"))[[1]]
+        }
+        return(res)
+      }
+
+      config[[fun_name_base]] <- arg
+    }
+
+    configs[[min(index, length(config) + 1)]] <- config
+    assign(namespace, configs, envir = namespaces)
+}
 
 #' Get or set log level threshold
-#' @param level see \code{\link{log_levels}}
+#' @param level see \code{\link{log_levels}}, default NULL
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set log level threshold
@@ -94,31 +133,16 @@ fallback_namespace <- function(namespace) {
 #' log_threshold(ERROR, namespace =  log_namespaces())
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
-log_threshold <- function(level, namespace = 'global', index = 1) {
-
-    if (length(namespace) > 1) {
-        for (ns in namespace) {
-            log_threshold(level, ns, index)
-        }
-        return(invisible())
-    }
-
-    configs <- get(fallback_namespace(namespace), envir = namespaces)
-    config  <- configs[[min(index, length(configs))]]
-
-    if (missing(level)) {
-        return(config$threshold)
-    }
-
-    config$threshold <- validate_log_level(level)
-    configs[[min(index, length(config) + 1)]] <- config
-    assign(namespace, configs, envir = namespaces)
-
+log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
+    fun_name <- deparse(sys.call()[[1]])
+    log_base(fun_name = fun_name, arg = level, namespace = namespace, index = index)
 }
 
 
 #' Get or set log record layout
-#' @param layout function defining the structure of a log record, eg \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+#' @param layout function defining the structure of a log record, eg
+#' \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}},
+#' \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}, default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -126,67 +150,28 @@ log_threshold <- function(level, namespace = 'global', index = 1) {
 #' log_info(42)
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
-log_layout <- function(layout, namespace = 'global', index = 1) {
-
-    if (length(namespace) > 1) {
-        for (ns in namespace) {
-            log_layout(layout, ns, index)
-        }
-        return(invisible())
-    }
-
-    configs <- get(fallback_namespace(namespace), envir = namespaces)
-    config  <- configs[[min(index, length(configs))]]
-
-    if (missing(layout)) {
-        layout <- config$layout
-        if (!is.null(attr(layout, 'generator'))) {
-            layout <- parse(text = attr(layout, 'generator'))[[1]]
-        }
-        return(layout)
-    }
-
-    config$layout <- layout
-    configs[[min(index, length(config) + 1)]] <- config
-    assign(namespace, configs, envir = namespaces)
-
+log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
+    fun_name <- deparse(sys.call()[[1]])
+    log_base(fun_name = fun_name, arg = layout, namespace = namespace, index = index)
 }
 
 
 #' Get or set log message formatter
-#' @param formatter function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @param formatter function defining how R objects are converted into a single string, eg
+#' \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}},
+#'  \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
-log_formatter <- function(formatter, namespace = 'global', index = 1) {
-
-    if (length(namespace) > 1) {
-        for (ns in namespace) {
-            log_formatter(formatter, ns, index)
-        }
-        return(invisible())
-    }
-
-    configs <- get(fallback_namespace(namespace), envir = namespaces)
-    config  <- configs[[min(index, length(configs))]]
-
-    if (missing(formatter)) {
-        formatter <- config$formatter
-        if (!is.null(attr(formatter, 'generator'))) {
-            formatter <- parse(text = attr(formatter, 'generator'))[[1]]
-        }
-        return(formatter)
-    }
-
-    config$formatter <- formatter
-    configs[[min(index, length(config) + 1)]] <- config
-    assign(namespace, configs, envir = namespaces)
-
+log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
+    fun_name <- deparse(sys.call()[[1]])
+    log_base(fun_name = fun_name, arg = formatter, namespace = namespace, index = index)
 }
 
 
 #' Get or set log record appender function
-#' @param appender function delivering a log record to the destination, eg \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}
+#' @param appender function delivering a log record to the destination, eg
+#' \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}, default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -205,30 +190,9 @@ log_formatter <- function(formatter, namespace = 'global', index = 1) {
 #' readLines(t)
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
-log_appender <- function(appender, namespace = 'global', index = 1) {
-
-    if (length(namespace) > 1) {
-        for (ns in namespace) {
-            log_appender(appender, ns, index)
-        }
-        return(invisible())
-    }
-
-    configs <- get(fallback_namespace(namespace), envir = namespaces)
-    config  <- configs[[min(index, length(configs))]]
-
-    if (missing(appender)) {
-        appender <- config$appender
-        if (!is.null(attr(appender, 'generator'))) {
-            appender <- parse(text = attr(appender, 'generator'))[[1]]
-        }
-        return(appender)
-    }
-
-    config$appender <- appender
-    configs[[min(index, length(config) + 1)]] <- config
-    assign(namespace, configs, envir = namespaces)
-
+log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
+    fun_name <- deparse(sys.call()[[1]])
+    log_base(fun_name = fun_name, arg = appender, namespace = namespace, index = index)
 }
 
 
@@ -238,7 +202,7 @@ log_appender <- function(appender, namespace = 'global', index = 1) {
 #' @importFrom utils getFromNamespace
 #' @param namespace override the default / auto-picked namespace with a custom string
 get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.frame()) {
-    namespace <- ifelse(is.na(namespace), top_env_name(.topenv), namespace)
+    namespace <- if (is.na(namespace)) top_env_name(.topenv) else namespace
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
@@ -304,14 +268,27 @@ log_namespaces <- function() {
 log_level <- function(level, ..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
+    log_arg <- list(...)
+
     ## guess namespace
     if (is.na(namespace)) {
         topenv    <- top_env_name(.topenv)
-        namespace <-  ifelse(topenv == 'R_GlobalEnv', 'global', topenv)
+        namespace <-  if (topenv == 'R_GlobalEnv') 'global' else topenv
     }
 
     definitions <- get_logger_definitions(namespace, .topenv = .topenv)
     level <- validate_log_level(level)
+
+    log_arg$level <- level
+    log_arg$.logcall <- .logcall
+    log_arg$.topcall  <- if(!is.null(.topcall)) {
+        .topcall
+    } else {
+        ## cannot pass NULL
+        NA
+    }
+    log_arg$.topenv <- .topenv
+    log_arg$namespace <- namespace
 
     for (definition in definitions) {
 
@@ -320,18 +297,6 @@ log_level <- function(level, ..., namespace = NA_character_,
         }
 
         log_fun <- do.call(logger, definition)
-        log_arg <- list(...)
-
-        log_arg$level <- level
-        log_arg$.logcall <- .logcall
-        log_arg$.topcall  <- if(!is.null(.topcall)) {
-            .topcall
-        } else {
-            ## cannot pass NULL
-            NA
-        }
-        log_arg$.topenv <- .topenv
-        log_arg$namespace <- namespace
 
         ## TODO try with match.call and replace [[1]]?
         do.call(log_fun, log_arg)

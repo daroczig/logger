@@ -26,6 +26,11 @@ Logs a long line to stand out from the console
 \examples{
 log_separator()
 log_separator(ERROR, separator = '!', width = 60)
+logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+log_layout(logger)
+log_separator(ERROR, separator = '!', width = 80)
+log_layout(layout_blank)
+log_separator(ERROR, separator = '!', width = 80)
 }
 \seealso{
 \code{\link{log_with_separator}}
