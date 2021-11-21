@@ -80,6 +80,8 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @inheritParams log_level
 #' @param separator character to be used as a separator
 #' @param width max width of message -- longer text will be wrapped into multiple lines
+#' @note The width could be improper when `log_layout` is not stable across environments.
+#' Additionally width could be longer than `width` if the `log_layout` is longer than it.
 #' @export
 #' @examples
 #' log_separator()

@@ -9,7 +9,10 @@ log_appender(appender_stdout)
 context('helpers')
 
 test_that('separator', {
-    expect_output(log_separator(), '===')
+    original_layout <- log_layout()
+    log_layout(layout_blank)
+    expect_output(log_separator(), '={80,80}')
+    log_layout(original_layout)
     expect_output(log_separator(separator = '-'), '---')
     expect_output(log_separator(), 'INFO')
     expect_output(log_separator(WARN), 'WARN')

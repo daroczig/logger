@@ -23,6 +23,10 @@ log_separator(
 \description{
 Logs a long line to stand out from the console
 }
+\note{
+The width could be improper when `log_layout` is not stable across environments.
+Additionally width could be longer than `width` if the `log_layout` is longer than it.
+}
 \examples{
 log_separator()
 log_separator(ERROR, separator = '!', width = 60)
