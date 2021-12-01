@@ -4,12 +4,19 @@
 \alias{log_shiny_input_changes}
 \title{Auto logging input changes in Shiny app}
 \usage{
-log_shiny_input_changes(input, level = INFO, excluded_inputs = character())
+log_shiny_input_changes(
+  input,
+  level = INFO,
+  namespace = NA_character_,
+  excluded_inputs = character()
+)
 }
 \arguments{
 \item{input}{passed from Shiny's \code{server}}
 
 \item{level}{log level}
+
+\item{namespace}{the name of the namespace}
 
 \item{excluded_inputs}{character vector of input names to exclude from logging}
 }
