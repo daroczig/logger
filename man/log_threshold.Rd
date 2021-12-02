@@ -7,7 +7,7 @@
 log_threshold(level = NULL, namespace = "global", index = 1)
 }
 \arguments{
-\item{level}{see \code{\link{log_levels}}, default NULL}
+\item{level}{see \code{\link{log_levels}}}
 
 \item{namespace}{logger namespace}
 

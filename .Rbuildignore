@@ -12,3 +12,5 @@ cran-comments.md
 dev-resources
 ^doc$
 ^Meta$
+^.*\.Rproj$
+^\.Rproj\.user$

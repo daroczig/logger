@@ -61,14 +61,11 @@ deparse_to_one_line <- function(x) {
 #' @param level see \code{\link{log_levels}}
 #' @param namespace string
 catch_base_log <- function(level, namespace) {
-    orginal_appender <- log_appender()
-    log_appender(appender_console)
+    namespace <- fallback_namespace(namespace)
+    orginal_appender <- log_appender(namespace = namespace)
+    log_appender(appender_console, namespace = namespace)
     # catch error, warning or message
     res <- capture.output(log_level(level = level, namespace = namespace), type = "message")
-    if (length(res) == 0) {
-        # catch output
-        res <- capture.output(log_level(level = level, namespace = namespace), type = "output")
-    }
-    log_appender(orginal_appender)
+    log_appender(orginal_appender, namespace = namespace)
     res
 }

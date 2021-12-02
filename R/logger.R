@@ -74,11 +74,11 @@ fallback_namespace <- function(namespace) {
 #' @param index index of the logger within the namespace
 #' @return currently set or return log function property
 #' @keywords internal
-log_base <- function(fun_name, arg, namespace, index) {
+log_config_setter <- function(fun_name, arg, namespace, index) {
 
     if (length(namespace) > 1) {
         for (ns in namespace) {
-            log_base(fun_name, arg, ns, index)
+          log_config_setter(fun_name, arg, ns, index)
         }
         return(invisible())
     }
@@ -110,7 +110,7 @@ log_base <- function(fun_name, arg, namespace, index) {
 }
 
 #' Get or set log level threshold
-#' @param level see \code{\link{log_levels}}, default NULL
+#' @param level see \code{\link{log_levels}}
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set log level threshold
@@ -135,7 +135,7 @@ log_base <- function(fun_name, arg, namespace, index) {
 #' @seealso \code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
 log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
     fun_name <- deparse(sys.call()[[1]])
-    log_base(fun_name = fun_name, arg = level, namespace = namespace, index = index)
+    log_config_setter(fun_name = fun_name, arg = level, namespace = namespace, index = index)
 }
 
 
@@ -152,7 +152,7 @@ log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
     fun_name <- deparse(sys.call()[[1]])
-    log_base(fun_name = fun_name, arg = layout, namespace = namespace, index = index)
+    log_config_setter(fun_name = fun_name, arg = layout, namespace = namespace, index = index)
 }
 
 
@@ -165,7 +165,7 @@ log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
 log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
     fun_name <- deparse(sys.call()[[1]])
-    log_base(fun_name = fun_name, arg = formatter, namespace = namespace, index = index)
+    log_config_setter(fun_name = fun_name, arg = formatter, namespace = namespace, index = index)
 }
 
 
@@ -192,7 +192,7 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
 log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
     fun_name <- deparse(sys.call()[[1]])
-    log_base(fun_name = fun_name, arg = appender, namespace = namespace, index = index)
+    log_config_setter(fun_name = fun_name, arg = appender, namespace = namespace, index = index)
 }
 
 
