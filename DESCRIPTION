@@ -42,3 +42,4 @@ Enhances:
   futile.logger,
   log4r
 VignetteBuilder: knitr
+Config/testthat/edition: 2
