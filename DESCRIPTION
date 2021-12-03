@@ -11,7 +11,7 @@ Date: 2021-10-10
 URL: https://daroczig.github.io/logger/
 BugReports: https://github.com/daroczig/logger/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.1.1
 License: AGPL-3
 Imports:
   utils
