@@ -94,6 +94,8 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @seealso \code{\link{log_with_separator}}
 log_separator <- function(level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
+    stopifnot(length(separator) == 1 && nchar(separator) == 1)
+
     base_info_chars <- nchar(catch_base_log(level, namespace))
 
     log_level(
@@ -127,7 +129,7 @@ log_separator <- function(level = INFO, namespace = NA_character_, separator = '
 #' @seealso \code{\link{log_separator}}
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
-    base_info_chars <- nchar(capture.output(log_level(level = level, namespace = namespace), type = "message"))
+    base_info_chars <- nchar(catch_base_log(level, namespace))
 
     log_separator(level = level, separator = separator, width = width, namespace = namespace)
 
@@ -139,6 +141,7 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
             paste(rep(' ', max(0, width - base_info_chars - 4 - nchar(m))), collapse = ''),
             ' ', separator)
     })
+
     log_level(skip_formatter(message), level = level, namespace = namespace)
 
     log_separator(level = level, separator = separator, width = width, namespace = namespace)
