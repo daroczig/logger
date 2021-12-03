@@ -80,23 +80,28 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @inheritParams log_level
 #' @param separator character to be used as a separator
 #' @param width max width of message -- longer text will be wrapped into multiple lines
-#' @note The width could be improper when `log_layout` is not stable across environments.
-#' Additionally width could be longer than `width` if the `log_layout` is longer than it.
 #' @export
 #' @examples
 #' log_separator()
 #' log_separator(ERROR, separator = '!', width = 60)
+#' log_separator(ERROR, separator = '!', width = 100)
 #' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 #' log_layout(logger)
-#' log_separator(ERROR, separator = '!', width = 80)
+#' log_separator(ERROR, separator = '!', width = 100)
 #' log_layout(layout_blank)
 #' log_separator(ERROR, separator = '!', width = 80)
 #' @seealso \code{\link{log_with_separator}}
-log_separator <- function(level = INFO, namespace = NA_character_, separator = '=', width = 80) {
+log_separator <- function(
+  level = INFO, 
+  namespace = NA_character_,
+  separator = '=',
+  width = 80,
+  .topcall = sys.call()
+  ) {
 
     stopifnot(length(separator) == 1 && nchar(separator) == 1)
 
-    base_info_chars <- nchar(catch_base_log(level, namespace))
+    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall))
 
     log_level(
         paste(rep(separator, max(0, width - base_info_chars)), collapse = ''),
@@ -129,9 +134,15 @@ log_separator <- function(level = INFO, namespace = NA_character_, separator = '
 #' @seealso \code{\link{log_separator}}
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
-    base_info_chars <- nchar(catch_base_log(level, namespace))
+    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call()))
 
-    log_separator(level = level, separator = separator, width = width, namespace = namespace)
+    log_separator(
+      level = level, 
+      separator = separator,
+      width = width, 
+      namespace = namespace,
+      .topcall = call("log_separator")
+      )
 
     message <- do.call(eval(log_formatter()), list(...))
     message <- strwrap(message, max(0, width - base_info_chars - 4))
@@ -144,8 +155,13 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 
     log_level(skip_formatter(message), level = level, namespace = namespace)
 
-    log_separator(level = level, separator = separator, width = width, namespace = namespace)
-
+    log_separator(
+      level = level, 
+      separator = separator,
+      width = width, 
+      namespace = namespace,
+      .topcall = call("log_separator")
+    )
 }
 
 

@@ -8,7 +8,8 @@ log_separator(
   level = INFO,
   namespace = NA_character_,
   separator = "=",
-  width = 80
+  width = 80,
+  .topcall = sys.call()
 )
 }
 \arguments{
@@ -19,20 +20,19 @@ log_separator(
 \item{separator}{character to be used as a separator}
 
 \item{width}{max width of message -- longer text will be wrapped into multiple lines}
+
+\item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
 }
 \description{
 Logs a long line to stand out from the console
 }
-\note{
-The width could be improper when `log_layout` is not stable across environments.
-Additionally width could be longer than `width` if the `log_layout` is longer than it.
-}
 \examples{
 log_separator()
 log_separator(ERROR, separator = '!', width = 60)
+log_separator(ERROR, separator = '!', width = 100)
 logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
 log_layout(logger)
-log_separator(ERROR, separator = '!', width = 80)
+log_separator(ERROR, separator = '!', width = 100)
 log_layout(layout_blank)
 log_separator(ERROR, separator = '!', width = 80)
 }

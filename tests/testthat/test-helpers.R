@@ -24,6 +24,11 @@ test_that('tictoc', {
 
 test_that('log with separator', {
     expect_output(log_with_separator(42), '===')
+    logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+    layout_original <- log_layout()
+    log_layout(logger)
+    expect_output(log_with_separator('Boo!', level = FATAL, width = 120), width = 120)
+    log_layout(layout_original)
 })
 
 test_that('log failure', {

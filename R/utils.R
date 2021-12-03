@@ -60,12 +60,35 @@ deparse_to_one_line <- function(x) {
 #' @keywords internal
 #' @param level see \code{\link{log_levels}}
 #' @param namespace string
-catch_base_log <- function(level, namespace) {
+#' @examples 
+#' \dontrun{
+#' catch_base_log(INFO, NA_character_)
+#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' log_layout(logger)
+#' catch_base_log(INFO, NA_character_)
+#' fun <- function() catch_base_log(INFO, NA_character_)
+#' fun()
+#' catch_base_log(INFO, NA_character_, .topcall = call("funLONG"))
+#' }
+catch_base_log <- function(
+  level, 
+  namespace,
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+  ) {
     namespace <- fallback_namespace(namespace)
     orginal_appender <- log_appender(namespace = namespace)
     log_appender(appender_console, namespace = namespace)
     # catch error, warning or message
-    res <- capture.output(log_level(level = level, namespace = namespace), type = "message")
+    res <- capture.output(
+      log_level(
+        level = level, 
+        namespace = namespace, 
+        .topcall = .topcall,
+        .topenv = .topenv
+        ), 
+      type = "message"
+      )
     log_appender(orginal_appender, namespace = namespace)
     res
 }
