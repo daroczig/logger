@@ -1,5 +1,5 @@
-pandoc: '2.2'
-pkgdown: 1.5.1
+pandoc: 2.7.3
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   Intro: Intro.html
@@ -9,5 +9,8 @@ articles:
   performance: performance.html
   r_packages: r_packages.html
   write_custom_extensions: write_custom_extensions.html
-last_built: 2021-04-14T15:57Z
+last_built: 2021-12-29T22:54Z
+urls:
+  reference: https://daroczig.github.io/logger/reference
+  article: https://daroczig.github.io/logger/articles
 

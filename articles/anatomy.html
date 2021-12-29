@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logger</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -82,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/daroczig/logger/">
+  <a href="https://github.com/daroczig/logger/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -97,13 +93,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="anatomy_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The Anatomy of a Log Request</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/master/vignettes/anatomy.Rmd"><code>vignettes/anatomy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/HEAD/vignettes/anatomy.Rmd" class="external-link"><code>vignettes/anatomy.Rmd</code></a></small>
       <div class="hidden name"><code>anatomy.Rmd</code></div>
 
     </div>
@@ -115,7 +111,8 @@
 <ul>
 <li>
 <p>a <strong>log request</strong>, eg</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>including the log level (importance) of the record, which will be later used to decide if the log record is to be delivered or not: <code>ERROR</code> in this case</li>
 <li>R objects to be logged: a simple string in this case, although it could be a character vector or any R object(s) that can be converted into a character vector by the <code>formatter</code> function</li>
@@ -123,8 +120,9 @@
 </li>
 <li>
 <p>the <strong>environment</strong> and meta-information of the log request, eg actual timestamp, hostname of the computer, the name of the user running the R script, the pid of the R process, calling function and the actual call etc.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span>(<span class="kw">log_level</span> <span class="kw">=</span> <span class="no">INFO</span>)
-<span class="fu">f</span>()
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span><span class="op">(</span>log_level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span>
+<span class="fu">f</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; $ns</span>
 <span class="co">#&gt; [1] NA</span>
 <span class="co">#&gt; </span>
@@ -141,7 +139,7 @@
 <span class="co">#&gt; [1] "f()"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2021-04-14 15:58:02 UTC"</span>
+<span class="co">#&gt; [1] "2021-12-29 22:55:16 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $levelr</span>
 <span class="co">#&gt; [1] 400</span>
@@ -154,16 +152,16 @@
 <span class="co">#&gt; [1] "INFO"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $pid</span>
-<span class="co">#&gt; [1] 19920</span>
+<span class="co">#&gt; [1] 17010</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $r_version</span>
-<span class="co">#&gt; [1] "4.0.2"</span>
+<span class="co">#&gt; [1] "4.1.2"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $ns_pkg_version</span>
 <span class="co">#&gt; [1] NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $node</span>
-<span class="co">#&gt; [1] "travis-job-db29fc9d-2154-46fe-a7c4-8e4423407e4f"</span>
+<span class="co">#&gt; [1] "fv-az278-410"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $arch</span>
 <span class="co">#&gt; [1] "x86_64"</span>
@@ -172,59 +170,64 @@
 <span class="co">#&gt; [1] "Linux"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $os_release</span>
-<span class="co">#&gt; [1] "4.15.0-1028-gcp"</span>
+<span class="co">#&gt; [1] "5.11.0-1022-azure"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $os_version</span>
-<span class="co">#&gt; [1] "#29~16.04.1-Ubuntu SMP Tue Feb 12 16:31:10 UTC 2019"</span>
+<span class="co">#&gt; [1] "#23~20.04.1-Ubuntu SMP Fri Nov 19 10:20:52 UTC 2021"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $user</span>
-<span class="co">#&gt; [1] "travis"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "runner"</span></code></pre></div>
 </li>
 <li>
 <p>a <strong>logger definition</strong> to process the log request, including</p>
 <ul>
 <li>
 <p>log level <code>threshold</code>, eg <code>INFO</code>, which defines the minimum log level required for actual logging – all log requests with lower log level will be thrown away</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span>()
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] 400</span>
 <span class="co">#&gt; attr(,"level")</span>
 <span class="co">#&gt; [1] "INFO"</span>
 <span class="co">#&gt; attr(,"class")</span>
 <span class="co">#&gt; [1] "loglevel" "integer"</span>
-<span class="no">ERROR</span> <span class="kw">&lt;=</span> <span class="no">INFO</span>
+<span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span>
 <span class="co">#&gt; [1] TRUE</span>
-<span class="fu"><a href="../reference/log_level.html">log_error</a></span>(<span class="st">'Oops'</span>)
-<span class="co">#&gt; ERROR [2021-04-14 15:58:02] Oops</span></pre></body></html></div>
+<span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span>
+<span class="co">#&gt; ERROR [2021-12-29 22:55:16] Oops</span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and converts those into actual log message(s) to be then passed to the <code>layout</code> function for the log record rendering – such as <code>paste</code>, <code>sprintf</code>, <code>glue</code> or eg the below custom example:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">formatter</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">...</span>) <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">...</span>, <span class="kw">collapse</span> <span class="kw">=</span> <span class="st">' '</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">' '</span>)
-<span class="fu">formatter</span>(<span class="fl">1</span>:<span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'foo'</span>, <span class="st">'bar'</span>))
-<span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">formatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">...</span>, collapse <span class="op">=</span> <span class="st">' '</span>, sep <span class="op">=</span> <span class="st">' '</span><span class="op">)</span>
+<span class="fu">formatter</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'foo'</span>, <span class="st">'bar'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span></code></pre></div>
 </li>
 <li>
 <p><code>layout</code> function, which takes log message(s) and further information on the log request (such as timestamp, hostname, username, calling function etc) to render the actual log records eg human-readable text, JSON etc</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">jsonlite</span>)
-<span class="no">layout</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">level</span>, <span class="no">msg</span>) <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">toJSON</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="no">level</span>, <span class="kw">timestamp</span> <span class="kw">=</span> <span class="no">time</span>, <span class="kw">hostname</span> <span class="kw">=</span> <span class="no">node</span>, <span class="kw">message</span> <span class="kw">=</span> <span class="no">msg</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span>(<span class="no">INFO</span>, <span class="st">'Happy Thursday!'</span>)
-<span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805" class="external-link">jsonlite</a></span><span class="op">)</span>
+<span class="va">layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">level</span>, <span class="va">msg</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span>level <span class="op">=</span> <span class="va">level</span>, timestamp <span class="op">=</span> <span class="va">time</span>, hostname <span class="op">=</span> <span class="va">node</span>, message <span class="op">=</span> <span class="va">msg</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/layout.html" class="external-link">layout</a></span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'Happy Thursday!'</span><span class="op">)</span>
+<span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></code></pre></div>
 </li>
 <li>
 <p><code>appender</code> function, which takes fully-rendered log record(s) and delivers to somewhere, eg <code>stdout</code>, a file or a streaming service, eg</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">appender</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">line</span>) <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="no">line</span>, <span class="st">'\n'</span>)
-<span class="fu">appender</span>(<span class="st">'INFO [now] I am a log message'</span>)
-<span class="co">#&gt; INFO [now] I am a log message</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">appender</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">line</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">'\n'</span><span class="op">)</span>
+<span class="fu">appender</span><span class="op">(</span><span class="st">'INFO [now] I am a log message'</span><span class="op">)</span>
+<span class="co">#&gt; INFO [now] I am a log message</span></code></pre></div>
 </li>
 </ul>
 </li>
 </ul>
 <p>Putting all these together (by explicitly setting the default config in the <code>global</code> namespace):</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span>(<span class="no">INFO</span>)
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span>(<span class="no">formatter_glue</span>)
-<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span>(<span class="no">layout_simple</span>)
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span>(<span class="no">appender_console</span>)
-<span class="fu"><a href="../reference/log_level.html">log_debug</a></span>(<span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span>)
-<span class="fu"><a href="../reference/log_level.html">log_warn</a></span>(<span class="st">'I am a higher level log message that is very likely to be printed'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">INFO</span><span class="op">)</span>
+<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_glue</span><span class="op">)</span>
+<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_simple</span><span class="op">)</span>
+<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_console</span><span class="op">)</span>
+<span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span><span class="op">)</span>
+<span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'I am a higher level log message that is very likely to be printed'</span><span class="op">)</span></code></pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied to a logging namespace, and one log request might trigger multiple <code>logger</code> definitions as well (stacking). Find more information on these in the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a> vignette.</p>
   </div>
 
@@ -237,11 +240,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Gergely Daróczi, <a href="https://system1.com"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="24"></a>.</p>
+  <p></p>
+<p>Developed by Gergely Daróczi, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="24"></a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -249,6 +254,8 @@
 
   
 
+
+  
 
   </body>
 </html>
