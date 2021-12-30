@@ -99,7 +99,7 @@ log_separator <- function(
   .topcall = sys.call()
   ) {
 
-    stopifnot(length(separator) == 1 && nchar(separator) == 1)
+    stopifnot(length(separator) == 1, nchar(separator) == 1)
 
     base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall))
 
