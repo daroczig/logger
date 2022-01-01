@@ -141,8 +141,8 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
       separator = separator,
       width = width, 
       namespace = namespace,
-      .topcall = call("log_separator")
-      )
+      .topcall = call('log_separator')
+    )
 
     message <- do.call(eval(log_formatter()), list(...))
     message <- strwrap(message, max(0, width - base_info_chars - 4))
@@ -160,7 +160,7 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
       separator = separator,
       width = width, 
       namespace = namespace,
-      .topcall = call("log_separator")
+      .topcall = call('log_separator')
     )
 }
 

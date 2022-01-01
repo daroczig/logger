@@ -83,12 +83,12 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
         return(invisible())
     }
 
-    fun_name_base <- strsplit(fun_name, "_")[[1]][2]
+    fun_name_base <- strsplit(fun_name, '_')[[1]][2]
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
 
-    if (fun_name_base == "threshold") {
+    if (fun_name_base == 'threshold') {
       if (is.null(arg)) {
         return(config[[fun_name_base]])
       }
@@ -96,8 +96,8 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
     } else {
       if (is.null(arg)) {
         res <- config[[fun_name_base]]
-        if (!is.null(attr(res, "generator"))) {
-          res <- parse(text = attr(res, "generator"))[[1]]
+        if (!is.null(attr(res, 'generator'))) {
+          res <- parse(text = attr(res, 'generator'))[[1]]
         }
         return(res)
       }

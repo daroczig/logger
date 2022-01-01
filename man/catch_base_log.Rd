@@ -30,7 +30,7 @@ log_layout(logger)
 catch_base_log(INFO, NA_character_)
 fun <- function() catch_base_log(INFO, NA_character_)
 fun()
-catch_base_log(INFO, NA_character_, .topcall = call("funLONG"))
+catch_base_log(INFO, NA_character_, .topcall = call('funLONG'))
 }
 }
 \keyword{internal}

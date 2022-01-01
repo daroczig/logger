@@ -68,7 +68,7 @@ deparse_to_one_line <- function(x) {
 #' catch_base_log(INFO, NA_character_)
 #' fun <- function() catch_base_log(INFO, NA_character_)
 #' fun()
-#' catch_base_log(INFO, NA_character_, .topcall = call("funLONG"))
+#' catch_base_log(INFO, NA_character_, .topcall = call('funLONG'))
 #' }
 catch_base_log <- function(
   level, 
@@ -87,7 +87,7 @@ catch_base_log <- function(
         .topcall = .topcall,
         .topenv = .topenv
         ), 
-      type = "message"
+      type = 'message'
       )
     log_appender(orginal_appender, namespace = namespace)
     res
