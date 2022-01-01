@@ -55,6 +55,7 @@ deparse_to_one_line <- function(x) {
          perl = TRUE)
 }
 
+
 #' Catch the log header
 #' @return string
 #' @keywords internal

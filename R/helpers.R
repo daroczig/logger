@@ -91,13 +91,11 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' log_layout(layout_blank)
 #' log_separator(ERROR, separator = '!', width = 80)
 #' @seealso \code{\link{log_with_separator}}
-log_separator <- function(
-  level = INFO, 
-  namespace = NA_character_,
-  separator = '=',
-  width = 80,
-  .topcall = sys.call()
-  ) {
+log_separator <- function(level = INFO, 
+                          namespace = NA_character_,
+                          separator = '=',
+                          width = 80,
+                          .topcall = sys.call()) {
 
     stopifnot(length(separator) == 1, nchar(separator) == 1)
 
