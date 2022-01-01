@@ -89,7 +89,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
                 n_lines <- tryCatch(
                     suppressWarnings(R.utils::countLines(file)),
                     error = function(e) 0)
-                n_bytes <- if (file.exists(file)) file.info(file)$size else 0
+                n_bytes <- ifelse(file.exists(file), file.info(file)$size, 0)
 
                 if (n_lines >= max_lines || n_bytes >= max_bytes) {
                     log_trace(

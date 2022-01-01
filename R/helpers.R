@@ -194,7 +194,7 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
     tictoc <- difftime(toc, tic)
 
     log_level(paste(ns, 'timer',
-                    if (round(tictoc, 2) == 0) 'tic' else 'toc',
+                    ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
                     round(tictoc, 2), attr(tictoc, 'units') , '-- '),
               ..., level = level, namespace = namespace)
 

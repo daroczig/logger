@@ -140,9 +140,7 @@ log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
 
 
 #' Get or set log record layout
-#' @param layout function defining the structure of a log record, eg
-#' \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}},
-#' \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}, default NULL
+#' @param layout function defining the structure of a log record, eg \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}, default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -157,9 +155,7 @@ log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
 
 
 #' Get or set log message formatter
-#' @param formatter function defining how R objects are converted into a single string, eg
-#' \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}},
-#'  \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, default NULL
+#' @param formatter function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
@@ -170,8 +166,7 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 
 
 #' Get or set log record appender function
-#' @param appender function delivering a log record to the destination, eg
-#' \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}, default NULL
+#' @param appender function delivering a log record to the destination, eg \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}, default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -202,7 +197,7 @@ log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
 #' @importFrom utils getFromNamespace
 #' @param namespace override the default / auto-picked namespace with a custom string
 get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.frame()) {
-    namespace <- if (is.na(namespace)) top_env_name(.topenv) else namespace
+    namespace <- ifelse(is.na(namespace), top_env_name(.topenv), namespace)
     if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
         namespace <- 'global'
     }
@@ -273,7 +268,7 @@ log_level <- function(level, ..., namespace = NA_character_,
     ## guess namespace
     if (is.na(namespace)) {
         topenv    <- top_env_name(.topenv)
-        namespace <-  if (topenv == 'R_GlobalEnv') 'global' else topenv
+        namespace <-  ifelse(topenv == 'R_GlobalEnv', 'global', topenv)
     }
 
     definitions <- get_logger_definitions(namespace, .topenv = .topenv)
