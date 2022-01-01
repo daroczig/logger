@@ -12,3 +12,7 @@ cran-comments.md
 dev-resources
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

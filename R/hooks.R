@@ -93,6 +93,7 @@ log_errors <- function() {
 #' @param input passed from Shiny's \code{server}
 #' @param level log level
 #' @param excluded_inputs character vector of input names to exclude from logging
+#' @param namespace the name of the namespace
 #' @importFrom utils assignInMyNamespace assignInNamespace
 #' @examples \dontrun{
 #' library(shiny)
@@ -118,7 +119,10 @@ log_errors <- function() {
 #'
 #' shinyApp(ui = ui, server = server)
 #' }
-log_shiny_input_changes <- function(input, level = INFO, excluded_inputs = character()) {
+log_shiny_input_changes <- function(input,
+                                    level = INFO,
+                                    namespace = NA_character_,
+                                    excluded_inputs = character()) {
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
@@ -130,7 +134,7 @@ log_shiny_input_changes <- function(input, level = INFO, excluded_inputs = chara
     assignInMyNamespace('shiny_input_values', input_values)
     log_info(skip_formatter(paste(
         'Default Shiny inputs initialized:',
-        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))))
+        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))), namespace = namespace)
 
     shiny::observe({
         old_input_values <- shiny_input_values
@@ -141,7 +145,7 @@ log_shiny_input_changes <- function(input, level = INFO, excluded_inputs = chara
             old <- old_input_values[name]
             new <- new_input_values[name]
             if (!identical(old, new)) {
-                log_level(level, 'Shiny input change detected on {name}: {old} -> {new}')
+                log_level(level, 'Shiny input change detected on {name}: {old} -> {new}', namespace = namespace)
             }
         }
         assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')
