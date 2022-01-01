@@ -32,10 +32,10 @@ test_that('log with separator', {
 })
 
 test_that('log failure', {
-  expect_output(log_failure("foobar"), NA)
-  expect_output(try(log_failure(foobar), silent = TRUE), 'ERROR.*foobar')
-  expect_error(log_failure('foobar'), NA)
-  expect_match(capture.output(expect_error(log_failure(foobar))), 'not found')
+    expect_output(log_failure("foobar"), NA)
+    expect_output(try(log_failure(foobar), silent = TRUE), 'ERROR.*foobar')
+    expect_error(log_failure('foobar'), NA)
+    expect_match(capture.output(expect_error(log_failure(foobar))), 'not found')
 })
 
 ## reset settings

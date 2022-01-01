@@ -81,14 +81,12 @@ catch_base_log <- function(
     log_appender(appender_console, namespace = namespace)
     # catch error, warning or message
     res <- capture.output(
-      log_level(
-        level = level, 
-        namespace = namespace, 
-        .topcall = .topcall,
-        .topenv = .topenv
-        ), 
+      log_level(level = level,
+                namespace = namespace, 
+                .topcall = .topcall,
+                .topenv = .topenv),
       type = 'message'
-      )
+    )
     log_appender(orginal_appender, namespace = namespace)
     res
 }
