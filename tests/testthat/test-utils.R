@@ -32,7 +32,7 @@ test_that('catch_base_log', {
     expect_true(nchar(logger:::catch_base_log(INFO, NA_character_)) == 0)
     log_layout(layout_original)
     layout_original <- log_layout(namespace = 'TEMP')
-    logger <- layout_glue_generator(format = '{namespace}/{fn} {time} {level}: {msg}')
+    logger <- layout_glue_generator(format = '{namespace}/{fn} {level}: {msg}')
     log_layout(logger, namespace = 'TEMP')
     expect_true(nchar(logger:::catch_base_log(INFO, 'TEMP')) == 37)
     expect_true(nchar(logger:::catch_base_log(INFO, 'TEMP', .topcall = NA)) == 34)
