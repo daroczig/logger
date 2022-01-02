@@ -83,6 +83,7 @@ catch_base_log <- function(
     # catch error, warning or message
     res <- capture.output(
       log_level(level = level,
+                "",
                 namespace = namespace, 
                 .topcall = .topcall,
                 .topenv = .topenv),
