@@ -9,7 +9,7 @@ log_tictoc(..., level = INFO, namespace = NA_character_)
 \arguments{
 \item{...}{passed to \code{log_level}}
 
-\item{level}{x}
+\item{level}{see \code{\link{log_levels}}}
 
 \item{namespace}{x}
 }

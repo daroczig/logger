@@ -4,7 +4,7 @@
 \alias{log_threshold}
 \title{Get or set log level threshold}
 \usage{
-log_threshold(level, namespace = "global", index = 1)
+log_threshold(level = NULL, namespace = "global", index = 1)
 }
 \arguments{
 \item{level}{see \code{\link{log_levels}}}
