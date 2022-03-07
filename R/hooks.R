@@ -132,7 +132,7 @@ log_shiny_input_changes <- function(input,
 
     input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
-    log_info(skip_formatter(paste(
+    log_level(level, skip_formatter(paste(
         'Default Shiny inputs initialized:',
         as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))), namespace = namespace)
 
