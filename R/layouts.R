@@ -23,7 +23,7 @@
 #' }
 #' @param log_level log level as per \code{\link{log_levels}}
 #' @inheritParams log_level
-#' @return list
+#' @return An environment with the meta variables as expressions.
 #' @export
 #' @importFrom utils packageVersion
 #' @seealso \code{\link{layout_glue_generator}}
