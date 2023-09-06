@@ -111,6 +111,82 @@ test_that('print.level', {
     expect_equal(capture.output(print(INFO)), 'Log level: INFO')
 })
 
+test_that("log_appender `do.call` works the same as calling function", {
+  t <- tempfile()
+
+  old_value <- log_appender()
+
+  log_info("42")
+
+  do.call(
+    log_appender,
+    list(
+      appender_file(t)
+    )
+  ) |>
+    expect_no_error()
+
+  log_info("42")
+
+  expect_length(readLines(t), 2)
+
+  log_appender(old_value)
+})
+
+test_that("log_threshold `do.call` works the same as calling function", {
+  t <- tempfile()
+  old_appender <- log_appender()
+  log_appender(appender_file(t))
+  log_threshold(INFO)
+
+  old_value <- log_threshold()
+
+  log_info("42")
+
+  do.call(
+    log_threshold,
+    list(
+      WARN
+    )
+  ) |>
+    expect_no_error()
+
+  log_info("42")
+
+  expect_length(readLines(t), 1)
+
+  log_appender(old_appender)
+  log_threshold(old_value)
+})
+
+testthat::test_that("log_formatter `do.call` works the same as calling function", {
+  old_value <- log_formatter()
+
+  do.call(
+    log_formatter,
+    list(
+      formatter_paste
+    )
+  ) |>
+    expect_no_error()
+
+  log_formatter(old_value)
+})
+
+testthat::test_that("log_layout `do.call` works the same as calling function", {
+  old_value <- log_layout()
+
+  do.call(
+    log_layout,
+    list(
+      formatter_paste
+    )
+  ) |>
+    expect_no_error()
+
+  log_layout(old_value)
+})
+
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)
