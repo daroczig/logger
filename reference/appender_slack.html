@@ -81,31 +81,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">appender_slack</span><span class="op">(</span>
-  channel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_CHANNEL"</span><span class="op">)</span>,
-  username <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_USERNAME"</span><span class="op">)</span>,
-  icon_emoji <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_ICON_EMOJI"</span><span class="op">)</span>,
-  api_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_API_TOKEN"</span><span class="op">)</span>,
-  preformatted <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">appender_slack</span><span class="op">(</span></span>
+<span>  channel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_CHANNEL"</span><span class="op">)</span>,</span>
+<span>  username <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_USERNAME"</span><span class="op">)</span>,</span>
+<span>  icon_emoji <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_ICON_EMOJI"</span><span class="op">)</span>,</span>
+<span>  api_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLACK_API_TOKEN"</span><span class="op">)</span>,</span>
+<span>  preformatted <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>channel</dt>
 <dd><p>Slack channel name with a hashtag prefix for public channel and no prefix for private channels</p></dd>
+
+
 <dt>username</dt>
 <dd><p>Slack (bot) username</p></dd>
+
+
 <dt>icon_emoji</dt>
 <dd><p>optional override for the bot icon</p></dd>
+
+
 <dt>api_token</dt>
 <dd><p>Slack API token</p></dd>
+
+
 <dt>preformatted</dt>
 <dd><p>use code tags around the message?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>function taking <code>lines</code> argument</p>
+    
+
+<p>function taking <code>lines</code> argument</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -128,7 +139,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

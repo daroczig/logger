@@ -81,23 +81,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">logger</span><span class="op">(</span><span class="va">threshold</span>, <span class="va">formatter</span>, <span class="va">layout</span>, <span class="va">appender</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">logger</span><span class="op">(</span><span class="va">threshold</span>, <span class="va">formatter</span>, <span class="va">layout</span>, <span class="va">appender</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>threshold</dt>
 <dd><p>omit log messages below this <code><a href="log_levels.html">log_levels</a></code></p></dd>
+
+
 <dt>formatter</dt>
 <dd><p>function pre-processing the message of the log record when it's not wrapped in a <code><a href="skip_formatter.html">skip_formatter</a></code> call</p></dd>
+
+
 <dt>layout</dt>
 <dd><p>function rendering the layout of the actual log record</p></dd>
+
+
 <dt>appender</dt>
 <dd><p>function writing the log record</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>function taking <code>level</code> and <code>msg</code> arguments</p>
+    
+
+<p>function taking <code>level</code> and <code>msg</code> arguments</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -118,12 +127,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">logger</span>, <span class="fu">logger</span><span class="fu">:::</span><span class="va">namespaces</span><span class="op">$</span><span class="va">global</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="va">INFO</span>, <span class="fl">42</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">logger</span>, <span class="fu">logger</span><span class="fu">:::</span><span class="va">namespaces</span><span class="op">$</span><span class="va">global</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'{pi}'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">42</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">logger</span>, <span class="fu">logger</span><span class="fu">:::</span><span class="va">namespaces</span><span class="op">$</span><span class="va">global</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'{x}^2 = {x^2}'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">logger</span>, <span class="fu">logger</span><span class="fu">:::</span><span class="va">namespaces</span><span class="op">$</span><span class="va">global</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="va">INFO</span>, <span class="fl">42</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">logger</span>, <span class="fu">logger</span><span class="fu">:::</span><span class="va">namespaces</span><span class="op">$</span><span class="va">global</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'{pi}'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">42</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">logger</span>, <span class="fu">logger</span><span class="fu">:::</span><span class="va">namespaces</span><span class="op">$</span><span class="va">global</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'{x}^2 = {x^2}'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -138,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

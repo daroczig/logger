@@ -81,17 +81,22 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">log_layout</span><span class="op">(</span>layout <span class="op">=</span> <span class="cn">NULL</span>, namespace <span class="op">=</span> <span class="st">"global"</span>, index <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">log_layout</span><span class="op">(</span>layout <span class="op">=</span> <span class="cn">NULL</span>, namespace <span class="op">=</span> <span class="st">"global"</span>, index <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>layout</dt>
 <dd><p>function defining the structure of a log record, eg <code><a href="layout_simple.html">layout_simple</a></code>, <code><a href="layout_glue.html">layout_glue</a></code> or <code><a href="layout_glue_colors.html">layout_glue_colors</a></code>, <code><a href="layout_json.html">layout_json</a></code>, or generator functions such as <code><a href="layout_glue_generator.html">layout_glue_generator</a></code>, default NULL</p></dd>
+
+
 <dt>namespace</dt>
 <dd><p>logger namespace</p></dd>
+
+
 <dt>index</dt>
 <dd><p>index of the logger within the namespace</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -100,10 +105,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">log_layout</span><span class="op">(</span><span class="fu"><a href="layout_json.html">layout_json</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">log_layout</span><span class="op">(</span><span class="fu"><a href="layout_json.html">layout_json</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -118,7 +123,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

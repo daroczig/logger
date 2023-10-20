@@ -81,32 +81,37 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">msg</span>, <span class="va">level</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">msg</span>, <span class="va">level</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>msg</dt>
 <dd><p>string</p></dd>
+
+
 <dt>level</dt>
 <dd><p>see <code><a href="log_levels.html">log_levels</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>string with ANSI escape code</p>
+    
+
+<p>string with ANSI escape code</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">FATAL</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">ERROR</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">WARN</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">SUCCESS</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">DEBUG</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">TRACE</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">FATAL</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">ERROR</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">WARN</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">SUCCESS</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">DEBUG</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">colorize_by_log_level</span><span class="op">(</span><span class="va">TRACE</span>, <span class="st">'foobar'</span><span class="op">)</span>, <span class="st">'\n'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -121,7 +126,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

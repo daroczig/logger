@@ -93,7 +93,7 @@
 
       
 
-      </header><script src="Intro_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to logger</h1>
@@ -106,54 +106,67 @@
 
     
     
-<p>If you are not only using R in the interactive console for ad-hoc data analysis, but running eg batch jobs (for ETL, reporting, modeling, forecasting etc) as well, then logging the status(changes) of your script is a must so that later on you can review / debug what have happened.</p>
-<p>For most cases, it’s enough to load the package and use the functions with the <code>log</code> prefix to log important and not so important messages, for example:</p>
+<p>If you are not only using R in the interactive console for ad-hoc
+data analysis, but running eg batch jobs (for ETL, reporting, modeling,
+forecasting etc) as well, then logging the status(changes) of your
+script is a must so that later on you can review / debug what have
+happened.</p>
+<p>For most cases, it’s enough to load the package and use the functions
+with the <code>log</code> prefix to log important and not so important
+messages, for example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://daroczig.github.io/logger/">logger</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Loading data'</span><span class="op">)</span>
-<span class="co">#&gt; INFO [2022-05-27 20:25:09] Loading data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'The dataset includes {nrow(mtcars)} rows'</span><span class="op">)</span>
-<span class="co">#&gt; INFO [2022-05-27 20:25:09] The dataset includes 32 rows</span>
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">hp</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; WARN [2022-05-27 20:25:09] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></code></pre></div>
-<p>Interestingly, the most powerful car was not being logged – because by default the <code>logger</code> prints messages with at least the <code>INFO</code> log level:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://daroczig.github.io/logger/">logger</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Loading data'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2023-10-20 13:17:40] Loading data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'The dataset includes {nrow(mtcars)} rows'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2023-10-20 13:17:40] The dataset includes 32 rows</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">hp</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; WARN [2023-10-20 13:17:40] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></span></code></pre></div>
+<p>Interestingly, the most powerful car was not being logged – because
+by default the <code>logger</code> prints messages with at least the
+<code>INFO</code> log level:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 400</span>
-<span class="co">#&gt; attr(,"level")</span>
-<span class="co">#&gt; [1] "INFO"</span>
-<span class="co">#&gt; attr(,"class")</span>
-<span class="co">#&gt; [1] "loglevel" "integer"</span></code></pre></div>
-<p>To change that, specify the new log level threshold, eg <code>TRACE</code> to log everything:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 400</span></span>
+<span><span class="co">#&gt; attr(,"level")</span></span>
+<span><span class="co">#&gt; [1] "INFO"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "loglevel" "integer"</span></span></code></pre></div>
+<p>To change that, specify the new log level threshold, eg
+<code>TRACE</code> to log everything:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></span></code></pre></div>
 <p>The rerunning the above code chunk:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Loading data'</span><span class="op">)</span>
-<span class="co">#&gt; INFO [2022-05-27 20:25:09] Loading data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'The dataset includes {nrow(mtcars)} rows'</span><span class="op">)</span>
-<span class="co">#&gt; INFO [2022-05-27 20:25:09] The dataset includes 32 rows</span>
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">hp</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; WARN [2022-05-27 20:25:09] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span>
-<span class="co">#&gt; DEBUG [2022-05-27 20:25:09] The most powerful car is Maserati Bora with 335 hp</span></code></pre></div>
-<p>You may also find the <code><a href="../reference/log_eval.html">?log_eval</a></code> function useful to log both an R expression and its result in the same log record:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Loading data'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2023-10-20 13:17:40] Loading data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'The dataset includes {nrow(mtcars)} rows'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2023-10-20 13:17:40] The dataset includes 32 rows</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">hp</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; WARN [2023-10-20 13:17:40] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></span>
+<span><span class="co">#&gt; DEBUG [2023-10-20 13:17:40] The most powerful car is Maserati Bora with 335 hp</span></span></code></pre></div>
+<p>You may also find the <code><a href="../reference/log_eval.html">?log_eval</a></code> function useful to log
+both an R expression and its result in the same log record:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span>
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="va">mean</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span>
-<span class="fu"><a href="../reference/log_eval.html">log_eval</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span>
-<span class="co">#&gt; INFO [2022-05-27 20:25:09] 'y &lt;- f(g(x))' =&gt; '4'</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
-<span class="co">#&gt;  num 4</span></code></pre></div>
-<p>For more details, check the <a href="https://daroczig.github.io/logger/reference/index.html">function reference in the manual</a>, or start with the <a href="https://daroczig.github.io/logger/articles/anatomy.html">The Anatomy of a Log Request</a> and <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the Format and the Destination of a Log Record</a> vignettes.</p>
+<code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">mean</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span></span>
+<span><span class="fu"><a href="../reference/log_eval.html">log_eval</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2023-10-20 13:17:41] 'y &lt;- f(g(x))' =&gt; '4'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  num 4</span></span></code></pre></div>
+<p>For more details, check the <a href="https://daroczig.github.io/logger/reference/index.html">function
+reference in the manual</a>, or start with the <a href="https://daroczig.github.io/logger/articles/anatomy.html">The
+Anatomy of a Log Request</a> and <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing
+the Format and the Destination of a Log Record</a> vignettes.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -171,7 +184,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

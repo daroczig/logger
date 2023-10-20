@@ -85,34 +85,47 @@ log severity level according to RFC 5424 "The Syslog Protocol".</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">layout_syslognet</span><span class="op">(</span>
-  <span class="va">level</span>,
-  <span class="va">msg</span>,
-  namespace <span class="op">=</span> <span class="cn">NA_character_</span>,
-  .logcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">)</span>,
-  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
-  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_syslognet</span><span class="op">(</span></span>
+<span>  <span class="va">level</span>,</span>
+<span>  <span class="va">msg</span>,</span>
+<span>  namespace <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  .logcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>level</dt>
 <dd><p>log level, see <code><a href="log_levels.html">log_levels</a></code> for more details</p></dd>
+
+
 <dt>msg</dt>
 <dd><p>string message</p></dd>
+
+
 <dt>namespace</dt>
 <dd><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></dd>
+
+
 <dt>.logcall</dt>
 <dd><p>the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)</p></dd>
+
+
 <dt>.topcall</dt>
 <dd><p>R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)</p></dd>
+
+
 <dt>.topenv</dt>
 <dd><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A character vector with a severity attribute.</p>
+    
+
+<p>A character vector with a severity attribute.</p>
     </div>
 
   </div>
@@ -127,7 +140,7 @@ log severity level according to RFC 5424 "The Syslog Protocol".</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

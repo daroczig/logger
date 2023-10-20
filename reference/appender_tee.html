@@ -81,31 +81,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">appender_tee</span><span class="op">(</span>
-  <span class="va">file</span>,
-  append <span class="op">=</span> <span class="cn">TRUE</span>,
-  max_lines <span class="op">=</span> <span class="cn">Inf</span>,
-  max_bytes <span class="op">=</span> <span class="cn">Inf</span>,
-  max_files <span class="op">=</span> <span class="fl">1L</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">appender_tee</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  append <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  max_lines <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  max_bytes <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  max_files <span class="op">=</span> <span class="fl">1L</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>path</p></dd>
+
+
 <dt>append</dt>
 <dd><p>boolean passed to <code>cat</code> defining if the file should be overwritten with the most recent log message instead of appending</p></dd>
+
+
 <dt>max_lines</dt>
 <dd><p>numeric specifying the maximum number of lines allowed in a file before rotating</p></dd>
+
+
 <dt>max_bytes</dt>
 <dd><p>numeric specifying the maximum number of bytes allowed in a file before rotating</p></dd>
+
+
 <dt>max_files</dt>
 <dd><p>integer specifying the maximum number of files to be used in rotation</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>function taking <code>lines</code> argument</p>
+    
+
+<p>function taking <code>lines</code> argument</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -124,7 +135,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

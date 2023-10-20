@@ -81,28 +81,37 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">formatter_glue</span><span class="op">(</span>
-  <span class="va">...</span>,
-  .logcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">)</span>,
-  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
-  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">formatter_glue</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  .logcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>passed to <code>glue</code> for the text interpolation</p></dd>
+
+
 <dt>.logcall</dt>
 <dd><p>the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)</p></dd>
+
+
 <dt>.topcall</dt>
 <dd><p>R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)</p></dd>
+
+
 <dt>.topenv</dt>
 <dd><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>character vector</p>
+    
+
+<p>character vector</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -125,7 +134,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

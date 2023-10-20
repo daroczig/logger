@@ -81,21 +81,28 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">appender_syslognet</span><span class="op">(</span><span class="va">identifier</span>, <span class="va">server</span>, port <span class="op">=</span> <span class="fl">601L</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">appender_syslognet</span><span class="op">(</span><span class="va">identifier</span>, <span class="va">server</span>, port <span class="op">=</span> <span class="fl">601L</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>identifier</dt>
 <dd><p>program/function identification (string).</p></dd>
+
+
 <dt>server</dt>
 <dd><p>machine where syslog daemon runs (string).</p></dd>
+
+
 <dt>port</dt>
 <dd><p>port where syslog daemon listens (integer).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A function taking a <code>lines</code> argument.</p>
+    
+
+<p>A function taking a <code>lines</code> argument.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -104,12 +111,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"syslognet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="log_appender.html">log_appender</a></span><span class="op">(</span><span class="fu">appender_syslognet</span><span class="op">(</span><span class="st">"test_app"</span>, <span class="st">'remoteserver'</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"Test message."</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"syslognet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="log_appender.html">log_appender</a></span><span class="op">(</span><span class="fu">appender_syslognet</span><span class="op">(</span><span class="st">"test_app"</span>, <span class="st">'remoteserver'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"Test message."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -124,7 +131,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -81,37 +81,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">catch_base_log</span><span class="op">(</span>
-  <span class="va">level</span>,
-  <span class="va">namespace</span>,
-  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
-  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">catch_base_log</span><span class="op">(</span></span>
+<span>  <span class="va">level</span>,</span>
+<span>  <span class="va">namespace</span>,</span>
+<span>  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>level</dt>
 <dd><p>see <code><a href="log_levels.html">log_levels</a></code></p></dd>
+
+
 <dt>namespace</dt>
 <dd><p>string</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>string</p>
+    
+
+<p>string</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">logger</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">fun</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span>, .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span><span class="st">'funLONG'</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">logger</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fun</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">catch_base_log</span><span class="op">(</span><span class="va">INFO</span>, <span class="cn">NA_character_</span>, .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span><span class="st">'funLONG'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -126,7 +131,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

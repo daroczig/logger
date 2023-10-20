@@ -81,51 +81,56 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">log_eval</span><span class="op">(</span><span class="va">expr</span>, level <span class="op">=</span> <span class="va">TRACE</span>, multiline <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">expr</span>, level <span class="op">=</span> <span class="va">TRACE</span>, multiline <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>expr</dt>
 <dd><p>R expression to be evaluated while logging the expression itself along with the result</p></dd>
+
+
 <dt>level</dt>
 <dd><p><code><a href="log_levels.html">log_levels</a></code></p></dd>
+
+
 <dt>multiline</dt>
 <dd><p>setting to <code>FALSE</code> will print both the expression (enforced to be on one line by removing line-breaks if any) and its result on a single line separated by <code>=&gt;</code>, while setting to <code>TRUE</code> will log the expression and the result in separate sections reserving line-breaks and rendering the printed results</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="fl">2</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## lowering the log level threshold so that we don't have to set a higher level in log_eval</span></span>
-<span class="r-in"><span class="fu"><a href="log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## log_eval can be called in-line as well as returning the return value of the expression</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1e3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## https://twitter.com/krlmlr/status/1067864829547999232</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span></span>
-<span class="r-in"><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">mean</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## returning a function</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## evaluating something returning a wall of "text"</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## doing something computationally intensive</span></span>
-<span class="r-in"><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="fl">2</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## lowering the log level threshold so that we don't have to set a higher level in log_eval</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## log_eval can be called in-line as well as returning the return value of the expression</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1e3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## https://twitter.com/krlmlr/status/1067864829547999232</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">mean</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## returning a function</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## evaluating something returning a wall of "text"</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## doing something computationally intensive</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -140,7 +145,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

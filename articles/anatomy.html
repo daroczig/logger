@@ -93,7 +93,7 @@
 
       
 
-      </header><script src="anatomy_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The Anatomy of a Log Request</h1>
@@ -107,128 +107,153 @@
     
     
 <p><img src="logger_structure.svg" style="width: 100%;" title="The structure of a logger and the flow of a log record request" alt="The structure of a logger and the flow of a log record request"></p>
-<p>To make a successful log record, <code>logger</code> requires the below components:</p>
+<p>To make a successful log record, <code>logger</code> requires the
+below components:</p>
 <ul>
 <li>
 <p>a <strong>log request</strong>, eg</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>including the log level (importance) of the record, which will be later used to decide if the log record is to be delivered or not: <code>ERROR</code> in this case</li>
-<li>R objects to be logged: a simple string in this case, although it could be a character vector or any R object(s) that can be converted into a character vector by the <code>formatter</code> function</li>
+<li>including the log level (importance) of the record, which will be
+later used to decide if the log record is to be delivered or not:
+<code>ERROR</code> in this case</li>
+<li>R objects to be logged: a simple string in this case, although it
+could be a character vector or any R object(s) that can be converted
+into a character vector by the <code>formatter</code> function</li>
 </ul>
 </li>
 <li>
-<p>the <strong>environment</strong> and meta-information of the log request, eg actual timestamp, hostname of the computer, the name of the user running the R script, the pid of the R process, calling function and the actual call etc.</p>
+<p>the <strong>environment</strong> and meta-information of the log
+request, eg actual timestamp, hostname of the computer, the name of the
+user running the R script, the pid of the R process, calling function
+and the actual call etc.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span><span class="op">(</span>log_level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span>
-<span class="fu">f</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; $ns</span>
-<span class="co">#&gt; [1] NA</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $ans</span>
-<span class="co">#&gt; [1] "global"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $topenv</span>
-<span class="co">#&gt; [1] "R_GlobalEnv"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fn</span>
-<span class="co">#&gt; [1] "f"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $call</span>
-<span class="co">#&gt; [1] "f()"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2022-05-27 20:25:11 UTC"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $levelr</span>
-<span class="co">#&gt; [1] 400</span>
-<span class="co">#&gt; attr(,"level")</span>
-<span class="co">#&gt; [1] "INFO"</span>
-<span class="co">#&gt; attr(,"class")</span>
-<span class="co">#&gt; [1] "loglevel" "integer" </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $level</span>
-<span class="co">#&gt; [1] "INFO"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $pid</span>
-<span class="co">#&gt; [1] 19698</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $r_version</span>
-<span class="co">#&gt; [1] "4.2.0"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $ns_pkg_version</span>
-<span class="co">#&gt; [1] NA</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $node</span>
-<span class="co">#&gt; [1] "fv-az36-646"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $arch</span>
-<span class="co">#&gt; [1] "x86_64"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $os_name</span>
-<span class="co">#&gt; [1] "Linux"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $os_release</span>
-<span class="co">#&gt; [1] "5.13.0-1023-azure"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $os_version</span>
-<span class="co">#&gt; [1] "#27~20.04.1-Ubuntu SMP Mon Apr 25 22:39:07 UTC 2022"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $user</span>
-<span class="co">#&gt; [1] "runner"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span><span class="op">(</span>log_level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
+<span><span class="fu">f</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $ns</span></span>
+<span><span class="co">#&gt; [1] NA</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ans</span></span>
+<span><span class="co">#&gt; [1] "global"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $topenv</span></span>
+<span><span class="co">#&gt; [1] "R_GlobalEnv"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $fn</span></span>
+<span><span class="co">#&gt; [1] "f"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $call</span></span>
+<span><span class="co">#&gt; [1] "f()"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $time</span></span>
+<span><span class="co">#&gt; [1] "2023-10-20 13:17:43 UTC"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $levelr</span></span>
+<span><span class="co">#&gt; [1] 400</span></span>
+<span><span class="co">#&gt; attr(,"level")</span></span>
+<span><span class="co">#&gt; [1] "INFO"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "loglevel" "integer" </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $level</span></span>
+<span><span class="co">#&gt; [1] "INFO"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $pid</span></span>
+<span><span class="co">#&gt; [1] 8440</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $r_version</span></span>
+<span><span class="co">#&gt; [1] "4.3.1"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ns_pkg_version</span></span>
+<span><span class="co">#&gt; [1] NA</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $node</span></span>
+<span><span class="co">#&gt; [1] "fv-az482-549"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $arch</span></span>
+<span><span class="co">#&gt; [1] "x86_64"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $os_name</span></span>
+<span><span class="co">#&gt; [1] "Linux"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $os_release</span></span>
+<span><span class="co">#&gt; [1] "6.2.0-1014-azure"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $os_version</span></span>
+<span><span class="co">#&gt; [1] "#14~22.04.1-Ubuntu SMP Wed Sep 13 16:15:26 UTC 2023"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $user</span></span>
+<span><span class="co">#&gt; [1] "runner"</span></span></code></pre></div>
 </li>
 <li>
-<p>a <strong>logger definition</strong> to process the log request, including</p>
+<p>a <strong>logger definition</strong> to process the log request,
+including</p>
 <ul>
 <li>
-<p>log level <code>threshold</code>, eg <code>INFO</code>, which defines the minimum log level required for actual logging – all log requests with lower log level will be thrown away</p>
+<p>log level <code>threshold</code>, eg <code>INFO</code>, which
+defines the minimum log level required for actual logging – all log
+requests with lower log level will be thrown away</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 400</span>
-<span class="co">#&gt; attr(,"level")</span>
-<span class="co">#&gt; [1] "INFO"</span>
-<span class="co">#&gt; attr(,"class")</span>
-<span class="co">#&gt; [1] "loglevel" "integer"</span>
-<span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span>
-<span class="co">#&gt; ERROR [2022-05-27 20:25:12] Oops</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 400</span></span>
+<span><span class="co">#&gt; attr(,"level")</span></span>
+<span><span class="co">#&gt; [1] "INFO"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "loglevel" "integer"</span></span>
+<span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ERROR [2023-10-20 13:17:43] Oops</span></span></code></pre></div>
 </li>
 <li>
-<p><code>formatter</code> function, which takes R objects and converts those into actual log message(s) to be then passed to the <code>layout</code> function for the log record rendering – such as <code>paste</code>, <code>sprintf</code>, <code>glue</code> or eg the below custom example:</p>
+<p><code>formatter</code> function, which takes R objects and
+converts those into actual log message(s) to be then passed to the
+<code>layout</code> function for the log record rendering – such as
+<code>paste</code>, <code>sprintf</code>, <code>glue</code> or eg the
+below custom example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">formatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">...</span>, collapse <span class="op">=</span> <span class="st">' '</span>, sep <span class="op">=</span> <span class="st">' '</span><span class="op">)</span>
-<span class="fu">formatter</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'foo'</span>, <span class="st">'bar'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">formatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">...</span>, collapse <span class="op">=</span> <span class="st">' '</span>, sep <span class="op">=</span> <span class="st">' '</span><span class="op">)</span></span>
+<span><span class="fu">formatter</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'foo'</span>, <span class="st">'bar'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span></span></code></pre></div>
 </li>
 <li>
-<p><code>layout</code> function, which takes log message(s) and further information on the log request (such as timestamp, hostname, username, calling function etc) to render the actual log records eg human-readable text, JSON etc</p>
+<p><code>layout</code> function, which takes log message(s) and
+further information on the log request (such as timestamp, hostname,
+username, calling function etc) to render the actual log records eg
+human-readable text, JSON etc</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805" class="external-link">jsonlite</a></span><span class="op">)</span>
-<span class="va">layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">level</span>, <span class="va">msg</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span>level <span class="op">=</span> <span class="va">level</span>, timestamp <span class="op">=</span> <span class="va">time</span>, hostname <span class="op">=</span> <span class="va">node</span>, message <span class="op">=</span> <span class="va">msg</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/layout.html" class="external-link">layout</a></span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'Happy Thursday!'</span><span class="op">)</span>
-<span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite" class="external-link">jsonlite</a></span><span class="op">)</span></span>
+<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">level</span>, <span class="va">msg</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span>level <span class="op">=</span> <span class="va">level</span>, timestamp <span class="op">=</span> <span class="va">time</span>, hostname <span class="op">=</span> <span class="va">node</span>, message <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/layout.html" class="external-link">layout</a></span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'Happy Thursday!'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></span></code></pre></div>
 </li>
 <li>
-<p><code>appender</code> function, which takes fully-rendered log record(s) and delivers to somewhere, eg <code>stdout</code>, a file or a streaming service, eg</p>
+<p><code>appender</code> function, which takes fully-rendered log
+record(s) and delivers to somewhere, eg <code>stdout</code>, a file or a
+streaming service, eg</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">appender</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">line</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">'\n'</span><span class="op">)</span>
-<span class="fu">appender</span><span class="op">(</span><span class="st">'INFO [now] I am a log message'</span><span class="op">)</span>
-<span class="co">#&gt; INFO [now] I am a log message</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">appender</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">line</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">'\n'</span><span class="op">)</span></span>
+<span><span class="fu">appender</span><span class="op">(</span><span class="st">'INFO [now] I am a log message'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [now] I am a log message</span></span></code></pre></div>
 </li>
 </ul>
 </li>
 </ul>
-<p>Putting all these together (by explicitly setting the default config in the <code>global</code> namespace):</p>
+<p>Putting all these together (by explicitly setting the default config
+in the <code>global</code> namespace):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">INFO</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_glue</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_simple</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_console</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span><span class="op">)</span>
-<span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'I am a higher level log message that is very likely to be printed'</span><span class="op">)</span></code></pre></div>
-<p>Note, that all <code>logger</code> definitions and requests are tied to a logging namespace, and one log request might trigger multiple <code>logger</code> definitions as well (stacking). Find more information on these in the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing the format and destination of log records</a> vignette.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">INFO</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_glue</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_simple</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_console</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'I am a higher level log message that is very likely to be printed'</span><span class="op">)</span></span></code></pre></div>
+<p>Note, that all <code>logger</code> definitions and requests are tied
+to a logging namespace, and one log request might trigger multiple
+<code>logger</code> definitions as well (stacking). Find more
+information on these in the <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing
+the format and destination of log records</a> vignette.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -246,7 +271,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
