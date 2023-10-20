@@ -3,7 +3,7 @@
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     eval(paste(...), envir = .topenv)
 }, generator = quote(formatter_paste()))
@@ -15,7 +15,7 @@ formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     eval(sprintf(fmt, ...), envir = .topenv)
 }, generator = quote(formatter_sprintf()))
@@ -27,7 +27,7 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @return character vector
 #' @export
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link{formatter_sprintf}} will be used as a fallback.
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 #' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
@@ -51,7 +51,7 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_glue}}, \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_glue}}, \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 #' @importFrom utils str
 formatter_glue_safe <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
@@ -91,7 +91,7 @@ formatter_glue_safe <- structure(function(..., .logcall = sys.call(), .topcall =
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}", c('foo', 'bar'))
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_logging}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
@@ -145,7 +145,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
 #' log_info(everything = 42)
 #' log_info(mtcars = mtcars, species = iris$Species)
 #' }
-#' @seealso This is a \code{\link{log_formatter}} potentially to be used with \code{\link{layout_json_parser}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}} potentially to be used with \code{\link{layout_json_parser}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_json <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('jsonlite')
     eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
@@ -184,7 +184,7 @@ skip_formatter <- function(message, ...) {
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
 formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
@@ -217,7 +217,7 @@ formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = s
 #' }
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
-#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+#' @seealso This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
 formatter_pander <- structure(function(x, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     fail_on_missing_package('pander')
