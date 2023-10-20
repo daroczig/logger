@@ -111,6 +111,23 @@ test_that('print.level', {
     expect_equal(capture.output(print(INFO)), 'Log level: INFO')
 })
 
+test_that('config setter called from do.call', {
+    t <- tempfile()
+    expect_error(do.call(log_appender, list(appender_file(t))), NA)
+    log_info(42)
+    expect_length(readLines(t), 1)
+    expect_error(do.call(log_threshold, list(ERROR)), NA)
+    log_info(42)
+    expect_length(readLines(t), 1)
+    expect_error(do.call(log_threshold, list(INFO)), NA)
+    log_info(42)
+    expect_length(readLines(t), 2)
+    expect_error(do.call(log_layout, list(formatter_paste)), NA)
+    log_info(42)
+    expect_length(readLines(t), 3)
+    unlink(t)
+})
+
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)
