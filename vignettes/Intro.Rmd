@@ -88,7 +88,7 @@ log_formatter(formatter_pander)
 log_info(head(iris))
 ```
 
-```{r knitr-pander-setup, include = FALSE}
+```{r knitr-pander-revert, include = FALSE}
 pander::panderOptions('knitr.auto.asis', ppo1)
 pander::panderOptions('table.style', ppo2)
 ```
