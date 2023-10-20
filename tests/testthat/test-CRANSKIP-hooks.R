@@ -34,3 +34,69 @@ test_that('log_errors', {
         expect_match(eval_outside('f<-function(x) {42 * "foobar"}; f()'), 'ERROR')
     }
 })
+
+test_that('shiny input initialization is detected', {
+    obs <-
+        eval_outside("
+            .globals <- shiny:::.globals
+            .globals$appState <- new.env(parent = emptyenv())
+            server <- function(input, output, session) {
+                logger::log_shiny_input_changes(input)
+            }
+            shiny::testServer(server, {})
+            "
+        )
+    exp <- "INFO \\[[0-9: \\-]+\\] Default Shiny inputs initialized"
+    expect_match(obs, exp)
+})
+
+test_that('shiny input initialization is detected with different log-level', {
+    obs <-
+        eval_outside("
+            .globals <- shiny:::.globals
+            .globals$appState <- new.env(parent = emptyenv())
+            server <- function(input, output, session) {
+                logger::log_shiny_input_changes(input, level = 'ERROR')
+            }
+            shiny::testServer(server, {})
+            "
+        )
+    exp <- "ERROR \\[[0-9: \\-]+\\] Default Shiny inputs initialized"
+    expect_match(obs, exp)
+})
+
+test_that('shiny input change is detected', {
+    obs <-
+        eval_outside("
+            .globals <- shiny:::.globals
+            .globals$appState <- new.env(parent = emptyenv())
+            server <- function(input, output, session) {
+                logger::log_shiny_input_changes(input)
+                x <- shiny::reactive(input$a)
+            }
+            shiny::testServer(server, {
+                session$setInputs(a = 2)
+            })
+            "
+        )
+    exp <- "INFO \\[[0-9: \\-]+\\] Shiny input change detected on a: NULL -> 2"
+    expect_match(obs, exp)
+})
+
+test_that('shiny input change is logged with different level', {
+    obs <-
+        eval_outside("
+            .globals <- shiny:::.globals
+            .globals$appState <- new.env(parent = emptyenv())
+            server <- function(input, output, session) {
+                logger::log_shiny_input_changes(input, level = 'ERROR')
+                x <- shiny::reactive(input$a)
+            }
+            shiny::testServer(server, {
+                session$setInputs(a = 2)
+            })
+            "
+        )
+    exp <- "ERROR \\[[0-9: \\-]+\\] Shiny input change detected on a: NULL -> 2"
+    expect_match(obs, exp)
+})
