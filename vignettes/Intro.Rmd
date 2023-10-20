@@ -73,6 +73,15 @@ log_eval(y <- f(g(x)), level = INFO)
 str(y)
 ```
 
+
+Sometimes, it may be reasonable to log R objects as markdown, e.g. a smallish `data.frame` or `data.table`, e.g. `mtcars` or `iris`. Calling the formatter using `pander` instead of `glue` can help:
+
+```{r}
+pander::panderOptions('table.style', 'simple')
+log_formatter(formatter_pander)
+log_info(head(iris))
+
+
 For more details, check the [function reference in the manual](https://daroczig.github.io/logger/reference/index.html), or start with the [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes.
 
 ```{r cleanup, include = FALSE}
