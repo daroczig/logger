@@ -37,20 +37,20 @@ log_messages <- function() {
 #' Injects a logger call to standard warnings
 #'
 #' This function uses \code{trace} to add a \code{log_warn} function call when \code{warning} is called to log the warning messages with the \code{logger} layout and appender.
-#' 
-#' @param muffle if TRUE, the warning are not shown after being logged
-#' 
+#' @param muffle if TRUE, the warning is not shown after being logged
 #' @export
 #' @examples \dontrun{
 #' log_warnings()
 #' for (i in 1:5) { Sys.sleep(runif(1)); warning(i) }
 #' }
-log_warnings <- function(muffle=getOption("logger_muffle_warnings", FALSE)) {
+log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
     if (R.Version()$major >= 4) {
         globalCallingHandlers(
             warning = function(m) {
                 logger::log_warn(m$message)
-                if(isTRUE(muffle)) invokeRestart("muffleWarning")
+                if (isTRUE(muffle)) {
+                    invokeRestart('muffleWarning')
+                }
             }
         )
     } else {
@@ -67,20 +67,20 @@ log_warnings <- function(muffle=getOption("logger_muffle_warnings", FALSE)) {
 #' Injects a logger call to standard errors
 #'
 #' This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.
-#' 
-#' @param muffle if TRUE, the errors are not thrown after being logged
-#' 
+#' @param muffle if TRUE, the error is not thrown after being logged
 #' @export
 #' @examples \dontrun{
 #' log_errors()
 #' stop('foobar')
 #' }
-log_errors <- function(muffle=getOption("logger_muffle_errors", FALSE)) {
+log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
         if (R.Version()$major >= 4) {
         globalCallingHandlers(
             error = function(m) {
                 logger::log_error(m$message)
-                if(isTRUE(muffle)) invokeRestart("abort")
+                if (isTRUE(muffle)) {
+                    invokeRestart('abort')
+                }
             }
         )
     } else {
