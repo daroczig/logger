@@ -18,11 +18,15 @@ warn_if_globalCallingHandlers_is_not_available <- function() {
 #' }
 log_messages <- function() {
     if (R.Version()$major >= 4) {
-        globalCallingHandlers(
-            message = function(m) {
-                logger::log_info(m$message)
-            }
-        )
+        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'message'],
+                       attr, which = 'implements') == 'log_messages')) {
+            warning('Ignoring this call to log_messages as it was registered previously.')
+        } else {
+            globalCallingHandlers(
+                message = structure(function(m) {
+                    logger::log_info(m$message)
+                }, implements = 'log_messages'))
+        }
     } else {
         warn_if_globalCallingHandlers_is_not_available()
         invisible(suppressMessages(trace(
@@ -45,14 +49,18 @@ log_messages <- function() {
 #' }
 log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
     if (R.Version()$major >= 4) {
-        globalCallingHandlers(
-            warning = function(m) {
-                logger::log_warn(m$message)
-                if (isTRUE(muffle)) {
-                    invokeRestart('muffleWarning')
-                }
-            }
-        )
+        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'warning'],
+                       attr, which = 'implements') == 'log_warnings')) {
+            warning('Ignoring this call to log_warnings as it was registered previously.')
+        } else {
+            globalCallingHandlers(
+                warning = structure(function(m) {
+                    logger::log_warn(m$message)
+                    if (isTRUE(muffle)) {
+                        invokeRestart('muffleWarning')
+                    }
+                }, implements = 'log_warnings'))
+        }
     } else {
         warn_if_globalCallingHandlers_is_not_available()
         invisible(suppressMessages(trace(
@@ -74,15 +82,19 @@ log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
 #' stop('foobar')
 #' }
 log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
-        if (R.Version()$major >= 4) {
-        globalCallingHandlers(
-            error = function(m) {
-                logger::log_error(m$message)
-                if (isTRUE(muffle)) {
-                    invokeRestart('abort')
-                }
-            }
-        )
+    if (R.Version()$major >= 4) {
+        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'error'],
+                       attr, which = 'implements') == 'log_errors')) {
+            warning('Ignoring this call to log_errors as it was registered previously.')
+        } else {
+            globalCallingHandlers(
+                error = structure(function(m) {
+                    logger::log_error(m$message)
+                    if (isTRUE(muffle)) {
+                        invokeRestart('abort')
+                    }
+                }, implements = 'log_errors'))
+        }
     } else {
         warn_if_globalCallingHandlers_is_not_available()
         invisible(suppressMessages(trace(
