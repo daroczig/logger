@@ -19,6 +19,12 @@ test_that('log levels', {
     expect_output(log_info('foo'), NA)
     expect_output(log_debug('foo'), NA)
     expect_output(log_trace('foo'), NA)
+    expect_output(log_level(as.loglevel(ERROR), 'foo'), 'ERROR.*foo')
+    expect_output(log_level(as.loglevel('ERROR'), 'foo'), 'ERROR.*foo')
+    expect_output(log_level(as.loglevel(200L), 'foo'), 'ERROR.*foo')
+    expect_output(log_level(as.loglevel(TRACE), 'foo'), NA)
+    expect_output(log_level(as.loglevel('TRACE'), 'foo'), NA)
+    expect_output(log_level(as.loglevel(600L), 'foo'), NA)
 })
 
 log_threshold(TRACE)
