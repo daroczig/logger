@@ -86,7 +86,7 @@ as.loglevel.character <- function(x) {
 
 #' @export
 as.loglevel.integer <- function(x) {
-    loglevels <- mget(log_levels_supported, env = asNamespace('logger'))
+    loglevels <- mget(log_levels_supported, envir = asNamespace('logger'))
     stopifnot(
         length(x) == 1,
         x %in% as.integer(loglevels)
