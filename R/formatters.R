@@ -102,6 +102,11 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
         sprintfparams <- seq_along(params)
     }
 
+    ## early return
+    if (is.null(msg) || length(msg) == 0) {
+        return('')
+    }
+
     ## but some unnamed params might belong to glue actually, so
     ## let's look for the max number of first unnamed params sprintf expects
     sprintftags <- regmatches(msg, gregexpr('%[0-9.+0]*[aAdifeEgGosxX]', msg))[[1]]
