@@ -79,6 +79,12 @@ test_that('glue+sprintf works', {
     expect_equal(formatter_glue_or_sprintf('%s and %i', 1), '%s and %i')
     expect_equal(formatter_glue_or_sprintf('fun{fun}'), 'fun{fun}')
 
+    for (fn in c(formatter_sprintf, formatter_glue_or_sprintf)) {
+        log_formatter(fn)
+        expect_error(log_info(character(0)), NA)
+        expect_output(log_info(character(0)), 'INFO')
+    }
+
 })
 
 test_that('formatter_logging works', {
