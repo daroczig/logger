@@ -31,9 +31,14 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
+    dots <- list(...)
+    if (!is.null(names(dots)) && !any(names(dots) == "")) {
+      dot1 <- paste0(names(dots), "={", names(dots), "}", collapse = " ")
+      dots <- c(dot1, dots)
+    }
     as.character(
         tryCatch(
-            glue::glue(..., .envir = .topenv),
+            do.call(glue::glue, c(dots, list(.envir = .topenv))),
             error = function(e) {
                 stop(paste(
                     '`glue` failed in `formatter_glue` on:\n\n',
@@ -55,9 +60,14 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
 #' @importFrom utils str
 formatter_glue_safe <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
+    dots <- list(...)
+    if (!is.null(names(dots)) && !any(names(dots) == "")) {
+      dot1 <- paste0(names(dots), "={", names(dots), "}", collapse = " ")
+      dots <- c(dot1, dots)
+    }
     as.character(
         tryCatch(
-            glue::glue_safe(..., .envir = .topenv),
+            do.call(glue::glue_safe, c(dots, list(.envir = .topenv))),
             error = function(e) {
                 stop(paste(
                     '`glue_safe` failed in `formatter_glue_safe` on:\n\n',

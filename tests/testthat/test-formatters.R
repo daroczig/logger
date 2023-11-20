@@ -41,6 +41,10 @@ test_that('glue works', {
 
 })
 
+test_that('formatter_glue with no unnamed args is not empty', {
+    expect_true(nzchar(formatter_glue(foo = "foo", bar = 1)))
+})
+
 log_formatter(formatter_glue_safe)
 test_that('glue_safe works', {
 
