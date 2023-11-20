@@ -48,9 +48,10 @@ logger <- function(threshold, formatter, layout, appender) {
                 .topenv = .topenv)))
         }
 
-        appender(layout(
+        appender(log_txt <- layout(
             level, messages, namespace = namespace,
             .logcall = substitute(.logcall), .topcall = substitute(.topcall), .topenv = .topenv))
+        invisible(log_txt)
 
     }
 }
@@ -293,7 +294,24 @@ log_level <- function(level, ..., namespace = NA_character_,
         do.call(log_fun, log_arg)
 
     }
+
+    class(log_arg) <- "logger"
+    invisible(log_arg)
 }
+
+#' Convert a log message to character
+#' @param namespace string
+#' @param index index of the logger within the namespace
+#' @export
+as.character.logger <- function(x, ..., namespace = x$namespace, index = 1,
+                                .topenv = parent.frame()) {
+    definition <- get_logger_definitions(namespace, .topenv = .topenv)[[index]]
+    x2 <- x[!names(x) %in% c("level", ".logcall", ".topcall", ".topenv", "namespace")]
+    do.call(definition$formatter, c(x2, list(
+      .logcall = substitute(.logcall),
+      .topcall = substitute(.topcall),
+      .topenv = .topenv)))
+ }
 
 
 #' Assure valid log level
