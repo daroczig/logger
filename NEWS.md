@@ -1,7 +1,7 @@
 # logger 0.2.9000 (development)
 
 - fix `formatter_glue(foo="bar")` so that the lack of an unnamed
-  argument will still return a string instead of `character(0)`
+  argument will still return a string instead of `character(0)` (#130)
 
 # logger 0.2.2 (2021-10-10)
 
