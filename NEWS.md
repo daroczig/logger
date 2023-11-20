@@ -1,5 +1,8 @@
 # logger 0.2.9000 (development)
 
+- update `log_*` so that they return the formatted string (#26) using
+  `as.character(log_*(..))`
+
 # logger 0.2.2 (2021-10-10)
 
 Maintenance release:
