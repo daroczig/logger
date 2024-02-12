@@ -1,5 +1,9 @@
 # logger 0.2.9000 (development)
 
+## New features
+
+* support `OFF` log level (#138, @pawelru)
+
 # logger 0.2.2 (2021-10-10)
 
 Maintenance release:
