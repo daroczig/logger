@@ -311,32 +311,47 @@ validate_log_level <- function(level) {
 }
 
 
+#' Make sure there are no unknown named arguments
+#' @keywords internal
+assert_no_unknown_args <- function() {
+    call <- match.call(definition = sys.function(1), call = sys.call(1), expand.dots = FALSE)
+    stopifnot("Unknown named argument provided." = is.null(names(call$`...`)))
+}
+
+
 #' @export
 log_fatal <- function(...) {
+    assert_no_unknown_args()
     log_level(FATAL, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 #' @export
 log_error <- function(...) {
+    assert_no_unknown_args()
     log_level(ERROR, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 #' @export
 log_warn <- function(...) {
+    assert_no_unknown_args()
     log_level(WARN, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 #' @export
 log_success <- function(...) {
+    assert_no_unknown_args()
     log_level(SUCCESS, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 #' @export
 log_info <- function(...) {
+    assert_no_unknown_args()
     log_level(INFO, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 #' @export
 log_debug <- function(...) {
+    assert_no_unknown_args()
     log_level(DEBUG, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 #' @export
 log_trace <- function(...) {
+    assert_no_unknown_args()
     log_level(TRACE, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 }
 
