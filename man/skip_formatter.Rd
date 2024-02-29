@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatters.R
 \name{skip_formatter}
 \alias{skip_formatter}
-\title{Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged}
+\title{Skip the formatter function}
 \usage{
 skip_formatter(message, ...)
 }
@@ -15,5 +15,5 @@ skip_formatter(message, ...)
 character vector  with \code{skip_formatter} attribute set to \code{TRUE}
 }
 \description{
-Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged
+Adds the \code{skip_formatter} attribute to an object so that logger will skip calling the formatter function(s). This is useful if you want to preprocess the log message with a custom function instead of the active formatter function(s). Note that the \code{message} should be a string, and \code{skip_formatter} should be the only input for the logging function to make this work.
 }
