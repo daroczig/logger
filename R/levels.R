@@ -51,6 +51,7 @@ DEBUG <- structure(500L, level = 'DEBUG', class = c('loglevel', 'integer'))
 #' @export
 TRACE <- structure(600L, level = 'TRACE', class = c('loglevel', 'integer'))
 
+#' @export
 print.loglevel <- function(x) {
     cat('Log level: ', attr(x, 'level'), '\n', sep = '')
 }
