@@ -4,6 +4,10 @@
 
 * support `OFF` log level (#138, @pawelru)
 
+## Fixes
+
+* change examples using `Mean` since they behave differently when the `Hmisc` package is loaded (#131)
+
 # logger 0.2.2 (2021-10-10)
 
 Maintenance release:
