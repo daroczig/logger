@@ -223,19 +223,26 @@ log_namespaces <- function() {
 #' log_level(level, ..., namespace = NA_character_,
 #'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_trace(...)
+#' log_trace(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_debug(...)
+#' log_debug(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_info(...)
+#' log_info(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_success(...)
+#' log_success(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_warn(...)
+#' log_warn(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_error(...)
+#' log_error(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #'
-#' log_fatal(...)
+#' log_fatal(..., namespace = NA_character_,
+#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #' @examples \dontrun{
 #' log_level(INFO, 'hi there')
 #' log_info('hi there')
@@ -312,32 +319,39 @@ validate_log_level <- function(level) {
 
 
 #' @export
-log_fatal <- function(...) {
-    log_level(FATAL, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_fatal <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(FATAL, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
-log_error <- function(...) {
-    log_level(ERROR, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_error <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(ERROR, ..., .logcall =  .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
-log_warn <- function(...) {
-    log_level(WARN, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_warn <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(WARN, ..., .logcall =  .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
-log_success <- function(...) {
-    log_level(SUCCESS, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_success <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(SUCCESS, ..., .logcall =  .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
-log_info <- function(...) {
-    log_level(INFO, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_info <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(INFO, ..., .logcall =  .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
-log_debug <- function(...) {
-    log_level(DEBUG, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_debug <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(DEBUG, ..., .logcall =  .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
-log_trace <- function(...) {
-    log_level(TRACE, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_trace <- function(..., namespace = NA_character_,
+                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+    log_level(TRACE, ..., .logcall =  .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 
 
