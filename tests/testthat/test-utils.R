@@ -14,8 +14,8 @@ test_that('fail_on_missing_package', {
 })
 
 test_that('except helper', {
-    expect_equal(Mean(1:10) %except% sum(1:10) / length(1:10), 5.5)
-    expect_output(Mean(1:10) %except% sum(1:10) / length(1:10), 'WARN')
+    expect_equal(FunDoesNotExist(1:10) %except% sum(1:10) / length(1:10), 5.5)
+    expect_output(FunDoesNotExist(1:10) %except% sum(1:10) / length(1:10), 'WARN')
 })
 
 test_that('validate_log_level', {
