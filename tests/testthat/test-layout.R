@@ -51,6 +51,7 @@ test_that('must throw errors', {
 
 log_layout(layout_logging)
 test_that('logging layout', {
+    expect_output(log_level(INFO, 'foo', namespace = 'bar'), 'INFO:bar:foo')
     expect_output(log_info('foobar'), 'INFO')
     expect_output(log_info('foo', namespace = 'bar'), 'foo')
     expect_output(log_info('foo', namespace = 'bar'), 'bar')
