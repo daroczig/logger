@@ -321,37 +321,37 @@ validate_log_level <- function(level) {
 #' @export
 log_fatal <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(FATAL, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(FATAL, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
 log_error <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(ERROR, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(ERROR, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
 log_warn <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(WARN, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(WARN, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
 log_success <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(SUCCESS, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(SUCCESS, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
 log_info <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(INFO, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(INFO, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
 log_debug <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(DEBUG, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(DEBUG, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
 log_trace <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    log_level(TRACE, ..., .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    log_level(TRACE, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 
 
