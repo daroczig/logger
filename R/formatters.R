@@ -145,7 +145,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @examples \dontrun{
-#' log_formatter(formatter_json())
+#' log_formatter(formatter_json)
 #' log_layout(layout_json_parser())
 #' log_info(everything = 42)
 #' log_info(mtcars = mtcars, species = iris$Species)
