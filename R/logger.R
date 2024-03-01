@@ -125,6 +125,20 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
     assign(namespace, configs, envir = namespaces)
 }
 
+
+#' Delete an index from a logger namespace
+#' @inheritParams log_threshold
+#' @export
+delete_logger_index <- function(namespace = 'global', index) {
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    if (index > length(configs)) {
+        stop(sprintf('%s namespace has only %i indexes', namespace, length(configs)))
+    }
+    configs[index] <- NULL
+    assign(namespace, configs, envir = namespaces)
+}
+
+
 #' Get or set log level threshold
 #' @param level see \code{\link{log_levels}}
 #' @param namespace logger namespace
