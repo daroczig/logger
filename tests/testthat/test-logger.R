@@ -145,6 +145,10 @@ test_that('config setter called from do.call', {
     unlink(t)
 })
 
+test_that('providing log_level() args to wrappers diretly is OK', {
+    expect_silent(log_info('{Sepal.Length}', .topenv = iris))
+})
+
 ## reset settings
 log_threshold(threshold)
 log_layout(layout)
