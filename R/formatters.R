@@ -31,7 +31,7 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
-    as.character(
+    message <- as.character(
         tryCatch(
             glue::glue(..., .envir = .topenv),
             error = function(e) {
@@ -43,6 +43,14 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
                     '\n\nPlease consider using another `log_formatter` or',
                     '`skip_formatter` on strings with curly braces.'))
             }))
+    ## throw warning with logger inputs on empty response
+    if (length(message) == 0) {
+        try(warning(paste(
+            "glue in formatter_glue returned nothing with the following parameters:",
+            paste(..., sep = ' | ')
+        )), silent = TRUE)
+    }
+    message
 }, generator = quote(formatter_glue()))
 
 
