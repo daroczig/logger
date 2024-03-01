@@ -157,7 +157,9 @@ formatter_json <- structure(function(..., .logcall = sys.call(), .topcall = sys.
 }, generator = quote(formatter_json()))
 
 
-#' Adds the skip_formatter attribute to an object so that logger will skip calling the formatter function on the object(s) to be logged
+#' Skip the formatter function
+#'
+#' Adds the \code{skip_formatter} attribute to an object so that logger will skip calling the formatter function(s). This is useful if you want to preprocess the log message with a custom function instead of the active formatter function(s). Note that the \code{message} should be a string, and \code{skip_formatter} should be the only input for the logging function to make this work.
 #' @param message character vector directly passed to the appender function in \code{\link{logger}}
 #' @param ... should be never set
 #' @return character vector  with \code{skip_formatter} attribute set to \code{TRUE}

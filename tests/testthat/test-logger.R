@@ -27,6 +27,17 @@ test_that('log levels', {
     expect_output(log_level(as.loglevel(600L), 'foo'), NA)
 })
 
+log_threshold(OFF)
+test_that('log levels - OFF', {
+    expect_output(log_fatal('foo'), NA)
+    expect_output(log_error('foo'), NA)
+    expect_output(log_warn('foo'), NA)
+    expect_output(log_success('foo'), NA)
+    expect_output(log_info('foo'), NA)
+    expect_output(log_debug('foo'), NA)
+    expect_output(log_trace('foo'), NA)
+})
+
 log_threshold(TRACE)
 test_that('log thresholds', {
     expect_output(log_fatal('foo'), 'FATAL.*foo')
