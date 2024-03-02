@@ -44,5 +44,5 @@ log_info(lm(hp ~ wt, mtcars))
 }
 }
 \seealso{
-This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
+This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}
 }

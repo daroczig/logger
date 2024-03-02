@@ -19,6 +19,23 @@ test_that('log levels', {
     expect_output(log_info('foo'), NA)
     expect_output(log_debug('foo'), NA)
     expect_output(log_trace('foo'), NA)
+    expect_output(log_level(as.loglevel(ERROR), 'foo'), 'ERROR.*foo')
+    expect_output(log_level(as.loglevel('ERROR'), 'foo'), 'ERROR.*foo')
+    expect_output(log_level(as.loglevel(200L), 'foo'), 'ERROR.*foo')
+    expect_output(log_level(as.loglevel(TRACE), 'foo'), NA)
+    expect_output(log_level(as.loglevel('TRACE'), 'foo'), NA)
+    expect_output(log_level(as.loglevel(600L), 'foo'), NA)
+})
+
+log_threshold(OFF)
+test_that('log levels - OFF', {
+    expect_output(log_fatal('foo'), NA)
+    expect_output(log_error('foo'), NA)
+    expect_output(log_warn('foo'), NA)
+    expect_output(log_success('foo'), NA)
+    expect_output(log_info('foo'), NA)
+    expect_output(log_debug('foo'), NA)
+    expect_output(log_trace('foo'), NA)
 })
 
 log_threshold(TRACE)
@@ -109,6 +126,23 @@ test_that('built in variables: namespace', {
 
 test_that('print.level', {
     expect_equal(capture.output(print(INFO)), 'Log level: INFO')
+})
+
+test_that('config setter called from do.call', {
+    t <- tempfile()
+    expect_error(do.call(log_appender, list(appender_file(t))), NA)
+    log_info(42)
+    expect_length(readLines(t), 1)
+    expect_error(do.call(log_threshold, list(ERROR)), NA)
+    log_info(42)
+    expect_length(readLines(t), 1)
+    expect_error(do.call(log_threshold, list(INFO)), NA)
+    log_info(42)
+    expect_length(readLines(t), 2)
+    expect_error(do.call(log_layout, list(formatter_paste)), NA)
+    log_info(42)
+    expect_length(readLines(t), 3)
+    unlink(t)
 })
 
 ## reset settings

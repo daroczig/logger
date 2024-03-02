@@ -4,7 +4,10 @@
 \alias{log_errors}
 \title{Injects a logger call to standard errors}
 \usage{
-log_errors()
+log_errors(muffle = getOption("logger_muffle_errors", FALSE))
+}
+\arguments{
+\item{muffle}{if TRUE, the error is not thrown after being logged}
 }
 \description{
 This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.

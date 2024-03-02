@@ -41,6 +41,24 @@ test_that('glue works', {
 
 })
 
+log_formatter(formatter_glue_safe)
+test_that('glue_safe works', {
+
+    expect_equal(formatter_glue_safe("Hi"), "Hi")
+    expect_equal(formatter_glue_safe("   Hi"), "   Hi")
+    expect_equal(formatter_glue_safe("Hi {a}", a = 42), "Hi 42")
+    expect_equal(formatter_glue_safe("Hi {everything}"), "Hi 42")
+
+    expect_output(log_info("Hi {everything}"), '42')
+    expect_output(log_warn("Hi {everything}"), '42')
+    expect_output(g(), '42')
+
+    expect_error(formatter_glue_safe("Hi {42}"))
+    expect_error(formatter_glue_safe('malformed {'))
+    expect_error(formatter_glue_safe('malformed {{'), NA)
+
+})
+
 log_formatter(formatter_sprintf)
 test_that('sprintf works', {
 
@@ -78,6 +96,12 @@ test_that('glue+sprintf works', {
     expect_equal(formatter_glue_or_sprintf('%s and %i'), '%s and %i')
     expect_equal(formatter_glue_or_sprintf('%s and %i', 1), '%s and %i')
     expect_equal(formatter_glue_or_sprintf('fun{fun}'), 'fun{fun}')
+
+    for (fn in c(formatter_sprintf, formatter_glue_or_sprintf)) {
+        log_formatter(fn)
+        expect_error(log_info(character(0)), NA)
+        expect_output(log_info(character(0)), 'INFO')
+    }
 
 })
 

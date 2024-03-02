@@ -18,11 +18,15 @@ warn_if_globalCallingHandlers_is_not_available <- function() {
 #' }
 log_messages <- function() {
     if (R.Version()$major >= 4) {
-        globalCallingHandlers(
-            message = function(m) {
-                logger::log_info(m$message)
-            }
-        )
+        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'message'],
+                       attr, which = 'implements') == 'log_messages')) {
+            warning('Ignoring this call to log_messages as it was registered previously.')
+        } else {
+            globalCallingHandlers(
+                message = structure(function(m) {
+                    logger::log_info(m$message)
+                }, implements = 'log_messages'))
+        }
     } else {
         warn_if_globalCallingHandlers_is_not_available()
         invisible(suppressMessages(trace(
@@ -37,18 +41,26 @@ log_messages <- function() {
 #' Injects a logger call to standard warnings
 #'
 #' This function uses \code{trace} to add a \code{log_warn} function call when \code{warning} is called to log the warning messages with the \code{logger} layout and appender.
+#' @param muffle if TRUE, the warning is not shown after being logged
 #' @export
 #' @examples \dontrun{
 #' log_warnings()
 #' for (i in 1:5) { Sys.sleep(runif(1)); warning(i) }
 #' }
-log_warnings <- function() {
+log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
     if (R.Version()$major >= 4) {
-        globalCallingHandlers(
-            warning = function(m) {
-                logger::log_warn(m$message)
-            }
-        )
+        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'warning'],
+                       attr, which = 'implements') == 'log_warnings')) {
+            warning('Ignoring this call to log_warnings as it was registered previously.')
+        } else {
+            globalCallingHandlers(
+                warning = structure(function(m) {
+                    logger::log_warn(m$message)
+                    if (isTRUE(muffle)) {
+                        invokeRestart('muffleWarning')
+                    }
+                }, implements = 'log_warnings'))
+        }
     } else {
         warn_if_globalCallingHandlers_is_not_available()
         invisible(suppressMessages(trace(
@@ -63,18 +75,26 @@ log_warnings <- function() {
 #' Injects a logger call to standard errors
 #'
 #' This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.
+#' @param muffle if TRUE, the error is not thrown after being logged
 #' @export
 #' @examples \dontrun{
 #' log_errors()
 #' stop('foobar')
 #' }
-log_errors <- function() {
-        if (R.Version()$major >= 4) {
-        globalCallingHandlers(
-            error = function(m) {
-                logger::log_error(m$message)
-            }
-        )
+log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
+    if (R.Version()$major >= 4) {
+        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'error'],
+                       attr, which = 'implements') == 'log_errors')) {
+            warning('Ignoring this call to log_errors as it was registered previously.')
+        } else {
+            globalCallingHandlers(
+                error = structure(function(m) {
+                    logger::log_error(m$message)
+                    if (isTRUE(muffle)) {
+                        invokeRestart('abort')
+                    }
+                }, implements = 'log_errors'))
+        }
     } else {
         warn_if_globalCallingHandlers_is_not_available()
         invisible(suppressMessages(trace(
@@ -132,7 +152,7 @@ log_shiny_input_changes <- function(input,
 
     input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
-    log_info(skip_formatter(paste(
+    log_level(level, skip_formatter(paste(
         'Default Shiny inputs initialized:',
         as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))), namespace = namespace)
 

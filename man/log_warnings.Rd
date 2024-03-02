@@ -4,7 +4,10 @@
 \alias{log_warnings}
 \title{Injects a logger call to standard warnings}
 \usage{
-log_warnings()
+log_warnings(muffle = getOption("logger_muffle_warnings", FALSE))
+}
+\arguments{
+\item{muffle}{if TRUE, the warning is not shown after being logged}
 }
 \description{
 This function uses \code{trace} to add a \code{log_warn} function call when \code{warning} is called to log the warning messages with the \code{logger} layout and appender.

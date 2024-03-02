@@ -134,8 +134,7 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
 log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
-    fun_name <- deparse(sys.call()[[1]])
-    log_config_setter(fun_name = fun_name, arg = level, namespace = namespace, index = index)
+    log_config_setter(fun_name = 'log_threshold', arg = level, namespace = namespace, index = index)
 }
 
 
@@ -149,8 +148,7 @@ log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
-    fun_name <- deparse(sys.call()[[1]])
-    log_config_setter(fun_name = fun_name, arg = layout, namespace = namespace, index = index)
+    log_config_setter(fun_name = 'log_layout', arg = layout, namespace = namespace, index = index)
 }
 
 
@@ -160,8 +158,7 @@ log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
 #' @export
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
 log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
-    fun_name <- deparse(sys.call()[[1]])
-    log_config_setter(fun_name = fun_name, arg = formatter, namespace = namespace, index = index)
+    log_config_setter(fun_name = 'log_formatter', arg = formatter, namespace = namespace, index = index)
 }
 
 
@@ -186,8 +183,7 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
 log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
-    fun_name <- deparse(sys.call()[[1]])
-    log_config_setter(fun_name = fun_name, arg = appender, namespace = namespace, index = index)
+    log_config_setter(fun_name = 'log_appender', arg = appender, namespace = namespace, index = index)
 }
 
 
