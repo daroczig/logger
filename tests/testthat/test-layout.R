@@ -29,7 +29,6 @@ test_that('metavars', {
     expect_output((function(){log_info(42)})(), 'INFO')
     expect_output((function(){log_warn(42)})(), 'WARN')
     expect_output((function(){log_info(42)})(), 'log_info')
-    expect_output(, 'INFO')
     log_layout(layout_glue_generator(format = '{fn}'))
     expect_output({fun42<-function(){log_info(42)};fun42();rm(fun42)}, 'fun42')
 })
