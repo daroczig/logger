@@ -131,7 +131,7 @@ and the actual call etc.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span><span class="op">(</span>log_level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
 <span><span class="fu">f</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x557f2063d3b8&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;environment: 0x5556ee8651b8&gt;</span></span></code></pre></div>
 </li>
 <li>
 <p>a <strong>logger definition</strong> to process the log request,
@@ -147,7 +147,7 @@ requests with lower log level will be thrown away</p>
 <span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ERROR [2024-03-03 13:20:08] Oops</span></span></code></pre></div>
+<span><span class="co">#&gt; ERROR [2024-03-03 13:20:28] Oops</span></span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and
