@@ -86,7 +86,7 @@ Maintenance release:
 
 # logger 0.1 (2018-12-20)
 
-Initial CRAN release after collecting feedback for a month on [Twitter](https://twitter.com/daroczig/status/1067461632677330944):
+Initial CRAN release after collecting feedback for a month on Twitter at `https://twitter.com/daroczig/status/1067461632677330944`:
 
 * finalized design of a log request defined by
 

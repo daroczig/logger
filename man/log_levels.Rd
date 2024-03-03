@@ -49,6 +49,6 @@ List of supported log levels:
 }
 }
 \references{
-\url{https://logging.apache.org/log4j/2.0/javadoc/log4j-api/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
+\url{https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
 }
 \keyword{datasets}
