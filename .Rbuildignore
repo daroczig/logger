@@ -16,3 +16,4 @@ dev-resources
 ^docs$
 ^pkgdown$
 ^\.github$
+revdep

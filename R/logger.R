@@ -33,40 +33,39 @@ logger <- function(threshold, formatter, layout, appender) {
 
     function(level, ..., namespace = NA_character_, .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
-        if (level > threshold) {
-            return(invisible(NULL))
-        }
-
-        params <- list(...)
-
-        ## workaround to be able to avoid any formatter function, eg when passing in a string
-        if (length(params) == 1 && isTRUE(attr(params[[1]], 'skip_formatter', exact = TRUE))) {
-            message <- params[[1]]
-        } else {
-            message <- do.call(formatter, c(params, list(
-                .logcall = substitute(.logcall),
-                .topcall = substitute(.topcall),
-                .topenv = .topenv)))
-        }
-
-        record <- layout(
-            level, message, namespace = namespace,
-            .logcall = substitute(.logcall), .topcall = substitute(.topcall), .topenv = .topenv)
-
-        appender(record)
-
-        invisible(list(
+        res <- list(
             level = level,
             namespace = namespace,
-            params = params,
-            message = message,
+            params = list(...),
             handlers = list(
                 formatter = formatter,
                 layout = layout,
                 appender = appender
             ),
-            record = record
-        ))
+            message = NULL,
+            record = NULL
+        )
+
+        if (level > threshold) {
+            return(invisible(res))
+        }
+
+        ## workaround to be able to avoid any formatter function, eg when passing in a string
+        if (length(res$params) == 1 && isTRUE(attr(res$params[[1]], 'skip_formatter', exact = TRUE))) {
+            res$message <- res$params[[1]]
+        } else {
+            res$message <- do.call(formatter, c(res$params, list(
+                .logcall = substitute(.logcall),
+                .topcall = substitute(.topcall),
+                .topenv = .topenv)))
+        }
+
+        res$record <- layout(
+            level, res$message, namespace = namespace,
+            .logcall = substitute(.logcall), .topcall = substitute(.topcall), .topenv = .topenv)
+
+        appender(res$record)
+        invisible(res)
 
     }
 }
