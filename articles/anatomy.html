@@ -131,56 +131,7 @@ and the actual call etc.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_logger_meta_variables.html">get_logger_meta_variables</a></span><span class="op">(</span>log_level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
 <span><span class="fu">f</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $ns</span></span>
-<span><span class="co">#&gt; [1] NA</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $ans</span></span>
-<span><span class="co">#&gt; [1] "global"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $topenv</span></span>
-<span><span class="co">#&gt; [1] "R_GlobalEnv"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $fn</span></span>
-<span><span class="co">#&gt; [1] "f"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $call</span></span>
-<span><span class="co">#&gt; [1] "f()"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2024-02-29 21:29:57 UTC"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $levelr</span></span>
-<span><span class="co">#&gt; Log level: INFO</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $level</span></span>
-<span><span class="co">#&gt; [1] "INFO"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $pid</span></span>
-<span><span class="co">#&gt; [1] 8382</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $r_version</span></span>
-<span><span class="co">#&gt; [1] "4.3.2"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $ns_pkg_version</span></span>
-<span><span class="co">#&gt; [1] NA</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $node</span></span>
-<span><span class="co">#&gt; [1] "fv-az1393-732"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $arch</span></span>
-<span><span class="co">#&gt; [1] "x86_64"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $os_name</span></span>
-<span><span class="co">#&gt; [1] "Linux"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $os_release</span></span>
-<span><span class="co">#&gt; [1] "6.5.0-1015-azure"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $os_version</span></span>
-<span><span class="co">#&gt; [1] "#15~22.04.1-Ubuntu SMP Tue Feb 13 01:15:12 UTC 2024"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $user</span></span>
-<span><span class="co">#&gt; [1] "runner"</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;environment: 0x558ea5ea05d0&gt;</span></span></code></pre></div>
 </li>
 <li>
 <p>a <strong>logger definition</strong> to process the log request,
@@ -196,7 +147,7 @@ requests with lower log level will be thrown away</p>
 <span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ERROR [2024-02-29 21:29:57] Oops</span></span></code></pre></div>
+<span><span class="co">#&gt; ERROR [2024-03-03 13:19:36] Oops</span></span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and
