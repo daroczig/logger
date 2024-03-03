@@ -24,7 +24,7 @@ log_messages <- function() {
         } else {
             globalCallingHandlers(
                 message = structure(function(m) {
-                    logger::log_info(m$message)
+                    logger::log_level(logger::INFO, m$message, .topcall = m$call)
                 }, implements = 'log_messages'))
         }
     } else {
@@ -55,7 +55,7 @@ log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
         } else {
             globalCallingHandlers(
                 warning = structure(function(m) {
-                    logger::log_warn(m$message)
+                    logger::log_level(logger::WARN, m$message, .topcall = m$call)
                     if (isTRUE(muffle)) {
                         invokeRestart('muffleWarning')
                     }
@@ -89,7 +89,7 @@ log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
         } else {
             globalCallingHandlers(
                 error = structure(function(m) {
-                    logger::log_error(m$message)
+                    logger::log_level(logger::ERROR, m$message, .topcall = m$call)
                     if (isTRUE(muffle)) {
                         invokeRestart('abort')
                     }
