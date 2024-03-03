@@ -111,7 +111,7 @@
     <div id="details">
     <h2>Details</h2>
     <p>By default, a general logger definition is created when loading the <code>logger</code> package, that uses</p>
-<ol><li><p><code><a href="log_levels.html">INFO</a></code> as the log level threshold</p></li>
+<ol><li><p><code><a href="log_levels.html">INFO</a></code> (or as per the <code>LOGGER_LOG_LEVEL</code> environment variable override) as the log level threshold</p></li>
 <li><p><code><a href="layout_simple.html">layout_simple</a></code> as the layout function showing the log level, timestamp and log message</p></li>
 <li><p><code><a href="formatter_glue.html">formatter_glue</a></code> (or <code><a href="formatter_sprintf.html">formatter_sprintf</a></code> if <span class="pkg">glue</span> is not installed) as the default formatter function transforming the R objects to be logged to a character vector</p></li>
 <li><p><code><a href="appender_console.html">appender_console</a></code> as the default log record destination</p></li>
