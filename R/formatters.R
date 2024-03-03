@@ -101,6 +101,9 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
     if (length(params) > 0 & length(sprintfparams) == 0) {
         sprintfparams <- seq_along(params)
     }
+    if (is.null(msg) || length(msg) == 0) {
+	    msg <- ''
+    }
 
     ## early return
     if (is.null(msg) || length(msg) == 0) {
