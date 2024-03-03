@@ -70,6 +70,9 @@
     <loc>https://daroczig.github.io/logger/reference/appender_telegram.html</loc>
   </url>
   <url>
+    <loc>https://daroczig.github.io/logger/reference/appender_void.html</loc>
+  </url>
+  <url>
     <loc>https://daroczig.github.io/logger/reference/as.loglevel.html</loc>
   </url>
   <url>
@@ -77,6 +80,9 @@
   </url>
   <url>
     <loc>https://daroczig.github.io/logger/reference/colorize_by_log_level.html</loc>
+  </url>
+  <url>
+    <loc>https://daroczig.github.io/logger/reference/delete_logger_index.html</loc>
   </url>
   <url>
     <loc>https://daroczig.github.io/logger/reference/deparse_to_one_line.html</loc>

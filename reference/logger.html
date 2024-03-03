@@ -106,7 +106,7 @@
     <h2>Value</h2>
     
 
-<p>function taking <code>level</code> and <code>msg</code> arguments</p>
+<p>A function taking the log <code>level</code> to compare with the set threshold, all the <code>...</code> arguments passed to the formatter function, besides the standard <code>namespace</code>, <code>.logcall</code>, <code>.topcall</code> and <code>.topenv</code> arguments (see <code><a href="log_level.html">log_level</a></code> for more details). The function invisibly returns a list including the original <code>level</code>, <code>namespace</code>, all <code>...</code> transformed to a list as <code>params</code>, the log <code>message</code> (after calling the <code>formatter</code> function) and the log <code>record</code> (after calling the <code>layout</code> function), and a list of <code>handlers</code> with the <code>formatter</code>, <code>layout</code> and <code>appender</code> functions.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
