@@ -1,3 +1,9 @@
+#' Dummy appender not delivering the log record to anywhere
+#' @param lines character vector
+#' @export
+appender_void <- structure(function(lines) {}, generator = quote(appender_void()))
+
+
 #' Append log record to stderr
 #' @param lines character vector
 #' @export

@@ -36,8 +36,14 @@ test_that('glue works', {
     expect_output(log_warn("Hi {everything}"), '42')
     expect_output(g(), '42')
 
+    log_appender(appender_void)
     expect_error(formatter_glue('malformed {'))
     expect_error(formatter_glue('malformed {{'), NA)
+
+    expect_warning(formatter_glue(NULL))
+    expect_warning(log_info(NULL))
+    expect_warning(log_info(a = 42, b = "foobar"))
+    log_appender(appender_stdout)
 
 })
 
@@ -99,7 +105,9 @@ test_that('glue+sprintf works', {
 
     for (fn in c(formatter_sprintf, formatter_glue_or_sprintf)) {
         log_formatter(fn)
+        log_appender(appender_void)
         expect_error(log_info(character(0)), NA)
+        log_appender(appender_stdout)
         expect_output(log_info(character(0)), 'INFO')
     }
 
