@@ -25,7 +25,7 @@ A logger consists of a log level \code{threshold}, a log message \code{formatter
 By default, a general logger definition is created when loading the \code{logger} package, that uses
 
 \enumerate{
-  \item \code{\link{INFO}} as the log level threshold
+  \item \code{\link{INFO}} (or as per the \code{LOGGER_LOG_LEVEL} environment variable override) as the log level threshold
   \item \code{\link{layout_simple}} as the layout function showing the log level, timestamp and log message
   \item \code{\link{formatter_glue}} (or \code{\link{formatter_sprintf}} if \pkg{glue} is not installed) as the default formatter function transforming the R objects to be logged to a character vector
   \item \code{\link{appender_console}} as the default log record destination

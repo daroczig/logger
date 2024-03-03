@@ -7,7 +7,7 @@ namespaces <- new.env()
     namespaces$global <- list(
         ## there can be multiple loggers for a namespace
         default = list(
-            threshold = INFO,
+            threshold = Sys.getenv('LOGGER_LOG_LEVEL', unset = 'INFO'),
             layout    = layout_simple,
             formatter = formatter_sprintf,
             appender  = appender_console))
