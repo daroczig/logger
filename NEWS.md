@@ -2,6 +2,7 @@
 
 ## New features
 
+* update `log_*` functions to invisibly return the formatted log message and record (#26, @r2evans)
 * support `OFF` log level (#138, @pawelru)
 
 ## Fixes

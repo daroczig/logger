@@ -14,7 +14,7 @@
 #' @param formatter function pre-processing the message of the log record when it's not wrapped in a \code{\link{skip_formatter}} call
 #' @param layout function rendering the layout of the actual log record
 #' @param appender function writing the log record
-#' @return function taking \code{level} and \code{msg} arguments
+#' @return A function taking the log \code{level} to compare with the set threshold, all the \code{...} arguments passed to the formatter function, besides the standard \code{namespace}, \code{.logcall}, \code{.topcall} and \code{.topenv} arguments (see \code{\link{log_level}} for more details). The function invisibly returns a list including the original \code{level}, \code{namespace}, all \code{...} transformed to a list as \code{params}, the log \code{message} (after calling the \code{formatter} function) and the log \code{record} (after calling the \code{layout} function), and a list of \code{handlers} with the \code{formatter}, \code{layout} and \code{appender} functions.
 #' @export
 #' @references For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
 #' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
@@ -37,20 +37,36 @@ logger <- function(threshold, formatter, layout, appender) {
             return(invisible(NULL))
         }
 
+        params <- list(...)
+
         ## workaround to be able to avoid any formatter function, eg when passing in a string
-        messages <- list(...)
-        if (length(messages) == 1 && isTRUE(attr(messages[[1]], 'skip_formatter', exact = TRUE))) {
-            messages <- messages[[1]]
+        if (length(params) == 1 && isTRUE(attr(params[[1]], 'skip_formatter', exact = TRUE))) {
+            message <- params[[1]]
         } else {
-            messages <- do.call(formatter, c(messages, list(
+            message <- do.call(formatter, c(params, list(
                 .logcall = substitute(.logcall),
                 .topcall = substitute(.topcall),
                 .topenv = .topenv)))
         }
 
-        appender(layout(
-            level, messages, namespace = namespace,
-            .logcall = substitute(.logcall), .topcall = substitute(.topcall), .topenv = .topenv))
+        record <- layout(
+            level, message, namespace = namespace,
+            .logcall = substitute(.logcall), .topcall = substitute(.topcall), .topenv = .topenv)
+
+        appender(record)
+
+        invisible(list(
+            level = level,
+            namespace = namespace,
+            params = params,
+            message = message,
+            handlers = list(
+                formatter = formatter,
+                layout = layout,
+                appender = appender
+            ),
+            record = record
+        ))
 
     }
 }
@@ -108,6 +124,20 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
     configs[[min(index, length(config) + 1)]] <- config
     assign(namespace, configs, envir = namespaces)
 }
+
+
+#' Delete an index from a logger namespace
+#' @inheritParams log_threshold
+#' @export
+delete_logger_index <- function(namespace = 'global', index) {
+    configs <- get(fallback_namespace(namespace), envir = namespaces)
+    if (index > length(configs)) {
+        stop(sprintf('%s namespace has only %i indexes', namespace, length(configs)))
+    }
+    configs[index] <- NULL
+    assign(namespace, configs, envir = namespaces)
+}
+
 
 #' Get or set log level threshold
 #' @param level see \code{\link{log_levels}}
@@ -263,6 +293,7 @@ log_namespaces <- function() {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
+#' @return Invisible \code{list} of \code{logger} objects. See \code{\link{logger}} for more details on the format/
 log_level <- function(level, ..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
@@ -288,18 +319,19 @@ log_level <- function(level, ..., namespace = NA_character_,
     log_arg$.topenv <- .topenv
     log_arg$namespace <- namespace
 
-    for (definition in definitions) {
+    invisible(lapply(definitions, function(definition) {
 
         if (level > definition$threshold) {
-            next
+            return(NULL)
         }
 
         log_fun <- do.call(logger, definition)
 
         ## TODO try with match.call and replace [[1]]?
-        do.call(log_fun, log_arg)
+        structure(do.call(log_fun, log_arg), class = 'logger')
 
-    }
+    }))
+
 }
 
 

@@ -48,6 +48,9 @@ log_fatal(..., namespace = NA_character_,
 
 \item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
+\value{
+Invisible \code{list} of \code{logger} objects. See \code{\link{logger}} for more details on the format/
+}
 \description{
 Log a message with given log level
 }
