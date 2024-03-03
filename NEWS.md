@@ -1,13 +1,30 @@
-# logger 0.2.9000 (development)
+# logger 0.3.0 (2024-03-03)
+
+Many unrelated small features, fixes and documentation updates collected over 2+ years.
 
 ## New features
 
 * update `log_*` functions to invisibly return the formatted log message and record (#26, @r2evans)
+* add `namespace` argument to `log_shiny_input_changes` (#93, @kpagacz)
+* optionally suppress messages in `globalCallingHandlers` after being logged (#100, @DanChaltiel)
+* `as.loglevel` helper to convert string/number to loglevel (requested by @tentacles-from-outer-space)
+* new formatter function: `formatter_glue_safe` (#126, @terashim)
 * support `OFF` log level (#138, @pawelru)
+* override default `INFO` log level via env var (#145, requested by sellorm)
+* warn when `formatter_glue` returns nothing (#147, reported by @r2evans)
 
 ## Fixes
 
-* change examples using `Mean` since they behave differently when the `Hmisc` package is loaded (#131)
+* handle zero-length messages in `formatter_glue_or_sprintf` (#74, @deeenes)
+* generalize `log_separator` to work with all layout functions (#96, @Polkas)
+* support log levels in `log_shiny_input_changes` (#103, @taekeharkema)
+* lazy evaluation of meta variables for better performance (#106, @deeenes)
+* fix fn name lookup/reference with nested calls (#120, reported by @averissimo)
+* force the `file` argument of `appender_tee` (#124, reported by @dbontemps)
+* don't allow stacking logger hooks on messages/warnings/errors (reported by @jkeuskamp)
+* improve fragile test case when `Hmisc` loaded (#131, @r2evans)
+* pass `index`, `namespace` etc from `log_` functions down to `log_level` (#143, @MichaelChirico)
+* refer to the caller function in global message logger hooks (#146, reported by @gabesolomon10)
 
 # logger 0.2.2 (2021-10-10)
 
