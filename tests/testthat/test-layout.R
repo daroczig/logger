@@ -25,7 +25,7 @@ test_that('colorized layout', {
 })
 
 test_that('metavars', {
-    log_layout(layout_glue_generator(format = '{level} {fn} {msg}'))
+    log_layout(layout_glue_generator(format = '{level} {ans} {fn} {msg}'))
     expect_output((function(){log_info(42)})(), 'INFO')
     expect_output((function(){log_warn(42)})(), 'WARN')
     expect_output((function(){log_info(42)})(), 'log_info')

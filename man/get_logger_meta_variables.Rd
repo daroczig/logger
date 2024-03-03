@@ -24,7 +24,7 @@ get_logger_meta_variables(
 \item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
-An environment with the meta variables as expressions.
+list
 }
 \description{
 Available variables to be used in the log formatter functions, eg in \code{\link{layout_glue_generator}}:

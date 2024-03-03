@@ -23,7 +23,7 @@
 #' }
 #' @param log_level log level as per \code{\link{log_levels}}
 #' @inheritParams log_level
-#' @return An environment with the meta variables as expressions.
+#' @return list
 #' @export
 #' @importFrom utils packageVersion
 #' @seealso \code{\link{layout_glue_generator}}
@@ -33,7 +33,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
     sysinfo <- Sys.info()
     timestamp <- Sys.time()
 
-    .get_logger_meta_variables <- function(
+    list(
         ns        = namespace,
         ans       = fallback_namespace(namespace),
         topenv    = top_env_name(.topenv),
@@ -61,16 +61,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 
         ## TODO jenkins (or any) env vars => no need to get here, users can write custom layouts
         ## TODO seed
-    ) {
-
-        parent_env <- parent.frame()
-        parent.env(parent_env) <- parent.frame(2L)
-
-        environment()
-
-    }
-
-    .get_logger_meta_variables()
+    )
 
 }
 
@@ -106,11 +97,10 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
             stop('Invalid log level, see ?log_levels')
         }
 
-
-            metavars <- get_logger_meta_variables(log_level = level, namespace = namespace,
-                                       .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
-
-            glue::glue(format, .envir = metavars)
+        with(get_logger_meta_variables(
+            log_level = level, namespace = namespace,
+            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv),
+             glue::glue(format))
 
     }, generator = deparse(match.call()))
 
@@ -222,12 +212,9 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 
         fail_on_missing_package('jsonlite')
 
-        metavars <- get_logger_meta_variables(
+        json <- get_logger_meta_variables(
             log_level = level, namespace = namespace,
             .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
-
-        json <- sapply(fields, get, envir = metavars, simplify = FALSE)
-        json$msg <- NULL
 
         sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
 
@@ -258,11 +245,9 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
 
         fail_on_missing_package('jsonlite')
 
-        metavars <- get_logger_meta_variables(
+        meta <- get_logger_meta_variables(
             log_level = level, namespace = namespace,
-            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
-
-        meta <- sapply(fields, get, envir = metavars, simplify = FALSE)
+            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)[fields]
 
         msg <- jsonlite::fromJSON(msg)
 

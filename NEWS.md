@@ -18,7 +18,6 @@ Many unrelated small features, fixes and documentation updates collected over 2+
 * handle zero-length messages in `formatter_glue_or_sprintf` (#74, @deeenes)
 * generalize `log_separator` to work with all layout functions (#96, @Polkas)
 * support log levels in `log_shiny_input_changes` (#103, @taekeharkema)
-* lazy evaluation of meta variables for better performance (#106, @deeenes)
 * fix fn name lookup/reference with nested calls (#120, reported by @averissimo)
 * force the `file` argument of `appender_tee` (#124, reported by @dbontemps)
 * don't allow stacking logger hooks on messages/warnings/errors (reported by @jkeuskamp)
