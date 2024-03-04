@@ -296,8 +296,6 @@ log_namespaces <- function() {
 log_level <- function(level, ..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
-    log_arg <- list(...)
-
     ## guess namespace
     if (is.na(namespace)) {
         topenv    <- top_env_name(.topenv)
@@ -305,8 +303,15 @@ log_level <- function(level, ..., namespace = NA_character_,
     }
 
     definitions <- get_logger_definitions(namespace, .topenv = .topenv)
+
+    ## super early return (even before evaluating passed parameters)
+    if (length(definitions) == 1 && level > definitions[[1]]$threshold) {
+        return(NULL)
+    }
+
     level <- validate_log_level(level)
 
+    log_arg <- list(...)
     log_arg$level <- level
     log_arg$.logcall <- .logcall
     log_arg$.topcall  <- if(!is.null(.topcall)) {
@@ -325,8 +330,6 @@ log_level <- function(level, ..., namespace = NA_character_,
         }
 
         log_fun <- do.call(logger, definition)
-
-        ## TODO try with match.call and replace [[1]]?
         structure(do.call(log_fun, log_arg), class = 'logger')
 
     }))
