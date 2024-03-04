@@ -56,7 +56,7 @@ test_that('shiny input initialization is detected with different log-level', {
             .globals <- shiny:::.globals
             .globals$appState <- new.env(parent = emptyenv())
             server <- function(input, output, session) {
-                logger::log_shiny_input_changes(input, level = 'ERROR')
+                logger::log_shiny_input_changes(input, level = logger::ERROR)
             }
             shiny::testServer(server, {})
             "
@@ -89,7 +89,7 @@ test_that('shiny input change is logged with different level', {
             .globals <- shiny:::.globals
             .globals$appState <- new.env(parent = emptyenv())
             server <- function(input, output, session) {
-                logger::log_shiny_input_changes(input, level = 'ERROR')
+                logger::log_shiny_input_changes(input, level = logger::ERROR)
                 x <- shiny::reactive(input$a)
             }
             shiny::testServer(server, {

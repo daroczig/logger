@@ -303,13 +303,12 @@ log_level <- function(level, ..., namespace = NA_character_,
     }
 
     definitions <- get_logger_definitions(namespace, .topenv = .topenv)
+    level <- validate_log_level(level)
 
     ## super early return (even before evaluating passed parameters)
     if (length(definitions) == 1 && level > definitions[[1]]$threshold) {
         return(invisible(NULL))
     }
-
-    level <- validate_log_level(level)
 
     log_arg <- list(...)
     log_arg$level <- level
