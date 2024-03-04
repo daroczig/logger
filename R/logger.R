@@ -306,7 +306,7 @@ log_level <- function(level, ..., namespace = NA_character_,
 
     ## super early return (even before evaluating passed parameters)
     if (length(definitions) == 1 && level > definitions[[1]]$threshold) {
-        return(NULL)
+        return(invisible(NULL))
     }
 
     level <- validate_log_level(level)
