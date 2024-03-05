@@ -45,10 +45,11 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
             }))
     ## throw warning with logger inputs on empty response
     if (length(message) == 0) {
-        try(warning(paste(
-            "glue in formatter_glue returned nothing with the following parameters:",
-            paste(..., sep = ' | ')
-        )), silent = TRUE)
+        ## disabled until azlogr drops test for no warning here: https://github.com/atalv/azlogr/issues/35
+        ## try(warning(paste(
+        ##     'glue in formatter_glue returned nothing with the following parameters:',
+        ##     paste(..., sep = ' | ')
+        ## )), silent = TRUE)
     }
     message
 }, generator = quote(formatter_glue()))

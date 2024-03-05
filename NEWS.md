@@ -11,7 +11,6 @@ Many unrelated small features, fixes and documentation updates collected over 2+
 * new formatter function: `formatter_glue_safe` (#126, @terashim)
 * support `OFF` log level (#138, @pawelru)
 * override default `INFO` log level via env var (#145, requested by sellorm)
-* warn when `formatter_glue` returns nothing (#147, reported by @r2evans)
 
 ## Fixes
 
