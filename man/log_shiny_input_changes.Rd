@@ -8,7 +8,10 @@ log_shiny_input_changes(
   input,
   level = INFO,
   namespace = NA_character_,
-  excluded_inputs = character()
+  excluded_inputs = character(),
+  allow = FALSE,
+  change_message = "Shiny input change detected on {name}: {old} -> {new}",
+  initialize_message = "Default Shiny inputs initialized:"
 )
 }
 \arguments{
@@ -19,6 +22,14 @@ log_shiny_input_changes(
 \item{namespace}{the name of the namespace}
 
 \item{excluded_inputs}{character vector of input names to exclude from logging}
+
+\item{allow}{allow to be used outside Shiny app}
+
+\item{change_message}{custom message to be displayed during the input change - supports `glue` syntax where `{name}`
+is the name of the input, and `{old}` and `{new}` are input values before the change and after the change}
+
+\item{initialize_message}{custom message to be displayed during input initialization (this is followed by initialized
+input values being printed in JSON format)}
 }
 \description{
 This is to be called in the \code{server} section of the Shiny app.
