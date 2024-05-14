@@ -114,6 +114,7 @@ log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
 #' @param level log level
 #' @param excluded_inputs character vector of input names to exclude from logging
 #' @param namespace the name of the namespace
+#' @param session passed from Shiny's \code{server}, enables to extract current Shiny namespace
 #' @importFrom utils assignInMyNamespace assignInNamespace
 #' @examples \dontrun{
 #' library(shiny)
@@ -142,19 +143,22 @@ log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
 log_shiny_input_changes <- function(input,
                                     level = INFO,
                                     namespace = NA_character_,
-                                    excluded_inputs = character()) {
+                                    excluded_inputs = character(),
+                                    session = NULL) {
+
+    ns <- if (!is.null(session)) session$ns(character(0))
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
-    if (!shiny::isRunning()) {
+    if (!(shiny::isRunning() | inherits(session, "MockShinySession"))) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
 
     input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
-    log_level(level, skip_formatter(paste(
+    log_level(level, skip_formatter(trimws(paste(ns,
         'Default Shiny inputs initialized:',
-        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))), namespace = namespace)
+        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE))))), namespace = namespace)
 
     shiny::observe({
         old_input_values <- shiny_input_values
@@ -165,7 +169,11 @@ log_shiny_input_changes <- function(input,
             old <- old_input_values[name]
             new <- new_input_values[name]
             if (!identical(old, new)) {
-                log_level(level, 'Shiny input change detected on {name}: {old} -> {new}', namespace = namespace)
+                message <- ifelse(is.null(ns),
+                  'Shiny input change detected in {name}: {old} -> {new}',
+                  'Shiny input change detected in {ns} on {name}: {old} -> {new}'
+                )
+                log_level(level, message, namespace = namespace)
             }
         }
         assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')
