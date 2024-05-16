@@ -114,7 +114,6 @@ log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
 #' @param level log level
 #' @param excluded_inputs character vector of input names to exclude from logging
 #' @param namespace the name of the namespace
-#' @param session passed from Shiny's \code{server}, enables to extract current Shiny namespace
 #' @importFrom utils assignInMyNamespace assignInNamespace
 #' @examples \dontrun{
 #' library(shiny)
@@ -143,16 +142,16 @@ log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
 log_shiny_input_changes <- function(input,
                                     level = INFO,
                                     namespace = NA_character_,
-                                    excluded_inputs = character(),
-                                    session = NULL) {
-
-    ns <- if (!is.null(session)) session$ns(character(0))
+                                    excluded_inputs = character()) {
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
     if (!(shiny::isRunning() | inherits(session, "MockShinySession"))) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
+
+    session <- shiny::getDefaultReactiveDomain()
+    ns <- if (!is.null(session)) session$ns(character(0))
 
     input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)

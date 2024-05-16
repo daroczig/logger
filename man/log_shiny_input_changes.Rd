@@ -8,8 +8,7 @@ log_shiny_input_changes(
   input,
   level = INFO,
   namespace = NA_character_,
-  excluded_inputs = character(),
-  session = NULL
+  excluded_inputs = character()
 )
 }
 \arguments{
@@ -20,8 +19,6 @@ log_shiny_input_changes(
 \item{namespace}{the name of the namespace}
 
 \item{excluded_inputs}{character vector of input names to exclude from logging}
-
-\item{session}{passed from Shiny's \code{server}, enables to extract current Shiny namespace}
 }
 \description{
 This is to be called in the \code{server} section of the Shiny app.
