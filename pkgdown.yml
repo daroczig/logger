@@ -1,15 +1,15 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
-  Intro: Intro.html
   anatomy: anatomy.html
   customize_logger: customize_logger.html
+  Intro: Intro.html
   migration: migration.html
   performance: performance.html
   r_packages: r_packages.html
   write_custom_extensions: write_custom_extensions.html
-last_built: 2024-03-05T14:13Z
+last_built: 2024-06-17T19:42Z
 urls:
   reference: https://daroczig.github.io/logger/reference
   article: https://daroczig.github.io/logger/articles
