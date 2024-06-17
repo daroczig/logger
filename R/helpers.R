@@ -91,20 +91,25 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' log_layout(layout_blank)
 #' log_separator(ERROR, separator = '!', width = 80)
 #' @seealso \code{\link{log_with_separator}}
-log_separator <- function(level = INFO, 
+log_separator <- function(level = INFO,
                           namespace = NA_character_,
                           separator = '=',
                           width = 80,
-                          .topcall = sys.call()) {
+                          .logcall = sys.call(),
+                          .topcall = sys.call(-1),
+                          .topenv = parent.frame()) {
 
     stopifnot(length(separator) == 1, nchar(separator) == 1)
 
-    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall))
+    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall, .topenv = .topenv))
 
     log_level(
         paste(rep(separator, max(0, width - base_info_chars)), collapse = ''),
         level = level,
-        namespace = namespace)
+        namespace = namespace,
+        .logcall = .logcall,
+        .topcall = .topcall,
+        .topenv = .topenv)
 }
 
 
@@ -132,14 +137,16 @@ log_separator <- function(level = INFO,
 #' @seealso \code{\link{log_separator}}
 log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
 
-    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call()))
+    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call(-1)))
 
     log_separator(
-      level = level, 
+      level = level,
       separator = separator,
-      width = width, 
+      width = width,
       namespace = namespace,
-      .topcall = call('log_separator')
+      .logcall = sys.call(),
+      .topcall = sys.call(-1),
+      .topenv = parent.frame()
     )
 
     message <- do.call(eval(log_formatter()), list(...))
@@ -151,14 +158,16 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
             ' ', separator)
     })
 
-    log_level(skip_formatter(message), level = level, namespace = namespace)
+    log_level(skip_formatter(message), level = level, namespace = namespace, .topenv = parent.frame())
 
     log_separator(
-      level = level, 
+      level = level,
       separator = separator,
-      width = width, 
+      width = width,
       namespace = namespace,
-      .topcall = call('log_separator')
+      .logcall = sys.call(),
+      .topcall = sys.call(-1),
+      .topenv = parent.frame()
     )
 }
 
@@ -191,10 +200,14 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
     toc <- Sys.time()
     tictoc <- difftime(toc, tic)
 
-    log_level(paste(ns, 'timer',
-                    ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
-                    round(tictoc, 2), attr(tictoc, 'units') , '-- '),
-              ..., level = level, namespace = namespace)
+    log_level(
+        paste(ns, 'timer',
+              ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
+              round(tictoc, 2), attr(tictoc, 'units') , '-- '),
+        ..., level = level, namespace = namespace,
+        .logcall = sys.call(),
+        .topcall = sys.call(-1),
+        .topenv = parent.frame())
 
 }
 tictocs <- new.env()
