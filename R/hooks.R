@@ -146,12 +146,13 @@ log_shiny_input_changes <- function(input,
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
-    if (!(shiny::isRunning() | inherits(session, "MockShinySession"))) {
-        stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
-    }
 
     session <- shiny::getDefaultReactiveDomain()
     ns <- if (!is.null(session)) session$ns(character(0))
+    
+    if (!(shiny::isRunning() | inherits(session, "MockShinySession"))) {
+        stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
+    }
 
     input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
