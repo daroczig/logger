@@ -148,7 +148,7 @@ log_shiny_input_changes <- function(input,
     fail_on_missing_package('jsonlite')
 
     session <- shiny::getDefaultReactiveDomain()
-    ns <- if (!is.null(session)) session$ns(character(0))
+    ns <- ifelse(!is.null(session), session$ns(character(0)), "")
     
     if (!(shiny::isRunning() | inherits(session, "MockShinySession"))) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
@@ -169,10 +169,7 @@ log_shiny_input_changes <- function(input,
             old <- old_input_values[name]
             new <- new_input_values[name]
             if (!identical(old, new)) {
-                message <- ifelse(is.null(ns),
-                  'Shiny input change detected in {name}: {old} -> {new}',
-                  'Shiny input change detected in {ns} on {name}: {old} -> {new}'
-                )
+                message <- trimws("{ns} Shiny input change detected in {name}: {old} -> {new}")
                 log_level(level, message, namespace = namespace)
             }
         }
