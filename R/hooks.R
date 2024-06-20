@@ -150,7 +150,7 @@ log_shiny_input_changes <- function(input,
     session <- shiny::getDefaultReactiveDomain()
     ns <- ifelse(!is.null(session), session$ns(character(0)), "")
     
-    if (!(shiny::isRunning() | inherits(session, "MockShinySession"))) {
+    if (!(shiny::isRunning() | inherits(session, "MockShinySession") || inherits(session, "session_proxy"))) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
 
