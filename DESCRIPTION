@@ -11,7 +11,7 @@ Date: 2024-03-03
 URL: https://daroczig.github.io/logger/
 BugReports: https://github.com/daroczig/logger/issues
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 License: AGPL-3
 Imports:
   utils
@@ -43,3 +43,4 @@ Enhances:
   log4r
 VignetteBuilder: knitr
 Config/testthat/edition: 2
+Roxygen: list(markdown = TRUE)

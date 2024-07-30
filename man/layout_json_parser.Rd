@@ -29,5 +29,5 @@ log_info(cars = row.names(mtcars), species = unique(iris$Species))
 }
 }
 \seealso{
-This is a \code{\link{log_layout}} potentially to be used with \code{\link{formatter_json}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}} or generator functions such as \code{\link{layout_glue_generator}}
+This is a \code{\link[=log_layout]{log_layout()}} potentially to be used with \code{\link[=formatter_json]{formatter_json()}}, for alternatives, see \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json]{layout_json()}} or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

@@ -37,15 +37,15 @@ The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For
 }
 \details{
 List of supported log levels:
-\enumerate{
-  \item \code{OFF} No events will be logged
-  \item \code{FATAL} Severe error that will prevent the application from continuing
-  \item \code{ERROR} An error in the application, possibly recoverable
-  \item \code{WARN} An event that might possible lead to an error
-  \item \code{SUCCESS} An explicit success event above the INFO level that you want to log
-  \item \code{INFO} An event for informational purposes
-  \item \code{DEBUG} A general debugging event
-  \item \code{TRACE} A fine-grained debug message, typically capturing the flow through the application.
+\itemize{
+\item \code{OFF} No events will be logged
+\item \code{FATAL} Severe error that will prevent the application from continuing
+\item \code{ERROR} An error in the application, possibly recoverable
+\item \code{WARN} An event that might possible lead to an error
+\item \code{SUCCESS} An explicit success event above the INFO level that you want to log
+\item \code{INFO} An event for informational purposes
+\item \code{DEBUG} A general debugging event
+\item \code{TRACE} A fine-grained debug message, typically capturing the flow through the application.
 }
 }
 \references{
