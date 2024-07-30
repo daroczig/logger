@@ -1,231 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://daroczig.github.io/logger/404.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/Intro.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/anatomy.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/customize_logger.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/migration.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/performance.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/r_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/articles/write_custom_extensions.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/index.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_async.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_console.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_file.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_kinesis.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_pushbullet.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_slack.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_stdout.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_syslog.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_syslognet.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_tee.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_telegram.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/appender_void.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/as.loglevel.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/catch_base_log.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/colorize_by_log_level.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/delete_logger_index.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/deparse_to_one_line.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/fail_on_missing_package.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/fallback_namespace.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_glue.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_glue_or_sprintf.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_glue_safe.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_json.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_logging.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_pander.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_paste.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/formatter_sprintf.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/get_logger_definitions.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/get_logger_meta_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/grapes-except-grapes.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/grayscale_by_log_level.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_blank.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_glue.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_glue_colors.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_glue_generator.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_json.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_json_parser.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_logging.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_simple.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/layout_syslognet.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_appender.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_config_setter.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_errors.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_eval.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_failure.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_formatter.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_layout.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_level.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_messages.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_namespaces.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_separator.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_shiny_input_changes.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_threshold.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_tictoc.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_warnings.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/log_with_separator.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/logger.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/skip_formatter.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/top_env_name.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/validate_log_level.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/warn_if_globalCallingHandlers_is_not_available.html</loc>
-  </url>
-  <url>
-    <loc>https://daroczig.github.io/logger/reference/with_log_threshold.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://daroczig.github.io/logger/404.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/Intro.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/anatomy.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/customize_logger.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/index.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/migration.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/performance.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/r_packages.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/articles/write_custom_extensions.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/authors.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/index.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/news/index.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_async.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_console.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_file.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_kinesis.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_pushbullet.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_slack.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_stdout.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_syslog.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_syslognet.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_tee.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_telegram.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_void.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/as.loglevel.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/catch_base_log.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/colorize_by_log_level.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/delete_logger_index.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/deparse_to_one_line.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/fail_on_missing_package.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/fallback_namespace.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_glue.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_glue_or_sprintf.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_glue_safe.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_json.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_logging.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_pander.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_paste.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_sprintf.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/get_logger_definitions.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/get_logger_meta_variables.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/grapes-except-grapes.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/grayscale_by_log_level.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/index.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_blank.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_glue.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_glue_colors.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_glue_generator.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_json.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_json_parser.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_logging.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_simple.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_syslognet.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_appender.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_config_setter.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_errors.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_eval.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_failure.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_formatter.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_layout.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_level.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_levels.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_messages.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_namespaces.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_separator.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_shiny_input_changes.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_threshold.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_tictoc.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_warnings.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_with_separator.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/logger.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/skip_formatter.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/top_env_name.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/validate_log_level.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/warn_if_globalCallingHandlers_is_not_available.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/with_log_threshold.html</loc></url>
 </urlset>
+
