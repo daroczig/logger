@@ -1,4 +1,8 @@
 url: https://daroczig.github.io/logger
+
+template:
+  bootstrap: 5
+
 authors:
   System1:
     href: https://system1.com
