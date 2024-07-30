@@ -18,13 +18,13 @@ string with ANSI escape code
 Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
 }
 \examples{
-\dontrun{
-cat(grayscale_by_log_level(FATAL, 'foobar'), '\n')
-cat(grayscale_by_log_level(ERROR, 'foobar'), '\n')
-cat(grayscale_by_log_level(WARN, 'foobar'), '\n')
-cat(grayscale_by_log_level(SUCCESS, 'foobar'), '\n')
-cat(grayscale_by_log_level(INFO, 'foobar'), '\n')
-cat(grayscale_by_log_level(DEBUG, 'foobar'), '\n')
-cat(grayscale_by_log_level(TRACE, 'foobar'), '\n')
-}
+\dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+cat(grayscale_by_log_level('foobar', FATAL), '\n')
+cat(grayscale_by_log_level('foobar', ERROR), '\n')
+cat(grayscale_by_log_level('foobar', WARN), '\n')
+cat(grayscale_by_log_level('foobar', SUCCESS), '\n')
+cat(grayscale_by_log_level('foobar', INFO), '\n')
+cat(grayscale_by_log_level('foobar', DEBUG), '\n')
+cat(grayscale_by_log_level('foobar', TRACE), '\n')
+\dontshow{\}) # examplesIf}
 }
