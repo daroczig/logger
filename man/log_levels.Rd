@@ -3,7 +3,6 @@
 \docType{data}
 \name{OFF}
 \alias{OFF}
-\alias{log_levels}
 \alias{FATAL}
 \alias{ERROR}
 \alias{WARN}
@@ -12,25 +11,22 @@
 \alias{DEBUG}
 \alias{TRACE}
 \title{Log levels}
-\format{
-An object of class \code{loglevel} (inherits from \code{integer}) of length 1.
-}
 \usage{
-TRACE
-
-DEBUG
-
-INFO
-
-SUCCESS
-
-WARN
-
-ERROR
+OFF
 
 FATAL
 
-OFF
+ERROR
+
+WARN
+
+SUCCESS
+
+INFO
+
+DEBUG
+
+TRACE
 }
 \description{
 The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.
