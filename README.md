@@ -1,6 +1,8 @@
 # logger
 
+<!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CRAN](https://www.r-pkg.org/badges/version/logger)](https://cran.r-project.org/package=logger) [![Build Status](https://github.com/daroczig/logger/workflows/R-CMD-check/badge.svg)](https://github.com/daroczig/logger/actions) [![Code Coverage](https://codecov.io/gh/daroczig/logger/branch/master/graph/badge.svg)](https://app.codecov.io/gh/daroczig/logger) [![A Mikata Project](https://mikata.dev/img/badge.svg)](https://mikata.dev)
+<!-- badges: end -->
 
 A lightweight, modern and flexibly logging utility for R -- heavily inspired by the `futile.logger` R package and `logging` Python module.
 
