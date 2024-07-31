@@ -6,8 +6,6 @@ threshold <- log_threshold()
 layout    <- log_layout()
 appender  <- log_appender()
 
-context('CRAN skip: async appender')
-
 test_that('async logging', {
     t <- tempfile()
     my_appender <- appender_async(appender_file(file = t))

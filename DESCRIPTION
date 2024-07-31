@@ -23,7 +23,7 @@ Suggests:
   slackr (>= 1.4.1),
   RPushbullet,
   telegram,
-  testthat,
+  testthat (>= 3.0.0),
   covr,
   knitr,
   rmarkdown,
@@ -36,10 +36,12 @@ Suggests:
   txtq,
   botor,
   R.utils,
-  syslognet
+  syslognet,
+  withr
 Enhances:
   logging,
   futile.logger,
   log4r
 VignetteBuilder: knitr
-Config/testthat/edition: 2
+Config/testthat/edition: 3
+Config/testthat/parallel: TRUE

@@ -5,8 +5,6 @@ library(testthat)
 formatter <- log_formatter()
 appender <- log_appender()
 
-context('return value')
-
 t <- tempfile()
 log_appender(appender_file(t))
 

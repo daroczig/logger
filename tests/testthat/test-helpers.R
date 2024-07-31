@@ -6,8 +6,6 @@ appender <- log_appender()
 
 log_appender(appender_stdout)
 
-context('helpers')
-
 test_that('separator', {
     original_layout <- log_layout()
     log_layout(layout_blank)

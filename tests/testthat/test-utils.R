@@ -5,8 +5,6 @@ library(testthat)
 appender <- log_appender()
 log_appender(appender_stdout)
 
-context('utils')
-
 test_that('fail_on_missing_package', {
     expect_error(fail_on_missing_package('logger'), NA)
     expect_error(fail_on_missing_package('logger', '9.9.9'))
