@@ -16,6 +16,9 @@ log_levels_supported <- c('OFF', 'FATAL', 'ERROR', 'WARN', 'SUCCESS', 'INFO', 'D
 #'   \item \code{TRACE} A fine-grained debug message, typically capturing the flow through the application.
 #' }
 #' @references \url{https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
+#' @name log_levels
+NULL
+
 #' @rdname log_levels
 #' @export
 #' @format NULL
