@@ -23,7 +23,7 @@ A lightweight, modern and flexibly logging utility for R -- heavily inspired by 
 
 ## Installation
 
-[![CRAN version](http://www.r-pkg.org/badges/version-ago/logger)](https://cran.r-project.org/package=logger)
+[![CRAN version](https://www.r-pkg.org/badges/version-ago/logger)](https://cran.r-project.org/package=logger)
 
 ```{r}
 #| eval: false

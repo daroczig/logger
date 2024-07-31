@@ -23,7 +23,7 @@ inspired by the `futile.logger` R package and `logging` Python module.
 ## Installation
 
 [![CRAN
-version](http://www.r-pkg.org/badges/version-ago/logger)](https://cran.r-project.org/package=logger)
+version](https://www.r-pkg.org/badges/version-ago/logger)](https://cran.r-project.org/package=logger)
 
 ``` r
 install.packages('logger')
@@ -46,11 +46,11 @@ messages in ad-hoc and programmatic ways:
 library(logger)
 log_threshold(DEBUG)
 log_info('Script starting up...')
-#> INFO [2024-07-31 07:37:34] Script starting up...
+#> INFO [2024-07-31 08:26:30] Script starting up...
 
 pkgs <- available.packages()
 log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
-#> INFO [2024-07-31 07:37:34] There are 21122 R packages hosted on CRAN!
+#> INFO [2024-07-31 08:26:30] There are 21122 R packages hosted on CRAN!
 
 for (letter in letters) {
   lpkgs <- sum(grepl(letter, pkgs[, 'Package'], ignore.case = TRUE))
@@ -59,23 +59,23 @@ for (letter in letters) {
     '{lpkgs} R packages including the {shQuote(letter)} letter'
   )
 }
-#> DEBUG [2024-07-31 07:37:34] 10188 R packages including the 'a' letter
-#> DEBUG [2024-07-31 07:37:34] 7013 R packages including the 'c' letter
-#> DEBUG [2024-07-31 07:37:34] 5750 R packages including the 'd' letter
-#> DEBUG [2024-07-31 07:37:34] 10902 R packages including the 'e' letter
-#> DEBUG [2024-07-31 07:37:34] 8821 R packages including the 'i' letter
-#> DEBUG [2024-07-31 07:37:34] 7055 R packages including the 'l' letter
-#> DEBUG [2024-07-31 07:37:34] 7039 R packages including the 'm' letter
-#> DEBUG [2024-07-31 07:37:34] 6661 R packages including the 'n' letter
-#> DEBUG [2024-07-31 07:37:34] 7859 R packages including the 'o' letter
-#> DEBUG [2024-07-31 07:37:34] 6579 R packages including the 'p' letter
-#> DEBUG [2024-07-31 07:37:34] 11224 R packages including the 'r' letter
-#> DEBUG [2024-07-31 07:37:34] 10292 R packages including the 's' letter
-#> DEBUG [2024-07-31 07:37:34] 9526 R packages including the 't' letter
+#> DEBUG [2024-07-31 08:26:30] 10188 R packages including the 'a' letter
+#> DEBUG [2024-07-31 08:26:30] 7013 R packages including the 'c' letter
+#> DEBUG [2024-07-31 08:26:30] 5750 R packages including the 'd' letter
+#> DEBUG [2024-07-31 08:26:30] 10902 R packages including the 'e' letter
+#> DEBUG [2024-07-31 08:26:30] 8821 R packages including the 'i' letter
+#> DEBUG [2024-07-31 08:26:30] 7055 R packages including the 'l' letter
+#> DEBUG [2024-07-31 08:26:30] 7039 R packages including the 'm' letter
+#> DEBUG [2024-07-31 08:26:30] 6661 R packages including the 'n' letter
+#> DEBUG [2024-07-31 08:26:30] 7859 R packages including the 'o' letter
+#> DEBUG [2024-07-31 08:26:30] 6579 R packages including the 'p' letter
+#> DEBUG [2024-07-31 08:26:31] 11224 R packages including the 'r' letter
+#> DEBUG [2024-07-31 08:26:31] 10292 R packages including the 's' letter
+#> DEBUG [2024-07-31 08:26:31] 9526 R packages including the 't' letter
 
 log_warn('There might be many, like {1:2} or more warnings!!!')
-#> WARN [2024-07-31 07:37:34] There might be many, like 1 or more warnings!!!
-#> WARN [2024-07-31 07:37:34] There might be many, like 2 or more warnings!!!
+#> WARN [2024-07-31 08:26:31] There might be many, like 1 or more warnings!!!
+#> WARN [2024-07-31 08:26:31] There might be many, like 2 or more warnings!!!
 ```
 
 You can even use a custom log layout to render the log records with
