@@ -7,11 +7,6 @@ appender_void <- structure(function(lines) {}, generator = quote(appender_void()
 #' Append log record to stderr
 #' @param lines character vector
 #' @export
-#' @aliases appender_stderr
-#' @usage
-#' appender_console(lines)
-#'
-#' appender_stderr(lines)
 #' @seealso This is a [log_appender()], for alternatives, see eg [appender_stdout()], [appender_file()], [appender_tee()], [appender_slack()], [appender_pushbullet()], [appender_telegram()], [appender_syslog()], [appender_kinesis()] and [appender_async()] for evaluate any [log_appender()] function in a background process.
 appender_console <- structure(function(lines) {
     cat(lines, file = stderr(), sep = '\n')
@@ -19,6 +14,7 @@ appender_console <- structure(function(lines) {
 
 
 #' @export
+#' @rdname appender_console
 appender_stderr <- appender_console
 
 

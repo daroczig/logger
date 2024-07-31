@@ -5,15 +5,14 @@
 #' @param level see [log_levels()]
 #' @return string with ANSI escape code
 #' @export
-#' @examples \dontrun{
-#' cat(colorize_by_log_level(FATAL, 'foobar'), '\n')
-#' cat(colorize_by_log_level(ERROR, 'foobar'), '\n')
-#' cat(colorize_by_log_level(WARN, 'foobar'), '\n')
-#' cat(colorize_by_log_level(SUCCESS, 'foobar'), '\n')
-#' cat(colorize_by_log_level(INFO, 'foobar'), '\n')
-#' cat(colorize_by_log_level(DEBUG, 'foobar'), '\n')
-#' cat(colorize_by_log_level(TRACE, 'foobar'), '\n')
-#' }
+#' @examplesIf requireNamespace("crayon")
+#' cat(colorize_by_log_level('foobar', FATAL), '\n')
+#' cat(colorize_by_log_level('foobar', ERROR), '\n')
+#' cat(colorize_by_log_level('foobar', WARN), '\n')
+#' cat(colorize_by_log_level('foobar', SUCCESS), '\n')
+#' cat(colorize_by_log_level('foobar', INFO), '\n')
+#' cat(colorize_by_log_level('foobar', DEBUG), '\n')
+#' cat(colorize_by_log_level('foobar', TRACE), '\n')
 colorize_by_log_level <- function(msg, level) {
 
     fail_on_missing_package('crayon')
@@ -42,15 +41,14 @@ colorize_by_log_level <- function(msg, level) {
 #' @param level see [log_levels()]
 #' @return string with ANSI escape code
 #' @export
-#' @examples \dontrun{
-#' cat(grayscale_by_log_level(FATAL, 'foobar'), '\n')
-#' cat(grayscale_by_log_level(ERROR, 'foobar'), '\n')
-#' cat(grayscale_by_log_level(WARN, 'foobar'), '\n')
-#' cat(grayscale_by_log_level(SUCCESS, 'foobar'), '\n')
-#' cat(grayscale_by_log_level(INFO, 'foobar'), '\n')
-#' cat(grayscale_by_log_level(DEBUG, 'foobar'), '\n')
-#' cat(grayscale_by_log_level(TRACE, 'foobar'), '\n')
-#' }
+#' @examplesIf requireNamespace("crayon")
+#' cat(grayscale_by_log_level('foobar', FATAL), '\n')
+#' cat(grayscale_by_log_level('foobar', ERROR), '\n')
+#' cat(grayscale_by_log_level('foobar', WARN), '\n')
+#' cat(grayscale_by_log_level('foobar', SUCCESS), '\n')
+#' cat(grayscale_by_log_level('foobar', INFO), '\n')
+#' cat(grayscale_by_log_level('foobar', DEBUG), '\n')
+#' cat(grayscale_by_log_level('foobar', TRACE), '\n')
 grayscale_by_log_level <- function(msg, level) {
 
     fail_on_missing_package('crayon')

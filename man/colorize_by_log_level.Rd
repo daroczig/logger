@@ -18,13 +18,13 @@ string with ANSI escape code
 Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
 }
 \examples{
-\dontrun{
-cat(colorize_by_log_level(FATAL, 'foobar'), '\n')
-cat(colorize_by_log_level(ERROR, 'foobar'), '\n')
-cat(colorize_by_log_level(WARN, 'foobar'), '\n')
-cat(colorize_by_log_level(SUCCESS, 'foobar'), '\n')
-cat(colorize_by_log_level(INFO, 'foobar'), '\n')
-cat(colorize_by_log_level(DEBUG, 'foobar'), '\n')
-cat(colorize_by_log_level(TRACE, 'foobar'), '\n')
-}
+\dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+cat(colorize_by_log_level('foobar', FATAL), '\n')
+cat(colorize_by_log_level('foobar', ERROR), '\n')
+cat(colorize_by_log_level('foobar', WARN), '\n')
+cat(colorize_by_log_level('foobar', SUCCESS), '\n')
+cat(colorize_by_log_level('foobar', INFO), '\n')
+cat(colorize_by_log_level('foobar', DEBUG), '\n')
+cat(colorize_by_log_level('foobar', TRACE), '\n')
+\dontshow{\}) # examplesIf}
 }
