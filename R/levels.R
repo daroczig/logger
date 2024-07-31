@@ -16,39 +16,40 @@ log_levels_supported <- c('OFF', 'FATAL', 'ERROR', 'WARN', 'SUCCESS', 'INFO', 'D
 #'   \item \code{TRACE} A fine-grained debug message, typically capturing the flow through the application.
 #' }
 #' @references \url{https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
-#' @aliases log_levels OFF FATAL ERROR WARN SUCCESS INFO DEBUG TRACE
+#' @name log_levels
+NULL
+
 #' @rdname log_levels
-#' @usage
-#' TRACE
-#'
-#' DEBUG
-#'
-#' INFO
-#'
-#' SUCCESS
-#'
-#' WARN
-#'
-#' ERROR
-#'
-#' FATAL
-#'
-#' OFF
 #' @export
+#' @format NULL
 OFF <- structure(0L, level = 'OFF', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 FATAL <- structure(100L, level = 'FATAL', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 ERROR <- structure(200L, level = 'ERROR', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 WARN  <- structure(300L, level = 'WARN', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 SUCCESS <- structure(350L, level = 'SUCCESS', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 INFO  <- structure(400L, level = 'INFO', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 DEBUG <- structure(500L, level = 'DEBUG', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 TRACE <- structure(600L, level = 'TRACE', class = c('loglevel', 'integer'))
 
 #' @export
