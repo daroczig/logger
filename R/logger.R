@@ -70,6 +70,7 @@ logger <- function(threshold, formatter, layout, appender) {
     }
 }
 
+
 #' Checks if provided namespace exists and falls back to global if not
 #' @param namespace string
 #' @return string
@@ -122,6 +123,7 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
     configs[[min(index, length(config) + 1)]] <- config
     assign(namespace, configs, envir = namespaces)
 }
+
 
 #' Delete an index from a logger namespace
 #' @inheritParams log_threshold
