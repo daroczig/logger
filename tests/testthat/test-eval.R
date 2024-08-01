@@ -1,6 +1,3 @@
-library(logger)
-library(testthat)
-
 ## save current settings so that we can reset later
 layout    <- log_layout()
 threshold <- log_threshold()

@@ -1,7 +1,3 @@
-library(logger)
-library(testthat)
-library(jsonlite)
-
 ## save current settings so that we can reset later
 formatter <- log_formatter()
 appender  <- log_appender()
@@ -29,8 +25,8 @@ test_that('glue works', {
     expect_equal(formatter_glue("Hi {everything}"), "Hi 42")
     expect_equal(formatter_glue("Hi {1:2}"), paste("Hi", 1:2))
 
-    expect_output(do.call(logger, logger:::namespaces$global[[1]])(INFO, 42), '42')
-    expect_output(do.call(logger, logger:::namespaces$global[[1]])(INFO, "Hi {everything}"), '42')
+    expect_output(do.call(logger, namespaces$global[[1]])(INFO, 42), '42')
+    expect_output(do.call(logger, namespaces$global[[1]])(INFO, "Hi {everything}"), '42')
 
     expect_output(log_info("Hi {everything}"), '42')
     expect_output(log_warn("Hi {everything}"), '42')

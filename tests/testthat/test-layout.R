@@ -1,7 +1,3 @@
-library(logger)
-library(testthat)
-library(jsonlite)
-
 ## save current settings so that we can reset later
 layout <- log_layout()
 appender <- log_appender()
@@ -35,8 +31,8 @@ test_that('metavars', {
 
 log_layout(layout_json())
 test_that('JSON layout', {
-    expect_equal(fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
-    expect_equal(fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
+    expect_equal(jsonlite::fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
+    expect_equal(jsonlite::fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
 })
 
 log_layout(layout_json_parser(fields = c()))
