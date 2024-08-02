@@ -17,3 +17,4 @@ dev-resources
 ^pkgdown$
 ^\.github$
 revdep
+^codecov\.yml$
