@@ -14,7 +14,7 @@ Encoding: UTF-8
 RoxygenNote: 7.3.2
 License: AGPL-3
 Imports:
-  utils
+    utils
 Suggests:
   glue,
   pander,
@@ -36,7 +36,8 @@ Suggests:
   txtq,
   botor,
   R.utils,
-  syslognet
+  syslognet,
+  withr
 Enhances:
   logging,
   futile.logger,
