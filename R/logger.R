@@ -111,9 +111,9 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
     } else {
       if (is.null(arg)) {
         res <- config[[fun_name_base]]
-        if (!is.null(attr(res, 'generator'))) {
-          res <- parse(text = attr(res, 'generator'))[[1]]
-        }
+        # if (!is.null(attr(res, 'generator'))) {
+        #   res <- parse(text = attr(res, 'generator'))[[1]]
+        # }
         return(res)
       }
 
@@ -177,6 +177,9 @@ log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
 log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
+    if (!is.null(layout) && !is.function(layout)) {
+        stop("`layout` must be a function")
+    }
     log_config_setter(fun_name = 'log_layout', arg = layout, namespace = namespace, index = index)
 }
 
@@ -187,6 +190,9 @@ log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
 #' @export
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
 log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
+    if (!is.null(formatter) && !is.function(formatter)) {
+        stop("`formatter` must be a function")
+    }
     log_config_setter(fun_name = 'log_formatter', arg = formatter, namespace = namespace, index = index)
 }
 
@@ -212,6 +218,9 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 #' }
 #' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
 log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
+    if (!is.null(appender) && !is.function(appender)) {
+        stop("`appender` must be a function")
+    }
     log_config_setter(fun_name = 'log_appender', arg = appender, namespace = namespace, index = index)
 }
 
