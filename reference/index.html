@@ -42,7 +42,7 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="key-logging-functions">Key logging functions<a class="anchor" aria-label="anchor" href="#key-logging-functions"></a></h2>
 
 
 
@@ -53,6 +53,88 @@
 
 
       <dl><dt>
+
+          <code><a href="log_level.html">log_level()</a></code> <code><a href="log_level.html">log_fatal()</a></code> <code><a href="log_level.html">log_error()</a></code> <code><a href="log_level.html">log_warn()</a></code> <code><a href="log_level.html">log_success()</a></code> <code><a href="log_level.html">log_info()</a></code> <code><a href="log_level.html">log_debug()</a></code> <code><a href="log_level.html">log_trace()</a></code>
+
+        </dt>
+        <dd>Log a message with given log level</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_levels.html">OFF</a></code> <code><a href="log_levels.html">FATAL</a></code> <code><a href="log_levels.html">ERROR</a></code> <code><a href="log_levels.html">WARN</a></code> <code><a href="log_levels.html">SUCCESS</a></code> <code><a href="log_levels.html">INFO</a></code> <code><a href="log_levels.html">DEBUG</a></code> <code><a href="log_levels.html">TRACE</a></code>
+
+        </dt>
+        <dd>Log levels</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_threshold.html">log_threshold()</a></code>
+
+        </dt>
+        <dd>Get or set log level threshold</dd>
+      </dl></div><div class="section level2">
+      <h2 id="other-logging-helpers">Other logging helpers<a class="anchor" aria-label="anchor" href="#other-logging-helpers"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="log_eval.html">log_eval()</a></code>
+
+        </dt>
+        <dd>Evaluate an expression and log results</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_failure.html">log_failure()</a></code>
+
+        </dt>
+        <dd>Logs the error message to console before failing</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_tictoc.html">log_tictoc()</a></code>
+
+        </dt>
+        <dd>Tic-toc logging</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_separator.html">log_separator()</a></code>
+
+        </dt>
+        <dd>Logs a long line to stand out from the console</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_with_separator.html">log_with_separator()</a></code>
+
+        </dt>
+        <dd>Logs a message in a very visible way</dd>
+      </dl><dl><dt>
+
+          <code><a href="with_log_threshold.html">with_log_threshold()</a></code>
+
+        </dt>
+        <dd>Evaluate R expression with a temporarily updated log level threshold</dd>
+      </dl></div><div class="section level2">
+      <h2 id="appenders">Appenders<a class="anchor" aria-label="anchor" href="#appenders"></a></h2>
+
+      <div class="section-desc"><p>Log appenders define where logging output should be sent to.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="log_appender.html">log_appender()</a></code>
+
+        </dt>
+        <dd>Get or set log record appender function</dd>
+      </dl><dl><dt>
 
           <code><a href="appender_async.html">appender_async()</a></code>
 
@@ -124,36 +206,23 @@
 
         </dt>
         <dd>Dummy appender not delivering the log record to anywhere</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="formatters">Formatters<a class="anchor" aria-label="anchor" href="#formatters"></a></h2>
 
-          <code><a href="as.loglevel.html">as.loglevel()</a></code>
+      <div class="section-desc"><p>Log formatters control how the inputs to the <code>log_</code> functions are converted to a string. The default is <code><a href="../reference/formatter_glue.html">formatter_glue()</a></code> when <code>glue</code> is installed.</p></div>
 
-        </dt>
-        <dd>Convert R object into a logger log-level</dd>
-      </dl><dl><dt>
 
-          <code><a href="colorize_by_log_level.html">colorize_by_log_level()</a></code>
+    </div><div class="section level2">
 
-        </dt>
-        <dd>Colorize string by the related log level</dd>
-      </dl><dl><dt>
 
-          <code><a href="delete_logger_index.html">delete_logger_index()</a></code>
 
-        </dt>
-        <dd>Delete an index from a logger namespace</dd>
-      </dl><dl><dt>
 
-          <code><a href="deparse_to_one_line.html">deparse_to_one_line()</a></code>
+      <dl><dt>
+
+          <code><a href="log_formatter.html">log_formatter()</a></code>
 
         </dt>
-        <dd>Deparse and join all lines into a single line</dd>
-      </dl><dl><dt>
-
-          <code><a href="fail_on_missing_package.html">fail_on_missing_package()</a></code>
-
-        </dt>
-        <dd>Check if R package can be loaded and fails loudly otherwise</dd>
+        <dd>Get or set log message formatter</dd>
       </dl><dl><dt>
 
           <code><a href="formatter_glue.html">formatter_glue()</a></code>
@@ -204,22 +273,27 @@
         <dd>Apply <code>sprintf</code> to convert R objects into a character vector</dd>
       </dl><dl><dt>
 
-          <code><a href="get_logger_meta_variables.html">get_logger_meta_variables()</a></code>
+          <code><a href="skip_formatter.html">skip_formatter()</a></code>
 
         </dt>
-        <dd>Collect useful information about the logging environment to be used in log messages</dd>
-      </dl><dl><dt>
+        <dd>Skip the formatter function</dd>
+      </dl></div><div class="section level2">
+      <h2 id="layouts">Layouts<a class="anchor" aria-label="anchor" href="#layouts"></a></h2>
 
-          <code><a href="grapes-except-grapes.html">`%except%`</a></code>
+      <div class="section-desc"><p>Logging layouts control what is sent to the appender. They always include the logged string, but might also include the timestamp, log level, etc.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="log_layout.html">log_layout()</a></code>
 
         </dt>
-        <dd>Try to evaluate an expressions and evaluate another expression on exception</dd>
-      </dl><dl><dt>
-
-          <code><a href="grayscale_by_log_level.html">grayscale_by_log_level()</a></code>
-
-        </dt>
-        <dd>Render a string with light/dark gray based on the related log level</dd>
+        <dd>Get or set log record layout</dd>
       </dl><dl><dt>
 
           <code><a href="layout_blank.html">layout_blank()</a></code>
@@ -274,54 +348,23 @@
 
         </dt>
         <dd>Format a log record for syslognet</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="hooks-for-automated-logging">Hooks for automated logging<a class="anchor" aria-label="anchor" href="#hooks-for-automated-logging"></a></h2>
 
-          <code><a href="log_appender.html">log_appender()</a></code>
 
-        </dt>
-        <dd>Get or set log record appender function</dd>
-      </dl><dl><dt>
 
-          <code><a href="log_errors.html">log_errors()</a></code>
 
-        </dt>
-        <dd>Injects a logger call to standard errors</dd>
-      </dl><dl><dt>
+    </div><div class="section level2">
 
-          <code><a href="log_eval.html">log_eval()</a></code>
 
-        </dt>
-        <dd>Evaluate an expression and log results</dd>
-      </dl><dl><dt>
 
-          <code><a href="log_failure.html">log_failure()</a></code>
+
+      <dl><dt>
+
+          <code><a href="log_shiny_input_changes.html">log_shiny_input_changes()</a></code>
 
         </dt>
-        <dd>Logs the error message to console before failing</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_formatter.html">log_formatter()</a></code>
-
-        </dt>
-        <dd>Get or set log message formatter</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_layout.html">log_layout()</a></code>
-
-        </dt>
-        <dd>Get or set log record layout</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_level.html">log_level()</a></code> <code><a href="log_level.html">log_fatal()</a></code> <code><a href="log_level.html">log_error()</a></code> <code><a href="log_level.html">log_warn()</a></code> <code><a href="log_level.html">log_success()</a></code> <code><a href="log_level.html">log_info()</a></code> <code><a href="log_level.html">log_debug()</a></code> <code><a href="log_level.html">log_trace()</a></code>
-
-        </dt>
-        <dd>Log a message with given log level</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_levels.html">OFF</a></code> <code><a href="log_levels.html">FATAL</a></code> <code><a href="log_levels.html">ERROR</a></code> <code><a href="log_levels.html">WARN</a></code> <code><a href="log_levels.html">SUCCESS</a></code> <code><a href="log_levels.html">INFO</a></code> <code><a href="log_levels.html">DEBUG</a></code> <code><a href="log_levels.html">TRACE</a></code>
-
-        </dt>
-        <dd>Log levels</dd>
+        <dd>Auto logging input changes in Shiny app</dd>
       </dl><dl><dt>
 
           <code><a href="log_messages.html">log_messages()</a></code>
@@ -330,46 +373,39 @@
         <dd>Injects a logger call to standard messages</dd>
       </dl><dl><dt>
 
-          <code><a href="log_namespaces.html">log_namespaces()</a></code>
-
-        </dt>
-        <dd>Looks up logger namespaces</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_separator.html">log_separator()</a></code>
-
-        </dt>
-        <dd>Logs a long line to stand out from the console</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_shiny_input_changes.html">log_shiny_input_changes()</a></code>
-
-        </dt>
-        <dd>Auto logging input changes in Shiny app</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_threshold.html">log_threshold()</a></code>
-
-        </dt>
-        <dd>Get or set log level threshold</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_tictoc.html">log_tictoc()</a></code>
-
-        </dt>
-        <dd>Tic-toc logging</dd>
-      </dl><dl><dt>
-
           <code><a href="log_warnings.html">log_warnings()</a></code>
 
         </dt>
         <dd>Injects a logger call to standard warnings</dd>
       </dl><dl><dt>
 
-          <code><a href="log_with_separator.html">log_with_separator()</a></code>
+          <code><a href="log_errors.html">log_errors()</a></code>
 
         </dt>
-        <dd>Logs a message in a very visible way</dd>
+        <dd>Injects a logger call to standard errors</dd>
+      </dl></div><div class="section level2">
+      <h2 id="other-helpers">Other helpers<a class="anchor" aria-label="anchor" href="#other-helpers"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="colorize_by_log_level.html">colorize_by_log_level()</a></code>
+
+        </dt>
+        <dd>Colorize string by the related log level</dd>
+      </dl><dl><dt>
+
+          <code><a href="grayscale_by_log_level.html">grayscale_by_log_level()</a></code>
+
+        </dt>
+        <dd>Render a string with light/dark gray based on the related log level</dd>
       </dl><dl><dt>
 
           <code><a href="logger.html">logger()</a></code>
@@ -378,18 +414,60 @@
         <dd>Generate logging utility</dd>
       </dl><dl><dt>
 
-          <code><a href="skip_formatter.html">skip_formatter()</a></code>
+          <code><a href="delete_logger_index.html">delete_logger_index()</a></code>
 
         </dt>
-        <dd>Skip the formatter function</dd>
+        <dd>Delete an index from a logger namespace</dd>
       </dl><dl><dt>
 
-          <code><a href="with_log_threshold.html">with_log_threshold()</a></code>
+          <code><a href="grapes-except-grapes.html">`%except%`</a></code>
 
         </dt>
-        <dd>Evaluate R expression with a temporarily updated log level threshold</dd>
+        <dd>Try to evaluate an expressions and evaluate another expression on exception</dd>
+      </dl></div><div class="section level2">
+      <h2 id="dev-tools">Dev tools<a class="anchor" aria-label="anchor" href="#dev-tools"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="as.loglevel.html">as.loglevel()</a></code>
+
+        </dt>
+        <dd>Convert R object into a logger log-level</dd>
+      </dl><dl><dt>
+
+          <code><a href="deparse_to_one_line.html">deparse_to_one_line()</a></code>
+
+        </dt>
+        <dd>Deparse and join all lines into a single line</dd>
+      </dl><dl><dt>
+
+          <code><a href="fail_on_missing_package.html">fail_on_missing_package()</a></code>
+
+        </dt>
+        <dd>Check if R package can be loaded and fails loudly otherwise</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_logger_meta_variables.html">get_logger_meta_variables()</a></code>
+
+        </dt>
+        <dd>Collect useful information about the logging environment to be used in log messages</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_namespaces.html">log_namespaces()</a></code>
+
+        </dt>
+        <dd>Looks up logger namespaces</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
