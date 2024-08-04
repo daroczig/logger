@@ -13,7 +13,7 @@ toc:
 reference:
 
 - title: Key logging functions
-  contents: 
+  contents:
   - log_eval
   - log_level
   - TRACE
@@ -30,12 +30,11 @@ reference:
   - log_tictoc
   - log_warnings
   - log_with_separator
-  
 
 - title: Appenders
   desc: >
     Log appenders define where logging output should be sent to.
-  contents: 
+  contents:
   - log_appender
   - starts_with("appender_")
 
@@ -43,7 +42,7 @@ reference:
   desc: >
     Log formatters control how the inputs to the `log_` functions are converted
     to a string. The default is `formatter_glue()`.
-  contents: 
+  contents:
   - log_formatter
   - starts_with("formatter_")
   - skip_formatter
@@ -52,7 +51,7 @@ reference:
   desc: >
     Logging layouts control what is sent to the appender. They always include
     the logged string, but might also include the timestamp, log level, etc.
-  contents: 
+  contents:
   - log_layout
   - starts_with("layout_")
 
