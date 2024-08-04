@@ -12,13 +12,13 @@ layout_glue_generator(
 \item{format}{\code{glue}-flavored layout of the message using the above variables}
 }
 \value{
-function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{\link{log_layout}} for the currently used layout
+function taking \code{level} and \code{msg} arguments - keeping the original call creating the generator in the \code{generator} attribute that is returned when calling \code{\link[=log_layout]{log_layout()}} for the currently used layout
 }
 \description{
 \code{format} is passed to \code{glue} with access to the below variables:
 \itemize{
- \item msg: the actual log message
- \item further variables set by \code{\link{get_logger_meta_variables}}
+\item msg: the actual log message
+\item further variables set by \code{\link[=get_logger_meta_variables]{get_logger_meta_variables()}}
 }
 }
 \examples{
@@ -32,5 +32,5 @@ log_info('try {runif(1)}')
 }
 }
 \seealso{
-See example calls from \code{\link{layout_glue}} and \code{\link{layout_glue_colors}}.
+See example calls from \code{\link[=layout_glue]{layout_glue()}} and \code{\link[=layout_glue_colors]{layout_glue_colors()}}.
 }

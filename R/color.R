@@ -2,7 +2,7 @@
 #'
 #' Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
 #' @param msg string
-#' @param level see \code{\link{log_levels}}
+#' @param level see [log_levels()]
 #' @return string with ANSI escape code
 #' @export
 #' @examplesIf requireNamespace("crayon")
@@ -38,7 +38,7 @@ colorize_by_log_level <- function(msg, level) {
 #'
 #' Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
 #' @param msg string
-#' @param level see \code{\link{log_levels}}
+#' @param level see [log_levels()]
 #' @return string with ANSI escape code
 #' @export
 #' @examplesIf requireNamespace("crayon")

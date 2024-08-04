@@ -9,7 +9,7 @@ log_config_setter(fun_name, arg, namespace, index)
 \arguments{
 \item{fun_name}{string a full name of log function}
 
-\item{arg}{see \code{\link{log_levels}}}
+\item{arg}{see \code{\link[=log_levels]{log_levels()}}}
 
 \item{namespace}{logger namespace}
 

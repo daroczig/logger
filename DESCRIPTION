@@ -43,3 +43,4 @@ Enhances:
   log4r
 VignetteBuilder: knitr
 Config/testthat/edition: 2
+Roxygen: list(markdown = TRUE)

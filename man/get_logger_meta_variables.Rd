@@ -13,7 +13,7 @@ get_logger_meta_variables(
 )
 }
 \arguments{
-\item{log_level}{log level as per \code{\link{log_levels}}}
+\item{log_level}{log level as per \code{\link[=log_levels]{log_levels()}}}
 
 \item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
 
@@ -27,28 +27,28 @@ get_logger_meta_variables(
 list
 }
 \description{
-Available variables to be used in the log formatter functions, eg in \code{\link{layout_glue_generator}}:
+Available variables to be used in the log formatter functions, eg in \code{\link[=layout_glue_generator]{layout_glue_generator()}}:
 \itemize{
-  \item levelr: log level as an R object, eg \code{\link{INFO}}
-  \item level: log level as a string, eg \code{\link{INFO}}
-  \item time: current time as \code{POSIXct}
-  \item node: name by which the machine is known on the network as reported by \code{Sys.info}
-  \item arch: machine type, typically the CPU architecture
-  \item os_name: Operating System's name
-  \item os_release: Operating System's release
-  \item os_version: Operating System's version
-  \item user: name of the real user id as reported by \code{Sys.info}
-  \item pid: the process identification number of the R session
-  \item node: name by which the machine is known on the network as reported by \code{Sys.info}
-  \item r_version: R's major and minor version as a string
-  \item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
-  \item ns_pkg_version: the version of \code{ns} when it's a package
-  \item ans: same as \code{ns} if there's a defined \code{\link{logger}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
-  \item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
-  \item call: parent call (if any) calling the logging function
-  \item fn: function's (if any) name calling the logging function
+\item levelr: log level as an R object, eg \code{\link[=INFO]{INFO()}}
+\item level: log level as a string, eg \code{\link[=INFO]{INFO()}}
+\item time: current time as \code{POSIXct}
+\item node: name by which the machine is known on the network as reported by \code{Sys.info}
+\item arch: machine type, typically the CPU architecture
+\item os_name: Operating System's name
+\item os_release: Operating System's release
+\item os_version: Operating System's version
+\item user: name of the real user id as reported by \code{Sys.info}
+\item pid: the process identification number of the R session
+\item node: name by which the machine is known on the network as reported by \code{Sys.info}
+\item r_version: R's major and minor version as a string
+\item ns: namespace usually defaults to \code{global} or the name of the holding R package of the calling the logging function
+\item ns_pkg_version: the version of \code{ns} when it's a package
+\item ans: same as \code{ns} if there's a defined \code{\link[=logger]{logger()}} for the namespace, otherwise a fallback namespace (eg usually \code{global})
+\item topenv: the name of the top environment from which the parent call was called (eg R package name or \code{GlobalEnv})
+\item call: parent call (if any) calling the logging function
+\item fn: function's (if any) name calling the logging function
 }
 }
 \seealso{
-\code{\link{layout_glue_generator}}
+\code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }
