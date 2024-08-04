@@ -79,7 +79,7 @@ log_warn('There might be many, like {1:2} or more warnings!!!')
 ```
 
 You can even use a custom log layout to render the log records with
-colors, asyou can see in
+colors, as you can see in
 `demo(colors, package = 'logger', echo = FALSE)`:
 
 <img src="man/figures/colors.png" alt="colored log output">
@@ -108,7 +108,7 @@ There are many other logging packages available on CRAN:
   provides a special operator to log changes in data
 
 Why use logger? I decided to write the `n+1`th extensible `log4j` logger
-that fits my liking — and hopefully yours as well — the the aim to:
+that fits my liking — and hopefully yours as well — with the aim to:
 
 - Keep it close to `log4j`.
 - Respect the modern function/variable naming conventions and general R
