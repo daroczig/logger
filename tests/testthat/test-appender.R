@@ -1,8 +1,3 @@
-library(logger)
-library(testthat)
-
-context('appenders')
-
 test_that('append to file', {
     t <- withr::local_tempfile()
     local_test_logger(

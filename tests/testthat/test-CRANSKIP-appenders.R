@@ -1,8 +1,3 @@
-library(logger)
-library(testthat)
-
-context('CRAN skip: async appender')
-
 test_that('async logging', {
     t <- withr::local_tempfile()
     local_test_logger(

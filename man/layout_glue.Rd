@@ -14,7 +14,7 @@ layout_glue(
 )
 }
 \arguments{
-\item{level}{log level, see \code{\link{log_levels}} for more details}
+\item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
 \item{msg}{string message}
 
@@ -30,8 +30,8 @@ layout_glue(
 character vector
 }
 \description{
-By default, this layout includes the log level of the log record as per \code{\link{log_levels}}, the current timestamp and the actual log message -- that you can override via calling \code{\link{layout_glue_generator}} directly. For colorized output, see \code{\link{layout_glue_colors}}.
+By default, this layout includes the log level of the log record as per \code{\link[=log_levels]{log_levels()}}, the current timestamp and the actual log message -- that you can override via calling \code{\link[=layout_glue_generator]{layout_glue_generator()}} directly. For colorized output, see \code{\link[=layout_glue_colors]{layout_glue_colors()}}.
 }
 \seealso{
-This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
+This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json]{layout_json()}}, \code{\link[=layout_json_parser]{layout_json_parser()}}, or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

@@ -1,7 +1,3 @@
-library(logger)
-library(testthat)
-
-context('log_eval')
 test_that('single line', {
     local_test_logger(layout = layout_glue_generator('{level} {msg}'))
 

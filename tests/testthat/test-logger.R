@@ -1,8 +1,3 @@
-library(logger)
-library(testthat)
-
-context('loggers')
-
 test_that('log levels', {
     local_test_logger(WARN)
 
