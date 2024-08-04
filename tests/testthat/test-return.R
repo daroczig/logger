@@ -1,6 +1,3 @@
-library(logger)
-library(testthat)
-
 ## save current settings so that we can reset later
 formatter <- log_formatter()
 appender <- log_appender()
