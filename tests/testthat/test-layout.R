@@ -8,8 +8,6 @@ appender <- log_appender()
 
 log_appender(appender_stdout)
 
-context('layouts')
-
 log_layout(layout_blank)
 test_that('blank layout', {
     expect_output(log_info('foobar'), 'foobar')

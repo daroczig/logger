@@ -9,7 +9,6 @@ appender  <- log_appender()
 log_layout(layout_glue_generator('{level} {msg}'))
 log_appender(appender_stdout)
 
-context('log_eval')
 test_that('single line', {
     expect_output(log_eval(4, INFO), sprintf("INFO %s => %s", shQuote(4), shQuote(4)))
 })

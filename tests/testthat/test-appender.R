@@ -6,8 +6,6 @@ threshold <- log_threshold()
 layout    <- log_layout()
 appender  <- log_appender()
 
-context('appenders')
-
 test_that('append to file', {
     log_layout(layout_glue_generator('{level} {msg}'))
     log_threshold(TRACE)

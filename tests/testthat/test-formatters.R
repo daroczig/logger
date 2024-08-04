@@ -6,7 +6,6 @@ library(jsonlite)
 formatter <- log_formatter()
 appender  <- log_appender()
 
-context('formatters')
 everything <- 42
 g <- function() {
     log_info("Hi {everything}")
@@ -137,8 +136,11 @@ test_that('special chars in the text work', {
   expect_output(log_info('JSON: {toJSON(iris[1:2, ], auto_unbox = TRUE)}'), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
 })
 
-log_formatter(formatter_pander)
 test_that('pander formatter', {
+    log_formatter(formatter_pander)
+    # pander partially matches coef to coefficient
+    withr::local_options(warnPartialMatchDollar = FALSE)
+
     expect_output(log_info(42), '_42_')
     expect_output(log_info('42'), '42')
     expect_output(log_info(head(iris)), 'Sepal.Length')

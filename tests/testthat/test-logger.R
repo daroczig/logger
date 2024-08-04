@@ -6,8 +6,6 @@ threshold <- log_threshold()
 appender  <- log_appender()
 layout    <- log_layout()
 
-context('loggers')
-
 log_appender(appender_stdout)
 
 log_threshold(WARN)
