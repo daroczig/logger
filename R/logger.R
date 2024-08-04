@@ -1,23 +1,21 @@
 #' Generate logging utility
 #'
-#' A logger consists of a log level \code{threshold}, a log message \code{formatter} function, a log record \code{layout} formatting function and the \code{appender} function deciding on the destination of the log record. For more details, see the package \code{README.md}.
+#' A logger consists of a log level `threshold`, a log message `formatter` function, a log record `layout` formatting function and the `appender` function deciding on the destination of the log record. For more details, see the package `README.md`.
 #'
-#' By default, a general logger definition is created when loading the \code{logger} package, that uses
+#' By default, a general logger definition is created when loading the `logger` package, that uses
 #'
-#' \enumerate{
-#'   \item \code{\link{INFO}} (or as per the \code{LOGGER_LOG_LEVEL} environment variable override) as the log level threshold
-#'   \item \code{\link{layout_simple}} as the layout function showing the log level, timestamp and log message
-#'   \item \code{\link{formatter_glue}} (or \code{\link{formatter_sprintf}} if \pkg{glue} is not installed) as the default formatter function transforming the R objects to be logged to a character vector
-#'   \item \code{\link{appender_console}} as the default log record destination
-#' }
-#' @param threshold omit log messages below this \code{\link{log_levels}}
-#' @param formatter function pre-processing the message of the log record when it's not wrapped in a \code{\link{skip_formatter}} call
+#' * [INFO()] (or as per the `LOGGER_LOG_LEVEL` environment variable override) as the log level threshold
+#' * [layout_simple()] as the layout function showing the log level, timestamp and log message
+#' * [formatter_glue()] (or [formatter_sprintf()] if \pkg{glue} is not installed) as the default formatter function transforming the R objects to be logged to a character vector
+#' * [appender_console()] as the default log record destination
+#' @param threshold omit log messages below this [log_levels()]
+#' @param formatter function pre-processing the message of the log record when it's not wrapped in a [skip_formatter()] call
 #' @param layout function rendering the layout of the actual log record
 #' @param appender function writing the log record
-#' @return A function taking the log \code{level} to compare with the set threshold, all the \code{...} arguments passed to the formatter function, besides the standard \code{namespace}, \code{.logcall}, \code{.topcall} and \code{.topenv} arguments (see \code{\link{log_level}} for more details). The function invisibly returns a list including the original \code{level}, \code{namespace}, all \code{...} transformed to a list as \code{params}, the log \code{message} (after calling the \code{formatter} function) and the log \code{record} (after calling the \code{layout} function), and a list of \code{handlers} with the \code{formatter}, \code{layout} and \code{appender} functions.
+#' @return A function taking the log `level` to compare with the set threshold, all the `...` arguments passed to the formatter function, besides the standard `namespace`, `.logcall`, `.topcall` and `.topenv` arguments (see [log_level()] for more details). The function invisibly returns a list including the original `level`, `namespace`, all `...` transformed to a list as `params`, the log `message` (after calling the `formatter` function) and the log `record` (after calling the `layout` function), and a list of `handlers` with the `formatter`, `layout` and `appender` functions.
 #' @export
-#' @references For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
-#' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link{log_threshold}}, \code{\link{log_formatter}}, \code{\link{log_layout}} and \code{\link{log_appender}} and then call \code{\link{log_levels}} and its derivatives, such as \code{\link{log_info}} directly.
+#' @references For more details, see the Anatomy of a Log Request vignette at <https://daroczig.github.io/logger/articles/anatomy.html>.
+#' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at [log_threshold()], [log_formatter()], [log_layout()] and [log_appender()] and then call [log_levels()] and its derivatives, such as [log_info()] directly.
 #' @examples \dontrun{
 #' do.call(logger, logger:::namespaces$global[[1]])(INFO, 42)
 #' do.call(logger, logger:::namespaces$global[[1]])(INFO, '{pi}')
@@ -84,7 +82,7 @@ fallback_namespace <- function(namespace) {
 
 #' Base Logging Function
 #' @param fun_name string a full name of log function
-#' @param arg see \code{\link{log_levels}}
+#' @param arg see [log_levels()]
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set or return log function property
@@ -139,7 +137,7 @@ delete_logger_index <- function(namespace = 'global', index) {
 
 
 #' Get or set log level threshold
-#' @param level see \code{\link{log_levels}}
+#' @param level see [log_levels()]
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set log level threshold
@@ -161,38 +159,38 @@ delete_logger_index <- function(namespace = 'global', index) {
 #' ## set the log level threshold in all namespaces to ERROR
 #' log_threshold(ERROR, namespace =  log_namespaces())
 #' }
-#' @seealso \code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
+#' @seealso [logger()], [log_layout()], [log_formatter()], [log_appender()]
 log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
     log_config_setter(fun_name = 'log_threshold', arg = level, namespace = namespace, index = index)
 }
 
 
 #' Get or set log record layout
-#' @param layout function defining the structure of a log record, eg \code{\link{layout_simple}}, \code{\link{layout_glue}} or \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}, default NULL
+#' @param layout function defining the structure of a log record, eg [layout_simple()], [layout_glue()] or [layout_glue_colors()], [layout_json()], or generator functions such as [layout_glue_generator()], default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
 #' log_layout(layout_json())
 #' log_info(42)
 #' }
-#' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_formatter}}
+#' @seealso [logger()], [log_threshold()], [log_appender()] and [log_formatter()]
 log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
     log_config_setter(fun_name = 'log_layout', arg = layout, namespace = namespace, index = index)
 }
 
 
 #' Get or set log message formatter
-#' @param formatter function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, default NULL
+#' @param formatter function defining how R objects are converted into a single string, eg [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_or_sprintf()], [formatter_logging()], default NULL
 #' @inheritParams log_threshold
 #' @export
-#' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
+#' @seealso [logger()], [log_threshold()], [log_appender()] and [log_layout()]
 log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
     log_config_setter(fun_name = 'log_formatter', arg = formatter, namespace = namespace, index = index)
 }
 
 
 #' Get or set log record appender function
-#' @param appender function delivering a log record to the destination, eg \code{\link{appender_console}}, \code{\link{appender_file}} or \code{\link{appender_tee}}, default NULL
+#' @param appender function delivering a log record to the destination, eg [appender_console()], [appender_file()] or [appender_tee()], default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -210,7 +208,7 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 #' log_info(42)
 #' readLines(t)
 #' }
-#' @seealso \code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_layout}} and \code{\link{log_formatter}}
+#' @seealso [logger()], [log_threshold()], [log_layout()] and [log_formatter()]
 log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
     log_config_setter(fun_name = 'log_appender', arg = appender, namespace = namespace, index = index)
 }
@@ -239,39 +237,14 @@ log_namespaces <- function() {
 
 
 #' Log a message with given log level
-#' @param level log level, see \code{\link{log_levels}} for more details
+#' @param level log level, see [log_levels()] for more details
 #' @param ... R objects that can be converted to a character vector via the active message formatter function
-#' @param namespace string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.
+#' @param namespace string referring to the `logger` environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.
 #' @param .logcall the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)
 #' @param .topcall R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)
-#' @param .topenv original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}
-#' @seealso \code{\link{logger}}
+#' @param .topenv original frame of the `.topcall` calling function where the formatter function will be evaluated and that is used to look up the `namespace` as well via `logger:::top_env_name`
+#' @seealso [logger()]
 #' @export
-#' @aliases log_level log_fatal log_error log_warn log_success log_info log_debug log_trace
-#' @usage
-#' log_level(level, ..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_trace(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_debug(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_info(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_success(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_warn(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_error(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
-#'
-#' log_fatal(..., namespace = NA_character_,
-#'   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
 #' @examples \dontrun{
 #' log_level(INFO, 'hi there')
 #' log_info('hi there')
@@ -292,7 +265,7 @@ log_namespaces <- function() {
 #' ## note for the JSON output, glue is not automatically applied
 #' log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 #' }
-#' @return Invisible \code{list} of \code{logger} objects. See \code{\link{logger}} for more details on the format/
+#' @return Invisible `list` of `logger` objects. See [logger()] for more details on the format/
 log_level <- function(level, ..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
@@ -337,8 +310,8 @@ log_level <- function(level, ..., namespace = NA_character_,
 
 
 #' Assure valid log level
-#' @param level \code{\link{log_levels}} object or string representation
-#' @return \code{\link{log_levels}} object
+#' @param level [log_levels()] object or string representation
+#' @return [log_levels()] object
 #' @keywords internal
 validate_log_level <- function(level) {
     if (inherits(level, 'loglevel')) {
@@ -352,36 +325,43 @@ validate_log_level <- function(level) {
 
 
 #' @export
+#' @rdname log_level
 log_fatal <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(FATAL, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
+#' @rdname log_level
 log_error <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(ERROR, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
+#' @rdname log_level
 log_warn <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(WARN, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
+#' @rdname log_level
 log_success <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(SUCCESS, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
+#' @rdname log_level
 log_info <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(INFO, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
+#' @rdname log_level
 log_debug <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(DEBUG, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
 }
 #' @export
+#' @rdname log_level
 log_trace <- function(..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     log_level(TRACE, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
@@ -390,7 +370,7 @@ log_trace <- function(..., namespace = NA_character_,
 
 #' Evaluate R expression with a temporarily updated log level threshold
 #' @param expression R command
-#' @param threshold \code{\link{log_levels}}
+#' @param threshold [log_levels()]
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{

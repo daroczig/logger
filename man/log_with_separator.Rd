@@ -15,7 +15,7 @@ log_with_separator(
 \arguments{
 \item{...}{R objects that can be converted to a character vector via the active message formatter function}
 
-\item{level}{log level, see \code{\link{log_levels}} for more details}
+\item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
 \item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
 
@@ -45,5 +45,5 @@ log_layout(logger)
 log_with_separator('Boo!', level = FATAL, width = 120)
 }
 \seealso{
-\code{\link{log_separator}}
+\code{\link[=log_separator]{log_separator()}}
 }

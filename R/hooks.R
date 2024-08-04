@@ -10,7 +10,7 @@ warn_if_globalCallingHandlers_is_not_available <- function() {
 
 #' Injects a logger call to standard messages
 #'
-#' This function uses \code{trace} to add a \code{log_info} function call when \code{message} is called to log the informative messages with the \code{logger} layout and appender.
+#' This function uses `trace` to add a `log_info` function call when `message` is called to log the informative messages with the `logger` layout and appender.
 #' @export
 #' @examples \dontrun{
 #' log_messages()
@@ -40,7 +40,7 @@ log_messages <- function() {
 
 #' Injects a logger call to standard warnings
 #'
-#' This function uses \code{trace} to add a \code{log_warn} function call when \code{warning} is called to log the warning messages with the \code{logger} layout and appender.
+#' This function uses `trace` to add a `log_warn` function call when `warning` is called to log the warning messages with the `logger` layout and appender.
 #' @param muffle if TRUE, the warning is not shown after being logged
 #' @export
 #' @examples \dontrun{
@@ -74,7 +74,7 @@ log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
 
 #' Injects a logger call to standard errors
 #'
-#' This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.
+#' This function uses `trace` to add a `log_error` function call when `stop` is called to log the error messages with the `logger` layout and appender.
 #' @param muffle if TRUE, the error is not thrown after being logged
 #' @export
 #' @examples \dontrun{
@@ -108,9 +108,9 @@ log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
 
 #' Auto logging input changes in Shiny app
 #'
-#' This is to be called in the \code{server} section of the Shiny app.
+#' This is to be called in the `server` section of the Shiny app.
 #' @export
-#' @param input passed from Shiny's \code{server}
+#' @param input passed from Shiny's `server`
 #' @param level log level
 #' @param excluded_inputs character vector of input names to exclude from logging
 #' @param namespace the name of the namespace

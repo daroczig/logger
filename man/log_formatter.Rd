@@ -7,7 +7,7 @@
 log_formatter(formatter = NULL, namespace = "global", index = 1)
 }
 \arguments{
-\item{formatter}{function defining how R objects are converted into a single string, eg \code{\link{formatter_paste}}, \code{\link{formatter_sprintf}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_logging}}, default NULL}
+\item{formatter}{function defining how R objects are converted into a single string, eg \code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_sprintf]{formatter_sprintf()}}, \code{\link[=formatter_glue]{formatter_glue()}}, \code{\link[=formatter_glue_or_sprintf]{formatter_glue_or_sprintf()}}, \code{\link[=formatter_logging]{formatter_logging()}}, default NULL}
 
 \item{namespace}{logger namespace}
 
@@ -17,5 +17,5 @@ log_formatter(formatter = NULL, namespace = "global", index = 1)
 Get or set log message formatter
 }
 \seealso{
-\code{\link{logger}}, \code{\link{log_threshold}}, \code{\link{log_appender}} and \code{\link{log_layout}}
+\code{\link[=logger]{logger()}}, \code{\link[=log_threshold]{log_threshold()}}, \code{\link[=log_appender]{log_appender()}} and \code{\link[=log_layout]{log_layout()}}
 }

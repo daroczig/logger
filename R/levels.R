@@ -2,53 +2,53 @@ log_levels_supported <- c('OFF', 'FATAL', 'ERROR', 'WARN', 'SUCCESS', 'INFO', 'D
 
 #' Log levels
 #'
-#' The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.
+#' The standard Apache logj4 log levels plus a custom level for `SUCCESS`. For the full list of these log levels and suggested usage, check the below Details.
 #'
 #' List of supported log levels:
-#' \enumerate{
-#'   \item \code{OFF} No events will be logged
-#'   \item \code{FATAL} Severe error that will prevent the application from continuing
-#'   \item \code{ERROR} An error in the application, possibly recoverable
-#'   \item \code{WARN} An event that might possible lead to an error
-#'   \item \code{SUCCESS} An explicit success event above the INFO level that you want to log
-#'   \item \code{INFO} An event for informational purposes
-#'   \item \code{DEBUG} A general debugging event
-#'   \item \code{TRACE} A fine-grained debug message, typically capturing the flow through the application.
-#' }
-#' @references \url{https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
-#' @aliases log_levels OFF FATAL ERROR WARN SUCCESS INFO DEBUG TRACE
+#' 
+#' *  `OFF` No events will be logged
+#' *  `FATAL` Severe error that will prevent the application from continuing
+#' *  `ERROR` An error in the application, possibly recoverable
+#' *  `WARN` An event that might possible lead to an error
+#' *  `SUCCESS` An explicit success event above the INFO level that you want to log
+#' *  `INFO` An event for informational purposes
+#' *  `DEBUG` A general debugging event
+#' *  `TRACE` A fine-grained debug message, typically capturing the flow through the application.
+#' @references <https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html>, <https://logging.apache.org/log4j/2.x/manual/customloglevels.html>
+#' @name log_levels
+NULL
+
 #' @rdname log_levels
-#' @usage
-#' TRACE
-#'
-#' DEBUG
-#'
-#' INFO
-#'
-#' SUCCESS
-#'
-#' WARN
-#'
-#' ERROR
-#'
-#' FATAL
-#'
-#' OFF
 #' @export
+#' @format NULL
 OFF <- structure(0L, level = 'OFF', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 FATAL <- structure(100L, level = 'FATAL', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 ERROR <- structure(200L, level = 'ERROR', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 WARN  <- structure(300L, level = 'WARN', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 SUCCESS <- structure(350L, level = 'SUCCESS', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 INFO  <- structure(400L, level = 'INFO', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 DEBUG <- structure(500L, level = 'DEBUG', class = c('loglevel', 'integer'))
 #' @export
+#' @rdname log_levels
+#' @format NULL
 TRACE <- structure(600L, level = 'TRACE', class = c('loglevel', 'integer'))
 
 #' @export
@@ -59,7 +59,7 @@ print.loglevel <- function(x, ...) {
 
 #' Convert R object into a logger log-level
 #' @param x string or integer
-#' @return pander log-level, e.g. \code{INFO}
+#' @return pander log-level, e.g. `INFO`
 #' @export
 #' @examples
 #' as.loglevel(INFO)

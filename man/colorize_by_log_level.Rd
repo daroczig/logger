@@ -9,7 +9,7 @@ colorize_by_log_level(msg, level)
 \arguments{
 \item{msg}{string}
 
-\item{level}{see \code{\link{log_levels}}}
+\item{level}{see \code{\link[=log_levels]{log_levels()}}}
 }
 \value{
 string with ANSI escape code

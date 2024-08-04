@@ -14,7 +14,7 @@ layout_logging(
 )
 }
 \arguments{
-\item{level}{log level, see \code{\link{log_levels}} for more details}
+\item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
 \item{msg}{string message}
 
@@ -43,5 +43,5 @@ logger_tester_function(INFO, 42)
 }
 }
 \seealso{
-This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_blank}}, \code{\link{layout_glue}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, \code{\link{layout_json_parser}}, or generator functions such as \code{\link{layout_glue_generator}}
+This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json]{layout_json()}}, \code{\link[=layout_json_parser]{layout_json_parser()}}, or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

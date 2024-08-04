@@ -14,7 +14,7 @@ with_log_threshold(
 \arguments{
 \item{expression}{R command}
 
-\item{threshold}{\code{\link{log_levels}}}
+\item{threshold}{\code{\link[=log_levels]{log_levels()}}}
 
 \item{namespace}{logger namespace}
 
