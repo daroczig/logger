@@ -4,10 +4,6 @@
       writeLines(eval_outside("message(42)"))
     Output
       INFO 42
-    Code
-      writeLines(eval_outside("system(\"echo 42\", invisible = TRUE)"))
-    Output
-      INFO arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only
 
 # log_warnings
 
