@@ -69,6 +69,7 @@ test_that('shiny input initialization is detected with different log-level', {
 })
 
 test_that('shiny input change is detected', {
+    skip_on_os("windows")
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
@@ -87,6 +88,7 @@ test_that('shiny input change is detected', {
 })
 
 test_that('shiny input change is logged with different level', {
+    skip_on_os("windows")
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
