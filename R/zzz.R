@@ -10,7 +10,7 @@ namespaces <- new.env()
             threshold = as.loglevel(Sys.getenv('LOGGER_LOG_LEVEL', unset = 'INFO')),
             layout    = layout_simple,
             formatter = formatter_sprintf,
-            appender  = appender_console))
+            appender  = if (in_pkgdown()) appender_stdout else appender_console))
 
     if (requireNamespace('glue', quietly = TRUE)) {
         log_formatter(formatter_glue, namespace = 'global', index = 1)

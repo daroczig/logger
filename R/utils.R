@@ -92,3 +92,7 @@ catch_base_log <- function(
     log_appender(orginal_appender, namespace = namespace)
     res
 }
+
+in_pkgdown <- function() {
+    identical(Sys.getenv("IN_PKGDOWN"), "true")
+}

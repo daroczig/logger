@@ -46,11 +46,11 @@ messages in ad-hoc and programmatic ways:
 library(logger)
 log_threshold(DEBUG)
 log_info('Script starting up...')
-#> INFO [2024-07-31 08:26:30] Script starting up...
+#> INFO [2024-08-05 16:05:22] Script starting up...
 
 pkgs <- available.packages()
 log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
-#> INFO [2024-07-31 08:26:30] There are 21122 R packages hosted on CRAN!
+#> INFO [2024-08-05 16:05:23] There are 21132 R packages hosted on CRAN!
 
 for (letter in letters) {
   lpkgs <- sum(grepl(letter, pkgs[, 'Package'], ignore.case = TRUE))
@@ -59,28 +59,27 @@ for (letter in letters) {
     '{lpkgs} R packages including the {shQuote(letter)} letter'
   )
 }
-#> DEBUG [2024-07-31 08:26:30] 10188 R packages including the 'a' letter
-#> DEBUG [2024-07-31 08:26:30] 7013 R packages including the 'c' letter
-#> DEBUG [2024-07-31 08:26:30] 5750 R packages including the 'd' letter
-#> DEBUG [2024-07-31 08:26:30] 10902 R packages including the 'e' letter
-#> DEBUG [2024-07-31 08:26:30] 8821 R packages including the 'i' letter
-#> DEBUG [2024-07-31 08:26:30] 7055 R packages including the 'l' letter
-#> DEBUG [2024-07-31 08:26:30] 7039 R packages including the 'm' letter
-#> DEBUG [2024-07-31 08:26:30] 6661 R packages including the 'n' letter
-#> DEBUG [2024-07-31 08:26:30] 7859 R packages including the 'o' letter
-#> DEBUG [2024-07-31 08:26:30] 6579 R packages including the 'p' letter
-#> DEBUG [2024-07-31 08:26:31] 11224 R packages including the 'r' letter
-#> DEBUG [2024-07-31 08:26:31] 10292 R packages including the 's' letter
-#> DEBUG [2024-07-31 08:26:31] 9526 R packages including the 't' letter
+#> DEBUG [2024-08-05 16:05:23] 10194 R packages including the 'a' letter
+#> DEBUG [2024-08-05 16:05:23] 7016 R packages including the 'c' letter
+#> DEBUG [2024-08-05 16:05:23] 5751 R packages including the 'd' letter
+#> DEBUG [2024-08-05 16:05:23] 10908 R packages including the 'e' letter
+#> DEBUG [2024-08-05 16:05:23] 8825 R packages including the 'i' letter
+#> DEBUG [2024-08-05 16:05:23] 7060 R packages including the 'l' letter
+#> DEBUG [2024-08-05 16:05:23] 7045 R packages including the 'm' letter
+#> DEBUG [2024-08-05 16:05:23] 6665 R packages including the 'n' letter
+#> DEBUG [2024-08-05 16:05:23] 7863 R packages including the 'o' letter
+#> DEBUG [2024-08-05 16:05:23] 6582 R packages including the 'p' letter
+#> DEBUG [2024-08-05 16:05:23] 11230 R packages including the 'r' letter
+#> DEBUG [2024-08-05 16:05:23] 10296 R packages including the 's' letter
+#> DEBUG [2024-08-05 16:05:23] 9531 R packages including the 't' letter
 
 log_warn('There might be many, like {1:2} or more warnings!!!')
-#> WARN [2024-07-31 08:26:31] There might be many, like 1 or more warnings!!!
-#> WARN [2024-07-31 08:26:31] There might be many, like 2 or more warnings!!!
+#> WARN [2024-08-05 16:05:23] There might be many, like 1 or more warnings!!!
+#> WARN [2024-08-05 16:05:23] There might be many, like 2 or more warnings!!!
 ```
 
 You can even use a custom log layout to render the log records with
-colors, as you can see in
-`demo(colors, package = 'logger', echo = FALSE)`:
+colors, as you can see in `layout_glue_colors()`:
 
 <img src="man/figures/colors.png" alt="colored log output">
 
