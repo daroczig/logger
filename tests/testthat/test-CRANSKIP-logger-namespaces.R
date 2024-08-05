@@ -4,8 +4,7 @@ appender <- log_appender()
 
 test_that('called from package', {
     devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
-    log_layout(layout_simple)
-    log_appender(appender_stdout)
+    local_test_logger(layout = layout_simple)
     expect_output(logger_tester_function(INFO, 'x = '), 'INFO')
     expect_output(logger_info_tester_function('everything = '), 'INFO')
 })

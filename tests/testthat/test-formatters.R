@@ -1,7 +1,3 @@
-## save current settings so that we can reset later
-formatter <- log_formatter()
-appender  <- log_appender()
-
 everything <- 42
 g <- function() {
     log_info("Hi {everything}")
@@ -10,9 +6,8 @@ f <- function() {
     log_info("Hi %s", everything)
 }
 
-log_formatter(formatter_glue)
-log_appender(appender_stdout)
 test_that('glue works', {
+    local_test_logger(formatter = formatter_glue)
 
     expect_equal(formatter_glue("Hi"), "Hi")
     expect_equal(formatter_glue("   Hi"), "   Hi")
@@ -31,7 +26,10 @@ test_that('glue works', {
     expect_output(log_warn("Hi {everything}"), '42')
     expect_output(g(), '42')
 
-    log_appender(appender_void)
+    local_test_logger(
+        formatter = formatter_glue,
+        appender = appender_void,
+    )
     expect_error(formatter_glue('malformed {'))
     expect_error(formatter_glue('malformed {{'), NA)
 
@@ -39,12 +37,10 @@ test_that('glue works', {
     ## expect_warning(formatter_glue(NULL))
     ## expect_warning(log_info(NULL))
     ## expect_warning(log_info(a = 42, b = "foobar"))
-    log_appender(appender_stdout)
-
 })
 
-log_formatter(formatter_glue_safe)
 test_that('glue_safe works', {
+    local_test_logger(formatter = formatter_glue_safe)
 
     expect_equal(formatter_glue_safe("Hi"), "Hi")
     expect_equal(formatter_glue_safe("   Hi"), "   Hi")
@@ -61,8 +57,8 @@ test_that('glue_safe works', {
 
 })
 
-log_formatter(formatter_sprintf)
 test_that('sprintf works', {
+    local_test_logger(formatter = formatter_sprintf)
 
     expect_equal(formatter_sprintf("Hi"), "Hi")
     expect_equal(formatter_sprintf("Hi %s", 42), "Hi 42")
@@ -100,18 +96,18 @@ test_that('glue+sprintf works', {
     expect_equal(formatter_glue_or_sprintf('fun{fun}'), 'fun{fun}')
 
     for (fn in c(formatter_sprintf, formatter_glue_or_sprintf)) {
-        log_formatter(fn)
-        log_appender(appender_void)
+        local_test_logger(formatter = fn, appender = appender_void) 
         expect_error(log_info(character(0)), NA)
-        log_appender(appender_stdout)
+
+        local_test_logger(formatter = fn)
         expect_output(log_info(character(0)), 'INFO')
     }
 
 })
 
 test_that('formatter_logging works', {
+    local_test_logger(formatter = formatter_logging)
 
-    log_formatter(formatter_logging)
     expect_output(log_info('42'), '42')
     expect_output(log_info(42), '42')
     expect_output(log_info(4+2), '4 \\+ 2')
@@ -128,15 +124,17 @@ test_that('formatter_logging works', {
 test_that('special chars in the text work', {
   expect_equal(formatter_glue('JSON: {jsonlite::toJSON(1:4)}'), 'JSON: [1,2,3,4]')
   expect_equal(formatter_glue('JSON: {jsonlite::toJSON(iris[1:2, ], auto_unbox = TRUE)}'), 'JSON: [{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
+    
+  local_test_logger()
   expect_output(log_info('JSON: {jsonlite::toJSON(1:4)}'), '[1,2,3,4]')
   expect_output(log_info('JSON: {jsonlite::toJSON(iris[1:2, ], auto_unbox = TRUE)}'), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
 })
 
 test_that('pander formatter', {
-    log_formatter(formatter_pander)
+    local_test_logger(formatter = formatter_pander)
     # pander partially matches coef to coefficient
     withr::local_options(warnPartialMatchDollar = FALSE)
-
+    
     expect_output(log_info(42), '_42_')
     expect_output(log_info('42'), '42')
     expect_output(log_info(head(iris)), 'Sepal.Length')
@@ -147,23 +145,20 @@ test_that('pander formatter', {
 rm(everything)
 rm(f)
 
-log_formatter(formatter_paste)
 test_that('paste formatter in actual logs', {
+    local_test_logger(formatter = formatter_paste)
     expect_output(log_info('hi', 5), 'hi 5')
 })
 
-log_formatter(formatter_glue)
 test_that('skip formatter', {
-    expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
+    local_test_logger(formatter = formatter_glue)
+   expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
     expect_error(log_info(skip_formatter(mtcars)))
     expect_error(log_info(skip_formatter('hi {x}', x = 4)))
 })
 
-log_formatter(formatter_json)
 test_that('skip formatter', {
+    local_test_logger(formatter = formatter_json)
     expect_output(log_info(skip_formatter('hi {pi}')), 'hi \\{pi\\}')
     expect_output(log_info(x = 1), '\\{"x":1\\}')
 })
-
-log_formatter(formatter)
-log_appender(appender)

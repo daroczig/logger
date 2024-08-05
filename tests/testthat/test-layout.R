@@ -1,17 +1,11 @@
-## save current settings so that we can reset later
-layout <- log_layout()
-appender <- log_appender()
-
-log_appender(appender_stdout)
-
-log_layout(layout_blank)
 test_that('blank layout', {
+    local_test_logger(layout = layout_blank)
     expect_output(log_info('foobar'), 'foobar')
     expect_equal(capture.output(log_info('foobar')), 'foobar')
 })
 
-log_layout(layout_glue_colors)
 test_that('colorized layout', {
+    local_test_logger(layout = layout_glue_colors)
     expect_output(log_info('foobar'), 'INFO')
     expect_output(log_info('foobar'), 'foobar')
     expect_output(log_error('foobar'), 'ERROR')
@@ -19,22 +13,24 @@ test_that('colorized layout', {
 })
 
 test_that('metavars', {
-    log_layout(layout_glue_generator(format = '{level} {ans} {fn} {msg}'))
+    local_test_logger(layout = layout_glue_generator('{level} {ans} {fn} {msg}'))
     expect_output((function(){log_info(42)})(), 'INFO')
     expect_output((function(){log_warn(42)})(), 'WARN')
     expect_output((function(){log_info(42)})(), 'log_info')
-    log_layout(layout_glue_generator(format = '{fn}'))
+    
+    local_test_logger(layout = layout_glue_generator('{fn}'))
     expect_output({fun42<-function(){log_info(42)};fun42();rm(fun42)}, 'fun42')
 })
 
-log_layout(layout_json())
 test_that('JSON layout', {
+    local_test_logger(layout = layout_json())
+    
     expect_equal(jsonlite::fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
     expect_equal(jsonlite::fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
 })
 
-log_layout(layout_json_parser(fields = c()))
 test_that('JSON parser layout', {
+    local_test_logger(layout = layout_json_parser(fields = c()))
     expect_output(log_info(skip_formatter('{"x": 4}')), '\\{"x":4\\}')
     expect_equal(capture.output(log_info(skip_formatter('{"x": 4}'))), '{"x":4}')
 })
@@ -52,15 +48,11 @@ test_that('must throw errors', {
 
 })
 
-log_layout(layout_logging)
 test_that('logging layout', {
+    local_test_logger(layout = layout_logging)
     expect_output(log_level(INFO, 'foo', namespace = 'bar'), 'INFO:bar:foo')
     expect_output(log_info('foobar'), 'INFO')
     expect_output(log_info('foo', namespace = 'bar'), 'foo')
     expect_output(log_info('foo', namespace = 'bar'), 'bar')
     expect_output(log_info('foo', namespace = 'bar'), 'INFO:bar:foo')
 })
-
-## reset settings
-log_layout(layout)
-log_appender(appender)

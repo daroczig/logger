@@ -1,56 +1,57 @@
-## save current settings so that we can reset later
-threshold <- log_threshold()
-layout    <- log_layout()
-appender  <- log_appender()
-
 test_that('append to file', {
-    log_layout(layout_glue_generator('{level} {msg}'))
-    log_threshold(TRACE)
-    t <- tempfile()
-    log_appender(appender_file(t))
+    t <- withr::local_tempfile()
+    local_test_logger(
+      appender = appender_file(t),
+      layout = layout_glue_generator('{level} {msg}'),
+      threshold = TRACE
+    )
     log_info('foobar')
     log_info('{1:2}')
     expect_equal(length(readLines(t)), 3)
     expect_equal(readLines(t)[1], 'INFO foobar')
     expect_equal(readLines(t)[3], 'INFO 2')
-    unlink(t)
-    rm(t)
 })
 
 test_that('overwrite file', {
-    log_layout(layout_glue_generator('{level} {msg}'))
-    log_threshold(TRACE)
-    t <- tempfile()
-    log_appender(appender_file(t, append = FALSE))
+    t <- withr::local_tempfile()
+    local_test_logger(
+      appender = appender_file(t, append = FALSE),
+      layout = layout_glue_generator('{level} {msg}'),
+      threshold = TRACE
+    )
+    
     log_info('foobar')
     log_info('{1:2}')
     expect_equal(length(readLines(t)), 2)
     expect_equal(readLines(t), c('INFO 1', 'INFO 2'))
+    
     log_info('42')
     expect_equal(length(readLines(t)), 1)
     expect_equal(readLines(t), 'INFO 42')
-    unlink(t)
-    rm(t)
 })
 
 test_that('append to file + print to console', {
-    t <- tempfile()
-    log_appender(appender_tee(t))
+    t <- withr::local_tempfile()
+    local_test_logger(
+      appender = appender_tee(t),
+      layout = layout_glue_generator('{level} {msg}'),
+    )
+
     expect_equal(capture.output(log_info('foobar'), type = 'message'), 'INFO foobar')
-    devnull <- capture.output(log_info('{1:2}'), type = 'message')
+    capture.output(log_info('{1:2}'), type = 'message')
     expect_equal(length(readLines(t)), 3)
     expect_equal(readLines(t)[1], 'INFO foobar')
-    unlink(t)
-    rm(t)
 })
 
 test_that('logrotate', {
-    log_layout(layout_glue_generator('{msg}'))
-    log_threshold(TRACE)
-    t <- tempfile()
-    dir.create(t)
+    t <- withr::local_tempdir()
     f <- file.path(t, 'log')
-    log_appender(appender_file(f, max_lines = 2, max_files = 5L))
+    local_test_logger(
+      appender = appender_file(f, max_lines = 2, max_files = 5L),
+      layout = layout_glue_generator('{msg}'),
+      threshold = TRACE
+    )
+
     for (i in 1:24) log_info(i)
     expect_equal(length(readLines(f)), 2)
     expect_equal(length(list.files(t)), 5)
@@ -58,11 +59,4 @@ test_that('logrotate', {
     log_info('42')
     expect_equal(length(readLines(f)), 1)
     expect_equal(readLines(f), '42')
-    unlink(t)
-    rm(t)
 })
-
-## reset settings
-log_threshold(threshold)
-log_layout(layout)
-log_appender(appender)
