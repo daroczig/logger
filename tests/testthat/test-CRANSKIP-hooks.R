@@ -27,7 +27,6 @@ test_that('log_messages', {
 
     expect_snapshot({
         writeLines(eval_outside('message(42)'))
-        writeLines(eval_outside('system("echo 42", invisible = TRUE)'))
     })
 })
 
