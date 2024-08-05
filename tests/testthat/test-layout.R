@@ -30,7 +30,7 @@ test_that('JSON layout', {
 })
 
 test_that('JSON parser layout', {
-    local_test_logger(layout = layout_json_parser(fields = c()))
+    local_test_logger(layout = layout_json_parser(fields = character()))
     expect_output(log_info(skip_formatter('{"x": 4}')), '\\{"x":4\\}')
     expect_equal(capture.output(log_info(skip_formatter('{"x": 4}'))), '{"x":4}')
 })

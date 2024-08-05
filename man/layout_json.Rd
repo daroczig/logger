@@ -6,7 +6,7 @@
 \usage{
 layout_json(
   fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name",
-    "os_release", "os_version", "pid", "user", "msg")
+    "os_release", "os_version", "pid", "user")
 )
 }
 \arguments{

@@ -66,6 +66,46 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 }
 
 
+get_logger_meta_env <- function(log_level = NULL,
+                                namespace = NA_character_,
+                                .logcall = sys.call(),
+                                .topcall = sys.call(-1),
+                                .topenv = parent.frame(),
+                                parent = emptyenv()) {
+
+    force(.topcall)
+    timestamp <- Sys.time()
+    
+    env <- new.env(parent = parent)
+    env$ns <- namespace
+    env$ans <- fallback_namespace(namespace)
+    env$topenv  <- top_env_name(.topenv)
+
+    delayedAssign('fn', deparse_to_one_line(.topcall[[1]]), assign.env = env)
+    delayedAssign('call', deparse_to_one_line(.topcall), assign.env = env)
+
+    env$time <- timestamp
+    env$levelr <- log_level
+    env$level <- attr(log_level, 'level')
+
+    delayedAssign("pid", Sys.getpid(), assign.env = env)
+
+    # R and ns package versions
+    delayedAssign("ns_pkg_version", tryCatch(as.character(packageVersion(namespace)), error = function(e) NA_character_), assign.env = env)
+    delayedAssign("r_version", paste0(R.Version()[c('major', 'minor')], collapse = '.'), assign.env = env)
+
+    # stuff from Sys.info
+    delayedAssign(".sysinfo", Sys.info())
+    delayedAssign("node", .sysinfo[['nodename']], assign.env = env)
+    delayedAssign("arch", .sysinfo[['machine']], assign.env = env)
+    delayedAssign("os_name", .sysinfo[['sysname']], assign.env = env)
+    delayedAssign("os_release", .sysinfo[['release']], assign.env = env)
+    delayedAssign("os_version", .sysinfo[['version']], assign.env = env)
+    delayedAssign("user", .sysinfo[['user']], assign.env = env)
+    
+    env
+}
+
 #' Generate log layout function using common variables available via glue syntax
 #'
 #' `format` is passed to `glue` with access to the below variables:
@@ -97,10 +137,15 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
             stop('Invalid log level, see ?log_levels')
         }
 
-        with(get_logger_meta_variables(
-            log_level = level, namespace = namespace,
-            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv),
-             glue::glue(format))
+        meta <- get_logger_meta_env(
+          log_level = level,
+          namespace = namespace,
+          .logcall = .logcall,
+          .topcall = .topcall,
+          .topenv = .topenv,
+          parent = environment()
+        )
+        glue::glue(format, .envir = meta)
 
     }, generator = deparse(match.call()))
 
@@ -147,9 +192,13 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' }
 layout_logging <- structure(function(level, msg, namespace = NA_character_,
                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    meta <- get_logger_meta_variables(
-        log_level = level, namespace = namespace,
-        .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
+    meta <- get_logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
     paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ',
            attr(level, 'level'), ':',
            ifelse(meta$ns == 'global', '', meta$ns), ':',
@@ -207,7 +256,7 @@ layout_glue_colors <- layout_glue_generator(
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue()], [layout_glue_colors()], [layout_json_parser()],  or generator functions such as [layout_glue_generator()]
-layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user', 'msg')) {
+layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user')) {
 
     force(fields)
 
@@ -216,11 +265,15 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 
         fail_on_missing_package('jsonlite')
 
-        json <- get_logger_meta_variables(
-            log_level = level, namespace = namespace,
-            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)
-
-        sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
+        meta <- get_logger_meta_env(
+          log_level = level,
+          namespace = namespace,
+          .logcall = .logcall,
+          .topcall = .topcall,
+          .topenv = .topenv
+        )
+        json <- mget(fields, meta)
+        sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg)), auto_unbox = TRUE))
 
     }, generator = deparse(match.call()))
 
@@ -249,10 +302,14 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
 
         fail_on_missing_package('jsonlite')
 
-        meta <- get_logger_meta_variables(
-            log_level = level, namespace = namespace,
-            .logcall = .logcall, .topcall = .topcall, .topenv = .topenv)[fields]
-
+        meta <- get_logger_meta_env(
+          log_level = level,
+          namespace = namespace,
+          .logcall = .logcall,
+          .topcall = .topcall,
+          .topenv = .topenv
+        )
+        meta <- mget(fields, envir = meta)
         msg <- jsonlite::fromJSON(msg)
 
         jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = 'null')
