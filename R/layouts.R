@@ -89,7 +89,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 
     force(format)
 
-    structure(function(level, msg, namespace = NA_character_,
+    function(level, msg, namespace = NA_character_,
                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
         fail_on_missing_package('glue')
@@ -102,7 +102,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
             .logcall = .logcall, .topcall = .topcall, .topenv = .topenv),
              glue::glue(format))
 
-    }, generator = deparse(match.call()))
+    }
 
 }
 
@@ -113,10 +113,10 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 #' @return character vector
 #' @export
 #' @seealso This is a [log_layout()], for alternatives, see [layout_simple()], [layout_glue_colors()], [layout_json()], or generator functions such as [layout_glue_generator()]
-layout_blank <- structure(function(level, msg, namespace = NA_character_,
+layout_blank <- function(level, msg, namespace = NA_character_,
                                    .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     msg
-}, generator = quote(layout_blank()))
+}
 
 
 #' Format a log record by concatenating the log level, timestamp and message
@@ -125,10 +125,10 @@ layout_blank <- structure(function(level, msg, namespace = NA_character_,
 #' @return character vector
 #' @export
 #' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_glue()], [layout_glue_colors()], [layout_json()], [layout_json_parser()], or generator functions such as [layout_glue_generator()]
-layout_simple <- structure(function(level, msg, namespace = NA_character_,
+layout_simple <- function(level, msg, namespace = NA_character_,
                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
-}, generator = quote(layout_simple()))
+}
 
 
 #' Format a log record as the logging package does by default
@@ -145,7 +145,7 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
 #' logger_tester_function(INFO, 42)
 #' }
-layout_logging <- structure(function(level, msg, namespace = NA_character_,
+layout_logging <- function(level, msg, namespace = NA_character_,
                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     meta <- get_logger_meta_variables(
         log_level = level, namespace = namespace,
@@ -154,7 +154,7 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
            attr(level, 'level'), ':',
            ifelse(meta$ns == 'global', '', meta$ns), ':',
            msg)
-}, generator = quote(layout_logging()))
+}
 
 
 #' Format a log message with `glue`
@@ -207,7 +207,7 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 
     force(fields)
 
-    structure(function(level, msg, namespace = NA_character_,
+    function(level, msg, namespace = NA_character_,
                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
         fail_on_missing_package('jsonlite')
@@ -218,7 +218,7 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 
         sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
 
-    }, generator = deparse(match.call()))
+    }
 
 }
 
@@ -240,7 +240,7 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
 
     force(fields)
 
-    structure(function(level, msg, namespace = NA_character_,
+    function(level, msg, namespace = NA_character_,
                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
         fail_on_missing_package('jsonlite')
@@ -253,7 +253,7 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
 
         jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = 'null')
 
-    }, generator = deparse(match.call()))
+    }
 
 }
 
@@ -268,8 +268,7 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
 #' @inheritParams layout_simple
 #' @return A character vector with a severity attribute.
 #' @export
-layout_syslognet <- structure(
-  function(level, msg, namespace = NA_character_,
+layout_syslognet <- function(level, msg, namespace = NA_character_,
            .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     ret <- paste(attr(level, 'level'), msg)
     attr(ret, 'severity') <- switch(
@@ -282,7 +281,5 @@ layout_syslognet <- structure(
         'DEBUG' = 'DEBUG',
         'TRACE' = 'DEBUG')
     return(ret)
-  },
-  generator = quote(layout_syslognet())
-)
+}
 #nocov end

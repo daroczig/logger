@@ -4,9 +4,9 @@
 #' @return character vector
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
-formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_paste <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     eval(paste(...), envir = .topenv)
-}, generator = quote(formatter_paste()))
+}
 
 
 #' Apply `sprintf` to convert R objects into a character vector
@@ -16,9 +16,9 @@ formatter_paste <- structure(function(..., .logcall = sys.call(), .topcall = sys
 #' @return character vector
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
-formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_sprintf <- function(fmt, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     eval(sprintf(fmt, ...), envir = .topenv)
-}, generator = quote(formatter_sprintf()))
+}
 
 
 #' Apply `glue` to convert R objects into a character vector
@@ -29,7 +29,7 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @note Although this is the default log message formatter function, but when \pkg{glue} is not installed, [formatter_sprintf()] will be used as a fallback.
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue_or_sprintf()], [formatter_glue_safe()], [formatter_logging()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 #' @importFrom utils str
-formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_glue <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
     message <- as.character(
         tryCatch(
@@ -52,7 +52,7 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
         ## )), silent = TRUE)
     }
     message
-}, generator = quote(formatter_glue()))
+}
 
 
 #' Apply `glue_safe` to convert R objects into a character vector
@@ -62,7 +62,7 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_glue()], [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_or_sprintf()], [formatter_logging()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 #' @importFrom utils str
-formatter_glue_safe <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_glue_safe <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
     as.character(
         tryCatch(
@@ -76,7 +76,7 @@ formatter_glue_safe <- structure(function(..., .logcall = sys.call(), .topcall =
                     '\n\nPlease consider using another `log_formatter` or',
                     '`skip_formatter` on strings with curly braces.'))
             }))
-}, generator = quote(formatter_glue_safe()))
+}
 
 
 #' Apply `glue` and `sprintf`
@@ -101,7 +101,7 @@ formatter_glue_safe <- structure(function(..., .logcall = sys.call(), .topcall =
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c('foo', 'bar'), 2*4)
 #' }
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_logging()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
-formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_glue_or_sprintf <- function(msg, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
 
@@ -147,7 +147,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
     ## return
     msg
 
-}, generator = quote(formatter_glue_or_sprintf()))
+}
 
 
 #' Transforms all passed R objects into a JSON list
@@ -163,10 +163,10 @@ formatter_glue_or_sprintf <- structure(function(msg, ..., .logcall = sys.call(),
 #' log_info(mtcars = mtcars, species = iris$Species)
 #' }
 #' @seealso This is a [log_formatter()] potentially to be used with [layout_json_parser()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
-formatter_json <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_json <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('jsonlite')
     eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
-}, generator = quote(formatter_json()))
+}
 
 
 #' Skip the formatter function
@@ -204,7 +204,7 @@ skip_formatter <- function(message, ...) {
 #' @return character vector
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
-formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_logging <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     params <- list(...)
     .logcall <- substitute(.logcall)
@@ -217,7 +217,7 @@ formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = s
         paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ': ')
     })
 
-}, generator = quote(formatter_logging()))
+}
 
 
 #' Formats R objects with pander
@@ -237,9 +237,9 @@ formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = s
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()]
-formatter_pander <- structure(function(x, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_pander <- function(x, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
     fail_on_missing_package('pander')
     eval(pander::pander_return(x, ...), envir = .topenv)
 
-}, generator = quote(formatter_pander()))
+}

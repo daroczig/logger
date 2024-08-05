@@ -1,16 +1,16 @@
 #' Dummy appender not delivering the log record to anywhere
 #' @param lines character vector
 #' @export
-appender_void <- structure(function(lines) {}, generator = quote(appender_void()))
+appender_void <- function(lines) {}
 
 
 #' Append log record to stderr
 #' @param lines character vector
 #' @export
 #' @seealso This is a [log_appender()], for alternatives, see eg [appender_stdout()], [appender_file()], [appender_tee()], [appender_slack()], [appender_pushbullet()], [appender_telegram()], [appender_syslog()], [appender_kinesis()] and [appender_async()] for evaluate any [log_appender()] function in a background process.
-appender_console <- structure(function(lines) {
+appender_console <- function(lines) {
     cat(lines, file = stderr(), sep = '\n')
-}, generator = quote(appender_console()))
+}
 
 
 #' @export
@@ -22,9 +22,9 @@ appender_stderr <- appender_console
 #' @param lines character vector
 #' @export
 #' @seealso This is a [log_appender()], for alternatives, see eg [appender_console()], [appender_file()], [appender_tee()], [appender_slack()], [appender_pushbullet()]
-appender_stdout <- structure(function(lines) {
+appender_stdout <- function(lines) {
     cat(lines, sep = '\n')
-}, generator = quote(appender_stdout()))
+}
 
 
 #' Append log messages to a file
@@ -82,7 +82,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
         stop('max_files must be a positive integer')
     }
 
-    structure(
+    
         function(lines) {
             if (is.finite(max_lines) | is.finite(max_bytes)) {
 
@@ -135,7 +135,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
             }
             log_trace('logging %s to %s', shQuote(lines), file, namespace = '.logger')
             cat(lines, sep = '\n', file = file, append = append)
-        }, generator = deparse(match.call()))
+        }
 }
 
 
@@ -152,11 +152,11 @@ appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, 
     force(max_lines)
     force(max_bytes)
     force(max_files)
-    structure(
-        function(lines) {
-            appender_console(lines)
-            appender_file(file, append, max_lines, max_bytes, max_files)(lines)
-        }, generator = deparse(match.call()))
+    
+    function(lines) {
+        appender_console(lines)
+        appender_file(file, append, max_lines, max_bytes, max_files)(lines)
+    }
 }
 
 
@@ -183,12 +183,12 @@ appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
     force(api_token)
     force(preformatted)
 
-    structure(
-        function(lines) {
-            slackr::slackr_msg(
-                text = lines, channel = channel, username = username,
-                icon_emoji = icon_emoji, token = api_token, preformatted = preformatted)
-        }, generator = deparse(match.call()))
+    
+    function(lines) {
+        slackr::slackr_msg(
+            text = lines, channel = channel, username = username,
+            icon_emoji = icon_emoji, token = api_token, preformatted = preformatted)
+    }
 
 }
 
@@ -202,11 +202,10 @@ appender_slack <- function(channel      = Sys.getenv('SLACK_CHANNEL'),
 appender_pushbullet <- function(...) {
 
     fail_on_missing_package('RPushbullet')
-
-    structure(
-        function(lines) {
-            RPushbullet::pbPost(type = 'note', body = paste(lines, sep = '\n'), ...)
-        }, generator = deparse(match.call()))
+    
+    function(lines) {
+        RPushbullet::pbPost(type = 'note', body = paste(lines, sep = '\n'), ...)
+    }
 
 }
 
@@ -229,10 +228,10 @@ appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
     force(parse_mode)
 
     tb <- telegram::TGBot$new(token = bot_token)
-    structure(
-        function(lines) {
-            tb$sendMessage(text = lines, parse_mode = parse_mode, chat_id = chat_id)
-        }, generator = deparse(match.call()))
+    
+    function(lines) {
+        tb$sendMessage(text = lines, parse_mode = parse_mode, chat_id = chat_id)
+    }
 
 }
 
@@ -253,14 +252,12 @@ appender_telegram <- function(chat_id      = Sys.getenv('TELEGRAM_CHAT_ID'),
 appender_syslog <- function(identifier, ...) {
     fail_on_missing_package('rsyslog')
     rsyslog::open_syslog(identifier = identifier, ...)
-    structure(
-        function(lines) {
-            for (line in lines) {
-                rsyslog::syslog(line)
-            }
-        },
-        generator = deparse(match.call())
-    )
+    
+    function(lines) {
+        for (line in lines) {
+            rsyslog::syslog(line)
+        }
+    }
 }
 
 
@@ -284,15 +281,14 @@ appender_syslognet <- function(identifier, server, port = 601L) {
   force(identifier)
   force(server)
   force(port)
-  structure(
-    function(lines) {
+  
+  function(lines) {
       sev <- attr(lines, 'severity', exact = TRUE)
       for (line in lines) {
-        syslognet::syslog(line, sev, app_name = identifier, server = server, port = port)
+      syslognet::syslog(line, sev, app_name = identifier, server = server, port = port)
       }
-    },
-    generator = deparse(match.call())
-  )
+  }
+
 }
 #nocov end
 
@@ -306,14 +302,12 @@ appender_syslognet <- function(identifier, server, port = 601L) {
 appender_kinesis <- function(stream) {
     fail_on_missing_package('botor')
     force(stream)
-    structure(
-        function(lines, partition_key = NA_character_) {
-            for (line in lines) {
-                botor::kinesis()$put_record(StreamName = stream, Data = line, PartitionKey = partition_key)
-            }
-        },
-        generator = deparse(match.call())
-    )
+    
+    function(lines, partition_key = NA_character_) {
+        for (line in lines) {
+            botor::kinesis()$put_record(StreamName = stream, Data = line, PartitionKey = partition_key)
+        }
+    }
 }
 
 
@@ -431,9 +425,10 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
         }
     })
 
-    structure(
+    
 
-        function(lines) {
+        structure(
+            function(lines) {
 
             ## check if background process still works
             if (!isTRUE(async_writer_process$is_alive())) {
@@ -459,7 +454,6 @@ appender_async <- function(appender, batch = 1, namespace = 'async_logger',
 
         },
 
-        generator = deparse(match.call()),
         ## share remote process and queue with parent for debugging purposes
         async_writer_storage = async_writer_storage,
         async_writer_queue = async_writer_queue,
