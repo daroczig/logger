@@ -5,7 +5,9 @@ eval_outside <- function(expr) {
     t <- withr::local_tempfile()
     cat('library(logger); log_messages(); log_warnings(); log_errors()\n', file = t)
     cat(expr, file = t, append = TRUE, sep = '\n')
-    paste(suppressWarnings(system2('Rscript', t, stderr = TRUE)), collapse = '\n')
+
+    path <- file.path(R.home(), "Rscript")
+    paste(suppressWarnings(system2(path, t, stderr = TRUE)), collapse = '\n')
 }
 
 test_that('log_messages', {
