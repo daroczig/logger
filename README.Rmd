@@ -67,7 +67,7 @@ for (letter in letters) {
 log_warn('There might be many, like {1:2} or more warnings!!!')
 ```
 
-You can even use a custom log layout to render the log records with colors, as you can see in `demo(colors, package = 'logger', echo = FALSE)`:
+You can even use a custom log layout to render the log records with colors, as you can see in `layout_glue_colors()`:
 
 <img src="man/figures/colors.png" alt="colored log output">
 
