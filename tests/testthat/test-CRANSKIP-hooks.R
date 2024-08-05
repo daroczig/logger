@@ -6,7 +6,10 @@ eval_outside <- function(expr) {
     cat('library(logger); log_messages(); log_warnings(); log_errors()\n', file = t)
     cat(expr, file = t, append = TRUE, sep = '\n')
 
-    path <- file.path(R.home(), "Rscript")
+    path <- file.path(R.home("bin"), "Rscript")
+    if (Sys.info()[["sysname"]] == "Windows") {
+        path <- paste0(path, ".exe")
+    }
     paste(suppressWarnings(system2(path, t, stderr = TRUE)), collapse = '\n')
 }
 
