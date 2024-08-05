@@ -2,35 +2,52 @@ library(logger)
 library(testthat)
 
 eval_outside <- function(expr) {
-    t <- withr::local_tempfile()
-    cat('library(logger); log_messages(); log_warnings(); log_errors()\n', file = t)
-    cat(expr, file = t, append = TRUE, sep = '\n')
+    input <- withr::local_tempfile()
+    output <- withr::local_tempfile()
+    writeLines(con = input, c(
+        "library(logger)",
+        "log_layout(layout_glue_generator('{level} {msg}'))",
+        paste0("log_appender(appender_file('", output, "'))"),
+        "log_messages()",
+        "log_warnings(TRUE)",
+        "log_errors()",
+        expr
+    ))
 
     path <- file.path(R.home("bin"), "Rscript")
     if (Sys.info()[["sysname"]] == "Windows") {
         path <- paste0(path, ".exe")
     }
-    paste(suppressWarnings(system2(path, t, stderr = TRUE)), collapse = '\n')
+    suppressWarnings(system2(path, input, stdout = TRUE, stderr = TRUE))
+    readLines(output)
 }
 
 test_that('log_messages', {
-    expect_match(eval_outside('message(42)'), 'INFO')
-    expect_match(eval_outside('system("echo 42", invisible = TRUE)'), 'INFO')
+    skip_if_not(getRversion() >= "4.0.0")
+
+    expect_snapshot({
+        writeLines(eval_outside('message(42)'))
+        writeLines(eval_outside('system("echo 42", invisible = TRUE)'))
+    })
 })
 
 test_that('log_warnings', {
     skip_if_not(getRversion() >= "4.0.0")
 
-    expect_match(eval_outside('warning(42)'), 'WARN')
-    expect_match(eval_outside('log(-1)'), 'WARN')
+    expect_snapshot({
+        writeLines(eval_outside('warning(42)'))
+        writeLines(eval_outside('log(-1)'))
+    })
 })
 
 test_that('log_errors', {
     skip_if_not(getRversion() >= "4.0.0")
 
-    expect_match(eval_outside('stop(42)'), 'ERROR')
-    expect_match(eval_outside('foobar'), 'ERROR')
-    expect_match(eval_outside('f<-function(x) {42 * "foobar"}; f()'), 'ERROR')
+    expect_snapshot({  
+        writeLines(eval_outside('stop(42)'))
+        writeLines(eval_outside('foobar'))
+        writeLines(eval_outside('f<-function(x) {42 * "foobar"}; f()'))
+    })
 })
 
 test_that('shiny input initialization is detected', {
@@ -44,8 +61,7 @@ test_that('shiny input initialization is detected', {
             shiny::testServer(server, {})
             "
         )
-    exp <- "INFO \\[[0-9: \\-]+\\] Default Shiny inputs initialized"
-    expect_match(obs, exp)
+    expect_snapshot(writeLines(obs))
 })
 
 test_that('shiny input initialization is detected with different log-level', {
@@ -59,8 +75,7 @@ test_that('shiny input initialization is detected with different log-level', {
             shiny::testServer(server, {})
             "
         )
-    exp <- "ERROR \\[[0-9: \\-]+\\] Default Shiny inputs initialized"
-    expect_match(obs, exp)
+    expect_snapshot(writeLines(obs))
 })
 
 test_that('shiny input change is detected', {
@@ -77,8 +92,7 @@ test_that('shiny input change is detected', {
             })
             "
         )
-    exp <- "INFO \\[[0-9: \\-]+\\] Shiny input change detected on a: NULL -> 2"
-    expect_match(obs, exp)
+    expect_snapshot(writeLines(obs))
 })
 
 test_that('shiny input change is logged with different level', {
@@ -95,6 +109,5 @@ test_that('shiny input change is logged with different level', {
             })
             "
         )
-    exp <- "ERROR \\[[0-9: \\-]+\\] Shiny input change detected on a: NULL -> 2"
-    expect_match(obs, exp)
+    expect_snapshot(writeLines(obs))
 })
