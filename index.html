@@ -83,11 +83,11 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://daroczig.github.io/logger/">logger</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">DEBUG</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Script starting up...'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-07-31 08:26:30] Script starting up...</span></span>
+<span><span class="co">#&gt; INFO [2024-08-05 16:05:22] Script starting up...</span></span>
 <span></span>
 <span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'There are {nrow(pkgs)} R packages hosted on CRAN!'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-07-31 08:26:30] There are 21122 R packages hosted on CRAN!</span></span>
+<span><span class="co">#&gt; INFO [2024-08-05 16:05:23] There are 21132 R packages hosted on CRAN!</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">letter</span> <span class="kw">in</span> <span class="va">letters</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">lpkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="va">letter</span>, <span class="va">pkgs</span><span class="op">[</span>, <span class="st">'Package'</span><span class="op">]</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -96,24 +96,24 @@
 <span>    <span class="st">'{lpkgs} R packages including the {shQuote(letter)} letter'</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 10188 R packages including the 'a' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 7013 R packages including the 'c' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 5750 R packages including the 'd' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 10902 R packages including the 'e' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 8821 R packages including the 'i' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 7055 R packages including the 'l' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 7039 R packages including the 'm' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 6661 R packages including the 'n' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 7859 R packages including the 'o' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:30] 6579 R packages including the 'p' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:31] 11224 R packages including the 'r' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:31] 10292 R packages including the 's' letter</span></span>
-<span><span class="co">#&gt; DEBUG [2024-07-31 08:26:31] 9526 R packages including the 't' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 10194 R packages including the 'a' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 7016 R packages including the 'c' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 5751 R packages including the 'd' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 10908 R packages including the 'e' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 8825 R packages including the 'i' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 7060 R packages including the 'l' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 7045 R packages including the 'm' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 6665 R packages including the 'n' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 7863 R packages including the 'o' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 6582 R packages including the 'p' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 11230 R packages including the 'r' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 10296 R packages including the 's' letter</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-05 16:05:23] 9531 R packages including the 't' letter</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'There might be many, like {1:2} or more warnings!!!'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; WARN [2024-07-31 08:26:31] There might be many, like 1 or more warnings!!!</span></span>
-<span><span class="co">#&gt; WARN [2024-07-31 08:26:31] There might be many, like 2 or more warnings!!!</span></span></code></pre></div>
-<p>You can even use a custom log layout to render the log records with colors, as you can see in <code>demo(colors, package = 'logger', echo = FALSE)</code>:</p>
+<span><span class="co">#&gt; WARN [2024-08-05 16:05:23] There might be many, like 1 or more warnings!!!</span></span>
+<span><span class="co">#&gt; WARN [2024-08-05 16:05:23] There might be many, like 2 or more warnings!!!</span></span></code></pre></div>
+<p>You can even use a custom log layout to render the log records with colors, as you can see in <code><a href="reference/layout_glue_colors.html">layout_glue_colors()</a></code>:</p>
 <p><img src="reference/figures/colors.png" alt="colored log output"></p>
 <p>But you could set up any custom colors and layout, eg using custom colors only for the log levels, make it grayscale, include the calling function or R package namespace with specific colors etc. For more details, see <code><a href="articles/write_custom_extensions.html">vignette("write_custom_extensions")</a></code>.</p>
 </div>
