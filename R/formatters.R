@@ -40,8 +40,8 @@ formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.
                 '`glue` failed in `formatter_glue` on:\n\n',
                 args,
                 '\n\nRaw error message:\n\n',
-                conditionMessage(message),
-                '\n\nPlease consider using another `log_formatter` or',
+                conditionMessage(e),
+                '\n\nPlease consider using another `log_formatter` or ',
                 '`skip_formatter` on strings with curly braces.'
             ))
         }
