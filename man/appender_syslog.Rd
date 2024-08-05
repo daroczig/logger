@@ -9,7 +9,7 @@ appender_syslog(identifier, ...)
 \arguments{
 \item{identifier}{A string identifying the process.}
 
-\item{...}{Further arguments passed on to \code{\link[rsyslog]{open_syslog}}.}
+\item{...}{Further arguments passed on to \code{\link[rsyslog:syslog]{rsyslog::open_syslog()}}.}
 }
 \value{
 function taking \code{lines} argument
@@ -29,5 +29,5 @@ if (requireNamespace("rsyslog", quietly = TRUE)) {
 }
 }
 \seealso{
-This is generator function for \code{\link{log_appender}}, for alternatives, see eg \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_kinesis}} and \code{\link{appender_async}} for evaluate any \code{\link{log_appender}} function in a background process.
+This is generator function for \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any \code{\link[=log_appender]{log_appender()}} function in a background process.
 }

@@ -18,3 +18,4 @@ dev-resources
 ^\.github$
 revdep
 ^codecov\.yml$
+^README\.Rmd$

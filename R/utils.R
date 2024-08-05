@@ -42,11 +42,11 @@ top_env_name <- function(.topenv = parent.frame()) {
 
 #' Deparse and join all lines into a single line
 #'
-#' Calling \code{deparse} and joining all the returned lines into a
+#' Calling `deparse` and joining all the returned lines into a
 #' single line, separated by whitespace, and then cleaning up all the
 #' duplicated whitespace (except for excessive whitespace in strings
 #' between single or double quotes).
-#' @param x object to \code{deparse}
+#' @param x object to `deparse`
 #' @return string
 #' @export
 deparse_to_one_line <- function(x) {
@@ -59,7 +59,7 @@ deparse_to_one_line <- function(x) {
 #' Catch the log header
 #' @return string
 #' @keywords internal
-#' @param level see \code{\link{log_levels}}
+#' @param level see [log_levels()]
 #' @param namespace string
 #' @examples 
 #' \dontrun{

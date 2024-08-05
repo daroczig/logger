@@ -12,7 +12,7 @@ appender_async(
 )
 }
 \arguments{
-\item{appender}{a  \code{\link{log_appender}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)}
+\item{appender}{a  \code{\link[=log_appender]{log_appender()}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)}
 
 \item{batch}{number of records to process from the queue at once}
 
@@ -71,5 +71,5 @@ attr(my_appender, 'async_writer_process')$read_error()
 }
 }
 \seealso{
-This function is to be used with an actual \code{\link{log_appender}}, for example \code{\link{appender_console}}, \code{\link{appender_file}}, \code{\link{appender_tee}}, \code{\link{appender_pushbullet}}, \code{\link{appender_telegram}}, \code{\link{appender_syslog}} or \code{\link{appender_kinesis}}.
+This function is to be used with an actual \code{\link[=log_appender]{log_appender()}}, for example \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}} or \code{\link[=appender_kinesis]{appender_kinesis()}}.
 }

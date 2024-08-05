@@ -24,7 +24,7 @@ formatter_logging(
 character vector
 }
 \description{
-The \pkg{logging} package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then \code{\link{sprintf}} is being called -- otherwise it does something like \code{\link{log_eval}} and logs the R expression(s) and the result(s) as well.
+The \pkg{logging} package uses a formatter that behaves differently when the input is a string or other R object. If the first argument is a string, then \code{\link[=sprintf]{sprintf()}} is being called -- otherwise it does something like \code{\link[=log_eval]{log_eval()}} and logs the R expression(s) and the result(s) as well.
 }
 \examples{
 \dontrun{
@@ -38,5 +38,5 @@ log_info(12, 1+1, 2 * 2)
 }
 }
 \seealso{
-This is a \code{\link{log_formatter}}, for alternatives, see \code{\link{formatter_paste}}, \code{\link{formatter_glue}}, \code{\link{formatter_glue_safe}}, \code{\link{formatter_glue_or_sprintf}}, \code{\link{formatter_json}}, \code{\link{formatter_pander}} and \code{\link{skip_formatter}} for marking a string not to apply the formatter on it.
+This is a \code{\link[=log_formatter]{log_formatter()}}, for alternatives, see \code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_glue]{formatter_glue()}}, \code{\link[=formatter_glue_safe]{formatter_glue_safe()}}, \code{\link[=formatter_glue_or_sprintf]{formatter_glue_or_sprintf()}}, \code{\link[=formatter_json]{formatter_json()}}, \code{\link[=formatter_pander]{formatter_pander()}} and \code{\link[=skip_formatter]{skip_formatter()}} for marking a string not to apply the formatter on it.
 }

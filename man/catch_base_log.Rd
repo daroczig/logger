@@ -12,7 +12,7 @@ catch_base_log(
 )
 }
 \arguments{
-\item{level}{see \code{\link{log_levels}}}
+\item{level}{see \code{\link[=log_levels]{log_levels()}}}
 
 \item{namespace}{string}
 }
