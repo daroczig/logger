@@ -5,6 +5,8 @@ vignette: >
   %\VignetteIndexEntry{The Anatomy of a Log Request}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - logger_structure.svg
 ---
 
 ```{r setup, include = FALSE}
