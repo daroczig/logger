@@ -31,27 +31,21 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
-    message <- as.character(
-        tryCatch(
-            glue::glue(..., .envir = .topenv),
-            error = function(e) {
-                stop(paste(
-                    '`glue` failed in `formatter_glue` on:\n\n',
-                    capture.output(str(...)),
-                    '\n\nRaw error message:\n\n',
-                    e$message,
-                    '\n\nPlease consider using another `log_formatter` or',
-                    '`skip_formatter` on strings with curly braces.'))
-            }))
-    ## throw warning with logger inputs on empty response
-    if (length(message) == 0) {
-        ## disabled until azlogr drops test for no warning here: https://github.com/atalv/azlogr/issues/35
-        ## try(warning(paste(
-        ##     'glue in formatter_glue returned nothing with the following parameters:',
-        ##     paste(..., sep = ' | ')
-        ## )), silent = TRUE)
-    }
-    message
+    withCallingHandlers(
+        glue::glue(..., .envir = .topenv),
+        error = function(e) {
+            args <- paste0(capture.output(str(...)), collapse = '\n')
+
+            stop(paste0(
+                '`glue` failed in `formatter_glue` on:\n\n',
+                args,
+                '\n\nRaw error message:\n\n',
+                conditionMessage(message),
+                '\n\nPlease consider using another `log_formatter` or',
+                '`skip_formatter` on strings with curly braces.'
+            ))
+        }
+    )
 }, generator = quote(formatter_glue()))
 
 
