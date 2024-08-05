@@ -12,28 +12,32 @@ eval_outside <- function(expr) {
 }
 
 test_that('log_messages', {
+    skip_on_os("windows")
+
     expect_match(eval_outside('message(42)'), 'INFO')
-    if (R.Version()$os == 'linux-gnu') {
-        expect_match(eval_outside('system("echo 42", invisible = TRUE)'), 'INFO')
-    }
+    expect_match(eval_outside('system("echo 42", invisible = TRUE)'), 'INFO')
 })
 
 test_that('log_warnings', {
+    skip_on_os("windows")
+    skip_if_not(getRversion() >= "4.0.0")
+
     expect_match(eval_outside('warning(42)'), 'WARN')
-    if (R.Version()$major >= 4) {
-        expect_match(eval_outside('log(-1)'), 'WARN')
-    }
+    expect_match(eval_outside('log(-1)'), 'WARN')
 })
 
 test_that('log_errors', {
+    skip_on_os("windows")
+    skip_if_not(getRversion() >= "4.0.0")
+
     expect_match(eval_outside('stop(42)'), 'ERROR')
-    if (R.Version()$major >= 4) {
-        expect_match(eval_outside('foobar'), 'ERROR')
-        expect_match(eval_outside('f<-function(x) {42 * "foobar"}; f()'), 'ERROR')
-    }
+    expect_match(eval_outside('foobar'), 'ERROR')
+    expect_match(eval_outside('f<-function(x) {42 * "foobar"}; f()'), 'ERROR')
 })
 
 test_that('shiny input initialization is detected', {
+    skip_on_os("windows")
+
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
@@ -49,6 +53,7 @@ test_that('shiny input initialization is detected', {
 })
 
 test_that('shiny input initialization is detected with different log-level', {
+    skip_on_os("windows")
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
