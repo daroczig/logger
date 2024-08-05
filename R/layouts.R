@@ -309,7 +309,7 @@ layout_json_parser <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv'
           .topcall = .topcall,
           .topenv = .topenv
         )
-        meta <- mget(fields, envir = meta)
+        meta <- mget(fields, meta)
         msg <- jsonlite::fromJSON(msg)
 
         jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = 'null')
