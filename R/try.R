@@ -16,21 +16,19 @@
 
     call <- sys.call(-1)
     env <- parent.frame()
-    try <- substitute(try)
-    fallback <- substitute(except)
 
     tryCatch(
-        eval(try, envir = env),
+        try,
         error = function(e) {
             log_level(
                 WARN,
                 paste(
-                    'Running', shQuote(deparse(fallback)), 'as',
-                    shQuote(deparse(try)), 'failed:',
+                    'Running', shQuote(deparse(substitute(except))), 'as',
+                    shQuote(deparse(substitute(try))), 'failed:',
                     shQuote(e$message)),
                 namespace = 'except',
                 .topcall = call, .topenv = env)
-            eval(fallback, envir = env)
+            except
         })
 
 }
