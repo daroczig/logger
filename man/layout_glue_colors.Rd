@@ -30,13 +30,15 @@ layout_glue_colors(
 character vector
 }
 \description{
-Format a log message with \code{glue} and ANSI escape codes to add colors
+Colour log levels based on their severity. Log levels are coloured
+with \code{\link[=colorize_by_log_level]{colorize_by_log_level()}} and the messages are coloured with
+\code{\link[=grayscale_by_log_level]{grayscale_by_log_level()}}.
 }
 \note{
 This functionality depends on the \pkg{crayon} package.
 }
 \examples{
-\dontrun{
+\dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 log_layout(layout_glue_colors)
 log_threshold(TRACE)
 log_info('Starting the script...')
@@ -47,7 +49,7 @@ log_error('This is a problem')
 log_debug('Getting an error is usually bad')
 log_error('This is another problem')
 log_fatal('The last problem.')
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_json]{layout_json()}}, \code{\link[=layout_json_parser]{layout_json_parser()}}, or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
