@@ -2,24 +2,18 @@ library(logger)
 library(testthat)
 
 eval_outside <- function(expr) {
-    t <- tempfile()
-    on.exit(unlink(t))
-    cat('library(logger); log_messages(); log_warnings(); log_errors();', file = t)
+    t <- withr::local_tempfile()
+    cat('library(logger); log_messages(); log_warnings(); log_errors()\n', file = t)
     cat(expr, file = t, append = TRUE, sep = '\n')
-    paste(
-        suppressWarnings(system(paste('$R_HOME/bin/Rscript', t, '2>&1'), intern = TRUE)),
-        collapse = '\n')
+    paste(suppressWarnings(system2('Rscript', t, stderr = TRUE)), collapse = '\n')
 }
 
 test_that('log_messages', {
-    skip_on_os("windows")
-
     expect_match(eval_outside('message(42)'), 'INFO')
     expect_match(eval_outside('system("echo 42", invisible = TRUE)'), 'INFO')
 })
 
 test_that('log_warnings', {
-    skip_on_os("windows")
     skip_if_not(getRversion() >= "4.0.0")
 
     expect_match(eval_outside('warning(42)'), 'WARN')
@@ -27,7 +21,6 @@ test_that('log_warnings', {
 })
 
 test_that('log_errors', {
-    skip_on_os("windows")
     skip_if_not(getRversion() >= "4.0.0")
 
     expect_match(eval_outside('stop(42)'), 'ERROR')
@@ -36,8 +29,6 @@ test_that('log_errors', {
 })
 
 test_that('shiny input initialization is detected', {
-    skip_on_os("windows")
-
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
@@ -53,7 +44,6 @@ test_that('shiny input initialization is detected', {
 })
 
 test_that('shiny input initialization is detected with different log-level', {
-    skip_on_os("windows")
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
@@ -69,7 +59,6 @@ test_that('shiny input initialization is detected with different log-level', {
 })
 
 test_that('shiny input change is detected', {
-    skip_on_os("windows")
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
@@ -88,7 +77,6 @@ test_that('shiny input change is detected', {
 })
 
 test_that('shiny input change is logged with different level', {
-    skip_on_os("windows")
     obs <-
         eval_outside("
             .globals <- shiny:::.globals
