@@ -33,28 +33,28 @@
     Code
       writeLines(obs)
     Output
-      INFO Default Shiny inputs initialized: {}
+      INFO mock-session Default Shiny inputs initialized: {}
 
 # shiny input initialization is detected with different log-level
 
     Code
       writeLines(obs)
     Output
-      ERROR Default Shiny inputs initialized: {}
+      ERROR mock-session Default Shiny inputs initialized: {}
 
 # shiny input change is detected
 
     Code
       writeLines(obs)
     Output
-      INFO Default Shiny inputs initialized: {}
-      INFO Shiny input change detected on a: NULL -> 2
+      INFO mock-session Default Shiny inputs initialized: {}
+      INFO mock-session Shiny input change detected in a: NULL -> 2
 
 # shiny input change is logged with different level
 
     Code
       writeLines(obs)
     Output
-      ERROR Default Shiny inputs initialized: {}
-      ERROR Shiny input change detected on a: NULL -> 2
+      ERROR mock-session Default Shiny inputs initialized: {}
+      ERROR mock-session Shiny input change detected in a: NULL -> 2
 
