@@ -31,6 +31,8 @@ formatter_sprintf <- structure(function(fmt, ..., .logcall = sys.call(), .topcal
 #' @importFrom utils str
 formatter_glue <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package('glue')
+    cat("Inside formatter_glue\n", file = stderr())    
+    
     withCallingHandlers(
         glue::glue(..., .envir = .topenv),
         error = function(e) {
@@ -233,6 +235,7 @@ formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = s
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()]
 formatter_pander <- structure(function(x, ..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
+    cat("inside formatter_pander\n", file = stderr())
     fail_on_missing_package('pander')
     eval(pander::pander_return(x, ...), envir = .topenv)
 

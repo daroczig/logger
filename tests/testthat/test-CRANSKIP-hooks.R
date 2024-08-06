@@ -13,6 +13,7 @@ eval_outside <- function(expr) {
         "log_errors()",
         expr
     ))
+    writeLines(readLines(input), con = stderr())
 
     path <- file.path(R.home("bin"), "Rscript")
     if (Sys.info()[["sysname"]] == "Windows") {
