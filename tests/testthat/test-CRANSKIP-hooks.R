@@ -4,7 +4,7 @@ library(testthat)
 eval_outside <- function(expr) {
 
     input <- normalizePath(withr::local_tempfile(lines = character()))
-    output <- normalizePath(withr::local_tempfile(lines = character()))
+    output <- normalizePath(withr::local_tempfile(lines = "foo"))
     writeLines(con = input, c(
         "library(logger)",
         "log_layout(layout_glue_generator('{level} {msg}'))",
