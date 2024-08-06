@@ -44,5 +44,5 @@ Enhances:
   log4r
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-Config/testthat/parallel: FALSE
+Config/testthat/parallel: TRUE
 Roxygen: list(markdown = TRUE)

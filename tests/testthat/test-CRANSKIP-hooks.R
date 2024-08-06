@@ -1,7 +1,4 @@
-library(logger)
-library(testthat)
-
-eval_outside <- function(expr) {
+eval_outside <- function(...) {
 
     input <- normalizePath(withr::local_tempfile(lines = character()), winslash = "/")
     output <- normalizePath(withr::local_tempfile(lines = character()), winslash = "/")
@@ -9,19 +6,13 @@ eval_outside <- function(expr) {
         "library(logger)",
         "log_layout(layout_glue_generator('{level} {msg}'))",
         paste0("log_appender(appender_file('", output, "'))"),
-        "log_messages()",
-        "log_warnings(TRUE)",
-        "log_errors()",
-        expr
+        ...
     ))
-    writeLines(readLines(input), con = stderr())
-
     path <- file.path(R.home("bin"), "Rscript")
     if (Sys.info()[["sysname"]] == "Windows") {
         path <- paste0(path, ".exe")
     }
-    # suppressWarnings(system2(path, input, stdout = TRUE, stderr = TRUE))
-    suppressWarnings(system2(path, input))
+    suppressWarnings(system2(path, input, stdout = TRUE, stderr = TRUE))
     readLines(output)
 }
 
@@ -29,7 +20,7 @@ test_that('log_messages', {
     skip_if_not(getRversion() >= "4.0.0")
 
     expect_snapshot({
-        writeLines(eval_outside('message(42)'))
+        writeLines(eval_outside("log_messages()", 'message(42)'))
     })
 })
 
@@ -37,8 +28,7 @@ test_that('log_warnings', {
     skip_if_not(getRversion() >= "4.0.0")
 
     expect_snapshot({
-        writeLines(eval_outside('warning(42)'))
-        writeLines(eval_outside('log(-1)'))
+        writeLines(eval_outside("log_warnings(TRUE)", 'warning(42)', 'log(-1)'))
     })
 })
 
@@ -46,9 +36,9 @@ test_that('log_errors', {
     skip_if_not(getRversion() >= "4.0.0")
 
     expect_snapshot({  
-        writeLines(eval_outside('stop(42)'))
-        writeLines(eval_outside('foobar'))
-        writeLines(eval_outside('f<-function(x) {42 * "foobar"}; f()'))
+        writeLines(eval_outside("log_errors()", 'stop(42)'))
+        writeLines(eval_outside("log_errors()", 'foobar'))
+        writeLines(eval_outside("log_errors()", 'f<-function(x) {42 * "foobar"}; f()'))
     })
 })
 
