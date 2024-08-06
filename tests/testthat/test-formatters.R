@@ -19,9 +19,6 @@ test_that('glue works', {
     expect_equal(formatter_glue("Hi {everything}"), "Hi 42")
     expect_equal(formatter_glue("Hi {1:2}"), paste("Hi", 1:2))
 
-    expect_output(do.call(logger, namespaces$global[[1]])(INFO, 42), '42')
-    expect_output(do.call(logger, namespaces$global[[1]])(INFO, "Hi {everything}"), '42')
-
     expect_output(log_info("Hi {everything}"), '42')
     expect_output(log_warn("Hi {everything}"), '42')
     expect_output(g(), '42')

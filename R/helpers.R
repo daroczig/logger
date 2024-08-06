@@ -104,12 +104,13 @@ log_separator <- function(level = INFO,
     base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall, .topenv = .topenv))
 
     log_level(
-        paste(rep(separator, max(0, width - base_info_chars)), collapse = ''),
-        level = level,
-        namespace = namespace,
-        .logcall = .logcall,
-        .topcall = .topcall,
-        .topenv = .topenv)
+      paste(rep(separator, max(0, width - base_info_chars)), collapse = ''),
+      level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
 }
 
 

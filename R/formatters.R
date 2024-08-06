@@ -186,6 +186,9 @@ skip_formatter <- function(message, ...) {
     structure(message, skip_formatter = TRUE)
 }
 
+is_skip_formatter <- function(x) {
+    isTRUE(attr(x, 'skip_formatter', exact = TRUE))
+}
 
 #' Mimic the default formatter used in the \pkg{logging} package
 #'
