@@ -272,7 +272,7 @@ You may find `?appender_tee` also useful, that writes the log messages to both `
 
 ```{r}
 ## reset appender
-log_appender(appender_console)
+log_appender(appender_stdout)
 ```
 
 And the are many other appender functions bundled with `logger` as well, eg some writing to Syslog, Telegram, Pushbullet, a database table or an Amazon Kinesis stream -- even doing that asynchronously via `appender_async` -- see [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) for more details.

@@ -87,7 +87,7 @@ Putting all these together (by explicitly setting the default config in the `glo
 log_threshold(INFO)
 log_formatter(formatter_glue)
 log_layout(layout_simple)
-log_appender(appender_console)
+log_appender(appender_stdout)
 log_debug('I am a low level log message that will not be printed with a high log level threshold')
 log_warn('I am a higher level log message that is very likely to be printed')
 ```
