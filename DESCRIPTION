@@ -37,8 +37,7 @@ Suggests:
   botor,
   R.utils,
   syslognet,
-  withr,
-  processx
+  withr
 Enhances:
   logging,
   futile.logger,
