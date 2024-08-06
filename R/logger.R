@@ -28,7 +28,6 @@ logger <- function(threshold, formatter, layout, appender) {
     threshold <- validate_log_level(threshold)
     force(layout)
     force(appender)
-    stop("Here")
 
     function(level, ..., namespace = NA_character_, .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
