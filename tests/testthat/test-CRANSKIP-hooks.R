@@ -2,8 +2,8 @@ library(logger)
 library(testthat)
 
 eval_outside <- function(expr) {
-    input <- normalizePath(withr::local_tempfile(), mustWork = FALSE)
-    output <- normalizePath(withr::local_tempfile(), mustWork = FALSE)
+    input <- normalizePath(withr::local_tempfile(lines = character()))
+    output <- normalizePath(withr::local_tempfile(lines = character()))
     writeLines(con = input, c(
         "library(logger)",
         "log_layout(layout_glue_generator('{level} {msg}'))",
