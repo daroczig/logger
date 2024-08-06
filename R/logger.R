@@ -85,7 +85,8 @@ fallback_namespace <- function(namespace) {
 #' @param arg see [log_levels()]
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
-#' @return currently set or return log function property
+#' @return If `arg` is `NULL`, will return the currently set value.
+#'   If `arg` is not `NULL`, will return the previously set value.
 #' @keywords internal
 log_config_setter <- function(fun_name, arg, namespace, index) {
 
@@ -100,19 +101,19 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
 
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
+    old <- config[[fun_name_base]]
 
     if (fun_name_base == 'threshold') {
       if (is.null(arg)) {
-        return(config[[fun_name_base]])
+        return(old)
       }
       config[[fun_name_base]] <- validate_log_level(arg)
     } else {
       if (is.null(arg)) {
-        res <- config[[fun_name_base]]
-        # if (!is.null(attr(res, 'generator'))) {
-        #   res <- parse(text = attr(res, 'generator'))[[1]]
-        # }
-        return(res)
+        if (!is.null(attr(old, 'generator'))) {
+          old <- parse(text = attr(old, 'generator'))[[1]]
+        }
+        return(old)
       }
 
       config[[fun_name_base]] <- arg
@@ -120,6 +121,7 @@ log_config_setter <- function(fun_name, arg, namespace, index) {
 
     configs[[min(index, length(config) + 1)]] <- config
     assign(namespace, configs, envir = namespaces)
+    invisible(old)
 }
 
 
@@ -396,10 +398,7 @@ log_trace <- function(..., namespace = NA_character_,
 #' log_trace('DONE')
 #' }
 with_log_threshold <- function(expression, threshold = ERROR, namespace = 'global', index = 1) {
-    old <- log_threshold(namespace = namespace, index = index)
-    on.exit({
-        log_threshold(old, namespace = namespace, index = index)
-    })
-    log_threshold(threshold, namespace = namespace, index = index)
+    old <- log_threshold(threshold, namespace = namespace, index = index)
+    on.exit(log_threshold(old, namespace = namespace, index = index))
     eval(quote(expression))
 }

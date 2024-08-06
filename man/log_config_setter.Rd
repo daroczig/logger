@@ -16,7 +16,8 @@ log_config_setter(fun_name, arg, namespace, index)
 \item{index}{index of the logger within the namespace}
 }
 \value{
-currently set or return log function property
+If \code{arg} is \code{NULL}, will return the currently set value.
+If \code{arg} is not \code{NULL}, will return the previously set value.
 }
 \description{
 Base Logging Function

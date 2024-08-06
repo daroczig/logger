@@ -1,7 +1,3 @@
-## save current settings so that we can reset later
-layout   <- log_layout()
-appender <- log_appender()
-
 test_that('called from package', {
     devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
     local_test_logger(layout = layout_simple)
@@ -89,7 +85,3 @@ test_that('namespace in a remote R session to avoid calling from testthat', {
     unlink(t)
 
 })
-
-## reset settings
-log_layout(layout)
-log_appender(appender)

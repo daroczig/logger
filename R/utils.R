@@ -78,19 +78,21 @@ catch_base_log <- function(
   .topenv = parent.frame()
   ) {
     namespace <- fallback_namespace(namespace)
-    orginal_appender <- log_appender(namespace = namespace)
-    log_appender(appender_console, namespace = namespace)
+
+    old <- log_appender(appender_console, namespace = namespace)
+    on.exit(log_appender(old, namespace = namespace))
+
     # catch error, warning or message
-    res <- capture.output(
-      log_level(level = level,
-                "",
-                namespace = namespace, 
-                .topcall = .topcall,
-                .topenv = .topenv),
+    capture.output(
+      log_level(
+        level = level,
+        "",
+        namespace = namespace,
+        .topcall = .topcall,
+        .topenv = .topenv
+      ),
       type = 'message'
     )
-    log_appender(orginal_appender, namespace = namespace)
-    res
 }
 
 in_pkgdown <- function() {
