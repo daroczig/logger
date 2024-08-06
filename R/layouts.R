@@ -168,10 +168,15 @@ layout_glue <- layout_glue_generator()
 
 
 #' Format a log message with `glue` and ANSI escape codes to add colors
+#' 
+#' Colour log levels based on their severity. Log levels are coloured
+#' with [colorize_by_log_level()] and the messages are coloured with
+#' [grayscale_by_log_level()].
+#' 
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @examples \dontrun{
+#' @examplesIf requireNamespace("crayon")
 #' log_layout(layout_glue_colors)
 #' log_threshold(TRACE)
 #' log_info('Starting the script...')
@@ -182,7 +187,6 @@ layout_glue <- layout_glue_generator()
 #' log_debug('Getting an error is usually bad')
 #' log_error('This is another problem')
 #' log_fatal('The last problem.')
-#' }
 #' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue()], [layout_json()], [layout_json_parser()], or generator functions such as [layout_glue_generator()]
 #' @note This functionality depends on the \pkg{crayon} package.
 layout_glue_colors <- layout_glue_generator(
