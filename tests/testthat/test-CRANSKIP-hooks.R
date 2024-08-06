@@ -18,7 +18,8 @@ eval_outside <- function(expr) {
     if (Sys.info()[["sysname"]] == "Windows") {
         path <- paste0(path, ".exe")
     }
-    suppressWarnings(system2(path, input, stdout = TRUE, stderr = TRUE))
+    # suppressWarnings(system2(path, input, stdout = TRUE, stderr = TRUE))
+    suppressWarnings(system2(path, input))
     readLines(output)
 }
 

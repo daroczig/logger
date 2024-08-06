@@ -84,7 +84,9 @@ pander::panderOptions('table.style', 'simple')
 ```
 
 ```{r}
+cat("Setting formatter\n", file = stderr())
 log_formatter(formatter_pander)
+cat(log_formatter(), "\n", file = stderr())
 log_info(head(iris))
 ```
 
