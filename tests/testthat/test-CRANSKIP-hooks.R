@@ -17,24 +17,18 @@ eval_outside <- function(...) {
 }
 
 test_that('log_messages', {
-    skip_if_not(getRversion() >= "4.0.0")
-
     expect_snapshot({
         writeLines(eval_outside("log_messages()", 'message(42)'))
     })
 })
 
 test_that('log_warnings', {
-    skip_if_not(getRversion() >= "4.0.0")
-
     expect_snapshot({
         writeLines(eval_outside("log_warnings(TRUE)", 'warning(42)', 'log(-1)'))
     })
 })
 
 test_that('log_errors', {
-    skip_if_not(getRversion() >= "4.0.0")
-
     expect_snapshot({  
         writeLines(eval_outside("log_errors()", 'stop(42)'))
         writeLines(eval_outside("log_errors()", 'foobar'))
