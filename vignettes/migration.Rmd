@@ -170,7 +170,7 @@ log_appender(appender_tee(t))
 
 ```{r echo=FALSE, results='hide'}
 flog.appender(appender.console)
-log_appender(appender_console)
+log_appender(appender_stdout)
 ```
 
 ### Hierarchical logging and performance
