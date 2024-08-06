@@ -6,7 +6,7 @@ Authors@R: c(
     )
 Title: A Lightweight, Modern and Flexible Logging Utility
 Description: Inspired by the the 'futile.logger' R package and 'logging' Python module, this utility provides a flexible and extensible way of formatting and delivering log messages with low overhead.
-Version: 0.3.0
+Version: 0.3.0.9000
 Date: 2024-03-03
 URL: https://daroczig.github.io/logger/
 BugReports: https://github.com/daroczig/logger/issues
@@ -15,6 +15,7 @@ RoxygenNote: 7.3.2
 License: AGPL-3
 Imports:
   utils
+Depends: R (>= 4.0.0)
 Suggests:
   glue,
   pander,
@@ -23,7 +24,7 @@ Suggests:
   slackr (>= 1.4.1),
   RPushbullet,
   telegram,
-  testthat,
+  testthat (>= 3.0.0),
   covr,
   knitr,
   rmarkdown,
@@ -36,10 +37,13 @@ Suggests:
   txtq,
   botor,
   R.utils,
-  syslognet
+  syslognet,
+  withr
 Enhances:
   logging,
   futile.logger,
   log4r
 VignetteBuilder: knitr
-Config/testthat/edition: 2
+Config/testthat/edition: 3
+Config/testthat/parallel: TRUE
+Roxygen: list(markdown = TRUE)

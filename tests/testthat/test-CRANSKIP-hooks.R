@@ -1,8 +1,6 @@
 library(logger)
 library(testthat)
 
-context('hooks')
-
 eval_outside <- function(expr) {
     t <- tempfile()
     on.exit(unlink(t))

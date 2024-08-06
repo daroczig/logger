@@ -1,9 +1,3 @@
-library(logger)
-library(testthat)
-library(jsonlite)
-
-context('layouts')
-
 test_that('blank layout', {
     local_test_logger(layout = layout_blank)
     expect_output(log_info('foobar'), 'foobar')
@@ -30,8 +24,9 @@ test_that('metavars', {
 
 test_that('JSON layout', {
     local_test_logger(layout = layout_json())
-    expect_equal(fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
-    expect_equal(fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
+    
+    expect_equal(jsonlite::fromJSON(capture.output(log_info('foobar')))$level, 'INFO')
+    expect_equal(jsonlite::fromJSON(capture.output(log_info('foobar')))$msg, 'foobar')
 })
 
 test_that('JSON parser layout', {

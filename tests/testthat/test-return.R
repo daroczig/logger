@@ -1,8 +1,3 @@
-library(logger)
-library(testthat)
-
-context('return value')
-
 glue_or_sprintf_result <- c(
     "Hi foo, did you know that 2*4=8?",
     "Hi bar, did you know that 2*4=8?")

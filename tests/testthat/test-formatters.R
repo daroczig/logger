@@ -1,8 +1,3 @@
-library(logger)
-library(testthat)
-library(jsonlite)
-
-context('formatters')
 everything <- 42
 g <- function() {
     log_info("Hi {everything}")
@@ -24,8 +19,8 @@ test_that('glue works', {
     expect_equal(formatter_glue("Hi {everything}"), "Hi 42")
     expect_equal(formatter_glue("Hi {1:2}"), paste("Hi", 1:2))
 
-    expect_output(do.call(logger, logger:::namespaces$global[[1]])(INFO, 42), '42')
-    expect_output(do.call(logger, logger:::namespaces$global[[1]])(INFO, "Hi {everything}"), '42')
+    expect_output(do.call(logger, namespaces$global[[1]])(INFO, 42), '42')
+    expect_output(do.call(logger, namespaces$global[[1]])(INFO, "Hi {everything}"), '42')
 
     expect_output(log_info("Hi {everything}"), '42')
     expect_output(log_warn("Hi {everything}"), '42')
@@ -127,12 +122,12 @@ test_that('formatter_logging works', {
 })
 
 test_that('special chars in the text work', {
-  expect_equal(formatter_glue('JSON: {toJSON(1:4)}'), 'JSON: [1,2,3,4]')
-  expect_equal(formatter_glue('JSON: {toJSON(iris[1:2, ], auto_unbox = TRUE)}'), 'JSON: [{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
+  expect_equal(formatter_glue('JSON: {jsonlite::toJSON(1:4)}'), 'JSON: [1,2,3,4]')
+  expect_equal(formatter_glue('JSON: {jsonlite::toJSON(iris[1:2, ], auto_unbox = TRUE)}'), 'JSON: [{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
     
   local_test_logger()
-  expect_output(log_info('JSON: {toJSON(1:4)}'), '[1,2,3,4]')
-  expect_output(log_info('JSON: {toJSON(iris[1:2, ], auto_unbox = TRUE)}'), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
+  expect_output(log_info('JSON: {jsonlite::toJSON(1:4)}'), '[1,2,3,4]')
+  expect_output(log_info('JSON: {jsonlite::toJSON(iris[1:2, ], auto_unbox = TRUE)}'), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
 })
 
 test_that('pander formatter', {

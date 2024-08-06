@@ -1,46 +1,28 @@
-#' Warn to update R to 4+
-#' @keywords internal
-warn_if_globalCallingHandlers_is_not_available <- function() {
-    log_warn(
-        'Using legacy version of global message/warning/error hook, ',
-        'please update your R installation to at least 4.0.0 ',
-        'to make use of the much more elegant globalCallingHandlers approach.')
-}
-
 
 #' Injects a logger call to standard messages
 #'
-#' This function uses \code{trace} to add a \code{log_info} function call when \code{message} is called to log the informative messages with the \code{logger} layout and appender.
+#' This function uses `trace` to add a `log_info` function call when `message` is called to log the informative messages with the `logger` layout and appender.
 #' @export
 #' @examples \dontrun{
 #' log_messages()
 #' message('hi there')
 #' }
 log_messages <- function() {
-    if (R.Version()$major >= 4) {
-        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'message'],
-                       attr, which = 'implements') == 'log_messages')) {
-            warning('Ignoring this call to log_messages as it was registered previously.')
-        } else {
-            globalCallingHandlers(
-                message = structure(function(m) {
-                    logger::log_level(logger::INFO, m$message, .topcall = m$call)
-                }, implements = 'log_messages'))
-        }
+    if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'message'],
+                    attr, which = 'implements') == 'log_messages')) {
+        warning('Ignoring this call to log_messages as it was registered previously.')
     } else {
-        warn_if_globalCallingHandlers_is_not_available()
-        invisible(suppressMessages(trace(
-            what = 'message',
-            exit = substitute(logger::log_info(logger::skip_formatter(cond$message))),
-            print = FALSE,
-            where = baseenv())))
+        globalCallingHandlers(
+            message = structure(function(m) {
+                logger::log_level(logger::INFO, m$message, .topcall = m$call)
+            }, implements = 'log_messages'))
     }
 }
 
 
 #' Injects a logger call to standard warnings
 #'
-#' This function uses \code{trace} to add a \code{log_warn} function call when \code{warning} is called to log the warning messages with the \code{logger} layout and appender.
+#' This function uses `trace` to add a `log_warn` function call when `warning` is called to log the warning messages with the `logger` layout and appender.
 #' @param muffle if TRUE, the warning is not shown after being logged
 #' @export
 #' @examples \dontrun{
@@ -48,33 +30,24 @@ log_messages <- function() {
 #' for (i in 1:5) { Sys.sleep(runif(1)); warning(i) }
 #' }
 log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
-    if (R.Version()$major >= 4) {
-        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'warning'],
-                       attr, which = 'implements') == 'log_warnings')) {
-            warning('Ignoring this call to log_warnings as it was registered previously.')
-        } else {
-            globalCallingHandlers(
-                warning = structure(function(m) {
-                    logger::log_level(logger::WARN, m$message, .topcall = m$call)
-                    if (isTRUE(muffle)) {
-                        invokeRestart('muffleWarning')
-                    }
-                }, implements = 'log_warnings'))
-        }
+    if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'warning'],
+                    attr, which = 'implements') == 'log_warnings')) {
+        warning('Ignoring this call to log_warnings as it was registered previously.')
     } else {
-        warn_if_globalCallingHandlers_is_not_available()
-        invisible(suppressMessages(trace(
-            what = 'warning',
-            tracer = substitute(logger::log_warn(logger::skip_formatter(paste(list(...), collapse = '')))),
-            print = FALSE,
-            where = baseenv())))
+        globalCallingHandlers(
+            warning = structure(function(m) {
+                logger::log_level(logger::WARN, m$message, .topcall = m$call)
+                if (isTRUE(muffle)) {
+                    invokeRestart('muffleWarning')
+                }
+            }, implements = 'log_warnings'))
     }
 }
 
 
 #' Injects a logger call to standard errors
 #'
-#' This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.
+#' This function uses `trace` to add a `log_error` function call when `stop` is called to log the error messages with the `logger` layout and appender.
 #' @param muffle if TRUE, the error is not thrown after being logged
 #' @export
 #' @examples \dontrun{
@@ -82,35 +55,26 @@ log_warnings <- function(muffle = getOption('logger_muffle_warnings', FALSE)) {
 #' stop('foobar')
 #' }
 log_errors <- function(muffle = getOption('logger_muffle_errors', FALSE)) {
-    if (R.Version()$major >= 4) {
-        if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'error'],
-                       attr, which = 'implements') == 'log_errors')) {
-            warning('Ignoring this call to log_errors as it was registered previously.')
-        } else {
-            globalCallingHandlers(
-                error = structure(function(m) {
-                    logger::log_level(logger::ERROR, m$message, .topcall = m$call)
-                    if (isTRUE(muffle)) {
-                        invokeRestart('abort')
-                    }
-                }, implements = 'log_errors'))
-        }
+    if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == 'error'],
+                    attr, which = 'implements') == 'log_errors')) {
+        warning('Ignoring this call to log_errors as it was registered previously.')
     } else {
-        warn_if_globalCallingHandlers_is_not_available()
-        invisible(suppressMessages(trace(
-            what = 'stop',
-            tracer = substitute(logger::log_error(logger::skip_formatter(paste(list(...), collapse = '')))),
-            print = FALSE,
-            where = baseenv())))
+        globalCallingHandlers(
+            error = structure(function(m) {
+                logger::log_level(logger::ERROR, m$message, .topcall = m$call)
+                if (isTRUE(muffle)) {
+                    invokeRestart('abort')
+                }
+            }, implements = 'log_errors'))
     }
 }
 
 
 #' Auto logging input changes in Shiny app
 #'
-#' This is to be called in the \code{server} section of the Shiny app.
+#' This is to be called in the `server` section of the Shiny app.
 #' @export
-#' @param input passed from Shiny's \code{server}
+#' @param input passed from Shiny's `server`
 #' @param level log level
 #' @param excluded_inputs character vector of input names to exclude from logging
 #' @param namespace the name of the namespace

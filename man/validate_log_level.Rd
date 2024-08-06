@@ -7,10 +7,10 @@
 validate_log_level(level)
 }
 \arguments{
-\item{level}{\code{\link{log_levels}} object or string representation}
+\item{level}{\code{\link[=log_levels]{log_levels()}} object or string representation}
 }
 \value{
-\code{\link{log_levels}} object
+\code{\link[=log_levels]{log_levels()}} object
 }
 \description{
 Assure valid log level

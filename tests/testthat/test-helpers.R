@@ -1,8 +1,3 @@
-library(logger)
-library(testthat)
-
-context('helpers')
-
 test_that('separator', {
     local_test_logger(layout = layout_blank)
     expect_output(log_separator(), '={80,80}')

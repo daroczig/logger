@@ -2,20 +2,25 @@
 % Please edit documentation in R/color.R
 \name{colorize_by_log_level}
 \alias{colorize_by_log_level}
-\title{Colorize string by the related log level}
+\alias{grayscale_by_log_level}
+\title{Color string by the related log level}
 \usage{
 colorize_by_log_level(msg, level)
+
+grayscale_by_log_level(msg, level)
 }
 \arguments{
-\item{msg}{string}
+\item{msg}{String to color.}
 
-\item{level}{see \code{\link{log_levels}}}
+\item{level}{see \code{\link[=log_levels]{log_levels()}}}
 }
 \value{
-string with ANSI escape code
+A string with ANSI escape codes.
 }
 \description{
-Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
+Color log messages according to their severity with either a rainbow
+or grayscale color scheme. The greyscale theme assumes a dark background on
+the terminal.
 }
 \examples{
 \dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -26,5 +31,13 @@ cat(colorize_by_log_level('foobar', SUCCESS), '\n')
 cat(colorize_by_log_level('foobar', INFO), '\n')
 cat(colorize_by_log_level('foobar', DEBUG), '\n')
 cat(colorize_by_log_level('foobar', TRACE), '\n')
+
+cat(grayscale_by_log_level('foobar', FATAL), '\n')
+cat(grayscale_by_log_level('foobar', ERROR), '\n')
+cat(grayscale_by_log_level('foobar', WARN), '\n')
+cat(grayscale_by_log_level('foobar', SUCCESS), '\n')
+cat(grayscale_by_log_level('foobar', INFO), '\n')
+cat(grayscale_by_log_level('foobar', DEBUG), '\n')
+cat(grayscale_by_log_level('foobar', TRACE), '\n')
 \dontshow{\}) # examplesIf}
 }

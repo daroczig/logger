@@ -14,7 +14,7 @@ layout_syslognet(
 )
 }
 \arguments{
-\item{level}{log level, see \code{\link{log_levels}} for more details}
+\item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
 \item{msg}{string message}
 

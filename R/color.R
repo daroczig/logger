@@ -1,9 +1,12 @@
-#' Colorize string by the related log level
+#' Color string by the related log level
 #'
-#' Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
-#' @param msg string
-#' @param level see \code{\link{log_levels}}
-#' @return string with ANSI escape code
+#' Color log messages according to their severity with either a rainbow
+#' or grayscale color scheme. The greyscale theme assumes a dark background on
+#' the terminal.
+#' 
+#' @param msg String to color.
+#' @param level see [log_levels()]
+#' @return A string with ANSI escape codes.
 #' @export
 #' @examplesIf requireNamespace("crayon")
 #' cat(colorize_by_log_level('foobar', FATAL), '\n')
@@ -13,6 +16,14 @@
 #' cat(colorize_by_log_level('foobar', INFO), '\n')
 #' cat(colorize_by_log_level('foobar', DEBUG), '\n')
 #' cat(colorize_by_log_level('foobar', TRACE), '\n')
+#' 
+#' cat(grayscale_by_log_level('foobar', FATAL), '\n')
+#' cat(grayscale_by_log_level('foobar', ERROR), '\n')
+#' cat(grayscale_by_log_level('foobar', WARN), '\n')
+#' cat(grayscale_by_log_level('foobar', SUCCESS), '\n')
+#' cat(grayscale_by_log_level('foobar', INFO), '\n')
+#' cat(grayscale_by_log_level('foobar', DEBUG), '\n')
+#' cat(grayscale_by_log_level('foobar', TRACE), '\n')
 colorize_by_log_level <- function(msg, level) {
 
     fail_on_missing_package('crayon')
@@ -33,22 +44,8 @@ colorize_by_log_level <- function(msg, level) {
 
 }
 
-
-#' Render a string with light/dark gray based on the related log level
-#'
-#' Adding color to a string to be used in terminal output. Supports ANSI standard colors 8 or 256.
-#' @param msg string
-#' @param level see \code{\link{log_levels}}
-#' @return string with ANSI escape code
 #' @export
-#' @examplesIf requireNamespace("crayon")
-#' cat(grayscale_by_log_level('foobar', FATAL), '\n')
-#' cat(grayscale_by_log_level('foobar', ERROR), '\n')
-#' cat(grayscale_by_log_level('foobar', WARN), '\n')
-#' cat(grayscale_by_log_level('foobar', SUCCESS), '\n')
-#' cat(grayscale_by_log_level('foobar', INFO), '\n')
-#' cat(grayscale_by_log_level('foobar', DEBUG), '\n')
-#' cat(grayscale_by_log_level('foobar', TRACE), '\n')
+#' @rdname colorize_by_log_level
 grayscale_by_log_level <- function(msg, level) {
 
     fail_on_missing_package('crayon')

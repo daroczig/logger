@@ -7,7 +7,7 @@
 log_threshold(level = NULL, namespace = "global", index = 1)
 }
 \arguments{
-\item{level}{see \code{\link{log_levels}}}
+\item{level}{see \code{\link[=log_levels]{log_levels()}}}
 
 \item{namespace}{logger namespace}
 
@@ -39,5 +39,5 @@ log_threshold(ERROR, namespace =  log_namespaces())
 }
 }
 \seealso{
-\code{\link{logger}}, \code{\link{log_layout}}, \code{\link{log_formatter}}, \code{\link{log_appender}}
+\code{\link[=logger]{logger()}}, \code{\link[=log_layout]{log_layout()}}, \code{\link[=log_formatter]{log_formatter()}}, \code{\link[=log_appender]{log_appender()}}
 }
