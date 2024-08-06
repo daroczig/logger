@@ -61,7 +61,7 @@ test_that('shiny input initialization is detected with different log-level', {
             shiny::testServer(server, {})
             "
         )
-    exp <- "ERROR \\[[0-9: \\-]+\\] Default Shiny inputs initialized"
+    exp <- ".*ERROR \\[[0-9: \\-]+\\] mock-session Default Shiny inputs initialized"
     expect_match(obs, exp)
 })
 
