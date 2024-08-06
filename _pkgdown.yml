@@ -1,7 +1,74 @@
 url: https://daroczig.github.io/logger
+
+template:
+  bootstrap: 5
+
 authors:
   System1:
     href: https://system1.com
-    html: <img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="24" />
+    html: <img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"/>
 toc:
   depth: 3
+
+reference:
+
+- title: Key logging functions
+  contents:
+  - log_level
+  - TRACE
+  - log_threshold
+
+- title: Other logging helpers
+  contents:
+  - log_eval
+  - log_failure
+  - log_tictoc
+  - log_separator
+  - log_with_separator
+  - with_log_threshold
+
+- title: Appenders
+  desc: >
+    Log appenders define where logging output should be sent to.
+  contents:
+  - log_appender
+  - starts_with("appender_")
+
+- title: Formatters
+  desc: >
+    Log formatters control how the inputs to the `log_` functions are converted
+    to a string. The default is `formatter_glue()` when `glue` is installed.
+  contents:
+  - log_formatter
+  - starts_with("formatter_")
+  - skip_formatter
+
+- title: Layouts
+  desc: >
+    Logging layouts control what is sent to the appender. They always include
+    the logged string, but might also include the timestamp, log level, etc.
+  contents:
+  - log_layout
+  - starts_with("layout_")
+
+- title: Hooks for automated logging
+  contents:
+  - log_shiny_input_changes
+  - log_messages
+  - log_warnings
+  - log_errors
+
+- title: Other helpers
+  contents:
+  - colorize_by_log_level
+  - logger
+  - delete_logger_index
+  - "%except%"
+
+- title: Dev tools
+  contents:
+  - as.loglevel
+  - deparse_to_one_line
+  - fail_on_missing_package
+  - get_logger_meta_variables
+  - log_namespaces

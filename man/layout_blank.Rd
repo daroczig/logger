@@ -14,7 +14,7 @@ layout_blank(
 )
 }
 \arguments{
-\item{level}{log level, see \code{\link{log_levels}} for more details}
+\item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
 \item{msg}{string message}
 
@@ -33,5 +33,5 @@ character vector
 Format a log record by including the raw message without anything added or modified
 }
 \seealso{
-This is a \code{\link{log_layout}}, for alternatives, see \code{\link{layout_simple}}, \code{\link{layout_glue_colors}}, \code{\link{layout_json}}, or generator functions such as \code{\link{layout_glue_generator}}
+This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json]{layout_json()}}, or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

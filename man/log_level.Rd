@@ -11,32 +11,73 @@
 \alias{log_trace}
 \title{Log a message with given log level}
 \usage{
-log_level(level, ..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_level(
+  level,
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_trace(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_fatal(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_debug(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_error(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_info(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_warn(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_success(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_success(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_warn(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_info(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_error(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_debug(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 
-log_fatal(..., namespace = NA_character_,
-  .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame())
+log_trace(
+  ...,
+  namespace = NA_character_,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
 }
 \arguments{
-\item{level}{log level, see \code{\link{log_levels}} for more details}
+\item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
 \item{...}{R objects that can be converted to a character vector via the active message formatter function}
 
@@ -49,7 +90,7 @@ log_fatal(..., namespace = NA_character_,
 \item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
-Invisible \code{list} of \code{logger} objects. See \code{\link{logger}} for more details on the format/
+Invisible \code{list} of \code{logger} objects. See \code{\link[=logger]{logger()}} for more details on the format/
 }
 \description{
 Log a message with given log level
@@ -77,5 +118,5 @@ log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
 }
 }
 \seealso{
-\code{\link{logger}}
+\code{\link[=logger]{logger()}}
 }

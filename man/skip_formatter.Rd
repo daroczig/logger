@@ -7,7 +7,7 @@
 skip_formatter(message, ...)
 }
 \arguments{
-\item{message}{character vector directly passed to the appender function in \code{\link{logger}}}
+\item{message}{character vector directly passed to the appender function in \code{\link[=logger]{logger()}}}
 
 \item{...}{should be never set}
 }

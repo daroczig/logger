@@ -5,6 +5,8 @@ vignette: >
   %\VignetteIndexEntry{The Anatomy of a Log Request}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - logger_structure.svg
 ---
 
 ```{r setup, include = FALSE}
@@ -13,13 +15,6 @@ knitr::opts_chunk$set(
     comment = "#>"
 )
 library(logger)
-## backup settings
-oldconf <- list(
-    threshold = log_threshold(),
-    layout = log_layout(),
-    formatter = log_formatter(),
-    appender = log_appender())
-## knitr not picking up stderr
 log_appender(appender_stdout)
 ```
 
@@ -87,7 +82,7 @@ Putting all these together (by explicitly setting the default config in the `glo
 log_threshold(INFO)
 log_formatter(formatter_glue)
 log_layout(layout_simple)
-log_appender(appender_console)
+log_appender(appender_stdout)
 log_debug('I am a low level log message that will not be printed with a high log level threshold')
 log_warn('I am a higher level log message that is very likely to be printed')
 ```
@@ -95,9 +90,5 @@ log_warn('I am a higher level log message that is very likely to be printed')
 Note, that all `logger` definitions and requests are tied to a logging namespace, and one log request might trigger multiple `logger` definitions as well (stacking). Find more information on these in the [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html) vignette.
 
 ```{r cleanup, include = FALSE}
-## restore settings
-log_threshold(oldconf$threshold)
-log_layout(oldconf$layout)
-log_formatter(oldconf$formatter)
-log_appender(oldconf$appender)
+logger:::namespaces_reset()
 ```
