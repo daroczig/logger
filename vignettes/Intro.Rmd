@@ -84,10 +84,13 @@ pander::panderOptions('table.style', 'simple')
 ```
 
 ```{r}
+withr::local_options(debugging = TRUE)
 cat("Setting formatter\n", file = stderr())
 log_formatter(formatter_pander)
+writeLines(capture.output(str(as.list(namespaces))), stderr())
 cat(log_formatter(), "\n", file = stderr())
 log_info(head(iris))
+cat("Done\n", file = stderr())
 ```
 
 ```{r knitr-pander-revert, include = FALSE}

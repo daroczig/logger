@@ -2,6 +2,7 @@ library(logger)
 library(testthat)
 
 eval_outside <- function(expr) {
+
     input <- normalizePath(withr::local_tempfile(lines = character()))
     output <- normalizePath(withr::local_tempfile(lines = character()))
     writeLines(con = input, c(
