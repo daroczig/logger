@@ -29,7 +29,7 @@ test_that('log_warnings', {
 })
 
 test_that('log_errors', {
-    expect_snapshot({  
+    expect_snapshot({
         writeLines(eval_outside("log_errors()", 'stop(42)'))
         writeLines(eval_outside("log_errors()", 'foobar'))
         writeLines(eval_outside("log_errors()", 'f<-function(x) {42 * "foobar"}; f()'))
