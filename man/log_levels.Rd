@@ -30,7 +30,9 @@ DEBUG
 TRACE
 }
 \description{
-The standard Apache logj4 log levels plus a custom level for \code{SUCCESS}. For the full list of these log levels and suggested usage, check the below Details.
+The standard Apache logj4 log levels plus a custom level for
+\code{SUCCESS}. For the full list of these log levels and suggested
+usage, check the below Details.
 }
 \details{
 List of supported log levels:
@@ -46,6 +48,7 @@ List of supported log levels:
 }
 }
 \references{
-\url{https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html}, \url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
+\url{https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html},
+\url{https://logging.apache.org/log4j/2.x/manual/customloglevels.html}
 }
 \keyword{datasets}

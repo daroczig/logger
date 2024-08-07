@@ -26,7 +26,7 @@ inspired by the `futile.logger` R package and `logging` Python module.
 version](https://www.r-pkg.org/badges/version-ago/logger)](https://cran.r-project.org/package=logger)
 
 ``` r
-install.packages('logger')
+install.packages("logger")
 ```
 
 The most recent, development version of `logger` can also be installed
@@ -34,7 +34,7 @@ from GitHub:
 
 ``` r
 # install.packages("pak")
-pak::pak('daroczig/logger')
+pak::pak("daroczig/logger")
 ```
 
 ## Quick example
@@ -45,7 +45,7 @@ messages in ad-hoc and programmatic ways:
 ``` r
 library(logger)
 log_threshold(DEBUG)
-log_info('Script starting up...')
+log_info("Script starting up...")
 #> INFO [2024-08-05 16:05:22] Script starting up...
 
 pkgs <- available.packages()
@@ -53,10 +53,10 @@ log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
 #> INFO [2024-08-05 16:05:23] There are 21132 R packages hosted on CRAN!
 
 for (letter in letters) {
-  lpkgs <- sum(grepl(letter, pkgs[, 'Package'], ignore.case = TRUE))
-   log_level(
+  lpkgs <- sum(grepl(letter, pkgs[, "Package"], ignore.case = TRUE))
+  log_level(
     if (lpkgs < 5000) TRACE else DEBUG,
-    '{lpkgs} R packages including the {shQuote(letter)} letter'
+    "{lpkgs} R packages including the {shQuote(letter)} letter"
   )
 }
 #> DEBUG [2024-08-05 16:05:23] 10194 R packages including the 'a' letter
@@ -73,7 +73,7 @@ for (letter in letters) {
 #> DEBUG [2024-08-05 16:05:23] 10296 R packages including the 's' letter
 #> DEBUG [2024-08-05 16:05:23] 9531 R packages including the 't' letter
 
-log_warn('There might be many, like {1:2} or more warnings!!!')
+log_warn("There might be many, like {1:2} or more warnings!!!")
 #> WARN [2024-08-05 16:05:23] There might be many, like 1 or more warnings!!!
 #> WARN [2024-08-05 16:05:23] There might be many, like 2 or more warnings!!!
 ```

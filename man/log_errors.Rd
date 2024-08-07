@@ -10,11 +10,13 @@ log_errors(muffle = getOption("logger_muffle_errors", FALSE))
 \item{muffle}{if TRUE, the error is not thrown after being logged}
 }
 \description{
-This function uses \code{trace} to add a \code{log_error} function call when \code{stop} is called to log the error messages with the \code{logger} layout and appender.
+This function uses \code{trace} to add a \code{log_error} function call when
+\code{stop} is called to log the error messages with the \code{logger} layout
+and appender.
 }
 \examples{
 \dontrun{
 log_errors()
-stop('foobar')
+stop("foobar")
 }
 }

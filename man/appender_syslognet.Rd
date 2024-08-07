@@ -25,7 +25,7 @@ This functionality depends on the \pkg{syslognet} package.
 \examples{
 \dontrun{
 if (requireNamespace("syslognet", quietly = TRUE)) {
-  log_appender(appender_syslognet("test_app", 'remoteserver'))
+  log_appender(appender_syslognet("test_app", "remoteserver"))
   log_info("Test message.")
 }
 }

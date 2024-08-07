@@ -1,7 +1,12 @@
 #' Evaluate an expression and log results
-#' @param expr R expression to be evaluated while logging the expression itself along with the result
+#' @param expr R expression to be evaluated while logging the
+#'   expression itself along with the result
 #' @param level [log_levels()]
-#' @param multiline setting to `FALSE` will print both the expression (enforced to be on one line by removing line-breaks if any) and its result on a single line separated by `=>`, while setting to `TRUE` will log the expression and the result in separate sections reserving line-breaks and rendering the printed results
+#' @param multiline setting to `FALSE` will print both the expression
+#'   (enforced to be on one line by removing line-breaks if any) and
+#'   its result on a single line separated by `=>`, while setting to
+#'   `TRUE` will log the expression and the result in separate
+#'   sections reserving line-breaks and rendering the printed results
 #' @examples \dontrun{
 #' log_eval(pi * 2, level = INFO)
 #'
@@ -30,49 +35,46 @@
 #' log_eval(f <- log_eval, multiline = TRUE)
 #'
 #' ## doing something computationally intensive
-#' log_eval(system.time(for(i in 1:100) mad(runif(1000))), multiline = TRUE)
+#' log_eval(system.time(for (i in 1:100) mad(runif(1000))), multiline = TRUE)
 #' }
 #' @importFrom utils capture.output
 #' @export
 log_eval <- function(expr, level = TRACE, multiline = FALSE) {
+  ## capture call
+  expr <- substitute(expr)
+  exprs <- gsub("\n", " ", deparse(expr), fixed = TRUE)
 
-    ## capture call
-    expr  <- substitute(expr)
-    exprs <- gsub('\n', ' ', deparse(expr), fixed = TRUE)
+  ## evaluate call and store results
+  timer <- Sys.time()
+  res <- withVisible(eval.parent(expr))
 
-    ## evaluate call and store results
-    timer <- Sys.time()
-    res   <- withVisible(eval.parent(expr))
+  ## log expression and results
+  if (multiline == FALSE) {
+    log_level(level, skip_formatter(
+      paste(
+        shQuote(paste(exprs, collapse = " ")),
+        "=>",
+        shQuote(paste(gsub("\n", " ", deparse(res$value)), collapse = " "))
+      )
+    ))
+  } else {
+    log_level(level, "Running expression: ====================")
+    log_level(level, skip_formatter(exprs))
+    log_level(level, "Results: ===============================")
+    log_level(level, skip_formatter(capture.output(res$value)))
+    log_level(level, paste(
+      "Elapsed time:",
+      round(difftime(Sys.time(), timer, units = "secs"), 2),
+      "sec"
+    ))
+  }
 
-    ## log expression and results
-    if (multiline == FALSE) {
-
-        log_level(level, skip_formatter(
-            paste(
-                shQuote(paste(exprs, collapse = ' ')),
-                '=>',
-                shQuote(paste(gsub('\n', ' ', deparse(res$value)), collapse = ' ')))))
-
-    } else {
-
-        log_level(level, 'Running expression: ====================')
-        log_level(level, skip_formatter(exprs))
-        log_level(level, 'Results: ===============================')
-        log_level(level, skip_formatter(capture.output(res$value)))
-        log_level(level, paste(
-            'Elapsed time:',
-            round(difftime(Sys.time(), timer, units = 'secs'), 2),
-            'sec'))
-
-    }
-
-    ## return the results of the call
-    if (res$visible == TRUE) {
-        return(res$value)
-    } else {
-        return(invisible(res$value))
-    }
-
+  ## return the results of the call
+  if (res$visible == TRUE) {
+    return(res$value)
+  } else {
+    return(invisible(res$value))
+  }
 }
 
 
@@ -83,33 +85,33 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @export
 #' @examples
 #' log_separator()
-#' log_separator(ERROR, separator = '!', width = 60)
-#' log_separator(ERROR, separator = '!', width = 100)
-#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' log_separator(ERROR, separator = "!", width = 60)
+#' log_separator(ERROR, separator = "!", width = 100)
+#' logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 #' log_layout(logger)
-#' log_separator(ERROR, separator = '!', width = 100)
+#' log_separator(ERROR, separator = "!", width = 100)
 #' log_layout(layout_blank)
-#' log_separator(ERROR, separator = '!', width = 80)
+#' log_separator(ERROR, separator = "!", width = 80)
 #' @seealso [log_with_separator()]
 log_separator <- function(level = INFO,
                           namespace = NA_character_,
-                          separator = '=',
+                          separator = "=",
                           width = 80,
                           .logcall = sys.call(),
                           .topcall = sys.call(-1),
                           .topenv = parent.frame()) {
+  stopifnot(length(separator) == 1, nchar(separator) == 1)
 
-    stopifnot(length(separator) == 1, nchar(separator) == 1)
+  base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall, .topenv = .topenv))
 
-    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall, .topenv = .topenv))
-
-    log_level(
-        paste(rep(separator, max(0, width - base_info_chars)), collapse = ''),
-        level = level,
-        namespace = namespace,
-        .logcall = .logcall,
-        .topcall = .topcall,
-        .topenv = .topenv)
+  log_level(
+    paste(rep(separator, max(0, width - base_info_chars)), collapse = ""),
+    level = level,
+    namespace = namespace,
+    .logcall = .logcall,
+    .topcall = .topcall,
+    .topenv = .topenv
+  )
 }
 
 
@@ -118,57 +120,61 @@ log_separator <- function(level = INFO,
 #' @inheritParams log_separator
 #' @export
 #' @examples
-#' log_with_separator('An important message')
-#' log_with_separator('Some critical KPI down!!!', separator = '$')
-#' log_with_separator('This message is worth a {1e3} words')
+#' log_with_separator("An important message")
+#' log_with_separator("Some critical KPI down!!!", separator = "$")
+#' log_with_separator("This message is worth a {1e3} words")
 #' log_with_separator(paste(
-#'   'A very important message with a bunch of extra words that will',
-#'   'eventually wrap into a multi-line message for our quite nice demo :wow:'))
-#' log_with_separator(paste(
-#'   'A very important message with a bunch of extra words that will',
-#'   'eventually wrap into a multi-line message for our quite nice demo :wow:'),
-#'   width = 60)
-#' log_with_separator('Boo!', level = FATAL)
+#'   "A very important message with a bunch of extra words that will",
+#'   "eventually wrap into a multi-line message for our quite nice demo :wow:"
+#' ))
+#' log_with_separator(
+#'   paste(
+#'     "A very important message with a bunch of extra words that will",
+#'     "eventually wrap into a multi-line message for our quite nice demo :wow:"
+#'   ),
+#'   width = 60
+#' )
+#' log_with_separator("Boo!", level = FATAL)
 #' log_layout(layout_blank)
-#' log_with_separator('Boo!', level = FATAL)
-#' logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+#' log_with_separator("Boo!", level = FATAL)
+#' logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 #' log_layout(logger)
-#' log_with_separator('Boo!', level = FATAL, width = 120)
+#' log_with_separator("Boo!", level = FATAL, width = 120)
 #' @seealso [log_separator()]
-log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = '=', width = 80) {
+log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = "=", width = 80) {
+  base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call(-1)))
 
-    base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call(-1)))
+  log_separator(
+    level = level,
+    separator = separator,
+    width = width,
+    namespace = namespace,
+    .logcall = sys.call(),
+    .topcall = sys.call(-1),
+    .topenv = parent.frame()
+  )
 
-    log_separator(
-      level = level,
-      separator = separator,
-      width = width,
-      namespace = namespace,
-      .logcall = sys.call(),
-      .topcall = sys.call(-1),
-      .topenv = parent.frame()
+  message <- do.call(eval(log_formatter()), list(...))
+  message <- strwrap(message, max(0, width - base_info_chars - 4))
+  message <- sapply(message, function(m) {
+    paste0(
+      separator, " ", m,
+      paste(rep(" ", max(0, width - base_info_chars - 4 - nchar(m))), collapse = ""),
+      " ", separator
     )
+  })
 
-    message <- do.call(eval(log_formatter()), list(...))
-    message <- strwrap(message, max(0, width - base_info_chars - 4))
-    message <- sapply(message, function(m) {
-        paste0(
-            separator, ' ', m,
-            paste(rep(' ', max(0, width - base_info_chars - 4 - nchar(m))), collapse = ''),
-            ' ', separator)
-    })
+  log_level(skip_formatter(message), level = level, namespace = namespace, .topenv = parent.frame())
 
-    log_level(skip_formatter(message), level = level, namespace = namespace, .topenv = parent.frame())
-
-    log_separator(
-      level = level,
-      separator = separator,
-      width = width,
-      namespace = namespace,
-      .logcall = sys.call(),
-      .topcall = sys.call(-1),
-      .topenv = parent.frame()
-    )
+  log_separator(
+    level = level,
+    separator = separator,
+    width = width,
+    namespace = namespace,
+    .logcall = sys.call(),
+    .topcall = sys.call(-1),
+    .topenv = parent.frame()
+  )
 }
 
 
@@ -178,37 +184,38 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 #' @param namespace x
 #' @export
 #' @examples \dontrun{
-#' log_tictoc('warming up')
+#' log_tictoc("warming up")
 #' Sys.sleep(0.1)
-#' log_tictoc('running')
+#' log_tictoc("running")
 #' Sys.sleep(0.1)
-#' log_tictoc('running')
+#' log_tictoc("running")
 #' Sys.sleep(runif(1))
-#' log_tictoc('and running')
+#' log_tictoc("and running")
 #' }
 #' @author Thanks to Neal Fultz for the idea and original implementation!
 log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
+  ns <- fallback_namespace(namespace)
 
-    ns <- fallback_namespace(namespace)
+  on.exit({
+    assign(ns, toc, envir = tictocs)
+  })
 
-    on.exit({
-        assign(ns, toc, envir = tictocs)
-    })
+  tic <- get0(ns, envir = tictocs, ifnotfound = Sys.time())
+  toc <- Sys.time()
+  tictoc <- difftime(toc, tic)
 
-    nsenv <- get(fallback_namespace(namespace), envir = namespaces)
-    tic <- get0(ns, envir = tictocs, ifnotfound = Sys.time())
-    toc <- Sys.time()
-    tictoc <- difftime(toc, tic)
-
-    log_level(
-        paste(ns, 'timer',
-              ifelse(round(tictoc, 2) == 0, 'tic', 'toc'),
-              round(tictoc, 2), attr(tictoc, 'units') , '-- '),
-        ..., level = level, namespace = namespace,
-        .logcall = sys.call(),
-        .topcall = sys.call(-1),
-        .topenv = parent.frame())
-
+  log_level(
+    paste(
+      ns, "timer",
+      ifelse(round(tictoc, 2) == 0, "tic", "toc"),
+      round(tictoc, 2), attr(tictoc, "units"), "-- "
+    ),
+    ...,
+    level = level, namespace = namespace,
+    .logcall = sys.call(),
+    .topcall = sys.call(-1),
+    .topenv = parent.frame()
+  )
 }
 tictocs <- new.env()
 
@@ -217,7 +224,7 @@ tictocs <- new.env()
 #' @param expression call
 #' @export
 #' @examples \dontrun{
-#' log_failure('foobar')
+#' log_failure("foobar")
 #' log_failure(foobar)
 #' }
 log_failure <- function(expression) {
