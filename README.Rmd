@@ -100,9 +100,9 @@ Why use logger? I decided to write the `n+1`th extensible `log4j` logger that fi
 
 Welcome to the [Bazaar](https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar)! If you already use any of the above packages for logging, you might find `vignette("migration")` useful.
 
-::: .pkgdown-hide
-
 ## Interested in more details?
+
+::: .pkgdown-hide
 
 Check out the main documentation site at <https://daroczig.github.io/logger> or the vignettes on the below topics:
 
@@ -115,3 +115,7 @@ Check out the main documentation site at <https://daroczig.github.io/logger> or 
 * [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html)
 
 :::
+
+If you prefer visual content, you can watch the video recording of the "Getting things logged" talk at RStudio::conf(2020):
+
+[![Gergely Daroczi presenting "Getting things logged" on using the `logger` R package at the RStudio conference in 2020](https://img.youtube.com/vi/_rUuBbml9dU/0.jpg)](https://www.youtube.com/watch?v=_rUuBbml9dU)

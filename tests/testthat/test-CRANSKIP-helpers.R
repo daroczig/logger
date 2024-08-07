@@ -10,13 +10,10 @@ test_that('tictoc', {
 })
 
 test_that('log with separator', {
-    expect_output(
-        cat(system("$R_HOME/bin/Rscript -e 'logger::log_with_separator(42)' 2>&1", intern = TRUE)),
-        '===')
-    expect_output(
-        cat(system("$R_HOME/bin/Rscript -e 'logger::log_with_separator(42)' 2>&1", intern = TRUE)),
-        '42')
-    expect_output(
-        cat(system("$R_HOME/bin/Rscript -e 'logger::log_with_separator(42, separator = \"|\")' 2>&1", intern = TRUE)),
-        '|||||')
+    local_test_logger(layout = layout_glue_generator("{level} {msg}"))
+
+    expect_snapshot({
+        log_with_separator(42)
+        log_with_separator(42, separator = "|")
+    })
 })

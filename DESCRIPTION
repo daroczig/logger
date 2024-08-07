@@ -15,6 +15,7 @@ RoxygenNote: 7.3.2
 License: AGPL-3
 Imports:
   utils
+Depends: R (>= 4.0.0)
 Suggests:
   glue,
   pander,

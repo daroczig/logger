@@ -37,3 +37,7 @@ logger_tester_function(INFO, 'hi from tester package')
 But if auto-guessing is not your style, then feel free to set your custom namespace (eg the name of your package) in all `?log_info` etc function calls and let your users know about how to suppress / reformat / redirect your log messages via `?log_threshold`, `?log_layout`, `?log_appender`.
 
 Please note that setting the formatter function via `?log_formatter` should not be left to the R package end-users, as the log message formatter is specific to your logging calls, so that should be decided by the R package author. Feel free to pick any formatter function (eg `glue`, `sprintf`, `paste` or something else), and set that via `?log_formatter` when your R package is loaded. All other parameters of your `logger` will inherit from the `global` namespace -- set by your R package's end user.
+
+```{r cleanup, include = FALSE}
+logger:::namespaces_reset()
+```

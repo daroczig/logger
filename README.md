@@ -136,9 +136,9 @@ Welcome to the
 you already use any of the above packages for logging, you might find
 `vignette("migration")` useful.
 
-<div class=".pkgdown-hide">
-
 ## Interested in more details?
+
+<div class=".pkgdown-hide">
 
 Check out the main documentation site at
 <https://daroczig.github.io/logger> or the vignettes on the below
@@ -160,3 +160,7 @@ topics:
   Performance](https://daroczig.github.io/logger/articles/performance.html)
 
 </div>
+
+If you prefer visual content, you can watch the video recording of the "Getting things logged" talk at RStudio::conf(2020):
+
+[![Gergely Daroczi presenting "Getting things logged" on using the `logger` R package at the RStudio conference in 2020](https://img.youtube.com/vi/_rUuBbml9dU/0.jpg)](https://www.youtube.com/watch?v=_rUuBbml9dU)

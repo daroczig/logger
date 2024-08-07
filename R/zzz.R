@@ -1,7 +1,12 @@
 ## init storage for all logger settings
-namespaces <- new.env()
+namespaces <- new.env(parent = emptyenv())
 
 .onLoad <- function(libname, pkgname) {
+    namespaces_reset()
+}
+
+namespaces_reset <- function() {
+    rm(list = ls(namespaces), envir = namespaces)
 
     ## default namespace's logger settings
     namespaces$global <- list(
@@ -23,7 +28,7 @@ namespaces <- new.env()
             layout    = layout_simple,
             formatter = formatter_sprintf,
             appender  = appender_console))
-
+    
 }
 
 .onAttach <- function(libname, pkgname) {
