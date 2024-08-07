@@ -1,0 +1,12 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+    object_usage_linter(interpret_glue = TRUE),
+    object_name_linter(styles = c("snake_case", "symbols", "UPPERCASE"))
+  )
+exclude: '# nolint'
+exclude_start: '# nolint start'
+exclude_end: '# nolint end'
+exclusions: list(
+    "inst/demo-packages/logger-tester-package/R/tester.R",
+    "vignettes/migration.Rmd"
+  )
