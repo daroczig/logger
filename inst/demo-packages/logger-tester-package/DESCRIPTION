@@ -9,7 +9,7 @@ Description: Dummy package providing testing functions for logger
 Version: 0.1
 Date: 2018-07-04
 URL: https://github.com/daroczig/logger
-RoxygenNote: 6.1.0
+RoxygenNote: 7.3.2
 License: AGPL-3
 Imports:
   logger
