@@ -204,15 +204,17 @@ is_skip_formatter <- function(x) {
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
 
-    params <- list(...)
-    .logcall <- substitute(.logcall)
-
-    if (is.character(params[[1]])) {
-        return(do.call(sprintf, params, envir = .topenv))
+    # If the first argument is a string, then use sprintf
+    if (is.character(..1)) {
+        return(sprintf(...))
     }
 
-    sapply(1:length(params), function(i) {
-        paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ': ')
+    # Otherwise show unevaluated inputs next to result
+    params <- list(...)
+    args <- as.list(.logcall)[-1]
+
+    sapply(seq_along(params), function(i) {
+        paste(deparse(args[[i]]), params[[i]], sep = ': ')
     })
 
 }, generator = quote(formatter_logging()))
