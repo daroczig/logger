@@ -24,20 +24,20 @@ the terminal.
 }
 \examples{
 \dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-cat(colorize_by_log_level('foobar', FATAL), '\n')
-cat(colorize_by_log_level('foobar', ERROR), '\n')
-cat(colorize_by_log_level('foobar', WARN), '\n')
-cat(colorize_by_log_level('foobar', SUCCESS), '\n')
-cat(colorize_by_log_level('foobar', INFO), '\n')
-cat(colorize_by_log_level('foobar', DEBUG), '\n')
-cat(colorize_by_log_level('foobar', TRACE), '\n')
+cat(colorize_by_log_level("foobar", FATAL), "\n")
+cat(colorize_by_log_level("foobar", ERROR), "\n")
+cat(colorize_by_log_level("foobar", WARN), "\n")
+cat(colorize_by_log_level("foobar", SUCCESS), "\n")
+cat(colorize_by_log_level("foobar", INFO), "\n")
+cat(colorize_by_log_level("foobar", DEBUG), "\n")
+cat(colorize_by_log_level("foobar", TRACE), "\n")
 
-cat(grayscale_by_log_level('foobar', FATAL), '\n')
-cat(grayscale_by_log_level('foobar', ERROR), '\n')
-cat(grayscale_by_log_level('foobar', WARN), '\n')
-cat(grayscale_by_log_level('foobar', SUCCESS), '\n')
-cat(grayscale_by_log_level('foobar', INFO), '\n')
-cat(grayscale_by_log_level('foobar', DEBUG), '\n')
-cat(grayscale_by_log_level('foobar', TRACE), '\n')
+cat(grayscale_by_log_level("foobar", FATAL), "\n")
+cat(grayscale_by_log_level("foobar", ERROR), "\n")
+cat(grayscale_by_log_level("foobar", WARN), "\n")
+cat(grayscale_by_log_level("foobar", SUCCESS), "\n")
+cat(grayscale_by_log_level("foobar", INFO), "\n")
+cat(grayscale_by_log_level("foobar", DEBUG), "\n")
+cat(grayscale_by_log_level("foobar", TRACE), "\n")
 \dontshow{\}) # examplesIf}
 }

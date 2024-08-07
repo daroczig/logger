@@ -79,15 +79,26 @@ log_trace(
 \arguments{
 \item{level}{log level, see \code{\link[=log_levels]{log_levels()}} for more details}
 
-\item{...}{R objects that can be converted to a character vector via the active message formatter function}
+\item{...}{R objects that can be converted to a character vector
+via the active message formatter function}
 
-\item{namespace}{string referring to the \code{logger} environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.}
+\item{namespace}{string referring to the \code{logger} environment /
+config to be used to override the target of the message record to
+be used instead of the default namespace, which is defined by the
+R package name from which the logger was called, and falls back
+to a common, global namespace.}
 
-\item{.logcall}{the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)}
+\item{.logcall}{the logging call being evaluated (useful in
+formatters and layouts when you want to have access to the raw,
+unevaluated R expression)}
 
-\item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
+\item{.topcall}{R expression from which the logging function was
+called (useful in formatters and layouts to extract the calling
+function's name or arguments)}
 
-\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
+\item{.topenv}{original frame of the \code{.topcall} calling function
+where the formatter function will be evaluated and that is used
+to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
 Invisible \code{list} of \code{logger} objects. See \code{\link[=logger]{logger()}} for more details on the format/
@@ -97,24 +108,24 @@ Log a message with given log level
 }
 \examples{
 \dontrun{
-log_level(INFO, 'hi there')
-log_info('hi there')
+log_level(INFO, "hi there")
+log_info("hi there")
 
 ## output omitted
-log_debug('hi there')
+log_debug("hi there")
 
 ## lower threshold and retry
 log_threshold(TRACE)
-log_debug('hi there')
+log_debug("hi there")
 
 ## multiple lines
-log_info('ok {1:3} + {1:3} = {2*(1:3)}')
+log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 
 log_layout(layout_json())
-log_info('ok {1:3} + {1:3} = {2*(1:3)}')
+log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 
 ## note for the JSON output, glue is not automatically applied
-log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
+log_info(glue::glue("ok {1:3} + {1:3} = {2*(1:3)}"))
 }
 }
 \seealso{

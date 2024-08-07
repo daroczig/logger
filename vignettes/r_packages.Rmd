@@ -9,11 +9,11 @@ vignette: >
 
 ```{r pkgchecks, echo = FALSE}
 ## check if other logger packages are available and exit if not
-for (pkg in c('devtools')) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-        warning(paste(pkg, 'package not available, so cannot build this vignette'))
-        knitr::knit_exit()
-    }
+for (pkg in c("devtools")) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    warning(paste(pkg, "package not available, so cannot build this vignette"))
+    knitr::knit_exit()
+  }
 }
 ```
 
@@ -30,8 +30,8 @@ So that your R package's users can suppress (or render with custom layout) the l
 
 ```{r}
 library(logger)
-devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
-logger_tester_function(INFO, 'hi from tester package')
+devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
+logger_tester_function(INFO, "hi from tester package")
 ```
 
 But if auto-guessing is not your style, then feel free to set your custom namespace (eg the name of your package) in all `?log_info` etc function calls and let your users know about how to suppress / reformat / redirect your log messages via `?log_threshold`, `?log_layout`, `?log_appender`.
