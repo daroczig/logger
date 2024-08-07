@@ -271,7 +271,7 @@ formatter_logging <- structure(function(...,
     return(do.call(sprintf, params, envir = .topenv))
   }
 
-  sapply(1:length(params), function(i) {
+  sapply(seq_along(params), function(i) {
     paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ": ")
   })
 }, generator = quote(formatter_logging()))

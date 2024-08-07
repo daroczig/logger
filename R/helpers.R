@@ -200,7 +200,6 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
     assign(ns, toc, envir = tictocs)
   })
 
-  nsenv <- get(fallback_namespace(namespace), envir = namespaces)
   tic <- get0(ns, envir = tictocs, ifnotfound = Sys.time())
   toc <- Sys.time()
   tictoc <- difftime(toc, tic)
