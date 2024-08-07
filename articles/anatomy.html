@@ -112,7 +112,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "f()"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2024-08-07 19:49:42 UTC"</span></span>
+<span><span class="co">#&gt; [1] "2024-08-07 19:52:39 UTC"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $levelr</span></span>
 <span><span class="co">#&gt; Log level: INFO</span></span>
@@ -121,7 +121,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "INFO"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pid</span></span>
-<span><span class="co">#&gt; [1] 7602</span></span>
+<span><span class="co">#&gt; [1] 7606</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $r_version</span></span>
 <span><span class="co">#&gt; [1] "4.4.1"</span></span>
@@ -130,7 +130,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $node</span></span>
-<span><span class="co">#&gt; [1] "fv-az888-211"</span></span>
+<span><span class="co">#&gt; [1] "fv-az2031-254"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $arch</span></span>
 <span><span class="co">#&gt; [1] "x86_64"</span></span>
@@ -160,8 +160,8 @@ requests with lower log level will be thrown away</p>
 <span><span class="co">#&gt; Log level: INFO</span></span>
 <span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">'Oops'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ERROR [2024-08-07 19:49:42] Oops</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">"Oops"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ERROR [2024-08-07 19:52:39] Oops</span></span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and
@@ -170,8 +170,8 @@ converts those into actual log message(s) to be then passed to the
 <code>paste</code>, <code>sprintf</code>, <code>glue</code> or eg the
 below custom example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">formatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">...</span>, collapse <span class="op">=</span> <span class="st">' '</span>, sep <span class="op">=</span> <span class="st">' '</span><span class="op">)</span></span>
-<span><span class="fu">formatter</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'foo'</span>, <span class="st">'bar'</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">formatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">...</span>, collapse <span class="op">=</span> <span class="st">" "</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span>
+<span><span class="fu">formatter</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"foo"</span>, <span class="st">"bar"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1 foo 2 bar 3 foo"</span></span></code></pre></div>
 </li>
 <li>
@@ -190,8 +190,8 @@ human-readable text, JSON etc</p>
 record(s) and delivers to somewhere, eg <code>stdout</code>, a file or a
 streaming service, eg</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">appender</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">line</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">'\n'</span><span class="op">)</span></span>
-<span><span class="fu">appender</span><span class="op">(</span><span class="st">'INFO [now] I am a log message'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">appender</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">line</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="fu">appender</span><span class="op">(</span><span class="st">"INFO [now] I am a log message"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; INFO [now] I am a log message</span></span></code></pre></div>
 </li>
 </ul>
@@ -204,9 +204,9 @@ in the <code>global</code> namespace):</p>
 <span><span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_glue</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_simple</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_stdout</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'I am a low level log message that will not be printed with a high log level threshold'</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'I am a higher level log message that is very likely to be printed'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; WARN [2024-08-07 19:49:42] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"I am a low level log message that will not be printed with a high log level threshold"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">"I am a higher level log message that is very likely to be printed"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; WARN [2024-08-07 19:52:39] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied
 to a logging namespace, and one log request might trigger multiple
 <code>logger</code> definitions as well (stacking). Find more

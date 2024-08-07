@@ -72,19 +72,29 @@
 
 
 <dt id="arg-namespace">namespace<a class="anchor" aria-label="anchor" href="#arg-namespace"></a></dt>
-<dd><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></dd>
+<dd><p>string referring to the <code>logger</code> environment /
+config to be used to override the target of the message record to
+be used instead of the default namespace, which is defined by the
+R package name from which the logger was called, and falls back
+to a common, global namespace.</p></dd>
 
 
 <dt id="arg--logcall">.logcall<a class="anchor" aria-label="anchor" href="#arg--logcall"></a></dt>
-<dd><p>the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)</p></dd>
+<dd><p>the logging call being evaluated (useful in
+formatters and layouts when you want to have access to the raw,
+unevaluated R expression)</p></dd>
 
 
 <dt id="arg--topcall">.topcall<a class="anchor" aria-label="anchor" href="#arg--topcall"></a></dt>
-<dd><p>R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)</p></dd>
+<dd><p>R expression from which the logging function was
+called (useful in formatters and layouts to extract the calling
+function's name or arguments)</p></dd>
 
 
 <dt id="arg--topenv">.topenv<a class="anchor" aria-label="anchor" href="#arg--topenv"></a></dt>
-<dd><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
+<dd><p>original frame of the <code>.topcall</code> calling function
+where the formatter function will be evaluated and that is used
+to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -93,7 +103,10 @@
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>This is a <code><a href="log_layout.html">log_layout()</a></code>, for alternatives, see <code><a href="layout_blank.html">layout_blank()</a></code>, <code><a href="layout_glue.html">layout_glue()</a></code>, <code><a href="layout_glue_colors.html">layout_glue_colors()</a></code>, <code><a href="layout_json.html">layout_json()</a></code>, <code><a href="layout_json_parser.html">layout_json_parser()</a></code>, or generator functions such as <code><a href="layout_glue_generator.html">layout_glue_generator()</a></code></p></div>
+    <div class="dont-index"><p>This is a <code><a href="log_layout.html">log_layout()</a></code>, for alternatives, see
+<code><a href="layout_blank.html">layout_blank()</a></code>, <code><a href="layout_glue.html">layout_glue()</a></code>, <code><a href="layout_glue_colors.html">layout_glue_colors()</a></code>,
+<code><a href="layout_json.html">layout_json()</a></code>, <code><a href="layout_json_parser.html">layout_json_parser()</a></code>, or generator functions
+such as <code><a href="layout_glue_generator.html">layout_glue_generator()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -101,9 +114,9 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_logging</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span>, namespace <span class="op">=</span> <span class="st">'everything'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span>, namespace <span class="op">=</span> <span class="st">"everything"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'demo-packages/logger-tester-package'</span>, package <span class="op">=</span> <span class="st">'logger'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo-packages/logger-tester-package"</span>, package <span class="op">=</span> <span class="st">"logger"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">logger_tester_function</span><span class="op">(</span><span class="va">INFO</span>, <span class="fl">42</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>

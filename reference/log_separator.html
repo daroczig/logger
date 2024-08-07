@@ -69,7 +69,11 @@
 
 
 <dt id="arg-namespace">namespace<a class="anchor" aria-label="anchor" href="#arg-namespace"></a></dt>
-<dd><p>string referring to the <code>logger</code> environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.</p></dd>
+<dd><p>string referring to the <code>logger</code> environment /
+config to be used to override the target of the message record to
+be used instead of the default namespace, which is defined by the
+R package name from which the logger was called, and falls back
+to a common, global namespace.</p></dd>
 
 
 <dt id="arg-separator">separator<a class="anchor" aria-label="anchor" href="#arg-separator"></a></dt>
@@ -81,15 +85,21 @@
 
 
 <dt id="arg--logcall">.logcall<a class="anchor" aria-label="anchor" href="#arg--logcall"></a></dt>
-<dd><p>the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)</p></dd>
+<dd><p>the logging call being evaluated (useful in
+formatters and layouts when you want to have access to the raw,
+unevaluated R expression)</p></dd>
 
 
 <dt id="arg--topcall">.topcall<a class="anchor" aria-label="anchor" href="#arg--topcall"></a></dt>
-<dd><p>R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)</p></dd>
+<dd><p>R expression from which the logging function was
+called (useful in formatters and layouts to extract the calling
+function's name or arguments)</p></dd>
 
 
 <dt id="arg--topenv">.topenv<a class="anchor" aria-label="anchor" href="#arg--topenv"></a></dt>
-<dd><p>original frame of the <code>.topcall</code> calling function where the formatter function will be evaluated and that is used to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
+<dd><p>original frame of the <code>.topcall</code> calling function
+where the formatter function will be evaluated and that is used
+to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -100,17 +110,17 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2024-08-07 19:49:38</span>] </span>
-<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">'!'</span>, width <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-07 19:49:38</span>] </span>
-<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">'!'</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-07 19:49:38</span>] </span>
-<span class="r-in"><span><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">'{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}'</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2024-08-07 19:52:35</span>] </span>
+<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-07 19:52:35</span>] </span>
+<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-07 19:52:35</span>] </span>
+<span class="r-in"><span><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">logger</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">'!'</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az888-211/5804/global/eval 2024-08-07 19:49:38.60408 ERROR: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az2031-254/5809/global/eval 2024-08-07 19:52:35.622123 ERROR: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_blank</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">'!'</span>, width <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 </code></pre></div>
     </div>

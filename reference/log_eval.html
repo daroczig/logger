@@ -57,7 +57,8 @@
 
 
 <dl><dt id="arg-expr">expr<a class="anchor" aria-label="anchor" href="#arg-expr"></a></dt>
-<dd><p>R expression to be evaluated while logging the expression itself along with the result</p></dd>
+<dd><p>R expression to be evaluated while logging the
+expression itself along with the result</p></dd>
 
 
 <dt id="arg-level">level<a class="anchor" aria-label="anchor" href="#arg-level"></a></dt>
@@ -65,7 +66,11 @@
 
 
 <dt id="arg-multiline">multiline<a class="anchor" aria-label="anchor" href="#arg-multiline"></a></dt>
-<dd><p>setting to <code>FALSE</code> will print both the expression (enforced to be on one line by removing line-breaks if any) and its result on a single line separated by <code>=&gt;</code>, while setting to <code>TRUE</code> will log the expression and the result in separate sections reserving line-breaks and rendering the printed results</p></dd>
+<dd><p>setting to <code>FALSE</code> will print both the expression
+(enforced to be on one line by removing line-breaks if any) and
+its result on a single line separated by <code>=&gt;</code>, while setting to
+<code>TRUE</code> will log the expression and the result in separate
+sections reserving line-breaks and rendering the printed results</p></dd>
 
 </dl></div>
 
@@ -99,7 +104,7 @@
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## doing something computationally intensive</span></span></span>
-<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
