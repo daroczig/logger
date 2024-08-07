@@ -10,7 +10,7 @@
 #'     and [skip_formatter()] for marking a string not to apply the
 #'     formatter on it.
 formatter_paste <- function(...,
-                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+                            .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   paste(...)
 }
 attr(formatter_paste, "generator") <- quote(formatter_paste())
@@ -28,7 +28,7 @@ attr(formatter_paste, "generator") <- quote(formatter_paste())
 #'     and [skip_formatter()] for marking a string not to apply the
 #'     formatter on it.
 formatter_sprintf <- function(fmt, ...,
-                                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+                              .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   sprintf(fmt, ...)
 }
 attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
@@ -49,12 +49,12 @@ attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 #'     formatter on it.
 #' @importFrom utils str
 formatter_glue <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    fail_on_missing_package('glue')
+  fail_on_missing_package("glue")
 
-    withCallingHandlers(
-        glue::glue(..., .envir = .topenv),
-        error = function(e) {
-            args <- paste0(capture.output(str(...)), collapse = '\n')
+  withCallingHandlers(
+    glue::glue(..., .envir = .topenv),
+    error = function(e) {
+      args <- paste0(capture.output(str(...)), collapse = "\n")
 
       stop(paste0(
         "`glue` failed in `formatter_glue` on:\n\n",
@@ -83,7 +83,7 @@ attr(formatter_glue, "generator") <- quote(formatter_glue())
 #'     formatter on it.
 #' @importFrom utils str
 formatter_glue_safe <- function(...,
-                                          .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+                                .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   fail_on_missing_package("glue")
   as.character(
     tryCatch(
@@ -136,8 +136,8 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c("foo", "bar"), 2 * 4)
 #' }
 formatter_glue_or_sprintf <- function(msg, ...,
-                                                .logcall = sys.call(), .topcall = sys.call(-1),
-                                                .topenv = parent.frame()) {
+                                      .logcall = sys.call(), .topcall = sys.call(-1),
+                                      .topenv = parent.frame()) {
   params <- list(...)
 
   ## params without a name are potential sprintf params
@@ -208,8 +208,8 @@ attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf(
 #' }
 #' @seealso This is a [log_formatter()] potentially to be used with [layout_json_parser()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_json <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    fail_on_missing_package('jsonlite')
-    eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
+  fail_on_missing_package("jsonlite")
+  eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
 }
 attr(formatter_json, "generator") <- quote(formatter_json())
 
@@ -270,9 +270,8 @@ skip_formatter <- function(message, ...) {
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_logging <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-
-    params <- list(...)
-    .logcall <- substitute(.logcall)
+  params <- list(...)
+  .logcall <- substitute(.logcall)
 
   if (is.character(params[[1]])) {
     return(do.call(sprintf, params, envir = .topenv))
@@ -306,7 +305,7 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' log_info(lm(hp ~ wt, mtcars))
 #' }
 formatter_pander <- function(x, ...,
-                                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+                             .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   fail_on_missing_package("pander")
   pander::pander_return(x, ...)
 }

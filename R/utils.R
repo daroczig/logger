@@ -95,7 +95,6 @@ catch_base_log <- function(level, namespace, .topcall = sys.call(-1), .topenv = 
     ),
     type = "message"
   )
-
 }
 
 in_pkgdown <- function() {
