@@ -439,7 +439,7 @@ log_trace <- function(..., namespace = NA_character_,
 #' log_trace("DONE")
 #' }
 with_log_threshold <- function(expression, threshold = ERROR, namespace = "global", index = 1) {
-    old <- log_threshold(threshold, namespace = namespace, index = index)
-    on.exit(log_threshold(old, namespace = namespace, index = index))
-    expression
+  old <- log_threshold(threshold, namespace = namespace, index = index)
+  on.exit(log_threshold(old, namespace = namespace, index = index))
+  expression
 }

@@ -78,28 +78,23 @@ deparse_to_one_line <- function(x) {
 #' fun()
 #' catch_base_log(INFO, NA_character_, .topcall = call("funLONG"))
 #' }
-catch_base_log <- function(
-  level,
-  namespace,
-  .topcall = sys.call(-1),
-  .topenv = parent.frame()
-  ) {
-    namespace <- fallback_namespace(namespace)
+catch_base_log <- function(level, namespace, .topcall = sys.call(-1), .topenv = parent.frame()) {
+  namespace <- fallback_namespace(namespace)
 
-    old <- log_appender(appender_console, namespace = namespace)
-    on.exit(log_appender(old, namespace = namespace))
+  old <- log_appender(appender_console, namespace = namespace)
+  on.exit(log_appender(old, namespace = namespace))
 
-    # catch error, warning or message
-    capture.output(
-      log_level(
-        level = level,
-        "",
-        namespace = namespace,
-        .topcall = .topcall,
-        .topenv = .topenv
-      ),
-      type = 'message'
-    )
+  # catch error, warning or message
+  capture.output(
+    log_level(
+      level = level,
+      "",
+      namespace = namespace,
+      .topcall = .topcall,
+      .topenv = .topenv
+    ),
+    type = "message"
+  )
 
 }
 

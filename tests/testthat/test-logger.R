@@ -149,10 +149,10 @@ test_that("providing log_level() args to wrappers diretly is OK", {
 })
 
 test_that("setters check inputs", {
-    expect_snapshot(error = TRUE, {
-        log_appender(1)
-        log_formatter(1)
-        log_layout(1)
-        log_threshold("x")
-    })
+  expect_snapshot(error = TRUE, {
+    log_appender(1)
+    log_formatter(1)
+    log_layout(1)
+    log_threshold("x")
+  })
 })
