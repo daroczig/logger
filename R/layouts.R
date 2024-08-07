@@ -1,26 +1,29 @@
 #' Collect useful information about the logging environment to be used in log messages
 #'
 #' Available variables to be used in the log formatter functions, eg in [layout_glue_generator()]:
-#' \itemize{
-#'   \item levelr: log level as an R object, eg [INFO()]
-#'   \item level: log level as a string, eg [INFO()]
-#'   \item time: current time as `POSIXct`
-#'   \item node: name by which the machine is known on the network as reported by `Sys.info`
-#'   \item arch: machine type, typically the CPU architecture
-#'   \item os_name: Operating System's name
-#'   \item os_release: Operating System's release
-#'   \item os_version: Operating System's version
-#'   \item user: name of the real user id as reported by `Sys.info`
-#'   \item pid: the process identification number of the R session
-#'   \item node: name by which the machine is known on the network as reported by `Sys.info`
-#'   \item r_version: R's major and minor version as a string
-#'   \item ns: namespace usually defaults to `global` or the name of the holding R package of the calling the logging function
-#'   \item ns_pkg_version: the version of `ns` when it's a package
-#'   \item ans: same as `ns` if there's a defined [logger()] for the namespace, otherwise a fallback namespace (eg usually `global`)
-#'   \item topenv: the name of the top environment from which the parent call was called (eg R package name or `GlobalEnv`)
-#'   \item call: parent call (if any) calling the logging function
-#'   \item fn: function's (if any) name calling the logging function
-#' }
+#'
+#' * `levelr`: log level as an R object, eg [INFO()]
+#' * `level`: log level as a string, eg [INFO()]
+#' * `time`: current time as `POSIXct`
+#' * `node`: name by which the machine is known on the network as reported by `Sys.info`
+#' * `arch`: machine type, typically the CPU architecture
+#' * `os_name`: Operating System's name
+#' * `os_release`: Operating System's release
+#' * `os_version`: Operating System's version
+#' * `user`: name of the real user id as reported by `Sys.info`
+#' * `pid`: the process identification number of the R session
+#' * `node`: name by which the machine is known on the network as reported by `Sys.info`
+#' * `r_version`: R's major and minor version as a string
+#' * `ns`: namespace usually defaults to `global` or the name of the holding R package
+#'   of the calling the logging function
+#' * `ns_pkg_version`: the version of `ns` when it's a package
+#' * `ans`: same as `ns` if there's a defined [logger()] for the namespace,
+#'   otherwise a fallback namespace (eg usually `global`)
+#' * `topenv`: the name of the top environment from which the parent call was called
+#'   (eg R package name or `GlobalEnv`)
+#' * `call`: parent call (if any) calling the logging function
+#' * `fn`: function's (if any) name calling the logging function
+#'
 #' @param log_level log level as per [log_levels()]
 #' @inheritParams log_level
 #' @return list
