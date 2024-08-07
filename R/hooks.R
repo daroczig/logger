@@ -1,13 +1,16 @@
 #' Injects a logger call to standard messages
 #'
-#' This function uses `trace` to add a `log_info` function call when `message` is called to log the informative messages with the `logger` layout and appender.
+#' This function uses `trace` to add a `log_info` function call when
+#' `message` is called to log the informative messages with the
+#' `logger` layout and appender.
 #' @export
 #' @examples \dontrun{
 #' log_messages()
 #' message("hi there")
 #' }
 log_messages <- function() {
-  if (any(sapply(globalCallingHandlers()[names(globalCallingHandlers()) == "message"],
+  if (any(sapply(
+    globalCallingHandlers()[names(globalCallingHandlers()) == "message"],
     attr,
     which = "implements"
   ) == "log_messages")) {
@@ -55,7 +58,9 @@ log_warnings <- function(muffle = getOption("logger_muffle_warnings", FALSE)) {
 
 #' Injects a logger call to standard errors
 #'
-#' This function uses `trace` to add a `log_error` function call when `stop` is called to log the error messages with the `logger` layout and appender.
+#' This function uses `trace` to add a `log_error` function call when
+#' `stop` is called to log the error messages with the `logger` layout
+#' and appender.
 #' @param muffle if TRUE, the error is not thrown after being logged
 #' @export
 #' @examples \dontrun{

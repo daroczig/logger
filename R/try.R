@@ -1,8 +1,10 @@
-#' Try to evaluate an expressions and evaluate another expression on exception
+#' Try to evaluate an expressions and evaluate another expression on
+#' exception
 #' @param try R expression
 #' @param except fallback R expression to be evaluated if `try` fails
 #' @export
-#' @note Suppress log messages in the `except` namespace if you don't want to throw a `WARN` log message on the exception branch.
+#' @note Suppress log messages in the `except` namespace if you don't
+#'   want to throw a `WARN` log message on the exception branch.
 #' @examples
 #' everything %except% 42
 #' everything <- "640kb"

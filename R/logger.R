@@ -1,21 +1,43 @@
 #' Generate logging utility
 #'
-#' A logger consists of a log level `threshold`, a log message `formatter` function, a log record `layout` formatting function and the `appender` function deciding on the destination of the log record. For more details, see the package `README.md`.
+#' A logger consists of a log level `threshold`, a log message
+#' `formatter` function, a log record `layout` formatting function and
+#' the `appender` function deciding on the destination of the log
+#' record. For more details, see the package `README.md`.
 #'
 #' By default, a general logger definition is created when loading the `logger` package, that uses
 #'
 #' * [INFO()] (or as per the `LOGGER_LOG_LEVEL` environment variable override) as the log level threshold
 #' * [layout_simple()] as the layout function showing the log level, timestamp and log message
-#' * [formatter_glue()] (or [formatter_sprintf()] if \pkg{glue} is not installed) as the default formatter function transforming the R objects to be logged to a character vector
+#' * [formatter_glue()] (or [formatter_sprintf()] if \pkg{glue} is not installed) as the
+#'   default formatter function transforming the R objects to be logged to a character vector
 #' * [appender_console()] as the default log record destination
+#'
 #' @param threshold omit log messages below this [log_levels()]
-#' @param formatter function pre-processing the message of the log record when it's not wrapped in a [skip_formatter()] call
-#' @param layout function rendering the layout of the actual log record
+#' @param formatter function pre-processing the message of the log
+#'   record when it's not wrapped in a [skip_formatter()] call
+#' @param layout function rendering the layout of the actual log
+#'   record
 #' @param appender function writing the log record
-#' @return A function taking the log `level` to compare with the set threshold, all the `...` arguments passed to the formatter function, besides the standard `namespace`, `.logcall`, `.topcall` and `.topenv` arguments (see [log_level()] for more details). The function invisibly returns a list including the original `level`, `namespace`, all `...` transformed to a list as `params`, the log `message` (after calling the `formatter` function) and the log `record` (after calling the `layout` function), and a list of `handlers` with the `formatter`, `layout` and `appender` functions.
+#' @return A function taking the log `level` to compare with the set
+#'   threshold, all the `...` arguments passed to the formatter
+#'   function, besides the standard `namespace`, `.logcall`,
+#'   `.topcall` and `.topenv` arguments (see [log_level()] for more
+#'   details). The function invisibly returns a list including the
+#'   original `level`, `namespace`, all `...` transformed to a list as
+#'   `params`, the log `message` (after calling the `formatter`
+#'   function) and the log `record` (after calling the `layout`
+#'   function), and a list of `handlers` with the `formatter`,
+#'   `layout` and `appender` functions.
 #' @export
-#' @references For more details, see the Anatomy of a Log Request vignette at <https://daroczig.github.io/logger/articles/anatomy.html>.
-#' @note It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at [log_threshold()], [log_formatter()], [log_layout()] and [log_appender()] and then call [log_levels()] and its derivatives, such as [log_info()] directly.
+#' @references For more details, see the Anatomy of a Log Request
+#'   vignette at
+#'   <https://daroczig.github.io/logger/articles/anatomy.html>.
+#' @note It's quite unlikely that you need to call this function
+#'   directly, but instead set the logger parameters and functions at
+#'   [log_threshold()], [log_formatter()], [log_layout()] and
+#'   [log_appender()] and then call [log_levels()] and its
+#'   derivatives, such as [log_info()] directly.
 #' @examples \dontrun{
 #' do.call(logger, logger:::namespaces$global[[1]])(INFO, 42)
 #' do.call(logger, logger:::namespaces$global[[1]])(INFO, "{pi}")
@@ -28,7 +50,8 @@ logger <- function(threshold, formatter, layout, appender) {
   force(layout)
   force(appender)
 
-  function(level, ..., namespace = NA_character_, .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  function(level, ..., namespace = NA_character_,
+           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     res <- list(
       level = level,
       namespace = namespace,
@@ -160,7 +183,10 @@ log_threshold <- function(level = NULL, namespace = "global", index = 1) {
 
 
 #' Get or set log record layout
-#' @param layout function defining the structure of a log record, eg [layout_simple()], [layout_glue()] or [layout_glue_colors()], [layout_json()], or generator functions such as [layout_glue_generator()], default NULL
+#' @param layout function defining the structure of a log record, eg
+#'   [layout_simple()], [layout_glue()] or [layout_glue_colors()],
+#'   [layout_json()], or generator functions such as
+#'   [layout_glue_generator()], default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -174,17 +200,23 @@ log_layout <- function(layout = NULL, namespace = "global", index = 1) {
 
 
 #' Get or set log message formatter
-#' @param formatter function defining how R objects are converted into a single string, eg [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_or_sprintf()], [formatter_logging()], default NULL
+#' @param formatter function defining how R objects are converted into
+#'   a single string, eg [formatter_paste()], [formatter_sprintf()],
+#'   [formatter_glue()], [formatter_glue_or_sprintf()],
+#'   [formatter_logging()], default NULL
 #' @inheritParams log_threshold
 #' @export
-#' @seealso [logger()], [log_threshold()], [log_appender()] and [log_layout()]
+#' @seealso [logger()], [log_threshold()], [log_appender()] and
+#'   [log_layout()]
 log_formatter <- function(formatter = NULL, namespace = "global", index = 1) {
   log_config_setter("formatter", formatter, namespace = namespace, index = index)
 }
 
 
 #' Get or set log record appender function
-#' @param appender function delivering a log record to the destination, eg [appender_console()], [appender_file()] or [appender_tee()], default NULL
+#' @param appender function delivering a log record to the
+#'   destination, eg [appender_console()], [appender_file()] or
+#'   [appender_tee()], default NULL
 #' @inheritParams log_threshold
 #' @export
 #' @examples \dontrun{
@@ -208,11 +240,13 @@ log_appender <- function(appender = NULL, namespace = "global", index = 1) {
 }
 
 
-#' Find the logger definition(s) specified for the current namespace with a fallback to the global namespace
+#' Find the logger definition(s) specified for the current namespace
+#' with a fallback to the global namespace
 #' @return list of function(s)
 #' @keywords internal
 #' @importFrom utils getFromNamespace
-#' @param namespace override the default / auto-picked namespace with a custom string
+#' @param namespace override the default / auto-picked namespace with
+#'   a custom string
 get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.frame()) {
   namespace <- ifelse(is.na(namespace), top_env_name(.topenv), namespace)
   if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
@@ -232,11 +266,22 @@ log_namespaces <- function() {
 
 #' Log a message with given log level
 #' @param level log level, see [log_levels()] for more details
-#' @param ... R objects that can be converted to a character vector via the active message formatter function
-#' @param namespace string referring to the `logger` environment / config to be used to override the target of the message record to be used instead of the default namespace, which is defined by the R package name from which the logger was called, and falls back to a common, global namespace.
-#' @param .logcall the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)
-#' @param .topcall R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)
-#' @param .topenv original frame of the `.topcall` calling function where the formatter function will be evaluated and that is used to look up the `namespace` as well via `logger:::top_env_name`
+#' @param ... R objects that can be converted to a character vector
+#'   via the active message formatter function
+#' @param namespace string referring to the `logger` environment /
+#'   config to be used to override the target of the message record to
+#'   be used instead of the default namespace, which is defined by the
+#'   R package name from which the logger was called, and falls back
+#'   to a common, global namespace.
+#' @param .logcall the logging call being evaluated (useful in
+#'   formatters and layouts when you want to have access to the raw,
+#'   unevaluated R expression)
+#' @param .topcall R expression from which the logging function was
+#'   called (useful in formatters and layouts to extract the calling
+#'   function's name or arguments)
+#' @param .topenv original frame of the `.topcall` calling function
+#'   where the formatter function will be evaluated and that is used
+#'   to look up the `namespace` as well via `logger:::top_env_name`
 #' @seealso [logger()]
 #' @export
 #' @examples \dontrun{
