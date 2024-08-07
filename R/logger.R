@@ -105,9 +105,11 @@ fallback_namespace <- function(namespace) {
 
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
-#' @return currently set or return log function property
+#' @return If `value` is `NULL`, will return the currently set value.
+#'   If `value` is not `NULL`, will return the previously set value.
 #' @noRd
 log_config_setter <- function(name, value, namespace = "global", index = 1) {
+
   if (length(namespace) > 1) {
     for (ns in namespace) {
       log_config_setter(name, value, ns, index)
@@ -117,6 +119,7 @@ log_config_setter <- function(name, value, namespace = "global", index = 1) {
 
   configs <- get(fallback_namespace(namespace), envir = namespaces)
   config <- configs[[min(index, length(configs))]]
+  old <- config[[name]]
 
   if (name == "threshold") {
     if (is.null(value)) {
@@ -137,6 +140,8 @@ log_config_setter <- function(name, value, namespace = "global", index = 1) {
 
   configs[[min(index, length(config) + 1)]] <- config
   assign(namespace, configs, envir = namespaces)
+  invisible(old)
+
 }
 
 
@@ -195,6 +200,9 @@ log_threshold <- function(level = NULL, namespace = "global", index = 1) {
 #' }
 #' @seealso [logger()], [log_threshold()], [log_appender()] and [log_formatter()]
 log_layout <- function(layout = NULL, namespace = "global", index = 1) {
+  if (!is.null(layout) && !is.function(layout)) {
+    stop("`layout` must be a function")
+  }
   log_config_setter("layout", layout, namespace = namespace, index = index)
 }
 
@@ -209,6 +217,9 @@ log_layout <- function(layout = NULL, namespace = "global", index = 1) {
 #' @seealso [logger()], [log_threshold()], [log_appender()] and
 #'   [log_layout()]
 log_formatter <- function(formatter = NULL, namespace = "global", index = 1) {
+  if (!is.null(formatter) && !is.function(formatter)) {
+    stop("`formatter` must be a function")
+  }
   log_config_setter("formatter", formatter, namespace = namespace, index = index)
 }
 
@@ -236,6 +247,9 @@ log_formatter <- function(formatter = NULL, namespace = "global", index = 1) {
 #' }
 #' @seealso [logger()], [log_threshold()], [log_layout()] and [log_formatter()]
 log_appender <- function(appender = NULL, namespace = "global", index = 1) {
+  if (!is.null(appender) && !is.function(appender)) {
+    stop("`appender` must be a function")
+  }
   log_config_setter("appender", appender, namespace = namespace, index = index)
 }
 
@@ -425,10 +439,7 @@ log_trace <- function(..., namespace = NA_character_,
 #' log_trace("DONE")
 #' }
 with_log_threshold <- function(expression, threshold = ERROR, namespace = "global", index = 1) {
-  old <- log_threshold(namespace = namespace, index = index)
-  on.exit({
-    log_threshold(old, namespace = namespace, index = index)
-  })
-  log_threshold(threshold, namespace = namespace, index = index)
+  old <- log_threshold(threshold, namespace = namespace, index = index)
+  on.exit(log_threshold(old, namespace = namespace, index = index))
   expression
 }
