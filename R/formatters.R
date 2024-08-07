@@ -236,7 +236,7 @@ skip_formatter <- function(message, ...) {
 }
 
 is_skip_formatter <- function(x) {
-    isTRUE(attr(x, 'skip_formatter', exact = TRUE))
+  isTRUE(attr(x, "skip_formatter", exact = TRUE))
 }
 
 #' Mimic the default formatter used in the \pkg{logging} package
@@ -271,20 +271,18 @@ is_skip_formatter <- function(x) {
 #' @export
 #' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  # If the first argument is a string, then use sprintf
+  if (is.character(..1)) {
+    return(sprintf(...))
+  }
 
-    # If the first argument is a string, then use sprintf
-    if (is.character(..1)) {
-        return(sprintf(...))
-    }
+  # Otherwise show unevaluated inputs next to result
+  params <- list(...)
+  args <- as.list(.logcall)[-1]
 
-    # Otherwise show unevaluated inputs next to result
-    params <- list(...)
-    args <- as.list(.logcall)[-1]
-
-    sapply(seq_along(params), function(i) {
-        paste(deparse(args[[i]]), params[[i]], sep = ': ')
-    })
-
+  sapply(seq_along(params), function(i) {
+    paste(deparse(args[[i]]), params[[i]], sep = ": ")
+  })
 }, generator = quote(formatter_logging()))
 
 

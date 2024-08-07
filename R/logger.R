@@ -109,7 +109,6 @@ fallback_namespace <- function(namespace) {
 #'   If `value` is not `NULL`, will return the previously set value.
 #' @noRd
 log_config_setter <- function(name, value, namespace = "global", index = 1) {
-
   if (length(namespace) > 1) {
     for (ns in namespace) {
       log_config_setter(name, value, ns, index)
@@ -141,7 +140,6 @@ log_config_setter <- function(name, value, namespace = "global", index = 1) {
   configs[[min(index, length(config) + 1)]] <- config
   assign(namespace, configs, envir = namespaces)
   invisible(old)
-
 }
 
 
@@ -325,45 +323,44 @@ log_level <- function(level,
                       .logcall = sys.call(),
                       .topcall = sys.call(-1),
                       .topenv = parent.frame()) {
+  level <- validate_log_level(level)
+  ## guess namespace
+  if (is.na(namespace)) {
+    topenv <- top_env_name(.topenv)
+    namespace <- ifelse(topenv == "R_GlobalEnv", "global", topenv)
+  }
+  .topcall <- .topcall %||% NA
 
-    level <- validate_log_level(level)
-    ## guess namespace
-    if (is.na(namespace)) {
-        topenv    <- top_env_name(.topenv)
-        namespace <-  ifelse(topenv == 'R_GlobalEnv', 'global', topenv)
-    }
-    .topcall <- .topcall %||% NA
-
-    loggers <- get_logger_definitions(namespace, .topenv = .topenv)
-    for (logger in loggers) {
-        if (level > logger$threshold) {
-            next
-        }
-
-        if (...length() == 1 && is_skip_formatter(..1)) {
-            # optionally skip fomrmatting
-            message <- ..1
-        } else {
-            message <- logger$formatter(
-                ...,
-                .logcall = .logcall,
-                .topcall = .topcall,
-                .topenv = .topenv
-            )
-        }
-
-        record <- logger$layout(
-            level,
-            message,
-            namespace = namespace,
-            .logcall = .logcall,
-            .topcall = .topcall,
-            .topenv = .topenv
-        )
-        logger$appender(record)
+  loggers <- get_logger_definitions(namespace, .topenv = .topenv)
+  for (logger in loggers) {
+    if (level > logger$threshold) {
+      next
     }
 
-    invisible()
+    if (...length() == 1 && is_skip_formatter(..1)) {
+      # optionally skip fomrmatting
+      message <- ..1
+    } else {
+      message <- logger$formatter(
+        ...,
+        .logcall = .logcall,
+        .topcall = .topcall,
+        .topenv = .topenv
+      )
+    }
+
+    record <- logger$layout(
+      level,
+      message,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
+    logger$appender(record)
+  }
+
+  invisible()
 }
 
 
