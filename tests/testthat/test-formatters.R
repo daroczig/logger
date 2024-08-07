@@ -39,6 +39,11 @@ test_that('glue works', {
     ## expect_warning(log_info(a = 42, b = "foobar"))
 })
 
+test_that("glue gives informative error if message contains curlies", {
+    local_test_logger(formatter = formatter_glue)
+    expect_snapshot(log_info("hi{"), error = TRUE)
+})
+
 test_that('glue_safe works', {
     local_test_logger(formatter = formatter_glue_safe)
 

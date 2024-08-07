@@ -70,3 +70,7 @@ log_appender(function(lines) {
         table = 'logs', db = con)
 })
 ```
+
+```{r cleanup, include = FALSE}
+logger:::namespaces_reset()
+```
