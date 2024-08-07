@@ -27,7 +27,7 @@ A lightweight, modern and flexibly logging utility for R -- heavily inspired by 
 
 ```{r}
 #| eval: false
-install.packages('logger')
+install.packages("logger")
 ```
 
 The most recent, development version of `logger` can also be installed from GitHub:
@@ -35,7 +35,7 @@ The most recent, development version of `logger` can also be installed from GitH
 ```{r}
 #| eval: false
 # install.packages("pak")
-pak::pak('daroczig/logger')
+pak::pak("daroczig/logger")
 ```
 
 ## Quick example
@@ -51,20 +51,20 @@ log_appender(appender_stdout)
 ```{r}
 library(logger)
 log_threshold(DEBUG)
-log_info('Script starting up...')
+log_info("Script starting up...")
 
 pkgs <- available.packages()
-log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
+log_info("There are {nrow(pkgs)} R packages hosted on CRAN!")
 
 for (letter in letters) {
-  lpkgs <- sum(grepl(letter, pkgs[, 'Package'], ignore.case = TRUE))
-   log_level(
+  lpkgs <- sum(grepl(letter, pkgs[, "Package"], ignore.case = TRUE))
+  log_level(
     if (lpkgs < 5000) TRACE else DEBUG,
-    '{lpkgs} R packages including the {shQuote(letter)} letter'
+    "{lpkgs} R packages including the {shQuote(letter)} letter"
   )
 }
 
-log_warn('There might be many, like {1:2} or more warnings!!!')
+log_warn("There might be many, like {1:2} or more warnings!!!")
 ```
 
 You can even use a custom log layout to render the log records with colors, as you can see in `layout_glue_colors()`:
