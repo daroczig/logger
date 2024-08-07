@@ -14,11 +14,17 @@ formatter_glue(
 \arguments{
 \item{...}{passed to \code{glue} for the text interpolation}
 
-\item{.logcall}{the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)}
+\item{.logcall}{the logging call being evaluated (useful in
+formatters and layouts when you want to have access to the raw,
+unevaluated R expression)}
 
-\item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
+\item{.topcall}{R expression from which the logging function was
+called (useful in formatters and layouts to extract the calling
+function's name or arguments)}
 
-\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
+\item{.topenv}{original frame of the \code{.topcall} calling function
+where the formatter function will be evaluated and that is used
+to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
 character vector
@@ -27,8 +33,15 @@ character vector
 Apply \code{glue} to convert R objects into a character vector
 }
 \note{
-Although this is the default log message formatter function, but when \pkg{glue} is not installed, \code{\link[=formatter_sprintf]{formatter_sprintf()}} will be used as a fallback.
+Although this is the default log message formatter function,
+but when \pkg{glue} is not installed, \code{\link[=formatter_sprintf]{formatter_sprintf()}}
+will be used as a fallback.
 }
 \seealso{
-This is a \code{\link[=log_formatter]{log_formatter()}}, for alternatives, see \code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_sprintf]{formatter_sprintf()}}, \code{\link[=formatter_glue_or_sprintf]{formatter_glue_or_sprintf()}}, \code{\link[=formatter_glue_safe]{formatter_glue_safe()}}, \code{\link[=formatter_logging]{formatter_logging()}}, \code{\link[=formatter_json]{formatter_json()}}, \code{\link[=formatter_pander]{formatter_pander()}} and \code{\link[=skip_formatter]{skip_formatter()}} for marking a string not to apply the formatter on it.
+This is a \code{\link[=log_formatter]{log_formatter()}}, for alternatives, see
+\code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_sprintf]{formatter_sprintf()}},
+\code{\link[=formatter_glue_or_sprintf]{formatter_glue_or_sprintf()}}, \code{\link[=formatter_glue_safe]{formatter_glue_safe()}},
+\code{\link[=formatter_logging]{formatter_logging()}}, \code{\link[=formatter_json]{formatter_json()}}, \code{\link[=formatter_pander]{formatter_pander()}}
+and \code{\link[=skip_formatter]{skip_formatter()}} for marking a string not to apply the
+formatter on it.
 }

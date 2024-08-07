@@ -7,11 +7,13 @@
 log_messages()
 }
 \description{
-This function uses \code{trace} to add a \code{log_info} function call when \code{message} is called to log the informative messages with the \code{logger} layout and appender.
+This function uses \code{trace} to add a \code{log_info} function call when
+\code{message} is called to log the informative messages with the
+\code{logger} layout and appender.
 }
 \examples{
 \dontrun{
 log_messages()
-message('hi there')
+message("hi there")
 }
 }

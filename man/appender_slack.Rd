@@ -13,7 +13,8 @@ appender_slack(
 )
 }
 \arguments{
-\item{channel}{Slack channel name with a hashtag prefix for public channel and no prefix for private channels}
+\item{channel}{Slack channel name with a hashtag prefix for public
+channel and no prefix for private channels}
 
 \item{username}{Slack (bot) username}
 
@@ -33,5 +34,10 @@ Send log messages to a Slack channel
 This functionality depends on the \pkg{slackr} package.
 }
 \seealso{
-This is generator function for \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}}, \code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any \code{\link[=log_appender]{log_appender()}} function in a background process.
+This is generator function for \code{\link[=log_appender]{log_appender()}}, for
+alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}},
+\code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}},
+\code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}},
+\code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any
+\code{\link[=log_appender]{log_appender()}} function in a background process.
 }

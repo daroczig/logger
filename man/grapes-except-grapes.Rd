@@ -2,7 +2,8 @@
 % Please edit documentation in R/try.R
 \name{\%except\%}
 \alias{\%except\%}
-\title{Try to evaluate an expressions and evaluate another expression on exception}
+\title{Try to evaluate an expressions and evaluate another expression on
+exception}
 \usage{
 try \%except\% except
 }
@@ -12,14 +13,16 @@ try \%except\% except
 \item{except}{fallback R expression to be evaluated if \code{try} fails}
 }
 \description{
-Try to evaluate an expressions and evaluate another expression on exception
+Try to evaluate an expressions and evaluate another expression on
+exception
 }
 \note{
-Suppress log messages in the \code{except} namespace if you don't want to throw a \code{WARN} log message on the exception branch.
+Suppress log messages in the \code{except} namespace if you don't
+want to throw a \code{WARN} log message on the exception branch.
 }
 \examples{
 everything \%except\% 42
-everything <- '640kb'
+everything <- "640kb"
 everything \%except\% 42
 
 FunDoesNotExist(1:10) \%except\% sum(1:10) / length(1:10)
