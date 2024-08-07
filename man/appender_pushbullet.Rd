@@ -7,7 +7,10 @@
 appender_pushbullet(...)
 }
 \arguments{
-\item{...}{parameters passed to \code{pbPost}, such as \code{recipients} or \code{apikey}, although it's probably much better to set all these in the \verb{~/.rpushbullet.json} as per package docs at \url{http://dirk.eddelbuettel.com/code/rpushbullet.html}}
+\item{...}{parameters passed to \code{pbPost}, such as \code{recipients} or
+\code{apikey}, although it's probably much better to set all these
+in the \verb{~/.rpushbullet.json} as per package docs at
+\url{http://dirk.eddelbuettel.com/code/rpushbullet.html}}
 }
 \description{
 Send log messages to Pushbullet
@@ -16,5 +19,10 @@ Send log messages to Pushbullet
 This functionality depends on the \pkg{RPushbullet} package.
 }
 \seealso{
-This is generator function for \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_slack]{appender_slack()}}, \code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}}, \code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any \code{\link[=log_appender]{log_appender()}} function in a background process.
+This is generator function for \code{\link[=log_appender]{log_appender()}}, for
+alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}},
+\code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_slack]{appender_slack()}}, \code{\link[=appender_telegram]{appender_telegram()}},
+\code{\link[=appender_syslog]{appender_syslog()}}, \code{\link[=appender_kinesis]{appender_kinesis()}} and
+\code{\link[=appender_async]{appender_async()}} for evaluate any \code{\link[=log_appender]{log_appender()}} function
+in a background process.
 }

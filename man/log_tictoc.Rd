@@ -18,13 +18,13 @@ Tic-toc logging
 }
 \examples{
 \dontrun{
-log_tictoc('warming up')
+log_tictoc("warming up")
 Sys.sleep(0.1)
-log_tictoc('running')
+log_tictoc("running")
 Sys.sleep(0.1)
-log_tictoc('running')
+log_tictoc("running")
 Sys.sleep(runif(1))
-log_tictoc('and running')
+log_tictoc("and running")
 }
 }
 \author{

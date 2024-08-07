@@ -9,11 +9,11 @@ vignette: >
 
 ```{r pkgchecks, echo = FALSE}
 ## check if other logger packages are available and exit if not
-for (pkg in c('devtools', 'parallel')) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-        warning(paste(pkg, 'package not available, so cannot build this vignette'))
-        knitr::knit_exit()
-    }
+for (pkg in c("devtools", "parallel")) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    warning(paste(pkg, "package not available, so cannot build this vignette"))
+    knitr::knit_exit()
+  }
 }
 ```
 
@@ -34,11 +34,11 @@ In this vignette I suppose that you are already familiar with [The Anatomy of a 
 `logger` mostly relies on and uses the default `log4j` log levels and supports suppressing log messages with a lower log level compared to the currently set threshold in the logging namespace:
 
 ```{r}
-log_info('Hi, there!')
-log_debug('How are you doing today?')
+log_info("Hi, there!")
+log_debug("How are you doing today?")
 log_threshold()
 log_threshold(TRACE)
-log_debug('How are you doing today?')
+log_debug("How are you doing today?")
 ```
 
 So the `?log_threshold` function can both get and set the log level threshold for all future log requests.
@@ -48,33 +48,36 @@ For the full list of all supported log levels and so thus the possible log level
 If you want to define the log level in a programmatic way, check out `?log_level`, eg
 
 ```{r}
-log_level(INFO, 'Hi, there!')
+log_level(INFO, "Hi, there!")
 ```
 
 To temporarily update the log level threshold, you may also find the `?with_log_threshold` function useful:
 
 ```{r}
 log_threshold(INFO)
-log_debug('pst, can you hear me?')
-log_info('no')
+log_debug("pst, can you hear me?")
+log_info("no")
 
-with_log_threshold(log_debug('pst, can you hear me?'), threshold = TRACE)
-log_info('yes')
+with_log_threshold(log_debug("pst, can you hear me?"), threshold = TRACE)
+log_info("yes")
 
-with_log_threshold({
-    log_debug('pst, can you hear me?')
-    log_info('yes')
-}, threshold = TRACE)
+with_log_threshold(
+  {
+    log_debug("pst, can you hear me?")
+    log_info("yes")
+  },
+  threshold = TRACE
+)
 ```
 
 You can also define your own log level(s) if needed, for example introducing an extra level between `DEBUG` and `INFO`:
 
 ```{r}
-FYI <- structure(450L, level = 'FYI', class = c('loglevel', 'integer'))
+FYI <- structure(450L, level = "FYI", class = c("loglevel", "integer"))
 log_threshold(FYI)
-log_debug('ping')
-log_level(FYI, 'ping')
-log_info('pong')
+log_debug("ping")
+log_level(FYI, "ping")
+log_info("pong")
 ```
 
 ## Log namespaces
@@ -85,18 +88,18 @@ If you specify an unknown `namespace` in a log request, it will fall back to the
 
 ```{r}
 log_threshold(INFO)
-log_trace('Hi, there!', namespace = 'kitchensink')
-log_info('Hi, there!', namespace = 'kitchensink')
+log_trace("Hi, there!", namespace = "kitchensink")
+log_info("Hi, there!", namespace = "kitchensink")
 ```
 
 But once you start customizing that namespace, it gets forked from the global settings and live on its own without modifying the original namespace:
 
 
 ```{r}
-log_threshold(TRACE, namespace = 'kitchensink')
-log_trace('Hi, there!', namespace = 'kitchensink')
-log_info('Hi, there!', namespace = 'kitchensink')
-log_trace('Hi, there!')
+log_threshold(TRACE, namespace = "kitchensink")
+log_trace("Hi, there!", namespace = "kitchensink")
+log_info("Hi, there!", namespace = "kitchensink")
+log_trace("Hi, there!")
 ```
 
 ## Log message formatter functions
@@ -107,8 +110,8 @@ By default, `logger` uses `glue` in the background:
 
 ```{r}
 log_formatter(formatter_glue)
-log_info('There are {nrow(mtcars)} cars in the mtcars dataset')
-log_info('2 + 2 = {2+2}')
+log_info("There are {nrow(mtcars)} cars in the mtcars dataset")
+log_info("2 + 2 = {2+2}")
 ```
 
 If you don't like this syntax, or want to save a dependency, you can use other formatter functions as well, such as `?formatter_sprintf` (being the default in eg the [`logging` and `futile.logger` packages](https://daroczig.github.io/logger/articles/migration.html)) or `?formatter_paste`, or [write your own formatter function](https://daroczig.github.io/logger/articles/write_custom_extensions.html) converting R objects into string.
@@ -119,8 +122,8 @@ By default, `?log_level` and its derivative functions (eg `?log_info`) will simp
 
 ```{r}
 log_info(42)
-log_info('The answer is {42}')
-log_info('The answers are {1:5}')
+log_info("The answer is {42}")
+log_info("The answers are {1:5}")
 ```
 
 In the above example, first, `42` was converted to a string by the `?formatter_glue` message formatter, then the message was passed to the `?layout_simple` layout function to generate the actual log record.
@@ -130,8 +133,8 @@ An example of another layout function writing the same log messages in JSON:
 ```{r}
 log_layout(layout_json())
 log_info(42)
-log_info('The answer is {42}')
-log_info('The answers are {1:5}')
+log_info("The answer is {42}")
+log_info("The answers are {1:5}")
 ```
 
 If you need colorized logs highlighting the important log messages, check out `?layout_glue_colors`, and for other formatter and layout functions, see the manual of the above mentioned functions that have references to all the other functions and generator functions bundled with the package.
@@ -147,38 +150,38 @@ A quick example:
 * define custom logger:
 
     ```{r}
-    logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
-    log_layout(logger)
+logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
+log_layout(logger)
     ```
 
 * check what's being logged when called from the global environment:
 
     ```{r}
-    log_info('foo')
+log_info("foo")
     ```
 
 * check what's being logged when called from a custom function:
 
     ```{r}
-    f <- function() log_info('foo')
-    f()
+f <- function() log_info("foo")
+f()
     ```
 
 * check what's being logged when called from a package:
 
     ```{r}
-    devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
-    logger_tester_function(INFO, 'hi from tester package')
+devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
+logger_tester_function(INFO, "hi from tester package")
     ```
 
 * suppress messages in a namespace:
 
     ```{r}
-    log_threshold(namespace = 'logger.tester')
-    log_threshold(WARN, namespace = 'logger.tester')
-    logger_tester_function(INFO, 'hi from tester package')
-    logger_tester_function(WARN, 'hi from tester package')
-    log_info('I am still working in the global namespace')
+log_threshold(namespace = "logger.tester")
+log_threshold(WARN, namespace = "logger.tester")
+logger_tester_function(INFO, "hi from tester package")
+logger_tester_function(WARN, "hi from tester package")
+log_info("I am still working in the global namespace")
     ```
 
 Another example of making use of the generator function is to update the layout to include the Process ID that might be very useful eg when forking, see for example the below code chunk still using the above defined log layout:
@@ -239,7 +242,7 @@ To write to a logfile instead, use the `?appender_file` generator function, that
 ```{r}
 t <- tempfile()
 log_appender(appender_file(t))
-log_info('where is this message going?')
+log_info("where is this message going?")
 log_appender()
 readLines(t)
 unlink(t)
@@ -289,8 +292,8 @@ t <- tempfile()
 log_appender(appender_file(t), index = 2)
 
 ## test both loggers
-log_info('info msg')
-log_debug('info msg')
+log_info("info msg")
+log_debug("info msg")
 
 readLines(t)
 unlink(t)

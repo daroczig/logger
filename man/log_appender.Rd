@@ -7,7 +7,9 @@
 log_appender(appender = NULL, namespace = "global", index = 1)
 }
 \arguments{
-\item{appender}{function delivering a log record to the destination, eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}} or \code{\link[=appender_tee]{appender_tee()}}, default NULL}
+\item{appender}{function delivering a log record to the
+destination, eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}} or
+\code{\link[=appender_tee]{appender_tee()}}, default NULL}
 
 \item{namespace}{logger namespace}
 
