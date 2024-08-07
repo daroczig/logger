@@ -9,29 +9,48 @@ logger(threshold, formatter, layout, appender)
 \arguments{
 \item{threshold}{omit log messages below this \code{\link[=log_levels]{log_levels()}}}
 
-\item{formatter}{function pre-processing the message of the log record when it's not wrapped in a \code{\link[=skip_formatter]{skip_formatter()}} call}
+\item{formatter}{function pre-processing the message of the log
+record when it's not wrapped in a \code{\link[=skip_formatter]{skip_formatter()}} call}
 
-\item{layout}{function rendering the layout of the actual log record}
+\item{layout}{function rendering the layout of the actual log
+record}
 
 \item{appender}{function writing the log record}
 }
 \value{
-A function taking the log \code{level} to compare with the set threshold, all the \code{...} arguments passed to the formatter function, besides the standard \code{namespace}, \code{.logcall}, \code{.topcall} and \code{.topenv} arguments (see \code{\link[=log_level]{log_level()}} for more details). The function invisibly returns a list including the original \code{level}, \code{namespace}, all \code{...} transformed to a list as \code{params}, the log \code{message} (after calling the \code{formatter} function) and the log \code{record} (after calling the \code{layout} function), and a list of \code{handlers} with the \code{formatter}, \code{layout} and \code{appender} functions.
+A function taking the log \code{level} to compare with the set
+threshold, all the \code{...} arguments passed to the formatter
+function, besides the standard \code{namespace}, \code{.logcall},
+\code{.topcall} and \code{.topenv} arguments (see \code{\link[=log_level]{log_level()}} for more
+details). The function invisibly returns a list including the
+original \code{level}, \code{namespace}, all \code{...} transformed to a list as
+\code{params}, the log \code{message} (after calling the \code{formatter}
+function) and the log \code{record} (after calling the \code{layout}
+function), and a list of \code{handlers} with the \code{formatter},
+\code{layout} and \code{appender} functions.
 }
 \description{
-A logger consists of a log level \code{threshold}, a log message \code{formatter} function, a log record \code{layout} formatting function and the \code{appender} function deciding on the destination of the log record. For more details, see the package \code{README.md}.
+A logger consists of a log level \code{threshold}, a log message
+\code{formatter} function, a log record \code{layout} formatting function and
+the \code{appender} function deciding on the destination of the log
+record. For more details, see the package \code{README.md}.
 }
 \details{
 By default, a general logger definition is created when loading the \code{logger} package, that uses
 \itemize{
 \item \code{\link[=INFO]{INFO()}} (or as per the \code{LOGGER_LOG_LEVEL} environment variable override) as the log level threshold
 \item \code{\link[=layout_simple]{layout_simple()}} as the layout function showing the log level, timestamp and log message
-\item \code{\link[=formatter_glue]{formatter_glue()}} (or \code{\link[=formatter_sprintf]{formatter_sprintf()}} if \pkg{glue} is not installed) as the default formatter function transforming the R objects to be logged to a character vector
+\item \code{\link[=formatter_glue]{formatter_glue()}} (or \code{\link[=formatter_sprintf]{formatter_sprintf()}} if \pkg{glue} is not installed) as the
+default formatter function transforming the R objects to be logged to a character vector
 \item \code{\link[=appender_console]{appender_console()}} as the default log record destination
 }
 }
 \note{
-It's quite unlikely that you need to call this function directly, but instead set the logger parameters and functions at \code{\link[=log_threshold]{log_threshold()}}, \code{\link[=log_formatter]{log_formatter()}}, \code{\link[=log_layout]{log_layout()}} and \code{\link[=log_appender]{log_appender()}} and then call \code{\link[=log_levels]{log_levels()}} and its derivatives, such as \code{\link[=log_info]{log_info()}} directly.
+It's quite unlikely that you need to call this function
+directly, but instead set the logger parameters and functions at
+\code{\link[=log_threshold]{log_threshold()}}, \code{\link[=log_formatter]{log_formatter()}}, \code{\link[=log_layout]{log_layout()}} and
+\code{\link[=log_appender]{log_appender()}} and then call \code{\link[=log_levels]{log_levels()}} and its
+derivatives, such as \code{\link[=log_info]{log_info()}} directly.
 }
 \examples{
 \dontrun{
@@ -42,5 +61,7 @@ do.call(logger, logger:::namespaces$global[[1]])(INFO, "{x}^2 = {x^2}")
 }
 }
 \references{
-For more details, see the Anatomy of a Log Request vignette at \url{https://daroczig.github.io/logger/articles/anatomy.html}.
+For more details, see the Anatomy of a Log Request
+vignette at
+\url{https://daroczig.github.io/logger/articles/anatomy.html}.
 }

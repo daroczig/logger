@@ -33,10 +33,12 @@ test_that("glue works", {
   expect_error(formatter_glue("malformed {"))
   expect_error(formatter_glue("malformed {{"), NA)
 
+  ## nolint start
   ## disabled for https://github.com/atalv/azlogr/issues/35
   ## expect_warning(formatter_glue(NULL))
   ## expect_warning(log_info(NULL))
   ## expect_warning(log_info(a = 42, b = "foobar"))
+  ## nolint end
 })
 
 test_that("glue gives informative error if message contains curlies", {

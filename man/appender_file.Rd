@@ -15,19 +15,29 @@ appender_file(
 \arguments{
 \item{file}{path}
 
-\item{append}{boolean passed to \code{cat} defining if the file should be overwritten with the most recent log message instead of appending}
+\item{append}{boolean passed to \code{cat} defining if the file should
+be overwritten with the most recent log message instead of
+appending}
 
-\item{max_lines}{numeric specifying the maximum number of lines allowed in a file before rotating}
+\item{max_lines}{numeric specifying the maximum number of lines
+allowed in a file before rotating}
 
-\item{max_bytes}{numeric specifying the maximum number of bytes allowed in a file before rotating}
+\item{max_bytes}{numeric specifying the maximum number of bytes
+allowed in a file before rotating}
 
-\item{max_files}{integer specifying the maximum number of files to be used in rotation}
+\item{max_files}{integer specifying the maximum number of files to
+be used in rotation}
 }
 \value{
 function taking \code{lines} argument
 }
 \description{
-Log messages are written to a file with basic log rotation: when max number of lines or bytes is defined to be other than \code{Inf}, then the log file is renamed with a \code{.1} suffix and a new log file is created. The renaming happens recursively (eg \code{logfile.1} renamed to \code{logfile.2}) until the specified \code{max_files}, then the oldest file (\code{logfile.{max_files-1}}) is deleted.
+Log messages are written to a file with basic log rotation: when
+max number of lines or bytes is defined to be other than \code{Inf},
+then the log file is renamed with a \code{.1} suffix and a new log file
+is created. The renaming happens recursively (eg \code{logfile.1}
+renamed to \code{logfile.2}) until the specified \code{max_files}, then the
+oldest file (\code{logfile.{max_files-1}}) is deleted.
 }
 \examples{
 \dontrun{
@@ -65,5 +75,10 @@ log_threshold(TRACE, namespace = ".logger")
 }
 }
 \seealso{
-This is generator function for \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_slack]{appender_slack()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}}, \code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any \code{\link[=log_appender]{log_appender()}} function in a background process.
+This is generator function for \code{\link[=log_appender]{log_appender()}}, for
+alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_tee]{appender_tee()}},
+\code{\link[=appender_slack]{appender_slack()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}},
+\code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}},
+\code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any
+\code{\link[=log_appender]{log_appender()}} function in a background process.
 }
