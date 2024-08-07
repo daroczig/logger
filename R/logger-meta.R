@@ -74,7 +74,6 @@ logger_meta_env <- function(log_level = NULL,
 #' @export
 #' @importFrom utils packageVersion
 #' @seealso [layout_glue_generator()]
-#' @seealso [layout_glue_generator()]
 get_logger_meta_variables <- function(log_level = NULL,
                                       namespace = NA_character_,
                                       .logcall = sys.call(),
