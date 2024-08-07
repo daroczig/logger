@@ -92,7 +92,7 @@ appender_stdout <- structure(function(lines) {
 #' log_threshold(TRACE, namespace = ".logger")
 #' ## run the above commands again
 #' }
-appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
+appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) { # nolint
   force(file)
   force(append)
   force(max_lines)
