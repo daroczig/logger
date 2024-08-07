@@ -2,7 +2,9 @@ log_levels_supported <- c("OFF", "FATAL", "ERROR", "WARN", "SUCCESS", "INFO", "D
 
 #' Log levels
 #'
-#' The standard Apache logj4 log levels plus a custom level for `SUCCESS`. For the full list of these log levels and suggested usage, check the below Details.
+#' The standard Apache logj4 log levels plus a custom level for
+#' `SUCCESS`. For the full list of these log levels and suggested
+#' usage, check the below Details.
 #'
 #' List of supported log levels:
 #'
@@ -14,7 +16,8 @@ log_levels_supported <- c("OFF", "FATAL", "ERROR", "WARN", "SUCCESS", "INFO", "D
 #' *  `INFO` An event for informational purposes
 #' *  `DEBUG` A general debugging event
 #' *  `TRACE` A fine-grained debug message, typically capturing the flow through the application.
-#' @references <https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html>, <https://logging.apache.org/log4j/2.x/manual/customloglevels.html>
+#' @references <https://logging.apache.org/log4j/2.x/javadoc/log4j-api/org/apache/logging/log4j/Level.html>,
+#'   <https://logging.apache.org/log4j/2.x/manual/customloglevels.html>
 #' @name log_levels
 NULL
 
@@ -65,7 +68,7 @@ print.loglevel <- function(x, ...) {
 #' as.loglevel(INFO)
 #' as.loglevel(400L)
 #' as.loglevel(400)
-as.loglevel <- function(x) {
+as.loglevel <- function(x) { # nolint
   UseMethod("as.loglevel", x)
 }
 

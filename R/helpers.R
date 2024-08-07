@@ -1,7 +1,12 @@
 #' Evaluate an expression and log results
-#' @param expr R expression to be evaluated while logging the expression itself along with the result
+#' @param expr R expression to be evaluated while logging the
+#'   expression itself along with the result
 #' @param level [log_levels()]
-#' @param multiline setting to `FALSE` will print both the expression (enforced to be on one line by removing line-breaks if any) and its result on a single line separated by `=>`, while setting to `TRUE` will log the expression and the result in separate sections reserving line-breaks and rendering the printed results
+#' @param multiline setting to `FALSE` will print both the expression
+#'   (enforced to be on one line by removing line-breaks if any) and
+#'   its result on a single line separated by `=>`, while setting to
+#'   `TRUE` will log the expression and the result in separate
+#'   sections reserving line-breaks and rendering the printed results
 #' @examples \dontrun{
 #' log_eval(pi * 2, level = INFO)
 #'
@@ -195,7 +200,6 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
     assign(ns, toc, envir = tictocs)
   })
 
-  nsenv <- get(fallback_namespace(namespace), envir = namespaces)
   tic <- get0(ns, envir = tictocs, ifnotfound = Sys.time())
   toc <- Sys.time()
   tictoc <- difftime(toc, tic)

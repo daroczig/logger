@@ -1,26 +1,29 @@
 #' Collect useful information about the logging environment to be used in log messages
 #'
 #' Available variables to be used in the log formatter functions, eg in [layout_glue_generator()]:
-#' \itemize{
-#'   \item levelr: log level as an R object, eg [INFO()]
-#'   \item level: log level as a string, eg [INFO()]
-#'   \item time: current time as `POSIXct`
-#'   \item node: name by which the machine is known on the network as reported by `Sys.info`
-#'   \item arch: machine type, typically the CPU architecture
-#'   \item os_name: Operating System's name
-#'   \item os_release: Operating System's release
-#'   \item os_version: Operating System's version
-#'   \item user: name of the real user id as reported by `Sys.info`
-#'   \item pid: the process identification number of the R session
-#'   \item node: name by which the machine is known on the network as reported by `Sys.info`
-#'   \item r_version: R's major and minor version as a string
-#'   \item ns: namespace usually defaults to `global` or the name of the holding R package of the calling the logging function
-#'   \item ns_pkg_version: the version of `ns` when it's a package
-#'   \item ans: same as `ns` if there's a defined [logger()] for the namespace, otherwise a fallback namespace (eg usually `global`)
-#'   \item topenv: the name of the top environment from which the parent call was called (eg R package name or `GlobalEnv`)
-#'   \item call: parent call (if any) calling the logging function
-#'   \item fn: function's (if any) name calling the logging function
-#' }
+#'
+#' * `levelr`: log level as an R object, eg [INFO()]
+#' * `level`: log level as a string, eg [INFO()]
+#' * `time`: current time as `POSIXct`
+#' * `node`: name by which the machine is known on the network as reported by `Sys.info`
+#' * `arch`: machine type, typically the CPU architecture
+#' * `os_name`: Operating System's name
+#' * `os_release`: Operating System's release
+#' * `os_version`: Operating System's version
+#' * `user`: name of the real user id as reported by `Sys.info`
+#' * `pid`: the process identification number of the R session
+#' * `node`: name by which the machine is known on the network as reported by `Sys.info`
+#' * `r_version`: R's major and minor version as a string
+#' * `ns`: namespace usually defaults to `global` or the name of the holding R package
+#'   of the calling the logging function
+#' * `ns_pkg_version`: the version of `ns` when it's a package
+#' * `ans`: same as `ns` if there's a defined [logger()] for the namespace,
+#'   otherwise a fallback namespace (eg usually `global`)
+#' * `topenv`: the name of the top environment from which the parent call was called
+#'   (eg R package name or `GlobalEnv`)
+#' * `call`: parent call (if any) calling the logging function
+#' * `fn`: function's (if any) name calling the logging function
+#'
 #' @param log_level log level as per [log_levels()]
 #' @inheritParams log_level
 #' @return list
@@ -65,12 +68,14 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 #' Generate log layout function using common variables available via glue syntax
 #'
 #' `format` is passed to `glue` with access to the below variables:
-#' \itemize{
-#'  \item msg: the actual log message
-#'  \item further variables set by [get_logger_meta_variables()]
-#' }
-#' @param format `glue`-flavored layout of the message using the above variables
-#' @return function taking `level` and `msg` arguments - keeping the original call creating the generator in the `generator` attribute that is returned when calling [log_layout()] for the currently used layout
+#' \itemize{ \item msg: the actual log message \item further variables
+#' set by [get_logger_meta_variables()] }
+#' @param format `glue`-flavored layout of the message using the above
+#'   variables
+#' @return function taking `level` and `msg` arguments - keeping the
+#'   original call creating the generator in the `generator` attribute
+#'   that is returned when calling [log_layout()] for the currently
+#'   used layout
 #' @export
 #' @examples \dontrun{
 #' example_layout <- layout_glue_generator(
@@ -103,24 +108,31 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 }
 
 
-#' Format a log record by including the raw message without anything added or modified
+#' Format a log record by including the raw message without anything
+#' added or modified
 #' @inheritParams log_level
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see [layout_simple()], [layout_glue_colors()], [layout_json()], or generator functions such as [layout_glue_generator()]
+#' @seealso This is a [log_layout()], for alternatives, see
+#'   [layout_simple()], [layout_glue_colors()], [layout_json()], or
+#'   generator functions such as [layout_glue_generator()]
 layout_blank <- structure(function(level, msg, namespace = NA_character_,
                                    .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   msg
 }, generator = quote(layout_blank()))
 
 
-#' Format a log record by concatenating the log level, timestamp and message
+#' Format a log record by concatenating the log level, timestamp and
+#' message
 #' @inheritParams log_level
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_glue()], [layout_glue_colors()], [layout_json()], [layout_json_parser()], or generator functions such as [layout_glue_generator()]
+#' @seealso This is a [log_layout()], for alternatives, see
+#'   [layout_blank()], [layout_glue()], [layout_glue_colors()],
+#'   [layout_json()], [layout_json_parser()], or generator functions
+#'   such as [layout_glue_generator()]
 layout_simple <- structure(function(level, msg, namespace = NA_character_,
                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
@@ -132,7 +144,10 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_glue()], [layout_glue_colors()], [layout_json()], [layout_json_parser()], or generator functions such as [layout_glue_generator()]
+#' @seealso This is a [log_layout()], for alternatives, see
+#'   [layout_blank()], [layout_glue()], [layout_glue_colors()],
+#'   [layout_json()], [layout_json_parser()], or generator functions
+#'   such as [layout_glue_generator()]
 #' @examples \dontrun{
 #' log_layout(layout_logging)
 #' log_info(42)
@@ -158,11 +173,18 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
 
 #' Format a log message with `glue`
 #'
-#' By default, this layout includes the log level of the log record as per [log_levels()], the current timestamp and the actual log message -- that you can override via calling [layout_glue_generator()] directly. For colorized output, see [layout_glue_colors()].
+#' By default, this layout includes the log level of the log record as
+#' per [log_levels()], the current timestamp and the actual log
+#' message -- that you can override via calling
+#' [layout_glue_generator()] directly. For colorized output, see
+#' [layout_glue_colors()].
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue_colors()], [layout_json()], [layout_json_parser()], or generator functions such as [layout_glue_generator()]
+#' @seealso This is a [log_layout()], for alternatives, see
+#'   [layout_blank()], [layout_simple()], [layout_glue_colors()],
+#'   [layout_json()], [layout_json_parser()], or generator functions
+#'   such as [layout_glue_generator()]
 layout_glue <- layout_glue_generator()
 
 
@@ -175,19 +197,21 @@ layout_glue <- layout_glue_generator()
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @examplesIf requireNamespace("crayon")
-#' log_layout(layout_glue_colors)
-#' log_threshold(TRACE)
-#' log_info("Starting the script...")
-#' log_debug("This is the second line")
-#' log_trace("That is being placed right after the first one.")
-#' log_warn("Some errors might come!")
-#' log_error("This is a problem")
-#' log_debug("Getting an error is usually bad")
-#' log_error("This is another problem")
-#' log_fatal("The last problem.")
-#' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue()], [layout_json()], [layout_json_parser()], or generator functions such as [layout_glue_generator()]
+#' @seealso This is a [log_layout()], for alternatives, see
+#'   [layout_blank()], [layout_simple()], [layout_glue()],
+#'   [layout_json()], [layout_json_parser()], or generator functions
+#'   such as [layout_glue_generator()]
 #' @note This functionality depends on the \pkg{crayon} package.
+#' @examplesIf requireNamespace("crayon")
+#'   log_layout(layout_glue_colors) log_threshold(TRACE)
+#'   log_info("Starting the script...")
+#'   log_debug("This is the second line")
+#'   log_trace("That is being placed right after the first one.")
+#'   log_warn("Some errors might come!")
+#'   log_error("This is a problem")
+#'   log_debug("Getting an error is usually bad")
+#'   log_error("This is another problem")
+#'   log_fatal("The last problem.")
 layout_glue_colors <- layout_glue_generator(
   format = paste(
     "{crayon::bold(colorize_by_log_level(level, levelr))}",
@@ -198,17 +222,22 @@ layout_glue_colors <- layout_glue_generator(
 
 
 #' Generate log layout function rendering JSON
-#' @param fields character vector of field names to be included in the JSON
+#' @param fields character vector of field names to be included in the
+#'   JSON
 #' @return character vector
 #' @export
+#' @note This functionality depends on the \pkg{jsonlite} package.
+#' @seealso This is a [log_layout()], for alternatives, see
+#'   [layout_blank()], [layout_simple()], [layout_glue()],
+#'   [layout_glue_colors()], [layout_json_parser()], or generator
+#'   functions such as [layout_glue_generator()]
 #' @examples \dontrun{
 #' log_layout(layout_json())
 #' log_info(42)
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 #' }
-#' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue()], [layout_glue_colors()], [layout_json_parser()],  or generator functions such as [layout_glue_generator()]
-layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name", "os_release", "os_version", "pid", "user", "msg")) {
+layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
+                                   "os_name", "os_release", "os_version", "pid", "user", "msg")) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
@@ -225,9 +254,16 @@ layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn",
 }
 
 
-#' Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message
-#' @param fields character vector of field names to be included in the JSON
+#' Generate log layout function rendering JSON after merging meta
+#' fields with parsed list from JSON message
+#' @param fields character vector of field names to be included in the
+#'   JSON
 #' @export
+#' @note This functionality depends on the \pkg{jsonlite} package.
+#' @seealso This is a [log_layout()] potentially to be used with
+#'   [formatter_json()], for alternatives, see [layout_simple()],
+#'   [layout_glue()], [layout_glue_colors()], [layout_json()] or
+#'   generator functions such as [layout_glue_generator()]
 #' @examples \dontrun{
 #' log_formatter(formatter_json)
 #' log_info(everything = 42)
@@ -236,9 +272,8 @@ layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn",
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
 #' }
-#' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_layout()] potentially to be used with [formatter_json()], for alternatives, see [layout_simple()], [layout_glue()], [layout_glue_colors()], [layout_json()] or generator functions such as [layout_glue_generator()]
-layout_json_parser <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name", "os_release", "os_version", "pid", "user")) {
+layout_json_parser <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
+                                          "os_name", "os_release", "os_version", "pid", "user")) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,

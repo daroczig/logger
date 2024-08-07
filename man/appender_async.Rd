@@ -2,7 +2,8 @@
 % Please edit documentation in R/appenders.R
 \name{appender_async}
 \alias{appender_async}
-\title{Delays executing the actual appender function to the future in a background process to avoid blocking the main R session}
+\title{Delays executing the actual appender function to the future in a
+background process to avoid blocking the main R session}
 \usage{
 appender_async(
   appender,
@@ -12,22 +13,32 @@ appender_async(
 )
 }
 \arguments{
-\item{appender}{a  \code{\link[=log_appender]{log_appender()}} function with a \code{generator} attribute (TODO note not required, all fn will be passed if not)}
+\item{appender}{a \code{\link[=log_appender]{log_appender()}} function with a \code{generator}
+attribute (TODO note not required, all fn will be passed if
+not)}
 
 \item{batch}{number of records to process from the queue at once}
 
-\item{namespace}{\code{logger} namespace to use for logging messages on starting up the background process}
+\item{namespace}{\code{logger} namespace to use for logging messages on
+starting up the background process}
 
-\item{init}{optional function to run in the background process that is useful to set up the environment required for logging, eg if the \code{appender} function requires some extra packages to be loaded or some environment variables to be set etc}
+\item{init}{optional function to run in the background process that
+is useful to set up the environment required for logging, eg if
+the \code{appender} function requires some extra packages to be
+loaded or some environment variables to be set etc}
 }
 \value{
 function taking \code{lines} argument
 }
 \description{
-Delays executing the actual appender function to the future in a background process to avoid blocking the main R session
+Delays executing the actual appender function to the future in a
+background process to avoid blocking the main R session
 }
 \note{
-This functionality depends on the \pkg{txtq} and \pkg{callr} packages. The R session's temp folder is used for staging files (message queue and other forms of communication between the parent and child processes).
+This functionality depends on the \pkg{txtq} and \pkg{callr}
+packages. The R session's temp folder is used for staging files
+(message queue and other forms of communication between the
+parent and child processes).
 }
 \examples{
 \dontrun{
@@ -71,5 +82,9 @@ attr(my_appender, "async_writer_process")$read_error()
 }
 }
 \seealso{
-This function is to be used with an actual \code{\link[=log_appender]{log_appender()}}, for example \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}} or \code{\link[=appender_kinesis]{appender_kinesis()}}.
+This function is to be used with an actual
+\code{\link[=log_appender]{log_appender()}}, for example \code{\link[=appender_console]{appender_console()}},
+\code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}},
+\code{\link[=appender_telegram]{appender_telegram()}}, \code{\link[=appender_syslog]{appender_syslog()}} or
+\code{\link[=appender_kinesis]{appender_kinesis()}}.
 }

@@ -13,24 +13,35 @@ formatter_glue_or_sprintf(
 )
 }
 \arguments{
-\item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...} in \code{glue}}
+\item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...}
+in \code{glue}}
 
 \item{...}{passed to \code{glue} for the text interpolation}
 
-\item{.logcall}{the logging call being evaluated (useful in formatters and layouts when you want to have access to the raw, unevaluated R expression)}
+\item{.logcall}{the logging call being evaluated (useful in
+formatters and layouts when you want to have access to the raw,
+unevaluated R expression)}
 
-\item{.topcall}{R expression from which the logging function was called (useful in formatters and layouts to extract the calling function's name or arguments)}
+\item{.topcall}{R expression from which the logging function was
+called (useful in formatters and layouts to extract the calling
+function's name or arguments)}
 
-\item{.topenv}{original frame of the \code{.topcall} calling function where the formatter function will be evaluated and that is used to look up the \code{namespace} as well via \code{logger:::top_env_name}}
+\item{.topenv}{original frame of the \code{.topcall} calling function
+where the formatter function will be evaluated and that is used
+to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
 character vector
 }
 \description{
-The best of both words: using both formatter functions in your log messages, which can be useful eg if you are migrating from \code{sprintf} formatted log messages to \code{glue} or similar.
+The best of both words: using both formatter functions in your log
+messages, which can be useful eg if you are migrating from
+\code{sprintf} formatted log messages to \code{glue} or similar.
 }
 \details{
-Note that this function tries to be smart when passing arguments to \code{glue} and \code{sprintf}, but might fail with some edge cases, and returns an unformatted string.
+Note that this function tries to be smart when passing arguments to
+\code{glue} and \code{sprintf}, but might fail with some edge cases, and
+returns an unformatted string.
 }
 \examples{
 \dontrun{
@@ -46,5 +57,9 @@ formatter_glue_or_sprintf("Hi \%s, did you know that 2*4=\%s", c("foo", "bar"), 
 }
 }
 \seealso{
-This is a \code{\link[=log_formatter]{log_formatter()}}, for alternatives, see \code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_sprintf]{formatter_sprintf()}}, \code{\link[=formatter_glue]{formatter_glue()}}, \code{\link[=formatter_glue_safe]{formatter_glue_safe()}}, \code{\link[=formatter_logging]{formatter_logging()}}, \code{\link[=formatter_json]{formatter_json()}}, \code{\link[=formatter_pander]{formatter_pander()}} and \code{\link[=skip_formatter]{skip_formatter()}} for marking a string not to apply the formatter on it.
+This is a \code{\link[=log_formatter]{log_formatter()}}, for alternatives, see
+\code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_sprintf]{formatter_sprintf()}}, \code{\link[=formatter_glue]{formatter_glue()}},
+\code{\link[=formatter_glue_safe]{formatter_glue_safe()}}, \code{\link[=formatter_logging]{formatter_logging()}},
+\code{\link[=formatter_json]{formatter_json()}}, \code{\link[=formatter_pander]{formatter_pander()}} and \code{\link[=skip_formatter]{skip_formatter()}}
+for marking a string not to apply the formatter on it.
 }

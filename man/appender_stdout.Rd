@@ -13,5 +13,6 @@ appender_stdout(lines)
 Append log record to stdout
 }
 \seealso{
-This is a \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_slack]{appender_slack()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}
+This is a \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}},
+\code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_slack]{appender_slack()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}
 }
