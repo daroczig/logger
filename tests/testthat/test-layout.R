@@ -44,10 +44,10 @@ test_that("JSON layout", {
   expect_equal(jsonlite::fromJSON(capture.output(log_info("foobar")))$msg, "foobar")
 })
 
-test_that('JSON parser layout', {
-    local_test_logger(layout = layout_json_parser(fields = character()))
-    expect_output(log_info(skip_formatter('{"x": 4}')), '\\{"x":4\\}')
-    expect_equal(capture.output(log_info(skip_formatter('{"x": 4}'))), '{"x":4}')
+test_that("JSON parser layout", {
+  local_test_logger(layout = layout_json_parser(fields = character()))
+  expect_output(log_info(skip_formatter('{"x": 4}')), '\\{"x":4\\}')
+  expect_equal(capture.output(log_info(skip_formatter('{"x": 4}'))), '{"x":4}')
 })
 
 test_that("must throw errors", {

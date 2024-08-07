@@ -30,18 +30,16 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
       stop("Invalid log level, see ?log_levels")
     }
 
-        meta <- logger_meta_env(
-          log_level = level,
-          namespace = namespace,
-          .logcall = .logcall,
-          .topcall = .topcall,
-          .topenv = .topenv,
-          parent = environment()
-        )
-        glue::glue(format, .envir = meta)
-
-    }, generator = deparse(match.call()))
-
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv,
+      parent = environment()
+    )
+    glue::glue(format, .envir = meta)
+  }, generator = deparse(match.call()))
 }
 
 
@@ -95,17 +93,19 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' }
 layout_logging <- structure(function(level, msg, namespace = NA_character_,
                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-    meta <- logger_meta_env(
-      log_level = level,
-      namespace = namespace,
-      .logcall = .logcall,
-      .topcall = .topcall,
-      .topenv = .topenv
-    )
-    paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), ' ',
-           attr(level, 'level'), ':',
-           ifelse(meta$ns == 'global', '', meta$ns), ':',
-           msg)
+  meta <- logger_meta_env(
+    log_level = level,
+    namespace = namespace,
+    .logcall = .logcall,
+    .topcall = .topcall,
+    .topenv = .topenv
+  )
+  paste0(
+    format(Sys.time(), "%Y-%m-%d %H:%M:%S"), " ",
+    attr(level, "level"), ":",
+    ifelse(meta$ns == "global", "", meta$ns), ":",
+    msg
+  )
 }, generator = quote(layout_logging()))
 
 
@@ -141,16 +141,16 @@ layout_glue <- layout_glue_generator()
 #'   such as [layout_glue_generator()]
 #' @note This functionality depends on the \pkg{crayon} package.
 #' @examplesIf requireNamespace("crayon")
-#'   log_layout(layout_glue_colors)
-#'   log_threshold(TRACE)
-#'   log_info("Starting the script...")
-#'   log_debug("This is the second line")
-#'   log_trace("That is being placed right after the first one.")
-#'   log_warn("Some errors might come!")
-#'   log_error("This is a problem")
-#'   log_debug("Getting an error is usually bad")
-#'   log_error("This is another problem")
-#'   log_fatal("The last problem.")
+#' log_layout(layout_glue_colors)
+#' log_threshold(TRACE)
+#' log_info("Starting the script...")
+#' log_debug("This is the second line")
+#' log_trace("That is being placed right after the first one.")
+#' log_warn("Some errors might come!")
+#' log_error("This is a problem")
+#' log_debug("Getting an error is usually bad")
+#' log_error("This is another problem")
+#' log_fatal("The last problem.")
 layout_glue_colors <- layout_glue_generator(
   format = paste(
     "{crayon::bold(colorize_by_log_level(level, levelr))}",
@@ -177,26 +177,23 @@ layout_glue_colors <- layout_glue_generator(
 #' }
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue()], [layout_glue_colors()], [layout_json_parser()],  or generator functions such as [layout_glue_generator()]
-layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn', 'node', 'arch', 'os_name', 'os_release', 'os_version', 'pid', 'user')) {
-
-    force(fields)
+layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name", "os_release", "os_version", "pid", "user")) {
+  force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
-        meta <- logger_meta_env(
-          log_level = level,
-          namespace = namespace,
-          .logcall = .logcall,
-          .topcall = .topcall,
-          .topenv = .topenv
-        )
-        json <- mget(fields, meta)
-        sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg)), auto_unbox = TRUE))
-
-    }, generator = deparse(match.call()))
-
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
+    json <- mget(fields, meta)
+    sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg)), auto_unbox = TRUE))
+  }, generator = deparse(match.call()))
 }
 
 
@@ -218,23 +215,25 @@ layout_json <- function(fields = c('time', 'level', 'ns', 'ans', 'topenv', 'fn',
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
 #' }
-layout_json_parser <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
-                                          "os_name", "os_release", "os_version", "pid", "user")) {
+layout_json_parser <- function(fields = c(
+                                 "time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
+                                 "os_name", "os_release", "os_version", "pid", "user"
+                               )) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
-        meta <- logger_meta_env(
-          log_level = level,
-          namespace = namespace,
-          .logcall = .logcall,
-          .topcall = .topcall,
-          .topenv = .topenv
-        )
-        meta <- mget(fields, meta)
-        msg <- jsonlite::fromJSON(msg)
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
+    meta <- mget(fields, meta)
+    msg <- jsonlite::fromJSON(msg)
 
     jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = "null")
   }, generator = deparse(match.call()))

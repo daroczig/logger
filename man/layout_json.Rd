@@ -21,6 +21,8 @@ Generate log layout function rendering JSON
 }
 \note{
 This functionality depends on the \pkg{jsonlite} package.
+
+This functionality depends on the \pkg{jsonlite} package.
 }
 \examples{
 \dontrun{
@@ -34,4 +36,6 @@ This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see
 \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}},
 \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json_parser]{layout_json_parser()}}, or generator
 functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
+
+This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json_parser]{layout_json_parser()}},  or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

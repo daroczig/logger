@@ -66,4 +66,6 @@ otherwise a fallback namespace (eg usually \code{global})
 }
 \seealso{
 \code{\link[=layout_glue_generator]{layout_glue_generator()}}
+
+\code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }
