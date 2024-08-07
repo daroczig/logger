@@ -17,17 +17,20 @@
     call <- sys.call(-1)
     env <- parent.frame()
 
+    # Only compute unparsed expressions if actually needed
+    delayedAssign("except_text", deparse(substitute(except)))
+    delayedAssign("try_text", deparse(substitute(try)))
+
     tryCatch(
         try,
         error = function(e) {
             log_level(
-                WARN,
-                paste(
-                    'Running', shQuote(deparse(substitute(except))), 'as',
-                    shQuote(deparse(substitute(try))), 'failed:',
-                    shQuote(e$message)),
-                namespace = 'except',
-                .topcall = call, .topenv = env)
+              WARN,
+              paste0('Running \'', except_text, '\' as \'', try_text, '\' failed: \'', e$message, '\''),
+              namespace = 'except',
+              .topcall = call,
+              .topenv = env
+            )
             except
         })
 
