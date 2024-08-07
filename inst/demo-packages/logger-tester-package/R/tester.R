@@ -4,6 +4,7 @@
 #' @export
 #' @importFrom logger log_level
 logger_tester_function <- function(level, msg) {
+    set.seed(1014)
     x <- runif(1)
     log_level(level, '{msg} {x}')
 }

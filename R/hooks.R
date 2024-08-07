@@ -110,15 +110,19 @@ log_shiny_input_changes <- function(input,
 
     fail_on_missing_package('shiny')
     fail_on_missing_package('jsonlite')
-    if (!shiny::isRunning()) {
+
+    session <- shiny::getDefaultReactiveDomain()
+    ns <- ifelse(!is.null(session), session$ns(character(0)), '')
+
+    if (!(shiny::isRunning() | inherits(session, 'MockShinySession') || inherits(session, 'session_proxy'))) {
         stop('No Shiny app running, it makes no sense to call this function outside of a Shiny app')
     }
 
     input_values <- shiny::isolate(shiny::reactiveValuesToList(input))
     assignInMyNamespace('shiny_input_values', input_values)
-    log_level(level, skip_formatter(paste(
+    log_level(level, skip_formatter(trimws(paste(ns,
         'Default Shiny inputs initialized:',
-        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE)))), namespace = namespace)
+        as.character(jsonlite::toJSON(input_values, auto_unbox = TRUE))))), namespace = namespace)
 
     shiny::observe({
         old_input_values <- shiny_input_values
@@ -129,7 +133,8 @@ log_shiny_input_changes <- function(input,
             old <- old_input_values[name]
             new <- new_input_values[name]
             if (!identical(old, new)) {
-                log_level(level, 'Shiny input change detected on {name}: {old} -> {new}', namespace = namespace)
+                message <- trimws('{ns} Shiny input change detected in {name}: {old} -> {new}')
+                log_level(level, message, namespace = namespace)
             }
         }
         assignInNamespace('shiny_input_values', new_input_values, ns = 'logger')

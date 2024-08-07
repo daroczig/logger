@@ -80,42 +80,37 @@ fallback_namespace <- function(namespace) {
     namespace
 }
 
-#' Base Logging Function
-#' @param fun_name string a full name of log function
-#' @param arg see [log_levels()]
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set or return log function property
-#' @keywords internal
-log_config_setter <- function(fun_name, arg, namespace, index) {
+#' @noRd
+log_config_setter <- function(name, value, namespace = 'global', index = 1) {
 
     if (length(namespace) > 1) {
         for (ns in namespace) {
-          log_config_setter(fun_name, arg, ns, index)
+          log_config_setter(name, value, ns, index)
         }
         return(invisible())
     }
 
-    fun_name_base <- strsplit(fun_name, '_')[[1]][2]
-
     configs <- get(fallback_namespace(namespace), envir = namespaces)
     config  <- configs[[min(index, length(configs))]]
 
-    if (fun_name_base == 'threshold') {
-      if (is.null(arg)) {
-        return(config[[fun_name_base]])
+    if (name == 'threshold') {
+      if (is.null(value)) {
+        return(config[[name]])
       }
-      config[[fun_name_base]] <- validate_log_level(arg)
+      config[[name]] <- validate_log_level(value)
     } else {
-      if (is.null(arg)) {
-        res <- config[[fun_name_base]]
+      if (is.null(value)) {
+        res <- config[[name]]
         if (!is.null(attr(res, 'generator'))) {
           res <- parse(text = attr(res, 'generator'))[[1]]
         }
         return(res)
       }
 
-      config[[fun_name_base]] <- arg
+      config[[name]] <- value
     }
 
     configs[[min(index, length(config) + 1)]] <- config
@@ -161,7 +156,7 @@ delete_logger_index <- function(namespace = 'global', index) {
 #' }
 #' @seealso [logger()], [log_layout()], [log_formatter()], [log_appender()]
 log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
-    log_config_setter(fun_name = 'log_threshold', arg = level, namespace = namespace, index = index)
+    log_config_setter('threshold', level, namespace = namespace, index = index)
 }
 
 
@@ -175,7 +170,7 @@ log_threshold <- function(level = NULL, namespace = 'global', index = 1) {
 #' }
 #' @seealso [logger()], [log_threshold()], [log_appender()] and [log_formatter()]
 log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
-    log_config_setter(fun_name = 'log_layout', arg = layout, namespace = namespace, index = index)
+    log_config_setter('layout', layout, namespace = namespace, index = index)
 }
 
 
@@ -185,7 +180,7 @@ log_layout <- function(layout = NULL, namespace = 'global', index = 1) {
 #' @export
 #' @seealso [logger()], [log_threshold()], [log_appender()] and [log_layout()]
 log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
-    log_config_setter(fun_name = 'log_formatter', arg = formatter, namespace = namespace, index = index)
+    log_config_setter('formatter', formatter, namespace = namespace, index = index)
 }
 
 
@@ -210,7 +205,7 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 #' }
 #' @seealso [logger()], [log_threshold()], [log_layout()] and [log_formatter()]
 log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
-    log_config_setter(fun_name = 'log_appender', arg = appender, namespace = namespace, index = index)
+    log_config_setter('appender', appender, namespace = namespace, index = index)
 }
 
 
