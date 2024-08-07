@@ -39,13 +39,6 @@ knitr::opts_chunk$set(
 
 ## load the main package first
 library(logger)
-## backup settings
-oldconf <- list(
-    threshold = log_threshold(),
-    layout = log_layout(),
-    formatter = log_formatter(),
-    appender = log_appender())
-## knitr not picking up stderr
 log_appender(appender_stdout)
 ```
 
@@ -170,7 +163,7 @@ log_appender(appender_tee(t))
 
 ```{r echo=FALSE, results='hide'}
 flog.appender(appender.console)
-log_appender(appender_console)
+log_appender(appender_stdout)
 ```
 
 ### Hierarchical logging and performance
@@ -425,14 +418,7 @@ Creating objects is the `log4r` way of handling multiple log environments, while
 Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=loggit) -- capturing `message`, `warning` and `stop` function messages, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to be used as message hooks feed `logger`.
 
 ```{r cleanup, include = FALSE}
-## restore settings
-log_threshold(oldconf$threshold)
-log_layout(oldconf$layout)
-log_formatter(oldconf$formatter)
-log_appender(oldconf$appender)
-```
-
-```{r echo=FALSE, results='hide'}
+logger:::namespaces_reset()
 detach('package:logger', unload = TRUE)
 detach('package:futile.logger', unload = TRUE)
 detach('package:logging', unload = TRUE)
