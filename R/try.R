@@ -15,25 +15,24 @@
 #' FunDoesNotExist(1:10) %except% MEAN(1:10) %except% mean(1:10)
 #' FunDoesNotExist(1:10) %except% (MEAN(1:10) %except% mean(1:10))
 `%except%` <- function(try, except) {
-  call <- sys.call(-1)
-  env <- parent.frame()
-  try <- substitute(try)
-  fallback <- substitute(except)
 
-  tryCatch(
-    eval(try, envir = env),
-    error = function(e) {
-      log_level(
-        WARN,
-        paste(
-          "Running", shQuote(deparse(fallback)), "as",
-          shQuote(deparse(try)), "failed:",
-          shQuote(e$message)
-        ),
-        namespace = "except",
-        .topcall = call, .topenv = env
-      )
-      eval(fallback, envir = env)
-    }
-  )
+  ## Need to capture these in the evaluation frame of `%except%` but only want
+  ## to do the work if there's an error
+  delayedAssign("call", sys.call(-1))
+  delayedAssign("env", parent.frame())
+  delayedAssign("except_text", deparse(substitute(except)))
+  delayedAssign("try_text", deparse(substitute(try)))
+
+  tryCatch(try,
+           error = function(e) {
+             log_level(
+               WARN,
+               paste0("Running '", except_text, "' as '", try_text, "' failed: '", e$message, "'"),
+               namespace = "except",
+               .topcall = call,
+               .topenv = env
+             )
+             except
+           })
+
 }

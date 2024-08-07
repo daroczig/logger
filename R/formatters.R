@@ -11,7 +11,7 @@
 #'     formatter on it.
 formatter_paste <- structure(function(...,
                                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-  eval(paste(...), envir = .topenv)
+  paste(...)
 }, generator = quote(formatter_paste()))
 
 
@@ -29,7 +29,7 @@ formatter_paste <- structure(function(...,
 #'     formatter on it.
 formatter_sprintf <- structure(function(fmt, ...,
                                         .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-  eval(sprintf(fmt, ...), envir = .topenv)
+  sprintf(fmt, ...)
 }, generator = quote(formatter_sprintf()))
 
 
@@ -207,7 +207,7 @@ formatter_glue_or_sprintf <- structure(function(msg, ...,
 formatter_json <- structure(function(...,
                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   fail_on_missing_package("jsonlite")
-  eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
+  as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE))
 }, generator = quote(formatter_json()))
 
 
@@ -300,5 +300,5 @@ formatter_logging <- structure(function(...,
 formatter_pander <- structure(function(x, ...,
                                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   fail_on_missing_package("pander")
-  eval(pander::pander_return(x, ...), envir = .topenv)
+  pander::pander_return(x, ...)
 }, generator = quote(formatter_pander()))

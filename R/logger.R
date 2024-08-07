@@ -430,5 +430,5 @@ with_log_threshold <- function(expression, threshold = ERROR, namespace = "globa
     log_threshold(old, namespace = namespace, index = index)
   })
   log_threshold(threshold, namespace = namespace, index = index)
-  eval(quote(expression))
+  expression
 }

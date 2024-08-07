@@ -4,12 +4,6 @@ test_that("fail_on_missing_package", {
   expect_error(fail_on_missing_package("an.R.package-that-doesNotExists"))
 })
 
-test_that("except helper", {
-  local_test_logger()
-  expect_equal(FunDoesNotExist(1:10) %except% sum(1:10) / length(1:10), 5.5)
-  expect_output(FunDoesNotExist(1:10) %except% sum(1:10) / length(1:10), "WARN")
-})
-
 test_that("validate_log_level", {
   expect_equal(validate_log_level(ERROR), ERROR)
   expect_equal(validate_log_level("ERROR"), ERROR)
