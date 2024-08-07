@@ -13,11 +13,10 @@
 #' FunDoesNotExist(1:10) %except% MEAN(1:10) %except% mean(1:10)
 #' FunDoesNotExist(1:10) %except% (MEAN(1:10) %except% mean(1:10))
 `%except%` <- function(try, except) {
-
-    call <- sys.call(-1)
-    env <- parent.frame()
-
-    # Only compute unparsed expressions if actually needed
+    # Need to capture these in the evaluation frame of `%except%` but only want
+    # to do the work if there's an error
+    delayedAssign("call", sys.call(-1))
+    delayedAssign("env", parent.frame())
     delayedAssign("except_text", deparse(substitute(except)))
     delayedAssign("try_text", deparse(substitute(try)))
 
