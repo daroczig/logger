@@ -68,7 +68,7 @@ print.loglevel <- function(x, ...) {
 #' as.loglevel(INFO)
 #' as.loglevel(400L)
 #' as.loglevel(400)
-as.loglevel <- function(x) {
+as.loglevel <- function(x) { # nolint
   UseMethod("as.loglevel", x)
 }
 
