@@ -19,7 +19,7 @@ Suppress log messages in the \code{except} namespace if you don't want to throw 
 }
 \examples{
 everything \%except\% 42
-everything <- '640kb'
+everything <- "640kb"
 everything \%except\% 42
 
 FunDoesNotExist(1:10) \%except\% sum(1:10) / length(1:10)

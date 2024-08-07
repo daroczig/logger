@@ -29,12 +29,12 @@ The \pkg{logging} package uses a formatter that behaves differently when the inp
 \examples{
 \dontrun{
 log_formatter(formatter_logging)
-log_info('42')
+log_info("42")
 log_info(42)
-log_info(4+2)
-log_info('foo \%s', 'bar')
-log_info('vector \%s', 1:3)
-log_info(12, 1+1, 2 * 2)
+log_info(4 + 2)
+log_info("foo \%s", "bar")
+log_info("vector \%s", 1:3)
+log_info(12, 1 + 1, 2 * 2)
 }
 }
 \seealso{

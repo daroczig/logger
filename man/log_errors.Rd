@@ -15,6 +15,6 @@ This function uses \code{trace} to add a \code{log_error} function call when \co
 \examples{
 \dontrun{
 log_errors()
-stop('foobar')
+stop("foobar")
 }
 }

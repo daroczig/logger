@@ -24,7 +24,7 @@ log_formatter(formatter_json)
 log_info(everything = 42)
 log_layout(layout_json_parser())
 log_info(everything = 42)
-log_layout(layout_json_parser(fields = c('time', 'node')))
+log_layout(layout_json_parser(fields = c("time", "node")))
 log_info(cars = row.names(mtcars), species = unique(iris$Species))
 }
 }

@@ -34,13 +34,13 @@ Logs a long line to stand out from the console
 }
 \examples{
 log_separator()
-log_separator(ERROR, separator = '!', width = 60)
-log_separator(ERROR, separator = '!', width = 100)
-logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+log_separator(ERROR, separator = "!", width = 60)
+log_separator(ERROR, separator = "!", width = 100)
+logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 log_layout(logger)
-log_separator(ERROR, separator = '!', width = 100)
+log_separator(ERROR, separator = "!", width = 100)
 log_layout(layout_blank)
-log_separator(ERROR, separator = '!', width = 80)
+log_separator(ERROR, separator = "!", width = 80)
 }
 \seealso{
 \code{\link[=log_with_separator]{log_with_separator()}}

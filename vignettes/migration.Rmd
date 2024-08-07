@@ -23,11 +23,11 @@ div#tocnav ul.nav li ul {
 
 ```{r pkgchecks, echo = FALSE}
 ## check if other logger packages are available and exit if not
-for (pkg in c('futile.logger', 'logging', 'log4r')) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-        warning(paste(pkg, 'package not available, so cannot build this vignette'))
-        knitr::knit_exit()
-    }
+for (pkg in c("futile.logger", "logging", "log4r")) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    warning(paste(pkg, "package not available, so cannot build this vignette"))
+    knitr::knit_exit()
+  }
 }
 ```
 
@@ -69,14 +69,14 @@ The most important change is that function names are by snake_case in `logger`, 
 
 <div class="comparison"><package>futile.logger</package>
 ```{r}
-flog.info('hi there')
-flog.warn('watch out')
+flog.info("hi there")
+flog.warn("watch out")
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_info('hi there')
-log_warn('watch out')
+log_info("hi there")
+log_warn("watch out")
 ```
 </div>
 
@@ -93,14 +93,14 @@ Changing layouts is easy in both package, as you simply pass a layout function:
 <div class="comparison"><package>futile.logger</package>
 ```{r}
 flog.layout(layout.json)
-flog.info('hi again')
+flog.info("hi again")
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
 log_layout(layout_json())
 
-log_info('hi again')
+log_info("hi again")
 ```
 </div>
 
@@ -117,20 +117,20 @@ By default, `futile.logger` uses an `sprintf` formatter, while `logger` passes t
 
 <div class="comparison"><package>futile.logger</package>
 ```{r}
-flog.info('hi')
-flog.info('hi %s', 84/2)
-flog.info(paste('hi', 84/2))
-flog.info(glue::glue('hi {84/2}'))
+flog.info("hi")
+flog.info("hi %s", 84 / 2)
+flog.info(paste("hi", 84 / 2))
+flog.info(glue::glue("hi {84/2}"))
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_info('hi')
-log_info('hi {84/2}')
+log_info("hi")
+log_info("hi {84/2}")
 log_formatter(formatter_sprintf)
-log_info('hi %s', 84/2)
+log_info("hi %s", 84 / 2)
 log_formatter(formatter_paste)
-log_info('hi', 84/2)
+log_info("hi", 84 / 2)
 ```
 </div>
 
@@ -183,8 +183,8 @@ flog.info <- log_info
 flog.warn <- log_warn
 flog.error <- log_error
 
-flog.info('Hello from logger in a futile.logger theme ...')
-flog.warn('... where the default log message formatter is %s', 'sprintf')
+flog.info("Hello from logger in a futile.logger theme ...")
+flog.warn("... where the default log message formatter is %s", "sprintf")
 ```
 
 ## logging
@@ -204,7 +204,6 @@ basicConfig()
 <div class="comparison"><package>logger</package>
 ```{r}
 library(logger)
-
 ```
 </div>
 
@@ -217,14 +216,14 @@ After initializing the logging engine, actual logging works similarly in the two
 
 <div class="comparison"><package>logging</package>
 ```{r}
-loginfo('hi there')
-logwarn('watch out')
+loginfo("hi there")
+logwarn("watch out")
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_info('hi there')
-log_warn('watch out')
+log_info("hi there")
+log_warn("watch out")
 ```
 </div>
 
@@ -244,11 +243,13 @@ str(as.list(loglevels))
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-levels <- mget(ls(
-    envir = environment(logger), pattern = '^[A-Z]'),
-    envir = environment(logger))
+levels <- mget(
+  ls(
+    envir = environment(logger), pattern = "^[A-Z]"
+  ),
+  envir = environment(logger)
+)
 str(levels[order(-as.numeric(levels))], give.attr = FALSE)
-
 ```
 </div>
 
@@ -262,7 +263,7 @@ Getting and setting the layout of the log record should happen up-front in both 
 
 <div class="comparison"><package>logging</package>
 ```{r}
-getLogger()[['handlers']]$basic.stdout$formatter
+getLogger()[["handlers"]]$basic.stdout$formatter
 ```
 </div>
 <div class="comparison"><package>logger</package>
@@ -279,20 +280,20 @@ If you want to pass dynamic log messages to the log engines, you can do that via
 
 <div class="comparison"><package>logging</package>
 ```{r}
-loginfo('hi')
-loginfo('hi %s', 84/2)
-loginfo(paste('hi', 84/2))
-loginfo(glue::glue('hi {84/2}'))
+loginfo("hi")
+loginfo("hi %s", 84 / 2)
+loginfo(paste("hi", 84 / 2))
+loginfo(glue::glue("hi {84/2}"))
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_info('hi')
-log_info('hi {84/2}')
+log_info("hi")
+log_info("hi {84/2}")
 log_formatter(formatter_sprintf)
-log_info('hi %s', 84/2)
+log_info("hi %s", 84 / 2)
 log_formatter(formatter_paste)
-log_info('hi', 84/2)
+log_info("hi", 84 / 2)
 ```
 </div>
 
@@ -300,11 +301,11 @@ For even better compatibility, there's also `?formatter_logging` that not only r
 
 ```{r}
 log_formatter(formatter_logging)
-log_info('42')
+log_info("42")
 log_info(42)
-log_info(4+2)
-log_info('foo %s', 'bar')
-log_info(12, 1+1, 2 * 2)
+log_info(4 + 2)
+log_info("foo %s", "bar")
+log_info(12, 1 + 1, 2 * 2)
 ```
 
 ```{r echo=FALSE, results='hide'}
@@ -350,8 +351,8 @@ loginfo <- log_info
 logwarn <- log_warn
 logerror <- log_error
 
-loginfo('Hello from logger in a logging theme ...')
-logwarn('... where the default log message formatter is %s', 'sprintf', namespace = 'foobar')
+loginfo("Hello from logger in a logging theme ...")
+logwarn("... where the default log message formatter is %s", "sprintf", namespace = "foobar")
 ```
 
 ## log4r
@@ -382,14 +383,14 @@ While `logger` has a `log_` prefix for all logging functions, `log4r` has lowerc
 
 <div class="comparison"><package>log4r</package>
 ```{r}
-info(logger, 'hi there')
-warn(logger, 'watch out')
+info(logger, "hi there")
+warn(logger, "watch out")
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_info('hi there')
-log_warn('watch out')
+log_info("hi there")
+log_warn("watch out")
 ```
 </div>
 
@@ -419,7 +420,7 @@ Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=l
 
 ```{r cleanup, include = FALSE}
 logger:::namespaces_reset()
-detach('package:logger', unload = TRUE)
-detach('package:futile.logger', unload = TRUE)
-detach('package:logging', unload = TRUE)
+detach("package:logger", unload = TRUE)
+detach("package:futile.logger", unload = TRUE)
+detach("package:logging", unload = TRUE)
 ```

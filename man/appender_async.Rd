@@ -35,22 +35,22 @@ appender_file_slow <- function(file) {
   force(file)
   function(lines) {
     Sys.sleep(1)
-    cat(lines, sep = '\n', file = file, append = TRUE)
+    cat(lines, sep = "\n", file = file, append = TRUE)
   }
 }
 
 ## log what's happening in the background
-log_threshold(TRACE, namespace = 'async_logger')
-log_appender(appender_console, namespace = 'async_logger')
+log_threshold(TRACE, namespace = "async_logger")
+log_appender(appender_console, namespace = "async_logger")
 
 ## start async appender
 t <- tempfile()
-log_info('Logging in the background to {t}')
+log_info("Logging in the background to {t}")
 my_appender <- appender_async(appender_file_slow(file = t))
 
 ## use async appender
 log_appender(my_appender)
-log_info('Was this slow?')
+log_info("Was this slow?")
 system.time(for (i in 1:25) log_info(i))
 
 readLines(t)
@@ -58,16 +58,16 @@ Sys.sleep(10)
 readLines(t)
 
 ## check on the async appender (debugging, you will probably never need this)
-attr(my_appender, 'async_writer_queue')$count()
-attr(my_appender, 'async_writer_queue')$log()
+attr(my_appender, "async_writer_queue")$count()
+attr(my_appender, "async_writer_queue")$log()
 
-attr(my_appender, 'async_writer_process')$get_pid()
-attr(my_appender, 'async_writer_process')$get_state()
-attr(my_appender, 'async_writer_process')$poll_process(1)
-attr(my_appender, 'async_writer_process')$read()
+attr(my_appender, "async_writer_process")$get_pid()
+attr(my_appender, "async_writer_process")$get_state()
+attr(my_appender, "async_writer_process")$poll_process(1)
+attr(my_appender, "async_writer_process")$read()
 
-attr(my_appender, 'async_writer_process')$is_alive()
-attr(my_appender, 'async_writer_process')$read_error()
+attr(my_appender, "async_writer_process")$is_alive()
+attr(my_appender, "async_writer_process")$read_error()
 }
 }
 \seealso{

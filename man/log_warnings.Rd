@@ -15,6 +15,9 @@ This function uses \code{trace} to add a \code{log_warn} function call when \cod
 \examples{
 \dontrun{
 log_warnings()
-for (i in 1:5) { Sys.sleep(runif(1)); warning(i) }
+for (i in 1:5) {
+  Sys.sleep(runif(1))
+  warning(i)
+}
 }
 }

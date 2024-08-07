@@ -35,14 +35,14 @@ Note that this function tries to be smart when passing arguments to \code{glue} 
 \examples{
 \dontrun{
 formatter_glue_or_sprintf("{a} + {b} = \%s", a = 2, b = 3, 5)
-formatter_glue_or_sprintf("{pi} * {2} = \%s", pi*2)
+formatter_glue_or_sprintf("{pi} * {2} = \%s", pi * 2)
 formatter_glue_or_sprintf("{pi} * {2} = {pi*2}")
 
 formatter_glue_or_sprintf("Hi ", "{c('foo', 'bar')}, did you know that 2*4={2*4}")
 formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4={2*4}")
-formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4=\%s", 2*4)
-formatter_glue_or_sprintf("Hi \%s, did you know that 2*4={2*4}", c('foo', 'bar'))
-formatter_glue_or_sprintf("Hi \%s, did you know that 2*4=\%s", c('foo', 'bar'), 2*4)
+formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4=\%s", 2 * 4)
+formatter_glue_or_sprintf("Hi \%s, did you know that 2*4={2*4}", c("foo", "bar"))
+formatter_glue_or_sprintf("Hi \%s, did you know that 2*4=\%s", c("foo", "bar"), 2 * 4)
 }
 }
 \seealso{

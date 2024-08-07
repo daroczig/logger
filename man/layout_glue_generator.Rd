@@ -24,11 +24,12 @@ function taking \code{level} and \code{msg} arguments - keeping the original cal
 \examples{
 \dontrun{
 example_layout <- layout_glue_generator(
-  format = '{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}')
-example_layout(INFO, 'try {runif(1)}')
+  format = "{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}"
+)
+example_layout(INFO, "try {runif(1)}")
 
 log_layout(example_layout)
-log_info('try {runif(1)}')
+log_info("try {runif(1)}")
 }
 }
 \seealso{

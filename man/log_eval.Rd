@@ -45,6 +45,6 @@ log_eval(f <- log_eval)
 log_eval(f <- log_eval, multiline = TRUE)
 
 ## doing something computationally intensive
-log_eval(system.time(for(i in 1:100) mad(runif(1000))), multiline = TRUE)
+log_eval(system.time(for (i in 1:100) mad(runif(1000))), multiline = TRUE)
 }
 }

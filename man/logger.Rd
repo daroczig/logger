@@ -36,9 +36,9 @@ It's quite unlikely that you need to call this function directly, but instead se
 \examples{
 \dontrun{
 do.call(logger, logger:::namespaces$global[[1]])(INFO, 42)
-do.call(logger, logger:::namespaces$global[[1]])(INFO, '{pi}')
+do.call(logger, logger:::namespaces$global[[1]])(INFO, "{pi}")
 x <- 42
-do.call(logger, logger:::namespaces$global[[1]])(INFO, '{x}^2 = {x^2}')
+do.call(logger, logger:::namespaces$global[[1]])(INFO, "{x}^2 = {x^2}")
 }
 }
 \references{

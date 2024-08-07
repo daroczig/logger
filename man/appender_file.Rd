@@ -43,8 +43,9 @@ readLines(t)
 ## rotated after every 3rd line up to max 5 files
 
 ## create a folder storing the log files
-t <- tempfile(); dir.create(t)
-f <- file.path(t, 'log')
+t <- tempfile()
+dir.create(t)
+f <- file.path(t, "log")
 
 ## define the file logger with log rotation enabled
 log_appender(appender_file(f, max_lines = 3, max_files = 5L))
@@ -54,12 +55,12 @@ for (i in 1:25) log_info(i)
 
 ## see what was logged
 lapply(list.files(t, full.names = TRUE), function(t) {
-  cat('\n##', t, '\n')
-  cat(readLines(t), sep = '\n')
+  cat("\n##", t, "\n")
+  cat(readLines(t), sep = "\n")
 })
 
 ## enable internal logging to see what's actually happening in the logrotate steps
-log_threshold(TRACE, namespace = '.logger')
+log_threshold(TRACE, namespace = ".logger")
 ## run the above commands again
 }
 }

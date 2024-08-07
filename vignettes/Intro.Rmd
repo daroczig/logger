@@ -23,12 +23,12 @@ For most cases, it's enough to load the package and use the functions with the `
 
 ```{r}
 library(logger)
-log_info('Loading data')
+log_info("Loading data")
 data(mtcars)
-log_info('The dataset includes {nrow(mtcars)} rows')
+log_info("The dataset includes {nrow(mtcars)} rows")
 if (max(mtcars$hp) < 1000) {
-    log_warn('Oh, no! There are no cars with more than 1K horsepower in the dataset :/')
-    log_debug('The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp')
+  log_warn("Oh, no! There are no cars with more than 1K horsepower in the dataset :/")
+  log_debug("The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp")
 }
 ```
 
@@ -47,12 +47,12 @@ log_threshold(TRACE)
 The rerunning the above code chunk:
 
 ```{r}
-log_info('Loading data')
+log_info("Loading data")
 data(mtcars)
-log_info('The dataset includes {nrow(mtcars)} rows')
+log_info("The dataset includes {nrow(mtcars)} rows")
 if (max(mtcars$hp) < 1000) {
-    log_warn('Oh, no! There are no cars with more than 1K horsepower in the dataset :/')
-    log_debug('The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp')
+  log_warn("Oh, no! There are no cars with more than 1K horsepower in the dataset :/")
+  log_debug("The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp")
 }
 ```
 
@@ -70,10 +70,10 @@ str(y)
 Sometimes, it may be reasonable to log R objects as markdown, e.g. a smallish `data.frame` or `data.table`, e.g. `mtcars` or `iris`. Calling the formatter using `pander` instead of `glue` can help:
 
 ```{r knitr-pander-setup, include = FALSE}
-ppo1 <- pander::panderOptions('knitr.auto.asis')
-ppo2 <- pander::panderOptions('table.style')
-pander::panderOptions('knitr.auto.asis', FALSE)
-pander::panderOptions('table.style', 'simple')
+ppo1 <- pander::panderOptions("knitr.auto.asis")
+ppo2 <- pander::panderOptions("table.style")
+pander::panderOptions("knitr.auto.asis", FALSE)
+pander::panderOptions("table.style", "simple")
 ```
 
 ```{r}
@@ -82,8 +82,8 @@ log_info(head(iris))
 ```
 
 ```{r knitr-pander-revert, include = FALSE}
-pander::panderOptions('knitr.auto.asis', ppo1)
-pander::panderOptions('table.style', ppo2)
+pander::panderOptions("knitr.auto.asis", ppo1)
+pander::panderOptions("table.style", ppo2)
 ```
 
 For more details, check the [function reference in the manual](https://daroczig.github.io/logger/reference/index.html), or start with the [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes.

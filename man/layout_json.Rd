@@ -25,7 +25,7 @@ This functionality depends on the \pkg{jsonlite} package.
 \dontrun{
 log_layout(layout_json())
 log_info(42)
-log_info('ok {1:3} + {1:3} = {2*(1:3)}')
+log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 }
 }
 \seealso{

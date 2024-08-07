@@ -26,15 +26,18 @@ Evaluate R expression with a temporarily updated log level threshold
 \examples{
 \dontrun{
 log_threshold(TRACE)
-log_trace('Logging everything!')
-x <- with_log_threshold({
-  log_info('Now we are temporarily suppressing eg INFO messages')
-  log_warn('WARN')
-  log_debug('Debug messages are suppressed as well')
-  log_error('ERROR')
-  invisible(42)
-}, threshold = WARN)
+log_trace("Logging everything!")
+x <- with_log_threshold(
+  {
+    log_info("Now we are temporarily suppressing eg INFO messages")
+    log_warn("WARN")
+    log_debug("Debug messages are suppressed as well")
+    log_error("ERROR")
+    invisible(42)
+  },
+  threshold = WARN
+)
 x
-log_trace('DONE')
+log_trace("DONE")
 }
 }

@@ -12,6 +12,6 @@ This function uses \code{trace} to add a \code{log_info} function call when \cod
 \examples{
 \dontrun{
 log_messages()
-message('hi there')
+message("hi there")
 }
 }

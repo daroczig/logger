@@ -36,9 +36,9 @@ Format a log record as the logging package does by default
 \dontrun{
 log_layout(layout_logging)
 log_info(42)
-log_info(42, namespace = 'everything')
+log_info(42, namespace = "everything")
 
-devtools::load_all(system.file('demo-packages/logger-tester-package', package = 'logger'))
+devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 logger_tester_function(INFO, 42)
 }
 }

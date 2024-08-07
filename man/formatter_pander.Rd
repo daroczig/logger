@@ -35,11 +35,11 @@ This functionality depends on the \pkg{pander} package.
 \examples{
 \dontrun{
 log_formatter(formatter_pander)
-log_info('42')
+log_info("42")
 log_info(42)
-log_info(4+2)
+log_info(4 + 2)
 log_info(head(iris))
-log_info(head(iris), style = 'simple')
+log_info(head(iris), style = "simple")
 log_info(lm(hp ~ wt, mtcars))
 }
 }

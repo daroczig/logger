@@ -97,24 +97,24 @@ Log a message with given log level
 }
 \examples{
 \dontrun{
-log_level(INFO, 'hi there')
-log_info('hi there')
+log_level(INFO, "hi there")
+log_info("hi there")
 
 ## output omitted
-log_debug('hi there')
+log_debug("hi there")
 
 ## lower threshold and retry
 log_threshold(TRACE)
-log_debug('hi there')
+log_debug("hi there")
 
 ## multiple lines
-log_info('ok {1:3} + {1:3} = {2*(1:3)}')
+log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 
 log_layout(layout_json())
-log_info('ok {1:3} + {1:3} = {2*(1:3)}')
+log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 
 ## note for the JSON output, glue is not automatically applied
-log_info(glue::glue('ok {1:3} + {1:3} = {2*(1:3)}'))
+log_info(glue::glue("ok {1:3} + {1:3} = {2*(1:3)}"))
 }
 }
 \seealso{
