@@ -62,8 +62,12 @@ reference:
   contents:
   - colorize_by_log_level
   - logger
-  - delete_logger_index
   - "%except%"
+
+- title: Namespace management
+  contents:
+  - delete_logger_index
+  - log_namespaces
 
 - title: Dev tools
   contents:
@@ -71,4 +75,3 @@ reference:
   - deparse_to_one_line
   - fail_on_missing_package
   - get_logger_meta_variables
-  - log_namespaces

@@ -69,17 +69,6 @@ logger <- function(threshold, formatter, layout, appender) {
 }
 
 
-#' Checks if provided namespace exists and falls back to global if not
-#' @param namespace string
-#' @return string
-#' @keywords internal
-fallback_namespace <- function(namespace) {
-    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
-        namespace <- 'global'
-    }
-    namespace
-}
-
 #' @param namespace logger namespace
 #' @param index index of the logger within the namespace
 #' @return currently set or return log function property
@@ -116,20 +105,6 @@ log_config_setter <- function(name, value, namespace = 'global', index = 1) {
     configs[[min(index, length(config) + 1)]] <- config
     assign(namespace, configs, envir = namespaces)
 }
-
-
-#' Delete an index from a logger namespace
-#' @inheritParams log_threshold
-#' @export
-delete_logger_index <- function(namespace = 'global', index) {
-    configs <- get(fallback_namespace(namespace), envir = namespaces)
-    if (index > length(configs)) {
-        stop(sprintf('%s namespace has only %i indexes', namespace, length(configs)))
-    }
-    configs[index] <- NULL
-    assign(namespace, configs, envir = namespaces)
-}
-
 
 #' Get or set log level threshold
 #' @param level see [log_levels()]
@@ -207,29 +182,6 @@ log_formatter <- function(formatter = NULL, namespace = 'global', index = 1) {
 log_appender <- function(appender = NULL, namespace = 'global', index = 1) {
     log_config_setter('appender', appender, namespace = namespace, index = index)
 }
-
-
-#' Find the logger definition(s) specified for the current namespace with a fallback to the global namespace
-#' @return list of function(s)
-#' @keywords internal
-#' @importFrom utils getFromNamespace
-#' @param namespace override the default / auto-picked namespace with a custom string
-get_logger_definitions <- function(namespace = NA_character_, .topenv = parent.frame()) {
-    namespace <- ifelse(is.na(namespace), top_env_name(.topenv), namespace)
-    if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
-        namespace <- 'global'
-    }
-    get(namespace, envir = getFromNamespace('namespaces', 'logger'))
-}
-
-
-#' Looks up logger namespaces
-#' @return character vector of namespace names
-#' @export
-log_namespaces <- function() {
-    ls(envir = namespaces)
-}
-
 
 #' Log a message with given log level
 #' @param level log level, see [log_levels()] for more details
