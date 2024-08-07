@@ -203,16 +203,16 @@ layout_glue <- layout_glue_generator()
 #'   such as [layout_glue_generator()]
 #' @note This functionality depends on the \pkg{crayon} package.
 #' @examplesIf requireNamespace("crayon")
-#'   log_layout(layout_glue_colors)
-#'   log_threshold(TRACE)
-#'   log_info("Starting the script...")
-#'   log_debug("This is the second line")
-#'   log_trace("That is being placed right after the first one.")
-#'   log_warn("Some errors might come!")
-#'   log_error("This is a problem")
-#'   log_debug("Getting an error is usually bad")
-#'   log_error("This is another problem")
-#'   log_fatal("The last problem.")
+#' log_layout(layout_glue_colors)
+#' log_threshold(TRACE)
+#' log_info("Starting the script...")
+#' log_debug("This is the second line")
+#' log_trace("That is being placed right after the first one.")
+#' log_warn("Some errors might come!")
+#' log_error("This is a problem")
+#' log_debug("Getting an error is usually bad")
+#' log_error("This is another problem")
+#' log_fatal("The last problem.")
 layout_glue_colors <- layout_glue_generator(
   format = paste(
     "{crayon::bold(colorize_by_log_level(level, levelr))}",
@@ -237,8 +237,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_info(42)
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 #' }
-layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
-                                   "os_name", "os_release", "os_version", "pid", "user", "msg")) {
+layout_json <- function(fields = default_fields()) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
@@ -273,8 +272,7 @@ layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn",
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
 #' }
-layout_json_parser <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
-                                          "os_name", "os_release", "os_version", "pid", "user")) {
+layout_json_parser <- function(fields = default_fields()) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
@@ -292,6 +290,12 @@ layout_json_parser <- function(fields = c("time", "level", "ns", "ans", "topenv"
   }, generator = deparse(match.call()))
 }
 
+default_fields <- function() {
+  c(
+    "time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
+    "os_name", "os_release", "os_version", "pid", "user", "msg"
+  )
+}
 
 # nocov start
 #' Format a log record for syslognet

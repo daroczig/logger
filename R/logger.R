@@ -109,7 +109,6 @@ fallback_namespace <- function(namespace) {
 #'   If `value` is not `NULL`, will return the previously set value.
 #' @noRd
 log_config_setter <- function(name, value, namespace = "global", index = 1) {
-
   if (length(namespace) > 1) {
     for (ns in namespace) {
       log_config_setter(name, value, ns, index)
@@ -141,7 +140,6 @@ log_config_setter <- function(name, value, namespace = "global", index = 1) {
   configs[[min(index, length(config) + 1)]] <- config
   assign(namespace, configs, envir = namespaces)
   invisible(old)
-
 }
 
 

@@ -15,7 +15,6 @@
 #' FunDoesNotExist(1:10) %except% MEAN(1:10) %except% mean(1:10)
 #' FunDoesNotExist(1:10) %except% (MEAN(1:10) %except% mean(1:10))
 `%except%` <- function(try, except) {
-
   ## Need to capture these in the evaluation frame of `%except%` but only want
   ## to do the work if there's an error
   delayedAssign("call", sys.call(-1))
@@ -24,15 +23,15 @@
   delayedAssign("try_text", deparse(substitute(try)))
 
   tryCatch(try,
-           error = function(e) {
-             log_level(
-               WARN,
-               paste0("Running '", except_text, "' as '", try_text, "' failed: '", e$message, "'"),
-               namespace = "except",
-               .topcall = call,
-               .topenv = env
-             )
-             except
-           })
-
+    error = function(e) {
+      log_level(
+        WARN,
+        paste0("Running '", except_text, "' as '", try_text, "' failed: '", e$message, "'"),
+        namespace = "except",
+        .topcall = call,
+        .topenv = env
+      )
+      except
+    }
+  )
 }
