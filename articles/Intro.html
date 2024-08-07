@@ -82,15 +82,15 @@ messages, for example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://daroczig.github.io/logger/">logger</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Loading data'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:22] Loading data</span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] Loading data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'The dataset includes {nrow(mtcars)} rows'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:22] The dataset includes 32 rows</span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] The dataset includes 32 rows</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">hp</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; WARN [2024-08-06 22:35:22] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></span></code></pre></div>
+<span><span class="co">#&gt; WARN [2024-08-07 06:54:25] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></span></code></pre></div>
 <p>Interestingly, the most powerful car was not being logged – because
 by default the <code>logger</code> prints messages with at least the
 <code>INFO</code> log level:</p>
@@ -104,16 +104,16 @@ by default the <code>logger</code> prints messages with at least the
 <p>The rerunning the above code chunk:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Loading data'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23] Loading data</span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] Loading data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'The dataset includes {nrow(mtcars)} rows'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23] The dataset includes 32 rows</span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] The dataset includes 32 rows</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">hp</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">'Oh, no! There are no cars with more than 1K horsepower in the dataset :/'</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">'The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp'</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; WARN [2024-08-06 22:35:23] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></span>
-<span><span class="co">#&gt; DEBUG [2024-08-06 22:35:23] The most powerful car is Maserati Bora with 335 hp</span></span></code></pre></div>
+<span><span class="co">#&gt; WARN [2024-08-07 06:54:25] Oh, no! There are no cars with more than 1K horsepower in the dataset :/</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-07 06:54:25] The most powerful car is Maserati Bora with 335 hp</span></span></code></pre></div>
 <p>You may also find the <code><a href="../reference/log_eval.html">?log_eval</a></code> function useful to log
 both an R expression and its result in the same log record:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -121,7 +121,7 @@ both an R expression and its result in the same log record:</p>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">mean</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span></span>
 <span><span class="fu"><a href="../reference/log_eval.html">log_eval</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23] 'y &lt;- f(g(x))' =&gt; '4'</span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] 'y &lt;- f(g(x))' =&gt; '4'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  num 4</span></span></code></pre></div>
 <p>Sometimes, it may be reasonable to log R objects as markdown, e.g. a
@@ -131,17 +131,17 @@ using <code>pander</code> instead of <code>glue</code> can help:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_pander</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23] </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23] </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23] -------------- ------------- -------------- ------------- ---------</span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]      5.1            3.5           1.4            0.2       setosa  </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]      4.9             3            1.4            0.2       setosa  </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]      4.7            3.2           1.3            0.2       setosa  </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]      4.6            3.1           1.5            0.2       setosa  </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]       5             3.6           1.4            0.2       setosa  </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]      5.4            3.9           1.7            0.4       setosa  </span></span>
-<span><span class="co">#&gt; INFO [2024-08-06 22:35:23]</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25] -------------- ------------- -------------- ------------- ---------</span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]      5.1            3.5           1.4            0.2       setosa  </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]      4.9             3            1.4            0.2       setosa  </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]      4.7            3.2           1.3            0.2       setosa  </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]      4.6            3.1           1.5            0.2       setosa  </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]       5             3.6           1.4            0.2       setosa  </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]      5.4            3.9           1.7            0.4       setosa  </span></span>
+<span><span class="co">#&gt; INFO [2024-08-07 06:54:25]</span></span></code></pre></div>
 <p>For more details, check the <a href="https://daroczig.github.io/logger/reference/index.html">function
 reference in the manual</a>, or start with the <a href="https://daroczig.github.io/logger/articles/anatomy.html">The
 Anatomy of a Log Request</a> and <a href="https://daroczig.github.io/logger/articles/customize_logger.html">Customizing
