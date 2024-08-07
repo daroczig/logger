@@ -1,49 +1,54 @@
 Type: Package
 Package: logger
-Authors@R: c(
-    person("Gergely", "Daróczi", , "daroczig@rapporter.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3149-8537")),
-    person("System1", role = c("fnd"))
-    )
 Title: A Lightweight, Modern and Flexible Logging Utility
-Description: Inspired by the the 'futile.logger' R package and 'logging' Python module, this utility provides a flexible and extensible way of formatting and delivering log messages with low overhead.
 Version: 0.3.0.9000
 Date: 2024-03-03
+Authors@R: c(
+    person("Gergely", "Daróczi", , "daroczig@rapporter.net", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-3149-8537")),
+    person("System1", role = "fnd")
+  )
+Description: Inspired by the the 'futile.logger' R package and 'logging'
+    Python module, this utility provides a flexible and extensible way of
+    formatting and delivering log messages with low overhead.
+License: AGPL-3
 URL: https://daroczig.github.io/logger/
 BugReports: https://github.com/daroczig/logger/issues
-Encoding: UTF-8
-RoxygenNote: 7.3.2
-License: AGPL-3
+Depends: 
+    R (>= 4.0.0)
 Imports:
-  utils
-Depends: R (>= 4.0.0)
+    utils
 Suggests:
-  glue,
-  pander,
-  jsonlite,
-  crayon,
-  slackr (>= 1.4.1),
-  RPushbullet,
-  telegram,
-  testthat (>= 3.0.0),
-  covr,
-  knitr,
-  rmarkdown,
-  devtools,
-  roxygen2,
-  parallel,
-  rsyslog,
-  shiny,
-  callr,
-  txtq,
-  botor,
-  R.utils,
-  syslognet,
-  withr
+    botor,
+    callr,
+    covr,
+    crayon,
+    devtools,
+    glue,
+    jsonlite,
+    knitr,
+    pander,
+    parallel,
+    R.utils,
+    rmarkdown,
+    roxygen2,
+    RPushbullet,
+    rsyslog,
+    shiny,
+    slackr (>= 1.4.1),
+    syslognet,
+    telegram,
+    testthat (>= 3.0.0),
+    txtq,
+    withr
 Enhances:
-  logging,
-  futile.logger,
-  log4r
-VignetteBuilder: knitr
+    futile.logger,
+    log4r,
+    logging
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: TRUE
+Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
