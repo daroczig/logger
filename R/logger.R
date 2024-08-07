@@ -279,7 +279,7 @@ log_level <- function(level,
     loggers <- get_logger_definitions(namespace, .topenv = .topenv)
     for (logger in loggers) {
         if (level > logger$threshold) {
-            return(invisible())
+            next
         }
 
         if (...length() == 1 && is_skip_formatter(..1)) {
