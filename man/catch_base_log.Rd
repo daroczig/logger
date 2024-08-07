@@ -25,12 +25,12 @@ Catch the log header
 \examples{
 \dontrun{
 catch_base_log(INFO, NA_character_)
-logger <- layout_glue_generator(format = '{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}')
+logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 log_layout(logger)
 catch_base_log(INFO, NA_character_)
 fun <- function() catch_base_log(INFO, NA_character_)
 fun()
-catch_base_log(INFO, NA_character_, .topcall = call('funLONG'))
+catch_base_log(INFO, NA_character_, .topcall = call("funLONG"))
 }
 }
 \keyword{internal}

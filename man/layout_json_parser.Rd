@@ -2,7 +2,8 @@
 % Please edit documentation in R/layouts.R
 \name{layout_json_parser}
 \alias{layout_json_parser}
-\title{Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message}
+\title{Generate log layout function rendering JSON after merging meta
+fields with parsed list from JSON message}
 \usage{
 layout_json_parser(
   fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name",
@@ -10,10 +11,12 @@ layout_json_parser(
 )
 }
 \arguments{
-\item{fields}{character vector of field names to be included in the JSON}
+\item{fields}{character vector of field names to be included in the
+JSON}
 }
 \description{
-Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message
+Generate log layout function rendering JSON after merging meta
+fields with parsed list from JSON message
 }
 \note{
 This functionality depends on the \pkg{jsonlite} package.
@@ -24,10 +27,13 @@ log_formatter(formatter_json)
 log_info(everything = 42)
 log_layout(layout_json_parser())
 log_info(everything = 42)
-log_layout(layout_json_parser(fields = c('time', 'node')))
+log_layout(layout_json_parser(fields = c("time", "node")))
 log_info(cars = row.names(mtcars), species = unique(iris$Species))
 }
 }
 \seealso{
-This is a \code{\link[=log_layout]{log_layout()}} potentially to be used with \code{\link[=formatter_json]{formatter_json()}}, for alternatives, see \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json]{layout_json()}} or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
+This is a \code{\link[=log_layout]{log_layout()}} potentially to be used with
+\code{\link[=formatter_json]{formatter_json()}}, for alternatives, see \code{\link[=layout_simple]{layout_simple()}},
+\code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json]{layout_json()}} or
+generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

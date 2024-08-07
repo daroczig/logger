@@ -11,11 +11,13 @@ appender_telegram(
 )
 }
 \arguments{
-\item{chat_id}{Unique identifier for the target chat or username of the target channel (in the format @channelusername)}
+\item{chat_id}{Unique identifier for the target chat or username of
+the target channel (in the format @channelusername)}
 
 \item{bot_token}{Telegram Authorization token}
 
-\item{parse_mode}{Message parse mode. Allowed values: Markdown or HTML}
+\item{parse_mode}{Message parse mode. Allowed values: Markdown or
+HTML}
 }
 \value{
 function taking \code{lines} argument
@@ -27,5 +29,9 @@ Send log messages to a Telegram chat
 This functionality depends on the \pkg{telegram} package.
 }
 \seealso{
-This is generator function for \code{\link[=log_appender]{log_appender()}}, for alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}}, \code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_syslog]{appender_syslog()}}, \code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any \code{\link[=log_appender]{log_appender()}} function in a background process.
+This is generator function for \code{\link[=log_appender]{log_appender()}}, for
+alternatives, see eg \code{\link[=appender_console]{appender_console()}}, \code{\link[=appender_file]{appender_file()}},
+\code{\link[=appender_tee]{appender_tee()}}, \code{\link[=appender_pushbullet]{appender_pushbullet()}}, \code{\link[=appender_syslog]{appender_syslog()}},
+\code{\link[=appender_kinesis]{appender_kinesis()}} and \code{\link[=appender_async]{appender_async()}} for evaluate any
+\code{\link[=log_appender]{log_appender()}} function in a background process.
 }
