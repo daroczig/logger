@@ -4,10 +4,7 @@
 \alias{layout_json}
 \title{Generate log layout function rendering JSON}
 \usage{
-layout_json(
-  fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name",
-    "os_release", "os_version", "pid", "user", "msg")
-)
+layout_json(fields = default_fields())
 }
 \arguments{
 \item{fields}{character vector of field names to be included in the
