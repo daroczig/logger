@@ -3,12 +3,11 @@
 #' @param min_version optional minimum version needed
 #' @export
 #' @importFrom utils packageVersion compareVersion
-#' @examples \dontrun{
+#' @examples
 #' f <- function() fail_on_missing_package("foobar")
-#' f()
+#' try(f())
 #' g <- function() fail_on_missing_package("stats")
 #' g()
-#' }
 fail_on_missing_package <- function(pkg, min_version) {
   pc <- sys.call(which = 1)
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -39,7 +38,7 @@ fail_on_missing_package <- function(pkg, min_version) {
 
 #' Returns the name of the top level environment from which the logger was called
 #' @return string
-#' @keywords internal
+#' @noRd
 #' @param .topenv call environment
 top_env_name <- function(.topenv = parent.frame()) {
   environmentName(topenv(.topenv))
@@ -65,11 +64,11 @@ deparse_to_one_line <- function(x) {
 
 #' Catch the log header
 #' @return string
-#' @keywords internal
 #' @param level see [log_levels()]
 #' @param namespace string
+#' @noRd
 #' @examples
-#' \dontrun{
+#' \dontshow{old <- logger:::namespaces_set()}
 #' catch_base_log(INFO, NA_character_)
 #' logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 #' log_layout(logger)
@@ -77,7 +76,7 @@ deparse_to_one_line <- function(x) {
 #' fun <- function() catch_base_log(INFO, NA_character_)
 #' fun()
 #' catch_base_log(INFO, NA_character_, .topcall = call("funLONG"))
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 catch_base_log <- function(level, namespace, .topcall = sys.call(-1), .topenv = parent.frame()) {
   namespace <- fallback_namespace(namespace)
 
@@ -99,4 +98,8 @@ catch_base_log <- function(level, namespace, .topcall = sys.call(-1), .topenv = 
 
 in_pkgdown <- function() {
   identical(Sys.getenv("IN_PKGDOWN"), "true")
+}
+
+is_checking_logger <- function() {
+  Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "logger"
 }

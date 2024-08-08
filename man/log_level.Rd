@@ -101,13 +101,13 @@ where the formatter function will be evaluated and that is used
 to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 }
 \value{
-Invisible \code{list} of \code{logger} objects. See \code{\link[=logger]{logger()}} for more details on the format/
+Invisible \code{list} of \code{logger} objects. See \code{\link[=logger]{logger()}} for more details on the format.
 }
 \description{
 Log a message with given log level
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 log_level(INFO, "hi there")
 log_info("hi there")
 
@@ -121,10 +121,7 @@ log_debug("hi there")
 ## multiple lines
 log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 
-log_layout(layout_json())
+log_layout(layout_json(c("level", "msg")))
 log_info("ok {1:3} + {1:3} = {2*(1:3)}")
-
-## note for the JSON output, glue is not automatically applied
-log_info(glue::glue("ok {1:3} + {1:3} = {2*(1:3)}"))
-}
+\dontshow{logger:::namespaces_set(old)}
 }

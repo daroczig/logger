@@ -38,7 +38,7 @@ something like \code{\link[=log_eval]{log_eval()}} and logs the R expression(s) 
 result(s) as well.
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 log_formatter(formatter_logging)
 log_info("42")
 log_info(42)
@@ -46,7 +46,7 @@ log_info(4 + 2)
 log_info("foo \%s", "bar")
 log_info("vector \%s", 1:3)
 log_info(12, 1 + 1, 2 * 2)
-}
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 Other \code{log_formatters}: 

@@ -2,36 +2,45 @@
 namespaces <- new.env(parent = emptyenv())
 
 .onLoad <- function(libname, pkgname) {
-  namespaces_reset()
+  namespaces_set(namespaces_default())
 }
 
 namespaces_reset <- function() {
   rm(list = ls(namespaces), envir = namespaces)
+  namespaces_set(namespaces_default())
+}
 
-  ## default namespace's logger settings
-  namespaces$global <- list(
-    ## there can be multiple loggers for a namespace
-    default = list(
-      threshold = as.loglevel(Sys.getenv("LOGGER_LOG_LEVEL", unset = "INFO")),
-      layout    = layout_simple,
-      formatter = formatter_sprintf,
-      appender  = if (in_pkgdown()) appender_stdout else appender_console
+namespaces_default <- function() {
+  has_glue <- requireNamespace("glue", quietly = TRUE)
+  needs_stdout <- in_pkgdown() || is_checking_logger()
+
+  list(
+    global = list(
+      default = list(
+        threshold = as.loglevel(Sys.getenv("LOGGER_LOG_LEVEL", unset = "INFO")),
+        layout    = layout_simple,
+        formatter = if (has_glue) formatter_glue else formatter_sprintf,
+        appender  = if (needs_stdout) appender_stdout else appender_console
+      )
+    ),
+    .logger = list(
+      default = list(
+        threshold = ERROR,
+        layout    = layout_simple,
+        formatter = formatter_sprintf,
+        appender  = if (needs_stdout) appender_stdout else appender_console
+      )
     )
   )
+}
 
-  if (requireNamespace("glue", quietly = TRUE)) {
-    log_formatter(formatter_glue, namespace = "global", index = 1)
-  }
+namespaces_set <- function(new = namespaces_default()) {
+  old <- as.list(namespaces)
 
-  ## internal namespace for debugging logger
-  namespaces$.logger <- list(
-    default = list(
-      threshold = ERROR,
-      layout    = layout_simple,
-      formatter = formatter_sprintf,
-      appender  = appender_console
-    )
-  )
+  rm(list = ls(namespaces), envir = namespaces)
+  list2env(new, namespaces)
+
+  invisible(old)
 }
 
 .onAttach <- function(libname, pkgname) {

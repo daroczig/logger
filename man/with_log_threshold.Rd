@@ -24,7 +24,7 @@ with_log_threshold(
 Evaluate R expression with a temporarily updated log level threshold
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 log_threshold(TRACE)
 log_trace("Logging everything!")
 x <- with_log_threshold(
@@ -39,5 +39,5 @@ x <- with_log_threshold(
 )
 x
 log_trace("DONE")
-}
+\dontshow{logger:::namespaces_set(old)}
 }

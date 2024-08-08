@@ -95,7 +95,7 @@ logger <- function(threshold, formatter, layout, appender) {
 #' Checks if provided namespace exists and falls back to global if not
 #' @param namespace string
 #' @return string
-#' @keywords internal
+#' @noRd
 fallback_namespace <- function(namespace) {
   if (!exists(namespace, envir = namespaces, inherits = FALSE)) {
     namespace <- "global"
@@ -162,7 +162,8 @@ delete_logger_index <- function(namespace = "global", index) {
 #' @param index index of the logger within the namespace
 #' @return currently set log level threshold
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' ## check the currently set log level threshold
 #' log_threshold()
 #'
@@ -178,7 +179,7 @@ delete_logger_index <- function(namespace = "global", index) {
 #'
 #' ## set the log level threshold in all namespaces to ERROR
 #' log_threshold(ERROR, namespace = log_namespaces())
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 #' @family log configutation functions
 log_threshold <- function(level = NULL, namespace = "global", index = 1) {
   log_config_setter("threshold", level, namespace = namespace, index = index)
@@ -192,10 +193,11 @@ log_threshold <- function(level = NULL, namespace = "global", index = 1) {
 #'   [layout_glue_generator()], default NULL
 #' @inheritParams log_threshold
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_layout(layout_json())
 #' log_info(42)
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 #' @family log configutation functions
 log_layout <- function(layout = NULL, namespace = "global", index = 1) {
   if (!is.null(layout) && !is.function(layout)) {
@@ -227,21 +229,23 @@ log_formatter <- function(formatter = NULL, namespace = "global", index = 1) {
 #'   [appender_tee()], default NULL
 #' @inheritParams log_threshold
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' ## change appender to "tee" that writes to the console and a file as well
 #' t <- tempfile()
 #' log_appender(appender_tee(t))
 #' log_info(42)
-#' log_info(42:44)
+#' log_info(43)
+#' log_info(44)
 #' readLines(t)
 #'
 #' ## poor man's tee by stacking loggers in the namespace
 #' t <- tempfile()
-#' log_appender(appender_console)
+#' log_appender(appender_stdout)
 #' log_appender(appender_file(t), index = 2)
 #' log_info(42)
 #' readLines(t)
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 #' @family log configutation functions
 log_appender <- function(appender = NULL, namespace = "global", index = 1) {
   if (!is.null(appender) && !is.function(appender)) {
@@ -254,7 +258,7 @@ log_appender <- function(appender = NULL, namespace = "global", index = 1) {
 #' Find the logger definition(s) specified for the current namespace
 #' with a fallback to the global namespace
 #' @return list of function(s)
-#' @keywords internal
+#' @noRd
 #' @importFrom utils getFromNamespace
 #' @param namespace override the default / auto-picked namespace with
 #'   a custom string
@@ -294,7 +298,8 @@ log_namespaces <- function() {
 #'   where the formatter function will be evaluated and that is used
 #'   to look up the `namespace` as well via `logger:::top_env_name`
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_level(INFO, "hi there")
 #' log_info("hi there")
 #'
@@ -308,13 +313,10 @@ log_namespaces <- function() {
 #' ## multiple lines
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 #'
-#' log_layout(layout_json())
+#' log_layout(layout_json(c("level", "msg")))
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
-#'
-#' ## note for the JSON output, glue is not automatically applied
-#' log_info(glue::glue("ok {1:3} + {1:3} = {2*(1:3)}"))
-#' }
-#' @return Invisible `list` of `logger` objects. See [logger()] for more details on the format/
+#' \dontshow{logger:::namespaces_set(old)}
+#' @return Invisible `list` of `logger` objects. See [logger()] for more details on the format.
 log_level <- function(level, ..., namespace = NA_character_,
                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   ## guess namespace
@@ -357,7 +359,7 @@ log_level <- function(level, ..., namespace = NA_character_,
 #' Assure valid log level
 #' @param level [log_levels()] object or string representation
 #' @return [log_levels()] object
-#' @keywords internal
+#' @noRd
 validate_log_level <- function(level) {
   if (inherits(level, "loglevel")) {
     return(level)
@@ -418,7 +420,8 @@ log_trace <- function(..., namespace = NA_character_,
 #' @param threshold [log_levels()]
 #' @inheritParams log_threshold
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_threshold(TRACE)
 #' log_trace("Logging everything!")
 #' x <- with_log_threshold(
@@ -433,7 +436,7 @@ log_trace <- function(..., namespace = NA_character_,
 #' )
 #' x
 #' log_trace("DONE")
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 with_log_threshold <- function(expression, threshold = ERROR, namespace = "global", index = 1) {
   old <- log_threshold(threshold, namespace = namespace, index = index)
   on.exit(log_threshold(old, namespace = namespace, index = index))
