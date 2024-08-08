@@ -265,11 +265,6 @@ is_skip_formatter <- function(x) {
 #' log_info("vector %s", 1:3)
 #' log_info(12, 1 + 1, 2 * 2)
 #' }
-#' @param ... string and further params passed to `sprintf` or R expressions to be evaluated
-#' @inheritParams log_level
-#' @return character vector
-#' @export
-#' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   # If the first argument is a string, then use sprintf
   if (is.character(..1)) {
