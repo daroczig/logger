@@ -142,7 +142,7 @@ formatter_glue_or_sprintf <- function(msg, ...,
 
   ## params without a name are potential sprintf params
   sprintfparams <- which(names(params) == "")
-  if (length(params) > 0 & length(sprintfparams) == 0) {
+  if (length(params) > 0 && length(sprintfparams) == 0) {
     sprintfparams <- seq_along(params)
   }
   if (is.null(msg) || length(msg) == 0) {
@@ -206,7 +206,6 @@ attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf(
 #' log_info(everything = 42)
 #' log_info(mtcars = mtcars, species = iris$Species)
 #' }
-#' @seealso This is a [log_formatter()] potentially to be used with [layout_json_parser()], for alternatives, see [formatter_paste()], [formatter_sprintf()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_logging()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_json <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   fail_on_missing_package("jsonlite")
   eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
@@ -264,11 +263,6 @@ skip_formatter <- function(message, ...) {
 #' log_info("vector %s", 1:3)
 #' log_info(12, 1 + 1, 2 * 2)
 #' }
-#' @param ... string and further params passed to `sprintf` or R expressions to be evaluated
-#' @inheritParams log_level
-#' @return character vector
-#' @export
-#' @seealso This is a [log_formatter()], for alternatives, see [formatter_paste()], [formatter_glue()], [formatter_glue_safe()], [formatter_glue_or_sprintf()], [formatter_json()], [formatter_pander()] and [skip_formatter()] for marking a string not to apply the formatter on it.
 formatter_logging <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   params <- list(...)
   .logcall <- substitute(.logcall)
