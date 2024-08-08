@@ -1,4 +1,3 @@
-
 test_that("glue works", {
   local_test_logger(formatter = formatter_glue)
   a <- 43
