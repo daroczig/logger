@@ -7,12 +7,7 @@ appender_void <- structure(function(lines) {}, generator = quote(appender_void()
 #' Append log record to stderr
 #' @param lines character vector
 #' @export
-#' @seealso This is a [log_appender()], for alternatives, see eg
-#'     [appender_stdout()], [appender_file()], [appender_tee()],
-#'     [appender_slack()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_syslog()],
-#'     [appender_kinesis()] and [appender_async()] for evaluate any
-#'     [log_appender()] function in a background process.
+#' @family `log_appenders`
 appender_console <- structure(function(lines) {
   cat(lines, file = stderr(), sep = "\n")
 }, generator = quote(appender_console()))
@@ -26,8 +21,7 @@ appender_stderr <- appender_console
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
-#' @seealso This is a [log_appender()], for alternatives, see eg [appender_console()], [appender_file()],
-#' [appender_tee()], [appender_slack()], [appender_pushbullet()]
+#' @family `log_appenders`
 appender_stdout <- structure(function(lines) {
   cat(lines, sep = "\n")
 }, generator = quote(appender_stdout()))
@@ -53,12 +47,7 @@ appender_stdout <- structure(function(lines) {
 #'     be used in rotation
 #' @export
 #' @return function taking `lines` argument
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_tee()],
-#'     [appender_slack()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_syslog()],
-#'     [appender_kinesis()] and [appender_async()] for evaluate any
-#'     [log_appender()] function in a background process.
+#' @family `log_appenders`
 #' @examples \dontrun{
 #' ## ##########################################################################
 #' ## simple example logging to a file
@@ -168,12 +157,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
 #' @inheritParams appender_file
 #' @export
 #' @return function taking `lines` argument
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_file()],
-#'     [appender_slack()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_syslog()],
-#'     [appender_kinesis()] and [appender_async()] for evaluate any
-#'     [log_appender()] function in a background process.
+#' @family `log_appenders`
 appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
   force(file)
   force(append)
@@ -200,12 +184,7 @@ appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, 
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{slackr} package.
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_file()],
-#'     [appender_tee()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_syslog()],
-#'     [appender_kinesis()] and [appender_async()] for evaluate any
-#'     [log_appender()] function in a background process.
+#' @family `log_appenders`
 appender_slack <- function(channel = Sys.getenv("SLACK_CHANNEL"),
                            username = Sys.getenv("SLACK_USERNAME"),
                            icon_emoji = Sys.getenv("SLACK_ICON_EMOJI"),
@@ -237,12 +216,7 @@ appender_slack <- function(channel = Sys.getenv("SLACK_CHANNEL"),
 #'     <http://dirk.eddelbuettel.com/code/rpushbullet.html>
 #' @export
 #' @note This functionality depends on the \pkg{RPushbullet} package.
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_file()],
-#'     [appender_tee()], [appender_slack()], [appender_telegram()],
-#'     [appender_syslog()], [appender_kinesis()] and
-#'     [appender_async()] for evaluate any [log_appender()] function
-#'     in a background process.
+#' @family `log_appenders`
 #' @export
 appender_pushbullet <- function(...) {
   fail_on_missing_package("RPushbullet")
@@ -265,11 +239,7 @@ appender_pushbullet <- function(...) {
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{telegram} package.
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_file()],
-#'     [appender_tee()], [appender_pushbullet()], [appender_syslog()],
-#'     [appender_kinesis()] and [appender_async()] for evaluate any
-#'     [log_appender()] function in a background process.
+#' @family `log_appenders`
 appender_telegram <- function(chat_id = Sys.getenv("TELEGRAM_CHAT_ID"),
                               bot_token = Sys.getenv("TELEGRAM_BOT_TOKEN"),
                               parse_mode = NULL) {
@@ -294,12 +264,7 @@ appender_telegram <- function(chat_id = Sys.getenv("TELEGRAM_CHAT_ID"),
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{rsyslog} package.
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_file()],
-#'     [appender_tee()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_kinesis()] and
-#'     [appender_async()] for evaluate any [log_appender()] function
-#'     in a background process.
+#' @family `log_appenders`
 #' @examples \dontrun{
 #' if (requireNamespace("rsyslog", quietly = TRUE)) {
 #'   log_appender(appender_syslog("test"))
@@ -359,12 +324,7 @@ appender_syslognet <- function(identifier, server, port = 601L) {
 #'     argument
 #' @export
 #' @note This functionality depends on the \pkg{botor} package.
-#' @seealso This is generator function for [log_appender()], for
-#'     alternatives, see eg [appender_console()], [appender_file()],
-#'     [appender_tee()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_syslog()] and
-#'     [appender_async()] for evaluate any [log_appender()] function
-#'     in a background process.
+#' @family `log_appenders`
 appender_kinesis <- function(stream) {
   fail_on_missing_package("botor")
   force(stream)
@@ -397,11 +357,7 @@ appender_kinesis <- function(stream) {
 #'     packages. The R session's temp folder is used for staging files
 #'     (message queue and other forms of communication between the
 #'     parent and child processes).
-#' @seealso This function is to be used with an actual
-#'     [log_appender()], for example [appender_console()],
-#'     [appender_file()], [appender_tee()], [appender_pushbullet()],
-#'     [appender_telegram()], [appender_syslog()] or
-#'     [appender_kinesis()].
+#' @family `log_appenders`
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
 #'   force(file)
