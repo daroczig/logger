@@ -108,8 +108,6 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 }
 
 
-
-
 #' Format a log record by including the raw message without anything
 #' added or modified
 #' @inheritParams log_level
@@ -205,16 +203,6 @@ attr(layout_glue, "generator") <- quote(layout_glue())
 #'   such as [layout_glue_generator()]
 #' @note This functionality depends on the \pkg{crayon} package.
 #' @examplesIf requireNamespace("crayon")
-#' log_layout(layout_glue_colors)
-#' log_threshold(TRACE)
-#' log_info("Starting the script...")
-#' log_debug("This is the second line")
-#' log_trace("That is being placed right after the first one.")
-#' log_warn("Some errors might come!")
-#' log_error("This is a problem")
-#' log_debug("Getting an error is usually bad")
-#' log_error("This is another problem")
-#' log_fatal("The last problem.")
 #' log_layout(layout_glue_colors)
 #' log_threshold(TRACE)
 #' log_info("Starting the script...")
