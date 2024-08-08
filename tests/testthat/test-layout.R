@@ -31,7 +31,7 @@ test_that("JSON layout", {
 
 test_that("JSON parser layout", {
   local_test_logger(layout = layout_json_parser(fields = c()))
-  expect_output(log_info(skip_formatter('{"x": 4}')), '{"x":4}')
+  expect_output(log_info(skip_formatter('{"x": 4}')), '{"x":4}', fixed = TRUE)
 })
 
 test_that("must throw errors", {
