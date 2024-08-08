@@ -4,10 +4,7 @@
 \alias{layout_json}
 \title{Generate log layout function rendering JSON}
 \usage{
-layout_json(
-  fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name",
-    "os_release", "os_version", "pid", "user")
-)
+layout_json(fields = default_fields())
 }
 \arguments{
 \item{fields}{character vector of field names to be included in the
@@ -20,8 +17,6 @@ character vector
 Generate log layout function rendering JSON
 }
 \note{
-This functionality depends on the \pkg{jsonlite} package.
-
 This functionality depends on the \pkg{jsonlite} package.
 }
 \examples{
@@ -36,6 +31,4 @@ This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see
 \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}},
 \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json_parser]{layout_json_parser()}}, or generator
 functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
-
-This is a \code{\link[=log_layout]{log_layout()}}, for alternatives, see \code{\link[=layout_blank]{layout_blank()}}, \code{\link[=layout_simple]{layout_simple()}}, \code{\link[=layout_glue]{layout_glue()}}, \code{\link[=layout_glue_colors]{layout_glue_colors()}}, \code{\link[=layout_json_parser]{layout_json_parser()}},  or generator functions such as \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 }

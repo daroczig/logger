@@ -151,6 +151,16 @@ layout_glue <- layout_glue_generator()
 #' log_debug("Getting an error is usually bad")
 #' log_error("This is another problem")
 #' log_fatal("The last problem.")
+#' log_layout(layout_glue_colors)
+#' log_threshold(TRACE)
+#' log_info("Starting the script...")
+#' log_debug("This is the second line")
+#' log_trace("That is being placed right after the first one.")
+#' log_warn("Some errors might come!")
+#' log_error("This is a problem")
+#' log_debug("Getting an error is usually bad")
+#' log_error("This is another problem")
+#' log_fatal("The last problem.")
 layout_glue_colors <- layout_glue_generator(
   format = paste(
     "{crayon::bold(colorize_by_log_level(level, levelr))}",
@@ -175,9 +185,7 @@ layout_glue_colors <- layout_glue_generator(
 #' log_info(42)
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 #' }
-#' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_layout()], for alternatives, see [layout_blank()], [layout_simple()], [layout_glue()], [layout_glue_colors()], [layout_json_parser()],  or generator functions such as [layout_glue_generator()]
-layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn", "node", "arch", "os_name", "os_release", "os_version", "pid", "user")) {
+layout_json <- function(fields = default_fields()) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
@@ -215,10 +223,7 @@ layout_json <- function(fields = c("time", "level", "ns", "ans", "topenv", "fn",
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
 #' }
-layout_json_parser <- function(fields = c(
-                                 "time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
-                                 "os_name", "os_release", "os_version", "pid", "user"
-                               )) {
+layout_json_parser <- function(fields = default_fields()) {
   force(fields)
 
   structure(function(level, msg, namespace = NA_character_,
@@ -239,6 +244,12 @@ layout_json_parser <- function(fields = c(
   }, generator = deparse(match.call()))
 }
 
+default_fields <- function() {
+  c(
+    "time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
+    "os_name", "os_release", "os_version", "pid", "user"
+  )
+}
 
 # nocov start
 #' Format a log record for syslognet
