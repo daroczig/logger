@@ -179,7 +179,7 @@ delete_logger_index <- function(namespace = "global", index) {
 #' ## set the log level threshold in all namespaces to ERROR
 #' log_threshold(ERROR, namespace = log_namespaces())
 #' }
-#' @seealso [logger()], [log_layout()], [log_formatter()], [log_appender()]
+#' @family log configutation functions
 log_threshold <- function(level = NULL, namespace = "global", index = 1) {
   log_config_setter("threshold", level, namespace = namespace, index = index)
 }
@@ -196,7 +196,7 @@ log_threshold <- function(level = NULL, namespace = "global", index = 1) {
 #' log_layout(layout_json())
 #' log_info(42)
 #' }
-#' @seealso [logger()], [log_threshold()], [log_appender()] and [log_formatter()]
+#' @family log configutation functions
 log_layout <- function(layout = NULL, namespace = "global", index = 1) {
   if (!is.null(layout) && !is.function(layout)) {
     stop("`layout` must be a function")
@@ -212,8 +212,7 @@ log_layout <- function(layout = NULL, namespace = "global", index = 1) {
 #'   [formatter_logging()], default NULL
 #' @inheritParams log_threshold
 #' @export
-#' @seealso [logger()], [log_threshold()], [log_appender()] and
-#'   [log_layout()]
+#' @family log configutation functions
 log_formatter <- function(formatter = NULL, namespace = "global", index = 1) {
   if (!is.null(formatter) && !is.function(formatter)) {
     stop("`formatter` must be a function")
@@ -243,7 +242,7 @@ log_formatter <- function(formatter = NULL, namespace = "global", index = 1) {
 #' log_info(42)
 #' readLines(t)
 #' }
-#' @seealso [logger()], [log_threshold()], [log_layout()] and [log_formatter()]
+#' @family log configutation functions
 log_appender <- function(appender = NULL, namespace = "global", index = 1) {
   if (!is.null(appender) && !is.function(appender)) {
     stop("`appender` must be a function")
@@ -294,7 +293,6 @@ log_namespaces <- function() {
 #' @param .topenv original frame of the `.topcall` calling function
 #'   where the formatter function will be evaluated and that is used
 #'   to look up the `namespace` as well via `logger:::top_env_name`
-#' @seealso [logger()]
 #' @export
 #' @examples \dontrun{
 #' log_level(INFO, "hi there")

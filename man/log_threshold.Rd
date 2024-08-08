@@ -39,5 +39,9 @@ log_threshold(ERROR, namespace = log_namespaces())
 }
 }
 \seealso{
-\code{\link[=logger]{logger()}}, \code{\link[=log_layout]{log_layout()}}, \code{\link[=log_formatter]{log_formatter()}}, \code{\link[=log_appender]{log_appender()}}
+Other log configutation functions: 
+\code{\link{log_appender}()},
+\code{\link{log_formatter}()},
+\code{\link{log_layout}()}
 }
+\concept{log configutation functions}

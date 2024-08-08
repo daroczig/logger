@@ -49,9 +49,13 @@ log_info(12, 1 + 1, 2 * 2)
 }
 }
 \seealso{
-This is a \code{\link[=log_formatter]{log_formatter()}}, for alternatives, see
-\code{\link[=formatter_paste]{formatter_paste()}}, \code{\link[=formatter_glue]{formatter_glue()}},
-\code{\link[=formatter_glue_safe]{formatter_glue_safe()}}, \code{\link[=formatter_glue_or_sprintf]{formatter_glue_or_sprintf()}},
-\code{\link[=formatter_json]{formatter_json()}}, \code{\link[=formatter_pander]{formatter_pander()}} and \code{\link[=skip_formatter]{skip_formatter()}}
-for marking a string not to apply the formatter on it.
+Other \code{log_formatters}: 
+\code{\link{formatter_glue}()},
+\code{\link{formatter_glue_or_sprintf}()},
+\code{\link{formatter_glue_safe}()},
+\code{\link{formatter_json}()},
+\code{\link{formatter_pander}()},
+\code{\link{formatter_paste}()},
+\code{\link{formatter_sprintf}()}
 }
+\concept{\code{log_formatters}}

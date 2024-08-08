@@ -26,5 +26,9 @@ log_info(42)
 }
 }
 \seealso{
-\code{\link[=logger]{logger()}}, \code{\link[=log_threshold]{log_threshold()}}, \code{\link[=log_appender]{log_appender()}} and \code{\link[=log_formatter]{log_formatter()}}
+Other log configutation functions: 
+\code{\link{log_appender}()},
+\code{\link{log_formatter}()},
+\code{\link{log_threshold}()}
 }
+\concept{log configutation functions}
