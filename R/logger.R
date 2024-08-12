@@ -275,6 +275,20 @@ log_namespaces <- function() {
 }
 
 
+#' Returns number of currently active indices
+#' 
+#' @param namespace string referring to the `logger` environment /
+#'   config to be used to override the target of the message record to
+#'   be used instead of the default namespace, which is defined by the
+#'   R package name from which the logger was called, and falls back
+#'   to a common, global namespace.
+#' @return number of indices
+#' @export
+log_indices <- function(namespace = "global") {
+  length(get(logger:::fallback_namespace(namespace), envir = logger:::namespaces)) 
+}
+
+
 #' Log a message with given log level
 #' @param level log level, see [log_levels()] for more details
 #' @param ... R objects that can be converted to a character vector
