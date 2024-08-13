@@ -276,12 +276,11 @@ log_namespaces <- function() {
 
 
 #' Returns number of currently active indices
-#' 
 #' @inheritParams get_logger_definitions
 #' @return number of indices
 #' @export
 log_indices <- function(namespace = "global") {
-  length(get(fallback_namespace(namespace), envir = namespaces)) 
+  length(get(fallback_namespace(namespace), envir = namespaces))
 }
 
 
