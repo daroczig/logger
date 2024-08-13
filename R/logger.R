@@ -281,7 +281,7 @@ log_namespaces <- function() {
 #' @return number of indices
 #' @export
 log_indices <- function(namespace = "global") {
-  length(get(logger::fallback_namespace(namespace), envir = logger::namespaces)) 
+  length(get(fallback_namespace(namespace), envir = namespaces)) 
 }
 
 
