@@ -277,15 +277,11 @@ log_namespaces <- function() {
 
 #' Returns number of currently active indices
 #' 
-#' @param namespace string referring to the `logger` environment /
-#'   config to be used to override the target of the message record to
-#'   be used instead of the default namespace, which is defined by the
-#'   R package name from which the logger was called, and falls back
-#'   to a common, global namespace.
+#' @inheritParams get_logger_definitions
 #' @return number of indices
 #' @export
 log_indices <- function(namespace = "global") {
-  length(get(logger:::fallback_namespace(namespace), envir = logger:::namespaces)) 
+  length(get(logger::fallback_namespace(namespace), envir = logger::namespaces)) 
 }
 
 
