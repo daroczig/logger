@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# logger
+# logger <a href="https://daroczig.github.io/logger"><img src="man/figures/logo.png" align="right" height="138" alt="logger website" /></a>
 
 <!-- badges: start -->
 
@@ -46,11 +46,11 @@ messages in ad-hoc and programmatic ways:
 library(logger)
 log_threshold(DEBUG)
 log_info("Script starting up...")
-#> INFO [2024-08-05 16:05:22] Script starting up...
+#> INFO [2024-08-15 11:59:27] Script starting up...
 
 pkgs <- available.packages()
-log_info('There are {nrow(pkgs)} R packages hosted on CRAN!')
-#> INFO [2024-08-05 16:05:23] There are 21132 R packages hosted on CRAN!
+log_info("There are {nrow(pkgs)} R packages hosted on CRAN!")
+#> INFO [2024-08-15 11:59:28] There are 21131 R packages hosted on CRAN!
 
 for (letter in letters) {
   lpkgs <- sum(grepl(letter, pkgs[, "Package"], ignore.case = TRUE))
@@ -59,23 +59,23 @@ for (letter in letters) {
     "{lpkgs} R packages including the {shQuote(letter)} letter"
   )
 }
-#> DEBUG [2024-08-05 16:05:23] 10194 R packages including the 'a' letter
-#> DEBUG [2024-08-05 16:05:23] 7016 R packages including the 'c' letter
-#> DEBUG [2024-08-05 16:05:23] 5751 R packages including the 'd' letter
-#> DEBUG [2024-08-05 16:05:23] 10908 R packages including the 'e' letter
-#> DEBUG [2024-08-05 16:05:23] 8825 R packages including the 'i' letter
-#> DEBUG [2024-08-05 16:05:23] 7060 R packages including the 'l' letter
-#> DEBUG [2024-08-05 16:05:23] 7045 R packages including the 'm' letter
-#> DEBUG [2024-08-05 16:05:23] 6665 R packages including the 'n' letter
-#> DEBUG [2024-08-05 16:05:23] 7863 R packages including the 'o' letter
-#> DEBUG [2024-08-05 16:05:23] 6582 R packages including the 'p' letter
-#> DEBUG [2024-08-05 16:05:23] 11230 R packages including the 'r' letter
-#> DEBUG [2024-08-05 16:05:23] 10296 R packages including the 's' letter
-#> DEBUG [2024-08-05 16:05:23] 9531 R packages including the 't' letter
+#> DEBUG [2024-08-15 11:59:28] 10193 R packages including the 'a' letter
+#> DEBUG [2024-08-15 11:59:28] 7016 R packages including the 'c' letter
+#> DEBUG [2024-08-15 11:59:28] 5751 R packages including the 'd' letter
+#> DEBUG [2024-08-15 11:59:28] 10907 R packages including the 'e' letter
+#> DEBUG [2024-08-15 11:59:28] 8825 R packages including the 'i' letter
+#> DEBUG [2024-08-15 11:59:28] 7059 R packages including the 'l' letter
+#> DEBUG [2024-08-15 11:59:28] 7045 R packages including the 'm' letter
+#> DEBUG [2024-08-15 11:59:28] 6665 R packages including the 'n' letter
+#> DEBUG [2024-08-15 11:59:28] 7863 R packages including the 'o' letter
+#> DEBUG [2024-08-15 11:59:28] 6581 R packages including the 'p' letter
+#> DEBUG [2024-08-15 11:59:28] 11229 R packages including the 'r' letter
+#> DEBUG [2024-08-15 11:59:28] 10296 R packages including the 's' letter
+#> DEBUG [2024-08-15 11:59:28] 9531 R packages including the 't' letter
 
 log_warn("There might be many, like {1:2} or more warnings!!!")
-#> WARN [2024-08-05 16:05:23] There might be many, like 1 or more warnings!!!
-#> WARN [2024-08-05 16:05:23] There might be many, like 2 or more warnings!!!
+#> WARN [2024-08-15 11:59:28] There might be many, like 1 or more warnings!!!
+#> WARN [2024-08-15 11:59:28] There might be many, like 2 or more warnings!!!
 ```
 
 You can even use a custom log layout to render the log records with
@@ -161,6 +161,9 @@ topics:
 
 </div>
 
-If you prefer visual content, you can watch the video recording of the "Getting things logged" talk at RStudio::conf(2020):
+If you prefer visual content, you can watch the video recording of the
+“Getting things logged” talk at RStudio::conf(2020):
 
-[![Gergely Daroczi presenting "Getting things logged" on using the `logger` R package at the RStudio conference in 2020](https://img.youtube.com/vi/_rUuBbml9dU/0.jpg)](https://www.youtube.com/watch?v=_rUuBbml9dU)
+[![Gergely Daroczi presenting “Getting things logged” on using the
+`logger` R package at the RStudio conference in
+2020](https://img.youtube.com/vi/_rUuBbml9dU/0.jpg)](https://www.youtube.com/watch?v=_rUuBbml9dU)
