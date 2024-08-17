@@ -324,42 +324,50 @@ log_indices <- function(namespace = "global") {
 #' log_info(glue::glue("ok {1:3} + {1:3} = {2*(1:3)}"))
 #' }
 #' @return Invisible `list` of `logger` objects. See [logger()] for more details on the format/
-log_level <- function(level, ..., namespace = NA_character_,
-                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+log_level <- function(level,
+                      ...,
+                      namespace = NA_character_,
+                      .logcall = sys.call(),
+                      .topcall = sys.call(-1),
+                      .topenv = parent.frame()) {
+  level <- validate_log_level(level)
   ## guess namespace
   if (is.na(namespace)) {
     topenv <- top_env_name(.topenv)
     namespace <- ifelse(topenv == "R_GlobalEnv", "global", topenv)
   }
+  .topcall <- .topcall %||% NA
 
-  definitions <- get_logger_definitions(namespace, .topenv = .topenv)
-  level <- validate_log_level(level)
-
-  ## super early return (even before evaluating passed parameters)
-  if (length(definitions) == 1 && level > definitions[[1]]$threshold) {
-    return(invisible(NULL))
-  }
-
-  log_arg <- list(...)
-  log_arg$level <- level
-  log_arg$.logcall <- .logcall
-  log_arg$.topcall <- if (!is.null(.topcall)) {
-    .topcall
-  } else {
-    ## cannot pass NULL
-    NA
-  }
-  log_arg$.topenv <- .topenv
-  log_arg$namespace <- namespace
-
-  invisible(lapply(definitions, function(definition) {
-    if (level > definition$threshold) {
-      return(NULL)
+  loggers <- get_logger_definitions(namespace, .topenv = .topenv)
+  for (logger in loggers) {
+    if (level > logger$threshold) {
+      next
     }
 
-    log_fun <- do.call(logger, definition)
-    structure(do.call(log_fun, log_arg), class = "logger")
-  }))
+    if (...length() == 1 && is_skip_formatter(..1)) {
+      # optionally skip fomrmatting
+      message <- ..1
+    } else {
+      message <- logger$formatter(
+        ...,
+        .logcall = .logcall,
+        .topcall = .topcall,
+        .topenv = .topenv
+      )
+    }
+
+    record <- logger$layout(
+      level,
+      message,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
+    logger$appender(record)
+  }
+
+  invisible()
 }
 
 

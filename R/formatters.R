@@ -205,6 +205,9 @@ skip_formatter <- function(message, ...) {
   structure(message, skip_formatter = TRUE)
 }
 
+is_skip_formatter <- function(x) {
+  isTRUE(attr(x, "skip_formatter", exact = TRUE))
+}
 
 #' Mimic the default formatter used in the \pkg{logging} package
 #'
@@ -228,17 +231,18 @@ skip_formatter <- function(message, ...) {
 #' log_info("vector %s", 1:3)
 #' log_info(12, 1 + 1, 2 * 2)
 #' }
-formatter_logging <- structure(function(...,
-                                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-  params <- list(...)
-  .logcall <- substitute(.logcall)
-
-  if (is.character(params[[1]])) {
-    return(do.call(sprintf, params, envir = .topenv))
+formatter_logging <- structure(function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  # If the first argument is a string, then use sprintf
+  if (is.character(..1)) {
+    return(sprintf(...))
   }
 
+  # Otherwise show unevaluated inputs next to result
+  params <- list(...)
+  args <- as.list(.logcall)[-1]
+
   sapply(seq_along(params), function(i) {
-    paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ": ")
+    paste(deparse(args[[i]]), params[[i]], sep = ": ")
   })
 }, generator = quote(formatter_logging()))
 

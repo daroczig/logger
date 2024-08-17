@@ -100,3 +100,7 @@ catch_base_log <- function(level, namespace, .topcall = sys.call(-1), .topenv = 
 in_pkgdown <- function() {
   identical(Sys.getenv("IN_PKGDOWN"), "true")
 }
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
