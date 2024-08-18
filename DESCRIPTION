@@ -14,9 +14,10 @@ Description: Inspired by the the 'futile.logger' R package and 'logging'
 License: AGPL-3
 URL: https://daroczig.github.io/logger/
 BugReports: https://github.com/daroczig/logger/issues
-Depends: 
+Depends:
     R (>= 4.0.0)
 Imports:
+    glue,
     utils
 Suggests:
     botor,
@@ -24,7 +25,6 @@ Suggests:
     covr,
     crayon,
     devtools,
-    glue,
     jsonlite,
     knitr,
     pander,
@@ -45,7 +45,7 @@ Enhances:
     futile.logger,
     log4r,
     logging
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: TRUE

@@ -37,7 +37,7 @@ reference:
 - title: Formatters
   desc: >
     Log formatters control how the inputs to the `log_` functions are converted
-    to a string. The default is `formatter_glue()` when `glue` is installed.
+    to a string. The default is `formatter_glue()`.
   contents:
   - log_formatter
   - starts_with("formatter_")
