@@ -101,13 +101,12 @@ in_pkgdown <- function() {
 }
 
 is_checking_logger <- function() {
-  Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "logger"
+  Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") == "logger"
 }
 
 needs_stdout <- function() {
   in_pkgdown() || is_checking_logger()
 }
-
 
 # allow mocking
 Sys.time <- NULL
