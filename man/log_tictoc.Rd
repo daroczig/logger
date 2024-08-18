@@ -24,7 +24,6 @@ Sys.sleep(0.1)
 log_tictoc("running")
 Sys.sleep(runif(1))
 log_tictoc("and running")
-\dontshow{rm(list = "global", envir = logger:::tictocs)}
 }
 \author{
 Thanks to Neal Fultz for the idea and original implementation!

@@ -196,7 +196,6 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 #' log_tictoc("running")
 #' Sys.sleep(runif(1))
 #' log_tictoc("and running")
-#' \dontshow{rm(list = "global", envir = logger:::tictocs)}
 #' @author Thanks to Neal Fultz for the idea and original implementation!
 log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
   ns <- fallback_namespace(namespace)

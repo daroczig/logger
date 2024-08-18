@@ -12,7 +12,6 @@ namespaces_reset <- function() {
 
 namespaces_default <- function() {
   has_glue <- requireNamespace("glue", quietly = TRUE)
-  needs_stdout <- in_pkgdown() || is_checking_logger()
 
   list(
     global = list(
@@ -20,7 +19,7 @@ namespaces_default <- function() {
         threshold = as.loglevel(Sys.getenv("LOGGER_LOG_LEVEL", unset = "INFO")),
         layout    = layout_simple,
         formatter = if (has_glue) formatter_glue else formatter_sprintf,
-        appender  = if (needs_stdout) appender_stdout else appender_console
+        appender  = if (needs_stdout()) appender_stdout else appender_console
       )
     ),
     .logger = list(
@@ -28,7 +27,7 @@ namespaces_default <- function() {
         threshold = ERROR,
         layout    = layout_simple,
         formatter = formatter_sprintf,
-        appender  = if (needs_stdout) appender_stdout else appender_console
+        appender  = if (needs_stdout()) appender_stdout else appender_console
       )
     )
   )

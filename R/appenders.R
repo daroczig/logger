@@ -166,11 +166,7 @@ appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, 
   force(max_files)
   structure(
     function(lines) {
-      if (in_pkgdown() || is_checking_logger()) {
-        appender_stdout(lines)
-      } else {
-        appender_console(lines)
-      }
+      if (needs_stdout()) appender_stdout(lines) else appender_console(lines)
       appender_file(file, append, max_lines, max_bytes, max_files)(lines)
     },
     generator = deparse(match.call())
