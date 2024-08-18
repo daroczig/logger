@@ -1,31 +1,33 @@
 #' Dummy appender not delivering the log record to anywhere
 #' @param lines character vector
 #' @export
-appender_void <- structure(function(lines) {}, generator = quote(appender_void()))
-
+appender_void <- function(lines) {}
+attr(appender_void, "generator") <- quote(appender_void())
 
 #' Append log record to stderr
 #' @param lines character vector
 #' @export
 #' @family `log_appenders`
-appender_console <- structure(function(lines) {
+appender_console <- function(lines) {
   cat(lines, file = stderr(), sep = "\n")
-}, generator = quote(appender_console()))
+}
+attr(appender_console, "generator") <- quote(appender_console())
 
 
 #' @export
 #' @rdname appender_console
 appender_stderr <- appender_console
+attr(appender_stderr, "generator") <- quote(appender_stderr())
 
 
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
 #' @family `log_appenders`
-appender_stdout <- structure(function(lines) {
+appender_stdout <- function(lines) {
   cat(lines, sep = "\n")
-}, generator = quote(appender_stdout()))
-
+}
+attr(appender_stdout, "generator") <- quote(appender_stdout())
 
 #' Append log messages to a file
 #'
