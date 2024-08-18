@@ -397,7 +397,9 @@ appender_kinesis <- function(stream) {
 #' attr(my_appender, "async_writer_process")$is_alive()
 #' attr(my_appender, "async_writer_process")$read_error()
 #' }
-appender_async <- function(appender, batch = 1, namespace = "async_logger",
+appender_async <- function(appender,
+                           batch = 1,
+                           namespace = "async_logger",
                            init = function() log_info("Background process started")) {
   fail_on_missing_package("txtq")
   fail_on_missing_package("callr")
