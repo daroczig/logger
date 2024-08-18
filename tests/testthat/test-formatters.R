@@ -1,13 +1,6 @@
-everything <- 42
-g <- function() {
-  log_info("Hi {everything}")
-}
-f <- function() {
-  log_info("Hi %s", everything)
-}
-
 test_that("glue works", {
   local_test_logger(formatter = formatter_glue)
+  a <- 43
 
   expect_equal(formatter_glue("Hi"), "Hi")
   expect_equal(formatter_glue("   Hi"), "   Hi")
@@ -16,15 +9,16 @@ test_that("glue works", {
   expect_equal(formatter_glue("pi is {round(pi, 2)}"), "pi is 3.14")
   expect_equal(formatter_glue("Hi {42}"), "Hi 42")
   expect_equal(formatter_glue("Hi {a}", a = 42), "Hi 42")
-  expect_equal(formatter_glue("Hi {everything}"), "Hi 42")
   expect_equal(formatter_glue("Hi {1:2}"), paste("Hi", 1:2))
 
   expect_output(do.call(logger, namespaces$global[[1]])(INFO, 42), "42")
-  expect_output(do.call(logger, namespaces$global[[1]])(INFO, "Hi {everything}"), "42")
+  expect_output(do.call(logger, namespaces$global[[1]])(INFO, "Hi {a}"), "43")
 
-  expect_output(log_info("Hi {everything}"), "42")
-  expect_output(log_warn("Hi {everything}"), "42")
-  expect_output(g(), "42")
+  expect_equal(formatter_glue("Hi {a}"), "Hi 43")
+  expect_output(log_info("Hi {a}"), "43")
+  expect_output(log_warn("Hi {a}"), "43")
+  f <- function() log_info("Hi {a}")
+  expect_output(f(), "43")
 
   local_test_logger(
     formatter = formatter_glue,
@@ -52,11 +46,13 @@ test_that("glue_safe works", {
   expect_equal(formatter_glue_safe("Hi"), "Hi")
   expect_equal(formatter_glue_safe("   Hi"), "   Hi")
   expect_equal(formatter_glue_safe("Hi {a}", a = 42), "Hi 42")
-  expect_equal(formatter_glue_safe("Hi {everything}"), "Hi 42")
 
-  expect_output(log_info("Hi {everything}"), "42")
-  expect_output(log_warn("Hi {everything}"), "42")
-  expect_output(g(), "42")
+  a <- 43
+  expect_equal(formatter_glue_safe("Hi {a}"), "Hi 43")
+  expect_output(log_info("Hi {a}"), "43")
+  expect_output(log_warn("Hi {a}"), "43")
+  f <- function() log_info("Hi {a}")
+  expect_output(f(), "43")
 
   expect_error(formatter_glue_safe("Hi {42}"))
   expect_error(formatter_glue_safe("malformed {"))
@@ -68,7 +64,6 @@ test_that("sprintf works", {
 
   expect_equal(formatter_sprintf("Hi"), "Hi")
   expect_equal(formatter_sprintf("Hi %s", 42), "Hi 42")
-  expect_equal(formatter_sprintf("Hi %s", everything), "Hi 42")
   expect_equal(formatter_sprintf("Hi %s", 1:2), paste("Hi", 1:2))
   expect_equal(formatter_sprintf("1 + %s", 1), "1 + 1")
   expect_equal(formatter_sprintf("=>%2i", 2), "=> 2")
@@ -79,17 +74,20 @@ test_that("sprintf works", {
   expect_error(formatter_sprintf("%s and %i", 1))
   expect_equal(formatter_sprintf("%s and %i", 1, 2), "1 and 2")
 
-  expect_output(log_info("Hi %s", everything), "42")
-  expect_output(f(), "42")
+  a <- 43
+  expect_output(log_info("Hi %s", a), "43")
+  expect_equal(formatter_sprintf("Hi %s", a), "Hi 43")
+  f <- function() log_info("Hi %s", a)
+  expect_output(f(), "43")
 })
 
 
-result <- c(
-  "Hi foo, did you know that 2*4=8?",
-  "Hi bar, did you know that 2*4=8?"
-)
-
 test_that("glue+sprintf works", {
+  result <- c(
+    "Hi foo, did you know that 2*4=8?",
+    "Hi bar, did you know that 2*4=8?"
+  )
+
   expect_equal(formatter_glue_or_sprintf("Hi ", "{c('foo', 'bar')}, did you know that 2*4={2*4}?"), result)
   expect_equal(formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4={2*4}?"), result)
   expect_equal(formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4=%s?", 2 * 4), result)
@@ -125,12 +123,14 @@ test_that("formatter_logging works", {
 })
 
 test_that("special chars in the text work", {
-  expect_equal(formatter_glue("JSON: {jsonlite::toJSON(1:4)}"), "JSON: [1,2,3,4]")
-  expect_equal(formatter_glue("JSON: {jsonlite::toJSON(iris[1:2, ], auto_unbox = TRUE)}"), 'JSON: [{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
+  array <- "[1, 2, 3, 4]"
+  object <- '{"x": 1, "y": 2}'
+  expect_equal(formatter_glue("JSON: {array}"), paste0("JSON: ", array))
+  expect_equal(formatter_glue("JSON: {object}"), paste0("JSON: ", object))
 
   local_test_logger()
-  expect_output(log_info("JSON: {jsonlite::toJSON(1:4)}"), "[1,2,3,4]")
-  expect_output(log_info("JSON: {jsonlite::toJSON(iris[1:2, ], auto_unbox = TRUE)}"), '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,"Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]') # nolint
+  expect_output(log_info("JSON: {array}"), paste0("JSON: ", array), fixed = TRUE)
+  expect_output(log_info("JSON: {object}"), paste0("JSON: ", object), fixed = TRUE)
 })
 
 test_that("pander formatter", {
@@ -143,10 +143,6 @@ test_that("pander formatter", {
   expect_output(log_info(head(iris)), "Sepal.Length")
   expect_output(log_info(lm(hp ~ wt, mtcars)), "Fitting linear model")
 })
-
-## cleanup
-rm(everything)
-rm(f)
 
 test_that("paste formatter in actual logs", {
   local_test_logger(formatter = formatter_paste)

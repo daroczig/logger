@@ -279,6 +279,15 @@ log_namespaces <- function() {
 }
 
 
+#' Returns number of currently active indices
+#' @inheritParams get_logger_definitions
+#' @return number of indices
+#' @export
+log_indices <- function(namespace = "global") {
+  length(get(fallback_namespace(namespace), envir = namespaces))
+}
+
+
 #' Log a message with given log level
 #' @param level log level, see [log_levels()] for more details
 #' @param ... R objects that can be converted to a character vector

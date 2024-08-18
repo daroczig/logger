@@ -1,6 +1,3 @@
-library(logger)
-library(testthat)
-
 test_that("tictoc", {
   expect_match(capture.output(log_tictoc(), type = "message"), "timer tic 0 secs")
   ## let time pass a bit

@@ -16,10 +16,7 @@ test_that("catch_base_log", {
   local_test_logger(layout = layout_blank)
   expect_true(nchar(catch_base_log(INFO, NA_character_)) == 0)
 
-  local_test_logger(
-    layout = layout_glue_generator(format = "{namespace}/{fn} {level}: {msg}"),
-    namespace = "TEMP"
-  )
-  expect_true(nchar(catch_base_log(INFO, "TEMP", .topcall = NA)) == 14)
-  expect_true(nchar(catch_base_log(INFO, "TEMP", .topcall = call("5char"))) == 17)
+  local_test_logger(layout = layout_glue_generator(format = "{namespace}/{fn}"))
+  expect_equal(catch_base_log(INFO, "TEMP", .topcall = NA), "global/NA")
+  expect_equal(catch_base_log(INFO, "TEMP", .topcall = quote(f())), "global/f")
 })

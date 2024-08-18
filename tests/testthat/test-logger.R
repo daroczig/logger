@@ -127,7 +127,7 @@ test_that("print.level", {
 test_that("config setter called from do.call", {
   local_test_logger()
 
-  t <- tempfile()
+  t <- withr::local_tempfile()
   expect_error(do.call(log_appender, list(appender_file(t))), NA)
   log_info(42)
   expect_length(readLines(t), 1)
@@ -140,7 +140,6 @@ test_that("config setter called from do.call", {
   expect_error(do.call(log_layout, list(formatter_paste)), NA)
   log_info(42)
   expect_length(readLines(t), 3)
-  unlink(t)
 })
 
 test_that("providing log_level() args to wrappers diretly is OK", {

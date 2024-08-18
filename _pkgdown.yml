@@ -72,3 +72,4 @@ reference:
   - fail_on_missing_package
   - get_logger_meta_variables
   - log_namespaces
+  - log_indices
