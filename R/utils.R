@@ -100,12 +100,16 @@ in_pkgdown <- function() {
   identical(Sys.getenv("IN_PKGDOWN"), "true")
 }
 
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
 is_checking_logger <- function() {
   Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") == "logger"
 }
 
 needs_stdout <- function() {
-  in_pkgdown() || is_checking_logger()
+  in_pkgdown() || is_testing() || is_checking_logger()
 }
 
 # allow mocking
