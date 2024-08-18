@@ -1,4 +1,6 @@
 test_that("async logging", {
+  skip_on_cran()
+
   t <- withr::local_tempfile()
   local_test_logger(
     layout = layout_blank,
