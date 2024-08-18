@@ -23,6 +23,6 @@ test_that("log failure", {
   local_test_logger()
   expect_output(log_failure("foobar"), NA)
   expect_output(try(log_failure(foobar), silent = TRUE), "ERROR.*foobar")
-  expect_error(log_failure("foobar"), NA)
-  expect_match(capture.output(expect_error(log_failure(foobar))), "not found")
+  expect_no_error(log_failure("foobar"))
+  expect_snapshot(capture.output(log_failure(foobar)), error = TRUE)
 })

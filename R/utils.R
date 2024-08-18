@@ -1,6 +1,7 @@
 #' Check if R package can be loaded and fails loudly otherwise
 #' @param pkg string
 #' @param min_version optional minimum version needed
+#' @param call Call to include in error message.
 #' @export
 #' @importFrom utils packageVersion compareVersion
 #' @examples \dontrun{
@@ -9,8 +10,8 @@
 #' g <- function() fail_on_missing_package("stats")
 #' g()
 #' }
-fail_on_missing_package <- function(pkg, min_version) {
-  pc <- sys.call(which = 1)
+fail_on_missing_package <- function(pkg, min_version, call = NULL) {
+  pc <- call %||% sys.call(which = 1)
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(
       sprintf(

@@ -35,14 +35,18 @@ test_that("JSON parser layout", {
 })
 
 test_that("must throw errors", {
-  expect_error(layout_simple(FOOBAR))
-  expect_error(layout_simple(42))
-  expect_error(layout_simple(msg = "foobar"))
+  expect_snapshot(error = TRUE, {
+    layout_simple(FOOBAR)
+    layout_simple(42)
+    layout_simple(msg = "foobar")
+  })
 
-  expect_error(layout_glue(FOOBAR))
-  expect_error(layout_glue(42))
-  expect_error(layout_glue(msg = "foobar"))
-  expect_error(layout_glue(level = 53, msg = "foobar"))
+  expect_snapshot(error = TRUE, {
+    layout_glue(FOOBAR)
+    layout_glue(42)
+    layout_glue(msg = "foobar")
+    layout_glue(level = 53, msg = "foobar")
+  })
 })
 
 test_that("logging layout", {
