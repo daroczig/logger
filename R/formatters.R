@@ -3,12 +3,7 @@
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 formatter_paste <- function(...,
                             .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   paste(...)
@@ -21,12 +16,7 @@ attr(formatter_paste, "generator") <- quote(formatter_paste())
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 formatter_sprintf <- function(fmt, ...,
                               .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   sprintf(fmt, ...)
@@ -41,12 +31,7 @@ attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 #' @note Although this is the default log message formatter function,
 #'     but when \pkg{glue} is not installed, [formatter_sprintf()]
 #'     will be used as a fallback.
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()],
-#'     [formatter_glue_or_sprintf()], [formatter_glue_safe()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 #' @importFrom utils str
 formatter_glue <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   fail_on_missing_package("glue")
@@ -75,12 +60,7 @@ attr(formatter_glue, "generator") <- quote(formatter_glue())
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_glue()], [formatter_paste()], [formatter_sprintf()],
-#'     [formatter_glue()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 #' @importFrom utils str
 formatter_glue_safe <- function(...,
                                 .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
@@ -118,11 +98,7 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' @param ... passed to `glue` for the text interpolation
 #' @inheritParams log_level
 #' @return character vector
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_logging()],
-#'     [formatter_json()], [formatter_pander()] and [skip_formatter()]
-#'     for marking a string not to apply the formatter on it.
+#' @family `log_formatters`
 #' @export
 #' @examples \dontrun{
 #' formatter_glue_or_sprintf("{a} + {b} = %s", a = 2, b = 3, 5)
@@ -193,13 +169,7 @@ attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf(
 #' @return character vector
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_formatter()] potentially to be used with
-#'     [layout_json_parser()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_pander()] and
-#'     [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 #' @examples \dontrun{
 #' log_formatter(formatter_json)
 #' log_layout(layout_json_parser())
@@ -249,11 +219,7 @@ skip_formatter <- function(message, ...) {
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_json()], [formatter_pander()] and [skip_formatter()]
-#'     for marking a string not to apply the formatter on it.
+#' @family `log_formatters`
 #' @examples \dontrun{
 #' log_formatter(formatter_logging)
 #' log_info("42")
@@ -285,10 +251,7 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' @return character vector
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()]
+#' @family `log_formatters`
 #' @examples \dontrun{
 #' log_formatter(formatter_pander)
 #' log_info("42")

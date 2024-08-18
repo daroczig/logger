@@ -30,6 +30,7 @@
 #' @export
 #' @importFrom utils packageVersion
 #' @seealso [layout_glue_generator()]
+#' @family `log_layouts`
 get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_,
                                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   sysinfo <- Sys.info()
@@ -87,6 +88,7 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 #' log_info("try {runif(1)}")
 #' }
 #' @seealso See example calls from [layout_glue()] and [layout_glue_colors()].
+#' @family `log_layouts`
 layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:%M:%S")}] {msg}') {
   force(format)
 
@@ -114,9 +116,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see
-#'   [layout_simple()], [layout_glue_colors()], [layout_json()], or
-#'   generator functions such as [layout_glue_generator()]
+#' @family `log_layouts`
 layout_blank <- function(level, msg, namespace = NA_character_,
                          .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   msg
@@ -129,10 +129,7 @@ attr(layout_blank, "generator") <- quote(layout_blank())
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see
-#'   [layout_blank()], [layout_glue()], [layout_glue_colors()],
-#'   [layout_json()], [layout_json_parser()], or generator functions
-#'   such as [layout_glue_generator()]
+#' @family `log_layouts`
 layout_simple <- function(level, msg, namespace = NA_character_,
                           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
@@ -144,10 +141,7 @@ attr(layout_simple, "generator") <- quote(layout_simple())
 #' @param msg string message
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see
-#'   [layout_blank()], [layout_glue()], [layout_glue_colors()],
-#'   [layout_json()], [layout_json_parser()], or generator functions
-#'   such as [layout_glue_generator()]
+#' @family `log_layouts`
 #' @examples \dontrun{
 #' log_layout(layout_logging)
 #' log_info(42)
@@ -181,10 +175,7 @@ attr(layout_logging, "generator") <- quote(layout_logging())
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see
-#'   [layout_blank()], [layout_simple()], [layout_glue_colors()],
-#'   [layout_json()], [layout_json_parser()], or generator functions
-#'   such as [layout_glue_generator()]
+#' @family `log_layouts`
 layout_glue <- layout_glue_generator()
 attr(layout_glue, "generator") <- quote(layout_glue())
 
@@ -197,10 +188,7 @@ attr(layout_glue, "generator") <- quote(layout_glue())
 #' @inheritParams layout_simple
 #' @return character vector
 #' @export
-#' @seealso This is a [log_layout()], for alternatives, see
-#'   [layout_blank()], [layout_simple()], [layout_glue()],
-#'   [layout_json()], [layout_json_parser()], or generator functions
-#'   such as [layout_glue_generator()]
+#' @family `log_layouts`
 #' @note This functionality depends on the \pkg{crayon} package.
 #' @examplesIf requireNamespace("crayon")
 #' log_layout(layout_glue_colors)
@@ -228,10 +216,7 @@ attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 #' @return character vector
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_layout()], for alternatives, see
-#'   [layout_blank()], [layout_simple()], [layout_glue()],
-#'   [layout_glue_colors()], [layout_json_parser()], or generator
-#'   functions such as [layout_glue_generator()]
+#' @family `log_layouts`
 #' @examples \dontrun{
 #' log_layout(layout_json())
 #' log_info(42)
@@ -260,10 +245,7 @@ layout_json <- function(fields = default_fields()) {
 #'   JSON
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_layout()] potentially to be used with
-#'   [formatter_json()], for alternatives, see [layout_simple()],
-#'   [layout_glue()], [layout_glue_colors()], [layout_json()] or
-#'   generator functions such as [layout_glue_generator()]
+#' @family `log_layouts`
 #' @examples \dontrun{
 #' log_formatter(formatter_json)
 #' log_info(everything = 42)
