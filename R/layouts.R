@@ -117,11 +117,11 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-layout_blank <- structure(function(level, msg, namespace = NA_character_,
-                                   .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_blank <- function(level, msg, namespace = NA_character_,
+                         .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   msg
-}, generator = quote(layout_blank()))
-
+}
+attr(layout_blank, "generator") <- quote(layout_blank())
 
 #' Format a log record by concatenating the log level, timestamp and
 #' message
@@ -130,11 +130,11 @@ layout_blank <- structure(function(level, msg, namespace = NA_character_,
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-layout_simple <- structure(function(level, msg, namespace = NA_character_,
-                                    .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_simple <- function(level, msg, namespace = NA_character_,
+                          .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
-}, generator = quote(layout_simple()))
-
+}
+attr(layout_simple, "generator") <- quote(layout_simple())
 
 #' Format a log record as the logging package does by default
 #' @inheritParams layout_simple
@@ -150,8 +150,8 @@ layout_simple <- structure(function(level, msg, namespace = NA_character_,
 #' devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 #' logger_tester_function(INFO, 42)
 #' }
-layout_logging <- structure(function(level, msg, namespace = NA_character_,
-                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_logging <- function(level, msg, namespace = NA_character_,
+                           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
   meta <- get_logger_meta_variables(
     log_level = level, namespace = namespace,
     .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
@@ -162,8 +162,8 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
     ifelse(meta$ns == "global", "", meta$ns), ":",
     msg
   )
-}, generator = quote(layout_logging()))
-
+}
+attr(layout_logging, "generator") <- quote(layout_logging())
 
 #' Format a log message with `glue`
 #'
@@ -177,7 +177,7 @@ layout_logging <- structure(function(level, msg, namespace = NA_character_,
 #' @export
 #' @family `log_layouts`
 layout_glue <- layout_glue_generator()
-
+attr(layout_glue, "generator") <- quote(layout_glue())
 
 #' Format a log message with `glue` and ANSI escape codes to add colors
 #'
@@ -208,7 +208,7 @@ layout_glue_colors <- layout_glue_generator(
     "{grayscale_by_log_level(msg, levelr)}"
   )
 )
-
+attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 
 #' Generate log layout function rendering JSON
 #' @param fields character vector of field names to be included in the
