@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Logs a long line to stand out from the console</h1>
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/master/R/helpers.R" class="external-link"><code>R/helpers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/main/R/helpers.R" class="external-link"><code>R/helpers.R</code></a></small>
       <div class="d-none name"><code>log_separator.Rd</code></div>
     </div>
 
@@ -109,15 +109,15 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2024-08-17 10:59:07</span>] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2024-08-18 19:49:36</span>] </span>
 <span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-17 10:59:07</span>] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-18 19:49:36</span>] </span>
 <span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-17 10:59:07</span>] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-08-18 19:49:36</span>] </span>
 <span class="r-in"><span><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">logger</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1435-435/5878/global/eval 2024-08-17 10:59:07.20112 ERROR: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az2021-63/5885/global/eval 2024-08-18 19:49:36.738119 ERROR: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_blank</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_separator</span><span class="op">(</span><span class="va">ERROR</span>, separator <span class="op">=</span> <span class="st">"!"</span>, width <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>

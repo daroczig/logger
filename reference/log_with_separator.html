@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Logs a message in a very visible way</h1>
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/master/R/helpers.R" class="external-link"><code>R/helpers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/main/R/helpers.R" class="external-link"><code>R/helpers.R</code></a></small>
       <div class="d-none name"><code>log_with_separator.Rd</code></div>
     </div>
 
@@ -137,9 +137,9 @@ to a common, global namespace.</p></dd>
 <span class="r-in"><span><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">logger</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"Boo!"</span>, level <span class="op">=</span> <span class="va">FATAL</span>, width <span class="op">=</span> <span class="fl">120</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1435-435/5878/global/eval 2024-08-17 10:59:08.360446 FATAL: =======================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1435-435/5878/global/log_with_separator 2024-08-17 10:59:08.36145 FATAL: = Boo!                                                =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1435-435/5878/global/eval 2024-08-17 10:59:08.363293 FATAL: =======================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az2021-63/5885/global/eval 2024-08-18 19:49:38.224587 FATAL: ========================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az2021-63/5885/global/log_with_separator 2024-08-18 19:49:38.225645 FATAL: = Boo!                                                 =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az2021-63/5885/global/eval 2024-08-18 19:49:38.227531 FATAL: ========================================================</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
