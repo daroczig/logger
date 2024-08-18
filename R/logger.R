@@ -280,7 +280,8 @@ log_namespaces <- function() {
 
 
 #' Returns number of currently active indices
-#' @inheritParams get_logger_definitions
+#' @param namespace override the default / auto-picked namespace with
+#'   a custom string
 #' @return number of indices
 #' @export
 log_indices <- function(namespace = "global") {
