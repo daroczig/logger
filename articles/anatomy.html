@@ -117,7 +117,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "f()"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2024-08-18 20:20:41 UTC"</span></span>
+<span><span class="co">#&gt; [1] "2024-08-22 20:01:44 UTC"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $levelr</span></span>
 <span><span class="co">#&gt; Log level: INFO</span></span>
@@ -126,7 +126,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "INFO"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pid</span></span>
-<span><span class="co">#&gt; [1] 7718</span></span>
+<span><span class="co">#&gt; [1] 7670</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $r_version</span></span>
 <span><span class="co">#&gt; [1] "4.4.1"</span></span>
@@ -135,7 +135,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $node</span></span>
-<span><span class="co">#&gt; [1] "fv-az773-934"</span></span>
+<span><span class="co">#&gt; [1] "fv-az1121-872"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $arch</span></span>
 <span><span class="co">#&gt; [1] "x86_64"</span></span>
@@ -166,7 +166,7 @@ requests with lower log level will be thrown away</p>
 <span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">"Oops"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ERROR [2024-08-18 20:20:41] Oops</span></span></code></pre></div>
+<span><span class="co">#&gt; ERROR [2024-08-22 20:01:44] Oops</span></span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and
@@ -211,7 +211,7 @@ in the <code>global</code> namespace):</p>
 <span><span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_stdout</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"I am a low level log message that will not be printed with a high log level threshold"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">"I am a higher level log message that is very likely to be printed"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; WARN [2024-08-18 20:20:41] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
+<span><span class="co">#&gt; WARN [2024-08-22 20:01:44] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied
 to a logging namespace, and one log request might trigger multiple
 <code>logger</code> definitions as well (stacking). Find more
