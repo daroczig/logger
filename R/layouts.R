@@ -31,8 +31,11 @@
 #' @importFrom utils packageVersion
 #' @seealso [layout_glue_generator()]
 #' @family `log_layouts`
-get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_,
-                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+get_logger_meta_variables <- function(log_level = NULL,
+                                      namespace = NA_character_,
+                                      .logcall = sys.call(),
+                                      .topcall = sys.call(-1),
+                                      .topenv = parent.frame()) {
   sysinfo <- Sys.info()
   timestamp <- Sys.time()
 
@@ -92,8 +95,12 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:%M:%S")}] {msg}') {
   force(format)
 
-  structure(function(level, msg, namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  structure(function(level,
+                     msg,
+                     namespace = NA_character_,
+                     .logcall = sys.call(),
+                     .topcall = sys.call(-1),
+                     .topenv = parent.frame()) {
     fail_on_missing_package("glue")
     if (!inherits(level, "loglevel")) {
       stop("Invalid log level, see ?log_levels")
@@ -101,8 +108,11 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 
     with(
       get_logger_meta_variables(
-        log_level = level, namespace = namespace,
-        .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
+        log_level = level,
+        namespace = namespace,
+        .logcall = .logcall,
+        .topcall = .topcall,
+        .topenv = .topenv
       ),
       glue::glue(format)
     )
@@ -117,8 +127,12 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-layout_blank <- function(level, msg, namespace = NA_character_,
-                         .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_blank <- function(level,
+                         msg,
+                         namespace = NA_character_,
+                         .logcall = sys.call(),
+                         .topcall = sys.call(-1),
+                         .topenv = parent.frame()) {
   msg
 }
 attr(layout_blank, "generator") <- quote(layout_blank())
@@ -130,8 +144,12 @@ attr(layout_blank, "generator") <- quote(layout_blank())
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-layout_simple <- function(level, msg, namespace = NA_character_,
-                          .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_simple <- function(level,
+                          msg,
+                          namespace = NA_character_,
+                          .logcall = sys.call(),
+                          .topcall = sys.call(-1),
+                          .topenv = parent.frame()) {
   paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
 }
 attr(layout_simple, "generator") <- quote(layout_simple())
@@ -150,8 +168,12 @@ attr(layout_simple, "generator") <- quote(layout_simple())
 #' devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 #' logger_tester_function(INFO, 42)
 #' }
-layout_logging <- function(level, msg, namespace = NA_character_,
-                           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_logging <- function(level,
+                           msg,
+                           namespace = NA_character_,
+                           .logcall = sys.call(),
+                           .topcall = sys.call(-1),
+                           .topenv = parent.frame()) {
   meta <- get_logger_meta_variables(
     log_level = level, namespace = namespace,
     .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
@@ -225,8 +247,12 @@ attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 layout_json <- function(fields = default_fields()) {
   force(fields)
 
-  structure(function(level, msg, namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  structure(function(level,
+                     msg,
+                     namespace = NA_character_,
+                     .logcall = sys.call(),
+                     .topcall = sys.call(-1),
+                     .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
     json <- get_logger_meta_variables(
@@ -257,13 +283,20 @@ layout_json <- function(fields = default_fields()) {
 layout_json_parser <- function(fields = default_fields()) {
   force(fields)
 
-  structure(function(level, msg, namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  structure(function(level,
+                     msg,
+                     namespace = NA_character_,
+                     .logcall = sys.call(),
+                     .topcall = sys.call(-1),
+                     .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
     meta <- get_logger_meta_variables(
-      log_level = level, namespace = namespace,
-      .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
     )[fields]
 
     msg <- jsonlite::fromJSON(msg)
@@ -290,10 +323,15 @@ default_fields <- function() {
 #' @return A character vector with a severity attribute.
 #' @export
 layout_syslognet <- structure(
-  function(level, msg, namespace = NA_character_,
-           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  function(level,
+           msg,
+           namespace = NA_character_,
+           .logcall = sys.call(),
+           .topcall = sys.call(-1),
+           .topenv = parent.frame()) {
     ret <- paste(attr(level, "level"), msg)
-    attr(ret, "severity") <- switch(attr(level, "level", exact = TRUE),
+    attr(ret, "severity") <- switch(
+      attr(level, "level", exact = TRUE),
       "FATAL" = "CRITICAL",
       "ERROR" = "ERR",
       "WARN" = "WARNING",

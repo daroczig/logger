@@ -141,7 +141,11 @@ log_separator <- function(level = INFO,
 #' log_layout(logger)
 #' log_with_separator("Boo!", level = FATAL, width = 120)
 #' @seealso [log_separator()]
-log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = "=", width = 80) {
+log_with_separator <- function(...,
+                               level = INFO,
+                               namespace = NA_character_,
+                               separator = "=",
+                               width = 80) {
   base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call(-1)))
 
   log_separator(
