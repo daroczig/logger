@@ -23,6 +23,7 @@
 #'   (eg R package name or `GlobalEnv`)
 #' * `call`: parent call (if any) calling the logging function
 #' * `fn`: function's (if any) name calling the logging function
+#'
 #' @param log_level log level as per [log_levels()]
 #' @inheritParams log_level
 #' @return list
