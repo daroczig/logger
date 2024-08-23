@@ -9,8 +9,11 @@ test_that("separator", {
 })
 
 test_that("tictoc", {
-  local_test_logger()
-  expect_output(log_tictoc(), "timer")
+  expect_match(capture.output(log_tictoc(), type = "message"), "timer tic 0 secs")
+  ## let time pass a bit
+  Sys.sleep(0.01)
+  expect_match(capture.output(log_tictoc(), type = "message"), "timer toc")
+  capture.output(expect_silent(log_tictoc()), type = "message")
 })
 
 test_that("log with separator", {
@@ -18,6 +21,16 @@ test_that("log with separator", {
   expect_output(log_with_separator(42), "===")
   expect_output(log_with_separator("Boo!", level = FATAL, width = 120), width = 120)
 })
+
+test_that("log with separator", {
+  local_test_logger(layout = layout_glue_generator("{level} {msg}"))
+
+  expect_snapshot({
+    log_with_separator(42)
+    log_with_separator(42, separator = "|")
+  })
+})
+
 
 test_that("log failure", {
   local_test_logger()
