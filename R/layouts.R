@@ -181,6 +181,11 @@ attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 layout_json <- function(fields = default_fields()) {
   force(fields)
 
+  if ("msg" %in% fields) {
+    warning("'msg' is always automatically included")
+    fields <- setdiff(fields, "msg")
+  }
+
   structure(function(level,
                      msg,
                      namespace = NA_character_,

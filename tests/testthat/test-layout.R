@@ -23,10 +23,17 @@ test_that("metavars", {
 })
 
 test_that("JSON layout", {
-  local_test_logger(layout = layout_json(fields = c("level", "msg")))
+  local_test_logger(layout = layout_json(fields = "level"))
 
   out <- jsonlite::fromJSON(capture.output(log_info("foobar")))
   expect_equal(out, list(level = "INFO", msg = "foobar"))
+})
+
+test_that("JSON layout warns if you include msg", {
+  expect_snapshot(layout <- layout_json(fields = "msg"))
+  local_test_logger(layout = layout)
+  out <- jsonlite::fromJSON(capture.output(log_info("foobar")))
+  expect_equal(out, list(msg = "foobar"))
 })
 
 test_that("JSON parser layout", {
