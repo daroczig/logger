@@ -37,13 +37,10 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 
     meta <- logger_meta_env(
       log_level = level,
-
-        namespace = namespace,
+      namespace = namespace,
       .logcall = .logcall,
-
-        .topcall = .topcall,
-
-        .topenv = .topenv,
+      .topcall = .topcall,
+      .topenv = .topenv,
       parent = environment()
     )
     glue::glue(format, .envir = meta)
