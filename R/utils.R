@@ -1,8 +1,13 @@
 #' Check if R package can be loaded and fails loudly otherwise
+#'
+#' We do not recommend using this function in new code; it only exported
+#' for historical reasons.
+#'
 #' @param pkg string
 #' @param min_version optional minimum version needed
 #' @export
 #' @importFrom utils packageVersion compareVersion
+#' @keywords internal
 #' @examples \dontrun{
 #' f <- function() fail_on_missing_package("foobar")
 #' f()
@@ -48,12 +53,12 @@ top_env_name <- function(.topenv = parent.frame()) {
 
 #' Deparse and join all lines into a single line
 #'
-#' Calling `deparse` and joining all the returned lines into a
-#' single line, separated by whitespace, and then cleaning up all the
-#' duplicated whitespace (except for excessive whitespace in strings
-#' between single or double quotes).
+#' We do not recommend using this function in new code; it only exported
+#' for historical reasons.
+#'
 #' @param x object to `deparse`
 #' @return string
+#' @keywords internal
 #' @export
 deparse_to_one_line <- function(x) {
   gsub('\\s+(?=(?:[^\\\'"]*[\\\'"][^\\\'"]*[\\\'"])*[^\\\'"]*$)', " ",

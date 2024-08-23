@@ -7,6 +7,7 @@
 #' @param msg String to color.
 #' @param level see [log_levels()]
 #' @return A string with ANSI escape codes.
+#' @keywords internal
 #' @export
 #' @examplesIf requireNamespace("crayon")
 #' cat(colorize_by_log_level("foobar", FATAL), "\n")

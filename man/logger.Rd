@@ -65,3 +65,4 @@ For more details, see the Anatomy of a Log Request
 vignette at
 \url{https://daroczig.github.io/logger/articles/anatomy.html}.
 }
+\keyword{internal}

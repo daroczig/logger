@@ -13,8 +13,7 @@ deparse_to_one_line(x)
 string
 }
 \description{
-Calling \code{deparse} and joining all the returned lines into a
-single line, separated by whitespace, and then cleaning up all the
-duplicated whitespace (except for excessive whitespace in strings
-between single or double quotes).
+We do not recommend using this function in new code; it only exported
+for historical reasons.
 }
+\keyword{internal}

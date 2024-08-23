@@ -12,7 +12,8 @@ fail_on_missing_package(pkg, min_version)
 \item{min_version}{optional minimum version needed}
 }
 \description{
-Check if R package can be loaded and fails loudly otherwise
+We do not recommend using this function in new code; it only exported
+for historical reasons.
 }
 \examples{
 \dontrun{
@@ -22,3 +23,4 @@ g <- function() fail_on_missing_package("stats")
 g()
 }
 }
+\keyword{internal}

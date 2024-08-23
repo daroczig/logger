@@ -41,3 +41,4 @@ cat(grayscale_by_log_level("foobar", DEBUG), "\n")
 cat(grayscale_by_log_level("foobar", TRACE), "\n")
 \dontshow{\}) # examplesIf}
 }
+\keyword{internal}
