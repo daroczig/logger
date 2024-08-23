@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In this vignette I suppose that you are already familiar with [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html) vignette.
+In this vignette I suppose that you are already familiar with `vignette("customize_logger")`.
 
 ## Custom log message formatter functions
 
@@ -43,7 +43,7 @@ layout_simple <- function(level, msg, ...) {
 
 Or much more complex, eg looking up the hostname of the machine, public IP address etc and logging all these automatically with the message of the log request.
 
-Your easiest option to set up a custom layout is calling `?layout_glue_generator` that comes with a nice API being able to access a bunch of meta-information on the log request via `?get_logger_meta_variables`. For such example, see the [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html) vignette.
+Your easiest option to set up a custom layout is calling `?layout_glue_generator` that comes with a nice API being able to access a bunch of meta-information on the log request via `?get_logger_meta_variables`. For such example, see the `vignette("customize_logger")`.
 
 If you are writing such a function or a generator function returning a log message formatter function, please keep the actual call resulting in the formatter function (eg `match.call()` in the generator function or the quoted function call) recorded in the `generator` attribute of the function so that `?log_layout` can pretty-print that instead of the unnamed function body. See the [`layouts.R`](https://github.com/daroczig/logger/blob/master/R/layouts.R) file for more examples.
 

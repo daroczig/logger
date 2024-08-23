@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In this vignette I suppose that you are already familiar with [Customizing the format and destination of log records](https://daroczig.github.io/logger/articles/customize_logger.html) vignette, especially with the [Log namespaces](https://daroczig.github.io/logger/articles/customize_logger.html#log-namespaces) section.
+In this vignette I suppose that you are already familiar with `vignette("customize_logger")`, especially the Log namespaces section.
 
 So that your R package's users can suppress (or render with custom layout) the log messages triggered by your R package, it's wise to record all those log messages in a custom namespace. By default, if you are calling the `?log_level` function family from an R package after importing from the `logger` package, then `logger` will try to auto-guess the calling R package name and use that as the default namespace, see eg:
 
