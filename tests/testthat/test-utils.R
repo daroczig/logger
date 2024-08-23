@@ -1,13 +1,16 @@
 test_that("fail_on_missing_package", {
-  expect_error(fail_on_missing_package("logger"), NA)
-  expect_error(fail_on_missing_package("logger", "9.9.9"))
-  expect_error(fail_on_missing_package("an.R.package-that-doesNotExists"))
+  expect_no_error(fail_on_missing_package("logger"))
+
+  expect_snapshot(error = TRUE, {
+    fail_on_missing_package("logger", "9.9.9", call = quote(f()))
+    fail_on_missing_package("an.R.package-that-doesNotExists", call = quote(f()))
+  })
 })
 
 test_that("validate_log_level", {
   expect_equal(validate_log_level(ERROR), ERROR)
   expect_equal(validate_log_level("ERROR"), ERROR)
-  expect_error(validate_log_level("FOOBAR"), "log level")
+  expect_snapshot(validate_log_level("FOOBAR"), error = TRUE)
 })
 
 test_that("catch_base_log", {

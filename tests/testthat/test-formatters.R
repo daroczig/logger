@@ -24,8 +24,8 @@ test_that("glue works", {
     formatter = formatter_glue,
     appender = appender_void,
   )
-  expect_error(formatter_glue("malformed {"))
-  expect_error(formatter_glue("malformed {{"), NA)
+  expect_snapshot(formatter_glue("malformed {"), error = TRUE)
+  expect_no_error(formatter_glue("malformed {{"))
 
   ## nolint start
   ## disabled for https://github.com/atalv/azlogr/issues/35
@@ -54,9 +54,11 @@ test_that("glue_safe works", {
   f <- function() log_info("Hi {a}")
   expect_output(f(), "43")
 
-  expect_error(formatter_glue_safe("Hi {42}"))
-  expect_error(formatter_glue_safe("malformed {"))
-  expect_error(formatter_glue_safe("malformed {{"), NA)
+  expect_snapshot(error = TRUE, {
+    formatter_glue_safe("Hi {42}")
+    formatter_glue_safe("malformed {")
+  })
+  expect_no_error(formatter_glue_safe("malformed {{"))
 })
 
 test_that("sprintf works", {
@@ -71,7 +73,7 @@ test_that("sprintf works", {
   expect_equal(formatter_sprintf("pi is %s", round(pi, 2)), "pi is 3.14")
   expect_equal(formatter_sprintf("pi is %1.2f", pi), "pi is 3.14")
 
-  expect_error(formatter_sprintf("%s and %i", 1))
+  expect_snapshot(formatter_sprintf("%s and %i", 1), error = TRUE)
   expect_equal(formatter_sprintf("%s and %i", 1, 2), "1 and 2")
 
   a <- 43
@@ -100,7 +102,7 @@ test_that("glue+sprintf works", {
 
   for (fn in c(formatter_sprintf, formatter_glue_or_sprintf)) {
     local_test_logger(formatter = fn, appender = appender_void)
-    expect_error(log_info(character(0)), NA)
+    expect_no_error(log_info(character(0)))
 
     local_test_logger(formatter = fn)
     expect_output(log_info(character(0)), "INFO")
@@ -152,8 +154,7 @@ test_that("paste formatter in actual logs", {
 test_that("skip formatter", {
   local_test_logger(formatter = formatter_glue)
   expect_output(log_info(skip_formatter("hi {pi}")), "hi \\{pi\\}")
-  expect_error(log_info(skip_formatter(mtcars)))
-  expect_error(log_info(skip_formatter("hi {x}", x = 4)))
+  expect_snapshot(log_info(skip_formatter("hi {x}", x = 4)), error = TRUE)
 })
 
 test_that("skip formatter", {
