@@ -1,3 +1,4 @@
+
 test_that("separator", {
   local_test_logger(layout = layout_blank)
   expect_output(log_separator(), "={80,80}")
@@ -9,8 +10,11 @@ test_that("separator", {
 })
 
 test_that("tictoc", {
-  local_test_logger()
-  expect_output(log_tictoc(), "timer")
+  expect_match(capture.output(log_tictoc(), type = "message"), "timer tic 0 secs")
+  ## let time pass a bit
+  Sys.sleep(0.01)
+  expect_match(capture.output(log_tictoc(), type = "message"), "timer toc")
+  capture.output(expect_silent(log_tictoc()), type = "message")
 })
 
 test_that("log with separator", {
@@ -19,10 +23,48 @@ test_that("log with separator", {
   expect_output(log_with_separator("Boo!", level = FATAL, width = 120), width = 120)
 })
 
+test_that("log with separator", {
+  local_test_logger(layout = layout_glue_generator("{level} {msg}"))
+
+  expect_snapshot({
+    log_with_separator(42)
+    log_with_separator(42, separator = "|")
+  })
+})
+
+
 test_that("log failure", {
   local_test_logger()
   expect_output(log_failure("foobar"), NA)
   expect_output(try(log_failure(foobar), silent = TRUE), "ERROR.*foobar")
   expect_error(log_failure("foobar"), NA)
   expect_match(capture.output(expect_error(log_failure(foobar))), "not found")
+})
+
+test_that("single line", {
+  local_test_logger(layout = layout_glue_generator("{level} {msg}"))
+
+  expect_output(log_eval(4, INFO), sprintf("INFO %s => %s", shQuote(4), shQuote(4)))
+})
+
+test_that("multi line", {
+  local_test_logger(layout = layout_glue_generator("{level} {msg}"))
+
+  expect_output(log_eval(4, INFO, multiline = TRUE), "Running expression")
+  expect_output(log_eval(4, INFO, multiline = TRUE), "Results:")
+  expect_output(log_eval(4, INFO, multiline = TRUE), "INFO 4")
+})
+
+test_that("invisible return", {
+  local_test_logger(layout = layout_glue_generator("{level} {msg}"))
+  expect_output(log_eval(require(logger), INFO), sprintf(
+    "INFO %s => %s",
+    shQuote("require\\(logger\\)"),
+    shQuote(TRUE)
+  ))
+})
+
+test_that("lower log level", {
+  local_test_logger(TRACE, layout = layout_glue_generator("{level} {msg}"))
+  expect_output(log_eval(4), sprintf("TRACE %s => %s", shQuote(4), shQuote(4)))
 })
