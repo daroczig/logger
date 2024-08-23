@@ -35,6 +35,8 @@ test_that("JSON parser layout", {
 })
 
 test_that("must throw errors", {
+  skip_if_not(getRversion() >= "4.3") # error call changed
+
   expect_snapshot(error = TRUE, {
     layout_simple(FOOBAR)
     layout_simple(42)

@@ -20,6 +20,8 @@ test_that("log with separator", {
 })
 
 test_that("log failure", {
+  skip_if_not(getRversion() >= "4.3") # error call changed
+
   local_test_logger()
   expect_output(log_failure("foobar"), NA)
   expect_output(try(log_failure(foobar), silent = TRUE), "ERROR.*foobar")
