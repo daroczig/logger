@@ -3,17 +3,14 @@
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
-formatter_paste <- structure(function(...,
-                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+#' @family `log_formatters`
+formatter_paste <- function(...,
+                            .logcall = sys.call(),
+                            .topcall = sys.call(-1),
+                            .topenv = parent.frame()) {
   paste(...)
-}, generator = quote(formatter_paste()))
-
+}
+attr(formatter_paste, "generator") <- quote(formatter_paste())
 
 #' Apply `sprintf` to convert R objects into a character vector
 #' @param fmt passed to `sprintf`
@@ -21,17 +18,15 @@ formatter_paste <- structure(function(...,
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
-formatter_sprintf <- structure(function(fmt, ...,
-                                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+#' @family `log_formatters`
+formatter_sprintf <- function(fmt,
+                              ...,
+                              .logcall = sys.call(),
+                              .topcall = sys.call(-1),
+                              .topenv = parent.frame()) {
   sprintf(fmt, ...)
-}, generator = quote(formatter_sprintf()))
-
+}
+attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 
 #' Apply `glue` to convert R objects into a character vector
 #' @param ... passed to `glue` for the text interpolation
@@ -41,15 +36,12 @@ formatter_sprintf <- structure(function(fmt, ...,
 #' @note Although this is the default log message formatter function,
 #'     but when \pkg{glue} is not installed, [formatter_sprintf()]
 #'     will be used as a fallback.
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()],
-#'     [formatter_glue_or_sprintf()], [formatter_glue_safe()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 #' @importFrom utils str
-formatter_glue <- structure(function(...,
-                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_glue <- function(...,
+                           .logcall = sys.call(),
+                           .topcall = sys.call(-1),
+                           .topenv = parent.frame()) {
   fail_on_missing_package("glue")
 
   withCallingHandlers(
@@ -67,7 +59,8 @@ formatter_glue <- structure(function(...,
       ))
     }
   )
-}, generator = quote(formatter_glue()))
+}
+attr(formatter_glue, "generator") <- quote(formatter_glue())
 
 
 #' Apply `glue_safe` to convert R objects into a character vector
@@ -75,15 +68,12 @@ formatter_glue <- structure(function(...,
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_glue()], [formatter_paste()], [formatter_sprintf()],
-#'     [formatter_glue()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_json()], [formatter_pander()]
-#'     and [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 #' @importFrom utils str
-formatter_glue_safe <- structure(function(...,
-                                          .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_glue_safe <- function(...,
+                                .logcall = sys.call(),
+                                .topcall = sys.call(-1),
+                                .topenv = parent.frame()) {
   fail_on_missing_package("glue")
   as.character(
     tryCatch(
@@ -100,7 +90,8 @@ formatter_glue_safe <- structure(function(...,
       }
     )
   )
-}, generator = quote(formatter_glue_safe()))
+}
+attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 
 
 #' Apply `glue` and `sprintf`
@@ -117,11 +108,7 @@ formatter_glue_safe <- structure(function(...,
 #' @param ... passed to `glue` for the text interpolation
 #' @inheritParams log_level
 #' @return character vector
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_logging()],
-#'     [formatter_json()], [formatter_pander()] and [skip_formatter()]
-#'     for marking a string not to apply the formatter on it.
+#' @family `log_formatters`
 #' @export
 #' @examples \dontrun{
 #' formatter_glue_or_sprintf("{a} + {b} = %s", a = 2, b = 3, 5)
@@ -134,14 +121,16 @@ formatter_glue_safe <- structure(function(...,
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}", c("foo", "bar"))
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c("foo", "bar"), 2 * 4)
 #' }
-formatter_glue_or_sprintf <- structure(function(msg, ...,
-                                                .logcall = sys.call(), .topcall = sys.call(-1),
-                                                .topenv = parent.frame()) {
+formatter_glue_or_sprintf <- function(msg,
+                                      ...,
+                                      .logcall = sys.call(),
+                                      .topcall = sys.call(-1),
+                                      .topenv = parent.frame()) {
   params <- list(...)
 
   ## params without a name are potential sprintf params
   sprintfparams <- which(names(params) == "")
-  if (length(params) > 0 & length(sprintfparams) == 0) {
+  if (length(params) > 0 && length(sprintfparams) == 0) {
     sprintfparams <- seq_along(params)
   }
   if (is.null(msg) || length(msg) == 0) {
@@ -182,7 +171,8 @@ formatter_glue_or_sprintf <- structure(function(msg, ...,
 
   ## return
   msg
-}, generator = quote(formatter_glue_or_sprintf()))
+}
+attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf())
 
 
 #' Transforms all passed R objects into a JSON list
@@ -191,25 +181,21 @@ formatter_glue_or_sprintf <- structure(function(msg, ...,
 #' @return character vector
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @seealso This is a [log_formatter()] potentially to be used with
-#'     [layout_json_parser()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()], [formatter_pander()] and
-#'     [skip_formatter()] for marking a string not to apply the
-#'     formatter on it.
+#' @family `log_formatters`
 #' @examples \dontrun{
 #' log_formatter(formatter_json)
 #' log_layout(layout_json_parser())
 #' log_info(everything = 42)
 #' log_info(mtcars = mtcars, species = iris$Species)
 #' }
-formatter_json <- structure(function(...,
-                                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_json <- function(...,
+                           .logcall = sys.call(),
+                           .topcall = sys.call(-1),
+                           .topenv = parent.frame()) {
   fail_on_missing_package("jsonlite")
-  as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE))
-}, generator = quote(formatter_json()))
-
+  eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
+}
+attr(formatter_json, "generator") <- quote(formatter_json())
 
 #' Skip the formatter function
 #'
@@ -248,11 +234,7 @@ skip_formatter <- function(message, ...) {
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_json()], [formatter_pander()] and [skip_formatter()]
-#'     for marking a string not to apply the formatter on it.
+#' @family `log_formatters`
 #' @examples \dontrun{
 #' log_formatter(formatter_logging)
 #' log_info("42")
@@ -262,8 +244,10 @@ skip_formatter <- function(message, ...) {
 #' log_info("vector %s", 1:3)
 #' log_info(12, 1 + 1, 2 * 2)
 #' }
-formatter_logging <- structure(function(...,
-                                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_logging <- function(...,
+                              .logcall = sys.call(),
+                              .topcall = sys.call(-1),
+                              .topenv = parent.frame()) {
   params <- list(...)
   .logcall <- substitute(.logcall)
 
@@ -274,7 +258,8 @@ formatter_logging <- structure(function(...,
   sapply(seq_along(params), function(i) {
     paste(deparse(as.list(.logcall)[-1][[i]]), params[[i]], sep = ": ")
   })
-}, generator = quote(formatter_logging()))
+}
+attr(formatter_logging, "generator") <- quote(formatter_logging())
 
 
 #' Formats R objects with pander
@@ -284,10 +269,7 @@ formatter_logging <- structure(function(...,
 #' @return character vector
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
-#' @seealso This is a [log_formatter()], for alternatives, see
-#'     [formatter_paste()], [formatter_sprintf()], [formatter_glue()],
-#'     [formatter_glue_safe()], [formatter_glue_or_sprintf()],
-#'     [formatter_logging()]
+#' @family `log_formatters`
 #' @examples \dontrun{
 #' log_formatter(formatter_pander)
 #' log_info("42")
@@ -297,8 +279,12 @@ formatter_logging <- structure(function(...,
 #' log_info(head(iris), style = "simple")
 #' log_info(lm(hp ~ wt, mtcars))
 #' }
-formatter_pander <- structure(function(x, ...,
-                                       .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_pander <- function(x,
+                             ...,
+                             .logcall = sys.call(),
+                             .topcall = sys.call(-1),
+                             .topenv = parent.frame()) {
   fail_on_missing_package("pander")
   pander::pander_return(x, ...)
-}, generator = quote(formatter_pander()))
+}
+attr(formatter_pander, "generator") <- quote(formatter_pander())

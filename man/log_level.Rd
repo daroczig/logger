@@ -128,6 +128,3 @@ log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 log_info(glue::glue("ok {1:3} + {1:3} = {2*(1:3)}"))
 }
 }
-\seealso{
-\code{\link[=logger]{logger()}}
-}

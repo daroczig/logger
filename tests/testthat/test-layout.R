@@ -13,41 +13,25 @@ test_that("colorized layout", {
 })
 
 test_that("metavars", {
-  local_test_logger(layout = layout_glue_generator("{level} {ans} {fn} {msg}"))
-  expect_output((function() {
-    log_info(42)
-  })(), "INFO")
-  expect_output((function() {
-    log_warn(42)
-  })(), "WARN")
-  expect_output((function() {
-    log_info(42)
-  })(), "log_info")
+  local_test_logger(layout = layout_glue_generator("{level} {ans} {fn}"))
 
-  local_test_logger(layout = layout_glue_generator("{fn}"))
-  expect_output(
-    {
-      fun42 <- function() {
-        log_info(42)
-      }
-      fun42()
-      rm(fun42)
-    },
-    "fun42"
-  )
+  f_info <- function() log_info()
+  expect_output(f_info(), "INFO global f_info()")
+
+  f_warn <- function() log_warn()
+  expect_output(f_warn(), "WARN global f_warn()")
 })
 
 test_that("JSON layout", {
-  local_test_logger(layout = layout_json())
+  local_test_logger(layout = layout_json(fields = c("level", "msg")))
 
-  expect_equal(jsonlite::fromJSON(capture.output(log_info("foobar")))$level, "INFO")
-  expect_equal(jsonlite::fromJSON(capture.output(log_info("foobar")))$msg, "foobar")
+  out <- jsonlite::fromJSON(capture.output(log_info("foobar")))
+  expect_equal(out, list(level = "INFO", msg = "foobar"))
 })
 
 test_that("JSON parser layout", {
   local_test_logger(layout = layout_json_parser(fields = character()))
-  expect_output(log_info(skip_formatter('{"x": 4}')), '\\{"x":4\\}')
-  expect_equal(capture.output(log_info(skip_formatter('{"x": 4}'))), '{"x":4}')
+  expect_output(log_info(skip_formatter('{"x": 4}')), '{"x":4}', fixed = TRUE)
 })
 
 test_that("must throw errors", {
