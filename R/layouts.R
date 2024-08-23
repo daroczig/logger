@@ -157,16 +157,6 @@ attr(layout_glue, "generator") <- quote(layout_glue())
 #' log_debug("Getting an error is usually bad")
 #' log_error("This is another problem")
 #' log_fatal("The last problem.")
-#' log_layout(layout_glue_colors)
-#' log_threshold(TRACE)
-#' log_info("Starting the script...")
-#' log_debug("This is the second line")
-#' log_trace("That is being placed right after the first one.")
-#' log_warn("Some errors might come!")
-#' log_error("This is a problem")
-#' log_debug("Getting an error is usually bad")
-#' log_error("This is another problem")
-#' log_fatal("The last problem.")
 layout_glue_colors <- layout_glue_generator(
   format = paste(
     "{crayon::bold(colorize_by_log_level(level, levelr))}",
