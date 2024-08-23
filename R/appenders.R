@@ -376,10 +376,9 @@ appender_kinesis <- function(stream) {
 #' ## start async appender
 #' t <- tempfile()
 #' log_info("Logging in the background to {t}")
-#' my_appender <- appender_async(appender_file_slow(file = t))
 #'
 #' ## use async appender
-#' log_appender(my_appender)
+#' log_appender(appender_async(appender_file_slow(file = t)))
 #' log_info("Was this slow?")
 #' system.time(for (i in 1:25) log_info(i))
 #'
@@ -387,116 +386,33 @@ appender_kinesis <- function(stream) {
 #' Sys.sleep(10)
 #' readLines(t)
 #'
-#' ## check on the async appender (debugging, you will probably never need this)
-#' attr(my_appender, "async_writer_queue")$count()
-#' attr(my_appender, "async_writer_queue")$log()
-#'
-#' attr(my_appender, "async_writer_process")$get_pid()
-#' attr(my_appender, "async_writer_process")$get_state()
-#' attr(my_appender, "async_writer_process")$poll_process(1)
-#' attr(my_appender, "async_writer_process")$read()
-#'
-#' attr(my_appender, "async_writer_process")$is_alive()
-#' attr(my_appender, "async_writer_process")$read_error()
 #' }
 appender_async <- function(appender,
                            batch = 1,
                            namespace = "async_logger",
                            init = function() log_info("Background process started")) {
-  fail_on_missing_package("txtq")
-  fail_on_missing_package("callr")
-
+  fail_on_missing_package("mirai")
   force(appender)
-  force(batch)
 
-  ## create a storage for the message queue
-  async_writer_storage <- tempfile()
-  log_trace(paste("Async writer storage:", async_writer_storage), namespace = "async_logger")
-
-  ## initialize the message queue
-  async_writer_queue <- txtq::txtq(async_writer_storage)
-
-  ## start a background process for the async execution of the message queue
-  ## TODO make it easy to create multiple/parallel background processes?
-  async_writer_process <- callr::r_session$new()
-  log_trace(paste("Async writer PID:", async_writer_process$get_pid()), namespace = "async_logger")
-
-  ## load minimum required packages
-  async_writer_process$run(function() {
-    source(system.file(
-      "load-packages-in-background-process.R",
-      package = "logger"
-    ))
-  })
-  async_writer_process$run(init)
-
-  ## connect to the message queue
-  async_writer_process$run(assign, args = list(x = "async_writer_storage", value = async_writer_storage))
-  async_writer_process$run(function() async_writer_queue <<- txtq::txtq(async_writer_storage))
-
-  ## pass arguments
-  async_writer_process$run(assign, args = list(x = "batch", value = batch))
-
-  ## pass appender
-  async_writer_tempfile <- tempfile()
-  saveRDS(appender, async_writer_tempfile)
-  log_trace(paste("Async appender cached at:", async_writer_tempfile), namespace = "async_logger")
-  async_writer_process$run(assign, args = list(x = "async_writer_tempfile", value = async_writer_tempfile))
-  async_writer_process$run(assign, args = list(x = "appender", value = readRDS(async_writer_tempfile)))
-
-  ## start infinite loop processing log records
-  async_writer_process$call(function() {
-    while (TRUE) {
-      items <- async_writer_queue$pop(batch)
-
-      if (nrow(items) == 0) {
-        ## avoid burning CPU
-        Sys.sleep(.1)
-      } else {
-        ## execute the actual appender for each log item
-        for (i in seq_len(nrow(items))) {
-          appender(items$message[i])
-        }
-
-        ## remove processed log records
-        async_writer_queue$clean()
-      }
-    }
-  })
+  # Start one background process
+  mirai::daemons(1, .compute = "logger")
+  mirai::everywhere(library(logger), .compute = "logger")
+  mirai::everywhere(init(), init = init, .compute = "logger")
 
   structure(
     function(lines) {
-      ## check if background process still works
-      if (!isTRUE(async_writer_process$is_alive())) {
-        stop("FATAL: Async writer process not found")
-      }
-      remote_error <- async_writer_process$read_error()
-      if (remote_error != "") {
-        stop(paste("FATAL: Async writer failed with", shQuote(remote_error)))
-      }
-      remote_event <- async_writer_process$read()
-      if (!is.null(remote_event) && !is.null(remote_event$error)) {
-        stop(paste(
-          "FATAL: Async writer error of",
-          shQuote(remote_event$error$message),
-          "in",
-          shQuote(paste(deparse(remote_event$error$call), collapse = " "))
-        ))
-      }
-
-      ## write to message queue
-      for (line in lines) {
-        async_writer_queue$push(title = as.character(as.numeric(Sys.time())), message = line)
-      }
+      m <- mirai::mirai(
+        for (line in lines) {
+          appender(line)
+        },
+        appender = appender,
+        lines = lines,
+        .compute = "logger"
+      )
+      # browser()
     },
-    generator = deparse(match.call()),
-    ## share remote process and queue with parent for debugging purposes
-    async_writer_storage = async_writer_storage,
-    async_writer_queue = async_writer_queue,
-    async_writer_process = async_writer_process
+    generator = deparse(match.call())
   )
-
-  ## NOTE no need to clean up, all will go away with the current R session's temp folder
 }
 
 ## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc
