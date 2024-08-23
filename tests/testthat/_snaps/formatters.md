@@ -5,7 +5,7 @@
     Condition
       Error in `formatter_glue()`:
       ! `glue()` failed.
-      i For strings containing `{`/`}` consider using`skip_formatter()` or another `log_formatter`
+      i For strings containing `{` or `}` consider using `skip_formatter()` or another `log_formatter`.
       Caused by error in `glue_data()`:
       ! Expecting '}'
 
@@ -17,11 +17,11 @@
       Error:
       ! `glue()` failed in `formatter_glue()` on:
       
-      glue::glue(..., .envir = .topenv)
+      List of 1 $ : chr "hi{"
       
       Raw error message:
       
       Expecting '}'
       
-      For strings containing `{`/`}` consider using`skip_formatter()` or another `log_formatter`
+      For strings containing `{` or `}` consider using `skip_formatter()` or another `log_formatter`.
 

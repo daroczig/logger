@@ -46,6 +46,7 @@ formatter_glue <- function(...,
 
   out <- wrap_glue(
     glue::glue(..., .envir = .topenv),
+    inputs = list(...),
     glue_fun = "glue",
     logger_fun = "formatter_glue"
   )
@@ -69,6 +70,7 @@ formatter_glue_safe <- function(...,
 
   out <- wrap_glue(
     glue::glue_safe(..., .envir = .topenv),
+    inputs = list(...),
     glue_fun = "glue_safe",
     logger_fun = "formatter_glue_safe"
   )
@@ -76,7 +78,7 @@ formatter_glue_safe <- function(...,
 }
 attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 
-wrap_glue <- function(code, glue_fun, logger_fun) {
+wrap_glue <- function(code, inputs, glue_fun, logger_fun) {
   if (has_rlang()) {
     withCallingHandlers(
       code,
@@ -92,8 +94,6 @@ wrap_glue <- function(code, glue_fun, logger_fun) {
       }
     )
   } else {
-    code_ <- substitute(code)
-
     withCallingHandlers(
       code,
       error = function(cnd) {
@@ -102,7 +102,7 @@ wrap_glue <- function(code, glue_fun, logger_fun) {
 
         stop(paste0(
           "`", glue_fun, "()` failed in `", logger_fun, "()` on:\n\n",
-          deparse1(code_),
+          paste0(capture.output(str(inputs)), collapse = ""),
           "\n\nRaw error message:\n\n",
           conditionMessage(cnd),
           hint
@@ -117,8 +117,8 @@ glue_hint <- function(message) {
     return()
   }
   paste0(
-    "For strings containing `{`/`}` consider using",
-    "`skip_formatter()` or another `log_formatter`"
+    "For strings containing `{` or `}` consider using ",
+    "`skip_formatter()` or another `log_formatter`."
   )
 }
 
