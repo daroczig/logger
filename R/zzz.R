@@ -14,14 +14,10 @@ namespaces_reset <- function() {
     default = list(
       threshold = as.loglevel(Sys.getenv("LOGGER_LOG_LEVEL", unset = "INFO")),
       layout    = layout_simple,
-      formatter = formatter_sprintf,
+      formatter = formatter_glue,
       appender  = if (in_pkgdown()) appender_stdout else appender_console
     )
   )
-
-  if (requireNamespace("glue", quietly = TRUE)) {
-    log_formatter(formatter_glue, namespace = "global", index = 1)
-  }
 
   ## internal namespace for debugging logger
   namespaces$.logger <- list(

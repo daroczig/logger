@@ -30,12 +30,7 @@ to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 character vector
 }
 \description{
-Apply \code{glue} to convert R objects into a character vector
-}
-\note{
-Although this is the default log message formatter function,
-but when \pkg{glue} is not installed, \code{\link[=formatter_sprintf]{formatter_sprintf()}}
-will be used as a fallback.
+This is the default formatter.
 }
 \seealso{
 Other \code{log_formatters}: 

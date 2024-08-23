@@ -9,8 +9,7 @@
 #'
 #' * [INFO()] (or as per the `LOGGER_LOG_LEVEL` environment variable override) as the log level threshold
 #' * [layout_simple()] as the layout function showing the log level, timestamp and log message
-#' * [formatter_glue()] (or [formatter_sprintf()] if \pkg{glue} is not installed) as the
-#'   default formatter function transforming the R objects to be logged to a character vector
+#' * [formatter_glue()] as the default formatter function transforming the R objects to be logged to a character vector
 #' * [appender_console()] as the default log record destination
 #'
 #' @param threshold omit log messages below this [log_levels()]

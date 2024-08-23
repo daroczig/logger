@@ -40,8 +40,7 @@ By default, a general logger definition is created when loading the \code{logger
 \itemize{
 \item \code{\link[=INFO]{INFO()}} (or as per the \code{LOGGER_LOG_LEVEL} environment variable override) as the log level threshold
 \item \code{\link[=layout_simple]{layout_simple()}} as the layout function showing the log level, timestamp and log message
-\item \code{\link[=formatter_glue]{formatter_glue()}} (or \code{\link[=formatter_sprintf]{formatter_sprintf()}} if \pkg{glue} is not installed) as the
-default formatter function transforming the R objects to be logged to a character vector
+\item \code{\link[=formatter_glue]{formatter_glue()}} as the default formatter function transforming the R objects to be logged to a character vector
 \item \code{\link[=appender_console]{appender_console()}} as the default log record destination
 }
 }

@@ -29,21 +29,19 @@ formatter_sprintf <- function(fmt,
 attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 
 #' Apply `glue` to convert R objects into a character vector
+#'
+#' This is the default formatter.
+#'
 #' @param ... passed to `glue` for the text interpolation
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @note Although this is the default log message formatter function,
-#'     but when \pkg{glue} is not installed, [formatter_sprintf()]
-#'     will be used as a fallback.
 #' @family `log_formatters`
 #' @importFrom utils str
 formatter_glue <- function(...,
                            .logcall = sys.call(),
                            .topcall = sys.call(-1),
                            .topenv = parent.frame()) {
-  fail_on_missing_package("glue")
-
   withCallingHandlers(
     glue::glue(..., .envir = .topenv),
     error = function(e) {
