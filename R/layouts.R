@@ -303,12 +303,9 @@ layout_json_parser <- function(fields = default_fields()) {
 
     meta <- logger_meta_env(
       log_level = level,
-
       namespace = namespace,
       .logcall = .logcall,
-
       .topcall = .topcall,
-
       .topenv = .topenv
     )
     meta <- mget(fields, meta)
