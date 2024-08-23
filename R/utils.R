@@ -15,8 +15,8 @@ fail_on_missing_package <- function(pkg, min_version, call = NULL) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(
       sprintf(
-        "Please install the %s package to use %s",
-        shQuote(pkg),
+        "Please install the '%s' package to use %s",
+        pkg,
         deparse(pc[[1]])
       ),
       call. = FALSE
