@@ -101,12 +101,12 @@ log_appender(appender_async(appender_file_slow(file = tempfile())))
 
 async <- function() log_info('Was this slow?')
 microbenchmark(async(), times = 1e3)
-#> Unit: microseconds
-#>     expr     min      lq     mean   median     uq      max neval
-#>  async() 511.329 528.247 614.8694 558.2535 616.14 5018.731  1000
+# Unit: microseconds
+#     expr     min       lq     mean  median      uq     max neval
+#  async() 298.275 315.5565 329.6235 322.219 333.371 894.579  1000
 ```
 
-Please note that although this ~0.6 ms is significantly higher than the ~0.15 ms we achieved above with the `sprintf` formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad. If you need even higher throughput, then a custom `appender_async` without checking on the background process and potentially a faster message queue can bring this even below to 200 µs.
+Please note that although this ~0.3 ms is higher than the ~0.15 ms we achieved above with the `sprintf` formatter, but this time we are calling an appender that would take 1 full second to deliver the log message (and not just printing to the console), so bringing that down to less than 1 millisecond is not too bad.
 
 ```{r cleanup, include = FALSE}
 logger:::namespaces_reset()

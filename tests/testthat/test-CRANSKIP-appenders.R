@@ -9,6 +9,7 @@ test_that("async logging", {
 
   for (i in 1:5) log_info(i)
   Sys.sleep(0.25)
+
   expect_equal(readLines(t)[1], "1")
   expect_equal(length(readLines(t)), 5)
 })
