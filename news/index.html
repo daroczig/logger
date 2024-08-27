@@ -43,7 +43,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="logger-development-version">logger (development version)<a class="anchor" aria-label="anchor" href="#logger-development-version"></a></h2>
-<ul><li>
+<ul><li>logger now computes metadata lazily, so various expensive computations are only performed if you actually add them to the log (<a href="https://github.com/daroczig/logger/issues/105" class="external-link">#105</a>).</li>
+<li>
 <code><a href="../reference/log_appender.html">log_appender()</a></code>, <code><a href="../reference/log_layout.html">log_layout()</a></code> and <code><a href="../reference/log_formatter.html">log_formatter()</a></code> now check that you are calling them with a function, and return the previously set value.</li>
 </ul></div>
     <div class="section level2">

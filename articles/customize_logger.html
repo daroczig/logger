@@ -87,13 +87,13 @@ a lower log level compared to the currently set threshold in the logging
 namespace:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"Hi, there!"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] Hi, there!</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:22] Hi, there!</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"How are you doing today?"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Log level: INFO</span></span>
 <span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"How are you doing today?"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; DEBUG [2024-08-22 20:03:51] How are you doing today?</span></span></code></pre></div>
+<span><span class="co">#&gt; DEBUG [2024-08-27 20:42:22] How are you doing today?</span></span></code></pre></div>
 <p>So the <code><a href="../reference/log_threshold.html">?log_threshold</a></code> function can both get and set the
 log level threshold for all future log requests.</p>
 <p>For the full list of all supported log levels and so thus the
@@ -102,19 +102,19 @@ possible log level thresholds, see <code><a href="../reference/log_levels.html">
 <code><a href="../reference/log_level.html">?log_level</a></code>, eg</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_level</a></span><span class="op">(</span><span class="va">INFO</span>, <span class="st">"Hi, there!"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] Hi, there!</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:22] Hi, there!</span></span></code></pre></div>
 <p>To temporarily update the log level threshold, you may also find the
 <code><a href="../reference/with_log_threshold.html">?with_log_threshold</a></code> function useful:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">INFO</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"pst, can you hear me?"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"no"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] no</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] no</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/with_log_threshold.html">with_log_threshold</a></span><span class="op">(</span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"pst, can you hear me?"</span><span class="op">)</span>, threshold <span class="op">=</span> <span class="va">TRACE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; DEBUG [2024-08-22 20:03:51] pst, can you hear me?</span></span>
+<span><span class="co">#&gt; DEBUG [2024-08-27 20:42:23] pst, can you hear me?</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"yes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] yes</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] yes</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/with_log_threshold.html">with_log_threshold</a></span><span class="op">(</span></span>
 <span>  <span class="op">{</span></span>
@@ -123,8 +123,8 @@ possible log level thresholds, see <code><a href="../reference/log_levels.html">
 <span>  <span class="op">}</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="va">TRACE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; DEBUG [2024-08-22 20:03:51] pst, can you hear me?</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] yes</span></span></code></pre></div>
+<span><span class="co">#&gt; DEBUG [2024-08-27 20:42:23] pst, can you hear me?</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] yes</span></span></code></pre></div>
 <p>You can also define your own log level(s) if needed, for example
 introducing an extra level between <code>DEBUG</code> and
 <code>INFO</code>:</p>
@@ -133,9 +133,9 @@ introducing an extra level between <code>DEBUG</code> and
 <span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">FYI</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"ping"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_level</a></span><span class="op">(</span><span class="va">FYI</span>, <span class="st">"ping"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; FYI [2024-08-22 20:03:51] ping</span></span>
+<span><span class="co">#&gt; FYI [2024-08-27 20:42:23] ping</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"pong"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] pong</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] pong</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="log-namespaces">Log namespaces<a class="anchor" aria-label="anchor" href="#log-namespaces"></a>
@@ -153,16 +153,16 @@ will fall back to the global settings:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">INFO</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_trace</a></span><span class="op">(</span><span class="st">"Hi, there!"</span>, namespace <span class="op">=</span> <span class="st">"kitchensink"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"Hi, there!"</span>, namespace <span class="op">=</span> <span class="st">"kitchensink"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] Hi, there!</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] Hi, there!</span></span></code></pre></div>
 <p>But once you start customizing that namespace, it gets forked from
 the global settings and live on its own without modifying the original
 namespace:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span>, namespace <span class="op">=</span> <span class="st">"kitchensink"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_trace</a></span><span class="op">(</span><span class="st">"Hi, there!"</span>, namespace <span class="op">=</span> <span class="st">"kitchensink"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; TRACE [2024-08-22 20:03:51] Hi, there!</span></span>
+<span><span class="co">#&gt; TRACE [2024-08-27 20:42:23] Hi, there!</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"Hi, there!"</span>, namespace <span class="op">=</span> <span class="st">"kitchensink"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] Hi, there!</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] Hi, there!</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_trace</a></span><span class="op">(</span><span class="st">"Hi, there!"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -177,9 +177,9 @@ background:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_glue</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"There are {nrow(mtcars)} cars in the mtcars dataset"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] There are 32 cars in the mtcars dataset</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] There are 32 cars in the mtcars dataset</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"2 + 2 = {2+2}"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] 2 + 2 = 4</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] 2 + 2 = 4</span></span></code></pre></div>
 <p>If you don’t like this syntax, or want to save a dependency, you can
 use other formatter functions as well, such as
 <code><a href="../reference/formatter_sprintf.html">?formatter_sprintf</a></code> (being the default in eg the <a href="https://daroczig.github.io/logger/articles/migration.html"><code>logging</code>
@@ -196,15 +196,15 @@ timestamp and the message after being processed by
 <code>glue</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] 42</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] 42</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"The answer is {42}"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] The answer is 42</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] The answer is 42</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"The answers are {1:5}"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] The answers are 1</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] The answers are 2</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] The answers are 3</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] The answers are 4</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:51] The answers are 5</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] The answers are 1</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] The answers are 2</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] The answers are 3</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] The answers are 4</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:23] The answers are 5</span></span></code></pre></div>
 <p>In the above example, first, <code>42</code> was converted to a
 string by the <code><a href="../reference/formatter_glue.html">?formatter_glue</a></code> message formatter, then the
 message was passed to the <code><a href="../reference/layout_simple.html">?layout_simple</a></code> layout function to
@@ -214,15 +214,15 @@ in JSON:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_layout.html">log_layout</a></span><span class="op">(</span><span class="fu"><a href="../reference/layout_json.html">layout_json</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"42"}</span></span>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"42"}</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"The answer is {42}"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"The answer is 42"}</span></span>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"The answer is 42"}</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"The answers are {1:5}"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"The answers are 1"}</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"The answers are 2"}</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"The answers are 3"}</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"The answers are 4"}</span></span>
-<span><span class="co">#&gt; {"time":"2024-08-22 20:03:51","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az566-657","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":7781,"user":"runner","msg":"The answers are 5"}</span></span></code></pre></div>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"The answers are 1"}</span></span>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"The answers are 2"}</span></span>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"The answers are 3"}</span></span>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"The answers are 4"}</span></span>
+<span><span class="co">#&gt; {"time":"2024-08-27 20:42:23","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"fv-az1249-914","arch":"x86_64","os_name":"Linux","os_release":"6.5.0-1025-azure","os_version":"#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024","pid":8102,"user":"runner","msg":"The answers are 5"}</span></span></code></pre></div>
 <p>If you need colorized logs highlighting the important log messages,
 check out <code><a href="../reference/layout_glue_colors.html">?layout_glue_colors</a></code>, and for other formatter and
 layout functions, see the manual of the above mentioned functions that
@@ -255,14 +255,14 @@ running the R process etc.</p>
 environment:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"foo"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; fv-az566-657/7781/global/eval 2024-08-22 20:03:51.771529 INFO: foo</span></span></code></pre></div>
+<span><span class="co">#&gt; fv-az1249-914/8102/global/eval 2024-08-27 20:42:23.555365 INFO: foo</span></span></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from a custom function:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"foo"</span><span class="op">)</span></span>
 <span><span class="fu">f</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; fv-az566-657/7781/global/f 2024-08-22 20:03:51.837484 INFO: foo</span></span></code></pre></div>
+<span><span class="co">#&gt; fv-az1249-914/8102/global/f 2024-08-27 20:42:23.629041 INFO: foo</span></span></code></pre></div>
 </li>
 <li>
 <p>check what’s being logged when called from a package:</p>
@@ -270,7 +270,7 @@ environment:</p>
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo-packages/logger-tester-package"</span>, package <span class="op">=</span> <span class="st">"logger"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Loading <span style="color: #0000BB;">logger.tester</span></span></span>
 <span><span class="fu">logger_tester_function</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">"hi from tester package"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; fv-az566-657/7781/logger.tester/logger_tester_function 2024-08-22 20:03:52.022768 INFO: hi from tester package 0.0807501375675201</span></span></code></pre></div>
+<span><span class="co">#&gt; fv-az1249-914/8102/logger.tester/logger_tester_function 2024-08-27 20:42:23.817077 INFO: hi from tester package 0.0807501375675201</span></span></code></pre></div>
 </li>
 <li>
 <p>suppress messages in a namespace:</p>
@@ -280,9 +280,9 @@ environment:</p>
 <span><span class="fu"><a href="../reference/log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">WARN</span>, namespace <span class="op">=</span> <span class="st">"logger.tester"</span><span class="op">)</span></span>
 <span><span class="fu">logger_tester_function</span><span class="op">(</span><span class="va">INFO</span>, <span class="st">"hi from tester package"</span><span class="op">)</span></span>
 <span><span class="fu">logger_tester_function</span><span class="op">(</span><span class="va">WARN</span>, <span class="st">"hi from tester package"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; fv-az566-657/7781/logger.tester/logger_tester_function 2024-08-22 20:03:52.095184 WARN: hi from tester package 0.0807501375675201</span></span>
+<span><span class="co">#&gt; fv-az1249-914/8102/logger.tester/logger_tester_function 2024-08-27 20:42:23.888778 WARN: hi from tester package 0.0807501375675201</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"I am still working in the global namespace"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; fv-az566-657/7781/global/eval 2024-08-22 20:03:52.096981 INFO: I am still working in the global namespace</span></span></code></pre></div>
+<span><span class="co">#&gt; fv-az1249-914/8102/global/eval 2024-08-27 20:42:23.890299 INFO: I am still working in the global namespace</span></span></code></pre></div>
 </li>
 </ul>
 <p>Another example of making use of the generator function is to update
@@ -349,7 +349,7 @@ namespace:</p>
 <span><span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; appender_file(file = t)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "INFO [2024-08-22 20:03:52] where is this message going?"</span></span>
+<span><span class="co">#&gt; [1] "INFO [2024-08-27 20:42:24] where is this message going?"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></code></pre></div>
 <p>There’s a similar generator function that returns an appender
 function delivering log messages to Slack channels:</p>
@@ -403,12 +403,12 @@ can set different log level thresholds for each logger, for example:</p>
 <span></span>
 <span><span class="co">## test both loggers</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">"info msg"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2024-08-22 20:03:52] info msg</span></span>
+<span><span class="co">#&gt; INFO [2024-08-27 20:42:24] info msg</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"info msg"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "INFO [2024-08-22 20:03:52] info msg" </span></span>
-<span><span class="co">#&gt; [2] "DEBUG [2024-08-22 20:03:52] info msg"</span></span>
+<span><span class="co">#&gt; [1] "INFO [2024-08-27 20:42:24] info msg" </span></span>
+<span><span class="co">#&gt; [2] "DEBUG [2024-08-27 20:42:24] info msg"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
