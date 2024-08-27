@@ -323,7 +323,8 @@ log_indices <- function(namespace = "global") {
 #' ## multiple lines
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 #'
-#' log_layout(layout_json(c("level", "msg")))
+#' ## use json layout
+#' log_layout(layout_json(c("time", "level")))
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 #' \dontshow{logger:::namespaces_set(old)}
 #' @return Invisible `list` of `logger` objects. See [logger()] for more details on the format.

@@ -121,7 +121,8 @@ log_debug("hi there")
 ## multiple lines
 log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 
-log_layout(layout_json(c("level", "msg")))
+## use json layout
+log_layout(layout_json(c("time", "level")))
 log_info("ok {1:3} + {1:3} = {2*(1:3)}")
 \dontshow{logger:::namespaces_set(old)}
 }
