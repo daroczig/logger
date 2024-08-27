@@ -107,16 +107,15 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
       stop("Invalid log level, see ?log_levels")
     }
 
-    with(
-      get_logger_meta_variables(
-        log_level = level,
-        namespace = namespace,
-        .logcall = .logcall,
-        .topcall = .topcall,
-        .topenv = .topenv
-      ),
-      glue::glue(format)
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv,
+      parent = environment()
     )
+    glue::glue(format, .envir = meta)
   }, generator = deparse(match.call()))
 }
 
@@ -178,9 +177,12 @@ layout_logging <- function(level,
                            .logcall = sys.call(),
                            .topcall = sys.call(-1),
                            .topenv = parent.frame()) {
-  meta <- get_logger_meta_variables(
-    log_level = level, namespace = namespace,
-    .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
+  meta <- logger_meta_env(
+    log_level = level,
+    namespace = namespace,
+    .logcall = .logcall,
+    .topcall = .topcall,
+    .topenv = .topenv
   )
   paste0(
     format(Sys.time(), "%Y-%m-%d %H:%M:%S"), " ",
@@ -252,6 +254,11 @@ attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 layout_json <- function(fields = default_fields()) {
   force(fields)
 
+  if ("msg" %in% fields) {
+    warning("'msg' is always automatically included")
+    fields <- setdiff(fields, "msg")
+  }
+
   structure(function(level,
                      msg,
                      namespace = NA_character_,
@@ -260,12 +267,15 @@ layout_json <- function(fields = default_fields()) {
                      .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
-    json <- get_logger_meta_variables(
-      log_level = level, namespace = namespace,
-      .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
     )
-
-    sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
+    json <- mget(fields, meta)
+    sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg)), auto_unbox = TRUE))
   }, generator = deparse(match.call()))
 }
 
@@ -299,14 +309,14 @@ layout_json_parser <- function(fields = default_fields()) {
                      .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
-    meta <- get_logger_meta_variables(
+    meta <- logger_meta_env(
       log_level = level,
       namespace = namespace,
       .logcall = .logcall,
       .topcall = .topcall,
       .topenv = .topenv
-    )[fields]
-
+    )
+    meta <- mget(fields, meta)
     msg <- jsonlite::fromJSON(msg)
 
     jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = "null")
@@ -316,7 +326,7 @@ layout_json_parser <- function(fields = default_fields()) {
 default_fields <- function() {
   c(
     "time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
-    "os_name", "os_release", "os_version", "pid", "user", "msg"
+    "os_name", "os_release", "os_version", "pid", "user"
   )
 }
 
