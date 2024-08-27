@@ -1,5 +1,6 @@
 # logger (development version)
 
+* logger now computes metadata lazily, so various expensive computations are only performed if you actually add them to the log (#105).
 * `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value.
 
 # logger 0.3.0 (2024-03-03)
