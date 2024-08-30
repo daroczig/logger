@@ -30,6 +30,7 @@
 #'   function), and a list of `handlers` with the `formatter`,
 #'   `layout` and `appender` functions.
 #' @export
+#' @keywords internal
 #' @references For more details, see the Anatomy of a Log Request
 #'   vignette at
 #'   <https://daroczig.github.io/logger/articles/anatomy.html>.

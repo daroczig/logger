@@ -13,8 +13,8 @@ try \%except\% except
 \item{except}{fallback R expression to be evaluated if \code{try} fails}
 }
 \description{
-Try to evaluate an expressions and evaluate another expression on
-exception
+We do not recommend using this function in new code; it only exported
+for historical reasons.
 }
 \note{
 Suppress log messages in the \code{except} namespace if you don't
@@ -30,3 +30,4 @@ FunDoesNotExist(1:10) \%except\% (sum(1:10) / length(1:10))
 FunDoesNotExist(1:10) \%except\% MEAN(1:10) \%except\% mean(1:10)
 FunDoesNotExist(1:10) \%except\% (MEAN(1:10) \%except\% mean(1:10))
 }
+\keyword{internal}

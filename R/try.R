@@ -1,7 +1,12 @@
 #' Try to evaluate an expressions and evaluate another expression on
 #' exception
+#'
+#' We do not recommend using this function in new code; it only exported
+#' for historical reasons.
+#'
 #' @param try R expression
 #' @param except fallback R expression to be evaluated if `try` fails
+#' @keywords internal
 #' @export
 #' @note Suppress log messages in the `except` namespace if you don't
 #'   want to throw a `WARN` log message on the exception branch.

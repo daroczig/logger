@@ -58,18 +58,10 @@ reference:
   - log_warnings
   - log_errors
 
-- title: Other helpers
-  contents:
-  - colorize_by_log_level
-  - logger
-  - delete_logger_index
-  - "%except%"
-
 - title: Dev tools
   contents:
   - as.loglevel
-  - deparse_to_one_line
-  - fail_on_missing_package
   - get_logger_meta_variables
   - log_namespaces
   - log_indices
+  - delete_logger_index
