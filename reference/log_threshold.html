@@ -81,23 +81,26 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co">## check the currently set log level threshold</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## check the currently set log level threshold</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log level: INFO</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## change the log level threshold to WARN</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">WARN</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-09-10 21:37:43] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## add another logger with a lower log level threshold and check the number of logged messages</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">INFO</span>, index <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-09-10 21:37:43] 1</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-09-10 21:37:43] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-09-10 21:37:43] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## set the log level threshold in all namespaces to ERROR</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">ERROR</span>, namespace <span class="op">=</span> <span class="fu"><a href="log_namespaces.html">log_namespaces</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -24,12 +24,10 @@
 <url><loc>https://daroczig.github.io/logger/reference/appender_telegram.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/appender_void.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/as.loglevel.html</loc></url>
-<url><loc>https://daroczig.github.io/logger/reference/catch_base_log.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/colorize_by_log_level.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/delete_logger_index.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/deparse_to_one_line.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/fail_on_missing_package.html</loc></url>
-<url><loc>https://daroczig.github.io/logger/reference/fallback_namespace.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue_or_sprintf.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue_safe.html</loc></url>
@@ -38,7 +36,6 @@
 <url><loc>https://daroczig.github.io/logger/reference/formatter_pander.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_paste.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_sprintf.html</loc></url>
-<url><loc>https://daroczig.github.io/logger/reference/get_logger_definitions.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/get_logger_meta_variables.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/grapes-except-grapes.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/index.html</loc></url>
@@ -71,8 +68,6 @@
 <url><loc>https://daroczig.github.io/logger/reference/logger-package.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/logger.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/skip_formatter.html</loc></url>
-<url><loc>https://daroczig.github.io/logger/reference/top_env_name.html</loc></url>
-<url><loc>https://daroczig.github.io/logger/reference/validate_log_level.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/with_log_threshold.html</loc></url>
 </urlset>
 
