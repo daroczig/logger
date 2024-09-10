@@ -50,7 +50,8 @@ attr(appender_stdout, "generator") <- quote(appender_stdout())
 #' @export
 #' @return function taking `lines` argument
 #' @family `log_appenders`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' ## ##########################################################################
 #' ## simple example logging to a file
 #' t <- tempfile()
@@ -70,6 +71,8 @@ attr(appender_stdout, "generator") <- quote(appender_stdout())
 #' ## define the file logger with log rotation enabled
 #' log_appender(appender_file(f, max_lines = 3, max_files = 5L))
 #'
+#' ## enable internal logging to see what's actually happening in the logrotate steps
+#' log_threshold(TRACE, namespace = ".logger")
 #' ## log 25 messages
 #' for (i in 1:25) log_info(i)
 #'
@@ -79,10 +82,7 @@ attr(appender_stdout, "generator") <- quote(appender_stdout())
 #'   cat(readLines(t), sep = "\n")
 #' })
 #'
-#' ## enable internal logging to see what's actually happening in the logrotate steps
-#' log_threshold(TRACE, namespace = ".logger")
-#' ## run the above commands again
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) { # nolint
   force(file)
   force(append)
@@ -168,7 +168,7 @@ appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, 
   force(max_files)
   structure(
     function(lines) {
-      appender_console(lines)
+      if (needs_stdout()) appender_stdout(lines) else appender_console(lines)
       appender_file(file, append, max_lines, max_bytes, max_files)(lines)
     },
     generator = deparse(match.call())

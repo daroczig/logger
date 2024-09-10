@@ -22,7 +22,7 @@ sections reserving line-breaks and rendering the printed results}
 Evaluate an expression and log results
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 log_eval(pi * 2, level = INFO)
 
 ## lowering the log level threshold so that we don't have to set a higher level in log_eval
@@ -51,5 +51,5 @@ log_eval(f <- log_eval, multiline = TRUE)
 
 ## doing something computationally intensive
 log_eval(system.time(for (i in 1:100) mad(runif(1000))), multiline = TRUE)
-}
+\dontshow{logger:::namespaces_set(old)}
 }

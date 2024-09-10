@@ -43,6 +43,7 @@ to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 Logs a long line to stand out from the console
 }
 \examples{
+\dontshow{old <- logger:::namespaces_set()}
 log_separator()
 log_separator(ERROR, separator = "!", width = 60)
 log_separator(ERROR, separator = "!", width = 100)
@@ -51,6 +52,7 @@ log_layout(logger)
 log_separator(ERROR, separator = "!", width = 100)
 log_layout(layout_blank)
 log_separator(ERROR, separator = "!", width = 80)
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 \code{\link[=log_with_separator]{log_with_separator()}}

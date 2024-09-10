@@ -32,6 +32,7 @@ to a common, global namespace.}
 Logs a message in a very visible way
 }
 \examples{
+\dontshow{old <- logger:::namespaces_set()}
 log_with_separator("An important message")
 log_with_separator("Some critical KPI down!!!", separator = "$")
 log_with_separator("This message is worth a {1e3} words")
@@ -52,6 +53,7 @@ log_with_separator("Boo!", level = FATAL)
 logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 log_layout(logger)
 log_with_separator("Boo!", level = FATAL, width = 120)
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 \code{\link[=log_separator]{log_separator()}}

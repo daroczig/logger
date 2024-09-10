@@ -110,7 +110,7 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' @return character vector
 #' @family `log_formatters`
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' formatter_glue_or_sprintf("{a} + {b} = %s", a = 2, b = 3, 5)
 #' formatter_glue_or_sprintf("{pi} * {2} = %s", pi * 2)
 #' formatter_glue_or_sprintf("{pi} * {2} = {pi*2}")
@@ -120,7 +120,6 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4=%s", 2 * 4)
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}", c("foo", "bar"))
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c("foo", "bar"), 2 * 4)
-#' }
 formatter_glue_or_sprintf <- function(msg,
                                       ...,
                                       .logcall = sys.call(),
@@ -182,12 +181,13 @@ attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf(
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family `log_formatters`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_json)
 #' log_layout(layout_json_parser())
 #' log_info(everything = 42)
 #' log_info(mtcars = mtcars, species = iris$Species)
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 formatter_json <- function(...,
                            .logcall = sys.call(),
                            .topcall = sys.call(-1),
@@ -235,7 +235,8 @@ skip_formatter <- function(message, ...) {
 #' @return character vector
 #' @export
 #' @family `log_formatters`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_logging)
 #' log_info("42")
 #' log_info(42)
@@ -243,7 +244,7 @@ skip_formatter <- function(message, ...) {
 #' log_info("foo %s", "bar")
 #' log_info("vector %s", 1:3)
 #' log_info(12, 1 + 1, 2 * 2)
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 formatter_logging <- function(...,
                               .logcall = sys.call(),
                               .topcall = sys.call(-1),
@@ -270,7 +271,8 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
 #' @family `log_formatters`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_pander)
 #' log_info("42")
 #' log_info(42)
@@ -278,7 +280,7 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' log_info(head(iris))
 #' log_info(head(iris), style = "simple")
 #' log_info(lm(hp ~ wt, mtcars))
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 formatter_pander <- function(x,
                              ...,
                              .logcall = sys.call(),

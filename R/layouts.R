@@ -81,7 +81,8 @@ get_logger_meta_variables <- function(log_level = NULL,
 #'   that is returned when calling [log_layout()] for the currently
 #'   used layout
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' example_layout <- layout_glue_generator(
 #'   format = "{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}"
 #' )
@@ -89,7 +90,7 @@ get_logger_meta_variables <- function(log_level = NULL,
 #'
 #' log_layout(example_layout)
 #' log_info("try {runif(1)}")
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 #' @seealso See example calls from [layout_glue()] and [layout_glue_colors()].
 #' @family `log_layouts`
 layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:%M:%S")}] {msg}') {
@@ -159,14 +160,17 @@ attr(layout_simple, "generator") <- quote(layout_simple())
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_layout(layout_logging)
 #' log_info(42)
 #' log_info(42, namespace = "everything")
 #'
+#' \dontrun{
 #' devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 #' logger_tester_function(INFO, 42)
 #' }
+#' \dontshow{logger:::namespaces_set(old)}
 layout_logging <- function(level,
                            msg,
                            namespace = NA_character_,
@@ -241,11 +245,12 @@ attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family `log_layouts`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_layout(layout_json())
 #' log_info(42)
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 layout_json <- function(fields = default_fields()) {
   force(fields)
 
@@ -282,14 +287,17 @@ layout_json <- function(fields = default_fields()) {
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family `log_layouts`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_json)
 #' log_info(everything = 42)
+#'
 #' log_layout(layout_json_parser())
 #' log_info(everything = 42)
+#'
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 layout_json_parser <- function(fields = default_fields()) {
   force(fields)
 

@@ -24,7 +24,7 @@ used layout
 set by \code{\link[=get_logger_meta_variables]{get_logger_meta_variables()}} }
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 example_layout <- layout_glue_generator(
   format = "{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}"
 )
@@ -32,7 +32,7 @@ example_layout(INFO, "try {runif(1)}")
 
 log_layout(example_layout)
 log_info("try {runif(1)}")
-}
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 See example calls from \code{\link[=layout_glue]{layout_glue()}} and \code{\link[=layout_glue_colors]{layout_glue_colors()}}.
