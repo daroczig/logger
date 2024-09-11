@@ -43,10 +43,31 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="logger-development-version">logger (development version)<a class="anchor" aria-label="anchor" href="#logger-development-version"></a></h2>
-<ul><li>logger now computes metadata lazily, so various expensive computations are only performed if you actually add them to the log (<a href="https://github.com/daroczig/logger/issues/105" class="external-link">#105</a>).</li>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>logo 😻 (<a href="https://github.com/daroczig/logger/issues/196" class="external-link">#196</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>computing metadata lazily, so various expensive computations are only performed if you actually add them to the log (<a href="https://github.com/daroczig/logger/issues/105" class="external-link">#105</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 <li>
-<code><a href="../reference/log_appender.html">log_appender()</a></code>, <code><a href="../reference/log_layout.html">log_layout()</a></code> and <code><a href="../reference/log_formatter.html">log_formatter()</a></code> now check that you are calling them with a function, and return the previously set value.</li>
+<code><a href="../reference/log_appender.html">log_appender()</a></code>, <code><a href="../reference/log_layout.html">log_layout()</a></code> and <code><a href="../reference/log_formatter.html">log_formatter()</a></code> now check that you are calling them with a function, and return the previously set value (<a href="https://github.com/daroczig/logger/issues/170" class="external-link">#170</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>new function to return number of log indices (<a href="https://github.com/daroczig/logger/issues/194" class="external-link">#194</a>, <a href="https://github.com/WurmPeter" class="external-link">@WurmPeter</a>)</li>
 </ul></div>
+<div class="section level3">
+<h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
+<ul><li>
+<code>eval</code> scoping and lazy eval (<a href="https://github.com/daroczig/logger/issues/178" class="external-link">#178</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="housekeeping-development-version">Housekeeping<a class="anchor" aria-label="anchor" href="#housekeeping-development-version"></a></h3>
+<ul><li>update <code>pkgdown</code> site to Bootstrap 5 and related revamp, e.g. reference index and run/show examples (<a href="https://github.com/daroczig/logger/issues/159" class="external-link">#159</a> <a href="https://github.com/daroczig/logger/issues/165" class="external-link">#165</a> <a href="https://github.com/daroczig/logger/issues/193" class="external-link">#193</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>roxygen updated to use markdown, general cleanup (<a href="https://github.com/daroczig/logger/issues/160" class="external-link">#160</a> <a href="https://github.com/daroczig/logger/issues/161" class="external-link">#161</a> <a href="https://github.com/daroczig/logger/issues/191" class="external-link">#191</a> <a href="https://github.com/daroczig/logger/issues/201" class="external-link">#201</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>testing improvements, e.g. move to <code>testthat</code> v3 and snapshots, syntactic sugar (<a href="https://github.com/daroczig/logger/issues/163" class="external-link">#163</a> <a href="https://github.com/daroczig/logger/issues/167" class="external-link">#167</a> <a href="https://github.com/daroczig/logger/issues/168" class="external-link">#168</a> <a href="https://github.com/daroczig/logger/issues/169" class="external-link">#169</a> <a href="https://github.com/daroczig/logger/issues/171" class="external-link">#171</a> <a href="https://github.com/daroczig/logger/issues/192" class="external-link">#192</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>README tweaks (<a href="https://github.com/daroczig/logger/issues/162" class="external-link">#162</a> <a href="https://github.com/daroczig/logger/issues/176" class="external-link">#176</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>modernize GitHub Actions (<a href="https://github.com/daroczig/logger/issues/171" class="external-link">#171</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>drop support for R versions below 4.0.0 (<a href="https://github.com/daroczig/logger/issues/177" class="external-link">#177</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>internal function tweaks (<a href="https://github.com/daroczig/logger/issues/181" class="external-link">#181</a> <a href="https://github.com/daroczig/logger/issues/187" class="external-link">#187</a> <a href="https://github.com/daroczig/logger/issues/197" class="external-link">#197</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+<li>restyle sources (<a href="https://github.com/daroczig/logger/issues/185" class="external-link">#185</a> <a href="https://github.com/daroczig/logger/issues/186" class="external-link">#186</a> <a href="https://github.com/daroczig/logger/issues/191" class="external-link">#191</a> <a href="https://github.com/daroczig/logger/issues/199" class="external-link">#199</a>, <a href="https://github.com/daroczig" class="external-link">@daroczig</a> and <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="logger-030-2024-03-03">logger 0.3.0 (2024-03-03)<a class="anchor" aria-label="anchor" href="#logger-030-2024-03-03"></a></h2><p class="text-muted">CRAN release: 2024-03-05</p>
 <p>Many unrelated small features, fixes and documentation updates collected over 2+ years.</p>
@@ -174,7 +195,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
