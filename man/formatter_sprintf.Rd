@@ -39,7 +39,6 @@ Apply \code{sprintf} to convert R objects into a character vector
 Other \code{log_formatters}: 
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
-\code{\link{formatter_glue_safe}()},
 \code{\link{formatter_json}()},
 \code{\link{formatter_logging}()},
 \code{\link{formatter_pander}()},
