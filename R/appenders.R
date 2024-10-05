@@ -346,7 +346,6 @@ appender_kinesis <- function(stream) {
 #' @param appender a [log_appender()] function with a `generator`
 #'     attribute (TODO note not required, all fn will be passed if
 #'     not)
-#' @param batch number of records to process from the queue at once
 #' @param namespace `logger` namespace to use for logging messages on
 #'     starting up the background process
 #' @param init optional function to run in the background process that
@@ -355,10 +354,7 @@ appender_kinesis <- function(stream) {
 #'     loaded or some environment variables to be set etc
 #' @return function taking `lines` argument
 #' @export
-#' @note This functionality depends on the \pkg{txtq} and \pkg{callr}
-#'     packages. The R session's temp folder is used for staging files
-#'     (message queue and other forms of communication between the
-#'     parent and child processes).
+#' @note This functionality depends on the \pkg{mirai} package.
 #' @family `log_appenders`
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
@@ -388,16 +384,23 @@ appender_kinesis <- function(stream) {
 #'
 #' }
 appender_async <- function(appender,
-                           batch = 1,
                            namespace = "async_logger",
                            init = function() log_info("Background process started")) {
   fail_on_missing_package("mirai")
   force(appender)
 
-  # Start one background process
-  mirai::daemons(1, .compute = "logger")
-  mirai::everywhere(library(logger), .compute = "logger")
-  mirai::everywhere(init(), init = init, .compute = "logger")
+  # Start one background process (hence dispatcher not required)
+  # force = FALSE allows multiple appenders to use same namespace logger
+  mirai::daemons(1L, dispatcher = FALSE, force = FALSE, .compute = namespace)
+  mirai::everywhere(
+    {
+      library(logger)
+      init()
+    },
+    appender = appender, # remains in .GlobalEnv on daemon
+    .args = list(init = init),
+    .compute = namespace
+  )
 
   structure(
     function(lines) {
@@ -405,11 +408,9 @@ appender_async <- function(appender,
         for (line in lines) {
           appender(line)
         },
-        appender = appender,
         lines = lines,
-        .compute = "logger"
+        .compute = namespace
       )
-      # browser()
     },
     generator = deparse(match.call())
   )
