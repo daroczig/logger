@@ -408,7 +408,7 @@ appender_async <- function(appender,
         for (line in lines) {
           appender(line)
         },
-        lines = lines,
+        .args = list(lines = lines),
         .compute = namespace
       )
     },
