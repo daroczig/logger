@@ -20,6 +20,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Gergely Daróczi \email{daroczig@rapporter.net} (\href{https://orcid.org/0000-0003-3149-8537}{ORCID})
 
+Authors:
+\itemize{
+  \item Hadley Wickham \email{hadley@posit.co} (\href{https://orcid.org/0000-0003-4757-117X}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item System1 [funder]
