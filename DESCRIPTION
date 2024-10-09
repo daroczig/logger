@@ -28,7 +28,7 @@ Suggests:
     glue,
     jsonlite,
     knitr,
-    mirai,
+    mirai (>= 1.3.0),
     pander,
     parallel,
     R.utils,

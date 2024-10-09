@@ -391,7 +391,7 @@ appender_async <- function(appender,
 
   # Start one background process (hence dispatcher not required)
   # force = FALSE allows multiple appenders to use same namespace logger
-  mirai::daemons(1L, dispatcher = FALSE, force = FALSE, .compute = namespace)
+  mirai::daemons(1L, dispatcher = "none", force = FALSE, .compute = namespace)
   mirai::everywhere(
     {
       library(logger)
@@ -404,7 +404,7 @@ appender_async <- function(appender,
 
   structure(
     function(lines) {
-      m <- mirai::mirai(
+      mirai::mirai(
         for (line in lines) {
           appender(line)
         },
