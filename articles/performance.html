@@ -183,17 +183,14 @@ as:</p>
 <span></span>
 <span><span class="va">async</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/log_level.html">log_info</a></span><span class="op">(</span><span class="st">'Was this slow?'</span><span class="op">)</span></span>
 <span><span class="fu">microbenchmark</span><span class="op">(</span><span class="fu">async</span><span class="op">(</span><span class="op">)</span>, times <span class="op">=</span> <span class="fl">1e3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Unit: microseconds</span></span>
-<span><span class="co">#&gt;     expr     min      lq     mean   median     uq      max neval</span></span>
-<span><span class="co">#&gt;  async() 511.329 528.247 614.8694 558.2535 616.14 5018.731  1000</span></span></code></pre></div>
-<p>Please note that although this ~0.6 ms is significantly higher than
-the ~0.15 ms we achieved above with the <code>sprintf</code> formatter,
-but this time we are calling an appender that would take 1 full second
-to deliver the log message (and not just printing to the console), so
-bringing that down to less than 1 millisecond is not too bad. If you
-need even higher throughput, then a custom <code>appender_async</code>
-without checking on the background process and potentially a faster
-message queue can bring this even below to 200 µs.</p>
+<span><span class="co"># Unit: microseconds</span></span>
+<span><span class="co">#     expr     min       lq     mean  median      uq     max neval</span></span>
+<span><span class="co">#  async() 298.275 315.5565 329.6235 322.219 333.371 894.579  1000</span></span></code></pre></div>
+<p>Please note that although this ~0.3 ms is higher than the ~0.15 ms we
+achieved above with the <code>sprintf</code> formatter, but this time we
+are calling an appender that would take 1 full second to deliver the log
+message (and not just printing to the console), so bringing that down to
+less than 1 millisecond is not too bad.</p>
   </main>
 </div>
 

@@ -50,6 +50,8 @@
 <li>
 <code><a href="../reference/log_appender.html">log_appender()</a></code>, <code><a href="../reference/log_layout.html">log_layout()</a></code> and <code><a href="../reference/log_formatter.html">log_formatter()</a></code> now check that you are calling them with a function, and return the previously set value (<a href="https://github.com/daroczig/logger/issues/170" class="external-link">#170</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 <li>new function to return number of log indices (<a href="https://github.com/daroczig/logger/issues/194" class="external-link">#194</a>, <a href="https://github.com/WurmPeter" class="external-link">@WurmPeter</a>)</li>
+<li>
+<code>appender_async</code> is now using <code>mirai</code> instead of a custom background process and queue system (<a href="https://github.com/daroczig/logger/issues/214" class="external-link">#214</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a> <a href="https://github.com/shikokuchuo" class="external-link">@shikokuchuo</a>)</li>
 </ul></div>
 <div class="section level3">
 <h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
