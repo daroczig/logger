@@ -22,13 +22,13 @@ Imports:
     utils
 Suggests:
     botor,
-    callr,
     covr,
     crayon,
     devtools,
     glue,
     jsonlite,
     knitr,
+    mirai (>= 1.3.0),
     pander,
     parallel,
     R.utils,
@@ -41,7 +41,6 @@ Suggests:
     syslognet,
     telegram,
     testthat (>= 3.0.0),
-    txtq,
     withr
 Enhances:
     futile.logger,
