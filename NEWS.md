@@ -6,6 +6,7 @@
 * computing metadata lazily, so various expensive computations are only performed if you actually add them to the log (#105, @hadley)
 * `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value (#170, @hadley)
 * new function to return number of log indices (#194, @WurmPeter)
+* `appender_async` is now using `mirai` instead of a custom background process and queue system (#214, @hadley @shikokuchuo)
 
 ## Fixes
 
