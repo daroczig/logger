@@ -6,7 +6,7 @@ template:
 authors:
   System1:
     href: https://system1.com
-    html: <img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"/>
+    html: <img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" alt="System1" height="14" width="70"/>
 toc:
   depth: 3
 
@@ -73,3 +73,16 @@ reference:
   - get_logger_meta_variables
   - log_namespaces
   - log_indices
+
+articles:
+- title: For users
+  navbar: ~
+  contents:
+  - customize_logger
+  - migration
+  - performance
+- title: For developers
+  navbar: For developers
+  contents:
+  - r_packages
+  - write_custom_extensions
