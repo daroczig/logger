@@ -235,8 +235,10 @@ tictocs <- new.env(parent = emptyenv())
 #' log_failure("foobar")
 #' try(log_failure(foobar))
 log_failure <- function(expression) {
-  tryCatch(expression, error = function(e) {
-    log_error(e$message)
-    stop(e)
-  })
+  withCallingHandlers(
+    expression,
+    error = function(e) {
+      log_error(conditionMessage(e))
+    }
+  )
 }
