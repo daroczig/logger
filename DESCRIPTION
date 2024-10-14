@@ -32,6 +32,7 @@ Suggests:
     pander,
     parallel,
     R.utils,
+    rlang,
     rmarkdown,
     roxygen2,
     RPushbullet,
