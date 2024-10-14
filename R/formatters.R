@@ -5,7 +5,9 @@
 #' @export
 #' @family `log_formatters`
 formatter_paste <- function(...,
-                            .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+                            .logcall = sys.call(),
+                            .topcall = sys.call(-1),
+                            .topenv = parent.frame()) {
   paste(...)
 }
 attr(formatter_paste, "generator") <- quote(formatter_paste())
@@ -17,8 +19,11 @@ attr(formatter_paste, "generator") <- quote(formatter_paste())
 #' @return character vector
 #' @export
 #' @family `log_formatters`
-formatter_sprintf <- function(fmt, ...,
-                              .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_sprintf <- function(fmt,
+                              ...,
+                              .logcall = sys.call(),
+                              .topcall = sys.call(-1),
+                              .topenv = parent.frame()) {
   sprintf(fmt, ...)
 }
 attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
@@ -33,7 +38,10 @@ attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 #'     will be used as a fallback.
 #' @family `log_formatters`
 #' @importFrom utils str
-formatter_glue <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+formatter_glue <- function(...,
+                           .logcall = sys.call(),
+                           .topcall = sys.call(-1),
+                           .topenv = parent.frame()) {
   fail_on_missing_package("glue")
 
   withCallingHandlers(
@@ -63,7 +71,9 @@ attr(formatter_glue, "generator") <- quote(formatter_glue())
 #' @family `log_formatters`
 #' @importFrom utils str
 formatter_glue_safe <- function(...,
-                                .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+                                .logcall = sys.call(),
+                                .topcall = sys.call(-1),
+                                .topenv = parent.frame()) {
   fail_on_missing_package("glue")
   as.character(
     tryCatch(
@@ -100,7 +110,7 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' @return character vector
 #' @family `log_formatters`
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' formatter_glue_or_sprintf("{a} + {b} = %s", a = 2, b = 3, 5)
 #' formatter_glue_or_sprintf("{pi} * {2} = %s", pi * 2)
 #' formatter_glue_or_sprintf("{pi} * {2} = {pi*2}")
@@ -110,9 +120,10 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' formatter_glue_or_sprintf("Hi {c('foo', 'bar')}, did you know that 2*4=%s", 2 * 4)
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4={2*4}", c("foo", "bar"))
 #' formatter_glue_or_sprintf("Hi %s, did you know that 2*4=%s", c("foo", "bar"), 2 * 4)
-#' }
-formatter_glue_or_sprintf <- function(msg, ...,
-                                      .logcall = sys.call(), .topcall = sys.call(-1),
+formatter_glue_or_sprintf <- function(msg,
+                                      ...,
+                                      .logcall = sys.call(),
+                                      .topcall = sys.call(-1),
                                       .topenv = parent.frame()) {
   params <- list(...)
 
@@ -170,13 +181,17 @@ attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf(
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family `log_formatters`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_json)
 #' log_layout(layout_json_parser())
 #' log_info(everything = 42)
 #' log_info(mtcars = mtcars, species = iris$Species)
-#' }
-formatter_json <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+#' \dontshow{logger:::namespaces_set(old)}
+formatter_json <- function(...,
+                           .logcall = sys.call(),
+                           .topcall = sys.call(-1),
+                           .topenv = parent.frame()) {
   fail_on_missing_package("jsonlite")
   eval(as.character(jsonlite::toJSON(list(...), auto_unbox = TRUE)), envir = .topenv)
 }
@@ -220,7 +235,8 @@ skip_formatter <- function(message, ...) {
 #' @return character vector
 #' @export
 #' @family `log_formatters`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_logging)
 #' log_info("42")
 #' log_info(42)
@@ -228,8 +244,11 @@ skip_formatter <- function(message, ...) {
 #' log_info("foo %s", "bar")
 #' log_info("vector %s", 1:3)
 #' log_info(12, 1 + 1, 2 * 2)
-#' }
-formatter_logging <- function(..., .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+#' \dontshow{logger:::namespaces_set(old)}
+formatter_logging <- function(...,
+                              .logcall = sys.call(),
+                              .topcall = sys.call(-1),
+                              .topenv = parent.frame()) {
   params <- list(...)
   .logcall <- substitute(.logcall)
 
@@ -252,7 +271,8 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
 #' @family `log_formatters`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_pander)
 #' log_info("42")
 #' log_info(42)
@@ -260,9 +280,12 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' log_info(head(iris))
 #' log_info(head(iris), style = "simple")
 #' log_info(lm(hp ~ wt, mtcars))
-#' }
-formatter_pander <- function(x, ...,
-                             .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+#' \dontshow{logger:::namespaces_set(old)}
+formatter_pander <- function(x,
+                             ...,
+                             .logcall = sys.call(),
+                             .topcall = sys.call(-1),
+                             .topenv = parent.frame()) {
   fail_on_missing_package("pander")
   pander::pander_return(x, ...)
 }

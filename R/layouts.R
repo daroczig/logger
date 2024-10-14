@@ -31,8 +31,11 @@
 #' @importFrom utils packageVersion
 #' @seealso [layout_glue_generator()]
 #' @family `log_layouts`
-get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character_,
-                                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+get_logger_meta_variables <- function(log_level = NULL,
+                                      namespace = NA_character_,
+                                      .logcall = sys.call(),
+                                      .topcall = sys.call(-1),
+                                      .topenv = parent.frame()) {
   sysinfo <- Sys.info()
   timestamp <- Sys.time()
 
@@ -78,7 +81,8 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 #'   that is returned when calling [log_layout()] for the currently
 #'   used layout
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' example_layout <- layout_glue_generator(
 #'   format = "{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}"
 #' )
@@ -86,26 +90,32 @@ get_logger_meta_variables <- function(log_level = NULL, namespace = NA_character
 #'
 #' log_layout(example_layout)
 #' log_info("try {runif(1)}")
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 #' @seealso See example calls from [layout_glue()] and [layout_glue_colors()].
 #' @family `log_layouts`
 layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:%M:%S")}] {msg}') {
   force(format)
 
-  structure(function(level, msg, namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  structure(function(level,
+                     msg,
+                     namespace = NA_character_,
+                     .logcall = sys.call(),
+                     .topcall = sys.call(-1),
+                     .topenv = parent.frame()) {
     fail_on_missing_package("glue")
     if (!inherits(level, "loglevel")) {
       stop("Invalid log level, see ?log_levels")
     }
 
-    with(
-      get_logger_meta_variables(
-        log_level = level, namespace = namespace,
-        .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
-      ),
-      glue::glue(format)
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv,
+      parent = environment()
     )
+    glue::glue(format, .envir = meta)
   }, generator = deparse(match.call()))
 }
 
@@ -117,8 +127,12 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-layout_blank <- function(level, msg, namespace = NA_character_,
-                         .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_blank <- function(level,
+                         msg,
+                         namespace = NA_character_,
+                         .logcall = sys.call(),
+                         .topcall = sys.call(-1),
+                         .topenv = parent.frame()) {
   msg
 }
 attr(layout_blank, "generator") <- quote(layout_blank())
@@ -130,8 +144,12 @@ attr(layout_blank, "generator") <- quote(layout_blank())
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-layout_simple <- function(level, msg, namespace = NA_character_,
-                          .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+layout_simple <- function(level,
+                          msg,
+                          namespace = NA_character_,
+                          .logcall = sys.call(),
+                          .topcall = sys.call(-1),
+                          .topenv = parent.frame()) {
   paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
 }
 attr(layout_simple, "generator") <- quote(layout_simple())
@@ -142,19 +160,29 @@ attr(layout_simple, "generator") <- quote(layout_simple())
 #' @return character vector
 #' @export
 #' @family `log_layouts`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_layout(layout_logging)
 #' log_info(42)
 #' log_info(42, namespace = "everything")
 #'
+#' \dontrun{
 #' devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 #' logger_tester_function(INFO, 42)
 #' }
-layout_logging <- function(level, msg, namespace = NA_character_,
-                           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
-  meta <- get_logger_meta_variables(
-    log_level = level, namespace = namespace,
-    .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
+#' \dontshow{logger:::namespaces_set(old)}
+layout_logging <- function(level,
+                           msg,
+                           namespace = NA_character_,
+                           .logcall = sys.call(),
+                           .topcall = sys.call(-1),
+                           .topenv = parent.frame()) {
+  meta <- logger_meta_env(
+    log_level = level,
+    namespace = namespace,
+    .logcall = .logcall,
+    .topcall = .topcall,
+    .topenv = .topenv
   )
   paste0(
     format(Sys.time(), "%Y-%m-%d %H:%M:%S"), " ",
@@ -217,24 +245,37 @@ attr(layout_glue_colors, "generator") <- quote(layout_glue_colors())
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family `log_layouts`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_layout(layout_json())
 #' log_info(42)
 #' log_info("ok {1:3} + {1:3} = {2*(1:3)}")
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 layout_json <- function(fields = default_fields()) {
   force(fields)
 
-  structure(function(level, msg, namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  if ("msg" %in% fields) {
+    warning("'msg' is always automatically included")
+    fields <- setdiff(fields, "msg")
+  }
+
+  structure(function(level,
+                     msg,
+                     namespace = NA_character_,
+                     .logcall = sys.call(),
+                     .topcall = sys.call(-1),
+                     .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
-    json <- get_logger_meta_variables(
-      log_level = level, namespace = namespace,
-      .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
     )
-
-    sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg))[fields], auto_unbox = TRUE))
+    json <- mget(fields, meta)
+    sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg)), auto_unbox = TRUE))
   }, generator = deparse(match.call()))
 }
 
@@ -246,26 +287,36 @@ layout_json <- function(fields = default_fields()) {
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family `log_layouts`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_json)
 #' log_info(everything = 42)
+#'
 #' log_layout(layout_json_parser())
 #' log_info(everything = 42)
+#'
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 layout_json_parser <- function(fields = default_fields()) {
   force(fields)
 
-  structure(function(level, msg, namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  structure(function(level,
+                     msg,
+                     namespace = NA_character_,
+                     .logcall = sys.call(),
+                     .topcall = sys.call(-1),
+                     .topenv = parent.frame()) {
     fail_on_missing_package("jsonlite")
 
-    meta <- get_logger_meta_variables(
-      log_level = level, namespace = namespace,
-      .logcall = .logcall, .topcall = .topcall, .topenv = .topenv
-    )[fields]
-
+    meta <- logger_meta_env(
+      log_level = level,
+      namespace = namespace,
+      .logcall = .logcall,
+      .topcall = .topcall,
+      .topenv = .topenv
+    )
+    meta <- mget(fields, meta)
     msg <- jsonlite::fromJSON(msg)
 
     jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = "null")
@@ -275,7 +326,7 @@ layout_json_parser <- function(fields = default_fields()) {
 default_fields <- function() {
   c(
     "time", "level", "ns", "ans", "topenv", "fn", "node", "arch",
-    "os_name", "os_release", "os_version", "pid", "user", "msg"
+    "os_name", "os_release", "os_version", "pid", "user"
   )
 }
 
@@ -290,10 +341,15 @@ default_fields <- function() {
 #' @return A character vector with a severity attribute.
 #' @export
 layout_syslognet <- structure(
-  function(level, msg, namespace = NA_character_,
-           .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame()) {
+  function(level,
+           msg,
+           namespace = NA_character_,
+           .logcall = sys.call(),
+           .topcall = sys.call(-1),
+           .topenv = parent.frame()) {
     ret <- paste(attr(level, "level"), msg)
-    attr(ret, "severity") <- switch(attr(level, "level", exact = TRUE),
+    attr(ret, "severity") <- switch(
+      attr(level, "level", exact = TRUE),
       "FATAL" = "CRITICAL",
       "ERROR" = "ERR",
       "WARN" = "WARNING",

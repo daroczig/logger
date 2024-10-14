@@ -1,31 +1,33 @@
 #' Dummy appender not delivering the log record to anywhere
 #' @param lines character vector
 #' @export
-appender_void <- structure(function(lines) {}, generator = quote(appender_void()))
-
+appender_void <- function(lines) {}
+attr(appender_void, "generator") <- quote(appender_void())
 
 #' Append log record to stderr
 #' @param lines character vector
 #' @export
 #' @family `log_appenders`
-appender_console <- structure(function(lines) {
+appender_console <- function(lines) {
   cat(lines, file = stderr(), sep = "\n")
-}, generator = quote(appender_console()))
+}
+attr(appender_console, "generator") <- quote(appender_console())
 
 
 #' @export
 #' @rdname appender_console
 appender_stderr <- appender_console
+attr(appender_stderr, "generator") <- quote(appender_stderr())
 
 
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
 #' @family `log_appenders`
-appender_stdout <- structure(function(lines) {
+appender_stdout <- function(lines) {
   cat(lines, sep = "\n")
-}, generator = quote(appender_stdout()))
-
+}
+attr(appender_stdout, "generator") <- quote(appender_stdout())
 
 #' Append log messages to a file
 #'
@@ -48,7 +50,8 @@ appender_stdout <- structure(function(lines) {
 #' @export
 #' @return function taking `lines` argument
 #' @family `log_appenders`
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' ## ##########################################################################
 #' ## simple example logging to a file
 #' t <- tempfile()
@@ -68,6 +71,8 @@ appender_stdout <- structure(function(lines) {
 #' ## define the file logger with log rotation enabled
 #' log_appender(appender_file(f, max_lines = 3, max_files = 5L))
 #'
+#' ## enable internal logging to see what's actually happening in the logrotate steps
+#' log_threshold(TRACE, namespace = ".logger")
 #' ## log 25 messages
 #' for (i in 1:25) log_info(i)
 #'
@@ -77,10 +82,7 @@ appender_stdout <- structure(function(lines) {
 #'   cat(readLines(t), sep = "\n")
 #' })
 #'
-#' ## enable internal logging to see what's actually happening in the logrotate steps
-#' log_threshold(TRACE, namespace = ".logger")
-#' ## run the above commands again
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) { # nolint
   force(file)
   force(append)
@@ -166,7 +168,7 @@ appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, 
   force(max_files)
   structure(
     function(lines) {
-      appender_console(lines)
+      if (needs_stdout()) appender_stdout(lines) else appender_console(lines)
       appender_file(file, append, max_lines, max_bytes, max_files)(lines)
     },
     generator = deparse(match.call())
@@ -344,7 +346,6 @@ appender_kinesis <- function(stream) {
 #' @param appender a [log_appender()] function with a `generator`
 #'     attribute (TODO note not required, all fn will be passed if
 #'     not)
-#' @param batch number of records to process from the queue at once
 #' @param namespace `logger` namespace to use for logging messages on
 #'     starting up the background process
 #' @param init optional function to run in the background process that
@@ -353,10 +354,7 @@ appender_kinesis <- function(stream) {
 #'     loaded or some environment variables to be set etc
 #' @return function taking `lines` argument
 #' @export
-#' @note This functionality depends on the \pkg{txtq} and \pkg{callr}
-#'     packages. The R session's temp folder is used for staging files
-#'     (message queue and other forms of communication between the
-#'     parent and child processes).
+#' @note This functionality depends on the \pkg{mirai} package.
 #' @family `log_appenders`
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
@@ -374,10 +372,9 @@ appender_kinesis <- function(stream) {
 #' ## start async appender
 #' t <- tempfile()
 #' log_info("Logging in the background to {t}")
-#' my_appender <- appender_async(appender_file_slow(file = t))
 #'
 #' ## use async appender
-#' log_appender(my_appender)
+#' log_appender(appender_async(appender_file_slow(file = t)))
 #' log_info("Was this slow?")
 #' system.time(for (i in 1:25) log_info(i))
 #'
@@ -385,114 +382,38 @@ appender_kinesis <- function(stream) {
 #' Sys.sleep(10)
 #' readLines(t)
 #'
-#' ## check on the async appender (debugging, you will probably never need this)
-#' attr(my_appender, "async_writer_queue")$count()
-#' attr(my_appender, "async_writer_queue")$log()
-#'
-#' attr(my_appender, "async_writer_process")$get_pid()
-#' attr(my_appender, "async_writer_process")$get_state()
-#' attr(my_appender, "async_writer_process")$poll_process(1)
-#' attr(my_appender, "async_writer_process")$read()
-#'
-#' attr(my_appender, "async_writer_process")$is_alive()
-#' attr(my_appender, "async_writer_process")$read_error()
 #' }
-appender_async <- function(appender, batch = 1, namespace = "async_logger",
+appender_async <- function(appender,
+                           namespace = "async_logger",
                            init = function() log_info("Background process started")) {
-  fail_on_missing_package("txtq")
-  fail_on_missing_package("callr")
-
+  fail_on_missing_package("mirai")
   force(appender)
-  force(batch)
 
-  ## create a storage for the message queue
-  async_writer_storage <- tempfile()
-  log_trace(paste("Async writer storage:", async_writer_storage), namespace = "async_logger")
-
-  ## initialize the message queue
-  async_writer_queue <- txtq::txtq(async_writer_storage)
-
-  ## start a background process for the async execution of the message queue
-  ## TODO make it easy to create multiple/parallel background processes?
-  async_writer_process <- callr::r_session$new()
-  log_trace(paste("Async writer PID:", async_writer_process$get_pid()), namespace = "async_logger")
-
-  ## load minimum required packages
-  async_writer_process$run(function() {
-    source(system.file(
-      "load-packages-in-background-process.R",
-      package = "logger"
-    ))
-  })
-  async_writer_process$run(init)
-
-  ## connect to the message queue
-  async_writer_process$run(assign, args = list(x = "async_writer_storage", value = async_writer_storage))
-  async_writer_process$run(function() async_writer_queue <<- txtq::txtq(async_writer_storage))
-
-  ## pass arguments
-  async_writer_process$run(assign, args = list(x = "batch", value = batch))
-
-  ## pass appender
-  async_writer_tempfile <- tempfile()
-  saveRDS(appender, async_writer_tempfile)
-  log_trace(paste("Async appender cached at:", async_writer_tempfile), namespace = "async_logger")
-  async_writer_process$run(assign, args = list(x = "async_writer_tempfile", value = async_writer_tempfile))
-  async_writer_process$run(assign, args = list(x = "appender", value = readRDS(async_writer_tempfile)))
-
-  ## start infinite loop processing log records
-  async_writer_process$call(function() {
-    while (TRUE) {
-      items <- async_writer_queue$pop(batch)
-
-      if (nrow(items) == 0) {
-        ## avoid burning CPU
-        Sys.sleep(.1)
-      } else {
-        ## execute the actual appender for each log item
-        for (i in seq_len(nrow(items))) {
-          appender(items$message[i])
-        }
-
-        ## remove processed log records
-        async_writer_queue$clean()
-      }
-    }
-  })
+  # Start one background process (hence dispatcher not required)
+  # force = FALSE allows multiple appenders to use same namespace logger
+  mirai::daemons(1L, dispatcher = "none", force = FALSE, .compute = namespace)
+  mirai::everywhere(
+    {
+      library(logger)
+      init()
+    },
+    appender = appender, # remains in .GlobalEnv on daemon
+    .args = list(init = init),
+    .compute = namespace
+  )
 
   structure(
     function(lines) {
-      ## check if background process still works
-      if (!isTRUE(async_writer_process$is_alive())) {
-        stop("FATAL: Async writer process not found")
-      }
-      remote_error <- async_writer_process$read_error()
-      if (remote_error != "") {
-        stop(paste("FATAL: Async writer failed with", shQuote(remote_error)))
-      }
-      remote_event <- async_writer_process$read()
-      if (!is.null(remote_event) && !is.null(remote_event$error)) {
-        stop(paste(
-          "FATAL: Async writer error of",
-          shQuote(remote_event$error$message),
-          "in",
-          shQuote(paste(deparse(remote_event$error$call), collapse = " "))
-        ))
-      }
-
-      ## write to message queue
-      for (line in lines) {
-        async_writer_queue$push(title = as.character(as.numeric(Sys.time())), message = line)
-      }
+      mirai::mirai(
+        for (line in lines) {
+          appender(line)
+        },
+        .args = list(lines = lines),
+        .compute = namespace
+      )
     },
-    generator = deparse(match.call()),
-    ## share remote process and queue with parent for debugging purposes
-    async_writer_storage = async_writer_storage,
-    async_writer_queue = async_writer_queue,
-    async_writer_process = async_writer_process
+    generator = deparse(match.call())
   )
-
-  ## NOTE no need to clean up, all will go away with the current R session's temp folder
 }
 
 ## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc

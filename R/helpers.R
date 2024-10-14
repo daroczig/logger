@@ -7,7 +7,8 @@
 #'   its result on a single line separated by `=>`, while setting to
 #'   `TRUE` will log the expression and the result in separate
 #'   sections reserving line-breaks and rendering the printed results
-#' @examples \dontrun{
+#' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_eval(pi * 2, level = INFO)
 #'
 #' ## lowering the log level threshold so that we don't have to set a higher level in log_eval
@@ -36,7 +37,7 @@
 #'
 #' ## doing something computationally intensive
 #' log_eval(system.time(for (i in 1:100) mad(runif(1000))), multiline = TRUE)
-#' }
+#' \dontshow{logger:::namespaces_set(old)}
 #' @importFrom utils capture.output
 #' @export
 log_eval <- function(expr, level = TRACE, multiline = FALSE) {
@@ -84,6 +85,7 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' @param width max width of message -- longer text will be wrapped into multiple lines
 #' @export
 #' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_separator()
 #' log_separator(ERROR, separator = "!", width = 60)
 #' log_separator(ERROR, separator = "!", width = 100)
@@ -92,6 +94,7 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 #' log_separator(ERROR, separator = "!", width = 100)
 #' log_layout(layout_blank)
 #' log_separator(ERROR, separator = "!", width = 80)
+#' \dontshow{logger:::namespaces_set(old)}
 #' @seealso [log_with_separator()]
 log_separator <- function(level = INFO,
                           namespace = NA_character_,
@@ -120,6 +123,7 @@ log_separator <- function(level = INFO,
 #' @inheritParams log_separator
 #' @export
 #' @examples
+#' \dontshow{old <- logger:::namespaces_set()}
 #' log_with_separator("An important message")
 #' log_with_separator("Some critical KPI down!!!", separator = "$")
 #' log_with_separator("This message is worth a {1e3} words")
@@ -140,8 +144,13 @@ log_separator <- function(level = INFO,
 #' logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 #' log_layout(logger)
 #' log_with_separator("Boo!", level = FATAL, width = 120)
+#' \dontshow{logger:::namespaces_set(old)}
 #' @seealso [log_separator()]
-log_with_separator <- function(..., level = INFO, namespace = NA_character_, separator = "=", width = 80) {
+log_with_separator <- function(...,
+                               level = INFO,
+                               namespace = NA_character_,
+                               separator = "=",
+                               width = 80) {
   base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = sys.call(-1)))
 
   log_separator(
@@ -183,7 +192,7 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 #' @param level see [log_levels()]
 #' @param namespace x
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' log_tictoc("warming up")
 #' Sys.sleep(0.1)
 #' log_tictoc("running")
@@ -191,7 +200,6 @@ log_with_separator <- function(..., level = INFO, namespace = NA_character_, sep
 #' log_tictoc("running")
 #' Sys.sleep(runif(1))
 #' log_tictoc("and running")
-#' }
 #' @author Thanks to Neal Fultz for the idea and original implementation!
 log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
   ns <- fallback_namespace(namespace)
@@ -217,16 +225,15 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
     .topenv = parent.frame()
   )
 }
-tictocs <- new.env()
+tictocs <- new.env(parent = emptyenv())
 
 
 #' Logs the error message to console before failing
 #' @param expression call
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' log_failure("foobar")
-#' log_failure(foobar)
-#' }
+#' try(log_failure(foobar))
 log_failure <- function(expression) {
   tryCatch(expression, error = function(e) {
     log_error(e$message)

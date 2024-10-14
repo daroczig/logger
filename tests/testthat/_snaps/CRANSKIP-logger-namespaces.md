@@ -14,7 +14,7 @@
     Code
       log_info("foobar")
     Output
-      logger / global / logger / eval / eval(expr, envir, enclos)
+      logger / global / logger / eval / eval(expr, envir)
     Code
       f()
     Output

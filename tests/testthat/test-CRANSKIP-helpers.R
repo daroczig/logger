@@ -1,9 +1,12 @@
 test_that("tictoc", {
-  expect_match(capture.output(log_tictoc(), type = "message"), "timer tic 0 secs")
-  ## let time pass a bit
-  Sys.sleep(0.01)
-  expect_match(capture.output(log_tictoc(), type = "message"), "timer toc")
-  capture.output(expect_silent(log_tictoc()), type = "message")
+  local_test_logger()
+  local_mocked_bindings(Sys.time = function() as.POSIXct("2024-01-01 00:00:00"))
+
+  expect_output(log_tictoc(), "timer tic 0 secs")
+  ## simulate time passing
+  local_mocked_bindings(Sys.time = function() as.POSIXct("2024-01-01 00:01:00"))
+  expect_output(log_tictoc(), "timer toc 1 mins")
+  expect_output(log_tictoc(), "timer tic 0 secs")
 })
 
 test_that("log with separator", {

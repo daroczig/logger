@@ -1,6 +1,27 @@
 # logger (development version)
 
-* `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value.
+## New features
+
+* logo 😻 (#196, @hadley)
+* computing metadata lazily, so various expensive computations are only performed if you actually add them to the log (#105, @hadley)
+* `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value (#170, @hadley)
+* new function to return number of log indices (#194, @WurmPeter)
+* `appender_async` is now using `mirai` instead of a custom background process and queue system (#214, @hadley @shikokuchuo)
+
+## Fixes
+
+* `eval` scoping and lazy eval (#178, @hadley)
+
+## Housekeeping
+
+* update `pkgdown` site to Bootstrap 5 and related revamp, e.g. reference index and run/show examples (#159 #165 #193, @hadley)
+* roxygen updated to use markdown, general cleanup (#160 #161 #191 #201, @hadley)
+* testing improvements, e.g. move to `testthat` v3 and snapshots, syntactic sugar (#163 #167 #168 #169 #171 #192, @hadley)
+* README tweaks (#162 #176, @hadley)
+* modernize GitHub Actions (#171, @hadley)
+* drop support for R versions below 4.0.0 (#177, @hadley)
+* internal function tweaks (#181 #187 #197, @hadley)
+* restyle sources (#185 #186 #191 #199, @daroczig and @hadley)
 
 # logger 0.3.0 (2024-03-03)
 

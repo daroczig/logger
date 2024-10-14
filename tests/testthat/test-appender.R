@@ -37,8 +37,8 @@ test_that("append to file + print to console", {
     layout = layout_glue_generator("{level} {msg}"),
   )
 
-  expect_equal(capture.output(log_info("foobar"), type = "message"), "INFO foobar")
-  capture.output(log_info("{1:2}"), type = "message")
+  expect_output(log_info("foobar"), "INFO foobar")
+  capture.output(log_info("{1:2}"))
   expect_equal(length(readLines(t)), 3)
   expect_equal(readLines(t)[1], "INFO foobar")
 })

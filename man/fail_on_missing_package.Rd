@@ -17,10 +17,8 @@ fail_on_missing_package(pkg, min_version, call = NULL)
 Check if R package can be loaded and fails loudly otherwise
 }
 \examples{
-\dontrun{
 f <- function() fail_on_missing_package("foobar")
-f()
+try(f())
 g <- function() fail_on_missing_package("stats")
 g()
-}
 }

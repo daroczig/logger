@@ -20,10 +20,10 @@ log_layout(layout = NULL, namespace = "global", index = 1)
 Get or set log record layout
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 log_layout(layout_json())
 log_info(42)
-}
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 Other log configutation functions: 

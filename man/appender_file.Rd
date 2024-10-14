@@ -40,7 +40,7 @@ renamed to \code{logfile.2}) until the specified \code{max_files}, then the
 oldest file (\code{logfile.{max_files-1}}) is deleted.
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 ## ##########################################################################
 ## simple example logging to a file
 t <- tempfile()
@@ -60,6 +60,8 @@ f <- file.path(t, "log")
 ## define the file logger with log rotation enabled
 log_appender(appender_file(f, max_lines = 3, max_files = 5L))
 
+## enable internal logging to see what's actually happening in the logrotate steps
+log_threshold(TRACE, namespace = ".logger")
 ## log 25 messages
 for (i in 1:25) log_info(i)
 
@@ -69,10 +71,7 @@ lapply(list.files(t, full.names = TRUE), function(t) {
   cat(readLines(t), sep = "\n")
 })
 
-## enable internal logging to see what's actually happening in the logrotate steps
-log_threshold(TRACE, namespace = ".logger")
-## run the above commands again
-}
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 Other \code{log_appenders}: 

@@ -19,21 +19,22 @@ destination, eg \code{\link[=appender_console]{appender_console()}}, \code{\link
 Get or set log record appender function
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 ## change appender to "tee" that writes to the console and a file as well
 t <- tempfile()
 log_appender(appender_tee(t))
 log_info(42)
-log_info(42:44)
+log_info(43)
+log_info(44)
 readLines(t)
 
 ## poor man's tee by stacking loggers in the namespace
 t <- tempfile()
-log_appender(appender_console)
+log_appender(appender_stdout)
 log_appender(appender_file(t), index = 2)
 log_info(42)
 readLines(t)
-}
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 Other log configutation functions: 

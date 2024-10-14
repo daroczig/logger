@@ -144,7 +144,7 @@ test_that("config setter called from do.call", {
 
 test_that("providing log_level() args to wrappers diretly is OK", {
   local_test_logger(WARN)
-  expect_silent(log_info("{Sepal.Length}", .topenv = iris))
+  expect_silent(log_info("{Sepal.Length}", .topenv = list2env(iris)))
 })
 
 test_that("setters check inputs", {

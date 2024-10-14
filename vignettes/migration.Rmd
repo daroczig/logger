@@ -243,13 +243,8 @@ str(as.list(loglevels))
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-levels <- mget(
-  ls(
-    envir = environment(logger), pattern = "^[A-Z]"
-  ),
-  envir = environment(logger)
-)
-str(levels[order(-as.numeric(levels))], give.attr = FALSE)
+levels <- mget(rev(logger:::log_levels_supported), envir = asNamespace("logger"))
+str(levels, give.attr = FALSE)
 ```
 </div>
 

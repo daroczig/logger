@@ -43,14 +43,16 @@ character vector
 Format a log record as the logging package does by default
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 log_layout(layout_logging)
 log_info(42)
 log_info(42, namespace = "everything")
 
+\dontrun{
 devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 logger_tester_function(INFO, 42)
 }
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 Other \code{log_layouts}: 
