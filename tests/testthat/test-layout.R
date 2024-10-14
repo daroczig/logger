@@ -23,26 +23,39 @@ test_that("metavars", {
 })
 
 test_that("JSON layout", {
-  local_test_logger(layout = layout_json(fields = c("level", "msg")))
+  local_test_logger(layout = layout_json(fields = "level"))
 
   out <- jsonlite::fromJSON(capture.output(log_info("foobar")))
   expect_equal(out, list(level = "INFO", msg = "foobar"))
 })
 
+test_that("JSON layout warns if you include msg", {
+  expect_snapshot(layout <- layout_json(fields = "msg"))
+  local_test_logger(layout = layout)
+  out <- jsonlite::fromJSON(capture.output(log_info("foobar")))
+  expect_equal(out, list(msg = "foobar"))
+})
+
 test_that("JSON parser layout", {
-  local_test_logger(layout = layout_json_parser(fields = c()))
+  local_test_logger(layout = layout_json_parser(fields = character()))
   expect_output(log_info(skip_formatter('{"x": 4}')), '{"x":4}', fixed = TRUE)
 })
 
 test_that("must throw errors", {
-  expect_error(layout_simple(FOOBAR))
-  expect_error(layout_simple(42))
-  expect_error(layout_simple(msg = "foobar"))
+  skip_if_not(getRversion() >= "4.3") # error call changed
 
-  expect_error(layout_glue(FOOBAR))
-  expect_error(layout_glue(42))
-  expect_error(layout_glue(msg = "foobar"))
-  expect_error(layout_glue(level = 53, msg = "foobar"))
+  expect_snapshot(error = TRUE, {
+    layout_simple(FOOBAR)
+    layout_simple(42)
+    layout_simple(msg = "foobar")
+  })
+
+  expect_snapshot(error = TRUE, {
+    layout_glue(FOOBAR)
+    layout_glue(42)
+    layout_glue(msg = "foobar")
+    layout_glue(level = 53, msg = "foobar")
+  })
 })
 
 test_that("logging layout", {

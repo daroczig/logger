@@ -4,21 +4,21 @@
 \alias{fail_on_missing_package}
 \title{Check if R package can be loaded and fails loudly otherwise}
 \usage{
-fail_on_missing_package(pkg, min_version)
+fail_on_missing_package(pkg, min_version, call = NULL)
 }
 \arguments{
 \item{pkg}{string}
 
 \item{min_version}{optional minimum version needed}
+
+\item{call}{Call to include in error message.}
 }
 \description{
 Check if R package can be loaded and fails loudly otherwise
 }
 \examples{
-\dontrun{
 f <- function() fail_on_missing_package("foobar")
-f()
+try(f())
 g <- function() fail_on_missing_package("stats")
 g()
-}
 }

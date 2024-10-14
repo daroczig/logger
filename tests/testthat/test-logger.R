@@ -128,23 +128,23 @@ test_that("config setter called from do.call", {
   local_test_logger()
 
   t <- withr::local_tempfile()
-  expect_error(do.call(log_appender, list(appender_file(t))), NA)
+  expect_no_error(do.call(log_appender, list(appender_file(t))))
   log_info(42)
   expect_length(readLines(t), 1)
-  expect_error(do.call(log_threshold, list(ERROR)), NA)
+  expect_no_error(do.call(log_threshold, list(ERROR)))
   log_info(42)
   expect_length(readLines(t), 1)
-  expect_error(do.call(log_threshold, list(INFO)), NA)
+  expect_no_error(do.call(log_threshold, list(INFO)))
   log_info(42)
   expect_length(readLines(t), 2)
-  expect_error(do.call(log_layout, list(formatter_paste)), NA)
+  expect_no_error(do.call(log_layout, list(formatter_paste)))
   log_info(42)
   expect_length(readLines(t), 3)
 })
 
 test_that("providing log_level() args to wrappers diretly is OK", {
   local_test_logger(WARN)
-  expect_silent(log_info("{Sepal.Length}", .topenv = iris))
+  expect_silent(log_info("{Sepal.Length}", .topenv = list2env(iris)))
 })
 
 test_that("setters check inputs", {

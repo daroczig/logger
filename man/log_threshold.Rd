@@ -20,7 +20,7 @@ currently set log level threshold
 Get or set log level threshold
 }
 \examples{
-\dontrun{
+\dontshow{old <- logger:::namespaces_set()}
 ## check the currently set log level threshold
 log_threshold()
 
@@ -36,7 +36,7 @@ log_warn(2)
 
 ## set the log level threshold in all namespaces to ERROR
 log_threshold(ERROR, namespace = log_namespaces())
-}
+\dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
 Other log configutation functions: 

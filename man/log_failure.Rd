@@ -13,8 +13,6 @@ log_failure(expression)
 Logs the error message to console before failing
 }
 \examples{
-\dontrun{
 log_failure("foobar")
-log_failure(foobar)
-}
+try(log_failure(foobar))
 }
