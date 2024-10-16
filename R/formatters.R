@@ -29,6 +29,10 @@ formatter_sprintf <- function(fmt,
 attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 
 #' Apply `glue` to convert R objects into a character vector
+#'
+#' `formatter_glue()` uses [glue::glue()]; `formatter_glue_safe()` uses
+#' [glue::glue_safe()].
+#'
 #' @param ... passed to `glue` for the text interpolation
 #' @inheritParams log_level
 #' @return character vector
@@ -63,13 +67,8 @@ formatter_glue <- function(...,
 attr(formatter_glue, "generator") <- quote(formatter_glue())
 
 
-#' Apply `glue_safe` to convert R objects into a character vector
-#' @param ... passed to `glue_safe` for the text interpolation
-#' @inheritParams log_level
-#' @return character vector
+#' @rdname formatter_glue
 #' @export
-#' @family `log_formatters`
-#' @importFrom utils str
 formatter_glue_safe <- function(...,
                                 .logcall = sys.call(),
                                 .topcall = sys.call(-1),

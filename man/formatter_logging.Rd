@@ -52,7 +52,6 @@ log_info(12, 1 + 1, 2 * 2)
 Other \code{log_formatters}: 
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
-\code{\link{formatter_glue_safe}()},
 \code{\link{formatter_json}()},
 \code{\link{formatter_pander}()},
 \code{\link{formatter_paste}()},
