@@ -89,15 +89,15 @@
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">WARN</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-14 22:34:37] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-19 21:51:25] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## add another logger with a lower log level threshold and check the number of logged messages</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">INFO</span>, index <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-14 22:34:37] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-19 21:51:25] 1</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-14 22:34:37] 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-14 22:34:37] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-19 21:51:25] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-19 21:51:25] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## set the log level threshold in all namespaces to ERROR</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">ERROR</span>, namespace <span class="op">=</span> <span class="fu"><a href="log_namespaces.html">log_namespaces</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
