@@ -13,7 +13,7 @@ Authors@R: c(
 Description: Inspired by the the 'futile.logger' R package and 'logging'
     Python module, this utility provides a flexible and extensible way of
     formatting and delivering log messages with low overhead.
-License: AGPL-3
+License: MIT + file LICENSE
 URL: https://daroczig.github.io/logger/
 BugReports: https://github.com/daroczig/logger/issues
 Depends:

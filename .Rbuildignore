@@ -19,3 +19,4 @@ dev-resources
 revdep
 ^codecov\.yml$
 ^README\.Rmd$
+^LICENSE\.md$
