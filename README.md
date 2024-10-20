@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# logger <a href="https://daroczig.github.io/logger"><img src="man/figures/logo.png" align="right" height="138" alt="logger website" /></a>
+# logger <a href="https://daroczig.github.io/logger/"><img src="man/figures/logo.png" align="right" height="138" alt="logger website" /></a>
 
 <!-- badges: start -->
 
@@ -17,7 +17,7 @@ Coverage](https://codecov.io/gh/daroczig/logger/branch/master/graph/badge.svg)](
 Project](https://mikata.dev/img/badge.svg)](https://mikata.dev)
 <!-- badges: end -->
 
-A lightweight, modern and flexibly logging utility for R – heavily
+A lightweight, modern and flexible logging utility for R – heavily
 inspired by the `futile.logger` R package and `logging` Python module.
 
 ## Installation
