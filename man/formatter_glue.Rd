@@ -2,9 +2,17 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_glue}
 \alias{formatter_glue}
+\alias{formatter_glue_safe}
 \title{Apply \code{glue} to convert R objects into a character vector}
 \usage{
 formatter_glue(
+  ...,
+  .logcall = sys.call(),
+  .topcall = sys.call(-1),
+  .topenv = parent.frame()
+)
+
+formatter_glue_safe(
   ...,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
@@ -30,7 +38,8 @@ to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 character vector
 }
 \description{
-Apply \code{glue} to convert R objects into a character vector
+\code{formatter_glue()} uses \code{\link[glue:glue]{glue::glue()}}; \code{formatter_glue_safe()} uses
+\code{\link[glue:glue_safe]{glue::glue_safe()}}.
 }
 \note{
 Although this is the default log message formatter function,
@@ -40,7 +49,6 @@ will be used as a fallback.
 \seealso{
 Other \code{log_formatters}: 
 \code{\link{formatter_glue_or_sprintf}()},
-\code{\link{formatter_glue_safe}()},
 \code{\link{formatter_json}()},
 \code{\link{formatter_logging}()},
 \code{\link{formatter_pander}()},
