@@ -363,4 +363,3 @@ layout_syslognet <- structure(
   generator = quote(layout_syslognet())
 )
 # nocov end
-

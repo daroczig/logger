@@ -417,4 +417,3 @@ appender_async <- function(appender,
 }
 
 ## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc
-
