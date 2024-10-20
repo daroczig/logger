@@ -11,7 +11,7 @@ grayscale_by_log_level()."><meta property="og:image" content="https://daroczig.g
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,7 +112,7 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other <code>log_layouts</code>:
+    <div class="dont-index"><p>Other log_layouts:
 <code><a href="get_logger_meta_variables.html">get_logger_meta_variables</a>()</code>,
 <code><a href="layout_blank.html">layout_blank</a>()</code>,
 <code><a href="layout_glue.html">layout_glue</a>()</code>,
@@ -128,21 +128,21 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_glue_colors</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"Starting the script..."</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #949494;">Starting the script...</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #949494;">Starting the script...</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"This is the second line"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0087AF; font-weight: bold;">DEBUG</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #808080;">This is the second line</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0087AF; font-weight: bold;">DEBUG</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #808080;">This is the second line</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_trace</a></span><span class="op">(</span><span class="st">"That is being placed right after the first one."</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #005FAF; font-weight: bold;">TRACE</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #626262;">That is being placed right after the first one.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #005FAF; font-weight: bold;">TRACE</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #626262;">That is being placed right after the first one.</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="st">"Some errors might come!"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #FFAF00; font-weight: bold;">WARN</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #C6C6C6;">Some errors might come!</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #FFAF00; font-weight: bold;">WARN</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #C6C6C6;">Some errors might come!</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_error</a></span><span class="op">(</span><span class="st">"This is a problem"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #DADADA;">This is a problem</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #DADADA;">This is a problem</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"Getting an error is usually bad"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0087AF; font-weight: bold;">DEBUG</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #808080;">Getting an error is usually bad</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0087AF; font-weight: bold;">DEBUG</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #808080;">Getting an error is usually bad</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_error</a></span><span class="op">(</span><span class="st">"This is another problem"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #DADADA;">This is another problem</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #AF0000; font-weight: bold;">ERROR</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #DADADA;">This is another problem</span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_fatal</a></span><span class="op">(</span><span class="st">"The last problem."</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #FF0000; font-weight: bold;">FATAL</span> [<span style="font-style: italic;">2024-10-20 19:57:50</span>] <span style="color: #EEEEEE;">The last problem.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #FF0000; font-weight: bold;">FATAL</span> [<span style="font-style: italic;">2024-10-20 22:39:38</span>] <span style="color: #EEEEEE;">The last problem.</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -17,7 +17,7 @@ oldest file (logfile.{max_files-1}) is deleted."><meta property="og:image" conte
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,7 @@ be used in rotation</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other <code>log_appenders</code>:
+    <div class="dont-index"><p>Other log_appenders:
 <code><a href="appender_async.html">appender_async</a>()</code>,
 <code><a href="appender_console.html">appender_console</a>()</code>,
 <code><a href="appender_kinesis.html">appender_kinesis</a>()</code>,
@@ -127,19 +127,19 @@ be used in rotation</p></dd>
 <span class="r-in"><span><span class="fu"><a href="log_appender.html">log_appender</a></span><span class="op">(</span><span class="fu">appender_file</span><span class="op">(</span><span class="va">t</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span> <span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "INFO [2024-10-20 19:57:44] 1"  "INFO [2024-10-20 19:57:44] 2" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "INFO [2024-10-20 19:57:44] 3"  "INFO [2024-10-20 19:57:44] 4" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "INFO [2024-10-20 19:57:44] 5"  "INFO [2024-10-20 19:57:44] 6" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "INFO [2024-10-20 19:57:44] 7"  "INFO [2024-10-20 19:57:44] 8" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "INFO [2024-10-20 19:57:44] 9"  "INFO [2024-10-20 19:57:44] 10"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "INFO [2024-10-20 19:57:44] 11" "INFO [2024-10-20 19:57:44] 12"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "INFO [2024-10-20 19:57:44] 13" "INFO [2024-10-20 19:57:44] 14"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] "INFO [2024-10-20 19:57:44] 15" "INFO [2024-10-20 19:57:44] 16"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "INFO [2024-10-20 19:57:44] 17" "INFO [2024-10-20 19:57:44] 18"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "INFO [2024-10-20 19:57:44] 19" "INFO [2024-10-20 19:57:44] 20"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "INFO [2024-10-20 19:57:44] 21" "INFO [2024-10-20 19:57:44] 22"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [23] "INFO [2024-10-20 19:57:44] 23" "INFO [2024-10-20 19:57:44] 24"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "INFO [2024-10-20 19:57:44] 25"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "INFO [2024-10-20 22:39:33] 1"  "INFO [2024-10-20 22:39:33] 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "INFO [2024-10-20 22:39:33] 3"  "INFO [2024-10-20 22:39:33] 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "INFO [2024-10-20 22:39:33] 5"  "INFO [2024-10-20 22:39:33] 6" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "INFO [2024-10-20 22:39:33] 7"  "INFO [2024-10-20 22:39:33] 8" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "INFO [2024-10-20 22:39:33] 9"  "INFO [2024-10-20 22:39:33] 10"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "INFO [2024-10-20 22:39:33] 11" "INFO [2024-10-20 22:39:33] 12"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "INFO [2024-10-20 22:39:33] 13" "INFO [2024-10-20 22:39:33] 14"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] "INFO [2024-10-20 22:39:33] 15" "INFO [2024-10-20 22:39:33] 16"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "INFO [2024-10-20 22:39:33] 17" "INFO [2024-10-20 22:39:33] 18"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "INFO [2024-10-20 22:39:33] 19" "INFO [2024-10-20 22:39:33] 20"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "INFO [2024-10-20 22:39:33] 21" "INFO [2024-10-20 22:39:33] 22"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [23] "INFO [2024-10-20 22:39:33] 23" "INFO [2024-10-20 22:39:33] 24"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "INFO [2024-10-20 22:39:33] 25"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## ##########################################################################</span></span></span>
 <span class="r-in"><span><span class="co">## more complex example of logging to file</span></span></span>
@@ -157,81 +157,81 @@ be used in rotation</p></dd>
 <span class="r-in"><span><span class="fu"><a href="log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span>, namespace <span class="op">=</span> <span class="st">".logger"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## log 25 messages</span></span></span>
 <span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span> <span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:44] logging 'INFO [2024-10-20 19:57:44] 1' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:44] logging 'INFO [2024-10-20 19:57:44] 2' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:44] 3' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 4' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 5' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 6' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 7' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 8' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 9' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 10' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 11' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 12' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 13' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 14' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 15' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 16' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 17' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 18' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 19' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 20' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 21' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 22' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 23' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 24' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] renaming /tmp/RtmpAI62jt/file1f2a6b20bb59/log to /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] killing the main file: /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 19:57:45] logging 'INFO [2024-10-20 19:57:45] 25' to /tmp/RtmpAI62jt/file1f2a6b20bb59/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 1' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 2' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 3' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 4' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 5' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 6' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 7' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 8' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 9' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 10' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 11' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 12' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.3 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 13' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 14' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 15' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.3 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 16' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 17' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 18' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.3 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 19' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 20' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 21' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.3 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 22' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 23' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 24' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] lines &gt;= max_lines || bytes &gt;= max_bytes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.3 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 to /tmp/RtmpVoI83W/file1fe0444e68c5/log.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] renaming /tmp/RtmpVoI83W/file1fe0444e68c5/log to /tmp/RtmpVoI83W/file1fe0444e68c5/log.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] killing the main file: /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2024-10-20 22:39:33] logging 'INFO [2024-10-20 22:39:33] 25' to /tmp/RtmpVoI83W/file1fe0444e68c5/log</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## see what was logged</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">t</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="op">{</span></span></span>
@@ -239,28 +239,28 @@ be used in rotation</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpAI62jt/file1f2a6b20bb59/log </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpVoI83W/file1fe0444e68c5/log </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpAI62jt/file1f2a6b20bb59/log.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpVoI83W/file1fe0444e68c5/log.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 24</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpAI62jt/file1f2a6b20bb59/log.2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpVoI83W/file1fe0444e68c5/log.2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpAI62jt/file1f2a6b20bb59/log.3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpVoI83W/file1fe0444e68c5/log.3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpAI62jt/file1f2a6b20bb59/log.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:45] 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## /tmp/RtmpVoI83W/file1fe0444e68c5/log.4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:33] 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

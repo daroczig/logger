@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,15 +89,15 @@
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">WARN</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-20 19:57:54] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-20 22:39:43] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## add another logger with a lower log level threshold and check the number of logged messages</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">INFO</span>, index <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 19:57:54] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2024-10-20 22:39:43] 1</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_warn</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-20 19:57:54] 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-20 19:57:54] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-20 22:39:43] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2024-10-20 22:39:43] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## set the log level threshold in all namespaces to ERROR</span></span></span>
 <span class="r-in"><span><span class="fu">log_threshold</span><span class="op">(</span><span class="va">ERROR</span>, namespace <span class="op">=</span> <span class="fu"><a href="log_namespaces.html">log_namespaces</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
