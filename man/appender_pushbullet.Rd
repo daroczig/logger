@@ -19,7 +19,7 @@ Send log messages to Pushbullet
 This functionality depends on the \pkg{RPushbullet} package.
 }
 \seealso{
-Other \code{log_appenders}: 
+Other log_appenders: 
 \code{\link{appender_async}()},
 \code{\link{appender_console}()},
 \code{\link{appender_file}()},
@@ -30,4 +30,4 @@ Other \code{log_appenders}:
 \code{\link{appender_tee}()},
 \code{\link{appender_telegram}()}
 }
-\concept{\code{log_appenders}}
+\concept{log_appenders}

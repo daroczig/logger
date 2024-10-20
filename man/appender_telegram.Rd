@@ -29,7 +29,7 @@ Send log messages to a Telegram chat
 This functionality depends on the \pkg{telegram} package.
 }
 \seealso{
-Other \code{log_appenders}: 
+Other log_appenders: 
 \code{\link{appender_async}()},
 \code{\link{appender_console}()},
 \code{\link{appender_file}()},
@@ -40,4 +40,4 @@ Other \code{log_appenders}:
 \code{\link{appender_syslog}()},
 \code{\link{appender_tee}()}
 }
-\concept{\code{log_appenders}}
+\concept{log_appenders}

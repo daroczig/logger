@@ -64,7 +64,7 @@ readLines(t)
 }
 }
 \seealso{
-Other \code{log_appenders}: 
+Other log_appenders: 
 \code{\link{appender_console}()},
 \code{\link{appender_file}()},
 \code{\link{appender_kinesis}()},
@@ -75,4 +75,4 @@ Other \code{log_appenders}:
 \code{\link{appender_tee}()},
 \code{\link{appender_telegram}()}
 }
-\concept{\code{log_appenders}}
+\concept{log_appenders}

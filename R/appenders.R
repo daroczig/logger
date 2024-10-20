@@ -7,7 +7,7 @@ attr(appender_void, "generator") <- quote(appender_void())
 #' Append log record to stderr
 #' @param lines character vector
 #' @export
-#' @family `log_appenders`
+#' @family log_appenders
 appender_console <- function(lines) {
   cat(lines, file = stderr(), sep = "\n")
 }
@@ -23,7 +23,7 @@ attr(appender_stderr, "generator") <- quote(appender_stderr())
 #' Append log record to stdout
 #' @param lines character vector
 #' @export
-#' @family `log_appenders`
+#' @family log_appenders
 appender_stdout <- function(lines) {
   cat(lines, sep = "\n")
 }
@@ -49,7 +49,7 @@ attr(appender_stdout, "generator") <- quote(appender_stdout())
 #'     be used in rotation
 #' @export
 #' @return function taking `lines` argument
-#' @family `log_appenders`
+#' @family log_appenders
 #' @examples
 #' \dontshow{old <- logger:::namespaces_set()}
 #' ## ##########################################################################
@@ -159,7 +159,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
 #' @inheritParams appender_file
 #' @export
 #' @return function taking `lines` argument
-#' @family `log_appenders`
+#' @family log_appenders
 appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, max_files = 1L) {
   force(file)
   force(append)
@@ -186,7 +186,7 @@ appender_tee <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf, 
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{slackr} package.
-#' @family `log_appenders`
+#' @family log_appenders
 appender_slack <- function(channel = Sys.getenv("SLACK_CHANNEL"),
                            username = Sys.getenv("SLACK_USERNAME"),
                            icon_emoji = Sys.getenv("SLACK_ICON_EMOJI"),
@@ -218,7 +218,7 @@ appender_slack <- function(channel = Sys.getenv("SLACK_CHANNEL"),
 #'     <http://dirk.eddelbuettel.com/code/rpushbullet.html>
 #' @export
 #' @note This functionality depends on the \pkg{RPushbullet} package.
-#' @family `log_appenders`
+#' @family log_appenders
 #' @export
 appender_pushbullet <- function(...) {
   fail_on_missing_package("RPushbullet")
@@ -241,7 +241,7 @@ appender_pushbullet <- function(...) {
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{telegram} package.
-#' @family `log_appenders`
+#' @family log_appenders
 appender_telegram <- function(chat_id = Sys.getenv("TELEGRAM_CHAT_ID"),
                               bot_token = Sys.getenv("TELEGRAM_BOT_TOKEN"),
                               parse_mode = NULL) {
@@ -266,7 +266,7 @@ appender_telegram <- function(chat_id = Sys.getenv("TELEGRAM_CHAT_ID"),
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{rsyslog} package.
-#' @family `log_appenders`
+#' @family log_appenders
 #' @examples \dontrun{
 #' if (requireNamespace("rsyslog", quietly = TRUE)) {
 #'   log_appender(appender_syslog("test"))
@@ -326,7 +326,7 @@ appender_syslognet <- function(identifier, server, port = 601L) {
 #'     argument
 #' @export
 #' @note This functionality depends on the \pkg{botor} package.
-#' @family `log_appenders`
+#' @family log_appenders
 appender_kinesis <- function(stream) {
   fail_on_missing_package("botor")
   force(stream)
@@ -355,7 +355,7 @@ appender_kinesis <- function(stream) {
 #' @return function taking `lines` argument
 #' @export
 #' @note This functionality depends on the \pkg{mirai} package.
-#' @family `log_appenders`
+#' @family log_appenders
 #' @examples \dontrun{
 #' appender_file_slow <- function(file) {
 #'   force(file)
@@ -417,3 +417,4 @@ appender_async <- function(appender,
 }
 
 ## TODO other appenders: graylog, datadog, cloudwatch, email via sendmailR, ES etc
+

@@ -67,7 +67,7 @@ otherwise a fallback namespace (eg usually \code{global})
 \seealso{
 \code{\link[=layout_glue_generator]{layout_glue_generator()}}
 
-Other \code{log_layouts}: 
+Other log_layouts: 
 \code{\link{layout_blank}()},
 \code{\link{layout_glue}()},
 \code{\link{layout_glue_colors}()},
@@ -77,4 +77,4 @@ Other \code{log_layouts}:
 \code{\link{layout_logging}()},
 \code{\link{layout_simple}()}
 }
-\concept{\code{log_layouts}}
+\concept{log_layouts}

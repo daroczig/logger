@@ -3,7 +3,7 @@
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @family `log_formatters`
+#' @family log_formatters
 formatter_paste <- function(...,
                             .logcall = sys.call(),
                             .topcall = sys.call(-1),
@@ -18,7 +18,7 @@ attr(formatter_paste, "generator") <- quote(formatter_paste())
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @family `log_formatters`
+#' @family log_formatters
 formatter_sprintf <- function(fmt,
                               ...,
                               .logcall = sys.call(),
@@ -36,7 +36,7 @@ attr(formatter_sprintf, "generator") <- quote(formatter_sprintf())
 #' @note Although this is the default log message formatter function,
 #'     but when \pkg{glue} is not installed, [formatter_sprintf()]
 #'     will be used as a fallback.
-#' @family `log_formatters`
+#' @family log_formatters
 #' @importFrom utils str
 formatter_glue <- function(...,
                            .logcall = sys.call(),
@@ -68,7 +68,7 @@ attr(formatter_glue, "generator") <- quote(formatter_glue())
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @family `log_formatters`
+#' @family log_formatters
 #' @importFrom utils str
 formatter_glue_safe <- function(...,
                                 .logcall = sys.call(),
@@ -108,7 +108,7 @@ attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 #' @param ... passed to `glue` for the text interpolation
 #' @inheritParams log_level
 #' @return character vector
-#' @family `log_formatters`
+#' @family log_formatters
 #' @export
 #' @examples
 #' formatter_glue_or_sprintf("{a} + {b} = %s", a = 2, b = 3, 5)
@@ -180,7 +180,7 @@ attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf(
 #' @return character vector
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
-#' @family `log_formatters`
+#' @family log_formatters
 #' @examples
 #' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_json)
@@ -234,7 +234,7 @@ skip_formatter <- function(message, ...) {
 #' @inheritParams log_level
 #' @return character vector
 #' @export
-#' @family `log_formatters`
+#' @family log_formatters
 #' @examples
 #' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_logging)
@@ -270,7 +270,7 @@ attr(formatter_logging, "generator") <- quote(formatter_logging())
 #' @return character vector
 #' @note This functionality depends on the \pkg{pander} package.
 #' @export
-#' @family `log_formatters`
+#' @family log_formatters
 #' @examples
 #' \dontshow{old <- logger:::namespaces_set()}
 #' log_formatter(formatter_pander)

@@ -55,7 +55,7 @@ formatter_glue_or_sprintf("Hi \%s, did you know that 2*4={2*4}", c("foo", "bar")
 formatter_glue_or_sprintf("Hi \%s, did you know that 2*4=\%s", c("foo", "bar"), 2 * 4)
 }
 \seealso{
-Other \code{log_formatters}: 
+Other log_formatters: 
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_safe}()},
 \code{\link{formatter_json}()},
@@ -64,4 +64,4 @@ Other \code{log_formatters}:
 \code{\link{formatter_paste}()},
 \code{\link{formatter_sprintf}()}
 }
-\concept{\code{log_formatters}}
+\concept{log_formatters}

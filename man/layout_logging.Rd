@@ -55,7 +55,7 @@ logger_tester_function(INFO, 42)
 \dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
-Other \code{log_layouts}: 
+Other log_layouts: 
 \code{\link{get_logger_meta_variables}()},
 \code{\link{layout_blank}()},
 \code{\link{layout_glue}()},
@@ -65,4 +65,4 @@ Other \code{log_layouts}:
 \code{\link{layout_json_parser}()},
 \code{\link{layout_simple}()}
 }
-\concept{\code{log_layouts}}
+\concept{log_layouts}

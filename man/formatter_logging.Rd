@@ -49,7 +49,7 @@ log_info(12, 1 + 1, 2 * 2)
 \dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
-Other \code{log_formatters}: 
+Other log_formatters: 
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
 \code{\link{formatter_glue_safe}()},
@@ -58,4 +58,4 @@ Other \code{log_formatters}:
 \code{\link{formatter_paste}()},
 \code{\link{formatter_sprintf}()}
 }
-\concept{\code{log_formatters}}
+\concept{log_formatters}

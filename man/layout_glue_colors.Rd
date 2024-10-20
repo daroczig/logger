@@ -62,7 +62,7 @@ log_fatal("The last problem.")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other \code{log_layouts}: 
+Other log_layouts: 
 \code{\link{get_logger_meta_variables}()},
 \code{\link{layout_blank}()},
 \code{\link{layout_glue}()},
@@ -72,4 +72,4 @@ Other \code{log_layouts}:
 \code{\link{layout_logging}()},
 \code{\link{layout_simple}()}
 }
-\concept{\code{log_layouts}}
+\concept{log_layouts}

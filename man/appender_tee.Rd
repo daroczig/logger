@@ -36,7 +36,7 @@ This appends log messages to both console and a file. The same
 rotation options are available as in \code{\link[=appender_file]{appender_file()}}.
 }
 \seealso{
-Other \code{log_appenders}: 
+Other log_appenders: 
 \code{\link{appender_async}()},
 \code{\link{appender_console}()},
 \code{\link{appender_file}()},
@@ -47,4 +47,4 @@ Other \code{log_appenders}:
 \code{\link{appender_syslog}()},
 \code{\link{appender_telegram}()}
 }
-\concept{\code{log_appenders}}
+\concept{log_appenders}

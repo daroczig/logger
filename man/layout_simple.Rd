@@ -45,7 +45,7 @@ Format a log record by concatenating the log level, timestamp and
 message
 }
 \seealso{
-Other \code{log_layouts}: 
+Other log_layouts: 
 \code{\link{get_logger_meta_variables}()},
 \code{\link{layout_blank}()},
 \code{\link{layout_glue}()},
@@ -55,4 +55,4 @@ Other \code{log_layouts}:
 \code{\link{layout_json_parser}()},
 \code{\link{layout_logging}()}
 }
-\concept{\code{log_layouts}}
+\concept{log_layouts}

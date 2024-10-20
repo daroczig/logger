@@ -16,7 +16,7 @@ appender_stderr(lines)
 Append log record to stderr
 }
 \seealso{
-Other \code{log_appenders}: 
+Other log_appenders: 
 \code{\link{appender_async}()},
 \code{\link{appender_file}()},
 \code{\link{appender_kinesis}()},
@@ -27,4 +27,4 @@ Other \code{log_appenders}:
 \code{\link{appender_tee}()},
 \code{\link{appender_telegram}()}
 }
-\concept{\code{log_appenders}}
+\concept{log_appenders}

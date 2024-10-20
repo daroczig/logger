@@ -36,7 +36,7 @@ character vector
 Apply \code{sprintf} to convert R objects into a character vector
 }
 \seealso{
-Other \code{log_formatters}: 
+Other log_formatters: 
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
 \code{\link{formatter_glue_safe}()},
@@ -45,4 +45,4 @@ Other \code{log_formatters}:
 \code{\link{formatter_pander}()},
 \code{\link{formatter_paste}()}
 }
-\concept{\code{log_formatters}}
+\concept{log_formatters}
