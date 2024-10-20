@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# logger <a href="https://daroczig.github.io/logger"><img src="man/figures/logo.png" align="right" height="138" alt="logger website" /></a>
+# logger <a href="https://daroczig.github.io/logger/"><img src="man/figures/logo.png" align="right" height="138" alt="logger website" /></a>
 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CRAN](https://www.r-pkg.org/badges/version/logger)](https://cran.r-project.org/package=logger) [![Build Status](https://github.com/daroczig/logger/workflows/R-CMD-check/badge.svg)](https://github.com/daroczig/logger/actions) [![Code Coverage](https://codecov.io/gh/daroczig/logger/branch/master/graph/badge.svg)](https://app.codecov.io/gh/daroczig/logger) [![A Mikata Project](https://mikata.dev/img/badge.svg)](https://mikata.dev)

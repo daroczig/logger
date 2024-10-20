@@ -141,7 +141,7 @@ you already use any of the above packages for logging, you might find
 <div class=".pkgdown-hide">
 
 Check out the main documentation site at
-<https://daroczig.github.io/logger> or the vignettes on the below
+<https://daroczig.github.io/logger/> or the vignettes on the below
 topics:
 
 - [Introduction to
