@@ -317,6 +317,12 @@ layout_json_parser <- function(fields = default_fields()) {
       .topenv = .topenv
     )
     meta <- mget(fields, meta)
+    field_names <- names(fields)
+    if (!is.null(field_names)) {
+      norename <- field_names == ""
+      field_names[norename] <- fields[norename]
+      meta <- setNames(meta, field_names)
+    }
     msg <- jsonlite::fromJSON(msg)
 
     jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = "null")
