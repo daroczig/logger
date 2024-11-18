@@ -9,7 +9,7 @@ layout_json_parser(fields = default_fields())
 }
 \arguments{
 \item{fields}{character vector of field names to be included in the
-JSON}
+JSON. If named, the names will be used as field names in the JSON.}
 }
 \description{
 Generate log layout function rendering JSON after merging meta

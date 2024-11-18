@@ -283,7 +283,7 @@ layout_json <- function(fields = default_fields()) {
 #' Generate log layout function rendering JSON after merging meta
 #' fields with parsed list from JSON message
 #' @param fields character vector of field names to be included in the
-#'   JSON
+#'   JSON. If named, the names will be used as field names in the JSON.
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family log_layouts
