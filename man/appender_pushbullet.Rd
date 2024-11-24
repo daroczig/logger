@@ -7,8 +7,8 @@
 appender_pushbullet(...)
 }
 \arguments{
-\item{...}{parameters passed to \code{pbPost}, such as \code{recipients} or
-\code{apikey}, although it's probably much better to set all these
+\item{...}{parameters passed to \link[RPushbullet:pbPost]{RPushbullet::pbPost}, such as \code{recipients}
+or \code{apikey}, although it's probably much better to set all these
 in the \verb{~/.rpushbullet.json} as per package docs at
 \url{http://dirk.eddelbuettel.com/code/rpushbullet.html}}
 }

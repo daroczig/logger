@@ -188,7 +188,7 @@ log_with_separator <- function(...,
 
 
 #' Tic-toc logging
-#' @param ... passed to `log_level`
+#' @param ... passed to [log_level()]
 #' @param level see [log_levels()]
 #' @param namespace x
 #' @export

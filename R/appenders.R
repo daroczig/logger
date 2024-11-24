@@ -212,8 +212,8 @@ appender_slack <- function(channel = Sys.getenv("SLACK_CHANNEL"),
 
 
 #' Send log messages to Pushbullet
-#' @param ... parameters passed to `pbPost`, such as `recipients` or
-#'     `apikey`, although it's probably much better to set all these
+#' @param ... parameters passed to [RPushbullet::pbPost], such as `recipients`
+#'     or `apikey`, although it's probably much better to set all these
 #'     in the `~/.rpushbullet.json` as per package docs at
 #'     <http://dirk.eddelbuettel.com/code/rpushbullet.html>
 #' @export
