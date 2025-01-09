@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Anatomy of a Log Request">
 </head>
 <body>
@@ -117,7 +117,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "f()"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2024-10-21 07:31:25 UTC"</span></span>
+<span><span class="co">#&gt; [1] "2025-01-09 13:21:54 UTC"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $levelr</span></span>
 <span><span class="co">#&gt; Log level: INFO</span></span>
@@ -126,16 +126,16 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "INFO"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pid</span></span>
-<span><span class="co">#&gt; [1] 9957</span></span>
+<span><span class="co">#&gt; [1] 11759</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $r_version</span></span>
-<span><span class="co">#&gt; [1] "4.4.1"</span></span>
+<span><span class="co">#&gt; [1] "4.4.2"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $ns_pkg_version</span></span>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $node</span></span>
-<span><span class="co">#&gt; [1] "fv-az1198-739"</span></span>
+<span><span class="co">#&gt; [1] "fv-az792-659"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $arch</span></span>
 <span><span class="co">#&gt; [1] "x86_64"</span></span>
@@ -144,10 +144,10 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "Linux"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $os_release</span></span>
-<span><span class="co">#&gt; [1] "6.5.0-1025-azure"</span></span>
+<span><span class="co">#&gt; [1] "6.8.0-1017-azure"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $os_version</span></span>
-<span><span class="co">#&gt; [1] "#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024"</span></span>
+<span><span class="co">#&gt; [1] "#20-Ubuntu SMP Tue Oct 22 03:43:13 UTC 2024"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $user</span></span>
 <span><span class="co">#&gt; [1] "runner"</span></span></code></pre></div>
@@ -166,7 +166,7 @@ requests with lower log level will be thrown away</p>
 <span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">"Oops"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ERROR [2024-10-21 07:31:25] Oops</span></span></code></pre></div>
+<span><span class="co">#&gt; ERROR [2025-01-09 13:21:54] Oops</span></span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and
@@ -186,7 +186,7 @@ username, calling function etc) to render the actual log records eg
 human-readable text, JSON etc</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite" class="external-link">jsonlite</a></span><span class="op">)</span></span>
-<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">level</span>, <span class="va">msg</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span>level <span class="op">=</span> <span class="va">level</span>, timestamp <span class="op">=</span> <span class="va">time</span>, hostname <span class="op">=</span> <span class="va">node</span>, message <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
+<span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">level</span>, <span class="va">msg</span><span class="op">)</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span>level <span class="op">=</span> <span class="va">level</span>, timestamp <span class="op">=</span> <span class="va">time</span>, hostname <span class="op">=</span> <span class="va">node</span>, message <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/layout.html" class="external-link">layout</a></span><span class="op">(</span><span class="va">INFO</span>, <span class="st">'Happy Thursday!'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}</span></span></code></pre></div>
 </li>
@@ -211,7 +211,7 @@ in the <code>global</code> namespace):</p>
 <span><span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_stdout</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"I am a low level log message that will not be printed with a high log level threshold"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">"I am a higher level log message that is very likely to be printed"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; WARN [2024-10-21 07:31:26] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
+<span><span class="co">#&gt; WARN [2025-01-09 13:21:54] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied
 to a logging namespace, and one log request might trigger multiple
 <code>logger</code> definitions as well (stacking). Find more
