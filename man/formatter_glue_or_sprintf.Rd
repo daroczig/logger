@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_glue_or_sprintf}
 \alias{formatter_glue_or_sprintf}
-\title{Apply \code{glue} and \code{sprintf}}
+\title{Apply \code{\link[glue:glue]{glue::glue()}} and \code{\link[=sprintf]{sprintf()}}}
 \usage{
 formatter_glue_or_sprintf(
   msg,
@@ -13,10 +13,10 @@ formatter_glue_or_sprintf(
 )
 }
 \arguments{
-\item{msg}{passed to \code{sprintf} as \code{fmt} or handled as part of \code{...}
-in \code{glue}}
+\item{msg}{passed to \code{\link[=sprintf]{sprintf()}} as \code{fmt} or handled as part of \code{...}
+in \code{\link[glue:glue]{glue::glue()}}}
 
-\item{...}{passed to \code{glue} for the text interpolation}
+\item{...}{passed to \code{\link[glue:glue]{glue::glue()}} for the text interpolation}
 
 \item{.logcall}{the logging call being evaluated (useful in
 formatters and layouts when you want to have access to the raw,
@@ -36,11 +36,11 @@ character vector
 \description{
 The best of both words: using both formatter functions in your log
 messages, which can be useful eg if you are migrating from
-\code{sprintf} formatted log messages to \code{glue} or similar.
+\code{\link[=sprintf]{sprintf()}} formatted log messages to \code{\link[glue:glue]{glue::glue()}} or similar.
 }
 \details{
 Note that this function tries to be smart when passing arguments to
-\code{glue} and \code{sprintf}, but might fail with some edge cases, and
+\code{\link[glue:glue]{glue::glue()}} and \code{\link[=sprintf]{sprintf()}}, but might fail with some edge cases, and
 returns an unformatted string.
 }
 \examples{
