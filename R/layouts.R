@@ -330,6 +330,47 @@ default_fields <- function() {
   )
 }
 
+#' Format a log record for github actions
+#'
+#' GitHub Actions can recognise specially formatted output and make these
+#' prominent in the output. The `layout_gha()` layout will ensure the correct
+#' formatting when running in GitHub Actions.
+#'
+#' @note
+#' GitHub Actions only recognise the log levels `error`, `warning`, `notice`,
+#' and `debug`. Because of this, `FATAL` and `ERROR` are coerced to `error`,
+#' `SUCCESS` and `INFO` are coerced to `notice`, and `DEBUG` and `TRACE` are
+#' coerced to `debug` (`WARN` maps directly to `warning`).
+#'
+#' @inheritParams layout_simple
+#' @return character vector
+#' @export
+#' @family log_layouts
+#'
+layout_gha <- structure(
+  function(level,
+           msg,
+           namespace = NA_character_,
+           .logcall = sys.call(),
+           .topcall = sys.call(-1),
+           .topenv = parent.frame()) {
+    level <- attr(level, "level")
+    gha_level <- switch(level,
+      FATAL = ,
+      ERROR = "error",
+      WARN = "warning",
+      SUCCESS = ,
+      INFO = "notice",
+      DEBUG = ,
+      TRACE = "debug",
+      "notice" # Defaults to notice if for some reason another level gets used
+    )
+    title <- if (gha_level == "debug") "" else paste0(" title=", level)
+    paste0("::", gha_level, title, "::", msg)
+  },
+  generator = quote(layout_gha())
+)
+
 # nocov start
 #' Format a log record for syslognet
 #'

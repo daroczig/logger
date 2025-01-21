@@ -47,6 +47,7 @@ added or modified
 \seealso{
 Other log_layouts: 
 \code{\link{get_logger_meta_variables}()},
+\code{\link{layout_gha}()},
 \code{\link{layout_glue}()},
 \code{\link{layout_glue_colors}()},
 \code{\link{layout_glue_generator}()},
