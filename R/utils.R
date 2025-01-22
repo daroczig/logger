@@ -119,3 +119,4 @@ needs_stdout <- function() {
 
 # allow mocking
 Sys.time <- NULL # nolint
+proc.time <- NULL #nolint

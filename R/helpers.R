@@ -227,6 +227,64 @@ log_tictoc <- function(..., level = INFO, namespace = NA_character_) {
 }
 tictocs <- new.env(parent = emptyenv())
 
+#' Log cumulative running time
+#'
+#' This function is working like [log_tictoc()] but differs in that it continues
+#' to count up rather than resetting the timer at every call. You can set the
+#' start time using `log_elapsed_start()`, but if that hasn't been called it
+#' will show the time since the R session started.
+#'
+#' @inheritParams log_tictoc
+#'
+#' @export
+#'
+#' @examples
+#' log_elapsed_start()
+#' Sys.sleep(0.4)
+#' log_elapsed("Tast 1")
+#' Sys.sleep(0.2)
+#' log_elapsed("Task 2")
+#'
+log_elapsed <- function(..., level = INFO, namespace = NA_character_) {
+  ns <- fallback_namespace(namespace)
+
+  start <- get0(ns, envir = elapsed, ifnotfound = 0)
+
+  time_elapsed <- difftime(proc.time()["elapsed"], start, units = "secs")
+
+  log_level(
+    paste(
+      ns, "timer",
+      round(time_elapsed, 2), attr(time_elapsed, "units"), "elapsed -- "
+    ),
+    ...,
+    level = level, namespace = namespace,
+    .logcall = sys.call(),
+    .topcall = sys.call(-1),
+    .topenv = parent.frame()
+  )
+}
+#' @rdname log_elapsed
+#' @param quiet Should starting the time emit a log message
+#' @export
+log_elapsed_start <- function(level = INFO, namespace = NA_character_, quiet = FALSE) {
+  ns <- fallback_namespace(namespace)
+
+  assign(ns, proc.time()["elapsed"], envir = elapsed)
+
+  if (!quiet) {
+    log_level(
+      paste(
+        "starting", ns, "timer"
+      ),
+      level = level, namespace = namespace,
+      .logcall = sys.call(),
+      .topcall = sys.call(-1),
+      .topenv = parent.frame()
+    )
+  }
+}
+elapsed <- new.env(parent = emptyenv())
 
 #' Logs the error message to console before failing
 #' @param expression call
