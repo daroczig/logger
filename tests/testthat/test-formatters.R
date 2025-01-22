@@ -109,6 +109,29 @@ test_that("glue+sprintf works", {
   }
 })
 
+test_that("cli works", {
+  local_test_logger(formatter = formatter_cli)
+
+  a <- 43
+
+  expect_equal(formatter_cli("Hi"), "Hi")
+  expect_equal(formatter_cli("{.arg Hi}"), "`Hi`")
+  expect_equal(formatter_cli("1 + {1}"), "1 + 1")
+  expect_equal(formatter_cli("{1:2}"), "1 and 2")
+  expect_equal(formatter_cli("pi is {round(pi, 2)}"), "pi is 3.14")
+  expect_equal(formatter_cli("Hi {42}"), "Hi 42")
+  expect_equal(formatter_cli("Hi {1:2}"), paste("Hi 1 and 2"))
+
+  expect_output(do.call(logger, namespaces$global[[1]])(INFO, 42), "42")
+  expect_output(do.call(logger, namespaces$global[[1]])(INFO, "Hi {a}"), "43")
+
+  expect_equal(formatter_cli("Hi {a}"), "Hi 43")
+  expect_output(log_info("Hi {a}"), "43")
+  expect_output(log_warn("Hi {a}"), "43")
+  f <- function() log_info("Hi {a}")
+  expect_output(f(), "43")
+})
+
 test_that("formatter_logging works", {
   local_test_logger(formatter = formatter_logging)
 

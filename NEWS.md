@@ -7,6 +7,7 @@
 * `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value (#170, @hadley)
 * new function to return number of log indices (#194, @WurmPeter)
 * `appender_async` is now using `mirai` instead of a custom background process and queue system (#214, @hadley @shikokuchuo)
+* New `formatter_cli()` allows you to use the syntax from the cli package to create log messages (#210, @thomasp85)
 
 ## Fixes
 
