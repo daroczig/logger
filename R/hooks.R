@@ -58,19 +58,20 @@ log_warnings <- function(muffle = getOption("logger_muffle_warnings", FALSE)) {
   }
 }
 
-
 #' Injects a logger call to standard errors
 #'
 #' This function uses [trace()] to add a [log_error()] function call when
 #' [stop()] is called to log the error messages with the `logger` layout
 #' and appender.
 #' @param muffle if TRUE, the error is not thrown after being logged
+#' @param traceback if TRUE the error traceback is logged along with the error
+#' message
 #' @export
 #' @examples \dontrun{
 #' log_errors()
 #' stop("foobar")
 #' }
-log_errors <- function(muffle = getOption("logger_muffle_errors", FALSE)) {
+log_errors <- function(muffle = getOption("logger_muffle_errors", FALSE), traceback = FALSE) {
   if (any(sapply(
     globalCallingHandlers()[names(globalCallingHandlers()) == "error"],
     attr,
@@ -81,6 +82,21 @@ log_errors <- function(muffle = getOption("logger_muffle_errors", FALSE)) {
     globalCallingHandlers(
       error = structure(function(m) {
         logger::log_level(logger::ERROR, m$message, .topcall = m$call)
+        if (traceback) {
+          bt <- .traceback(3L)
+          logger::log_level(logger::ERROR, "Traceback:", .topcall = m$call)
+          for (i in seq_along(bt)) {
+            msg <- paste0(length(bt) - i + 1L, ": ", bt[[i]])
+            ref <- attr(bt[[i]], "srcref")
+            file <- attr(ref, "srcfile")
+            if (inherits(file, "srcfile")) {
+              file <- basename(file$filename)
+              line <- paste(unique(c(ref[1L], ref[3L])), collapse = "-")
+              msg <- paste0(msg, " at ", file, " #", line)
+            }
+            logger::log_level(logger::ERROR, msg, .topcall = m$call)
+          }
+        }
         if (isTRUE(muffle)) {
           invokeRestart("abort")
         }

@@ -27,6 +27,14 @@
       writeLines(eval_outside("log_errors()", "f<-function(x) {42 * \"foobar\"}; f()"))
     Output
       ERROR non-numeric argument to binary operator
+    Code
+      writeLines(eval_outside("log_errors(traceback = TRUE)",
+        "f<-function() stop(\"TEST\"); f()"))
+    Output
+      ERROR TEST
+      ERROR Traceback:
+      ERROR 2: stop("TEST")
+      ERROR 1: f()
 
 # shiny input initialization is detected
 
