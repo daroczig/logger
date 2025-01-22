@@ -61,6 +61,8 @@ otherwise a fallback namespace (eg usually \code{global})
 \item \code{topenv}: the name of the top environment from which the parent call was called
 (eg R package name or \code{GlobalEnv})
 \item \code{call}: parent call (if any) calling the logging function
+\item \code{location}: A list with element \code{path} and \code{line} giving the location of the
+log call
 \item \code{fn}: function's (if any) name calling the logging function
 }
 }

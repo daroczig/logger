@@ -45,6 +45,29 @@ top_env_name <- function(.topenv = parent.frame()) {
   environmentName(topenv(.topenv))
 }
 
+#' Finds the location of the logger call (file and line)
+#' @return list with path and line element
+#' @noRd
+#' @param .logcall The call that emitted the log
+log_call_location <- function(.logcall) {
+  call_string <- deparse(.logcall)
+  loc <- list(
+    path = "<console>",
+    line = ""
+  )
+  for (trace in .traceback(0)) {
+    if (identical(call_string, as.vector(trace))) {
+      ref <- attr(trace, "srcref")
+      loc$line <- ref[1L]
+      file <- attr(ref, "srcfile")
+      if (!is.null(file)) {
+        loc$path <- file$filename
+      }
+      break
+    }
+  }
+  loc
+}
 
 #' Deparse and join all lines into a single line
 #'

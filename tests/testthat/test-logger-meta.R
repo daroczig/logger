@@ -31,4 +31,7 @@ test_that("captures other environmental metadata", {
   expect_equal(env$os_release, sysinfo$release)
   expect_equal(env$os_version, sysinfo$version)
   expect_equal(env$user, sysinfo$user)
+
+  local_test_logger(layout = layout_glue_generator("{location$path}#{location$line}: {msg}"))
+  expect_output(test_info(), "logger/tests/testthat/helper.R#3: TEST")
 })
