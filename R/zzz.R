@@ -20,7 +20,7 @@ namespaces_default <- function() {
         threshold = as.loglevel(Sys.getenv("LOGGER_LOG_LEVEL", unset = "INFO")),
         layout    = if (is_running_gha) layout_gha else layout_simple,
         formatter = if (has_glue) formatter_glue else formatter_sprintf,
-        appender  = if (is_running_gha) appender_stderr else if (needs_stdout()) appender_stdout else appender_console
+        appender  = if (needs_stdout()) appender_stdout else appender_console
       )
     ),
     .logger = list(
@@ -28,7 +28,7 @@ namespaces_default <- function() {
         threshold = ERROR,
         layout    = if (is_running_gha) layout_gha else layout_simple,
         formatter = formatter_sprintf,
-        appender  = if (is_running_gha) appender_stderr else if (needs_stdout()) appender_stdout else appender_console
+        appender  = if (needs_stdout()) appender_stdout else appender_console
       )
     )
   )
