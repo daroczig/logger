@@ -7,7 +7,7 @@
 \usage{
 log_elapsed(..., level = INFO, namespace = NA_character_)
 
-log_elapsed_start(level = INFO, namespace = NA_character_)
+log_elapsed_start(level = INFO, namespace = NA_character_, quiet = FALSE)
 }
 \arguments{
 \item{...}{passed to \code{\link[=log_level]{log_level()}}}
@@ -15,6 +15,8 @@ log_elapsed_start(level = INFO, namespace = NA_character_)
 \item{level}{see \code{\link[=log_levels]{log_levels()}}}
 
 \item{namespace}{x}
+
+\item{quiet}{Should starting the time emit a log message}
 }
 \description{
 This function is working like \code{\link[=log_tictoc]{log_tictoc()}} but differs in that it continues
