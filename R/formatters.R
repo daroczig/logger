@@ -44,21 +44,13 @@ formatter_glue <- function(...,
                            .topenv = parent.frame()) {
   fail_on_missing_package("glue")
 
-  withCallingHandlers(
+  out <- wrap_glue(
     glue::glue(..., .envir = .topenv),
-    error = function(e) {
-      args <- paste0(capture.output(str(...)), collapse = "\n")
-
-      stop(paste0(
-        "`glue` failed in `formatter_glue` on:\n\n",
-        args,
-        "\n\nRaw error message:\n\n",
-        conditionMessage(e),
-        "\n\nPlease consider using another `log_formatter` or ",
-        "`skip_formatter` on strings with curly braces."
-      ))
-    }
+    inputs = list(...),
+    glue_fun = "glue",
+    logger_fun = "formatter_glue"
   )
+  as.character(out)
 }
 attr(formatter_glue, "generator") <- quote(formatter_glue())
 
@@ -75,24 +67,64 @@ formatter_glue_safe <- function(...,
                                 .topcall = sys.call(-1),
                                 .topenv = parent.frame()) {
   fail_on_missing_package("glue")
-  as.character(
-    tryCatch(
-      glue::glue_safe(..., .envir = .topenv),
-      error = function(e) {
-        stop(paste(
-          "`glue_safe` failed in `formatter_glue_safe` on:\n\n",
-          capture.output(str(...)),
-          "\n\nRaw error message:\n\n",
-          e$message,
-          "\n\nPlease consider using another `log_formatter` or",
-          "`skip_formatter` on strings with curly braces."
-        ))
-      }
-    )
+
+  out <- wrap_glue(
+    glue::glue_safe(..., .envir = .topenv),
+    inputs = list(...),
+    glue_fun = "glue_safe",
+    logger_fun = "formatter_glue_safe"
   )
+  as.character(out)
 }
 attr(formatter_glue_safe, "generator") <- quote(formatter_glue_safe())
 
+wrap_glue <- function(code, inputs, glue_fun, logger_fun) {
+  if (has_rlang()) {
+    withCallingHandlers(
+      code,
+      error = function(cnd) {
+        rlang::abort(
+          c(
+            glue::glue("`{glue_fun}()` failed."),
+            i = glue_hint(conditionMessage(cnd))
+          ),
+          parent = cnd,
+          call = rlang::call2(logger_fun)
+        )
+      }
+    )
+  } else {
+    withCallingHandlers(
+      code,
+      error = function(cnd) {
+        hint <- glue_hint(conditionMessage(cnd))
+        if (!is.null(hint)) hint <- paste0("\n\n", hint)
+
+        stop(paste0(
+          "`", glue_fun, "()` failed in `", logger_fun, "()` on:\n\n",
+          paste0(capture.output(str(inputs)), collapse = ""),
+          "\n\nRaw error message:\n\n",
+          conditionMessage(cnd),
+          hint
+        ), call. = FALSE)
+      }
+    )
+  }
+}
+
+glue_hint <- function(message) {
+  if (!grepl("}", message, fixed = TRUE)) {
+    return()
+  }
+  paste0(
+    "For strings containing `{` or `}` consider using ",
+    "`skip_formatter()` or another `log_formatter`."
+  )
+}
+
+has_rlang <- function() {
+  requireNamespace("rlang", quietly = TRUE)
+}
 
 #' Apply [glue::glue()] and [sprintf()]
 #'
