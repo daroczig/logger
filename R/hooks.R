@@ -94,7 +94,7 @@ log_errors <- function(muffle = getOption("logger_muffle_errors", FALSE), traceb
               line <- paste(unique(c(ref[1L], ref[3L])), collapse = "-")
               msg <- paste0(msg, " at ", file, " #", line)
             }
-            logger::log_level(logger::ERROR, msg, .topcall = m$call)
+            logger::log_level(logger::ERROR, skip_formatter(msg), .topcall = m$call)
           }
         }
         if (isTRUE(muffle)) {
