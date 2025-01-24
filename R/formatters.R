@@ -202,7 +202,7 @@ formatter_cli <- function(...,
     }
   )
 }
-attr(formatter_glue, "generator") <- quote(formatter_glue())
+attr(formatter_cli, "generator") <- quote(formatter_cli())
 
 #' Transforms all passed R objects into a JSON list
 #' @param ... passed to `toJSON` wrapped into a `list`
