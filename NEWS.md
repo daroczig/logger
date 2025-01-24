@@ -1,5 +1,11 @@
 # logger (development version)
 
+
+# logger 0.4.0 (2024-10-19)
+
+A lot of internal code quality improvements and standardization,
+improved documentations, modernized tests, performance speedups.
+
 ## New features
 
 * logo 😻 (#196, @hadley)
