@@ -35,3 +35,8 @@ eval_outside <- function(...) {
   suppressWarnings(system2(path, input, stdout = TRUE, stderr = TRUE))
   readLines(output)
 }
+
+# This function is needed to test traceback logging
+function_that_fails <- function() {
+  stop("I'm failing")
+}

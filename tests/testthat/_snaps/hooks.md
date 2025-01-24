@@ -29,12 +29,12 @@
       ERROR non-numeric argument to binary operator
     Code
       writeLines(eval_outside("log_errors(traceback = TRUE)",
-        "f<-function() stop(\"TEST\"); f()"))
+        "source(\"helper.R\", keep.source = TRUE)", "function_that_fails()"))
     Output
-      ERROR TEST
+      ERROR I'm failing
       ERROR Traceback:
-      ERROR 2: stop("TEST")
-      ERROR 1: f()
+      ERROR 2: stop("I'm failing") at helper.R #41
+      ERROR 1: function_that_fails()
 
 # shiny input initialization is detected
 

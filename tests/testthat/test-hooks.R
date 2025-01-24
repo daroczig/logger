@@ -15,7 +15,7 @@ test_that("log_errors", {
     writeLines(eval_outside("log_errors()", "stop(42)"))
     writeLines(eval_outside("log_errors()", "foobar"))
     writeLines(eval_outside("log_errors()", 'f<-function(x) {42 * "foobar"}; f()'))
-    writeLines(eval_outside("log_errors(traceback = TRUE)", 'f<-function() stop("TEST"); f()'))
+    writeLines(eval_outside("log_errors(traceback = TRUE)", 'source("helper.R", keep.source = TRUE)', "function_that_fails()"))
   })
 })
 
