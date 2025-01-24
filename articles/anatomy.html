@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,7 +117,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "f()"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2025-01-15 11:04:59 UTC"</span></span>
+<span><span class="co">#&gt; [1] "2025-01-24 16:09:08 UTC"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $levelr</span></span>
 <span><span class="co">#&gt; Log level: INFO</span></span>
@@ -126,7 +126,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "INFO"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pid</span></span>
-<span><span class="co">#&gt; [1] 11511</span></span>
+<span><span class="co">#&gt; [1] 11612</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $r_version</span></span>
 <span><span class="co">#&gt; [1] "4.4.2"</span></span>
@@ -135,7 +135,7 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $node</span></span>
-<span><span class="co">#&gt; [1] "fv-az792-248"</span></span>
+<span><span class="co">#&gt; [1] "fv-az1046-344"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $arch</span></span>
 <span><span class="co">#&gt; [1] "x86_64"</span></span>
@@ -144,10 +144,10 @@ and the actual call etc.</p>
 <span><span class="co">#&gt; [1] "Linux"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $os_release</span></span>
-<span><span class="co">#&gt; [1] "6.8.0-1017-azure"</span></span>
+<span><span class="co">#&gt; [1] "6.8.0-1020-azure"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $os_version</span></span>
-<span><span class="co">#&gt; [1] "#20-Ubuntu SMP Tue Oct 22 03:43:13 UTC 2024"</span></span>
+<span><span class="co">#&gt; [1] "#23-Ubuntu SMP Mon Dec  9 16:58:58 UTC 2024"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $user</span></span>
 <span><span class="co">#&gt; [1] "runner"</span></span></code></pre></div>
@@ -166,7 +166,7 @@ requests with lower log level will be thrown away</p>
 <span><span class="va">ERROR</span> <span class="op">&lt;=</span> <span class="va">INFO</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_error</a></span><span class="op">(</span><span class="st">"Oops"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ERROR [2025-01-15 11:04:59] Oops</span></span></code></pre></div>
+<span><span class="co">#&gt; ERROR [2025-01-24 16:09:08] Oops</span></span></code></pre></div>
 </li>
 <li>
 <p><code>formatter</code> function, which takes R objects and
@@ -211,7 +211,7 @@ in the <code>global</code> namespace):</p>
 <span><span class="fu"><a href="../reference/log_appender.html">log_appender</a></span><span class="op">(</span><span class="va">appender_stdout</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_debug</a></span><span class="op">(</span><span class="st">"I am a low level log message that will not be printed with a high log level threshold"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/log_level.html">log_warn</a></span><span class="op">(</span><span class="st">"I am a higher level log message that is very likely to be printed"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; WARN [2025-01-15 11:04:59] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
+<span><span class="co">#&gt; WARN [2025-01-24 16:09:08] I am a higher level log message that is very likely to be printed</span></span></code></pre></div>
 <p>Note, that all <code>logger</code> definitions and requests are tied
 to a logging namespace, and one log request might trigger multiple
 <code>logger</code> definitions as well (stacking). Find more
