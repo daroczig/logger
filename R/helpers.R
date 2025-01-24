@@ -250,7 +250,7 @@ log_elapsed <- function(..., level = INFO, namespace = NA_character_) {
 
   start <- get0(ns, envir = elapsed, ifnotfound = 0)
 
-  time_elapsed <- difftime(proc.time()["elapsed"], start, units = "secs")
+  time_elapsed <- as.difftime(proc.time()["elapsed"] - start, units = "secs")
 
   log_level(
     paste(
