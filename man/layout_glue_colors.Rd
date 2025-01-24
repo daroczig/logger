@@ -2,7 +2,7 @@
 % Please edit documentation in R/layouts.R
 \name{layout_glue_colors}
 \alias{layout_glue_colors}
-\title{Format a log message with \code{glue} and ANSI escape codes to add colors}
+\title{Format a log message with \code{\link[glue:glue]{glue::glue()}} and ANSI escape codes to add colors}
 \usage{
 layout_glue_colors(
   level,

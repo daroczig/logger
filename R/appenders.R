@@ -212,8 +212,8 @@ appender_slack <- function(channel = Sys.getenv("SLACK_CHANNEL"),
 
 
 #' Send log messages to Pushbullet
-#' @param ... parameters passed to `pbPost`, such as `recipients` or
-#'     `apikey`, although it's probably much better to set all these
+#' @param ... parameters passed to [RPushbullet::pbPost], such as `recipients`
+#'     or `apikey`, although it's probably much better to set all these
 #'     in the `~/.rpushbullet.json` as per package docs at
 #'     <http://dirk.eddelbuettel.com/code/rpushbullet.html>
 #' @export
@@ -391,7 +391,7 @@ appender_async <- function(appender,
 
   # Start one background process (hence dispatcher not required)
   # force = FALSE allows multiple appenders to use same namespace logger
-  mirai::daemons(1L, dispatcher = "none", force = FALSE, .compute = namespace)
+  mirai::daemons(1L, dispatcher = FALSE, force = FALSE, cleanup = FALSE, .compute = namespace)
   mirai::everywhere(
     {
       library(logger)

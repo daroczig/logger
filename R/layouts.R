@@ -71,10 +71,10 @@ get_logger_meta_variables <- function(log_level = NULL,
 
 #' Generate log layout function using common variables available via glue syntax
 #'
-#' `format` is passed to `glue` with access to the below variables:
+#' `format` is passed to [glue::glue()] with access to the below variables:
 #' \itemize{ \item msg: the actual log message \item further variables
 #' set by [get_logger_meta_variables()] }
-#' @param format `glue`-flavored layout of the message using the above
+#' @param format [glue::glue()]-flavored layout of the message using the above
 #'   variables
 #' @return function taking `level` and `msg` arguments - keeping the
 #'   original call creating the generator in the `generator` attribute
@@ -193,7 +193,7 @@ layout_logging <- function(level,
 }
 attr(layout_logging, "generator") <- quote(layout_logging())
 
-#' Format a log message with `glue`
+#' Format a log message with [glue::glue()]
 #'
 #' By default, this layout includes the log level of the log record as
 #' per [log_levels()], the current timestamp and the actual log
@@ -207,7 +207,7 @@ attr(layout_logging, "generator") <- quote(layout_logging())
 layout_glue <- layout_glue_generator()
 attr(layout_glue, "generator") <- quote(layout_glue())
 
-#' Format a log message with `glue` and ANSI escape codes to add colors
+#' Format a log message with [glue::glue()] and ANSI escape codes to add colors
 #'
 #' Colour log levels based on their severity. Log levels are coloured
 #' with [colorize_by_log_level()] and the messages are coloured with

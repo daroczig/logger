@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatters.R
 \name{formatter_glue}
 \alias{formatter_glue}
-\title{Apply \code{glue} to convert R objects into a character vector}
+\title{Apply \code{\link[glue:glue]{glue::glue()}} to convert R objects into a character vector}
 \usage{
 formatter_glue(
   ...,
@@ -12,7 +12,7 @@ formatter_glue(
 )
 }
 \arguments{
-\item{...}{passed to \code{glue} for the text interpolation}
+\item{...}{passed to \code{\link[glue:glue]{glue::glue()}} for the text interpolation}
 
 \item{.logcall}{the logging call being evaluated (useful in
 formatters and layouts when you want to have access to the raw,
@@ -30,7 +30,7 @@ to look up the \code{namespace} as well via \code{logger:::top_env_name}}
 character vector
 }
 \description{
-Apply \code{glue} to convert R objects into a character vector
+Apply \code{\link[glue:glue]{glue::glue()}} to convert R objects into a character vector
 }
 \note{
 Although this is the default log message formatter function,
