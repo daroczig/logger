@@ -28,6 +28,14 @@ log_info(everything = 42)
 
 log_layout(layout_json_parser(fields = c("time", "node")))
 log_info(cars = row.names(mtcars), species = unique(iris$Species))
+
+log_layout(layout_json_parser(fields = c(timestamp = "time", "node")))
+log_info(
+  message = paste(
+    "Compared to the previous example,
+    the 'time' field is renamed to 'timestamp'"
+  )
+)
 \dontshow{logger:::namespaces_set(old)}
 }
 \seealso{

@@ -297,6 +297,14 @@ layout_json <- function(fields = default_fields()) {
 #'
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
+#'
+#' log_layout(layout_json_parser(fields = c(timestamp = "time", "node")))
+#' log_info(
+#'   message = paste(
+#'     "Compared to the previous example,
+#'     the 'time' field is renamed to 'timestamp'"
+#'   )
+#' )
 #' \dontshow{logger:::namespaces_set(old)}
 layout_json_parser <- function(fields = default_fields()) {
   force(fields)
