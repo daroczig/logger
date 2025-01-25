@@ -16,7 +16,14 @@ logger_meta_env <- function(log_level = NULL,
   delayedAssign("call", deparse_to_one_line(.topcall), assign.env = env)
   delayedAssign("topenv", top_env_name(.topenv), assign.env = env)
 
-  env$time <- timestamp
+  format_time <- getOption(
+    paste0("logger.format_time.", namespace), # prefer namespace-specific option
+    default = getOption(
+      "logger.format_time", # fallback to global option
+      default = identity # if no options, keep it POSIXct for the backward compatibility
+    )
+  )
+  env$time <- format_time(timestamp)
   env$levelr <- log_level
   env$level <- attr(log_level, "level")
 
