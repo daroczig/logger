@@ -32,3 +32,37 @@ test_that("captures other environmental metadata", {
   expect_equal(env$os_version, sysinfo$version)
   expect_equal(env$user, sysinfo$user)
 })
+
+test_that("format timestamp", {
+  option_global_ns <- list(`logger.format_time` = function(x) format(x, "global %Z", tz = "UTC"))
+
+  # If no namespace-specific option, fallback to global
+  expect_equal(
+    withr::with_options(
+      c(option_global_ns, list(`logger.format_time.foo` = NULL)),
+      logger_meta_env(namespace = "foo")$time
+    ),
+    "global UTC"
+  )
+
+  # If namespace-specific option is set, use it
+  expect_equal(
+    withr::with_options(
+      c(
+        option_global_ns,
+        list(`logger.format_time.foo` = function(x) format(x, "foo %Z", tz = "UTC"))
+      ),
+      logger_meta_env(namespace = "foo")$time
+    ),
+    "foo UTC"
+  )
+
+  # If both options are unset, keep POSIXct
+  expect_equal(
+    withr::with_options(
+      list(`logger.format_time` = NULL, `logger.format_time.foo` = NULL),
+      class(logger_meta_env(namespace = "foo")$time)
+    ),
+    c("POSIXct", "POSIXt")
+  )
+})
