@@ -283,7 +283,7 @@ layout_json <- function(fields = default_fields()) {
 #' Generate log layout function rendering JSON after merging meta
 #' fields with parsed list from JSON message
 #' @param fields character vector of field names to be included in the
-#'   JSON
+#'   JSON. If named, the names will be used as field names in the JSON.
 #' @export
 #' @note This functionality depends on the \pkg{jsonlite} package.
 #' @family log_layouts
@@ -297,6 +297,14 @@ layout_json <- function(fields = default_fields()) {
 #'
 #' log_layout(layout_json_parser(fields = c("time", "node")))
 #' log_info(cars = row.names(mtcars), species = unique(iris$Species))
+#'
+#' log_layout(layout_json_parser(fields = c(timestamp = "time", "node")))
+#' log_info(
+#'   message = paste(
+#'     "Compared to the previous example,
+#'     the 'time' field is renamed to 'timestamp'"
+#'   )
+#' )
 #' \dontshow{logger:::namespaces_set(old)}
 layout_json_parser <- function(fields = default_fields()) {
   force(fields)
@@ -317,6 +325,12 @@ layout_json_parser <- function(fields = default_fields()) {
       .topenv = .topenv
     )
     meta <- mget(fields, meta)
+    field_names <- names(fields)
+    if (!is.null(field_names)) {
+      norename <- field_names == ""
+      field_names[norename] <- fields[norename]
+      meta <- setNames(meta, field_names)
+    }
     msg <- jsonlite::fromJSON(msg)
 
     jsonlite::toJSON(c(meta, msg), auto_unbox = TRUE, null = "null")
