@@ -22,6 +22,7 @@ Imports:
     utils
 Suggests:
     botor,
+    cli,
     covr,
     crayon,
     devtools,
