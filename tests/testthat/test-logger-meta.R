@@ -33,5 +33,5 @@ test_that("captures other environmental metadata", {
   expect_equal(env$user, sysinfo$user)
 
   local_test_logger(layout = layout_glue_generator("{location$path}#{location$line}: {msg}"))
-  expect_output(test_info(), "logger/tests/testthat/helper.R#3: TEST")
+  expect_output(test_info(), file.path(getwd(), "helper.R#3: TEST"))
 })
