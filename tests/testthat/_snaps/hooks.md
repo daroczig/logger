@@ -27,6 +27,14 @@
       writeLines(eval_outside("log_errors()", "f<-function(x) {42 * \"foobar\"}; f()"))
     Output
       ERROR non-numeric argument to binary operator
+    Code
+      writeLines(eval_outside("log_errors(traceback = TRUE)",
+        "source(\"helper.R\", keep.source = TRUE)", "function_that_fails()"))
+    Output
+      ERROR I'm failing
+      ERROR Traceback:
+      ERROR 2: stop("I'm failing") at helper.R #46
+      ERROR 1: function_that_fails()
 
 # shiny input initialization is detected
 

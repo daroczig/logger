@@ -4,10 +4,16 @@
 \alias{log_errors}
 \title{Injects a logger call to standard errors}
 \usage{
-log_errors(muffle = getOption("logger_muffle_errors", FALSE))
+log_errors(
+  muffle = getOption("logger_muffle_errors", FALSE),
+  traceback = FALSE
+)
 }
 \arguments{
 \item{muffle}{if TRUE, the error is not thrown after being logged}
+
+\item{traceback}{if TRUE the error traceback is logged along with the error
+message}
 }
 \description{
 This function uses \code{\link[=trace]{trace()}} to add a \code{\link[=log_error]{log_error()}} function call when
