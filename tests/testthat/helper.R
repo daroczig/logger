@@ -1,3 +1,8 @@
+# Do not move this to another line as the location of this piece of code is tested for
+test_info <- function() {
+  log_info("TEST")
+}
+
 local_test_logger <- function(threshold = INFO,
                               formatter = formatter_glue,
                               layout = layout_simple,

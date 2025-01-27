@@ -22,6 +22,8 @@
 #' * `topenv`: the name of the top environment from which the parent call was called
 #'   (eg R package name or `GlobalEnv`)
 #' * `call`: parent call (if any) calling the logging function
+#' * `location`: A list with element `path` and `line` giving the location of the
+#'   log call
 #' * `fn`: function's (if any) name calling the logging function
 #'
 #' @param log_level log level as per [log_levels()]
@@ -45,6 +47,7 @@ get_logger_meta_variables <- function(log_level = NULL,
     topenv = top_env_name(.topenv),
     fn = deparse_to_one_line(.topcall[[1]]),
     call = deparse_to_one_line(.topcall),
+    location = log_call_location(.logcall),
     time = timestamp,
     levelr = log_level,
     level = attr(log_level, "level"),

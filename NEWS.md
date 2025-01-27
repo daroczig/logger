@@ -1,5 +1,6 @@
 # logger (development version)
 
+* File and line location of the log call is now available to the layouts (#110, @thomasp85)
 * Added `log_elapsed()` to show cumulative elapsed running time (@thomasp85)
 * New `formatter_cli()` allows you to use the syntax from the cli package to create log messages (#210, @thomasp85)
 
