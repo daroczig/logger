@@ -1,7 +1,7 @@
 Type: Package
 Package: logger
 Title: A Lightweight, Modern and Flexible Logging Utility
-Version: 0.4.0
+Version: 0.4.0.9000
 Date: 2024-10-19
 Authors@R: c(
     person("Gergely", "Daróczi", , "daroczig@rapporter.net", role = c("aut", "cre"),
@@ -22,6 +22,7 @@ Imports:
     utils
 Suggests:
     botor,
+    cli,
     covr,
     crayon,
     devtools,
