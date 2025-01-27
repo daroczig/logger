@@ -34,6 +34,7 @@ Apply \code{\link[glue:glue_safe]{glue::glue_safe()}} to convert R objects into 
 }
 \seealso{
 Other log_formatters: 
+\code{\link{formatter_cli}()},
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
 \code{\link{formatter_json}()},

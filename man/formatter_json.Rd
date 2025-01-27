@@ -45,6 +45,7 @@ log_info(mtcars = mtcars, species = iris$Species)
 }
 \seealso{
 Other log_formatters: 
+\code{\link{formatter_cli}()},
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
 \code{\link{formatter_glue_safe}()},
