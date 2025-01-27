@@ -23,6 +23,7 @@ reference:
   - log_eval
   - log_failure
   - log_tictoc
+  - log_elapsed
   - log_separator
   - log_with_separator
   - with_log_threshold
