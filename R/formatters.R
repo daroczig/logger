@@ -173,6 +173,36 @@ formatter_glue_or_sprintf <- function(msg,
 }
 attr(formatter_glue_or_sprintf, "generator") <- quote(formatter_glue_or_sprintf())
 
+#' Apply [cli::cli_text()] to format string with cli syntax
+#' @param ... passed to [cli::cli_text()] for the text interpolation
+#' @inheritParams log_level
+#' @return character vector
+#' @export
+#' @family log_formatters
+#' @importFrom utils str
+formatter_cli <- function(...,
+                          .logcall = sys.call(),
+                          .topcall = sys.call(-1),
+                          .topenv = parent.frame()) {
+  fail_on_missing_package("cli")
+
+  withCallingHandlers(
+    cli::cli_fmt(cli::cli_text(..., .envir = .topenv)),
+    error = function(e) {
+      args <- paste0(capture.output(str(...)), collapse = "\n")
+
+      stop(paste0(
+        "`cli` failed in `formatter_cli` on:\n\n",
+        args,
+        "\n\nRaw error message:\n\n",
+        conditionMessage(e),
+        "\n\nPlease consider using another `log_formatter` or ",
+        "`skip_formatter` on strings with curly braces."
+      ))
+    }
+  )
+}
+attr(formatter_cli, "generator") <- quote(formatter_cli())
 
 #' Transforms all passed R objects into a JSON list
 #' @param ... passed to `toJSON` wrapped into a `list`

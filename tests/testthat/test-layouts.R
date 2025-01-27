@@ -41,6 +41,11 @@ test_that("JSON parser layout", {
   expect_output(log_info(skip_formatter('{"x": 4}')), '{"x":4}', fixed = TRUE)
 })
 
+test_that("JSON parser layout can be renamed", {
+  local_test_logger(layout = layout_json_parser(c(LEVEL = "level")))
+  expect_output(log_info(skip_formatter('{"x": 4}')), '{"LEVEL":"INFO","x":4}', fixed = TRUE)
+})
+
 test_that("must throw errors", {
   skip_if_not(getRversion() >= "4.3") # error call changed
 

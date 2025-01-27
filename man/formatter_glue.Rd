@@ -39,6 +39,7 @@ will be used as a fallback.
 }
 \seealso{
 Other log_formatters: 
+\code{\link{formatter_cli}()},
 \code{\link{formatter_glue_or_sprintf}()},
 \code{\link{formatter_glue_safe}()},
 \code{\link{formatter_json}()},

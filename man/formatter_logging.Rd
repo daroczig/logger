@@ -50,6 +50,7 @@ log_info(12, 1 + 1, 2 * 2)
 }
 \seealso{
 Other log_formatters: 
+\code{\link{formatter_cli}()},
 \code{\link{formatter_glue}()},
 \code{\link{formatter_glue_or_sprintf}()},
 \code{\link{formatter_glue_safe}()},
