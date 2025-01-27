@@ -43,9 +43,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="logger-development-version">logger (development version)<a class="anchor" aria-label="anchor" href="#logger-development-version"></a></h2>
-<ul><li>File and line location of the log call is now available to the layouts (<a href="https://github.com/daroczig/logger/issues/110" class="external-link">#110</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
-<li>Added <code><a href="../reference/log_elapsed.html">log_elapsed()</a></code> to show cumulative elapsed running time (<a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
-<li>New <code><a href="../reference/formatter_cli.html">formatter_cli()</a></code> allows you to use the syntax from the cli package to create log messages (<a href="https://github.com/daroczig/logger/issues/210" class="external-link">#210</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<ul><li>Support renaming meta fields (<a href="https://github.com/daroczig/logger/issues/217" class="external-link">#217</a>, <a href="https://github.com/atusy" class="external-link">@atusy</a>)</li>
+<li>Added <code><a href="../reference/log_elapsed.html">log_elapsed()</a></code> to show cumulative elapsed running time (<a href="https://github.com/daroczig/logger/issues/221" class="external-link">#221</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>
+<code><a href="../reference/log_errors.html">log_errors()</a></code> gains a <code>traceback</code> argument that toggles whether the error traceback should be logged along with the message (fix <a href="https://github.com/daroczig/logger/issues/86" class="external-link">#86</a> via <a href="https://github.com/daroczig/logger/issues/223" class="external-link">#223</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>File and line location of the log call is now available to the layouts (fix <a href="https://github.com/daroczig/logger/issues/110" class="external-link">#110</a> via <a href="https://github.com/daroczig/logger/issues/224" class="external-link">#224</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>New <code><a href="../reference/formatter_cli.html">formatter_cli()</a></code> allows you to use the syntax from the cli package to create log messages (fix <a href="https://github.com/daroczig/logger/issues/210" class="external-link">#210</a> via <a href="https://github.com/daroczig/logger/issues/225" class="external-link">#225</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="logger-040-2024-10-19">logger 0.4.0 (2024-10-19)<a class="anchor" aria-label="anchor" href="#logger-040-2024-10-19"></a></h2><p class="text-muted">CRAN release: 2024-10-22</p>
@@ -59,8 +62,6 @@
 <li>new function to return number of log indices (<a href="https://github.com/daroczig/logger/issues/194" class="external-link">#194</a>, <a href="https://github.com/WurmPeter" class="external-link">@WurmPeter</a>)</li>
 <li>
 <code>appender_async</code> is now using <code>mirai</code> instead of a custom background process and queue system (<a href="https://github.com/daroczig/logger/issues/214" class="external-link">#214</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a> <a href="https://github.com/shikokuchuo" class="external-link">@shikokuchuo</a>)</li>
-<li>
-<code><a href="../reference/log_errors.html">log_errors()</a></code> gains a <code>traceback</code> argument that toggles whether the error traceback should be logged along with the message (<a href="https://github.com/daroczig/logger/issues/86" class="external-link">#86</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
 </ul></div>
 <div class="section level3">
 <h3 id="fixes-0-4-0">Fixes<a class="anchor" aria-label="anchor" href="#fixes-0-4-0"></a></h3>

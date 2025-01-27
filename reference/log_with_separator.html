@@ -94,26 +94,26 @@ to a common, global namespace.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"An important message"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =====================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = An important message                              =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = An important message                              =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =====================================================</span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"Some critical KPI down!!!"</span>, separator <span class="op">=</span> <span class="st">"$"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] $ Some critical KPI down!!!                         $</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] $ Some critical KPI down!!!                         $</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"This message is worth a {1e3} words"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =====================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = This message is worth a 1000 words                =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = This message is worth a 1000 words                =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =====================================================</span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"A very important message with a bunch of extra words that will"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"eventually wrap into a multi-line message for our quite nice demo :wow:"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =====================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = A very important message with a bunch of extra    =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = words that will eventually wrap into a            =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = multi-line message for our quite nice demo :wow:  =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = A very important message with a bunch of extra    =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = words that will eventually wrap into a            =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = multi-line message for our quite nice demo :wow:  =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =====================================================</span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"A very important message with a bunch of extra words that will"</span>,</span></span>
@@ -121,18 +121,18 @@ to a common, global namespace.</p></dd>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  width <span class="op">=</span> <span class="fl">60</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = A very important message      =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = with a bunch of extra words   =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = that will eventually wrap     =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = into a multi-line message     =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = for our quite nice demo       =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] = :wow:                         =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:24:50] =================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = A very important message      =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = with a bunch of extra words   =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = that will eventually wrap     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = into a multi-line message     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = for our quite nice demo       =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] = :wow:                         =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-01-27 21:29:35] =================================</span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"Boo!"</span>, level <span class="op">=</span> <span class="va">FATAL</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FATAL [2025-01-27 21:24:50] ====================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FATAL [2025-01-27 21:24:50] = Boo!                                             =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FATAL [2025-01-27 21:24:50] ====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FATAL [2025-01-27 21:29:35] ====================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FATAL [2025-01-27 21:29:35] = Boo!                                             =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FATAL [2025-01-27 21:29:35] ====================================================</span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">layout_blank</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"Boo!"</span>, level <span class="op">=</span> <span class="va">FATAL</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ================================================================================</span>
@@ -141,9 +141,9 @@ to a common, global namespace.</p></dd>
 <span class="r-in"><span><span class="va">logger</span> <span class="op">&lt;-</span> <span class="fu"><a href="layout_glue_generator.html">layout_glue_generator</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="va">logger</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_with_separator</span><span class="op">(</span><span class="st">"Boo!"</span>, level <span class="op">=</span> <span class="va">FATAL</span>, width <span class="op">=</span> <span class="fl">120</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1277-669/9776/global/eval 2025-01-27 21:24:50.876121 FATAL: =======================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1277-669/9776/global/log_with_separator 2025-01-27 21:24:50.876907 FATAL: = Boo!                                                =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1277-669/9776/global/eval 2025-01-27 21:24:50.878318 FATAL: =======================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1690-15/9694/global/eval 2025-01-27 21:29:35.090833 FATAL: ========================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1690-15/9694/global/log_with_separator 2025-01-27 21:29:35.091639 FATAL: = Boo!                                                 =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fv-az1690-15/9694/global/eval 2025-01-27 21:29:35.093121 FATAL: =========================================================</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
