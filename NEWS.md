@@ -1,8 +1,10 @@
 # logger (development version)
 
-* File and line location of the log call is now available to the layouts (#110, @thomasp85)
-* Added `log_elapsed()` to show cumulative elapsed running time (@thomasp85)
-* New `formatter_cli()` allows you to use the syntax from the cli package to create log messages (#210, @thomasp85)
+* Support renaming meta fields (#217, @atusy)
+* Added `log_elapsed()` to show cumulative elapsed running time (#221, @thomasp85)
+* `log_errors()` gains a `traceback` argument that toggles whether the error traceback should be logged along with the message (fix #86 via #223, @thomasp85)
+* File and line location of the log call is now available to the layouts (fix #110 via #224, @thomasp85)
+* New `formatter_cli()` allows you to use the syntax from the cli package to create log messages (fix #210 via #225, @thomasp85)
 
 # logger 0.4.0 (2024-10-19)
 
@@ -16,7 +18,6 @@ improved documentations, modernized tests, performance speedups.
 * `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value (#170, @hadley)
 * new function to return number of log indices (#194, @WurmPeter)
 * `appender_async` is now using `mirai` instead of a custom background process and queue system (#214, @hadley @shikokuchuo)
-* `log_errors()` gains a `traceback` argument that toggles whether the error traceback should be logged along with the message (#86, @thomasp85)
 
 ## Fixes
 
