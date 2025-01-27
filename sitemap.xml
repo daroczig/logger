@@ -30,6 +30,7 @@
 <url><loc>https://daroczig.github.io/logger/reference/delete_logger_index.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/deparse_to_one_line.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/fail_on_missing_package.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_cli.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue_or_sprintf.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue_safe.html</loc></url>
