@@ -33,7 +33,7 @@
     Output
       ERROR I'm failing
       ERROR Traceback:
-      ERROR 2: stop("I'm failing") at helper.R #41
+      ERROR 2: stop("I'm failing") at helper.R #46
       ERROR 1: function_that_fails()
 
 # shiny input initialization is detected
