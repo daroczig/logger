@@ -300,3 +300,40 @@ log_failure <- function(expression) {
     }
   )
 }
+
+#' Automatically log execution time of knitr chunks
+#'
+#' Calling this function in the first chunk of a document will instruct knitr
+#' to automatically log the execution time of each chunk. If using
+#' [formatter_glue()] or [formatter_cli()] then the `options` variable will be
+#' available, providing the chunk options such as chunk label etc.
+#'
+#' @inheritParams log_elapsed
+#'
+#' @export
+#'
+#' @examples
+#' # To be put in the first chunk of a document
+#' log_chunk_time("chunk {options$label}")
+#'
+log_chunk_time <- function(..., level = INFO, namespace = NA_character_) {
+  if (!requireNamespace("knitr", quietly = TRUE)) {
+    stop("knitr is required to use this functionality", call. = FALSE)
+  }
+  if (!isTRUE(getOption("knitr.in.progress"))) {
+    return(invisible())
+  }
+  args <- list(...)
+  args$level <- level
+  args$namespace <- namespace
+  knitr::knit_hooks$set(logger_timer = function(before, options) {
+    if (before) {
+      log_elapsed_start(namespace = namespace, quiet = TRUE)
+    } else {
+      do.call(log_elapsed, args)
+    }
+  })
+  knitr::opts_chunk$set(logger_timer = TRUE)
+
+  invisible()
+}
