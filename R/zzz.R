@@ -12,12 +12,13 @@ namespaces_reset <- function() {
 
 namespaces_default <- function() {
   has_glue <- requireNamespace("glue", quietly = TRUE)
+  is_running_gha <- isTRUE(Sys.getenv("GITHUB_ACTIONS") == "true") && !needs_stdout()
 
   list(
     global = list(
       default = list(
         threshold = as.loglevel(Sys.getenv("LOGGER_LOG_LEVEL", unset = "INFO")),
-        layout    = layout_simple,
+        layout    = if (is_running_gha) layout_gha else layout_simple,
         formatter = if (has_glue) formatter_glue else formatter_sprintf,
         appender  = if (needs_stdout()) appender_stdout else appender_console
       )
@@ -25,7 +26,7 @@ namespaces_default <- function() {
     .logger = list(
       default = list(
         threshold = ERROR,
-        layout    = layout_simple,
+        layout    = if (is_running_gha) layout_gha else layout_simple,
         formatter = formatter_sprintf,
         appender  = if (needs_stdout()) appender_stdout else appender_console
       )
