@@ -96,3 +96,17 @@ test_that("lower log level", {
   local_test_logger(TRACE, layout = layout_glue_generator("{level} {msg}"))
   expect_output(log_eval(4), sprintf("TRACE %s => %s", shQuote(4), shQuote(4)))
 })
+
+test_that("knitr hook gets applied", {
+  local_test_logger()
+  mock_doc <- c(
+    "```{r, include = FALSE}",
+    "library(logger)",
+    "log_chunk_time()",
+    "```",
+    "```{r}",
+    "Sys.sleep(0.2)",
+    "```"
+  )
+  expect_output(knitr::knit(text = mock_doc, quiet = TRUE), "global timer 0.2")
+})

@@ -27,6 +27,7 @@ reference:
   - log_separator
   - log_with_separator
   - with_log_threshold
+  - log_chunk_time
 
 - title: Appenders
   desc: >
