@@ -4,7 +4,7 @@
 \alias{log_chunk_time}
 \title{Automatically log execution time of knitr chunks}
 \usage{
-log_chunk_time(..., level = INFO, namespace = "_knitr_chunk_timer_")
+log_chunk_time(..., level = INFO, namespace = NA_character_)
 }
 \arguments{
 \item{...}{passed to \code{\link[=log_level]{log_level()}}}
