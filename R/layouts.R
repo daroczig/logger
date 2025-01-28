@@ -153,7 +153,18 @@ layout_simple <- function(level,
                           .logcall = sys.call(),
                           .topcall = sys.call(-1),
                           .topenv = parent.frame()) {
-  paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
+  timestamp <- logger_meta_env(
+    log_level = level,
+    namespace = namespace,
+    .logcall = .logcall,
+    .topcall = .topcall,
+    .topenv = .topenv
+  )$time
+  paste0(attr(level, "level"), " [", if (is.character(timestamp)) {
+    timestamp
+  } else {
+    format(timestamp, "%Y-%m-%d %H:%M:%S")
+  }, "] ", msg)
 }
 attr(layout_simple, "generator") <- quote(layout_simple())
 
@@ -187,8 +198,14 @@ layout_logging <- function(level,
     .topcall = .topcall,
     .topenv = .topenv
   )
+  timestamp <- meta$time
   paste0(
-    format(Sys.time(), "%Y-%m-%d %H:%M:%S"), " ",
+    if (is.character(timestamp)) {
+      timestamp
+    } else {
+      format(timestamp, "%Y-%m-%d %H:%M:%S")
+    },
+    " ",
     attr(level, "level"), ":",
     ifelse(meta$ns == "global", "", meta$ns), ":",
     msg

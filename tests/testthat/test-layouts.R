@@ -99,3 +99,25 @@ test_that("log_info() captures package info", {
     logger_info_tester_function("everything = ")
   })
 })
+
+test_that("timestamp can be formatted", {
+  layouts <- list(
+    layout_glue_generator("{time}"),
+    # layout_blank, # blank layout does not print time
+    layout_simple,
+    layout_logging,
+    # layout_glue, # time-foramt is fixed
+    # layout_glue_colors, # time-foramt is fixed
+    layout_json(fields = "time")
+  )
+
+  withr::with_options(
+    list(`logger.format_time` = function(x) format(x, "global %Z", tz = "UTC")),
+    {
+      for (layout in layouts) {
+        local_test_logger(layout = layout, formatter = formatter_json)
+        expect_snapshot(log_info())
+      }
+    }
+  )
+})

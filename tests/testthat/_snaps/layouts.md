@@ -73,3 +73,31 @@
     Output
       logger.tester INFO everything =  42
 
+# timestamp can be formatted
+
+    Code
+      log_info()
+    Output
+      global UTC
+
+---
+
+    Code
+      log_info()
+    Output
+      INFO [global UTC] []
+
+---
+
+    Code
+      log_info()
+    Output
+      global UTC INFO:logger:[]
+
+---
+
+    Code
+      log_info()
+    Output
+      {"time":"global UTC","msg":"[]"}
+
