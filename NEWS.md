@@ -5,6 +5,7 @@
 * `log_errors()` gains a `traceback` argument that toggles whether the error traceback should be logged along with the message (fix #86 via #223, @thomasp85)
 * File and line location of the log call is now available to the layouts (fix #110 via #224, @thomasp85)
 * New `formatter_cli()` allows you to use the syntax from the cli package to create log messages (fix #210 via #225, @thomasp85)
+* New `log_chunk_time()` helper function to automatically log the execution time of knitr code chunks (fix #222 via ##227, @thomasp85)
 
 # logger 0.4.0 (2024-10-19)
 
