@@ -393,44 +393,58 @@ validate_log_level <- function(level) {
 #' @export
 #' @rdname log_level
 log_fatal <- function(..., namespace = NA_character_,
-                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(FATAL, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                      .logcall = sys.call(), .topcall = sys.call(-1),
+                      .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(FATAL, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 #' @export
 #' @rdname log_level
 log_error <- function(..., namespace = NA_character_,
-                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(ERROR, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                      .logcall = sys.call(), .topcall = sys.call(-1),
+                      .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(ERROR, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 #' @export
 #' @rdname log_level
 log_warn <- function(..., namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(WARN, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                     .logcall = sys.call(), .topcall = sys.call(-1),
+                     .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(WARN, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 #' @export
 #' @rdname log_level
 log_success <- function(..., namespace = NA_character_,
-                        .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(SUCCESS, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                        .logcall = sys.call(), .topcall = sys.call(-1),
+                        .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(SUCCESS, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 #' @export
 #' @rdname log_level
 log_info <- function(..., namespace = NA_character_,
-                     .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(INFO, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                     .logcall = sys.call(), .topcall = sys.call(-1),
+                     .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(INFO, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 #' @export
 #' @rdname log_level
 log_debug <- function(..., namespace = NA_character_,
-                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(DEBUG, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                      .logcall = sys.call(), .topcall = sys.call(-1),
+                      .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(DEBUG, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 #' @export
 #' @rdname log_level
 log_trace <- function(..., namespace = NA_character_,
-                      .logcall = sys.call(), .topcall = sys.call(-1), .topenv = parent.frame(), .timestamp = Sys.time()) {
-  log_level(TRACE, ..., namespace = namespace, .logcall = .logcall, .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
+                      .logcall = sys.call(), .topcall = sys.call(-1),
+                      .topenv = parent.frame(), .timestamp = Sys.time()) {
+  log_level(TRACE, ..., namespace = namespace, .logcall = .logcall,
+            .topcall = .topcall, .topenv = .topenv, .timestamp = .timestamp)
 }
 
 
