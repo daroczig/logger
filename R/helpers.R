@@ -102,7 +102,8 @@ log_separator <- function(level = INFO,
                           width = 80,
                           .logcall = sys.call(),
                           .topcall = sys.call(-1),
-                          .topenv = parent.frame()) {
+                          .topenv = parent.frame(),
+                          .timestamp = Sys.time()) {
   stopifnot(length(separator) == 1, nchar(separator) == 1)
 
   base_info_chars <- nchar(catch_base_log(level, namespace, .topcall = .topcall, .topenv = .topenv))
@@ -113,7 +114,8 @@ log_separator <- function(level = INFO,
     namespace = namespace,
     .logcall = .logcall,
     .topcall = .topcall,
-    .topenv = .topenv
+    .topenv = .topenv,
+    .timestamp = .timestamp
   )
 }
 
