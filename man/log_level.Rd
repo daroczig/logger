@@ -17,7 +17,8 @@ log_level(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_fatal(
@@ -25,7 +26,8 @@ log_fatal(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_error(
@@ -33,7 +35,8 @@ log_error(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_warn(
@@ -41,7 +44,8 @@ log_warn(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_success(
@@ -49,7 +53,8 @@ log_success(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_info(
@@ -57,7 +62,8 @@ log_info(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_debug(
@@ -65,7 +71,8 @@ log_debug(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 
 log_trace(
@@ -73,7 +80,8 @@ log_trace(
   namespace = NA_character_,
   .logcall = sys.call(),
   .topcall = sys.call(-1),
-  .topenv = parent.frame()
+  .topenv = parent.frame(),
+  .timestamp = Sys.time()
 )
 }
 \arguments{
@@ -99,6 +107,9 @@ function's name or arguments)}
 \item{.topenv}{original frame of the \code{.topcall} calling function
 where the formatter function will be evaluated and that is used
 to look up the \code{namespace} as well via \code{logger:::top_env_name}}
+
+\item{.timestamp}{The time the logging occured. Defaults to the current time
+but may be overwritten if the logging is delayed from the time it happend}
 }
 \value{
 Invisible \code{list} of \code{logger} objects. See \code{\link[=logger]{logger()}} for more details on the format.
