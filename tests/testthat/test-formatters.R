@@ -38,6 +38,9 @@ test_that("glue works", {
 test_that("glue gives informative error if message contains curlies", {
   local_test_logger(formatter = formatter_glue)
   expect_snapshot(log_info("hi{"), error = TRUE)
+
+  local_mocked_bindings(has_rlang = function() FALSE)
+  expect_snapshot(log_info("hi{"), error = TRUE)
 })
 
 test_that("glue_safe works", {
