@@ -231,7 +231,7 @@ log_layout(layout_simple)
 
 ## Delivering log records to their destination
 
-By default, `logger` will write to the console or `stdout` via the `?appender_console` function:
+By default, `logger` will write to the `stderr` via the `?appender_console` function:
 
 ```{r}
 log_appender()
