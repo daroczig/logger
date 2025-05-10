@@ -389,9 +389,10 @@ appender_async <- function(appender,
   fail_on_missing_package("mirai")
   force(appender)
 
-  # Start one background process (hence dispatcher not required)
-  # force = FALSE allows multiple appenders to use same namespace logger
-  mirai::daemons(1L, dispatcher = FALSE, force = FALSE, cleanup = FALSE, .compute = namespace)
+  # Start one non-dispatcher background process if not already started
+  if (is.null(mirai::nextget("n", .compute = namespace))) {
+    mirai::daemons(1L, dispatcher = FALSE, cleanup = FALSE, .compute = namespace)
+  }
   mirai::everywhere(
     {
       library(logger)
