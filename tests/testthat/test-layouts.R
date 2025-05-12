@@ -20,6 +20,10 @@ test_that("metavars", {
 
   f_warn <- function() log_warn()
   expect_output(f_warn(), "WARN global f_warn()")
+
+  local_test_logger(layout = layout_glue_generator("{time}"))
+  time <- as.POSIXct("2025-04-04 10:31:57 CEST")
+  expect_output(log_info("test", .timestamp = time), "2025-04-04 10:31:57")
 })
 
 test_that("JSON layout", {

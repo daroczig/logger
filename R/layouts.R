@@ -37,9 +37,9 @@ get_logger_meta_variables <- function(log_level = NULL,
                                       namespace = NA_character_,
                                       .logcall = sys.call(),
                                       .topcall = sys.call(-1),
-                                      .topenv = parent.frame()) {
+                                      .topenv = parent.frame(),
+                                      .timestamp = Sys.time()) {
   sysinfo <- Sys.info()
-  timestamp <- Sys.time()
 
   list(
     ns = namespace,
@@ -48,7 +48,7 @@ get_logger_meta_variables <- function(log_level = NULL,
     fn = deparse_to_one_line(.topcall[[1]]),
     call = deparse_to_one_line(.topcall),
     location = log_call_location(.logcall),
-    time = timestamp,
+    time = .timestamp,
     levelr = log_level,
     level = attr(log_level, "level"),
     pid = Sys.getpid(),
@@ -104,7 +104,8 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
                      namespace = NA_character_,
                      .logcall = sys.call(),
                      .topcall = sys.call(-1),
-                     .topenv = parent.frame()) {
+                     .topenv = parent.frame(),
+                     .timestamp = Sys.time()) {
     fail_on_missing_package("glue")
     if (!inherits(level, "loglevel")) {
       stop("Invalid log level, see ?log_levels")
@@ -116,6 +117,7 @@ layout_glue_generator <- function(format = '{level} [{format(time, "%Y-%m-%d %H:
       .logcall = .logcall,
       .topcall = .topcall,
       .topenv = .topenv,
+      .timestamp = .timestamp,
       parent = environment()
     )
     glue::glue(format, .envir = meta)
@@ -135,7 +137,8 @@ layout_blank <- function(level,
                          namespace = NA_character_,
                          .logcall = sys.call(),
                          .topcall = sys.call(-1),
-                         .topenv = parent.frame()) {
+                         .topenv = parent.frame(),
+                         .timestamp = Sys.time()) {
   msg
 }
 attr(layout_blank, "generator") <- quote(layout_blank())
@@ -152,8 +155,9 @@ layout_simple <- function(level,
                           namespace = NA_character_,
                           .logcall = sys.call(),
                           .topcall = sys.call(-1),
-                          .topenv = parent.frame()) {
-  paste0(attr(level, "level"), " [", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
+                          .topenv = parent.frame(),
+                          .timestamp = Sys.time()) {
+  paste0(attr(level, "level"), " [", format(.timestamp, "%Y-%m-%d %H:%M:%S"), "] ", msg)
 }
 attr(layout_simple, "generator") <- quote(layout_simple())
 
@@ -179,16 +183,18 @@ layout_logging <- function(level,
                            namespace = NA_character_,
                            .logcall = sys.call(),
                            .topcall = sys.call(-1),
-                           .topenv = parent.frame()) {
+                           .topenv = parent.frame(),
+                           .timestamp = Sys.time()) {
   meta <- logger_meta_env(
     log_level = level,
     namespace = namespace,
     .logcall = .logcall,
     .topcall = .topcall,
-    .topenv = .topenv
+    .topenv = .topenv,
+    .timestamp = .timestamp
   )
   paste0(
-    format(Sys.time(), "%Y-%m-%d %H:%M:%S"), " ",
+    format(meta$time, "%Y-%m-%d %H:%M:%S"), " ",
     attr(level, "level"), ":",
     ifelse(meta$ns == "global", "", meta$ns), ":",
     msg
@@ -267,7 +273,8 @@ layout_json <- function(fields = default_fields()) {
                      namespace = NA_character_,
                      .logcall = sys.call(),
                      .topcall = sys.call(-1),
-                     .topenv = parent.frame()) {
+                     .topenv = parent.frame(),
+                     .timestamp = Sys.time()) {
     fail_on_missing_package("jsonlite")
 
     meta <- logger_meta_env(
@@ -275,7 +282,8 @@ layout_json <- function(fields = default_fields()) {
       namespace = namespace,
       .logcall = .logcall,
       .topcall = .topcall,
-      .topenv = .topenv
+      .topenv = .topenv,
+      .timestamp = .timestamp
     )
     json <- mget(fields, meta)
     sapply(msg, function(msg) jsonlite::toJSON(c(json, list(msg = msg)), auto_unbox = TRUE))
@@ -317,7 +325,8 @@ layout_json_parser <- function(fields = default_fields()) {
                      namespace = NA_character_,
                      .logcall = sys.call(),
                      .topcall = sys.call(-1),
-                     .topenv = parent.frame()) {
+                     .topenv = parent.frame(),
+                     .timestamp = Sys.time()) {
     fail_on_missing_package("jsonlite")
 
     meta <- logger_meta_env(
@@ -325,7 +334,8 @@ layout_json_parser <- function(fields = default_fields()) {
       namespace = namespace,
       .logcall = .logcall,
       .topcall = .topcall,
-      .topenv = .topenv
+      .topenv = .topenv,
+      .timestamp = .timestamp
     )
     meta <- mget(fields, meta)
     field_names <- names(fields)
@@ -363,7 +373,8 @@ layout_syslognet <- structure(
            namespace = NA_character_,
            .logcall = sys.call(),
            .topcall = sys.call(-1),
-           .topenv = parent.frame()) {
+           .topenv = parent.frame(),
+           .timestamp = Sys.time()) {
     ret <- paste(attr(level, "level"), msg)
     attr(ret, "severity") <- switch(
       attr(level, "level", exact = TRUE),
