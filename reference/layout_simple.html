@@ -57,7 +57,8 @@ message</p>
 <span>  namespace <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  .logcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
-<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .timestamp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -97,6 +98,11 @@ function's name or arguments)</p></dd>
 <dd><p>original frame of the <code>.topcall</code> calling function
 where the formatter function will be evaluated and that is used
 to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
+
+
+<dt id="arg--timestamp">.timestamp<a class="anchor" aria-label="anchor" href="#arg--timestamp"></a></dt>
+<dd><p>The time the logging occured. Defaults to the current time
+but may be overwritten if the logging is delayed from the time it happend</p></dd>
 
 </dl></div>
     <div class="section level2">

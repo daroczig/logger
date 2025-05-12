@@ -112,53 +112,53 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_pander</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"42"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] 42</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] _42_</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] _42_</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">4</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] _6_</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] _6_</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] -------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] -------------- ------------- -------------- ------------- ---------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      5.1            3.5           1.4            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      4.9             3            1.4            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      4.7            3.2           1.3            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      4.6            3.1           1.5            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]       5             3.6           1.4            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      5.4            3.9           1.7            0.4       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] -------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] -------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] -------------- ------------- -------------- ------------- ---------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      5.1            3.5           1.4            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      4.9             3            1.4            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      4.7            3.2           1.3            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      4.6            3.1           1.5            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]       5             3.6           1.4            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      5.4            3.9           1.7            0.4       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] -------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>, style <span class="op">=</span> <span class="st">"simple"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] -------------- ------------- -------------- ------------- ---------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      5.1            3.5           1.4            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      4.9             3            1.4            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      4.7            3.2           1.3            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      4.6            3.1           1.5            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]       5             3.6           1.4            0.2       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      5.4            3.9           1.7            0.4       setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] -------------- ------------- -------------- ------------- ---------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      5.1            3.5           1.4            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      4.9             3            1.4            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      4.7            3.2           1.3            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      4.6            3.1           1.5            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]       5             3.6           1.4            0.2       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      5.4            3.9           1.7            0.4       setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] ----------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      &amp;nbsp;        Estimate   Std. Error   t value    Pr(&gt;|t|)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] ----------------- ---------- ------------ ---------- -----------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]  **(Intercept)**    -1.821      32.32      -0.05633    0.9555   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16]      **wt**         46.16       9.625       4.796     4.146e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] ----------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] Table: Fitting linear model: hp ~ wt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-10 08:36:16] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] ----------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      &amp;nbsp;        Estimate   Std. Error   t value    Pr(&gt;|t|)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] ----------------- ---------- ------------ ---------- -----------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]  **(Intercept)**    -1.821      32.32      -0.05633    0.9555   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46]      **wt**         46.16       9.625       4.796     4.146e-05 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] ----------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] Table: Fitting linear model: hp ~ wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-05-12 21:04:46] </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
