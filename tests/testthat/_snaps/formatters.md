@@ -19,16 +19,27 @@
     Code
       log_info("hi{")
     Condition
-      Error in `h()`:
-      ! `glue` failed in `formatter_glue` on:
+      Error in `formatter_glue()`:
+      ! `glue()` failed.
+      i For strings containing `{` or `}` consider using `skip_formatter()` or another `log_formatter`.
+      Caused by error in `glue_data()`:
+      ! Expecting '}'
+
+---
+
+    Code
+      log_info("hi{")
+    Condition
+      Error:
+      ! `glue()` failed in `formatter_glue()` on:
       
-       chr "hi{"
+      List of 1 $ : chr "hi{"
       
       Raw error message:
       
       Expecting '}'
       
-      Please consider using another `log_formatter` or `skip_formatter` on strings with curly braces.
+      For strings containing `{` or `}` consider using `skip_formatter()` or another `log_formatter`.
 
 # glue_safe works
 
