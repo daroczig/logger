@@ -62,6 +62,7 @@ logger_tester_function(INFO, 42)
 Other log_layouts: 
 \code{\link{get_logger_meta_variables}()},
 \code{\link{layout_blank}()},
+\code{\link{layout_gha}()},
 \code{\link{layout_glue}()},
 \code{\link{layout_glue_colors}()},
 \code{\link{layout_glue_generator}()},

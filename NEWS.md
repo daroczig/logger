@@ -20,6 +20,7 @@ improved documentations, modernized tests, performance speedups.
 * `log_appender()`, `log_layout()` and `log_formatter()` now check that you are calling them with a function, and return the previously set value (#170, @hadley)
 * new function to return number of log indices (#194, @WurmPeter)
 * `appender_async` is now using `mirai` instead of a custom background process and queue system (#214, @hadley @shikokuchuo)
+* `layout_gha()` for providing native GitHub Action logging. This automatically gets used when running code in github actions (@thomasp85)
 
 ## Fixes
 
