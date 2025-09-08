@@ -27,6 +27,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Spare Cores [funder]
   \item System1 [funder]
 }
 

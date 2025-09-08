@@ -4,6 +4,9 @@ template:
   bootstrap: 5
 
 authors:
+  Spare Cores:
+    href: https://sparecores.com
+    html: <img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"/>
   System1:
     href: https://system1.com
     html: <img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"/>
