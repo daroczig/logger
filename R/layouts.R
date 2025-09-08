@@ -380,7 +380,8 @@ layout_gha <- structure(
            namespace = NA_character_,
            .logcall = sys.call(),
            .topcall = sys.call(-1),
-           .topenv = parent.frame()) {
+           .topenv = parent.frame(),
+           .timestamp = Sys.time()) {
     level <- attr(level, "level")
     gha_level <- switch(level,
       FATAL = ,
