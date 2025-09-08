@@ -16,9 +16,8 @@ log_errors(
 message}
 }
 \description{
-This function uses \code{\link[=trace]{trace()}} to add a \code{\link[=log_error]{log_error()}} function call when
-\code{\link[=stop]{stop()}} is called to log the error messages with the \code{logger} layout
-and appender.
+This function sets a hook to trigger \code{\link[=log_error]{log_error()}} when \code{\link[=stop]{stop()}} is called
+to log the error messages with the global \code{logger} layout and appender.
 }
 \examples{
 \dontrun{

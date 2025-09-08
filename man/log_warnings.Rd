@@ -10,9 +10,8 @@ log_warnings(muffle = getOption("logger_muffle_warnings", FALSE))
 \item{muffle}{if TRUE, the warning is not shown after being logged}
 }
 \description{
-This function uses \code{trace} to add a \code{log_warn} function call when
-\code{warning} is called to log the warning messages with the \code{logger}
-layout and appender.
+This function sets a hook to trigger \code{\link[=log_warn]{log_warn()}} when \code{warning} is called
+to log the warning messages with the global \code{logger} layout and appender.
 }
 \examples{
 \dontrun{

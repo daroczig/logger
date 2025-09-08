@@ -7,9 +7,8 @@
 log_messages()
 }
 \description{
-This function uses \code{\link[=trace]{trace()}} to add a \code{\link[=log_info]{log_info()}} function call when
-\code{message} is called to log the informative messages with the
-\code{logger} layout and appender.
+This function sets a hook to trigger \code{\link[=log_info]{log_info()}} when \code{message} is called
+to log the informative messages with the global \code{logger} layout and appender.
 }
 \examples{
 \dontrun{
