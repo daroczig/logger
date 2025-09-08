@@ -14,6 +14,7 @@ test_that("validate_log_level", {
 })
 
 test_that("catch_base_log", {
+  local_test_logger(layout = layout_simple)
   expect_true(nchar(catch_base_log(ERROR, NA_character_)) == 28)
   expect_true(nchar(catch_base_log(INFO, NA_character_)) == 27)
   local_test_logger(layout = layout_blank)
