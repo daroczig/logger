@@ -86,13 +86,13 @@ will show the time since the R session started.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">log_elapsed_start</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2025-09-08 20:06:30</span>] <span style="color: #949494;">starting global timer</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2025-09-08 20:34:43</span>] <span style="color: #949494;">starting global timer</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_elapsed</span><span class="op">(</span><span class="st">"Tast 1"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2025-09-08 20:06:30</span>] <span style="color: #949494;">global timer 0.4 secs elapsed -- Tast 1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2025-09-08 20:34:43</span>] <span style="color: #949494;">global timer 0.4 secs elapsed -- Tast 1</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_elapsed</span><span class="op">(</span><span class="st">"Task 2"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2025-09-08 20:06:30</span>] <span style="color: #949494;">global timer 0.61 secs elapsed -- Task 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [<span style="font-style: italic;">2025-09-08 20:34:43</span>] <span style="color: #949494;">global timer 0.61 secs elapsed -- Task 2</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
