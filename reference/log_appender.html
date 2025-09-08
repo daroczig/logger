@@ -83,23 +83,23 @@ destination, eg <code><a href="appender_console.html">appender_console()</a></co
 <span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_appender</span><span class="op">(</span><span class="fu"><a href="appender_tee.html">appender_tee</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:48:21] 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:58:28] 42</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">43</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:48:21] 43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:58:28] 43</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">44</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:48:21] 44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:58:28] 44</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2025-09-08 20:48:21] 42" "INFO [2025-09-08 20:48:21] 43"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "INFO [2025-09-08 20:48:21] 44"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2025-09-08 20:58:28] 42" "INFO [2025-09-08 20:58:28] 43"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "INFO [2025-09-08 20:58:28] 44"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## poor man's tee by stacking loggers in the namespace</span></span></span>
 <span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_appender</span><span class="op">(</span><span class="va">appender_stdout</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_appender</span><span class="op">(</span><span class="fu"><a href="appender_file.html">appender_file</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, index <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:48:21] 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-08 20:58:28] 42</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2025-09-08 20:48:21] 42"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2025-09-08 20:58:28] 42"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -107,7 +107,7 @@ destination, eg <code><a href="appender_console.html">appender_console()</a></co
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
