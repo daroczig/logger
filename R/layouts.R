@@ -317,6 +317,7 @@ layout_json <- function(fields = default_fields()) {
 #'   )
 #' )
 #' \dontshow{logger:::namespaces_set(old)}
+#' @importFrom stats setNames
 layout_json_parser <- function(fields = default_fields()) {
   force(fields)
 
