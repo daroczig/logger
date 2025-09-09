@@ -1,4 +1,8 @@
-# logger (development version)
+# logger 0.4.1.9000 (development version)
+
+# logger 0.4.1 (2025-09-08)
+
+New features and quality of life improvements:
 
 * Support renaming meta fields (#217, @atusy)
 * Added `log_elapsed()` to show cumulative elapsed running time (#221, @thomasp85)
