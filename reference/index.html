@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,12 +100,6 @@
         <dd>Tic-toc logging</dd>
       </dl><dl><dt>
 
-          <code><a href="log_elapsed.html">log_elapsed()</a></code> <code><a href="log_elapsed.html">log_elapsed_start()</a></code>
-
-        </dt>
-        <dd>Log cumulative running time</dd>
-      </dl><dl><dt>
-
           <code><a href="log_separator.html">log_separator()</a></code>
 
         </dt>
@@ -122,12 +116,6 @@
 
         </dt>
         <dd>Evaluate R expression with a temporarily updated log level threshold</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_chunk_time.html">log_chunk_time()</a></code>
-
-        </dt>
-        <dd>Automatically log execution time of knitr chunks</dd>
       </dl></div><div class="section level2">
       <h2 id="appenders">Appenders<a class="anchor" aria-label="anchor" href="#appenders"></a></h2>
 
@@ -236,28 +224,22 @@
         <dd>Get or set log message formatter</dd>
       </dl><dl><dt>
 
-          <code><a href="formatter_cli.html">formatter_cli()</a></code>
-
-        </dt>
-        <dd>Apply <code><a href="https://cli.r-lib.org/reference/cli_text.html" class="external-link">cli::cli_text()</a></code> to format string with cli syntax</dd>
-      </dl><dl><dt>
-
           <code><a href="formatter_glue.html">formatter_glue()</a></code>
 
         </dt>
-        <dd>Apply <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> to convert R objects into a character vector</dd>
+        <dd>Apply <code>glue</code> to convert R objects into a character vector</dd>
       </dl><dl><dt>
 
           <code><a href="formatter_glue_or_sprintf.html">formatter_glue_or_sprintf()</a></code>
 
         </dt>
-        <dd>Apply <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> and <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code></dd>
+        <dd>Apply <code>glue</code> and <code>sprintf</code></dd>
       </dl><dl><dt>
 
           <code><a href="formatter_glue_safe.html">formatter_glue_safe()</a></code>
 
         </dt>
-        <dd>Apply <code><a href="https://glue.tidyverse.org/reference/glue_safe.html" class="external-link">glue::glue_safe()</a></code> to convert R objects into a character vector</dd>
+        <dd>Apply <code>glue_safe</code> to convert R objects into a character vector</dd>
       </dl><dl><dt>
 
           <code><a href="formatter_json.html">formatter_json()</a></code>
@@ -287,7 +269,7 @@
           <code><a href="formatter_sprintf.html">formatter_sprintf()</a></code>
 
         </dt>
-        <dd>Apply <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code> to convert R objects into a character vector</dd>
+        <dd>Apply <code>sprintf</code> to convert R objects into a character vector</dd>
       </dl><dl><dt>
 
           <code><a href="skip_formatter.html">skip_formatter()</a></code>
@@ -319,22 +301,16 @@
         <dd>Format a log record by including the raw message without anything added or modified</dd>
       </dl><dl><dt>
 
-          <code><a href="layout_gha.html">layout_gha()</a></code>
-
-        </dt>
-        <dd>Format a log record for github actions</dd>
-      </dl><dl><dt>
-
           <code><a href="layout_glue.html">layout_glue()</a></code>
 
         </dt>
-        <dd>Format a log message with <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code></dd>
+        <dd>Format a log message with <code>glue</code></dd>
       </dl><dl><dt>
 
           <code><a href="layout_glue_colors.html">layout_glue_colors()</a></code>
 
         </dt>
-        <dd>Format a log message with <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> and ANSI escape codes to add colors</dd>
+        <dd>Format a log message with <code>glue</code> and ANSI escape codes to add colors</dd>
       </dl><dl><dt>
 
           <code><a href="layout_glue_generator.html">layout_glue_generator()</a></code>
@@ -494,7 +470,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

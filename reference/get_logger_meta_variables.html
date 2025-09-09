@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Collect useful information about the logging environment to be used in log messages</h1>
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/main/R/layouts.R" class="external-link"><code>R/layouts.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/v0.4.0/R/layouts.R" class="external-link"><code>R/layouts.R</code></a></small>
       <div class="d-none name"><code>get_logger_meta_variables.Rd</code></div>
     </div>
 
@@ -53,8 +53,7 @@
 <span>  namespace <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  .logcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  .topcall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.call</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
-<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .timestamp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  .topenv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -91,11 +90,6 @@ function's name or arguments)</p></dd>
 where the formatter function will be evaluated and that is used
 to look up the <code>namespace</code> as well via <code>logger:::top_env_name</code></p></dd>
 
-
-<dt id="arg--timestamp">.timestamp<a class="anchor" aria-label="anchor" href="#arg--timestamp"></a></dt>
-<dd><p>The time the logging occured. Defaults to the current time
-but may be overwritten if the logging is delayed from the time it happend</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -124,8 +118,6 @@ otherwise a fallback namespace (eg usually <code>global</code>)</p></li>
 <li><p><code>topenv</code>: the name of the top environment from which the parent call was called
 (eg R package name or <code>GlobalEnv</code>)</p></li>
 <li><p><code>call</code>: parent call (if any) calling the logging function</p></li>
-<li><p><code>location</code>: A list with element <code>path</code> and <code>line</code> giving the location of the
-log call</p></li>
 <li><p><code>fn</code>: function's (if any) name calling the logging function</p></li>
 </ul></div>
     <div class="section level2">
@@ -133,7 +125,6 @@ log call</p></li>
     <div class="dont-index"><p><code><a href="layout_glue_generator.html">layout_glue_generator()</a></code></p>
 <p>Other log_layouts:
 <code><a href="layout_blank.html">layout_blank</a>()</code>,
-<code><a href="layout_gha.html">layout_gha</a>()</code>,
 <code><a href="layout_glue.html">layout_glue</a>()</code>,
 <code><a href="layout_glue_colors.html">layout_glue_colors</a>()</code>,
 <code><a href="layout_glue_generator.html">layout_glue_generator</a>()</code>,
@@ -148,7 +139,7 @@ log call</p></li>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
