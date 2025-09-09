@@ -30,6 +30,7 @@
 <url><loc>https://daroczig.github.io/logger/reference/delete_logger_index.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/deparse_to_one_line.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/fail_on_missing_package.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/formatter_cli.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue_or_sprintf.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/formatter_glue_safe.html</loc></url>
@@ -42,6 +43,7 @@
 <url><loc>https://daroczig.github.io/logger/reference/grapes-except-grapes.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/index.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/layout_blank.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/layout_gha.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/layout_glue.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/layout_glue_colors.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/layout_glue_generator.html</loc></url>
@@ -51,6 +53,8 @@
 <url><loc>https://daroczig.github.io/logger/reference/layout_simple.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/layout_syslognet.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/log_appender.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_chunk_time.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/log_elapsed.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/log_errors.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/log_eval.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/log_failure.html</loc></url>

@@ -15,7 +15,7 @@ result(s) as well."><meta property="og:image" content="https://daroczig.github.i
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@ result(s) as well."><meta property="og:image" content="https://daroczig.github.i
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Mimic the default formatter used in the <span class="pkg">logging</span> package</h1>
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/v0.4.0/R/formatters.R" class="external-link"><code>R/formatters.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/main/R/formatters.R" class="external-link"><code>R/formatters.R</code></a></small>
       <div class="d-none name"><code>formatter_logging.Rd</code></div>
     </div>
 
@@ -73,7 +73,7 @@ result(s) as well.</p>
 
 
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>string and further params passed to <code>sprintf</code> or R
+<dd><p>string and further params passed to <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code> or R
 expressions to be evaluated</p></dd>
 
 
@@ -102,6 +102,7 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other log_formatters:
+<code><a href="formatter_cli.html">formatter_cli</a>()</code>,
 <code><a href="formatter_glue.html">formatter_glue</a>()</code>,
 <code><a href="formatter_glue_or_sprintf.html">formatter_glue_or_sprintf</a>()</code>,
 <code><a href="formatter_glue_safe.html">formatter_glue_safe</a>()</code>,
@@ -115,21 +116,21 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_logging</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"42"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] 42</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] 42: 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] 42: 42</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">4</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] 4 + 2: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] 4 + 2: 6</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"foo %s"</span>, <span class="st">"bar"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] foo bar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] foo bar</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="st">"vector %s"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] vector 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] vector 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] vector 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] vector 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] vector 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] vector 3</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span>, <span class="fl">2</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] 12: 12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] 1 + 1: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:13] 2 * 2: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] 12: 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] 1 + 1: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:41] 2 * 2: 4</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -137,7 +138,7 @@ to look up the <code>namespace</code> as well via <code>logger:::top_env_name</c
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

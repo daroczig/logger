@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,13 +38,29 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/daroczig/logger/blob/v0.4.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/daroczig/logger/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="logger-development-version">logger (development version)<a class="anchor" aria-label="anchor" href="#logger-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.4.1.9000" id="logger-0419000-development-version">logger 0.4.1.9000 (development version)<a class="anchor" aria-label="anchor" href="#logger-0419000-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.1" id="logger-041-2025-09-08">logger 0.4.1 (2025-09-08)<a class="anchor" aria-label="anchor" href="#logger-041-2025-09-08"></a></h2>
+<p>New features and quality of life improvements:</p>
+<ul><li>Support renaming meta fields (<a href="https://github.com/daroczig/logger/issues/217" class="external-link">#217</a>, <a href="https://github.com/atusy" class="external-link">@atusy</a>)</li>
+<li>Added <code><a href="../reference/log_elapsed.html">log_elapsed()</a></code> to show cumulative elapsed running time (<a href="https://github.com/daroczig/logger/issues/221" class="external-link">#221</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>
+<code><a href="../reference/log_errors.html">log_errors()</a></code> gains a <code>traceback</code> argument that toggles whether the error traceback should be logged along with the message (fix <a href="https://github.com/daroczig/logger/issues/86" class="external-link">#86</a> via <a href="https://github.com/daroczig/logger/issues/223" class="external-link">#223</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>File and line location of the log call is now available to the layouts (fix <a href="https://github.com/daroczig/logger/issues/110" class="external-link">#110</a> via <a href="https://github.com/daroczig/logger/issues/224" class="external-link">#224</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>New <code><a href="../reference/formatter_cli.html">formatter_cli()</a></code> allows you to use the syntax from the cli package to create log messages (fix <a href="https://github.com/daroczig/logger/issues/210" class="external-link">#210</a> via <a href="https://github.com/daroczig/logger/issues/225" class="external-link">#225</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>New <code><a href="../reference/log_chunk_time.html">log_chunk_time()</a></code> helper function to automatically log the execution time of knitr code chunks (fix <a href="https://github.com/daroczig/logger/issues/222" class="external-link">#222</a> via <a href="https://github.com/daroczig/logger/issues/227" class="external-link">#227</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+<li>Allow user to overwrite the timestamp during logging if needed (fix <a href="https://github.com/daroczig/logger/issues/230" class="external-link">#230</a>, <a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="logger-040-2024-10-19">logger 0.4.0 (2024-10-19)<a class="anchor" aria-label="anchor" href="#logger-040-2024-10-19"></a></h2><p class="text-muted">CRAN release: 2024-10-22</p>
+<p>A lot of internal code quality improvements and standardization, improved documentations, modernized tests, performance speedups.</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
 <ul><li>logo 😻 (<a href="https://github.com/daroczig/logger/issues/196" class="external-link">#196</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 <li>computing metadata lazily, so various expensive computations are only performed if you actually add them to the log (<a href="https://github.com/daroczig/logger/issues/105" class="external-link">#105</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 <li>
@@ -52,14 +68,16 @@
 <li>new function to return number of log indices (<a href="https://github.com/daroczig/logger/issues/194" class="external-link">#194</a>, <a href="https://github.com/WurmPeter" class="external-link">@WurmPeter</a>)</li>
 <li>
 <code>appender_async</code> is now using <code>mirai</code> instead of a custom background process and queue system (<a href="https://github.com/daroczig/logger/issues/214" class="external-link">#214</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a> <a href="https://github.com/shikokuchuo" class="external-link">@shikokuchuo</a>)</li>
+<li>
+<code><a href="../reference/layout_gha.html">layout_gha()</a></code> for providing native GitHub Action logging. This automatically gets used when running code in github actions (<a href="https://github.com/thomasp85" class="external-link">@thomasp85</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
+<h3 id="fixes-0-4-0">Fixes<a class="anchor" aria-label="anchor" href="#fixes-0-4-0"></a></h3>
 <ul><li>
 <code>eval</code> scoping and lazy eval (<a href="https://github.com/daroczig/logger/issues/178" class="external-link">#178</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="housekeeping-development-version">Housekeeping<a class="anchor" aria-label="anchor" href="#housekeeping-development-version"></a></h3>
+<h3 id="housekeeping-0-4-0">Housekeeping<a class="anchor" aria-label="anchor" href="#housekeeping-0-4-0"></a></h3>
 <ul><li>update <code>pkgdown</code> site to Bootstrap 5 and related revamp, e.g. reference index and run/show examples (<a href="https://github.com/daroczig/logger/issues/159" class="external-link">#159</a> <a href="https://github.com/daroczig/logger/issues/165" class="external-link">#165</a> <a href="https://github.com/daroczig/logger/issues/193" class="external-link">#193</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 <li>roxygen updated to use markdown, general cleanup (<a href="https://github.com/daroczig/logger/issues/160" class="external-link">#160</a> <a href="https://github.com/daroczig/logger/issues/161" class="external-link">#161</a> <a href="https://github.com/daroczig/logger/issues/191" class="external-link">#191</a> <a href="https://github.com/daroczig/logger/issues/201" class="external-link">#201</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
 <li>testing improvements, e.g. move to <code>testthat</code> v3 and snapshots, syntactic sugar (<a href="https://github.com/daroczig/logger/issues/163" class="external-link">#163</a> <a href="https://github.com/daroczig/logger/issues/167" class="external-link">#167</a> <a href="https://github.com/daroczig/logger/issues/168" class="external-link">#168</a> <a href="https://github.com/daroczig/logger/issues/169" class="external-link">#169</a> <a href="https://github.com/daroczig/logger/issues/171" class="external-link">#171</a> <a href="https://github.com/daroczig/logger/issues/192" class="external-link">#192</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>)</li>
@@ -197,7 +215,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

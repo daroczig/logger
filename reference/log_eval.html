@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Evaluate an expression and log results</h1>
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/v0.4.0/R/helpers.R" class="external-link"><code>R/helpers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/main/R/helpers.R" class="external-link"><code>R/helpers.R</code></a></small>
       <div class="d-none name"><code>log_eval.Rd</code></div>
     </div>
 
@@ -76,87 +76,87 @@ sections reserving line-breaks and rendering the printed results</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="fl">2</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:16] 'pi * 2' =&gt; '6.28318530717959'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:46] 'pi * 2' =&gt; '6.28318530717959'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6.283185</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## lowering the log level threshold so that we don't have to set a higher level in log_eval</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_threshold.html">log_threshold</a></span><span class="op">(</span><span class="va">TRACE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] 'x &lt;- 4' =&gt; '4'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] 'x &lt;- 4' =&gt; '4'</span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] 'sqrt(x)' =&gt; '2'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] 'sqrt(x)' =&gt; '2'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## log_eval can be called in-line as well as returning the return value of the expression</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1e3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] 'mean(runif(1000))' =&gt; '0.509041080087191'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] 'mean(runif(1000))' =&gt; '0.509379567583324'</span>
 <span class="r-in"><span><span class="va">x</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5090411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5093796</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## https://twitter.com/krlmlr/status/1067864829547999232</span></span></span>
 <span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">mean</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span></span></span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:16] 'f(g(x))' =&gt; '4'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:46] 'f(g(x))' =&gt; '4'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, level <span class="op">=</span> <span class="va">INFO</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:16] 'y &lt;- f(g(x))' =&gt; '4'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:46] 'y &lt;- f(g(x))' =&gt; '4'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## returning a function</span></span></span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">sqrt</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] 'f &lt;- sqrt' =&gt; '.Primitive("sqrt")'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] 'f &lt;- sqrt' =&gt; '.Primitive("sqrt")'</span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] 'f' =&gt; '.Primitive("sqrt")'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] 'f' =&gt; '.Primitive("sqrt")'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x)  .Primitive("sqrt")</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## evaluating something returning a wall of "text"</span></span></span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] 'f &lt;- log_eval' =&gt; 'function (expr, level = TRACE, multiline = FALSE)  {     expr &lt;- substitute(expr)     exprs &lt;- gsub("\n", " ", deparse(expr), fixed = TRUE)     timer &lt;- Sys.time()     res &lt;- withVisible(eval.parent(expr))     if (multiline == FALSE) {         log_level(level, skip_formatter(paste(shQuote(paste(exprs,              collapse = " ")), "=&gt;", shQuote(paste(gsub("\n",              " ", deparse(res$value)), collapse = " ")))))     }     else {         log_level(level, "Running expression: ====================")         log_level(level, skip_formatter(exprs))         log_level(level, "Results: ===============================")         log_level(level, skip_formatter(capture.output(res$value)))         log_level(level, paste("Elapsed time:", round(difftime(Sys.time(),              timer, units = "secs"), 2), "sec"))     }     if (res$visible == TRUE) {         return(res$value)     }     else {         return(invisible(res$value))     } }'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] 'f &lt;- log_eval' =&gt; 'function (expr, level = TRACE, multiline = FALSE)  {     expr &lt;- substitute(expr)     exprs &lt;- gsub("\n", " ", deparse(expr), fixed = TRUE)     timer &lt;- Sys.time()     res &lt;- withVisible(eval.parent(expr))     if (multiline == FALSE) {         log_level(level, skip_formatter(paste(shQuote(paste(exprs,              collapse = " ")), "=&gt;", shQuote(paste(gsub("\n",              " ", deparse(res$value)), collapse = " ")))))     }     else {         log_level(level, "Running expression: ====================")         log_level(level, skip_formatter(exprs))         log_level(level, "Results: ===============================")         log_level(level, skip_formatter(capture.output(res$value)))         log_level(level, paste("Elapsed time:", round(difftime(Sys.time(),              timer, units = "secs"), 2), "sec"))     }     if (res$visible == TRUE) {         return(res$value)     }     else {         return(invisible(res$value))     } }'</span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">log_eval</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] Running expression: ====================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] f &lt;- log_eval</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] Results: ===============================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] function (expr, level = TRACE, multiline = FALSE) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     expr &lt;- substitute(expr)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     exprs &lt;- gsub("\n", " ", deparse(expr), fixed = TRUE)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     timer &lt;- Sys.time()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     res &lt;- withVisible(eval.parent(expr))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     if (multiline == FALSE) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         log_level(level, skip_formatter(paste(shQuote(paste(exprs, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]             collapse = " ")), "=&gt;", shQuote(paste(gsub("\n", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]             " ", deparse(res$value)), collapse = " ")))))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     else {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         log_level(level, "Running expression: ====================")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         log_level(level, skip_formatter(exprs))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         log_level(level, "Results: ===============================")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         log_level(level, skip_formatter(capture.output(res$value)))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         log_level(level, paste("Elapsed time:", round(difftime(Sys.time(), </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]             timer, units = "secs"), 2), "sec"))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     if (res$visible == TRUE) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         return(res$value)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     else {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]         return(invisible(res$value))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] &lt;bytecode: 0x5559d65c6000&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] &lt;environment: namespace:logger&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] Elapsed time: 0 sec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] Running expression: ====================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] f &lt;- log_eval</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] Results: ===============================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] function (expr, level = TRACE, multiline = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     expr &lt;- substitute(expr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     exprs &lt;- gsub("\n", " ", deparse(expr), fixed = TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     timer &lt;- Sys.time()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     res &lt;- withVisible(eval.parent(expr))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     if (multiline == FALSE) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         log_level(level, skip_formatter(paste(shQuote(paste(exprs, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]             collapse = " ")), "=&gt;", shQuote(paste(gsub("\n", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]             " ", deparse(res$value)), collapse = " ")))))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     else {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         log_level(level, "Running expression: ====================")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         log_level(level, skip_formatter(exprs))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         log_level(level, "Results: ===============================")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         log_level(level, skip_formatter(capture.output(res$value)))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         log_level(level, paste("Elapsed time:", round(difftime(Sys.time(), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]             timer, units = "secs"), 2), "sec"))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     if (res$visible == TRUE) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         return(res$value)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     else {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]         return(invisible(res$value))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] &lt;bytecode: 0x55966d88b2e8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] &lt;environment: namespace:logger&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] Elapsed time: 0 sec</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## doing something computationally intensive</span></span></span>
 <span class="r-in"><span><span class="fu">log_eval</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] Running expression: ====================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] system.time(for (i in 1:100) mad(runif(1000)))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] Results: ===============================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16]   0.011   0.000   0.010 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 07:55:16] Elapsed time: 0.1 sec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] Running expression: ====================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] system.time(for (i in 1:100) mad(runif(1000)))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] Results: ===============================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]    user  system elapsed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46]   0.011   0.000   0.011 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACE [2025-09-09 08:03:46] Elapsed time: 0.11 sec</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.011   0.000   0.010 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.011   0.000   0.011 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -164,7 +164,7 @@ sections reserving line-breaks and rendering the printed results</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

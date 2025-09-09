@@ -9,7 +9,7 @@ fields with parsed list from JSON message"><meta property="og:image" content="ht
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@ fields with parsed list from JSON message"><meta property="og:image" content="ht
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message</h1>
-      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/v0.4.0/R/layouts.R" class="external-link"><code>R/layouts.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/daroczig/logger/blob/main/R/layouts.R" class="external-link"><code>R/layouts.R</code></a></small>
       <div class="d-none name"><code>layout_json_parser.Rd</code></div>
     </div>
 
@@ -60,7 +60,7 @@ fields with parsed list from JSON message</p>
 
 <dl><dt id="arg-fields">fields<a class="anchor" aria-label="anchor" href="#arg-fields"></a></dt>
 <dd><p>character vector of field names to be included in the
-JSON</p></dd>
+JSON. If named, the names will be used as field names in the JSON.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -72,6 +72,7 @@ JSON</p></dd>
     <div class="dont-index"><p>Other log_layouts:
 <code><a href="get_logger_meta_variables.html">get_logger_meta_variables</a>()</code>,
 <code><a href="layout_blank.html">layout_blank</a>()</code>,
+<code><a href="layout_gha.html">layout_gha</a>()</code>,
 <code><a href="layout_glue.html">layout_glue</a>()</code>,
 <code><a href="layout_glue_colors.html">layout_glue_colors</a>()</code>,
 <code><a href="layout_glue_generator.html">layout_glue_generator</a>()</code>,
@@ -84,15 +85,24 @@ JSON</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="log_formatter.html">log_formatter</a></span><span class="op">(</span><span class="va">formatter_json</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span>everything <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 07:55:15] {"everything":42}</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-09-09 08:03:43] {"everything":42}</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="fu">layout_json_parser</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span>everything <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {"time":"2025-09-09 07:55:15","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"pkrvm7jw40e0xgp","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":9177,"user":"runner","everything":42}</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {"time":"2025-09-09 08:03:43","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"pkrvm7jw40e0xgp","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":9215,"user":"runner","everything":42}</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="fu">layout_json_parser</span><span class="op">(</span>fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"node"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span>cars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {"time":"2025-09-09 07:55:15","node":"pkrvm7jw40e0xgp","cars":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"species":["setosa","versicolor","virginica"]}</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {"time":"2025-09-09 08:03:43","node":"pkrvm7jw40e0xgp","cars":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"species":["setosa","versicolor","virginica"]}</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_layout.html">log_layout</a></span><span class="op">(</span><span class="fu">layout_json_parser</span><span class="op">(</span>fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>timestamp <span class="op">=</span> <span class="st">"time"</span>, <span class="st">"node"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  message <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"Compared to the previous example,</span></span></span>
+<span class="r-in"><span><span class="st">    the 'time' field is renamed to 'timestamp'"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {"timestamp":"2025-09-09 08:03:43","node":"pkrvm7jw40e0xgp","message":"Compared to the previous example,\n    the 'time' field is renamed to 'timestamp'"}</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -100,7 +110,7 @@ JSON</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
+  <p>Developed by Gergely Daróczi, Hadley Wickham, <a href="https://sparecores.com" class="external-link"><img src="https://sparecores.com/assets/images/logos/sc-logo-horizontal-transparent-for-light-theme.png" height="12" width="70"></a>, <a href="https://system1.com" class="external-link"><img src="https://cdn.system1.com/s1c/dist/img/system1-logo.svg" height="14" width="70"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
