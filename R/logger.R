@@ -81,14 +81,26 @@ logger <- function(threshold, formatter, layout, appender) {
       )))
     }
 
-    res$record <- layout(
-      level, res$message,
-      namespace = namespace,
-      .logcall = substitute(.logcall),
-      .topcall = substitute(.topcall),
-      .topenv = .topenv,
-      .timestamp = .timestamp
-    )
+    ## .timestamp arg was added in 0.4.1 and external layout fns might not support it yet
+    ## instead of checking formals of the layout fn, let's just try to call it not to delay OK fns
+    res$record <- tryCatch({
+      layout(
+        level, res$message,
+        namespace = namespace,
+        .logcall = substitute(.logcall),
+        .topcall = substitute(.topcall),
+        .topenv = .topenv,
+        .timestamp = .timestamp
+      )
+    }, error = function(e) {
+      layout(
+        level, res$message,
+        namespace = namespace,
+        .logcall = substitute(.logcall),
+        .topcall = substitute(.topcall),
+        .topenv = .topenv,
+      )
+    })
 
     appender(res$record)
     invisible(res)
