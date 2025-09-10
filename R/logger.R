@@ -98,7 +98,7 @@ logger <- function(threshold, formatter, layout, appender) {
         namespace = namespace,
         .logcall = substitute(.logcall),
         .topcall = substitute(.topcall),
-        .topenv = .topenv,
+        .topenv = .topenv
       )
     })
 
