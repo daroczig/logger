@@ -42,7 +42,7 @@ library(logger)
 log_appender(appender_stdout)
 ```
 
-In this vignette I suppose that you are already familiar with at least one of the [similar logging R packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package) and you are looking for suggestions on how to switch to `logger`. Before moving forward, please make sure that you have read the [Introduction to logger](https://daroczig.github.io/logger/articles/Intro.html), [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes for a decent background on `logger`, and use this vignette as a quick-reference sheet to help you migrate from another package.
+This vignette provides a quick reference guide to switching to logger from the futile.logger, logging, log4r, and loggit packages. I assume that you're already familiar with the basics of logger by reading `vignette("logger")` and `vignette("customize_logger")`.
 
 ## futile.logger
 
@@ -168,7 +168,7 @@ log_appender(appender_stdout)
 
 ### Hierarchical logging and performance
 
-Both packages support using different logging namespaces and stacking loggers within the same namespace. Performance-wise, there's `logger` seems to be faster than `futile.logger`, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
+Both packages support using different logging namespaces and stacking loggers within the same namespace. Performance-wise, there's `logger` seems to be faster than `futile.logger`, but for more details, check `vignette("performance")`.
 
 ### Using `logger` as a drop-in-replacement of `futile.logger`
 
@@ -250,7 +250,7 @@ str(levels, give.attr = FALSE)
 
 ### Performance
 
-Performance-wise, there's no big difference between the two packages, but for more details, check the [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html) vignette.
+Performance-wise, there's no big difference between the two packages, but for more details, check `vignette("performance")`.
 
 ### Log record layout
 
@@ -267,7 +267,7 @@ log_layout()
 ```
 </div>
 
-`logger` provides multiple configurable layouts to fit the user's need, eg easily show the calling function of the lof request, the `pid` of the R process, name of the machine etc. or colorized outputs. See [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignette for more details.
+`logger` provides multiple configurable layouts to fit the user's need, eg easily show the calling function of the lof request, the `pid` of the R process, name of the machine etc. or colorized outputs. See `vignette("customize_logger")`for more details.
 
 ### Log message formatting
 
