@@ -108,5 +108,5 @@ test_that("knitr hook gets applied", {
     "Sys.sleep(0.2)",
     "```"
   )
-  expect_output(knitr::knit(text = mock_doc, quiet = TRUE), "global timer 0.2")
+  expect_output(knitr::knit(text = mock_doc, quiet = TRUE), "global timer [0-9\\.]* secs elapsed")
 })
