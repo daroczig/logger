@@ -7,6 +7,10 @@
 appender_ntfy(title = "{logger}", tags = c("memo"), ...)
 }
 \arguments{
+\item{title}{notification title}
+
+\item{tags}{emoji (or general tag) for notification. See \link[ntfy:emoji]{ntfy::emoji}}
+
 \item{...}{parameters passed to \link[ntfy:ntfy_send]{ntfy::ntfy_send}, such as \code{title}
 or \code{tags}.}
 }
