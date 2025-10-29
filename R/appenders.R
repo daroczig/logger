@@ -235,8 +235,7 @@ appender_pushbullet <- function(...) {
 #' Send log messages to ntfy
 #' @param title notification title
 #' @param tags emoji (or general tag) for notification. See [ntfy::emoji]
-#' @param ... parameters passed to [ntfy::ntfy_send], such as `title`
-#'     or `tags`. 
+#' @param ... extra parameters passed to [ntfy::ntfy_send]
 #'     
 #' @details Configure server and topic via environment variables. See 
 #' [ntfy::ntfy_topic()] for details.     
