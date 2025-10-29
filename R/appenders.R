@@ -235,22 +235,21 @@ appender_pushbullet <- function(...) {
 #' Send log messages to ntfy
 #' @param title notification title
 #' @param tags emoji (or general tag) for notification. See [ntfy::emoji]
-#' @param ... extra parameters passed to [ntfy::ntfy_send]
-#'     
-#' @details Configure server and topic via environment variables. See 
-#' [ntfy::ntfy_topic()] for details.     
-#'     
+#' @param ... extra parameters passed to [ntfy::ntfy_send] such as
+#'     `priority`, `topic`, etc.
+#' @details Configure server and topic via environment variables. See
+#' [ntfy::ntfy_topic()] for details
 #' @export
 #' @note This functionality depends on the \pkg{ntfy} package.
 #' @family log_appenders
 #' @export
-appender_ntfy <- function(title = "{logger}", 
+appender_ntfy <- function(title = "{logger}",
                           tags = c("memo"),
                           ...) {
   fail_on_missing_package("ntfy")
   force(title)
   force(tags)
-  
+
   structure(
     function(lines) {
       ntfy::ntfy_send(title = title, tags = tags, message = paste(lines, sep = "\n"), ...)
