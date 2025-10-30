@@ -9,7 +9,7 @@ appender_syslog(identifier, ...)
 \arguments{
 \item{identifier}{A string identifying the process.}
 
-\item{...}{Further arguments passed on to \code{\link[rsyslog:syslog]{rsyslog::open_syslog()}}.}
+\item{...}{Further arguments passed on to \code{\link[rsyslog:open_syslog]{rsyslog::open_syslog()}}.}
 }
 \value{
 function taking \code{lines} argument
@@ -34,6 +34,7 @@ Other log_appenders:
 \code{\link{appender_console}()},
 \code{\link{appender_file}()},
 \code{\link{appender_kinesis}()},
+\code{\link{appender_ntfy}()},
 \code{\link{appender_pushbullet}()},
 \code{\link{appender_slack}()},
 \code{\link{appender_stdout}()},

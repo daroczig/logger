@@ -23,7 +23,7 @@ or grayscale color scheme. The greyscale theme assumes a dark background on
 the terminal.
 }
 \examples{
-\dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("crayon")) withAutoprint(\{ # examplesIf}
 cat(colorize_by_log_level("foobar", FATAL), "\n")
 cat(colorize_by_log_level("foobar", ERROR), "\n")
 cat(colorize_by_log_level("foobar", WARN), "\n")

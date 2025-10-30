@@ -1,13 +1,15 @@
 Type: Package
 Package: logger
 Title: A Lightweight, Modern and Flexible Logging Utility
-Version: 0.4.1.9000
-Date: 2025-09-09
+Version: 0.4.1.9001
+Date: 2025-10-29
 Authors@R: c(
     person("Gergely", "Daróczi", , "daroczig@rapporter.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3149-8537")),
     person("Hadley", "Wickham", , "hadley@posit.co", role = "aut",
            comment = c(ORCID = "0000-0003-4757-117X")),
+    person("Jonathan", "Carroll", , "rpkg@jcarroll.com.au", role = "ctb", 
+           comment = c(ORCID = "0000-0002-1404-5264")),       
     person("Spare Cores", role = "fnd"),
     person("System1", role = "fnd")
   )
@@ -31,6 +33,7 @@ Suggests:
     jsonlite,
     knitr,
     mirai (>= 1.3.0),
+    ntfy,
     pander,
     parallel,
     R.utils,
@@ -54,4 +57,4 @@ Config/testthat/edition: 3
 Config/testthat/parallel: TRUE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

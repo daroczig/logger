@@ -1,5 +1,9 @@
 # logger 0.4.1.9000 (development version)
 
+New features and quality of life improvements:
+
+* Added `appender_ntfy()` to use {ntfy} as an appender (#240, @jonocarroll)
+
 # logger 0.4.1 (2025-09-08)
 
 New features and quality of life improvements:
