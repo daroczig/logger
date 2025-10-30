@@ -17,6 +17,7 @@
 <url><loc>https://daroczig.github.io/logger/reference/appender_console.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/appender_file.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/appender_kinesis.html</loc></url>
+<url><loc>https://daroczig.github.io/logger/reference/appender_ntfy.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/appender_pushbullet.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/appender_slack.html</loc></url>
 <url><loc>https://daroczig.github.io/logger/reference/appender_stdout.html</loc></url>
