@@ -30,9 +30,7 @@
 #'   function), and a list of `handlers` with the `formatter`,
 #'   `layout` and `appender` functions.
 #' @export
-#' @references For more details, see the Anatomy of a Log Request
-#'   vignette at
-#'   <https://daroczig.github.io/logger/articles/anatomy.html>.
+#' @references For more details, see vignette("customize_logger")
 #' @note It's quite unlikely that you need to call this function
 #'   directly, but instead set the logger parameters and functions at
 #'   [log_threshold()], [log_formatter()], [log_layout()] and
