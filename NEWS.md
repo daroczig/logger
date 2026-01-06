@@ -3,6 +3,8 @@
 New features and quality of life improvements:
 
 * Added `appender_ntfy()` to use {ntfy} as an appender (#240, @jonocarroll)
+* `normalizePath()` in the `log_call_location()` no longer triggers warning
+  if the package source does not exist (#241, @maksymiuks)
 
 # logger 0.4.1 (2025-09-08)
 

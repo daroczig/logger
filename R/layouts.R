@@ -429,7 +429,7 @@ layout_syslognet <- structure(
       "DEBUG" = "DEBUG",
       "TRACE" = "DEBUG"
     )
-    return(ret)
+    ret
   },
   generator = quote(layout_syslognet())
 )
