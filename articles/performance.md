@@ -1,0 +1,124 @@
+# Simple Benchmarks on logger Performance
+
+Although this has not been an important feature in the early development
+and overall design of this `logger` implementation, but with the default
+[`?layout_simple`](https://daroczig.github.io/logger/reference/layout_simple.md)
+and
+[`?formatter_glue`](https://daroczig.github.io/logger/reference/formatter_glue.md),
+it seems to perform pretty well when comparing with `futile.logger` and
+`logging` packages:
+
+``` r
+library(microbenchmark)
+
+## fl
+library(futile.logger)
+t1 <- tempfile()
+flog.appender(appender.file(t1))
+#> NULL
+
+## lg
+library(logging)
+t2 <- tempfile()
+addHandler(writeToFile, file = t2)
+
+## lr
+library(logger)
+#> The following objects are masked from ‘package:futile.logger’: DEBUG, ERROR, FATAL, INFO, TRACE, WARN
+t3 <- tempfile()
+log_appender(appender_file(t3))
+
+string_fl <- function() flog.info('hi')
+string_lg <- function() loginfo('hi')
+string_lr <- function() log_info('hi')
+dynamic_fl <- function() flog.info('hi %s', 42)
+dynamic_lg <- function() loginfo('hi %s', 42)
+dynamic_lr <- function() log_info('hi {42}')
+vector_fl <- function() flog.info(paste('hi', 1:5))
+vector_lg <- function() loginfo(paste('hi', 1:5))
+vector_lr <- function() log_info('hi {1:5}')
+
+microbenchmark(
+    string_fl(), string_lg(), string_lr(),
+    vector_fl(), vector_lg(), vector_lr(),
+    dynamic_fl(), dynamic_lg(), dynamic_lr(),
+    times = 1e3)
+#> Unit: microseconds
+#>          expr      min        lq      mean    median        uq        max neval
+#>   string_fl() 1533.379 1650.7915 2510.5517 1759.9345 2885.4465  20835.425  1000
+#>   string_lg()  172.963  206.7615  315.6177  237.3150  335.3010  12738.735  1000
+#>   string_lr()  227.981  263.4715  390.7139  301.9045  409.0400  11926.974  1000
+#>   vector_fl() 1552.706 1661.7030 2434.0460 1766.7485 2819.5525  40892.197  1000
+#>   vector_lg()  198.338  234.2355  330.3268  266.7695  358.2510   9969.333  1000
+#>   vector_lr()  290.169  337.4730  592.0041  382.4335  537.5485 101946.435  1000
+#>  dynamic_fl() 1538.985 1663.7890 2564.6668 1782.1160 2932.7555  46039.686  1000
+#>  dynamic_lg()  188.213  226.5370  387.2470  255.1745  350.2015  60737.562  1000
+#>  dynamic_lr()  271.478  317.3350  486.1123  360.5815  483.5830  12070.936  1000
+
+paste(t1, length(readLines(t1)))
+#> [1] "/tmp/Rtmp3Fp6qa/file7a8919485a36 7000"
+paste(t2, length(readLines(t2)))
+#> [1] "/tmp/Rtmp3Fp6qa/file7a89b17929f 7000"
+paste(t3, length(readLines(t3)))
+#> [1] "/tmp/Rtmp3Fp6qa/file289f24c88c41 7000"
+```
+
+So based on the above, non-comprehensive benchmark, it seems that when
+it comes to using the very base functionality of a logging engine,
+`logging` comes first, then `logger` performs with a bit of overhead due
+to using `glue` by default, then comes a bit slower `futile.logger`.
+
+On the other hand, there are some low-hanging fruits to improve
+performance, eg caching the `logger` function in the namespace, or using
+much faster message formatters (eg `paste0` or `sprintf` instead of
+`glue`) if needed – like what `futile.logger` and `logging` are using
+instead of `glue`, so a quick `logger` comparison:
+
+``` r
+log_formatter(formatter_sprintf)
+string <- function() log_info('hi')
+dynamic <- function() log_info('hi %s', 42)
+vector <- function() log_info(paste('hi', 1:5))
+
+microbenchmark(string(), vector(), dynamic(), times = 1e3)
+#> Unit: microseconds
+#>       expr     min       lq     mean   median       uq      max neval cld
+#>   string() 110.192 118.4850 148.5848 137.1825 152.7275 1312.903  1000  a
+#>   vector() 129.111 136.8245 168.9274 155.5840 172.6795 3230.528  1000   b
+#>  dynamic() 116.347 124.7620 159.1570 143.2140 160.5040 4397.640  1000  ab
+```
+
+Which suggests that `logger` is a pretty well-performing log framework.
+
+If you need even more performance with slower appenders, then
+asynchronous logging is your friend: passing the log messages to a
+reliable message queue, and a background process delivering those to the
+actual log destination in the background – without blocking the main R
+process. This can be easily achieved in `logger` by wrapping any
+appender function in the `appender_async` function, such as:
+
+``` r
+## demo log appender that's pretty slow
+appender_file_slow <- function(file) {
+  force(file)
+  function(lines) {
+    Sys.sleep(1)
+    cat(lines, sep = '\n', file = file, append = TRUE)
+  }
+}
+
+## create an async appender and start using it right away
+log_appender(appender_async(appender_file_slow(file = tempfile())))
+
+async <- function() log_info('Was this slow?')
+microbenchmark(async(), times = 1e3)
+# Unit: microseconds
+#     expr     min       lq     mean  median      uq     max neval
+#  async() 298.275 315.5565 329.6235 322.219 333.371 894.579  1000
+```
+
+Please note that although this ~0.3 ms is higher than the ~0.15 ms we
+achieved above with the `sprintf` formatter, but this time we are
+calling an appender that would take 1 full second to deliver the log
+message (and not just printing to the console), so bringing that down to
+less than 1 millisecond is not too bad.

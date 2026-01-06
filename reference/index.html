@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,8 +45,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -57,13 +56,15 @@
 
         </dt>
         <dd>Log a message with given log level</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_levels.html">OFF</a></code> <code><a href="log_levels.html">FATAL</a></code> <code><a href="log_levels.html">ERROR</a></code> <code><a href="log_levels.html">WARN</a></code> <code><a href="log_levels.html">SUCCESS</a></code> <code><a href="log_levels.html">INFO</a></code> <code><a href="log_levels.html">DEBUG</a></code> <code><a href="log_levels.html">TRACE</a></code>
 
         </dt>
         <dd>Log levels</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_threshold.html">log_threshold()</a></code>
 
@@ -74,8 +75,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -86,43 +86,50 @@
 
         </dt>
         <dd>Evaluate an expression and log results</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_failure.html">log_failure()</a></code>
 
         </dt>
         <dd>Logs the error message to console before failing</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_tictoc.html">log_tictoc()</a></code>
 
         </dt>
         <dd>Tic-toc logging</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_elapsed.html">log_elapsed()</a></code> <code><a href="log_elapsed.html">log_elapsed_start()</a></code>
 
         </dt>
         <dd>Log cumulative running time</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_separator.html">log_separator()</a></code>
 
         </dt>
         <dd>Logs a long line to stand out from the console</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_with_separator.html">log_with_separator()</a></code>
 
         </dt>
         <dd>Logs a message in a very visible way</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="with_log_threshold.html">with_log_threshold()</a></code>
 
         </dt>
         <dd>Evaluate R expression with a temporarily updated log level threshold</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_chunk_time.html">log_chunk_time()</a></code>
 
@@ -133,8 +140,7 @@
 
       <div class="section-desc"><p>Log appenders define where logging output should be sent to.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -145,79 +151,92 @@
 
         </dt>
         <dd>Get or set log record appender function</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_async.html">appender_async()</a></code>
 
         </dt>
         <dd>Delays executing the actual appender function to the future in a background process to avoid blocking the main R session</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_console.html">appender_console()</a></code> <code><a href="appender_console.html">appender_stderr()</a></code>
 
         </dt>
         <dd>Append log record to stderr</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_file.html">appender_file()</a></code>
 
         </dt>
         <dd>Append log messages to a file</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_kinesis.html">appender_kinesis()</a></code>
 
         </dt>
         <dd>Send log messages to a Amazon Kinesis stream</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_ntfy.html">appender_ntfy()</a></code>
 
         </dt>
         <dd>Send log messages to ntfy</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_pushbullet.html">appender_pushbullet()</a></code>
 
         </dt>
         <dd>Send log messages to Pushbullet</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_slack.html">appender_slack()</a></code>
 
         </dt>
         <dd>Send log messages to a Slack channel</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_stdout.html">appender_stdout()</a></code>
 
         </dt>
         <dd>Append log record to stdout</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_syslog.html">appender_syslog()</a></code>
 
         </dt>
         <dd>Send log messages to the POSIX system log</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_syslognet.html">appender_syslognet()</a></code>
 
         </dt>
         <dd>Send log messages to a network syslog server</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_tee.html">appender_tee()</a></code>
 
         </dt>
         <dd>Append log messages to a file and stdout as well</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_telegram.html">appender_telegram()</a></code>
 
         </dt>
         <dd>Send log messages to a Telegram chat</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="appender_void.html">appender_void()</a></code>
 
@@ -228,8 +247,7 @@
 
       <div class="section-desc"><p>Log formatters control how the inputs to the <code>log_</code> functions are converted to a string. The default is <code><a href="../reference/formatter_glue.html">formatter_glue()</a></code> when <code>glue</code> is installed.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -240,61 +258,71 @@
 
         </dt>
         <dd>Get or set log message formatter</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_cli.html">formatter_cli()</a></code>
 
         </dt>
         <dd>Apply <code><a href="https://cli.r-lib.org/reference/cli_text.html" class="external-link">cli::cli_text()</a></code> to format string with cli syntax</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_glue.html">formatter_glue()</a></code>
 
         </dt>
         <dd>Apply <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> to convert R objects into a character vector</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_glue_or_sprintf.html">formatter_glue_or_sprintf()</a></code>
 
         </dt>
         <dd>Apply <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> and <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code></dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_glue_safe.html">formatter_glue_safe()</a></code>
 
         </dt>
         <dd>Apply <code><a href="https://glue.tidyverse.org/reference/glue_safe.html" class="external-link">glue::glue_safe()</a></code> to convert R objects into a character vector</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_json.html">formatter_json()</a></code>
 
         </dt>
         <dd>Transforms all passed R objects into a JSON list</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_logging.html">formatter_logging()</a></code>
 
         </dt>
         <dd>Mimic the default formatter used in the <span class="pkg">logging</span> package</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_pander.html">formatter_pander()</a></code>
 
         </dt>
         <dd>Formats R objects with pander</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_paste.html">formatter_paste()</a></code>
 
         </dt>
         <dd>Concatenate R objects into a character vector via <code>paste</code></dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="formatter_sprintf.html">formatter_sprintf()</a></code>
 
         </dt>
         <dd>Apply <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code> to convert R objects into a character vector</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="skip_formatter.html">skip_formatter()</a></code>
 
@@ -305,8 +333,7 @@
 
       <div class="section-desc"><p>Logging layouts control what is sent to the appender. They always include the logged string, but might also include the timestamp, log level, etc.</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -317,61 +344,71 @@
 
         </dt>
         <dd>Get or set log record layout</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_blank.html">layout_blank()</a></code>
 
         </dt>
         <dd>Format a log record by including the raw message without anything added or modified</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_gha.html">layout_gha()</a></code>
 
         </dt>
         <dd>Format a log record for github actions</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_glue.html">layout_glue()</a></code>
 
         </dt>
         <dd>Format a log message with <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code></dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_glue_colors.html">layout_glue_colors()</a></code>
 
         </dt>
         <dd>Format a log message with <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> and ANSI escape codes to add colors</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_glue_generator.html">layout_glue_generator()</a></code>
 
         </dt>
         <dd>Generate log layout function using common variables available via glue syntax</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_json.html">layout_json()</a></code>
 
         </dt>
         <dd>Generate log layout function rendering JSON</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_json_parser.html">layout_json_parser()</a></code>
 
         </dt>
         <dd>Generate log layout function rendering JSON after merging meta fields with parsed list from JSON message</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_logging.html">layout_logging()</a></code>
 
         </dt>
         <dd>Format a log record as the logging package does by default</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_simple.html">layout_simple()</a></code>
 
         </dt>
         <dd>Format a log record by concatenating the log level, timestamp and message</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="layout_syslognet.html">layout_syslognet()</a></code>
 
@@ -382,8 +419,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -394,19 +430,22 @@
 
         </dt>
         <dd>Auto logging input changes in Shiny app</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_messages.html">log_messages()</a></code>
 
         </dt>
         <dd>Injects a logger call to standard messages</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_warnings.html">log_warnings()</a></code>
 
         </dt>
         <dd>Injects a logger call to standard warnings</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_errors.html">log_errors()</a></code>
 
@@ -417,8 +456,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -429,19 +467,22 @@
 
         </dt>
         <dd>Color string by the related log level</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="logger.html">logger()</a></code>
 
         </dt>
         <dd>Generate logging utility</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="delete_logger_index.html">delete_logger_index()</a></code>
 
         </dt>
         <dd>Delete an index from a logger namespace</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="grapes-except-grapes.html">`%except%`</a></code>
 
@@ -452,8 +493,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -464,31 +504,36 @@
 
         </dt>
         <dd>Convert R object into a logger log-level</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="deparse_to_one_line.html">deparse_to_one_line()</a></code>
 
         </dt>
         <dd>Deparse and join all lines into a single line</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="fail_on_missing_package.html">fail_on_missing_package()</a></code>
 
         </dt>
         <dd>Check if R package can be loaded and fails loudly otherwise</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_logger_meta_variables.html">get_logger_meta_variables()</a></code>
 
         </dt>
         <dd>Collect useful information about the logging environment to be used in log messages</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_namespaces.html">log_namespaces()</a></code>
 
         </dt>
         <dd>Looks up logger namespaces</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="log_indices.html">log_indices()</a></code>
 
@@ -504,7 +549,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logger</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,9 +72,9 @@ destination, eg <code><a href="appender_console.html">appender_console()</a></co
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other log configutation functions:
-<code><a href="log_formatter.html">log_formatter</a>()</code>,
-<code><a href="log_layout.html">log_layout</a>()</code>,
-<code><a href="log_threshold.html">log_threshold</a>()</code></p></div>
+<code><a href="log_formatter.html">log_formatter()</a></code>,
+<code><a href="log_layout.html">log_layout()</a></code>,
+<code><a href="log_threshold.html">log_threshold()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -83,23 +83,23 @@ destination, eg <code><a href="appender_console.html">appender_console()</a></co
 <span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_appender</span><span class="op">(</span><span class="fu"><a href="appender_tee.html">appender_tee</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-10-30 21:00:51] 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2026-01-06 21:43:05] 42</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">43</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-10-30 21:00:51] 43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2026-01-06 21:43:05] 43</span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">44</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-10-30 21:00:51] 44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2026-01-06 21:43:05] 44</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2025-10-30 21:00:51] 42" "INFO [2025-10-30 21:00:51] 43"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "INFO [2025-10-30 21:00:51] 44"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2026-01-06 21:43:05] 42" "INFO [2026-01-06 21:43:05] 43"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "INFO [2026-01-06 21:43:05] 44"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## poor man's tee by stacking loggers in the namespace</span></span></span>
 <span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_appender</span><span class="op">(</span><span class="va">appender_stdout</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">log_appender</span><span class="op">(</span><span class="fu"><a href="appender_file.html">appender_file</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, index <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="log_level.html">log_info</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2025-10-30 21:00:51] 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2026-01-06 21:43:05] 42</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2025-10-30 21:00:51] 42"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "INFO [2026-01-06 21:43:05] 42"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -111,7 +111,7 @@ destination, eg <code><a href="appender_console.html">appender_console()</a></co
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -1,0 +1,571 @@
+# Migration Guide
+
+In this vignette I suppose that you are already familiar with at least
+one of the [similar logging R
+packages](https://daroczig.github.io/logger/index.html#why-another-logging-r-package)
+and you are looking for suggestions on how to switch to `logger`. Before
+moving forward, please make sure that you have read the [Introduction to
+logger](https://daroczig.github.io/logger/articles/Intro.html), [The
+Anatomy of a Log
+Request](https://daroczig.github.io/logger/articles/anatomy.html) and
+[Customizing the Format and the Destination of a Log
+Record](https://daroczig.github.io/logger/articles/customize_logger.html)
+vignettes for a decent background on `logger`, and use this vignette as
+a quick-reference sheet to help you migrate from another package.
+
+## futile.logger
+
+The `logger` package has been very heavily inspired by
+[`futile.logger`](https://cran.r-project.org/package=futile.logger) and
+have been using it for many years, also opened multiple pull requests to
+extend `futile.logger` before I decided to revamp my ideas into a new R
+package – but there are still many common things between `futile.logger`
+and `logger`.
+
+### Initialize
+
+Both packages comes with a default log engine / config, so it’s enough
+to load the packages and those are ready to be used right away:
+
+futile.logger
+
+``` r
+library(futile.logger)
+#> 
+#> Attaching package: 'futile.logger'
+#> The following objects are masked from 'package:logger':
+#> 
+#>     DEBUG, ERROR, FATAL, INFO, TRACE, WARN
+```
+
+logger
+
+``` r
+library(logger)
+```
+
+### Logging functions
+
+The most important change is that function names are by snake_case in
+`logger`, while `futile.logger` uses dot.separated expressions, and
+`futile.logger` prefixes function names by `flog` while `logger` uses
+`log` for that:
+
+futile.logger
+
+``` r
+flog.info("hi there")
+#> INFO [2026-01-06 21:43:21] hi there
+flog.warn("watch out")
+#> WARN [2026-01-06 21:43:21] watch out
+```
+
+logger
+
+``` r
+log_info("hi there")
+#> INFO [2026-01-06 21:43:21] hi there
+log_warn("watch out")
+#> WARN [2026-01-06 21:43:21] watch out
+```
+
+As you can see above, the default layout of the messages is exactly the
+same.
+
+### Log levels
+
+Regarding log levels, `futile.logger` bundles the default `log4j` levels
+(`TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` and `FATAL`) that is extended
+by `SUCCESS` in `logger` as sometimes it’s worth logging with a higher
+than `INFO` level that something succeeded.
+
+### Log record layout
+
+Changing layouts is easy in both package, as you simply pass a layout
+function:
+
+futile.logger
+
+``` r
+flog.layout(layout.json)
+#> NULL
+flog.info("hi again")
+#> {"level":"INFO","timestamp":"2026-01-06 21:43:22 +0000","message":"hi again","func":"eval"}
+```
+
+logger
+
+``` r
+log_layout(layout_json())
+
+log_info("hi again")
+#> {"time":"2026-01-06 21:43:22","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12170,"user":"runner","msg":"hi again"}
+```
+
+As you can see, `logger` provided a bit more information about the log
+request compared to `futile.logger`, but it’s easy to change the list of
+fields to be used in the JSON – see
+[`?get_logger_meta_variables`](https://daroczig.github.io/logger/reference/get_logger_meta_variables.md)
+for a complete list of variable names to be passed to
+[`?layout_json`](https://daroczig.github.io/logger/reference/layout_json.md).
+`logger` also ships a lot more layouts, eg
+[`?layout_glue_colors`](https://daroczig.github.io/logger/reference/layout_glue_colors.md)
+or roll out your own via the
+[`?layout_glue_generator`](https://daroczig.github.io/logger/reference/layout_glue_generator.md)
+factory function.
+
+### Log message formatting
+
+By default, `futile.logger` uses an `sprintf` formatter, while `logger`
+passes the objects to be logged to `glue`:
+
+futile.logger
+
+``` r
+flog.info("hi")
+#> INFO [2026-01-06 21:43:22] hi
+flog.info("hi %s", 84 / 2)
+#> INFO [2026-01-06 21:43:22] hi 42
+flog.info(paste("hi", 84 / 2))
+#> INFO [2026-01-06 21:43:22] hi 42
+flog.info(glue::glue("hi {84/2}"))
+#> INFO [2026-01-06 21:43:22] hi 42
+```
+
+logger
+
+``` r
+log_info("hi")
+#> INFO [2026-01-06 21:43:22] hi
+log_info("hi {84/2}")
+#> INFO [2026-01-06 21:43:22] hi 42
+log_formatter(formatter_sprintf)
+log_info("hi %s", 84 / 2)
+#> INFO [2026-01-06 21:43:22] hi 42
+log_formatter(formatter_paste)
+log_info("hi", 84 / 2)
+#> INFO [2026-01-06 21:43:22] hi 42
+```
+
+It’s easy to change this default formatter in both packages: use
+`flog.layout` handles this as well in `futile.logger`, while the
+formatter is separated from the layout function in `logger`, so check
+[`?log_formatter`](https://daroczig.github.io/logger/reference/log_formatter.md)
+instead. `logger` ships with a bit more formatter functions, eg the
+default
+[`?formatter_glue`](https://daroczig.github.io/logger/reference/formatter_glue.md)
+and
+[`?formatter_glue_or_sprintf`](https://daroczig.github.io/logger/reference/formatter_glue_or_sprintf.md)
+that tries to combine the best from both words.
+
+### Log record destination
+
+Setting the destination of the log records works similarly in both
+packages, although he `logger` packages bundles a lot more options:
+
+logging
+
+``` r
+t <- tempfile()
+flog.appender(appender.file(t))
+#> NULL
+flog.appender(appender.tee(t))
+#> NULL
+```
+
+logger
+
+``` r
+t <- tempfile()
+log_appender(appender_file(t))
+log_appender(appender_tee(t))
+```
+
+### Hierarchical logging and performance
+
+Both packages support using different logging namespaces and stacking
+loggers within the same namespace. Performance-wise, there’s `logger`
+seems to be faster than `futile.logger`, but for more details, check the
+[Simple Benchmarks on
+Performance](https://daroczig.github.io/logger/articles/performance.html)
+vignette.
+
+### Using `logger` as a drop-in-replacement of `futile.logger`
+
+`logger` has no hard requirements, so it’s a very lightweight
+alternative of `futile.logger`. Although the function names are a bit
+different, and the message formatter also differs, but with some simple
+tweaks, `logger` can become an almost perfect drop-in-replacement of
+`futile.logger`:
+
+``` r
+library(logger)
+log_formatter(formatter_sprintf)
+flog.trace <- log_trace
+flog.debug <- log_debug
+flog.info <- log_info
+flog.warn <- log_warn
+flog.error <- log_error
+
+flog.info("Hello from logger in a futile.logger theme ...")
+#> INFO [2026-01-06 21:43:22] Hello from logger in a futile.logger theme ...
+flog.warn("... where the default log message formatter is %s", "sprintf")
+#> WARN [2026-01-06 21:43:22] ... where the default log message formatter is sprintf
+```
+
+## logging
+
+The [`logging`](https://cran.r-project.org/package=logging) package
+behaves very similarly to the Python logging module and so thus being
+pretty Pythonic, while `logger` tries to accommodate native R users’
+expectations – so there are some minor nuances between the usage of the
+two packages.
+
+### Initialize
+
+In `logging`, you have to initialize a logger first via `addHandler` or
+simply by calling `basicConfig`, which is not required in `logger` as it
+already comes with a default log config:
+
+logging
+
+``` r
+library(logging)
+basicConfig()
+```
+
+logger
+
+``` r
+library(logger)
+```
+
+### Logging functions
+
+After initializing the logging engine, actual logging works similarly in
+the two packages – with a bit different function names:
+
+- although `logging` uses mostly camelCase function names (eg
+  `basicConfig`), but the logging functions are all lowercase without
+  any separator, such as `loginfo` or `logwarn`
+- `logger` uses snake_case for the function names, such as `log_info`
+  and `log_warn`
+
+logging
+
+``` r
+loginfo("hi there")
+#> 2026-01-06 21:43:22.848129 INFO::hi there
+logwarn("watch out")
+#> 2026-01-06 21:43:22.855952 WARNING::watch out
+```
+
+logger
+
+``` r
+log_info("hi there")
+#> INFO [2026-01-06 21:43:22] hi there
+log_warn("watch out")
+#> WARN [2026-01-06 21:43:22] watch out
+```
+
+As you can see above, the default layout of the log messages is somewhat
+different:
+
+- `logging` starts with the timestamp that is followed by the log level,
+  optional namespace and the message separated by colons
+- `logger` starts with the log level, followed by the timestamp between
+  brackets and then the message
+
+### Log levels
+
+For the available log levels in `logging`, check
+[`?loglevels`](https://rdrr.io/pkg/logging/man/loglevels.html), and
+[`?log_levels`](https://daroczig.github.io/logger/reference/log_levels.md)
+for the same in `logger`:
+
+logging
+
+``` r
+str(as.list(loglevels))
+#> List of 11
+#>  $ NOTSET  : num 0
+#>  $ FINEST  : num 1
+#>  $ FINER   : num 4
+#>  $ FINE    : num 7
+#>  $ DEBUG   : num 10
+#>  $ INFO    : num 20
+#>  $ WARNING : num 30
+#>  $ WARN    : num 30
+#>  $ ERROR   : num 40
+#>  $ CRITICAL: num 50
+#>  $ FATAL   : num 50
+```
+
+logger
+
+``` r
+levels <- mget(rev(logger:::log_levels_supported), envir = asNamespace("logger"))
+str(levels, give.attr = FALSE)
+#> List of 8
+#>  $ TRACE  : 'loglevel' int 600
+#>  $ DEBUG  : 'loglevel' int 500
+#>  $ INFO   : 'loglevel' int 400
+#>  $ SUCCESS: 'loglevel' int 350
+#>  $ WARN   : 'loglevel' int 300
+#>  $ ERROR  : 'loglevel' int 200
+#>  $ FATAL  : 'loglevel' int 100
+#>  $ OFF    : 'loglevel' int 0
+```
+
+### Performance
+
+Performance-wise, there’s no big difference between the two packages,
+but for more details, check the [Simple Benchmarks on
+Performance](https://daroczig.github.io/logger/articles/performance.html)
+vignette.
+
+### Log record layout
+
+Getting and setting the layout of the log record should happen up-front
+in both packages:
+
+logging
+
+``` r
+getLogger()[["handlers"]]$basic.stdout$formatter
+#> function (record) 
+#> {
+#>     msg <- trimws(record$msg)
+#>     text <- paste(record$timestamp, paste(record$levelname, record$logger, 
+#>         msg, sep = ":"))
+#>     return(text)
+#> }
+#> <bytecode: 0x55bbe2caf7d8>
+#> <environment: namespace:logging>
+```
+
+logger
+
+``` r
+log_layout()
+#> layout_simple
+```
+
+`logger` provides multiple configurable layouts to fit the user’s need,
+eg easily show the calling function of the lof request, the `pid` of the
+R process, name of the machine etc. or colorized outputs. See
+[Customizing the Format and the Destination of a Log
+Record](https://daroczig.github.io/logger/articles/customize_logger.html)
+vignette for more details.
+
+### Log message formatting
+
+If you want to pass dynamic log messages to the log engines, you can do
+that via the hard-coded `sprintf` in the `logging` package, while you
+can set that on a namespaces basis in `logger`, which is by default
+using `glue`:
+
+logging
+
+``` r
+loginfo("hi")
+#> 2026-01-06 21:43:23.250358 INFO::hi
+loginfo("hi %s", 84 / 2)
+#> 2026-01-06 21:43:23.251494 INFO::hi 42
+loginfo(paste("hi", 84 / 2))
+#> 2026-01-06 21:43:23.25239 INFO::hi 42
+loginfo(glue::glue("hi {84/2}"))
+#> 2026-01-06 21:43:23.253525 INFO::hi 42
+```
+
+logger
+
+``` r
+log_info("hi")
+#> INFO [2026-01-06 21:43:23] hi
+log_info("hi {84/2}")
+#> INFO [2026-01-06 21:43:23] hi {84/2}
+log_formatter(formatter_sprintf)
+log_info("hi %s", 84 / 2)
+#> INFO [2026-01-06 21:43:23] hi 42
+log_formatter(formatter_paste)
+log_info("hi", 84 / 2)
+#> INFO [2026-01-06 21:43:23] hi 42
+```
+
+For even better compatibility, there’s also
+[`?formatter_logging`](https://daroczig.github.io/logger/reference/formatter_logging.md)
+that not only relies on `sprintf` when the first argument is a string,
+but will log the call and the result as well when the log object is an R
+expression:
+
+``` r
+log_formatter(formatter_logging)
+log_info("42")
+#> INFO [2026-01-06 21:43:23] 42
+log_info(42)
+#> INFO [2026-01-06 21:43:23] 42: 42
+log_info(4 + 2)
+#> INFO [2026-01-06 21:43:23] 4 + 2: 6
+log_info("foo %s", "bar")
+#> INFO [2026-01-06 21:43:23] foo bar
+log_info(12, 1 + 1, 2 * 2)
+#> INFO [2026-01-06 21:43:23] 12: 12
+#> INFO [2026-01-06 21:43:23] 1 + 1: 2
+#> INFO [2026-01-06 21:43:23] 2 * 2: 4
+```
+
+### Log record destination
+
+Setting the destination of the log records works similarly in both
+packages, although he `logger` packages bundles a lot more options:
+
+logging
+
+``` r
+?addHandler
+?writeToConsole
+?writeToFile
+```
+
+logger
+
+``` r
+?log_appender
+?appender_console
+?appender_file
+?appender_tee
+?appender_slack
+?appender_pushbullet
+```
+
+### Hierarchical logging
+
+Both packages support using different logging namespaces and stacking
+loggers within the same namespace.
+
+### Using `logger` as a drop-in-replacement of `logging`
+
+`logger` has no hard requirements, so it’s an adequate alternative of
+`logging`. Although the function names are a bit different, and the
+message formatter also differs, but with some simple tweaks, `logger`
+can become an almost perfect drop-in-replacement of `logging` – although
+not all log levels (eg and ) are supported:
+
+``` r
+library(logger)
+log_formatter(formatter_logging)
+log_layout(layout_logging)
+logdebug <- log_debug
+loginfo <- log_info
+logwarn <- log_warn
+logerror <- log_error
+
+loginfo("Hello from logger in a logging theme ...")
+#> 2026-01-06 21:43:23 INFO::Hello from logger in a logging theme ...
+logwarn("... where the default log message formatter is %s", "sprintf", namespace = "foobar")
+#> 2026-01-06 21:43:23 WARN:foobar:... where the default log message formatter is sprintf
+```
+
+## log4r
+
+The [`log4r`](https://cran.r-project.org/package=log4r) package provides
+an object-oriented approach for logging in R, so the logger object is to
+be passed to the log calls – unlike in the `logger` package.
+
+### Initialize
+
+So thus it’s important to create a logging object in `log4r` before
+being able to log messages, while that’s automatically done in \`logger:
+
+log4r
+
+``` r
+library(log4r)
+#> 
+#> Attaching package: 'log4r'
+#> The following object is masked from 'package:logging':
+#> 
+#>     levellog
+#> The following objects are masked from 'package:logger':
+#> 
+#>     as.loglevel, logger
+#> The following object is masked from 'package:base':
+#> 
+#>     debug
+logger <- create.logger(logfile = stdout(), level = "INFO")
+```
+
+logger
+
+``` r
+library(logger)
+```
+
+Please note that in the background, `logger` does have a concept of
+logger objects, but that’s behind the scene and the user does not have
+to specify / reference it. On the other hand, if you wish, you can do
+that via the `namespace` concept of `logger` – more on that later.
+
+### Logging functions
+
+While `logger` has a `log_` prefix for all logging functions, `log4r`
+has lowercase functions names referring to the log level, which takes a
+logging object and the log message:
+
+log4r
+
+``` r
+info(logger, "hi there")
+#> INFO  [2026-01-06 21:43:23] hi there
+warn(logger, "watch out")
+#> WARN  [2026-01-06 21:43:23] watch out
+```
+
+logger
+
+``` r
+log_info("hi there")
+#> 2026-01-06 21:43:23 INFO::hi there
+log_warn("watch out")
+#> 2026-01-06 21:43:23 WARN::watch out
+```
+
+As you can see the default layout of the messages is a bit different in
+the two packages.
+
+### Log levels
+
+Both packages are based on `log4j`, and `log4r` provides `DEBUG`,
+`INFO`, `WARN`, `ERROR` and `FATAL`, while `logger` also adds `TRACE`
+and `SUCCESS` on the top of these.
+
+To change the log level threshold, use the `level` function on the
+logging object in `log4r`, while it’s `log_level` in `logger`.
+
+### Log record layout and formatter functions
+
+The `log4r` provides a `logformat` argument in `create.logger` that can
+be used to override the default formatting, while `logger` provides
+formatter and layout functions for a flexible log record design.
+
+### Log record destination
+
+By default, `log4r` logs to a file that can be set to `stoud` to write
+to the console, while `logger` writes to the console by default, but
+logging to files via the `appender_file` functions is also possible –
+besides a number of other log record destinations as well.
+
+### Hierarchical logging and performance
+
+Creating objects is the `log4r` way of handling multiple log
+environments, while `logger` handles that via `namespace`s.
+
+## loggit
+
+Sorry, no direct replacement for
+[`loggit`](https://cran.r-project.org/package=loggit) – capturing
+`message`, `warning` and `stop` function messages, but it’s on the
+[roadmap](https://github.com/daroczig/logger/issues/6) to provide helper
+functions to be used as message hooks feed `logger`.

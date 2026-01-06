@@ -1,0 +1,151 @@
+# The Anatomy of a Log Request
+
+![](logger_structure.svg "The structure of a logger and the flow of a log record request")
+
+To make a successful log record, `logger` requires the below components:
+
+- a **log request**, eg
+
+  ``` r
+  log_error('Oops')
+  ```
+
+  - including the log level (importance) of the record, which will be
+    later used to decide if the log record is to be delivered or not:
+    `ERROR` in this case
+  - R objects to be logged: a simple string in this case, although it
+    could be a character vector or any R object(s) that can be converted
+    into a character vector by the `formatter` function
+
+- the **environment** and meta-information of the log request, eg actual
+  timestamp, hostname of the computer, the name of the user running the
+  R script, the pid of the R process, calling function and the actual
+  call etc.
+
+  ``` r
+  f <- function() get_logger_meta_variables(log_level = INFO)
+  f()
+  #> $ns
+  #> [1] NA
+  #> 
+  #> $ans
+  #> [1] "global"
+  #> 
+  #> $topenv
+  #> [1] "R_GlobalEnv"
+  #> 
+  #> $fn
+  #> [1] "f"
+  #> 
+  #> $call
+  #> [1] "f()"
+  #> 
+  #> $location
+  #> $location$path
+  #> [1] "<console>"
+  #> 
+  #> 
+  #> $time
+  #> [1] "2026-01-06 21:43:13 UTC"
+  #> 
+  #> $levelr
+  #> Log level: INFO
+  #> 
+  #> $level
+  #> [1] "INFO"
+  #> 
+  #> $pid
+  #> [1] 11923
+  #> 
+  #> $r_version
+  #> [1] "4.5.2"
+  #> 
+  #> $ns_pkg_version
+  #> [1] NA
+  #> 
+  #> $node
+  #> [1] "runnervmh13bl"
+  #> 
+  #> $arch
+  #> [1] "x86_64"
+  #> 
+  #> $os_name
+  #> [1] "Linux"
+  #> 
+  #> $os_release
+  #> [1] "6.11.0-1018-azure"
+  #> 
+  #> $os_version
+  #> [1] "#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025"
+  #> 
+  #> $user
+  #> [1] "runner"
+  ```
+
+- a **logger definition** to process the log request, including
+
+  - log level `threshold`, eg `INFO`, which defines the minimum log
+    level required for actual logging – all log requests with lower log
+    level will be thrown away
+
+    ``` r
+    log_threshold()
+    #> Log level: INFO
+    ERROR <= INFO
+    #> [1] TRUE
+    log_error("Oops")
+    #> ERROR [2026-01-06 21:43:13] Oops
+    ```
+
+  - `formatter` function, which takes R objects and converts those into
+    actual log message(s) to be then passed to the `layout` function for
+    the log record rendering – such as `paste`, `sprintf`, `glue` or eg
+    the below custom example:
+
+    ``` r
+    formatter <- function(...) paste(..., collapse = " ", sep = " ")
+    formatter(1:3, c("foo", "bar"))
+    #> [1] "1 foo 2 bar 3 foo"
+    ```
+
+  - `layout` function, which takes log message(s) and further
+    information on the log request (such as timestamp, hostname,
+    username, calling function etc) to render the actual log records eg
+    human-readable text, JSON etc
+
+    ``` r
+    library(jsonlite)
+    layout <- function(level, msg) toJSON(level = level, timestamp = time, hostname = node, message = msg)
+    layout(INFO, 'Happy Thursday!')
+    #> {'level': 'INFO', 'timestamp': '1970-01-01 00:00:00', 'hostname': 'foobar', 'message': 'Happy Thursday!'}
+    ```
+
+  - `appender` function, which takes fully-rendered log record(s) and
+    delivers to somewhere, eg `stdout`, a file or a streaming service,
+    eg
+
+    ``` r
+    appender <- function(line) cat(line, "\n")
+    appender("INFO [now] I am a log message")
+    #> INFO [now] I am a log message
+    ```
+
+Putting all these together (by explicitly setting the default config in
+the `global` namespace):
+
+``` r
+log_threshold(INFO)
+log_formatter(formatter_glue)
+log_layout(layout_simple)
+log_appender(appender_stdout)
+log_debug("I am a low level log message that will not be printed with a high log level threshold")
+log_warn("I am a higher level log message that is very likely to be printed")
+#> WARN [2026-01-06 21:43:13] I am a higher level log message that is very likely to be printed
+```
+
+Note, that all `logger` definitions and requests are tied to a logging
+namespace, and one log request might trigger multiple `logger`
+definitions as well (stacking). Find more information on these in the
+[Customizing the format and destination of log
+records](https://daroczig.github.io/logger/articles/customize_logger.html)
+vignette.

@@ -1,0 +1,99 @@
+# Introduction to logger
+
+If you are not only using R in the interactive console for ad-hoc data
+analysis, but running eg batch jobs (for ETL, reporting, modeling,
+forecasting etc) as well, then logging the status(changes) of your
+script is a must so that later on you can review / debug what have
+happened.
+
+For most cases, it’s enough to load the package and use the functions
+with the `log` prefix to log important and not so important messages,
+for example:
+
+``` r
+library(logger)
+log_info("Loading data")
+#> INFO [2026-01-06 21:43:19] Loading data
+data(mtcars)
+log_info("The dataset includes {nrow(mtcars)} rows")
+#> INFO [2026-01-06 21:43:19] The dataset includes 32 rows
+if (max(mtcars$hp) < 1000) {
+  log_warn("Oh, no! There are no cars with more than 1K horsepower in the dataset :/")
+  log_debug("The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp")
+}
+#> WARN [2026-01-06 21:43:19] Oh, no! There are no cars with more than 1K horsepower in the dataset :/
+```
+
+Interestingly, the most powerful car was not being logged – because by
+default the `logger` prints messages with at least the `INFO` log level:
+
+``` r
+log_threshold()
+#> Log level: INFO
+```
+
+To change that, specify the new log level threshold, eg `TRACE` to log
+everything:
+
+``` r
+log_threshold(TRACE)
+```
+
+The rerunning the above code chunk:
+
+``` r
+log_info("Loading data")
+#> INFO [2026-01-06 21:43:19] Loading data
+data(mtcars)
+log_info("The dataset includes {nrow(mtcars)} rows")
+#> INFO [2026-01-06 21:43:19] The dataset includes 32 rows
+if (max(mtcars$hp) < 1000) {
+  log_warn("Oh, no! There are no cars with more than 1K horsepower in the dataset :/")
+  log_debug("The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp")
+}
+#> WARN [2026-01-06 21:43:19] Oh, no! There are no cars with more than 1K horsepower in the dataset :/
+#> DEBUG [2026-01-06 21:43:19] The most powerful car is Maserati Bora with 335 hp
+```
+
+You may also find the
+[`?log_eval`](https://daroczig.github.io/logger/reference/log_eval.md)
+function useful to log both an R expression and its result in the same
+log record:
+
+``` r
+f <- sqrt
+g <- mean
+x <- 1:31
+log_eval(y <- f(g(x)), level = INFO)
+#> INFO [2026-01-06 21:43:19] 'y <- f(g(x))' => '4'
+str(y)
+#>  num 4
+```
+
+Sometimes, it may be reasonable to log R objects as markdown, e.g. a
+smallish `data.frame` or `data.table`, e.g. `mtcars` or `iris`. Calling
+the formatter using `pander` instead of `glue` can help:
+
+``` r
+log_formatter(formatter_pander)
+log_info(head(iris))
+#> INFO [2026-01-06 21:43:19] 
+#> INFO [2026-01-06 21:43:19] 
+#> INFO [2026-01-06 21:43:19]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species 
+#> INFO [2026-01-06 21:43:19] -------------- ------------- -------------- ------------- ---------
+#> INFO [2026-01-06 21:43:19]      5.1            3.5           1.4            0.2       setosa  
+#> INFO [2026-01-06 21:43:19]      4.9             3            1.4            0.2       setosa  
+#> INFO [2026-01-06 21:43:19]      4.7            3.2           1.3            0.2       setosa  
+#> INFO [2026-01-06 21:43:19]      4.6            3.1           1.5            0.2       setosa  
+#> INFO [2026-01-06 21:43:19]       5             3.6           1.4            0.2       setosa  
+#> INFO [2026-01-06 21:43:19]      5.4            3.9           1.7            0.4       setosa  
+#> INFO [2026-01-06 21:43:19]
+```
+
+For more details, check the [function reference in the
+manual](https://daroczig.github.io/logger/reference/index.html), or
+start with the [The Anatomy of a Log
+Request](https://daroczig.github.io/logger/articles/anatomy.html) and
+[Customizing the Format and the Destination of a Log
+Record](https://daroczig.github.io/logger/articles/customize_logger.html)
+vignettes.

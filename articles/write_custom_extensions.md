@@ -1,0 +1,119 @@
+# Writing Custom Logger Extensions
+
+In this vignette I suppose that you are already familiar with
+[Customizing the format and destination of log
+records](https://daroczig.github.io/logger/articles/customize_logger.html)
+vignette.
+
+## Custom log message formatter functions
+
+The log message formatter function should be able to take any number of
+R objects and convert those into a character vector that is safe to pass
+to the layout function.
+
+This transformer function can be as simple as calling `paste`, `glue` or
+`sprintf` or something complex as well, eg looking up user attributes of
+a user id mentioned in a log record etc.
+
+When writing a custom formatter function, it should also accept the
+original logging function call as `.logcall`, the parent call as
+`.topcall` and the log request’s environment as `.topenv`, which can be
+used to find the relevant variables in your formatter.
+
+If you are writing such a function or a generator function returning a
+log message formatter function, please keep the actual call resulting in
+the formatter function (eg
+[`match.call()`](https://rdrr.io/r/base/match.call.html) in the
+generator function or the quoted function call) recorded in the
+`generator` attribute of the function so that
+[`?log_formatter`](https://daroczig.github.io/logger/reference/log_formatter.md)
+can pretty-print that instead of the unnamed function body. See the
+[`formatters.R`](https://github.com/daroczig/logger/blob/master/R/formatters.R)
+file for more examples.
+
+## Custom log layout rendering functions
+
+The layout functions return the log record and take at least two
+arguments:
+
+- the log level and
+- a message already formatted as a string by a log message formatter
+  function
+- the namespace (as `namespace`), calling function (as `.topcall`) and
+  its environment (as `.topenv`) of the log request, and the actual log
+  call (as `.logcall`) automatically collected by
+  [`?log_level`](https://daroczig.github.io/logger/reference/log_level.md)
+
+Such layout rendering function can be as simple as the default
+[`?layout_simple`](https://daroczig.github.io/logger/reference/layout_simple.md):
+
+``` r
+layout_simple <- function(level, msg, ...) {
+    paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
+}
+```
+
+Or much more complex, eg looking up the hostname of the machine, public
+IP address etc and logging all these automatically with the message of
+the log request.
+
+Your easiest option to set up a custom layout is calling
+[`?layout_glue_generator`](https://daroczig.github.io/logger/reference/layout_glue_generator.md)
+that comes with a nice API being able to access a bunch of
+meta-information on the log request via
+[`?get_logger_meta_variables`](https://daroczig.github.io/logger/reference/get_logger_meta_variables.md).
+For such example, see the [Customizing the format and destination of log
+records](https://daroczig.github.io/logger/articles/customize_logger.html)
+vignette.
+
+If you are writing such a function or a generator function returning a
+log message formatter function, please keep the actual call resulting in
+the formatter function (eg
+[`match.call()`](https://rdrr.io/r/base/match.call.html) in the
+generator function or the quoted function call) recorded in the
+`generator` attribute of the function so that
+[`?log_layout`](https://daroczig.github.io/logger/reference/log_layout.md)
+can pretty-print that instead of the unnamed function body. See the
+[`layouts.R`](https://github.com/daroczig/logger/blob/master/R/layouts.R)
+file for more examples.
+
+## Custom log record appenders
+
+The appender functions take log records and delivers those to the
+desired destination. This can be as simple as writing to the console
+([`?appender_console`](https://daroczig.github.io/logger/reference/appender_console.md))
+or to a local file
+([`?appender_file`](https://daroczig.github.io/logger/reference/appender_file.md)),
+or delivering the log record via an API request to a remote service,
+streaming somewhere or sending a Slack message
+([`?appender_slack`](https://daroczig.github.io/logger/reference/appender_slack.md)).
+
+If you are writing such a function or a generator function returning a
+log message formatter function, please keep the actual call resulting in
+the formatter function (eg
+[`match.call()`](https://rdrr.io/r/base/match.call.html) in the
+generator function or the quoted function call) recorded in the
+`generator` attribute of the function so that
+[`?log_appender`](https://daroczig.github.io/logger/reference/log_appender.md)
+can pretty-print that instead of the unnamed function body. See the
+[`appenders.R`](https://github.com/daroczig/logger/blob/master/R/appenders.R)
+file for more examples.
+
+An example for a custom appender delivering log messages to a database
+table:
+
+``` r
+## the dbr package provides and easy and secure way of connecting to databased from R
+## although if you want to minimize the dependencies, feel free to stick with DBI etc.
+library(dbr)
+## init a persistent connection to the database using a yaml config in the background thanks to dbr
+## NOTE that this is optional and a temporarily connection could be also used
+##      for higher reliability but lower throughput
+con <- db_connect('mydb')
+## define custom function writing the log message to a table
+log_appender(function(lines) {
+    db_append(
+        df = data.frame(timestamp = Sys.time(), message = lines),
+        table = 'logs', db = con)
+})
+```
