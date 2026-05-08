@@ -6,6 +6,8 @@ Maintenance release:
 * `normalizePath()` in the `log_call_location()` no longer triggers warning if the package source does not exist (#241, @maksymiuks)
 * Fix failing unit test on CRAN
 
+# logger 0.4.1 (2025-09-08)
+
 New features and quality of life improvements:
 
 * Support renaming meta fields (#217, @atusy)
