@@ -409,9 +409,9 @@ By default, `log4r` logs to a file that can be set to `stoud` to write to the co
 
 Creating objects is the `log4r` way of handling multiple log environments, while `logger` handles that via `namespace`s.
 
-## loggit
+## loggit and loggr
 
-Sorry, no direct replacement for [`loggit`](https://cran.r-project.org/package=loggit) -- capturing `message`, `warning` and `stop` function messages, but it's on the [roadmap](https://github.com/daroczig/logger/issues/6) to provide helper functions to be used as message hooks feed `logger`.
+Both [`loggit`](https://cran.r-project.org/package=loggit) and [`loggr`](https://github.com/smbache/loggr) provides an easy way of capturing `message`, `warning` and `stop` function messages. Similar functionality has been added to `logger` in the form of `log_message`, `log_warning` and `log_error` functions.
 
 ```{r cleanup, include = FALSE}
 logger:::namespaces_reset()
