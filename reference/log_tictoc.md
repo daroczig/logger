@@ -32,14 +32,14 @@ Thanks to Neal Fultz for the idea and original implementation!
 
 ``` r
 log_tictoc("warming up")
-#> INFO [2026-01-06 21:43:09] global timer tic 0 secs -- warming up
+#> INFO [2026-05-08 20:47:30] global timer tic 0 secs -- warming up
 Sys.sleep(0.1)
 log_tictoc("running")
-#> INFO [2026-01-06 21:43:10] global timer toc 0.1 secs -- running
+#> INFO [2026-05-08 20:47:30] global timer toc 0.1 secs -- running
 Sys.sleep(0.1)
 log_tictoc("running")
-#> INFO [2026-01-06 21:43:10] global timer toc 0.1 secs -- running
+#> INFO [2026-05-08 20:47:30] global timer toc 0.1 secs -- running
 Sys.sleep(runif(1))
 log_tictoc("and running")
-#> INFO [2026-01-06 21:43:10] global timer toc 0.07 secs -- and running
+#> INFO [2026-05-08 20:47:31] global timer toc 0.93 secs -- and running
 ```

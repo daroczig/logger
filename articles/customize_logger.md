@@ -12,14 +12,15 @@ supports suppressing log messages with a lower log level compared to the
 currently set threshold in the logging namespace:
 
 ``` r
+
 log_info("Hi, there!")
-#> INFO [2026-01-06 21:43:16] Hi, there!
+#> INFO [2026-05-08 20:47:37] Hi, there!
 log_debug("How are you doing today?")
 log_threshold()
 #> Log level: INFO
 log_threshold(TRACE)
 log_debug("How are you doing today?")
-#> DEBUG [2026-01-06 21:43:16] How are you doing today?
+#> DEBUG [2026-05-08 20:47:37] How are you doing today?
 ```
 
 So the
@@ -36,8 +37,9 @@ If you want to define the log level in a programmatic way, check out
 eg
 
 ``` r
+
 log_level(INFO, "Hi, there!")
-#> INFO [2026-01-06 21:43:16] Hi, there!
+#> INFO [2026-05-08 20:47:37] Hi, there!
 ```
 
 To temporarily update the log level threshold, you may also find the
@@ -45,15 +47,16 @@ To temporarily update the log level threshold, you may also find the
 function useful:
 
 ``` r
+
 log_threshold(INFO)
 log_debug("pst, can you hear me?")
 log_info("no")
-#> INFO [2026-01-06 21:43:16] no
+#> INFO [2026-05-08 20:47:37] no
 
 with_log_threshold(log_debug("pst, can you hear me?"), threshold = TRACE)
-#> DEBUG [2026-01-06 21:43:16] pst, can you hear me?
+#> DEBUG [2026-05-08 20:47:37] pst, can you hear me?
 log_info("yes")
-#> INFO [2026-01-06 21:43:16] yes
+#> INFO [2026-05-08 20:47:37] yes
 
 with_log_threshold(
   {
@@ -62,21 +65,22 @@ with_log_threshold(
   },
   threshold = TRACE
 )
-#> DEBUG [2026-01-06 21:43:16] pst, can you hear me?
-#> INFO [2026-01-06 21:43:16] yes
+#> DEBUG [2026-05-08 20:47:37] pst, can you hear me?
+#> INFO [2026-05-08 20:47:37] yes
 ```
 
 You can also define your own log level(s) if needed, for example
 introducing an extra level between `DEBUG` and `INFO`:
 
 ``` r
+
 FYI <- structure(450L, level = "FYI", class = c("loglevel", "integer"))
 log_threshold(FYI)
 log_debug("ping")
 log_level(FYI, "ping")
-#> FYI [2026-01-06 21:43:16] ping
+#> FYI [2026-05-08 20:47:37] ping
 log_info("pong")
-#> INFO [2026-01-06 21:43:16] pong
+#> INFO [2026-05-08 20:47:37] pong
 ```
 
 ## Log namespaces
@@ -92,10 +96,11 @@ If you specify an unknown `namespace` in a log request, it will fall
 back to the global settings:
 
 ``` r
+
 log_threshold(INFO)
 log_trace("Hi, there!", namespace = "kitchensink")
 log_info("Hi, there!", namespace = "kitchensink")
-#> INFO [2026-01-06 21:43:16] Hi, there!
+#> INFO [2026-05-08 20:47:37] Hi, there!
 ```
 
 But once you start customizing that namespace, it gets forked from the
@@ -103,11 +108,12 @@ global settings and live on its own without modifying the original
 namespace:
 
 ``` r
+
 log_threshold(TRACE, namespace = "kitchensink")
 log_trace("Hi, there!", namespace = "kitchensink")
-#> TRACE [2026-01-06 21:43:16] Hi, there!
+#> TRACE [2026-05-08 20:47:37] Hi, there!
 log_info("Hi, there!", namespace = "kitchensink")
-#> INFO [2026-01-06 21:43:16] Hi, there!
+#> INFO [2026-05-08 20:47:37] Hi, there!
 log_trace("Hi, there!")
 ```
 
@@ -121,11 +127,12 @@ transform that to a regular character vector.
 By default, `logger` uses `glue` in the background:
 
 ``` r
+
 log_formatter(formatter_glue)
 log_info("There are {nrow(mtcars)} cars in the mtcars dataset")
-#> INFO [2026-01-06 21:43:16] There are 32 cars in the mtcars dataset
+#> INFO [2026-05-08 20:47:37] There are 32 cars in the mtcars dataset
 log_info("2 + 2 = {2+2}")
-#> INFO [2026-01-06 21:43:16] 2 + 2 = 4
+#> INFO [2026-05-08 20:47:37] 2 + 2 = 4
 ```
 
 If you don’t like this syntax, or want to save a dependency, you can use
@@ -148,16 +155,17 @@ will simply record the log-level, the current timestamp and the message
 after being processed by `glue`:
 
 ``` r
+
 log_info(42)
-#> INFO [2026-01-06 21:43:16] 42
+#> INFO [2026-05-08 20:47:37] 42
 log_info("The answer is {42}")
-#> INFO [2026-01-06 21:43:16] The answer is 42
+#> INFO [2026-05-08 20:47:37] The answer is 42
 log_info("The answers are {1:5}")
-#> INFO [2026-01-06 21:43:16] The answers are 1
-#> INFO [2026-01-06 21:43:16] The answers are 2
-#> INFO [2026-01-06 21:43:16] The answers are 3
-#> INFO [2026-01-06 21:43:16] The answers are 4
-#> INFO [2026-01-06 21:43:16] The answers are 5
+#> INFO [2026-05-08 20:47:37] The answers are 1
+#> INFO [2026-05-08 20:47:37] The answers are 2
+#> INFO [2026-05-08 20:47:37] The answers are 3
+#> INFO [2026-05-08 20:47:37] The answers are 4
+#> INFO [2026-05-08 20:47:37] The answers are 5
 ```
 
 In the above example, first, `42` was converted to a string by the
@@ -170,17 +178,18 @@ An example of another layout function writing the same log messages in
 JSON:
 
 ``` r
+
 log_layout(layout_json())
 log_info(42)
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"42"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"42"}
 log_info("The answer is {42}")
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"The answer is 42"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"The answer is 42"}
 log_info("The answers are {1:5}")
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"The answers are 1"}
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"The answers are 2"}
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"The answers are 3"}
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"The answers are 4"}
-#> {"time":"2026-01-06 21:43:16","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12004,"user":"runner","msg":"The answers are 5"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"The answers are 1"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"The answers are 2"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"The answers are 3"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"The answers are 4"}
+#> {"time":"2026-05-08 20:47:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":11873,"user":"runner","msg":"The answers are 5"}
 ```
 
 If you need colorized logs highlighting the important log messages,
@@ -209,6 +218,7 @@ A quick example:
 - define custom logger:
 
   ``` r
+
   logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
   log_layout(logger)
   ```
@@ -216,38 +226,42 @@ A quick example:
 - check what’s being logged when called from the global environment:
 
   ``` r
+
   log_info("foo")
-  #> runnervmh13bl/12004/global/eval 2026-01-06 21:43:16.721519 INFO: foo
+  #> runnervmeorf1/11873/global/eval 2026-05-08 20:47:38.170184 INFO: foo
   ```
 
 - check what’s being logged when called from a custom function:
 
   ``` r
+
   f <- function() log_info("foo")
   f()
-  #> runnervmh13bl/12004/global/f 2026-01-06 21:43:16.785197 INFO: foo
+  #> runnervmeorf1/11873/global/f 2026-05-08 20:47:38.229801 INFO: foo
   ```
 
 - check what’s being logged when called from a package:
 
   ``` r
+
   devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
   #> ℹ Loading logger.tester
   logger_tester_function(INFO, "hi from tester package")
-  #> runnervmh13bl/12004/logger.tester/logger_tester_function 2026-01-06 21:43:16.956286 INFO: hi from tester package 0.0807501375675201
+  #> runnervmeorf1/11873/logger.tester/logger_tester_function 2026-05-08 20:47:38.400035 INFO: hi from tester package 0.0807501375675201
   ```
 
 - suppress messages in a namespace:
 
   ``` r
+
   log_threshold(namespace = "logger.tester")
   #> Log level: INFO
   log_threshold(WARN, namespace = "logger.tester")
   logger_tester_function(INFO, "hi from tester package")
   logger_tester_function(WARN, "hi from tester package")
-  #> runnervmh13bl/12004/logger.tester/logger_tester_function 2026-01-06 21:43:17.025943 WARN: hi from tester package 0.0807501375675201
+  #> runnervmeorf1/11873/logger.tester/logger_tester_function 2026-05-08 20:47:38.466082 WARN: hi from tester package 0.0807501375675201
   log_info("I am still working in the global namespace")
-  #> runnervmh13bl/12004/global/eval 2026-01-06 21:43:17.027276 INFO: I am still working in the global namespace
+  #> runnervmeorf1/11873/global/eval 2026-05-08 20:47:38.467375 INFO: I am still working in the global namespace
   ```
 
 Another example of making use of the generator function is to update the
@@ -256,6 +270,7 @@ forking, see for example the below code chunk still using the above
 defined log layout:
 
 ``` r
+
 f <- function(x) {
     log_info('received {length(x)} values')
     log_success('with the mean of {mean(x)}')
@@ -291,6 +306,7 @@ layout function to the console, the user can easily interpret what’s
 being used instead of just showing the actual functions’s body:*
 
 ``` r
+
 log_layout()
 #> layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 ```
@@ -300,6 +316,7 @@ extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.h
 vignette.
 
 ``` r
+
 ## reset layout
 log_layout(layout_simple)
 ```
@@ -311,6 +328,7 @@ By default, `logger` will write to the `stderr` via the
 function:
 
 ``` r
+
 log_appender()
 #> appender_stdout
 ```
@@ -321,13 +339,14 @@ generator function, that returns a function that can be used in any
 namespace:
 
 ``` r
+
 t <- tempfile()
 log_appender(appender_file(t))
 log_info("where is this message going?")
 log_appender()
 #> appender_file(file = t)
 readLines(t)
-#> [1] "INFO [2026-01-06 21:43:17] where is this message going?"
+#> [1] "INFO [2026-05-08 20:47:38] where is this message going?"
 unlink(t)
 ```
 
@@ -335,6 +354,7 @@ There’s a similar generator function that returns an appender function
 delivering log messages to Slack channels:
 
 ``` r
+
 ## load Slack configuration, API token etc from a (hopefully encrypted) yaml file or similar
 slack_config <- config::config(...)
 ## redirect log messages to Slack
@@ -353,6 +373,7 @@ You may find
 also useful, that writes the log messages to both `stdout` and a file.
 
 ``` r
+
 ## reset appender
 log_appender(appender_stdout)
 ```
@@ -377,6 +398,7 @@ The advantage of this approach is that you can set different log level
 thresholds for each logger, for example:
 
 ``` r
+
 log_threshold()
 #> Log level: INFO
 
@@ -395,11 +417,11 @@ log_appender(appender_file(t), index = 2)
 
 ## test both loggers
 log_info("info msg")
-#> INFO [2026-01-06 21:43:17] info msg
+#> INFO [2026-05-08 20:47:38] info msg
 log_debug("info msg")
 
 readLines(t)
-#> [1] "INFO [2026-01-06 21:43:17] info msg" 
-#> [2] "DEBUG [2026-01-06 21:43:17] info msg"
+#> [1] "INFO [2026-05-08 20:47:38] info msg" 
+#> [2] "DEBUG [2026-05-08 20:47:38] info msg"
 unlink(t)
 ```

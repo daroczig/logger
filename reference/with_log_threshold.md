@@ -36,7 +36,7 @@ with_log_threshold(
 ``` r
 log_threshold(TRACE)
 log_trace("Logging everything!")
-#> TRACE [2026-01-06 21:43:11] Logging everything!
+#> TRACE [2026-05-08 20:47:32] Logging everything!
 x <- with_log_threshold(
   {
     log_info("Now we are temporarily suppressing eg INFO messages")
@@ -47,10 +47,10 @@ x <- with_log_threshold(
   },
   threshold = WARN
 )
-#> WARN [2026-01-06 21:43:11] WARN
-#> ERROR [2026-01-06 21:43:11] ERROR
+#> WARN [2026-05-08 20:47:32] WARN
+#> ERROR [2026-05-08 20:47:32] ERROR
 x
 #> [1] 42
 log_trace("DONE")
-#> TRACE [2026-01-06 21:43:11] DONE
+#> TRACE [2026-05-08 20:47:32] DONE
 ```

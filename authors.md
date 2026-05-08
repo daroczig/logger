@@ -22,13 +22,13 @@ Source:
 [`DESCRIPTION`](https://github.com/daroczig/logger/blob/main/DESCRIPTION)
 
 Daróczi G, Wickham H (2026). *logger: A Lightweight, Modern and Flexible
-Logging Utility*. R package version 0.4.1.9002,
+Logging Utility*. R package version 0.4.2,
 <https://daroczig.github.io/logger/>.
 
     @Manual{,
       title = {logger: A Lightweight, Modern and Flexible Logging Utility},
       author = {Gergely Daróczi and Hadley Wickham},
       year = {2026},
-      note = {R package version 0.4.1.9002},
+      note = {R package version 0.4.2},
       url = {https://daroczig.github.io/logger/},
     }

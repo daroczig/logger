@@ -7,6 +7,7 @@ To make a successful log record, `logger` requires the below components:
 - a **log request**, eg
 
   ``` r
+
   log_error('Oops')
   ```
 
@@ -23,6 +24,7 @@ To make a successful log record, `logger` requires the below components:
   call etc.
 
   ``` r
+
   f <- function() get_logger_meta_variables(log_level = INFO)
   f()
   #> $ns
@@ -46,7 +48,7 @@ To make a successful log record, `logger` requires the below components:
   #> 
   #> 
   #> $time
-  #> [1] "2026-01-06 21:43:13 UTC"
+  #> [1] "2026-05-08 20:47:34 UTC"
   #> 
   #> $levelr
   #> Log level: INFO
@@ -55,16 +57,16 @@ To make a successful log record, `logger` requires the below components:
   #> [1] "INFO"
   #> 
   #> $pid
-  #> [1] 11923
+  #> [1] 11792
   #> 
   #> $r_version
-  #> [1] "4.5.2"
+  #> [1] "4.6.0"
   #> 
   #> $ns_pkg_version
   #> [1] NA
   #> 
   #> $node
-  #> [1] "runnervmh13bl"
+  #> [1] "runnervmeorf1"
   #> 
   #> $arch
   #> [1] "x86_64"
@@ -73,10 +75,10 @@ To make a successful log record, `logger` requires the below components:
   #> [1] "Linux"
   #> 
   #> $os_release
-  #> [1] "6.11.0-1018-azure"
+  #> [1] "6.17.0-1010-azure"
   #> 
   #> $os_version
-  #> [1] "#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025"
+  #> [1] "#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026"
   #> 
   #> $user
   #> [1] "runner"
@@ -89,12 +91,13 @@ To make a successful log record, `logger` requires the below components:
     level will be thrown away
 
     ``` r
+
     log_threshold()
     #> Log level: INFO
     ERROR <= INFO
     #> [1] TRUE
     log_error("Oops")
-    #> ERROR [2026-01-06 21:43:13] Oops
+    #> ERROR [2026-05-08 20:47:34] Oops
     ```
 
   - `formatter` function, which takes R objects and converts those into
@@ -103,6 +106,7 @@ To make a successful log record, `logger` requires the below components:
     the below custom example:
 
     ``` r
+
     formatter <- function(...) paste(..., collapse = " ", sep = " ")
     formatter(1:3, c("foo", "bar"))
     #> [1] "1 foo 2 bar 3 foo"
@@ -114,6 +118,7 @@ To make a successful log record, `logger` requires the below components:
     human-readable text, JSON etc
 
     ``` r
+
     library(jsonlite)
     layout <- function(level, msg) toJSON(level = level, timestamp = time, hostname = node, message = msg)
     layout(INFO, 'Happy Thursday!')
@@ -125,6 +130,7 @@ To make a successful log record, `logger` requires the below components:
     eg
 
     ``` r
+
     appender <- function(line) cat(line, "\n")
     appender("INFO [now] I am a log message")
     #> INFO [now] I am a log message
@@ -134,13 +140,14 @@ Putting all these together (by explicitly setting the default config in
 the `global` namespace):
 
 ``` r
+
 log_threshold(INFO)
 log_formatter(formatter_glue)
 log_layout(layout_simple)
 log_appender(appender_stdout)
 log_debug("I am a low level log message that will not be printed with a high log level threshold")
 log_warn("I am a higher level log message that is very likely to be printed")
-#> WARN [2026-01-06 21:43:13] I am a higher level log message that is very likely to be printed
+#> WARN [2026-05-08 20:47:34] I am a higher level log message that is very likely to be printed
 ```
 
 Note, that all `logger` definitions and requests are tied to a logging

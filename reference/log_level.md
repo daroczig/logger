@@ -131,9 +131,9 @@ more details on the format.
 
 ``` r
 log_level(INFO, "hi there")
-#> INFO [2026-01-06 21:43:08] hi there
+#> INFO [2026-05-08 20:47:28] hi there
 log_info("hi there")
-#> INFO [2026-01-06 21:43:08] hi there
+#> INFO [2026-05-08 20:47:28] hi there
 
 ## output omitted
 log_debug("hi there")
@@ -141,18 +141,18 @@ log_debug("hi there")
 ## lower threshold and retry
 log_threshold(TRACE)
 log_debug("hi there")
-#> DEBUG [2026-01-06 21:43:08] hi there
+#> DEBUG [2026-05-08 20:47:28] hi there
 
 ## multiple lines
 log_info("ok {1:3} + {1:3} = {2*(1:3)}")
-#> INFO [2026-01-06 21:43:08] ok 1 + 1 = 2
-#> INFO [2026-01-06 21:43:08] ok 2 + 2 = 4
-#> INFO [2026-01-06 21:43:08] ok 3 + 3 = 6
+#> INFO [2026-05-08 20:47:28] ok 1 + 1 = 2
+#> INFO [2026-05-08 20:47:28] ok 2 + 2 = 4
+#> INFO [2026-05-08 20:47:28] ok 3 + 3 = 6
 
 ## use json layout
 log_layout(layout_json(c("time", "level")))
 log_info("ok {1:3} + {1:3} = {2*(1:3)}")
-#> {"time":"2026-01-06 21:43:08","level":"INFO","msg":"ok 1 + 1 = 2"}
-#> {"time":"2026-01-06 21:43:08","level":"INFO","msg":"ok 2 + 2 = 4"}
-#> {"time":"2026-01-06 21:43:08","level":"INFO","msg":"ok 3 + 3 = 6"}
+#> {"time":"2026-05-08 20:47:28","level":"INFO","msg":"ok 1 + 1 = 2"}
+#> {"time":"2026-05-08 20:47:28","level":"INFO","msg":"ok 2 + 2 = 4"}
+#> {"time":"2026-05-08 20:47:28","level":"INFO","msg":"ok 3 + 3 = 6"}
 ```

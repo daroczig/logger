@@ -17,11 +17,12 @@ package, then `logger` will try to auto-guess the calling R package name
 and use that as the default namespace, see eg:
 
 ``` r
+
 library(logger)
 devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 #> ℹ Loading logger.tester
 logger_tester_function(INFO, "hi from tester package")
-#> INFO [2026-01-06 21:43:30] hi from tester package 0.0807501375675201
+#> INFO [2026-05-08 20:47:51] hi from tester package 0.0807501375675201
 ```
 
 But if auto-guessing is not your style, then feel free to set your

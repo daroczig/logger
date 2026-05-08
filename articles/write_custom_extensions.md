@@ -48,6 +48,7 @@ Such layout rendering function can be as simple as the default
 [`?layout_simple`](https://daroczig.github.io/logger/reference/layout_simple.md):
 
 ``` r
+
 layout_simple <- function(level, msg, ...) {
     paste0(attr(level, 'level'), ' [', format(Sys.time(), "%Y-%m-%d %H:%M:%S"), '] ', msg)
 }
@@ -103,6 +104,7 @@ An example for a custom appender delivering log messages to a database
 table:
 
 ``` r
+
 ## the dbr package provides and easy and secure way of connecting to databased from R
 ## although if you want to minimize the dependencies, feel free to stick with DBI etc.
 library(dbr)

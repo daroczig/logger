@@ -30,6 +30,7 @@ to load the packages and those are ready to be used right away:
 futile.logger
 
 ``` r
+
 library(futile.logger)
 #> 
 #> Attaching package: 'futile.logger'
@@ -41,6 +42,7 @@ library(futile.logger)
 logger
 
 ``` r
+
 library(logger)
 ```
 
@@ -54,19 +56,21 @@ The most important change is that function names are by snake_case in
 futile.logger
 
 ``` r
+
 flog.info("hi there")
-#> INFO [2026-01-06 21:43:21] hi there
+#> INFO [2026-05-08 20:47:43] hi there
 flog.warn("watch out")
-#> WARN [2026-01-06 21:43:21] watch out
+#> WARN [2026-05-08 20:47:43] watch out
 ```
 
 logger
 
 ``` r
+
 log_info("hi there")
-#> INFO [2026-01-06 21:43:21] hi there
+#> INFO [2026-05-08 20:47:43] hi there
 log_warn("watch out")
-#> WARN [2026-01-06 21:43:21] watch out
+#> WARN [2026-05-08 20:47:43] watch out
 ```
 
 As you can see above, the default layout of the messages is exactly the
@@ -87,19 +91,21 @@ function:
 futile.logger
 
 ``` r
+
 flog.layout(layout.json)
 #> NULL
 flog.info("hi again")
-#> {"level":"INFO","timestamp":"2026-01-06 21:43:22 +0000","message":"hi again","func":"eval"}
+#> {"level":"INFO","timestamp":"2026-05-08 20:47:43 +0000","message":"hi again","func":"eval"}
 ```
 
 logger
 
 ``` r
+
 log_layout(layout_json())
 
 log_info("hi again")
-#> {"time":"2026-01-06 21:43:22","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmh13bl","arch":"x86_64","os_name":"Linux","os_release":"6.11.0-1018-azure","os_version":"#18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025","pid":12170,"user":"runner","msg":"hi again"}
+#> {"time":"2026-05-08 20:47:43","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":12035,"user":"runner","msg":"hi again"}
 ```
 
 As you can see, `logger` provided a bit more information about the log
@@ -122,29 +128,31 @@ passes the objects to be logged to `glue`:
 futile.logger
 
 ``` r
+
 flog.info("hi")
-#> INFO [2026-01-06 21:43:22] hi
+#> INFO [2026-05-08 20:47:43] hi
 flog.info("hi %s", 84 / 2)
-#> INFO [2026-01-06 21:43:22] hi 42
+#> INFO [2026-05-08 20:47:43] hi 42
 flog.info(paste("hi", 84 / 2))
-#> INFO [2026-01-06 21:43:22] hi 42
+#> INFO [2026-05-08 20:47:43] hi 42
 flog.info(glue::glue("hi {84/2}"))
-#> INFO [2026-01-06 21:43:22] hi 42
+#> INFO [2026-05-08 20:47:43] hi 42
 ```
 
 logger
 
 ``` r
+
 log_info("hi")
-#> INFO [2026-01-06 21:43:22] hi
+#> INFO [2026-05-08 20:47:43] hi
 log_info("hi {84/2}")
-#> INFO [2026-01-06 21:43:22] hi 42
+#> INFO [2026-05-08 20:47:43] hi 42
 log_formatter(formatter_sprintf)
 log_info("hi %s", 84 / 2)
-#> INFO [2026-01-06 21:43:22] hi 42
+#> INFO [2026-05-08 20:47:43] hi 42
 log_formatter(formatter_paste)
 log_info("hi", 84 / 2)
-#> INFO [2026-01-06 21:43:22] hi 42
+#> INFO [2026-05-08 20:47:43] hi 42
 ```
 
 It’s easy to change this default formatter in both packages: use
@@ -166,6 +174,7 @@ packages, although he `logger` packages bundles a lot more options:
 logging
 
 ``` r
+
 t <- tempfile()
 flog.appender(appender.file(t))
 #> NULL
@@ -176,6 +185,7 @@ flog.appender(appender.tee(t))
 logger
 
 ``` r
+
 t <- tempfile()
 log_appender(appender_file(t))
 log_appender(appender_tee(t))
@@ -199,6 +209,7 @@ tweaks, `logger` can become an almost perfect drop-in-replacement of
 `futile.logger`:
 
 ``` r
+
 library(logger)
 log_formatter(formatter_sprintf)
 flog.trace <- log_trace
@@ -208,9 +219,9 @@ flog.warn <- log_warn
 flog.error <- log_error
 
 flog.info("Hello from logger in a futile.logger theme ...")
-#> INFO [2026-01-06 21:43:22] Hello from logger in a futile.logger theme ...
+#> INFO [2026-05-08 20:47:44] Hello from logger in a futile.logger theme ...
 flog.warn("... where the default log message formatter is %s", "sprintf")
-#> WARN [2026-01-06 21:43:22] ... where the default log message formatter is sprintf
+#> WARN [2026-05-08 20:47:44] ... where the default log message formatter is sprintf
 ```
 
 ## logging
@@ -230,6 +241,7 @@ already comes with a default log config:
 logging
 
 ``` r
+
 library(logging)
 basicConfig()
 ```
@@ -237,6 +249,7 @@ basicConfig()
 logger
 
 ``` r
+
 library(logger)
 ```
 
@@ -254,19 +267,21 @@ the two packages – with a bit different function names:
 logging
 
 ``` r
+
 loginfo("hi there")
-#> 2026-01-06 21:43:22.848129 INFO::hi there
+#> 2026-05-08 20:47:44.276917 INFO::hi there
 logwarn("watch out")
-#> 2026-01-06 21:43:22.855952 WARNING::watch out
+#> 2026-05-08 20:47:44.287332 WARNING::watch out
 ```
 
 logger
 
 ``` r
+
 log_info("hi there")
-#> INFO [2026-01-06 21:43:22] hi there
+#> INFO [2026-05-08 20:47:44] hi there
 log_warn("watch out")
-#> WARN [2026-01-06 21:43:22] watch out
+#> WARN [2026-05-08 20:47:44] watch out
 ```
 
 As you can see above, the default layout of the log messages is somewhat
@@ -287,6 +302,7 @@ for the same in `logger`:
 logging
 
 ``` r
+
 str(as.list(loglevels))
 #> List of 11
 #>  $ NOTSET  : num 0
@@ -305,6 +321,7 @@ str(as.list(loglevels))
 logger
 
 ``` r
+
 levels <- mget(rev(logger:::log_levels_supported), envir = asNamespace("logger"))
 str(levels, give.attr = FALSE)
 #> List of 8
@@ -333,6 +350,7 @@ in both packages:
 logging
 
 ``` r
+
 getLogger()[["handlers"]]$basic.stdout$formatter
 #> function (record) 
 #> {
@@ -341,13 +359,14 @@ getLogger()[["handlers"]]$basic.stdout$formatter
 #>         msg, sep = ":"))
 #>     return(text)
 #> }
-#> <bytecode: 0x55bbe2caf7d8>
+#> <bytecode: 0x557f3134fe78>
 #> <environment: namespace:logging>
 ```
 
 logger
 
 ``` r
+
 log_layout()
 #> layout_simple
 ```
@@ -369,29 +388,31 @@ using `glue`:
 logging
 
 ``` r
+
 loginfo("hi")
-#> 2026-01-06 21:43:23.250358 INFO::hi
+#> 2026-05-08 20:47:44.649525 INFO::hi
 loginfo("hi %s", 84 / 2)
-#> 2026-01-06 21:43:23.251494 INFO::hi 42
+#> 2026-05-08 20:47:44.650525 INFO::hi 42
 loginfo(paste("hi", 84 / 2))
-#> 2026-01-06 21:43:23.25239 INFO::hi 42
+#> 2026-05-08 20:47:44.651314 INFO::hi 42
 loginfo(glue::glue("hi {84/2}"))
-#> 2026-01-06 21:43:23.253525 INFO::hi 42
+#> 2026-05-08 20:47:44.652237 INFO::hi 42
 ```
 
 logger
 
 ``` r
+
 log_info("hi")
-#> INFO [2026-01-06 21:43:23] hi
+#> INFO [2026-05-08 20:47:44] hi
 log_info("hi {84/2}")
-#> INFO [2026-01-06 21:43:23] hi {84/2}
+#> INFO [2026-05-08 20:47:44] hi {84/2}
 log_formatter(formatter_sprintf)
 log_info("hi %s", 84 / 2)
-#> INFO [2026-01-06 21:43:23] hi 42
+#> INFO [2026-05-08 20:47:44] hi 42
 log_formatter(formatter_paste)
 log_info("hi", 84 / 2)
-#> INFO [2026-01-06 21:43:23] hi 42
+#> INFO [2026-05-08 20:47:44] hi 42
 ```
 
 For even better compatibility, there’s also
@@ -401,19 +422,20 @@ but will log the call and the result as well when the log object is an R
 expression:
 
 ``` r
+
 log_formatter(formatter_logging)
 log_info("42")
-#> INFO [2026-01-06 21:43:23] 42
+#> INFO [2026-05-08 20:47:44] 42
 log_info(42)
-#> INFO [2026-01-06 21:43:23] 42: 42
+#> INFO [2026-05-08 20:47:44] 42: 42
 log_info(4 + 2)
-#> INFO [2026-01-06 21:43:23] 4 + 2: 6
+#> INFO [2026-05-08 20:47:44] 4 + 2: 6
 log_info("foo %s", "bar")
-#> INFO [2026-01-06 21:43:23] foo bar
+#> INFO [2026-05-08 20:47:44] foo bar
 log_info(12, 1 + 1, 2 * 2)
-#> INFO [2026-01-06 21:43:23] 12: 12
-#> INFO [2026-01-06 21:43:23] 1 + 1: 2
-#> INFO [2026-01-06 21:43:23] 2 * 2: 4
+#> INFO [2026-05-08 20:47:44] 12: 12
+#> INFO [2026-05-08 20:47:44] 1 + 1: 2
+#> INFO [2026-05-08 20:47:44] 2 * 2: 4
 ```
 
 ### Log record destination
@@ -424,6 +446,7 @@ packages, although he `logger` packages bundles a lot more options:
 logging
 
 ``` r
+
 ?addHandler
 ?writeToConsole
 ?writeToFile
@@ -432,6 +455,7 @@ logging
 logger
 
 ``` r
+
 ?log_appender
 ?appender_console
 ?appender_file
@@ -454,6 +478,7 @@ can become an almost perfect drop-in-replacement of `logging` – although
 not all log levels (eg and ) are supported:
 
 ``` r
+
 library(logger)
 log_formatter(formatter_logging)
 log_layout(layout_logging)
@@ -463,9 +488,9 @@ logwarn <- log_warn
 logerror <- log_error
 
 loginfo("Hello from logger in a logging theme ...")
-#> 2026-01-06 21:43:23 INFO::Hello from logger in a logging theme ...
+#> 2026-05-08 20:47:44 INFO::Hello from logger in a logging theme ...
 logwarn("... where the default log message formatter is %s", "sprintf", namespace = "foobar")
-#> 2026-01-06 21:43:23 WARN:foobar:... where the default log message formatter is sprintf
+#> 2026-05-08 20:47:44 WARN:foobar:... where the default log message formatter is sprintf
 ```
 
 ## log4r
@@ -482,6 +507,7 @@ being able to log messages, while that’s automatically done in \`logger:
 log4r
 
 ``` r
+
 library(log4r)
 #> 
 #> Attaching package: 'log4r'
@@ -500,6 +526,7 @@ logger <- create.logger(logfile = stdout(), level = "INFO")
 logger
 
 ``` r
+
 library(logger)
 ```
 
@@ -517,19 +544,21 @@ logging object and the log message:
 log4r
 
 ``` r
+
 info(logger, "hi there")
-#> INFO  [2026-01-06 21:43:23] hi there
+#> INFO  [2026-05-08 20:47:45] hi there
 warn(logger, "watch out")
-#> WARN  [2026-01-06 21:43:23] watch out
+#> WARN  [2026-05-08 20:47:45] watch out
 ```
 
 logger
 
 ``` r
+
 log_info("hi there")
-#> 2026-01-06 21:43:23 INFO::hi there
+#> 2026-05-08 20:47:45 INFO::hi there
 log_warn("watch out")
-#> 2026-01-06 21:43:23 WARN::watch out
+#> 2026-05-08 20:47:45 WARN::watch out
 ```
 
 As you can see the default layout of the messages is a bit different in
@@ -562,10 +591,10 @@ besides a number of other log record destinations as well.
 Creating objects is the `log4r` way of handling multiple log
 environments, while `logger` handles that via `namespace`s.
 
-## loggit
+## loggit and loggr
 
-Sorry, no direct replacement for
-[`loggit`](https://cran.r-project.org/package=loggit) – capturing
-`message`, `warning` and `stop` function messages, but it’s on the
-[roadmap](https://github.com/daroczig/logger/issues/6) to provide helper
-functions to be used as message hooks feed `logger`.
+Both [`loggit`](https://cran.r-project.org/package=loggit) and
+[`loggr`](https://github.com/smbache/loggr) provides an easy way of
+capturing `message`, `warning` and `stop` function messages. Similar
+functionality has been added to `logger` in the form of `log_message`,
+`log_warning` and `log_error` functions.

@@ -1,8 +1,8 @@
 # Changelog
 
-## logger 0.4.1.9000 (development version)
+## logger 0.4.2 (2026-05-08)
 
-New features and quality of life improvements:
+Maintenance release:
 
 - Added
   [`appender_ntfy()`](https://daroczig.github.io/logger/reference/appender_ntfy.md)
@@ -14,6 +14,7 @@ New features and quality of life improvements:
   does not exist
   ([\#241](https://github.com/daroczig/logger/issues/241),
   [@maksymiuks](https://github.com/maksymiuks))
+- Fix failing unit test on CRAN
 
 ## logger 0.4.1 (2025-09-08)
 

@@ -20,6 +20,6 @@ log_failure(expression)
 log_failure("foobar")
 #> [1] "foobar"
 try(log_failure(foobar))
-#> ERROR [2026-01-06 21:43:07] object 'foobar' not found
+#> ERROR [2026-05-08 20:47:28] object 'foobar' not found
 #> Error in eval(expr, envir) : object 'foobar' not found
 ```

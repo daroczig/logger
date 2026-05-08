@@ -9,6 +9,7 @@ it seems to perform pretty well when comparing with `futile.logger` and
 `logging` packages:
 
 ``` r
+
 library(microbenchmark)
 
 ## fl
@@ -75,6 +76,7 @@ much faster message formatters (eg `paste0` or `sprintf` instead of
 instead of `glue`, so a quick `logger` comparison:
 
 ``` r
+
 log_formatter(formatter_sprintf)
 string <- function() log_info('hi')
 dynamic <- function() log_info('hi %s', 42)
@@ -98,6 +100,7 @@ process. This can be easily achieved in `logger` by wrapping any
 appender function in the `appender_async` function, such as:
 
 ``` r
+
 ## demo log appender that's pretty slow
 appender_file_slow <- function(file) {
   force(file)

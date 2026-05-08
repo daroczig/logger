@@ -9,6 +9,7 @@ inspired by the `futile.logger` R package and `logging` Python module.
 version](https://www.r-pkg.org/badges/version-ago/logger)](https://cran.r-project.org/package=logger)
 
 ``` r
+
 install.packages("logger")
 ```
 
@@ -16,6 +17,7 @@ The most recent, development version of `logger` can also be installed
 from GitHub:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("daroczig/logger")
 ```
@@ -26,6 +28,7 @@ Setting the log level threshold to something low and logging various
 messages in ad-hoc and programmatic ways:
 
 ``` r
+
 library(logger)
 log_threshold(DEBUG)
 log_info("Script starting up...")
