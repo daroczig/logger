@@ -2,11 +2,9 @@
 
 Maintenance release:
 
-* `ntfy` appender (#240, @jonocarroll)
-* Fix rare warnings on srcrefs pointing to uninstalled packages (#242, @maksymiuks)
+* Added `appender_ntfy()` to use {ntfy} as an appender (#240, @jonocarroll)
+* `normalizePath()` in the `log_call_location()` no longer triggers warning if the package source does not exist (#241, @maksymiuks)
 * Fix failing unit test on CRAN
-
-# logger 0.4.1 (2025-09-10)
 
 New features and quality of life improvements:
 

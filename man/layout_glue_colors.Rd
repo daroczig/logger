@@ -52,7 +52,7 @@ with \code{\link[=colorize_by_log_level]{colorize_by_log_level()}} and the messa
 This functionality depends on the \pkg{crayon} package.
 }
 \examples{
-\dontshow{if (requireNamespace("crayon")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("crayon")) withAutoprint(\{ # examplesIf}
 log_layout(layout_glue_colors)
 log_threshold(TRACE)
 log_info("Starting the script...")

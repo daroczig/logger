@@ -78,6 +78,7 @@ Other log_appenders:
 \code{\link{appender_async}()},
 \code{\link{appender_console}()},
 \code{\link{appender_kinesis}()},
+\code{\link{appender_ntfy}()},
 \code{\link{appender_pushbullet}()},
 \code{\link{appender_slack}()},
 \code{\link{appender_stdout}()},

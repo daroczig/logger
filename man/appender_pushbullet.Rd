@@ -24,6 +24,7 @@ Other log_appenders:
 \code{\link{appender_console}()},
 \code{\link{appender_file}()},
 \code{\link{appender_kinesis}()},
+\code{\link{appender_ntfy}()},
 \code{\link{appender_slack}()},
 \code{\link{appender_stdout}()},
 \code{\link{appender_syslog}()},

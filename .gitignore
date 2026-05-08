@@ -2,3 +2,5 @@ docs/
 README.html
 
 /.quarto/
+.trash
+revdep

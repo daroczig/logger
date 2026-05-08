@@ -72,9 +72,9 @@ log_eval <- function(expr, level = TRACE, multiline = FALSE) {
 
   ## return the results of the call
   if (res$visible == TRUE) {
-    return(res$value)
+    res$value
   } else {
-    return(invisible(res$value))
+    invisible(res$value)
   }
 }
 

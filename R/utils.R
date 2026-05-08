@@ -61,7 +61,7 @@ log_call_location <- function(.logcall) {
       loc$line <- ref[1L]
       file <- attr(ref, "srcfile")
       if (!is.null(file)) {
-        loc$path <- normalizePath(file$filename, winslash = "/")
+        loc$path <- normalizePath(file$filename, winslash = "/", mustWork = FALSE)
       }
       break
     }
