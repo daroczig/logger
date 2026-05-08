@@ -1,6 +1,12 @@
-# logger 0.4.1.9000 (development version)
+# logger 0.4.2 (2026-05-08)
 
-# logger 0.4.1 (2025-09-08)
+Maintenance release:
+
+* `ntfy` appender (#240, @jonocarroll)
+* Fix rare warnings on srcrefs pointing to uninstalled packages (#242, @maksymiuks)
+* Fix failing unit test on CRAN
+
+# logger 0.4.1 (2025-09-10)
 
 New features and quality of life improvements:
 
