@@ -57,9 +57,9 @@ example_layout <- layout_glue_generator(
   format = "{node}/{pid}/{ns}/{ans}/{topenv}/{fn} {time} {level}: {msg}"
 )
 example_layout(INFO, "try {runif(1)}")
-#> runnervmeorf1/9021/NA/global/R_GlobalEnv/eval 2026-05-08 20:47:24.547137 INFO: try {runif(1)}
+#> runnervmeorf1/8746/NA/global/R_GlobalEnv/eval 2026-05-09 19:42:17.032041 INFO: try {runif(1)}
 
 log_layout(example_layout)
 log_info("try {runif(1)}")
-#> runnervmeorf1/9021/global/global/R_GlobalEnv/eval 2026-05-08 20:47:24.549617 INFO: try 0.0807501375675201
+#> runnervmeorf1/8746/global/global/R_GlobalEnv/eval 2026-05-09 19:42:17.034523 INFO: try 0.0807501375675201
 ```

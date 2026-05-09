@@ -14,15 +14,15 @@ for example:
 
 library(logger)
 log_info("Loading data")
-#> INFO [2026-05-08 20:47:40] Loading data
+#> INFO [2026-05-09 19:42:32] Loading data
 data(mtcars)
 log_info("The dataset includes {nrow(mtcars)} rows")
-#> INFO [2026-05-08 20:47:40] The dataset includes 32 rows
+#> INFO [2026-05-09 19:42:32] The dataset includes 32 rows
 if (max(mtcars$hp) < 1000) {
   log_warn("Oh, no! There are no cars with more than 1K horsepower in the dataset :/")
   log_debug("The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp")
 }
-#> WARN [2026-05-08 20:47:40] Oh, no! There are no cars with more than 1K horsepower in the dataset :/
+#> WARN [2026-05-09 19:42:32] Oh, no! There are no cars with more than 1K horsepower in the dataset :/
 ```
 
 Interestingly, the most powerful car was not being logged – because by
@@ -47,16 +47,16 @@ The rerunning the above code chunk:
 ``` r
 
 log_info("Loading data")
-#> INFO [2026-05-08 20:47:41] Loading data
+#> INFO [2026-05-09 19:42:33] Loading data
 data(mtcars)
 log_info("The dataset includes {nrow(mtcars)} rows")
-#> INFO [2026-05-08 20:47:41] The dataset includes 32 rows
+#> INFO [2026-05-09 19:42:33] The dataset includes 32 rows
 if (max(mtcars$hp) < 1000) {
   log_warn("Oh, no! There are no cars with more than 1K horsepower in the dataset :/")
   log_debug("The most powerful car is {rownames(mtcars)[which.max(mtcars$hp)]} with {max(mtcars$hp)} hp")
 }
-#> WARN [2026-05-08 20:47:41] Oh, no! There are no cars with more than 1K horsepower in the dataset :/
-#> DEBUG [2026-05-08 20:47:41] The most powerful car is Maserati Bora with 335 hp
+#> WARN [2026-05-09 19:42:33] Oh, no! There are no cars with more than 1K horsepower in the dataset :/
+#> DEBUG [2026-05-09 19:42:33] The most powerful car is Maserati Bora with 335 hp
 ```
 
 You may also find the
@@ -70,7 +70,7 @@ f <- sqrt
 g <- mean
 x <- 1:31
 log_eval(y <- f(g(x)), level = INFO)
-#> INFO [2026-05-08 20:47:41] 'y <- f(g(x))' => '4'
+#> INFO [2026-05-09 19:42:33] 'y <- f(g(x))' => '4'
 str(y)
 #>  num 4
 ```
@@ -83,17 +83,17 @@ the formatter using `pander` instead of `glue` can help:
 
 log_formatter(formatter_pander)
 log_info(head(iris))
-#> INFO [2026-05-08 20:47:41] 
-#> INFO [2026-05-08 20:47:41] 
-#> INFO [2026-05-08 20:47:41]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species 
-#> INFO [2026-05-08 20:47:41] -------------- ------------- -------------- ------------- ---------
-#> INFO [2026-05-08 20:47:41]      5.1            3.5           1.4            0.2       setosa  
-#> INFO [2026-05-08 20:47:41]      4.9             3            1.4            0.2       setosa  
-#> INFO [2026-05-08 20:47:41]      4.7            3.2           1.3            0.2       setosa  
-#> INFO [2026-05-08 20:47:41]      4.6            3.1           1.5            0.2       setosa  
-#> INFO [2026-05-08 20:47:41]       5             3.6           1.4            0.2       setosa  
-#> INFO [2026-05-08 20:47:41]      5.4            3.9           1.7            0.4       setosa  
-#> INFO [2026-05-08 20:47:41]
+#> INFO [2026-05-09 19:42:33] 
+#> INFO [2026-05-09 19:42:33] 
+#> INFO [2026-05-09 19:42:33]  Sepal.Length   Sepal.Width   Petal.Length   Petal.Width   Species 
+#> INFO [2026-05-09 19:42:33] -------------- ------------- -------------- ------------- ---------
+#> INFO [2026-05-09 19:42:33]      5.1            3.5           1.4            0.2       setosa  
+#> INFO [2026-05-09 19:42:33]      4.9             3            1.4            0.2       setosa  
+#> INFO [2026-05-09 19:42:33]      4.7            3.2           1.3            0.2       setosa  
+#> INFO [2026-05-09 19:42:33]      4.6            3.1           1.5            0.2       setosa  
+#> INFO [2026-05-09 19:42:33]       5             3.6           1.4            0.2       setosa  
+#> INFO [2026-05-09 19:42:33]      5.4            3.9           1.7            0.4       setosa  
+#> INFO [2026-05-09 19:42:33]
 ```
 
 For more details, check the [function reference in the

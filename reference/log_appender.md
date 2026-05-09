@@ -41,21 +41,21 @@ Other log configutation functions:
 t <- tempfile()
 log_appender(appender_tee(t))
 log_info(42)
-#> INFO [2026-05-08 20:47:26] 42
+#> INFO [2026-05-09 19:42:18] 42
 log_info(43)
-#> INFO [2026-05-08 20:47:26] 43
+#> INFO [2026-05-09 19:42:18] 43
 log_info(44)
-#> INFO [2026-05-08 20:47:26] 44
+#> INFO [2026-05-09 19:42:18] 44
 readLines(t)
-#> [1] "INFO [2026-05-08 20:47:26] 42" "INFO [2026-05-08 20:47:26] 43"
-#> [3] "INFO [2026-05-08 20:47:26] 44"
+#> [1] "INFO [2026-05-09 19:42:18] 42" "INFO [2026-05-09 19:42:18] 43"
+#> [3] "INFO [2026-05-09 19:42:18] 44"
 
 ## poor man's tee by stacking loggers in the namespace
 t <- tempfile()
 log_appender(appender_stdout)
 log_appender(appender_file(t), index = 2)
 log_info(42)
-#> INFO [2026-05-08 20:47:26] 42
+#> INFO [2026-05-09 19:42:18] 42
 readLines(t)
-#> [1] "INFO [2026-05-08 20:47:26] 42"
+#> [1] "INFO [2026-05-09 19:42:18] 42"
 ```
