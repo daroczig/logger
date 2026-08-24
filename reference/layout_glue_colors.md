@@ -87,19 +87,19 @@ Other log_layouts:
 log_layout(layout_glue_colors)
 log_threshold(TRACE)
 log_info("Starting the script...")
-#> INFO [2026-05-09 19:42:16] Starting the script...
+#> INFO [2026-08-24 12:19:34] Starting the script...
 log_debug("This is the second line")
-#> DEBUG [2026-05-09 19:42:16] This is the second line
+#> DEBUG [2026-08-24 12:19:34] This is the second line
 log_trace("That is being placed right after the first one.")
-#> TRACE [2026-05-09 19:42:16] That is being placed right after the first one.
+#> TRACE [2026-08-24 12:19:34] That is being placed right after the first one.
 log_warn("Some errors might come!")
-#> WARN [2026-05-09 19:42:16] Some errors might come!
+#> WARN [2026-08-24 12:19:34] Some errors might come!
 log_error("This is a problem")
-#> ERROR [2026-05-09 19:42:16] This is a problem
+#> ERROR [2026-08-24 12:19:34] This is a problem
 log_debug("Getting an error is usually bad")
-#> DEBUG [2026-05-09 19:42:16] Getting an error is usually bad
+#> DEBUG [2026-08-24 12:19:34] Getting an error is usually bad
 log_error("This is another problem")
-#> ERROR [2026-05-09 19:42:16] This is another problem
+#> ERROR [2026-08-24 12:19:34] This is another problem
 log_fatal("The last problem.")
-#> FATAL [2026-05-09 19:42:16] The last problem.
+#> FATAL [2026-08-24 12:19:34] The last problem.
 ```

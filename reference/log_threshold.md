@@ -45,15 +45,15 @@ log_threshold()
 log_threshold(WARN)
 log_info(1)
 log_warn(2)
-#> WARN [2026-05-09 19:42:22] 2
+#> WARN [2026-08-24 12:19:40] 2
 
 ## add another logger with a lower log level threshold and check the number of logged messages
 log_threshold(INFO, index = 2)
 log_info(1)
-#> INFO [2026-05-09 19:42:22] 1
+#> INFO [2026-08-24 12:19:40] 1
 log_warn(2)
-#> WARN [2026-05-09 19:42:22] 2
-#> WARN [2026-05-09 19:42:22] 2
+#> WARN [2026-08-24 12:19:40] 2
+#> WARN [2026-08-24 12:19:40] 2
 
 ## set the log level threshold in all namespaces to ERROR
 log_threshold(ERROR, namespace = log_namespaces())

@@ -38,15 +38,15 @@ Other log_layouts:
 ``` r
 log_formatter(formatter_json)
 log_info(everything = 42)
-#> INFO [2026-05-09 19:42:17] {"everything":42}
+#> INFO [2026-08-24 12:19:35] {"everything":42}
 
 log_layout(layout_json_parser())
 log_info(everything = 42)
-#> {"time":"2026-05-09 19:42:17","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmeorf1","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1010-azure","os_version":"#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026","pid":8746,"user":"runner","everything":42}
+#> {"time":"2026-08-24 12:19:35","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervm76f27","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1022-azure","os_version":"#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026","pid":8754,"user":"runner","everything":42}
 
 log_layout(layout_json_parser(fields = c("time", "node")))
 log_info(cars = row.names(mtcars), species = unique(iris$Species))
-#> {"time":"2026-05-09 19:42:17","node":"runnervmeorf1","cars":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"species":["setosa","versicolor","virginica"]}
+#> {"time":"2026-08-24 12:19:35","node":"runnervm76f27","cars":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"species":["setosa","versicolor","virginica"]}
 
 log_layout(layout_json_parser(fields = c(timestamp = "time", "node")))
 log_info(
@@ -55,5 +55,5 @@ log_info(
     the 'time' field is renamed to 'timestamp'"
   )
 )
-#> {"timestamp":"2026-05-09 19:42:17","node":"runnervmeorf1","message":"Compared to the previous example,\n    the 'time' field is renamed to 'timestamp'"}
+#> {"timestamp":"2026-08-24 12:19:35","node":"runnervm76f27","message":"Compared to the previous example,\n    the 'time' field is renamed to 'timestamp'"}
 ```

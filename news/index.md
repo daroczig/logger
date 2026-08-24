@@ -1,6 +1,15 @@
 # Changelog
 
+## logger 0.4.3 (2026-08-23)
+
+Maintenance release:
+
+- Update `log4r` migration vignette to reflect their new API with
+  conflicting function names
+
 ## logger 0.4.2 (2026-05-08)
+
+CRAN release: 2026-05-10
 
 Maintenance release:
 

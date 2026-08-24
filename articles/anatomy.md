@@ -48,7 +48,7 @@ To make a successful log record, `logger` requires the below components:
   #> 
   #> 
   #> $time
-  #> [1] "2026-05-09 19:42:26 UTC"
+  #> [1] "2026-08-24 12:19:44 UTC"
   #> 
   #> $levelr
   #> Log level: INFO
@@ -57,16 +57,16 @@ To make a successful log record, `logger` requires the below components:
   #> [1] "INFO"
   #> 
   #> $pid
-  #> [1] 11518
+  #> [1] 11525
   #> 
   #> $r_version
-  #> [1] "4.6.0"
+  #> [1] "4.6.1"
   #> 
   #> $ns_pkg_version
   #> [1] NA
   #> 
   #> $node
-  #> [1] "runnervmeorf1"
+  #> [1] "runnervm76f27"
   #> 
   #> $arch
   #> [1] "x86_64"
@@ -75,10 +75,10 @@ To make a successful log record, `logger` requires the below components:
   #> [1] "Linux"
   #> 
   #> $os_release
-  #> [1] "6.17.0-1010-azure"
+  #> [1] "6.17.0-1022-azure"
   #> 
   #> $os_version
-  #> [1] "#10~24.04.1-Ubuntu SMP Fri Mar  6 22:00:57 UTC 2026"
+  #> [1] "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026"
   #> 
   #> $user
   #> [1] "runner"
@@ -97,7 +97,7 @@ To make a successful log record, `logger` requires the below components:
     ERROR <= INFO
     #> [1] TRUE
     log_error("Oops")
-    #> ERROR [2026-05-09 19:42:26] Oops
+    #> ERROR [2026-08-24 12:19:44] Oops
     ```
 
   - `formatter` function, which takes R objects and converts those into
@@ -147,7 +147,7 @@ log_layout(layout_simple)
 log_appender(appender_stdout)
 log_debug("I am a low level log message that will not be printed with a high log level threshold")
 log_warn("I am a higher level log message that is very likely to be printed")
-#> WARN [2026-05-09 19:42:26] I am a higher level log message that is very likely to be printed
+#> WARN [2026-08-24 12:19:45] I am a higher level log message that is very likely to be printed
 ```
 
 Note, that all `logger` definitions and requests are tied to a logging

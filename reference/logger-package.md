@@ -19,6 +19,9 @@ Useful links:
 
 Authors:
 
+- Gergely Daróczi <daroczig@rapporter.net>
+  ([ORCID](https://orcid.org/0000-0003-3149-8537))
+
 - Hadley Wickham <hadley@posit.co>
   ([ORCID](https://orcid.org/0000-0003-4757-117X))
 

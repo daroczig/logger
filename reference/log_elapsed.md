@@ -39,11 +39,11 @@ log_elapsed_start(level = INFO, namespace = NA_character_, quiet = FALSE)
 
 ``` r
 log_elapsed_start()
-#> INFO [2026-05-09 19:42:19] starting global timer
+#> INFO [2026-08-24 12:19:37] starting global timer
 Sys.sleep(0.4)
 log_elapsed("Tast 1")
-#> INFO [2026-05-09 19:42:19] global timer 0.4 secs elapsed -- Tast 1
+#> INFO [2026-08-24 12:19:37] global timer 0.4 secs elapsed -- Tast 1
 Sys.sleep(0.2)
 log_elapsed("Task 2")
-#> INFO [2026-05-09 19:42:19] global timer 0.61 secs elapsed -- Task 2
+#> INFO [2026-08-24 12:19:37] global timer 0.61 secs elapsed -- Task 2
 ```

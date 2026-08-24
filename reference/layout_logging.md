@@ -79,9 +79,9 @@ Other log_layouts:
 ``` r
 log_layout(layout_logging)
 log_info(42)
-#> 2026-05-09 19:42:17 INFO::42
+#> 2026-08-24 12:19:35 INFO::42
 log_info(42, namespace = "everything")
-#> 2026-05-09 19:42:17 INFO:everything:42
+#> 2026-08-24 12:19:35 INFO:everything:42
 
 if (FALSE) { # \dontrun{
 devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))

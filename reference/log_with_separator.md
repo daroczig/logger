@@ -50,26 +50,26 @@ log_with_separator(
 
 ``` r
 log_with_separator("An important message")
-#> INFO [2026-05-09 19:42:24] =====================================================
-#> INFO [2026-05-09 19:42:24] = An important message                              =
-#> INFO [2026-05-09 19:42:24] =====================================================
+#> INFO [2026-08-24 12:19:42] =====================================================
+#> INFO [2026-08-24 12:19:42] = An important message                              =
+#> INFO [2026-08-24 12:19:42] =====================================================
 log_with_separator("Some critical KPI down!!!", separator = "$")
-#> INFO [2026-05-09 19:42:24] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-#> INFO [2026-05-09 19:42:24] $ Some critical KPI down!!!                         $
-#> INFO [2026-05-09 19:42:24] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#> INFO [2026-08-24 12:19:42] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#> INFO [2026-08-24 12:19:42] $ Some critical KPI down!!!                         $
+#> INFO [2026-08-24 12:19:42] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 log_with_separator("This message is worth a {1e3} words")
-#> INFO [2026-05-09 19:42:24] =====================================================
-#> INFO [2026-05-09 19:42:24] = This message is worth a 1000 words                =
-#> INFO [2026-05-09 19:42:24] =====================================================
+#> INFO [2026-08-24 12:19:42] =====================================================
+#> INFO [2026-08-24 12:19:42] = This message is worth a 1000 words                =
+#> INFO [2026-08-24 12:19:42] =====================================================
 log_with_separator(paste(
   "A very important message with a bunch of extra words that will",
   "eventually wrap into a multi-line message for our quite nice demo :wow:"
 ))
-#> INFO [2026-05-09 19:42:24] =====================================================
-#> INFO [2026-05-09 19:42:24] = A very important message with a bunch of extra    =
-#> INFO [2026-05-09 19:42:24] = words that will eventually wrap into a            =
-#> INFO [2026-05-09 19:42:24] = multi-line message for our quite nice demo :wow:  =
-#> INFO [2026-05-09 19:42:24] =====================================================
+#> INFO [2026-08-24 12:19:42] =====================================================
+#> INFO [2026-08-24 12:19:42] = A very important message with a bunch of extra    =
+#> INFO [2026-08-24 12:19:42] = words that will eventually wrap into a            =
+#> INFO [2026-08-24 12:19:42] = multi-line message for our quite nice demo :wow:  =
+#> INFO [2026-08-24 12:19:42] =====================================================
 log_with_separator(
   paste(
     "A very important message with a bunch of extra words that will",
@@ -77,18 +77,18 @@ log_with_separator(
   ),
   width = 60
 )
-#> INFO [2026-05-09 19:42:24] =================================
-#> INFO [2026-05-09 19:42:24] = A very important message      =
-#> INFO [2026-05-09 19:42:24] = with a bunch of extra words   =
-#> INFO [2026-05-09 19:42:24] = that will eventually wrap     =
-#> INFO [2026-05-09 19:42:24] = into a multi-line message     =
-#> INFO [2026-05-09 19:42:24] = for our quite nice demo       =
-#> INFO [2026-05-09 19:42:24] = :wow:                         =
-#> INFO [2026-05-09 19:42:24] =================================
+#> INFO [2026-08-24 12:19:42] =================================
+#> INFO [2026-08-24 12:19:42] = A very important message      =
+#> INFO [2026-08-24 12:19:42] = with a bunch of extra words   =
+#> INFO [2026-08-24 12:19:42] = that will eventually wrap     =
+#> INFO [2026-08-24 12:19:42] = into a multi-line message     =
+#> INFO [2026-08-24 12:19:42] = for our quite nice demo       =
+#> INFO [2026-08-24 12:19:42] = :wow:                         =
+#> INFO [2026-08-24 12:19:42] =================================
 log_with_separator("Boo!", level = FATAL)
-#> FATAL [2026-05-09 19:42:24] ====================================================
-#> FATAL [2026-05-09 19:42:24] = Boo!                                             =
-#> FATAL [2026-05-09 19:42:24] ====================================================
+#> FATAL [2026-08-24 12:19:42] ====================================================
+#> FATAL [2026-08-24 12:19:42] = Boo!                                             =
+#> FATAL [2026-08-24 12:19:42] ====================================================
 log_layout(layout_blank)
 log_with_separator("Boo!", level = FATAL)
 #> ================================================================================
@@ -97,7 +97,7 @@ log_with_separator("Boo!", level = FATAL)
 logger <- layout_glue_generator(format = "{node}/{pid}/{namespace}/{fn} {time} {level}: {msg}")
 log_layout(logger)
 log_with_separator("Boo!", level = FATAL, width = 120)
-#> runnervmeorf1/8746/global/eval 2026-05-09 19:42:24.167744 FATAL: =======================================================
-#> runnervmeorf1/8746/global/log_with_separator 2026-05-09 19:42:24.168538 FATAL: = Boo!                                                =
-#> runnervmeorf1/8746/global/eval 2026-05-09 19:42:24.169734 FATAL: =======================================================
+#> runnervm76f27/8754/global/eval 2026-08-24 12:19:42.373327 FATAL: =======================================================
+#> runnervm76f27/8754/global/log_with_separator 2026-08-24 12:19:42.374208 FATAL: = Boo!                                                 =
+#> runnervm76f27/8754/global/eval 2026-08-24 12:19:42.375592 FATAL: ========================================================
 ```
