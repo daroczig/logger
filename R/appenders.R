@@ -96,7 +96,7 @@ appender_file <- function(file, append = TRUE, max_lines = Inf, max_bytes = Inf,
 
   structure(
     function(lines) {
-      if (is.finite(max_lines) | is.finite(max_bytes)) {
+      if (is.finite(max_lines) || is.finite(max_bytes)) {
         fail_on_missing_package("R.utils")
 
         n_lines <- tryCatch(
