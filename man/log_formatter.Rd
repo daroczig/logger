@@ -20,9 +20,9 @@ a single string, eg \code{\link[=formatter_paste]{formatter_paste()}}, \code{\li
 Get or set log message formatter
 }
 \seealso{
-Other log configutation functions: 
-\code{\link{log_appender}()},
-\code{\link{log_layout}()},
-\code{\link{log_threshold}()}
+Other log configutation functions:
+\code{\link[=log_appender]{log_appender()}},
+\code{\link[=log_layout]{log_layout()}},
+\code{\link[=log_threshold]{log_threshold()}}
 }
 \concept{log configutation functions}

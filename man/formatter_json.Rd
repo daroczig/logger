@@ -44,14 +44,14 @@ log_info(mtcars = mtcars, species = iris$Species)
 \dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
-Other log_formatters: 
-\code{\link{formatter_cli}()},
-\code{\link{formatter_glue}()},
-\code{\link{formatter_glue_or_sprintf}()},
-\code{\link{formatter_glue_safe}()},
-\code{\link{formatter_logging}()},
-\code{\link{formatter_pander}()},
-\code{\link{formatter_paste}()},
-\code{\link{formatter_sprintf}()}
+Other log_formatters:
+\code{\link[=formatter_cli]{formatter_cli()}},
+\code{\link[=formatter_glue]{formatter_glue()}},
+\code{\link[=formatter_glue_or_sprintf]{formatter_glue_or_sprintf()}},
+\code{\link[=formatter_glue_safe]{formatter_glue_safe()}},
+\code{\link[=formatter_logging]{formatter_logging()}},
+\code{\link[=formatter_pander]{formatter_pander()}},
+\code{\link[=formatter_paste]{formatter_paste()}},
+\code{\link[=formatter_sprintf]{formatter_sprintf()}}
 }
 \concept{log_formatters}

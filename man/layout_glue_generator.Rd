@@ -37,15 +37,15 @@ log_info("try {runif(1)}")
 \seealso{
 See example calls from \code{\link[=layout_glue]{layout_glue()}} and \code{\link[=layout_glue_colors]{layout_glue_colors()}}.
 
-Other log_layouts: 
-\code{\link{get_logger_meta_variables}()},
-\code{\link{layout_blank}()},
-\code{\link{layout_gha}()},
-\code{\link{layout_glue}()},
-\code{\link{layout_glue_colors}()},
-\code{\link{layout_json}()},
-\code{\link{layout_json_parser}()},
-\code{\link{layout_logging}()},
-\code{\link{layout_simple}()}
+Other log_layouts:
+\code{\link[=get_logger_meta_variables]{get_logger_meta_variables()}},
+\code{\link[=layout_blank]{layout_blank()}},
+\code{\link[=layout_gha]{layout_gha()}},
+\code{\link[=layout_glue]{layout_glue()}},
+\code{\link[=layout_glue_colors]{layout_glue_colors()}},
+\code{\link[=layout_json]{layout_json()}},
+\code{\link[=layout_json_parser]{layout_json_parser()}},
+\code{\link[=layout_logging]{layout_logging()}},
+\code{\link[=layout_simple]{layout_simple()}}
 }
 \concept{log_layouts}

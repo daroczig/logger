@@ -55,15 +55,15 @@ and \code{debug}. Because of this, \code{FATAL} and \code{ERROR} are coerced to 
 coerced to \code{debug} (\code{WARN} maps directly to \code{warning}).
 }
 \seealso{
-Other log_layouts: 
-\code{\link{get_logger_meta_variables}()},
-\code{\link{layout_blank}()},
-\code{\link{layout_glue}()},
-\code{\link{layout_glue_colors}()},
-\code{\link{layout_glue_generator}()},
-\code{\link{layout_json}()},
-\code{\link{layout_json_parser}()},
-\code{\link{layout_logging}()},
-\code{\link{layout_simple}()}
+Other log_layouts:
+\code{\link[=get_logger_meta_variables]{get_logger_meta_variables()}},
+\code{\link[=layout_blank]{layout_blank()}},
+\code{\link[=layout_glue]{layout_glue()}},
+\code{\link[=layout_glue_colors]{layout_glue_colors()}},
+\code{\link[=layout_glue_generator]{layout_glue_generator()}},
+\code{\link[=layout_json]{layout_json()}},
+\code{\link[=layout_json_parser]{layout_json_parser()}},
+\code{\link[=layout_logging]{layout_logging()}},
+\code{\link[=layout_simple]{layout_simple()}}
 }
 \concept{log_layouts}

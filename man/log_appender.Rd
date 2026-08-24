@@ -37,9 +37,9 @@ readLines(t)
 \dontshow{logger:::namespaces_set(old)}
 }
 \seealso{
-Other log configutation functions: 
-\code{\link{log_formatter}()},
-\code{\link{log_layout}()},
-\code{\link{log_threshold}()}
+Other log configutation functions:
+\code{\link[=log_formatter]{log_formatter()}},
+\code{\link[=log_layout]{log_layout()}},
+\code{\link[=log_threshold]{log_threshold()}}
 }
 \concept{log configutation functions}

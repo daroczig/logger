@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Gergely Daróczi \email{daroczig@rapporter.net} (\href{https://orcid.org/0000-0003-3149-8537}{ORCID})
   \item Hadley Wickham \email{hadley@posit.co} (\href{https://orcid.org/0000-0003-4757-117X}{ORCID})
 }
 

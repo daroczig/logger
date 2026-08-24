@@ -49,15 +49,15 @@ Format a log record by concatenating the log level, timestamp and
 message
 }
 \seealso{
-Other log_layouts: 
-\code{\link{get_logger_meta_variables}()},
-\code{\link{layout_blank}()},
-\code{\link{layout_gha}()},
-\code{\link{layout_glue}()},
-\code{\link{layout_glue_colors}()},
-\code{\link{layout_glue_generator}()},
-\code{\link{layout_json}()},
-\code{\link{layout_json_parser}()},
-\code{\link{layout_logging}()}
+Other log_layouts:
+\code{\link[=get_logger_meta_variables]{get_logger_meta_variables()}},
+\code{\link[=layout_blank]{layout_blank()}},
+\code{\link[=layout_gha]{layout_gha()}},
+\code{\link[=layout_glue]{layout_glue()}},
+\code{\link[=layout_glue_colors]{layout_glue_colors()}},
+\code{\link[=layout_glue_generator]{layout_glue_generator()}},
+\code{\link[=layout_json]{layout_json()}},
+\code{\link[=layout_json_parser]{layout_json_parser()}},
+\code{\link[=layout_logging]{layout_logging()}}
 }
 \concept{log_layouts}

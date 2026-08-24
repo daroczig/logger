@@ -84,10 +84,12 @@ export(logger)
 export(skip_formatter)
 export(with_log_threshold)
 importFrom(stats,setNames)
-importFrom(utils,assignInMyNamespace)
-importFrom(utils,assignInNamespace)
-importFrom(utils,capture.output)
-importFrom(utils,compareVersion)
-importFrom(utils,getFromNamespace)
-importFrom(utils,packageVersion)
-importFrom(utils,str)
+importFrom(utils,
+  assignInMyNamespace,
+  assignInNamespace,
+  capture.output,
+  compareVersion,
+  getFromNamespace,
+  packageVersion,
+  str
+)

@@ -36,16 +36,16 @@ This appends log messages to both console and a file. The same
 rotation options are available as in \code{\link[=appender_file]{appender_file()}}.
 }
 \seealso{
-Other log_appenders: 
-\code{\link{appender_async}()},
-\code{\link{appender_console}()},
-\code{\link{appender_file}()},
-\code{\link{appender_kinesis}()},
-\code{\link{appender_ntfy}()},
-\code{\link{appender_pushbullet}()},
-\code{\link{appender_slack}()},
-\code{\link{appender_stdout}()},
-\code{\link{appender_syslog}()},
-\code{\link{appender_telegram}()}
+Other log_appenders:
+\code{\link[=appender_async]{appender_async()}},
+\code{\link[=appender_console]{appender_console()}},
+\code{\link[=appender_file]{appender_file()}},
+\code{\link[=appender_kinesis]{appender_kinesis()}},
+\code{\link[=appender_ntfy]{appender_ntfy()}},
+\code{\link[=appender_pushbullet]{appender_pushbullet()}},
+\code{\link[=appender_slack]{appender_slack()}},
+\code{\link[=appender_stdout]{appender_stdout()}},
+\code{\link[=appender_syslog]{appender_syslog()}},
+\code{\link[=appender_telegram]{appender_telegram()}}
 }
 \concept{log_appenders}
