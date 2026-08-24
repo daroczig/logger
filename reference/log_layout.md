@@ -42,5 +42,5 @@ Other log configutation functions:
 ``` r
 log_layout(layout_json())
 log_info(42)
-#> {"time":"2026-08-24 12:19:38","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervm76f27","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1022-azure","os_version":"#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026","pid":8754,"user":"runner","msg":"42"}
+#> {"time":"2026-08-24 12:26:33","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervm76f27","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1022-azure","os_version":"#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026","pid":8164,"user":"runner","msg":"42"}
 ```

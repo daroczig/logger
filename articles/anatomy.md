@@ -48,7 +48,7 @@ To make a successful log record, `logger` requires the below components:
   #> 
   #> 
   #> $time
-  #> [1] "2026-08-24 12:19:44 UTC"
+  #> [1] "2026-08-24 12:26:38 UTC"
   #> 
   #> $levelr
   #> Log level: INFO
@@ -57,7 +57,7 @@ To make a successful log record, `logger` requires the below components:
   #> [1] "INFO"
   #> 
   #> $pid
-  #> [1] 11525
+  #> [1] 10935
   #> 
   #> $r_version
   #> [1] "4.6.1"
@@ -97,7 +97,7 @@ To make a successful log record, `logger` requires the below components:
     ERROR <= INFO
     #> [1] TRUE
     log_error("Oops")
-    #> ERROR [2026-08-24 12:19:44] Oops
+    #> ERROR [2026-08-24 12:26:38] Oops
     ```
 
   - `formatter` function, which takes R objects and converts those into
@@ -147,7 +147,7 @@ log_layout(layout_simple)
 log_appender(appender_stdout)
 log_debug("I am a low level log message that will not be printed with a high log level threshold")
 log_warn("I am a higher level log message that is very likely to be printed")
-#> WARN [2026-08-24 12:19:45] I am a higher level log message that is very likely to be printed
+#> WARN [2026-08-24 12:26:38] I am a higher level log message that is very likely to be printed
 ```
 
 Note, that all `logger` definitions and requests are tied to a logging
