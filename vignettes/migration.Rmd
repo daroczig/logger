@@ -160,7 +160,6 @@ log_appender(appender_tee(t))
 ```
 </div>
 
-
 ```{r echo=FALSE, results='hide'}
 flog.appender(appender.console)
 log_appender(appender_stdout)
@@ -173,6 +172,10 @@ Both packages support using different logging namespaces and stacking loggers wi
 ### Using `logger` as a drop-in-replacement of `futile.logger`
 
 `logger` has no hard requirements, so it's a very lightweight alternative of `futile.logger`. Although the function names are a bit different, and the message formatter also differs, but with some simple tweaks, `logger` can become an almost perfect drop-in-replacement of `futile.logger`:
+
+```{r echo=FALSE, results='hide'}
+detach("package:futile.logger", unload = TRUE)
+```
 
 ```{r}
 library(logger)
@@ -348,6 +351,11 @@ logerror <- log_error
 
 loginfo("Hello from logger in a logging theme ...")
 logwarn("... where the default log message formatter is %s", "sprintf", namespace = "foobar")
+
+## reset the logger to the default state
+detach("package:logging", unload = TRUE)
+logger:::namespaces_reset()
+log_appender(appender_stdout)
 ```
 
 ## log4r
@@ -356,12 +364,12 @@ The [`log4r`](https://cran.r-project.org/package=log4r) package provides an obje
 
 ### Initialize
 
-So thus it's important to create a logging object in `log4r` before being able to log messages, while that's automatically done in `logger:
+So thus it's important to create a logging object in `log4r` before being able to log messages, while that's automatically done in `logger`:
 
 <div class="comparison"><package>log4r</package>
 ```{r}
 library(log4r)
-logger <- create.logger(logfile = stdout(), level = "INFO")
+log4r_logger <- log4r::logger()
 ```
 </div>
 <div class="comparison"><package>logger</package>
@@ -374,18 +382,18 @@ Please note that in the background, `logger` does have a concept of logger objec
 
 ### Logging functions
 
-While `logger` has a `log_` prefix for all logging functions, `log4r` has lowercase functions names referring to the log level, which takes a logging object and the log message:
+While `logger` has a `log_` prefix for all logging functions, `log4r` used to have lowercase functions names referring to the log level, which takes a logging object and the log message, but since version 0.5, `log4r` also follows the `log_` prefix format:
 
 <div class="comparison"><package>log4r</package>
 ```{r}
-info(logger, "hi there")
-warn(logger, "watch out")
+log4r::log_info(log4r_logger, "hi there")
+log4r::log_warn(log4r_logger, "watch out")
 ```
 </div>
 <div class="comparison"><package>logger</package>
 ```{r}
-log_info("hi there")
-log_warn("watch out")
+logger::log_info("hi there")
+logger::log_warn("watch out")
 ```
 </div>
 
@@ -395,15 +403,9 @@ As you can see the default layout of the messages is a bit different in the two 
 
 Both packages are based on `log4j`, and `log4r` provides `DEBUG`, `INFO`, `WARN`, `ERROR` and `FATAL`, while `logger` also adds `TRACE` and `SUCCESS` on the top of these.
 
-To change the log level threshold, use the `level` function on the logging object in `log4r`, while it's `log_level` in `logger`.
+### Log record layout, formatter functions, and log record destinations
 
-### Log record layout and formatter functions
-
-The `log4r` provides a `logformat` argument in `create.logger` that can be used to override the default formatting, while `logger` provides formatter and layout functions for a flexible log record design.
-
-### Log record destination
-
-By default, `log4r` logs to a file that can be set to `stoud` to write to the console, while `logger` writes to the console by default, but logging to files via the `appender_file` functions is also possible -- besides a number of other log record destinations as well.
+Since version 0.5, the `log4r` package also follows the `appenders` and layout formatter functions, similar to `logger`.
 
 ### Hierarchical logging and performance
 
@@ -416,6 +418,4 @@ Both [`loggit`](https://cran.r-project.org/package=loggit) and [`loggr`](https:/
 ```{r cleanup, include = FALSE}
 logger:::namespaces_reset()
 detach("package:logger", unload = TRUE)
-detach("package:futile.logger", unload = TRUE)
-detach("package:logging", unload = TRUE)
 ```

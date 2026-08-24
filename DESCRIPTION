@@ -1,8 +1,8 @@
 Type: Package
 Package: logger
 Title: A Lightweight, Modern and Flexible Logging Utility
-Version: 0.4.2
-Date: 2026-05-08
+Version: 0.4.3
+Date: 2026-08-23
 Authors@R: c(
     person("Gergely", "Daróczi", , "daroczig@rapporter.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3149-8537")),
