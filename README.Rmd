@@ -106,13 +106,12 @@ Welcome to the [Bazaar](https://en.wikipedia.org/wiki/The_Cathedral_and_the_Baza
 
 Check out the main documentation site at <https://daroczig.github.io/logger/> or the vignettes on the below topics:
 
-* [Introduction to logger](https://daroczig.github.io/logger/articles/Intro.html)
-* [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html)
-* [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html)
-* [Writing Custom Logger Extensions](https://daroczig.github.io/logger/articles/write_custom_extensions.html)
-* [Migration Guide from other logging packages](https://daroczig.github.io/logger/articles/migration.html)
-* [Logging from R Packages](https://daroczig.github.io/logger/articles/r_packages.html)
-* [Simple Benchmarks on Performance](https://daroczig.github.io/logger/articles/performance.html)
+* Introduction to logger: `vignette("logger")`.
+* Customizing the Format and the Destination of a Log Record: `vignette("customize_logger")`
+* Writing Custom Logger Extensions: `vignette("write_custom_extensions")`
+* Migration Guide from other logging packages: `vignette("migration")`
+* Logging from R Packages: `vignette("r_packages")`
+* Simple Benchmarks on Performance: `vignette("performance")`
 
 :::
 

@@ -61,7 +61,5 @@ do.call(logger, logger:::namespaces$global[[1]])(INFO, "{x}^2 = {x^2}")
 }
 }
 \references{
-For more details, see the Anatomy of a Log Request
-vignette at
-\url{https://daroczig.github.io/logger/articles/anatomy.html}.
+For more details, see vignette("customize_logger")
 }

@@ -86,7 +86,7 @@ pander::panderOptions("knitr.auto.asis", ppo1)
 pander::panderOptions("table.style", ppo2)
 ```
 
-For more details, check the [function reference in the manual](https://daroczig.github.io/logger/reference/index.html), or start with the [The Anatomy of a Log Request](https://daroczig.github.io/logger/articles/anatomy.html) and [Customizing the Format and the Destination of a Log Record](https://daroczig.github.io/logger/articles/customize_logger.html) vignettes.
+For more details, check the [function reference in the manual](https://daroczig.github.io/logger/reference/index.html) or `vignette("customize_logger")`.
 
 ```{r cleanup, include = FALSE}
 logger:::namespaces_reset()
