@@ -165,7 +165,7 @@ log_with_separator <- function(...,
     .topenv = parent.frame()
   )
 
-  message <- do.call(eval(log_formatter()), list(...))
+  message <- do.call(eval(log_formatter()), list(...), envir = parent.frame())
   message <- strwrap(message, max(0, width - base_info_chars - 4))
   message <- sapply(message, function(m) {
     paste0(
