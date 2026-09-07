@@ -47,6 +47,8 @@ test_that("log with separator", {
   local_test_logger()
   expect_output(log_with_separator(42), "===")
   expect_output(log_with_separator("Boo!", level = FATAL, width = 120), width = 120)
+  test_fct <- function(x) log_with_separator("{x}")
+  expect_output(test_fct("Hello World!"))
 })
 
 test_that("log failure", {
