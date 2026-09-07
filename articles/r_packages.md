@@ -22,7 +22,7 @@ library(logger)
 devtools::load_all(system.file("demo-packages/logger-tester-package", package = "logger"))
 #> ℹ Loading logger.tester
 logger_tester_function(INFO, "hi from tester package")
-#> INFO [2026-08-24 12:26:54] hi from tester package 0.0807501375675201
+#> INFO [2026-09-07 21:11:12] hi from tester package 0.0807501375675201
 ```
 
 But if auto-guessing is not your style, then feel free to set your

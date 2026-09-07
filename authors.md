@@ -19,7 +19,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/daroczig/logger/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/daroczig/logger/blob/v0.4.3/DESCRIPTION)
 
 Daróczi G, Wickham H (2026). *logger: A Lightweight, Modern and Flexible
 Logging Utility*. R package version 0.4.3,

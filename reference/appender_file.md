@@ -71,19 +71,19 @@ t <- tempfile()
 log_appender(appender_file(t))
 for (i in 1:25) log_info(i)
 readLines(t)
-#>  [1] "INFO [2026-08-24 12:26:23] 1"  "INFO [2026-08-24 12:26:23] 2" 
-#>  [3] "INFO [2026-08-24 12:26:23] 3"  "INFO [2026-08-24 12:26:23] 4" 
-#>  [5] "INFO [2026-08-24 12:26:23] 5"  "INFO [2026-08-24 12:26:23] 6" 
-#>  [7] "INFO [2026-08-24 12:26:23] 7"  "INFO [2026-08-24 12:26:23] 8" 
-#>  [9] "INFO [2026-08-24 12:26:23] 9"  "INFO [2026-08-24 12:26:23] 10"
-#> [11] "INFO [2026-08-24 12:26:23] 11" "INFO [2026-08-24 12:26:23] 12"
-#> [13] "INFO [2026-08-24 12:26:23] 13" "INFO [2026-08-24 12:26:23] 14"
-#> [15] "INFO [2026-08-24 12:26:23] 15" "INFO [2026-08-24 12:26:23] 16"
-#> [17] "INFO [2026-08-24 12:26:23] 17" "INFO [2026-08-24 12:26:23] 18"
-#> [19] "INFO [2026-08-24 12:26:23] 19" "INFO [2026-08-24 12:26:23] 20"
-#> [21] "INFO [2026-08-24 12:26:23] 21" "INFO [2026-08-24 12:26:23] 22"
-#> [23] "INFO [2026-08-24 12:26:23] 23" "INFO [2026-08-24 12:26:23] 24"
-#> [25] "INFO [2026-08-24 12:26:23] 25"
+#>  [1] "INFO [2026-09-07 21:10:39] 1"  "INFO [2026-09-07 21:10:39] 2" 
+#>  [3] "INFO [2026-09-07 21:10:39] 3"  "INFO [2026-09-07 21:10:39] 4" 
+#>  [5] "INFO [2026-09-07 21:10:39] 5"  "INFO [2026-09-07 21:10:39] 6" 
+#>  [7] "INFO [2026-09-07 21:10:39] 7"  "INFO [2026-09-07 21:10:39] 8" 
+#>  [9] "INFO [2026-09-07 21:10:39] 9"  "INFO [2026-09-07 21:10:39] 10"
+#> [11] "INFO [2026-09-07 21:10:39] 11" "INFO [2026-09-07 21:10:39] 12"
+#> [13] "INFO [2026-09-07 21:10:39] 13" "INFO [2026-09-07 21:10:39] 14"
+#> [15] "INFO [2026-09-07 21:10:39] 15" "INFO [2026-09-07 21:10:39] 16"
+#> [17] "INFO [2026-09-07 21:10:39] 17" "INFO [2026-09-07 21:10:39] 18"
+#> [19] "INFO [2026-09-07 21:10:39] 19" "INFO [2026-09-07 21:10:39] 20"
+#> [21] "INFO [2026-09-07 21:10:39] 21" "INFO [2026-09-07 21:10:39] 22"
+#> [23] "INFO [2026-09-07 21:10:39] 23" "INFO [2026-09-07 21:10:39] 24"
+#> [25] "INFO [2026-09-07 21:10:39] 25"
 
 ## ##########################################################################
 ## more complex example of logging to file
@@ -101,81 +101,81 @@ log_appender(appender_file(f, max_lines = 3, max_files = 5L))
 log_threshold(TRACE, namespace = ".logger")
 ## log 25 messages
 for (i in 1:25) log_info(i)
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 1' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 2' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 3' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 4' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 5' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 6' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 7' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 8' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 9' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 10' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 11' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 12' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.4
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 13' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 14' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 15' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.4
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 16' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 17' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 18' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.4
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 19' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 20' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 21' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.4
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 22' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 23' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 24' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
-#> TRACE [2026-08-24 12:26:23] lines >= max_lines || bytes >= max_bytes: TRUE
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.4
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2
-#> TRACE [2026-08-24 12:26:23] renaming /tmp/Rtmp15k6nj/file1fe41cf5fce4/log to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1
-#> TRACE [2026-08-24 12:26:23] killing the main file: /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
-#> TRACE [2026-08-24 12:26:23] logging 'INFO [2026-08-24 12:26:23] 25' to /tmp/Rtmp15k6nj/file1fe41cf5fce4/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 1' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 2' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 3' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 4' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 5' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 6' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 7' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 8' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 9' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 87, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.2 to /tmp/RtmpciY11P/file21732d062140/log.3
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 10' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 11' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 12' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.3 to /tmp/RtmpciY11P/file21732d062140/log.4
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.2 to /tmp/RtmpciY11P/file21732d062140/log.3
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 13' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 14' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 15' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.3 to /tmp/RtmpciY11P/file21732d062140/log.4
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.2 to /tmp/RtmpciY11P/file21732d062140/log.3
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 16' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 17' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 18' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.3 to /tmp/RtmpciY11P/file21732d062140/log.4
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.2 to /tmp/RtmpciY11P/file21732d062140/log.3
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 19' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 20' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 21' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.3 to /tmp/RtmpciY11P/file21732d062140/log.4
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.2 to /tmp/RtmpciY11P/file21732d062140/log.3
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 22' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 23' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 24' to /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] lines: 3, max_lines: 3, bytes: 90, max_bytes: Inf
+#> TRACE [2026-09-07 21:10:39] lines >= max_lines || bytes >= max_bytes: TRUE
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.3 to /tmp/RtmpciY11P/file21732d062140/log.4
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.2 to /tmp/RtmpciY11P/file21732d062140/log.3
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log.1 to /tmp/RtmpciY11P/file21732d062140/log.2
+#> TRACE [2026-09-07 21:10:39] renaming /tmp/RtmpciY11P/file21732d062140/log to /tmp/RtmpciY11P/file21732d062140/log.1
+#> TRACE [2026-09-07 21:10:39] killing the main file: /tmp/RtmpciY11P/file21732d062140/log
+#> TRACE [2026-09-07 21:10:39] logging 'INFO [2026-09-07 21:10:39] 25' to /tmp/RtmpciY11P/file21732d062140/log
 
 ## see what was logged
 lapply(list.files(t, full.names = TRUE), function(t) {
@@ -183,28 +183,28 @@ lapply(list.files(t, full.names = TRUE), function(t) {
   cat(readLines(t), sep = "\n")
 })
 #> 
-#> ## /tmp/Rtmp15k6nj/file1fe41cf5fce4/log 
-#> INFO [2026-08-24 12:26:23] 25
+#> ## /tmp/RtmpciY11P/file21732d062140/log 
+#> INFO [2026-09-07 21:10:39] 25
 #> 
-#> ## /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.1 
-#> INFO [2026-08-24 12:26:23] 22
-#> INFO [2026-08-24 12:26:23] 23
-#> INFO [2026-08-24 12:26:23] 24
+#> ## /tmp/RtmpciY11P/file21732d062140/log.1 
+#> INFO [2026-09-07 21:10:39] 22
+#> INFO [2026-09-07 21:10:39] 23
+#> INFO [2026-09-07 21:10:39] 24
 #> 
-#> ## /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.2 
-#> INFO [2026-08-24 12:26:23] 19
-#> INFO [2026-08-24 12:26:23] 20
-#> INFO [2026-08-24 12:26:23] 21
+#> ## /tmp/RtmpciY11P/file21732d062140/log.2 
+#> INFO [2026-09-07 21:10:39] 19
+#> INFO [2026-09-07 21:10:39] 20
+#> INFO [2026-09-07 21:10:39] 21
 #> 
-#> ## /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.3 
-#> INFO [2026-08-24 12:26:23] 16
-#> INFO [2026-08-24 12:26:23] 17
-#> INFO [2026-08-24 12:26:23] 18
+#> ## /tmp/RtmpciY11P/file21732d062140/log.3 
+#> INFO [2026-09-07 21:10:39] 16
+#> INFO [2026-09-07 21:10:39] 17
+#> INFO [2026-09-07 21:10:39] 18
 #> 
-#> ## /tmp/Rtmp15k6nj/file1fe41cf5fce4/log.4 
-#> INFO [2026-08-24 12:26:23] 13
-#> INFO [2026-08-24 12:26:23] 14
-#> INFO [2026-08-24 12:26:23] 15
+#> ## /tmp/RtmpciY11P/file21732d062140/log.4 
+#> INFO [2026-09-07 21:10:39] 13
+#> INFO [2026-09-07 21:10:39] 14
+#> INFO [2026-09-07 21:10:39] 15
 #> [[1]]
 #> NULL
 #> 

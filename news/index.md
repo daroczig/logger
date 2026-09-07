@@ -2,6 +2,8 @@
 
 ## logger 0.4.3 (2026-08-23)
 
+CRAN release: 2026-08-24
+
 Maintenance release:
 
 - Update `log4r` migration vignette to reflect their new API with
