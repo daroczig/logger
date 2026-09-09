@@ -1,3 +1,7 @@
+# logger (development version)
+
+* `log_with_separator()` now correctly evaluates in the caller environment, so it behaves as expected when wrapped in a function call. (#245)
+
 # logger 0.4.3 (2026-08-23)
 
 Maintenance release:
