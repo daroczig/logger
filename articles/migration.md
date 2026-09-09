@@ -58,9 +58,9 @@ futile.logger
 ``` r
 
 flog.info("hi there")
-#> INFO [2026-09-07 21:11:04] hi there
+#> INFO [2026-09-09 13:09:10] hi there
 flog.warn("watch out")
-#> WARN [2026-09-07 21:11:04] watch out
+#> WARN [2026-09-09 13:09:10] watch out
 ```
 
 logger
@@ -68,9 +68,9 @@ logger
 ``` r
 
 log_info("hi there")
-#> INFO [2026-09-07 21:11:04] hi there
+#> INFO [2026-09-09 13:09:10] hi there
 log_warn("watch out")
-#> WARN [2026-09-07 21:11:04] watch out
+#> WARN [2026-09-09 13:09:10] watch out
 ```
 
 As you can see above, the default layout of the messages is exactly the
@@ -95,7 +95,7 @@ futile.logger
 flog.layout(layout.json)
 #> NULL
 flog.info("hi again")
-#> {"level":"INFO","timestamp":"2026-09-07 21:11:04 +0000","message":"hi again","func":"eval"}
+#> {"level":"INFO","timestamp":"2026-09-09 13:09:10 +0000","message":"hi again","func":"eval"}
 ```
 
 logger
@@ -105,7 +105,7 @@ logger
 log_layout(layout_json())
 
 log_info("hi again")
-#> {"time":"2026-09-07 21:11:04","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmejwal","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1022-azure","os_version":"#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026","pid":11578,"user":"runner","msg":"hi again"}
+#> {"time":"2026-09-09 13:09:10","level":"INFO","ns":"global","ans":"global","topenv":"R_GlobalEnv","fn":"eval","node":"runnervmejwal","arch":"x86_64","os_name":"Linux","os_release":"6.17.0-1022-azure","os_version":"#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026","pid":11429,"user":"runner","msg":"hi again"}
 ```
 
 As you can see, `logger` provided a bit more information about the log
@@ -130,13 +130,13 @@ futile.logger
 ``` r
 
 flog.info("hi")
-#> INFO [2026-09-07 21:11:04] hi
+#> INFO [2026-09-09 13:09:10] hi
 flog.info("hi %s", 84 / 2)
-#> INFO [2026-09-07 21:11:04] hi 42
+#> INFO [2026-09-09 13:09:10] hi 42
 flog.info(paste("hi", 84 / 2))
-#> INFO [2026-09-07 21:11:04] hi 42
+#> INFO [2026-09-09 13:09:10] hi 42
 flog.info(glue::glue("hi {84/2}"))
-#> INFO [2026-09-07 21:11:04] hi 42
+#> INFO [2026-09-09 13:09:10] hi 42
 ```
 
 logger
@@ -144,15 +144,15 @@ logger
 ``` r
 
 log_info("hi")
-#> INFO [2026-09-07 21:11:04] hi
+#> INFO [2026-09-09 13:09:10] hi
 log_info("hi {84/2}")
-#> INFO [2026-09-07 21:11:04] hi 42
+#> INFO [2026-09-09 13:09:10] hi 42
 log_formatter(formatter_sprintf)
 log_info("hi %s", 84 / 2)
-#> INFO [2026-09-07 21:11:04] hi 42
+#> INFO [2026-09-09 13:09:10] hi 42
 log_formatter(formatter_paste)
 log_info("hi", 84 / 2)
-#> INFO [2026-09-07 21:11:04] hi 42
+#> INFO [2026-09-09 13:09:10] hi 42
 ```
 
 It’s easy to change this default formatter in both packages: use
@@ -219,9 +219,9 @@ flog.warn <- log_warn
 flog.error <- log_error
 
 flog.info("Hello from logger in a futile.logger theme ...")
-#> INFO [2026-09-07 21:11:04] Hello from logger in a futile.logger theme ...
+#> INFO [2026-09-09 13:09:10] Hello from logger in a futile.logger theme ...
 flog.warn("... where the default log message formatter is %s", "sprintf")
-#> WARN [2026-09-07 21:11:04] ... where the default log message formatter is sprintf
+#> WARN [2026-09-09 13:09:10] ... where the default log message formatter is sprintf
 ```
 
 ## logging
@@ -269,9 +269,9 @@ logging
 ``` r
 
 loginfo("hi there")
-#> 2026-09-07 21:11:05.1195 INFO::hi there
+#> 2026-09-09 13:09:11.026042 INFO::hi there
 logwarn("watch out")
-#> 2026-09-07 21:11:05.126518 WARNING::watch out
+#> 2026-09-09 13:09:11.031806 WARNING::watch out
 ```
 
 logger
@@ -279,9 +279,9 @@ logger
 ``` r
 
 log_info("hi there")
-#> INFO [2026-09-07 21:11:05] hi there
+#> INFO [2026-09-09 13:09:11] hi there
 log_warn("watch out")
-#> WARN [2026-09-07 21:11:05] watch out
+#> WARN [2026-09-09 13:09:11] watch out
 ```
 
 As you can see above, the default layout of the log messages is somewhat
@@ -359,7 +359,7 @@ getLogger()[["handlers"]]$basic.stdout$formatter
 #>         msg, sep = ":"))
 #>     return(text)
 #> }
-#> <bytecode: 0x5615cfdf1cd8>
+#> <bytecode: 0x55aaa7e080f8>
 #> <environment: namespace:logging>
 ```
 
@@ -390,13 +390,13 @@ logging
 ``` r
 
 loginfo("hi")
-#> 2026-09-07 21:11:05.485723 INFO::hi
+#> 2026-09-09 13:09:11.309646 INFO::hi
 loginfo("hi %s", 84 / 2)
-#> 2026-09-07 21:11:05.486721 INFO::hi 42
+#> 2026-09-09 13:09:11.310442 INFO::hi 42
 loginfo(paste("hi", 84 / 2))
-#> 2026-09-07 21:11:05.487487 INFO::hi 42
+#> 2026-09-09 13:09:11.311059 INFO::hi 42
 loginfo(glue::glue("hi {84/2}"))
-#> 2026-09-07 21:11:05.488365 INFO::hi 42
+#> 2026-09-09 13:09:11.311771 INFO::hi 42
 ```
 
 logger
@@ -404,15 +404,15 @@ logger
 ``` r
 
 log_info("hi")
-#> INFO [2026-09-07 21:11:05] hi
+#> INFO [2026-09-09 13:09:11] hi
 log_info("hi {84/2}")
-#> INFO [2026-09-07 21:11:05] hi {84/2}
+#> INFO [2026-09-09 13:09:11] hi {84/2}
 log_formatter(formatter_sprintf)
 log_info("hi %s", 84 / 2)
-#> INFO [2026-09-07 21:11:05] hi 42
+#> INFO [2026-09-09 13:09:11] hi 42
 log_formatter(formatter_paste)
 log_info("hi", 84 / 2)
-#> INFO [2026-09-07 21:11:05] hi 42
+#> INFO [2026-09-09 13:09:11] hi 42
 ```
 
 For even better compatibility, there’s also
@@ -425,17 +425,17 @@ expression:
 
 log_formatter(formatter_logging)
 log_info("42")
-#> INFO [2026-09-07 21:11:05] 42
+#> INFO [2026-09-09 13:09:11] 42
 log_info(42)
-#> INFO [2026-09-07 21:11:05] 42: 42
+#> INFO [2026-09-09 13:09:11] 42: 42
 log_info(4 + 2)
-#> INFO [2026-09-07 21:11:05] 4 + 2: 6
+#> INFO [2026-09-09 13:09:11] 4 + 2: 6
 log_info("foo %s", "bar")
-#> INFO [2026-09-07 21:11:05] foo bar
+#> INFO [2026-09-09 13:09:11] foo bar
 log_info(12, 1 + 1, 2 * 2)
-#> INFO [2026-09-07 21:11:05] 12: 12
-#> INFO [2026-09-07 21:11:05] 1 + 1: 2
-#> INFO [2026-09-07 21:11:05] 2 * 2: 4
+#> INFO [2026-09-09 13:09:11] 12: 12
+#> INFO [2026-09-09 13:09:11] 1 + 1: 2
+#> INFO [2026-09-09 13:09:11] 2 * 2: 4
 ```
 
 ### Log record destination
@@ -488,9 +488,9 @@ logwarn <- log_warn
 logerror <- log_error
 
 loginfo("Hello from logger in a logging theme ...")
-#> 2026-09-07 21:11:05 INFO::Hello from logger in a logging theme ...
+#> 2026-09-09 13:09:11 INFO::Hello from logger in a logging theme ...
 logwarn("... where the default log message formatter is %s", "sprintf", namespace = "foobar")
-#> 2026-09-07 21:11:05 WARN:foobar:... where the default log message formatter is sprintf
+#> 2026-09-09 13:09:11 WARN:foobar:... where the default log message formatter is sprintf
 
 ## reset the logger to the default state
 detach("package:logging", unload = TRUE)
@@ -550,9 +550,9 @@ log4r
 ``` r
 
 log4r::log_info(log4r_logger, "hi there")
-#> INFO  [2026-09-07 21:11:05] hi there
+#> INFO  [2026-09-09 13:09:11] hi there
 log4r::log_warn(log4r_logger, "watch out")
-#> WARN  [2026-09-07 21:11:05] watch out
+#> WARN  [2026-09-09 13:09:11] watch out
 ```
 
 logger
@@ -560,9 +560,9 @@ logger
 ``` r
 
 logger::log_info("hi there")
-#> INFO [2026-09-07 21:11:05] hi there
+#> INFO [2026-09-09 13:09:11] hi there
 logger::log_warn("watch out")
-#> WARN [2026-09-07 21:11:05] watch out
+#> WARN [2026-09-09 13:09:11] watch out
 ```
 
 As you can see the default layout of the messages is a bit different in

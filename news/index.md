@@ -1,5 +1,12 @@
 # Changelog
 
+## logger (development version)
+
+- [`log_with_separator()`](https://daroczig.github.io/logger/reference/log_with_separator.md)
+  now correctly evaluates in the caller environment, so it behaves as
+  expected when wrapped in a function call.
+  ([\#245](https://github.com/daroczig/logger/issues/245))
+
 ## logger 0.4.3 (2026-08-23)
 
 CRAN release: 2026-08-24
